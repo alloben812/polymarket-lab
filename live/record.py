@@ -42,20 +42,22 @@ class Recorder:
         self.pending = {}
         self.discovered = asyncio.Event()
         self.stop = asyncio.Event()
+        self.watch_sessions = set()
         self.since = time.monotonic()
         self.status_detail = ""
         self.expected = {}
         self.end_reason = "interrupted"
 
-    def emit(self, kind, **fields):
-        row = self.log.put(kind, self.session, **fields)
+    def emit(self, kind, *, session=None, **fields):
+        row = self.log.put(kind, self.session if session is None else session, **fields)
         self.replay.apply(row)
         return row["recv_ns"]
 
-    def gap(self, reason, tokens, since=None):
+    def gap(self, reason, tokens, since=None, *, session=None):
         self.reasons[reason] += 1
         self.emit(
             "gap",
+            session=session,
             tokens=sorted(tokens),
             reason=reason,
             since_ns=since or self.last_seen or time.time_ns(),
@@ -111,6 +113,7 @@ class Recorder:
         retry = 1
         while True:
             self.session = uuid4().hex[:12]
+            self.watch_sessions.add(self.session)
             self.active = set()
             try:
                 async with connect(
@@ -202,8 +205,13 @@ class Recorder:
                                     continue
                                 e = {**e, "price_changes": changes}
                             elif typ == "market_resolved":
+                                condition = e.get("market") or e.get("condition_id")
                                 if not self.active.intersection(
                                     e.get("assets_ids", [])
+                                ) and not any(
+                                    m["condition_id"] == condition
+                                    and self.active.intersection(m["tokens"].values())
+                                    for m in self.catalog.values()
                                 ):
                                     continue
                             else:
@@ -218,6 +226,8 @@ class Recorder:
                             elif typ == "price_change":
                                 for c in e["price_changes"]:
                                     self.last_change[c["asset_id"]] = self.last_seen
+                            elif typ == "best_bid_ask":
+                                self.last_change[e["asset_id"]] = self.last_seen
             except Exception as err:
                 self.gap("socket_" + type(err).__name__, self.active)
                 self.active.clear()
@@ -325,16 +335,23 @@ class Recorder:
         prev = time.time() - time.monotonic()
         last = time.monotonic()
         previous_wall_ns = time.time_ns()
+        self.watch_sessions.add(self.session)
         while True:
             await asyncio.sleep(3)
             now = time.monotonic()
             difference = time.time() - now
             if now - last > 10 or abs(difference - prev) > 0.25:
-                self.gap(
-                    "local_clock_or_processing_pause",
-                    self.active,
-                    min(previous_wall_ns, self.last_seen or previous_wall_ns),
-                )
+                # A rotation or a reconnect may run first after the Mac wakes.
+                # An empty token list covers the entire session at the earlier time.
+                for session in sorted(self.watch_sessions | {self.session}):
+                    if session:
+                        self.gap(
+                            "local_clock_or_processing_pause",
+                            [],
+                            min(previous_wall_ns, self.last_seen or previous_wall_ns),
+                            session=session,
+                        )
+            self.watch_sessions = {self.session}
             prev, last = difference, now
             previous_wall_ns = time.time_ns()
             self.log.flush()

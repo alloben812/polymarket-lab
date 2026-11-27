@@ -82,7 +82,10 @@ def test_watchdog_marks_previous_wall_time_after_buffered_receive(tmp_path):
         rec.active = {"a"}
         rec.last_seen = 1011_000_000_000
         gaps = []
-        rec.gap = lambda reason, tokens, since: gaps.append((reason, since))
+        rec.watch_sessions.add("previous")
+        rec.gap = lambda reason, tokens, since, *, session: gaps.append(
+            (reason, tokens, since, session)
+        )
         rec.status = lambda state: None
 
         class Halt(BaseException):
@@ -99,7 +102,10 @@ def test_watchdog_marks_previous_wall_time_after_buffered_receive(tmp_path):
                 await rec.watchdog()
             except Halt:
                 pass
-        assert gaps == [("local_clock_or_processing_pause", 1000_000_000_000)]
+        assert gaps == [
+            ("local_clock_or_processing_pause", [], 1000_000_000_000, s)
+            for s in ("previous", "s")
+        ]
 
     asyncio.run(test())
 
@@ -154,3 +160,70 @@ def test_long_span_without_pongs_cannot_certify_recording():
     )
     assert report["errors"]["reference_does_not_cover_capture"]
     assert report["errors"]["missing_complete_btc5m_window"] > 0
+
+
+def test_preloaded_token_must_still_have_depth_during_its_window():
+    from live.validate import inspect
+
+    market = dict(
+        kind="btc5m",
+        slug="btc-updown-5m-300",
+        tokens={"Up": "A", "Down": "B"},
+        condition_id="c",
+        start_ts=300,
+        end_ts=600,
+    )
+    rows = [
+        (230, "market", {"market": market}),
+        (231, "connected", {"tokens": ["A", "B", "W"]}),
+    ]
+    for token in ("A", "B"):
+        rows.append(
+            (
+                232,
+                "ws",
+                {
+                    "payload": dict(
+                        event_type="book",
+                        market="c",
+                        asset_id=token,
+                        timestamp="232000",
+                        bids=[{"price": "0.49", "size": "9"}],
+                        asks=[{"price": "0.51", "size": "7"}],
+                    )
+                },
+            )
+        )
+    rows.append(
+        (240, "gap", dict(reason="unsubscribed", tokens=["A"], since_ns=240 * 10**9))
+    )
+    for t in range(241, 602, 8):
+        rows.append((t, "heartbeat", {"status": "pong"}))
+    rows.extend(
+        [
+            (
+                602,
+                "ws",
+                {
+                    "payload": dict(
+                        event_type="last_trade_price",
+                        asset_id="B",
+                        market="c",
+                        timestamp="602000",
+                        price="0.50",
+                        size="5",
+                        side="BUY",
+                    )
+                },
+            ),
+            (603, "stop", {"tokens": ["B", "W"], "reason": "duration"}),
+        ]
+    )
+    report = inspect(
+        dict(kind=k, recv_ns=t * 10**9, session="s", ordinal=n, **attrs)
+        for n, (t, k, attrs) in enumerate(rows, 1)
+    )
+    assert report["complete_btc_windows"] == [
+        {"slug": market["slug"], "known_depth_pct": {"Up": 0.0, "Down": 100.0}}
+    ]
+    assert report["errors"]["no_in_window_depth_btc5m"] == 1

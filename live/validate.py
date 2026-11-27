@@ -5,19 +5,18 @@ from collections import Counter
 import json
 from pathlib import Path
 
-from .book import iter_records
+from .book import coverage, iter_records
 
 BILLION = 1_000_000_000
 
 
-def inspect(rows):
+def _scan(rows, markets, report):
     counts, events, gaps, bad, categories = (Counter() for _ in range(5))
-    tokens, markets, sessions, heartbeats = {}, {}, {}, {}
+    tokens, sessions, heartbeats = {}, {}, {}
     last_reference = None
     anchored = set()
     subscribed = set()
     market_events = Counter()
-    closed_pulses = []
     first_reference = None
     last_audit = None
     audit_count = 0
@@ -31,8 +30,10 @@ def inspect(rows):
     for r in rows:
         kind, now, session = r["kind"], r["recv_ns"], r["session"]
         ordinal = r["ordinal"]
-        if previous is not None and ordinal != previous + 1:
+        if ordinal != (1 if previous is None else previous + 1):
             bad["missing_local_records"] += 1
+        if stop is not None:
+            bad["records_after_stop"] += 1
         previous = ordinal
         counts[kind] += 1
         last_recv = now
@@ -109,11 +110,11 @@ def inspect(rows):
         elif kind == "stop":
             stop = r.get("reason")
             for start in heartbeats.values():
-                closed_pulses.append(now - start)
-            for delta in closed_pulses:
+                delta = now - start
                 largest_gap = max(largest_gap, delta)
                 if delta > 20 * BILLION:
                     bad["unaccounted_pong_gap_over_20s"] += 1
+        yield r
     if first_ws and last_ws:
         observed = last_ws - first_ws
         if observed > 20 * BILLION and not counts["heartbeat"]:
@@ -133,7 +134,7 @@ def inspect(rows):
             bad["subscribed_token_without_book"] += 1
         for tf, dur in [("btc5m", 300), ("btc15m", 900)]:
             starts = {m["start_ts"] for m in markets.values() if m["kind"] == tf}
-            first = (first_ws // BILLION + dur - 1) // dur * dur
+            first = (first_ws + dur * BILLION - 1) // (dur * BILLION) * dur
             for start in range(first, last_ws // BILLION - dur + 1, dur):
                 if start in starts:
                     m = next(
@@ -148,28 +149,56 @@ def inspect(rows):
                         bad["no_books_" + tf + "_window"] += 1
                 else:
                     bad["missing_complete_" + tf + "_window"] += 1
-    return {
-        "records": sum(counts.values()),
-        "counts": dict(counts),
-        "events": dict(events),
-        "token_count": len(tokens),
-        "markets_by_kind": dict(categories),
-        "gap_reasons": dict(gaps),
-        "first_ws_ns": first_ws,
-        "last_ws_ns": last_ws,
-        "last_recv_ns": last_recv,
-        "observed_seconds": round((last_ws - first_ws) / BILLION, 3)
-        if last_ws and first_ws
-        else 0,
-        "max_pong_spacing_s": round(largest_gap / BILLION, 3),
-        "max_ws_message_age_ms": max_feed_lag_ms,
-        "full_book_anchors": dict(reanchors),
-        "binance_seconds": candle_count,
-        "subscribed_tokens": len(subscribed),
-        "anchored_tokens": len(anchored),
-        "stop": stop,
-        "errors": dict(bad),
-    }
+    report.update(
+        {
+            "records": sum(counts.values()),
+            "counts": dict(counts),
+            "events": dict(events),
+            "token_count": len(tokens),
+            "markets_by_kind": dict(categories),
+            "gap_reasons": dict(gaps),
+            "first_ws_ns": first_ws,
+            "last_ws_ns": last_ws,
+            "last_recv_ns": last_recv,
+            "observed_seconds": round((last_ws - first_ws) / BILLION, 3)
+            if last_ws and first_ws
+            else 0,
+            "max_pong_spacing_s": round(largest_gap / BILLION, 3),
+            "max_ws_message_age_ms": max_feed_lag_ms,
+            "full_book_anchors": dict(reanchors),
+            "binance_seconds": candle_count,
+            "subscribed_tokens": len(subscribed),
+            "anchored_tokens": len(anchored),
+            "stop": stop,
+            "errors": dict(bad),
+        }
+    )
+
+
+def inspect(rows):
+    """Check ordering and measure usable depth inside each complete BTC window."""
+    markets, report = {}, {}
+    books = coverage(_scan(rows, markets, report))
+    complete = []
+    first, last = report["first_ws_ns"], report["last_ws_ns"]
+    errors = Counter(report["errors"])
+    for m in markets.values():
+        if m["kind"] not in ("btc5m", "btc15m"):
+            continue
+        start, end = m["start_ts"] * BILLION, m["end_ts"] * BILLION
+        if first is None or first > start or last < end:
+            continue
+        per_side = {}
+        for side, token in m["tokens"].items():
+            times = books.tokens[token].intervals
+            known = sum(max(0, min(b + 1, end) - max(a, start)) for a, b in times)
+            per_side[side] = round(100 * known / (end - start), 3)
+            if not known:
+                errors["no_in_window_depth_" + m["kind"]] += 1
+        complete.append({"slug": m["slug"], "known_depth_pct": per_side})
+    report["complete_btc_windows"] = complete
+    report["errors"] = dict(errors)
+    return report
 
 
 def main():

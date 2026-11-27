@@ -413,6 +413,16 @@ class RealEnv:
         o = self.c.get_order(order_id=order_id)
         return {"status": str(o.status), "size_matched": D(o.size_matched)}
 
+    def open_orders(self, condition_id: str) -> list[dict]:
+        """This API key's open orders in one market (one request, paginated). Raises if it cannot be read."""
+        found = []
+        for o in self.c.list_open_orders(market=condition_id).iter_items():
+            if len(found) >= 200:
+                raise RuntimeError("more than 200 open orders in one market: list not read to the end")
+            found.append({"id": str(o.id), "token": str(o.asset_id), "price": D(o.price),
+                          "size": D(o.original_size), "status": str(o.status)})
+        return found
+
     def fills(self, order_id: str, token: str) -> dict:
         o = self.c.get_order(order_id=order_id)
         matched = D(o.size_matched)
@@ -468,6 +478,7 @@ class OrderRec:
     closed: bool = False             # the exchange's order state is terminal (no longer live)
     last_state: str = ""
     cancel_tries: int = 0
+    absent: bool = False             # post-error: confirmed not among this account's open orders
     mid_up: Decimal | None = None
     bid: Decimal | None = None
     ask: Decimal | None = None
@@ -709,15 +720,101 @@ class Session:
             self.push(self.env.now() + CANCEL_RETRY_S, "cancel", w, rec)
 
     def on_close(self, w: Window) -> None:
-        """Window end: confirm that none of the window's orders is still live; cancel again if one is."""
-        if not any(r.status == "posted" for r in w.orders):
+        """Window end: confirm that none of the window's orders is still live; cancel again if one is.
+
+        Orders whose post outcome is unknown (post-error: they may rest without an id) are looked up once
+        in this account's open orders in the window's market. Every open order found on the window's
+        tokens that is not a known order is ours (one runner per account): it is cancelled and its state
+        read. A found order that matches a post-error order (token, price, size) takes its id, so its
+        cancel is retried and its fills are read at finalise like any posted order. A post-error order not
+        found stays counted as fully filled (it may have filled completely). If the list cannot be read,
+        the owner is told to check open orders on the site."""
+        unknown = [r for r in w.orders if r.status == "post-error" and not r.absent]
+        if not self.live or (not unknown and not any(r.status == "posted" for r in w.orders)):
             return
+        check = {}
+        if unknown:
+            check = self.find_unknown(w, unknown)        # may turn found post-error orders into posted ones
         left = self.close_orders(w.orders, "window end")
+        n_bad = len(left) + check.get("unread", 0) + len(check.get("stray_left", []))
+        if check:
+            append_record(self.path(w.start), {
+                "type": "window-end-check", "exp": self.cfg.name, "session": self.session, "mode": "live",
+                "window_start": w.start, "slug": w.slug, "unknown_outcome": len(unknown),
+                "open_orders_read": check["read"], "found_ids": check["found_ids"],
+                "adopted_keys": check["adopted"], "absent_keys": check["absent"],
+                "stray_cancel_confirmed": check["stray_confirmed"],
+                "stray_still_live_or_unknown": [o["id"] for o in check["stray_left"]],
+                "window_orders_still_live_or_unknown": [r.key for r in left] + check["unread_keys"],
+                "note": check["note"]})
         if left:
             out(f"  {w.slug}: {len(left)} order(s) still live or unknown after the window end; "
                 f"cancel retried every {FINALIZE_EVERY_S} s, counted as fully filled until closed")
-        else:
-            out(f"  {w.slug}: window end: no order of this window is live")
+        if n_bad == 0:
+            out(f"  {w.slug}: window end: no order of this window is live"
+                + (f" (confirmed for each order; {len(unknown)} with an unknown post outcome checked "
+                   f"against this account's open orders)" if unknown else ""))
+
+    def find_unknown(self, w: Window, unknown: list[OrderRec]) -> dict:
+        """One read of this account's open orders for a window with post-error orders (see on_close)."""
+        res = {"read": False, "found_ids": [], "adopted": [], "absent": [], "stray_confirmed": [],
+               "stray_left": [], "unread": 0, "unread_keys": [], "note": ""}
+        known = {r.order_id for r in w.orders if r.order_id}
+        toks = set(w.market["tokens"].values())
+        try:
+            found = [o for o in self.env.open_orders(w.market["condition_id"])
+                     if o["token"] in toks and o["id"] not in known]
+        except Exception as e:  # noqa: BLE001
+            res["unread"], res["unread_keys"] = len(unknown), [r.key for r in unknown]
+            res["note"] = (f"{len(unknown)} order(s) of this window have an unknown outcome (post error) and "
+                           f"this account's open orders could not be read ({scrub(type(e).__name__)}): the "
+                           f"owner must check open orders on polymarket.com and cancel any left; counted as "
+                           f"fully filled")
+            out(f"  {w.slug}: WINDOW END: {res['note']}")
+            return res
+        res["read"], res["found_ids"] = True, [o["id"] for o in found]
+        stray = []
+        for o in found:
+            rec = next((r for r in unknown if not r.order_id and r.token == o["token"]
+                        and r.price == o["price"] and r.size == o["size"]), None)
+            if rec is None:
+                stray.append(o)
+                continue
+            rec.order_id, rec.status = o["id"], "posted"
+            rec.reason += "; found resting in open orders at the window end, id taken, cancelled from there"
+            res["adopted"].append(rec.key)
+            out(f"    window end: post-error {rec.level.label} {rec.outcome} found resting (state {o['status']})")
+        for r in unknown:
+            if not r.order_id:
+                r.absent = True
+                r.reason += ("; not in this account's open orders at the window end (a full fill also leaves "
+                             "the list): counted as fully filled")
+                res["absent"].append(r.key)
+                out(f"    window end: post-error {r.level.label} {r.outcome} not in open orders; "
+                    f"counted as fully filled")
+        if stray:
+            ids = [o["id"] for o in stray]
+            try:
+                done = set(self.env.cancel(ids))
+            except Exception as e:  # noqa: BLE001
+                done = set()
+                out(f"    window end: cancel of other open orders failed: {scrub(type(e).__name__)}")
+            for o in stray:
+                try:
+                    closed = order_closed(self.env.order_state(o["id"])["status"])
+                except Exception:  # noqa: BLE001
+                    closed = False
+                if closed:                                   # its state, read after the cancel, is terminal
+                    res["stray_confirmed"].append(o["id"])
+                else:
+                    res["stray_left"].append(o)
+                out(f"    window end: other open order on this window's tokens (BUY {o['size']} @ {o['price']}): "
+                    f"cancel {'confirmed' if o['id'] in done else 'NOT confirmed'}, "
+                    f"{'closed' if closed else 'STILL LIVE or unknown: cancel it on polymarket.com'}")
+        res["note"] = (f"{len(unknown)} unknown-outcome order(s): {len(res['adopted'])} found resting, "
+                       f"{len(res['absent'])} not in open orders; {len(stray)} other open order(s) on the window's "
+                       f"tokens, {len(res['stray_left'])} not confirmed closed")
+        return res
 
     def write_order(self, w: Window, rec: OrderRec, result: str | None, fill: dict | None) -> dict:
         filled = avg = cost = payout = pnl = None
@@ -828,7 +925,7 @@ class Session:
                 f"finalise, counted as fully filled until closed")
         # windows without orders need no result wait
         for w in self.windows:
-            if not any(r.status in ("posted", "dry-run") for r in w.orders) and not w.done:
+            if not any(r.status in ("posted", "dry-run", "post-error") for r in w.orders) and not w.done:
                 w.done = True
 
     def run(self) -> int:
@@ -1017,6 +1114,7 @@ class FakeEnv:
         self.fill_outcome, self.res = fill_outcome, result
         self.posted, self.cancelled, self.tokens = [], [], {}
         self.cancel_log, self.closed_ids, self.fill_reads = [], set(), []   # (time, id), ids, (time, id)
+        self.open_reads = []                                                 # times of open-orders reads
 
     def now(self):
         return self.t
@@ -1071,6 +1169,11 @@ class FakeEnv:
         done = [i for i in ids if self.order_state(i)["status"] == "LIVE"]
         self.closed_ids.update(done)
         return done
+
+    def open_orders(self, condition_id):         # every posted order still LIVE, with its token, price, size
+        self.open_reads.append(self.t)
+        return [{"id": p[0], "token": p[1], "price": p[2] / p[3], "size": p[3] / smoke.USDC_UNIT, "status": "LIVE"}
+                for p in self.posted if self.order_state(p[0])["status"] == "LIVE"]
 
     def fills(self, order_id, token):
         self.fill_reads.append((self.t, order_id))
@@ -1211,6 +1314,30 @@ def cmd_selftest(a) -> int:
         STOP_FILE.write_text("")
         check("STOP file present -> refused", lambda: check_order_caps(Decimal("0.10"), Decimal(0), day), True)
         STOP_FILE.unlink()
+        # STOP path under the home directory: the refusal reason (it goes into the records) writes it as ~/...
+        old_home, home = os.environ.get("HOME"), tmp / "home" / "someuser"
+        os.environ["HOME"], STOP_FILE = str(home), home / ".polymarket-pilot" / "STOP"
+        msg = ""
+        try:
+            STOP_FILE.parent.mkdir(parents=True)
+            STOP_FILE.write_text("")
+            try:
+                check_order_caps(Decimal("0.10"), Decimal(0), day)
+            except Refusal as e:
+                msg = str(e)
+        finally:
+            if old_home is None:
+                os.environ.pop("HOME", None)
+            else:
+                os.environ["HOME"] = old_home
+            STOP_FILE = tmp / "STOP"
+        expect("STOP refusal reason writes the home directory as ~ (no user name in records)",
+               "(~/.polymarket-pilot/STOP)" in msg and "someuser" not in msg, msg)
+        bare, pref, oid64 = "5a" * 20, "0x" + "c3" * 20, "0x" + "ab" * 32
+        scrubbed = scrub(f"maker {bare} proxy {pref} upper {bare.upper()} order {oid64}")
+        expect("scrub removes a bare 40-hex address and a 0x one; a 64-hex order id is kept",
+               bare not in scrubbed.lower() and pref[2:] not in scrubbed and scrubbed.count("<address>") == 3
+               and oid64 in scrubbed, scrubbed)
 
         # ---- M3 config: a level whose minimum expiry outlives the window is refused
         check("place_before_end_s 20 refused (minimum expiry would outlive the window)",
@@ -1547,6 +1674,118 @@ def cmd_selftest(a) -> int:
             expect("M3: 4 s book read before a 10 s resting level -> skipped as too close to its cancel second",
                    not env.posted and o and "too close to its cancel second" in o[0]["reason"],
                    json.dumps([r["reason"] for r in o]))
+
+            # ---- S2: a post timed out after the request was sent (post-error): the order may rest without an id.
+            # At the window end this account's open orders are read once; what is found is cancelled and confirmed.
+            class PostErrRests(FakeEnv):
+                fail_legs = ("Up", "Down")
+                open_fails = False
+                ledger_at_check = None
+
+                def post(self, signed):
+                    r = super().post(signed)     # the exchange got it: it rests (or fills) like any order
+                    if self.tokens[str(signed.token_id)] in self.fail_legs:
+                        raise TimeoutError("read timed out after the request was sent")
+                    return r
+
+                def open_orders(self, condition_id):
+                    self.ledger_at_check = ledger(d0, True, "")
+                    if self.open_fails:
+                        self.open_reads.append(self.t)
+                        raise ConnectionError("simulated")
+                    return super().open_orders(condition_id)
+
+            def log_mark():
+                return out.log_path.stat().st_size if out.log_path.exists() else 0
+
+            def log_since(m):
+                with open(out.log_path, encoding="utf-8") as f:
+                    f.seek(m)
+                    return f.read()
+
+            def checks_now():
+                return [r for r in read_records(OUT_DIR.glob("*.jsonl")) if r["type"] == "window-end-check"]
+
+            # (1) only post-error orders in the window, both resting in the book
+            clean()
+            m = log_mark()
+            env = PostErrRests(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            Session(cfg, env, True, 1).run()
+            ws = env.posted[0][5] - env.posted[0][5] % 300
+            n, f_, o_ = ledger(d0, True, "")
+            o, chk, ids, lg = orders_now(), checks_now(), [p[0] for p in env.posted], log_since(m)
+            expect("S2: window with only post-error orders (both resting) -> open orders read once at the window end",
+                   len(env.open_reads) == 1 and ws + 300 <= env.open_reads[0] < ws + 300 + FINALIZE_FIRST_S
+                   and len(chk) == 1 and chk[0]["unknown_outcome"] == 2 and chk[0]["open_orders_read"],
+                   f"reads at {[round(t - ws) for t in env.open_reads]}, checks {len(chk)}")
+            expect("S2: ... both found, cancelled, state read CANCELED; recorded as adopted",
+                   sorted(env.cancelled) == sorted(ids) and len(chk[0]["adopted_keys"]) == 2
+                   and not chk[0]["window_orders_still_live_or_unknown"]
+                   and len(o) == 2 and all(r["end_status"] == "CANCELED" and r["order_id"] in ids for r in o),
+                   json.dumps([(r["status"], r["end_status"]) for r in o]))
+            expect("S2: ... day ledger counted 4.00 until confirmed closed, 0 after (fills read after the cancel)",
+                   env.ledger_at_check is not None and sum(env.ledger_at_check[1:]) == Decimal("4.00")
+                   and f_ + o_ == 0 and len(env.fill_reads) == 2,
+                   f"at check {env.ledger_at_check}, after filled {f_} open {o_}")
+            expect("S2: ... 'no order of this window is live' printed only with the confirmation",
+                   lg.count("no order of this window is live (confirmed for each order; 2 with an unknown") == 1)
+
+            # (2) a closed posted order next to a post-error order that rests
+            clean()
+            m = log_mark()
+            env = PostErrRests(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            env.fail_legs = ("Down",)
+            Session(cfg, env, True, 1).run()
+            ws = env.posted[0][5] - env.posted[0][5] % 300
+            up_id, dn_id = (p[0] for p in env.posted)
+            o, chk, lg = {r["outcome"]: r for r in orders_now()}, checks_now(), log_since(m)
+            expect("S2: closed Up next to a post-error Down -> Down found at the window end and cancelled there",
+                   [t for t, i in env.cancel_log if i == up_id] and all(t < ws + 300 for t, i in env.cancel_log
+                                                                        if i == up_id)
+                   and [t for t, i in env.cancel_log if i == dn_id]
+                   and all(t >= ws + 300 for t, i in env.cancel_log if i == dn_id)
+                   and len(chk) == 1 and chk[0]["unknown_outcome"] == 1 and len(chk[0]["adopted_keys"]) == 1,
+                   f"cancels {[(round(t - ws), 'Up' if i == up_id else 'Down') for t, i in env.cancel_log]}")
+            expect("S2: ... both end CANCELED; 'nothing live' printed once, after the check",
+                   all(r["end_status"] == "CANCELED" for r in o.values())
+                   and lg.count("no order of this window is live (confirmed for each order; 1 with an unknown") == 1,
+                   json.dumps({k: r["end_status"] for k, r in o.items()}))
+            # (2b) the same, but the post-error order is not in the book (never arrived or filled completely)
+            clean()
+
+            class PostErrGone(PostErrRests):
+                def post(self, signed):
+                    if self.tokens[str(signed.token_id)] in self.fail_legs:
+                        raise TimeoutError("read timed out")
+                    return FakeEnv.post(self, signed)
+            env = PostErrGone(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            env.fail_legs = ("Down",)
+            Session(cfg, env, True, 1).run()
+            n, f_, o_ = ledger(d0, True, "")
+            o, chk = {r["outcome"]: r for r in orders_now()}, checks_now()
+            expect("S2: post-error order not in open orders -> recorded absent, still counted as filled (2.00)",
+                   len(chk) == 1 and len(chk[0]["absent_keys"]) == 1 and o["Down"]["status"] == "post-error"
+                   and "not in this account's open orders" in o["Down"]["reason"] and f_ + o_ == Decimal("2.00"),
+                   f"filled {f_} open {o_}")
+
+            # (3) the open-orders read fails
+            clean()
+            m = log_mark()
+            env = PostErrRests(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            env.fail_legs, env.open_fails = ("Down",), True
+            Session(cfg, env, True, 1).run()
+            n, f_, o_ = ledger(d0, True, "")
+            dn_id = env.posted[1][0]
+            o, chk, lg = {r["outcome"]: r for r in orders_now()}, checks_now(), log_since(m)
+            expect("S2: open orders unreadable -> recorded: 1 unknown outcome, owner must check open orders on the site",
+                   len(env.open_reads) == 1 and len(chk) == 1 and not chk[0]["open_orders_read"]
+                   and chk[0]["window_orders_still_live_or_unknown"] == [o["Down"]["key"]]
+                   and "must check open orders on polymarket.com" in chk[0]["note"]
+                   and "1 order(s) of this window have an unknown outcome" in lg, chk[0]["note"] if chk else "")
+            expect("S2: ... 'no order of this window is live' NOT printed; the 2.00 stays counted as filled",
+                   "no order of this window is live" not in lg and f_ + o_ == Decimal("2.00")
+                   and dn_id not in env.cancelled and o["Down"]["status"] == "post-error",
+                   f"filled {f_} open {o_}")
 
             # ---- (a) + (b): RealEnv.post maps a definite 4xx to "rejected" (cost 0); timeouts, 5xx, 429 stay
             # unknown (worst case); error text in records is redacted and carries no address

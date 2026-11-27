@@ -90,9 +90,13 @@ def resolved_no(m):
     return bool(p) and str(p[0]) in ("0", "0.0")
 
 
+GIDX = {}
+
+
 def grid(df, conds, op, h0):
     """time x market matrices of yb, ya (YES space), forward filled from the opening state."""
-    sub = df[df.cond.isin(conds)]
+    ii = [GIDX[c] for c in conds if c in GIDX]
+    sub = df.iloc[np.concatenate(ii)] if ii else df.iloc[:0]
     idx = {c: i for i, c in enumerate(conds)}
     init = pd.DataFrame({"ts": h0 * 1000 - 1, "row_ordinal": -1, "cond": conds,
                          "yb": [op.get(c, (0.0, 1.0, False))[0] for c in conds],
@@ -124,6 +128,7 @@ def scan(tag):
     h0 = int(dt.datetime.strptime(tag, "%Y-%m-%dT%H").replace(tzinfo=dt.timezone.utc).timestamp())
     hend = (h0 + 3600) * 1000
     df = load_top(tag); op = load_open(tag)
+    GIDX.clear(); GIDX.update(df.groupby("cond").indices)
     res = {"tag": tag, "rows": int(len(df)), "B1": [], "B2": [], "C1": [], "C2": [], "A1": {}, "n_events": {}}
     # A1: both tokens' rows at the same exchange ms
     g = df.groupby(["cond", "timestamp"]).isyes.nunique()
@@ -146,7 +151,7 @@ def scan(tag):
             if len(live) < 2 or not any(m["conditionId"] in op or m["conditionId"] in set() for m in live):
                 continue
             conds = [m["conditionId"] for m in live]
-            if not (df.cond.isin(conds).any() or any(c in op for c in conds)):
+            if not (any(c in GIDX for c in conds) or any(c in op for c in conds)):
                 continue
             ne += 1
             r = np.array([m["rate"] for m in live])

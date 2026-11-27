@@ -1,0 +1,332 @@
+Sandbox verification of exp_bids.py, 2026-11-27 (US IP, no account, no key). SDK polymarket-client==0.20.1 (pilot/.venv).
+Nothing authenticated was sent. Dry-runs sign with a throwaway in-memory key and post nothing.
+
+================================================================ 1. selftest (offline: dead proxy, throwaway key, fake clock and exchange)
+$ .venv/bin/python -I exp_bids.py selftest
+=== exp_bids.py selftest  2026-11-27 18:41:11 UTC
+selftest: throwaway key, fake clock, fake exchange; records in a temp dir
+  [PASS] shipped config late-tail.json valid: returned late-tail: 1 level(s), window 0.50 pUSD
+  [PASS] shipped config pairs.json valid: returned pairs: 1 level(s), window 4.00 pUSD
+  [PASS] shipped config tails.json valid: returned tails: 1 level(s), window 1.00 pUSD
+  [PASS] order 6 x 0.50 = 3.00 > 2.50 refused: refused: config: level 0: 6 x 0.50 = 3.00 pUSD > per-order cap 2.50
+  [PASS] order 5 x 0.50 = 2.50 accepted (cap is inclusive): returned 2.50
+  [PASS] window both 2 x (5 x 0.50) = 5.00 accepted: returned 5.00
+  [PASS] window 4.00 + 1.20 = 5.20 > 5.00 refused: refused: config: one window would rest 5.20 pUSD > per-window cap 5.00
+  [PASS] unknown config key (max_order_usd) refused: refused: config: unknown keys ['max_order_usd'] (caps cannot be set in a config)
+  [PASS] unknown level key (side: SELL) refused: refused: config: level 0: unknown keys ['side']
+  [PASS] outcome 'sell' refused: refused: config: level 0: outcome must be one of ('both', 'trailing', 'leading') (orders are always BUY)
+  [PASS] price 0.015 (3 decimals) refused: refused: config: level 0 price must have at most 2 decimals: '0.015'
+  [PASS] price 1.00 refused: refused: config: level 0: price must be 0.01-0.99
+  [PASS] size 0 refused: refused: config: level 0: size must be positive (shares)
+  [PASS] both placement keys refused: refused: config: level 0: give exactly one of place_after_start_s / place_before_end_s
+  [PASS] placement after expiry refused: refused: config: level 0: the order would rest -10 s (< 10 s)
+  [PASS] asset 'trump' refused: refused: config: asset must be one of ('btc', 'eth', 'sol', 'xrp', 'doge', 'hype')
+  [PASS] duration '1h' refused: refused: config: duration must be one of ('5m', '15m')
+  [PASS] flag --max-notional does not exist: refused: argparse rejected the flag
+  [PASS] --max-windows 500 refused: refused: --max-windows must be 1-96
+  [PASS] order 2.51 refused by per-order cap: refused: order notional 2.51 > per-order cap 2.50
+  [PASS] window 4.50 + 1.00 refused by per-window cap: refused: window resting 4.50 + 1.00 > per-window cap 5.00
+  [PASS] day: 300 orders sent -> 301st refused: refused: 300 orders already sent today (UTC); +1 > cap 300
+  [PASS] day: filled 14.00 + open 0.50 + 1.00 > 15 refused: refused: today filled 14.00 + still open 0.50 + 1.00 > daily cap 15.00
+  [PASS] day: filled 14.00 + 1.00 = 15.00 accepted: returned None
+  [PASS] day: 299 sent, a 'both' level (2 legs) refused: refused: STOP file present (/tmp/pm-exp-selftest-agbu7_52/STOP): no new orders
+  [PASS] STOP file present -> refused: refused: STOP file present (/tmp/pm-exp-selftest-agbu7_52/STOP): no new orders
+  [PASS] ledger: 2 sent, filled 0.80, unfinalized 1.00 counted as open: 2, 0.80, 1.00
+  [PASS] signed BUY 5 @ 0.40 passes the final guard: returned 2
+  [PASS] signed BUY 5 @ 0.60 = 3.00 blocked by the final guard: refused: signed order would spend 3 pUSD > cap 2.50; not posted
+  [PASS] signed order larger than planned blocked: refused: signed order would spend 2 pUSD > cap 1.00; not posted
+  [PASS] signed order without post-only blocked: refused: internal: signed order is not post-only; not posted
+  [PASS] signed GTC (no expiration) blocked: refused: internal: signed order is not GTD; not posted
+  [PASS] signed order for another token blocked: refused: internal: signed order token differs from the planned token; not posted
+  [PASS] signed SELL blocked: refused: internal: expected a BUY order
+  experiment tails: btc 5m, 1 level(s), worst case per window 1.00 pUSD
+    both-0.02-start: both BUY 25 @ 0.02 (0.50 pUSD each), place at +0 s, cancel at +270 s
+  [PASS] --live without a key file refused: refused: key file not found: /tmp/pm-exp-selftest-agbu7_52/missing-key  (set PM_KEY_FILE or create it, see README)
+  [PASS] geoblock unreachable -> refused (network is dead in selftest): refused: geoblock check failed (URLError); not sending orders
+  geoblock: blocked=True country=US (IP not shown)
+  [PASS] geoblock blocked=true -> refused: refused: this IP is geoblocked for order placement; nothing was sent
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=True country=US (IP not shown)
+  [PASS] live session with blocked geoblock stops before posting: refused: this IP is geoblocked for order placement; nothing was sent
+  [PASS]   ... and nothing was posted: posted 0
+  pUSD balance 3.99; worst-case resting per window 4.00
+  [PASS] balance 3.99 < worst-case 4.00 (pairs) refused: refused: balance 3.99 pUSD < worst-case resting notional 4.00; not starting
+  pUSD balance 3.00; worst-case resting per window 1.00
+  [PASS] balance 3.00 >= worst-case 1.00 (tails) accepted: returned 3.00
+  plan: 2 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 1.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+    DRY both-0.02-start: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.01 ask 0.60, mid Up 0.70) signed exp 2027-01-15T08:10:30Z, cancel 2027-01-15T08:09:30Z; NOT posted
+    DRY both-0.02-start: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.01 ask 0.60, mid Up 0.70) signed exp 2027-01-15T08:10:30Z, cancel 2027-01-15T08:09:30Z; NOT posted
+  btc-updown-5m-1800000600: market found, accepting=True
+    DRY both-0.02-start: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.01 ask 0.60, mid Up 0.70) signed exp 2027-01-15T08:15:30Z, cancel 2027-01-15T08:14:30Z; NOT posted
+    DRY both-0.02-start: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.01 ask 0.60, mid Up 0.70) signed exp 2027-01-15T08:15:30Z, cancel 2027-01-15T08:14:30Z; NOT posted
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1800000600: result Up; 2 order records; cost 0 payout 0 net 0
+  session 89ab558a937d done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] dry-run: 2 windows x 2 orders planned and signed, none posted: 4 order records, posted 0
+  [PASS] dry-run: window results recorded
+  plan: 2 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0xfe2fe935478f477ba5ad5caf2a078bcdfe2fe935478f477ba5ad5caf2a078bcd status live, cancel at 2027-01-15T08:09:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0x5c0c29e26f9f43c8992280f4d0e1f0295c0c29e26f9f43c8992280f4d0e1f029 status live, cancel at 2027-01-15T08:09:30Z
+  btc-updown-5m-1800000600: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0xb118953fa69641b58565489728374171b118953fa69641b58565489728374171 status live, cancel at 2027-01-15T08:14:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0xc9a1f19da5394a41994af719cc8a96f8c9a1f19da5394a41994af719cc8a96f8 status live, cancel at 2027-01-15T08:14:30Z
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+  btc-updown-5m-1800000600: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  session 14b4b35cbc0e done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] live (fake): 4 orders posted, each cancelled at its expiry second: posted 4 cancelled 4
+  [PASS] live (fake): Down filled 5 @ 0.40, lost: cost 2.00 payout 0 net -2.00: [["5", "2.0", "-2.0"], ["5", "2.0", "-2.0"]]
+  [PASS] live (fake): Up not filled, cost 0
+  plan: 1 windows from 2027-01-15T08:00:00Z (btc-updown-5m-1800000000), worst-case resting per window 0.50 pUSD
+  btc-updown-5m-1800000000: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED trailing-0.02-late: BUY 25 Down @ 0.02 id 0x4881ffd2e0f24dbb9395dca6855af9a34881ffd2e0f24dbb9395dca6855af9a3 status live, cancel at 2027-01-15T08:04:55Z
+    cancel trailing-0.02-late Down: cancelled
+  btc-updown-5m-1800000000: result Down; 1 order records; cost 0.50 payout 25 net 24.50
+  session d800cf04f3c8 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] late-tail: mid Up 0.80 -> trailing = Down, placed 120 s before the end: [["Down", "2027-01-15T08:03:00Z"]]
+  [PASS] late-tail: Down won: payout 25, cost 0.50, net +24.50: 24.50
+  plan: 1 windows from 2027-01-15T08:00:00Z (btc-updown-5m-1800000000), worst-case resting per window 0.50 pUSD
+  btc-updown-5m-1800000000: market found, accepting=True
+    skip trailing-0.02-late trailing: mid exactly 0.50: no trailing/leading outcome
+  btc-updown-5m-1800000000: result Up; 1 order records; cost 0 payout 0 net 0
+  session 9c41218b9b56 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] late-tail: mid exactly 0.50 -> skipped, nothing posted
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+    skip both-0.40-start Up: size 5 < market minimum 10
+    skip both-0.40-start Down: size 5 < market minimum 10
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session 04b93015427b done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] size 5 < market minimum 10 -> skipped, nothing posted
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+    skip both-0.40-start Up: would cross: best ask 0.40 <= price 0.40 (post-only)
+    skip both-0.40-start Down: would cross: best ask 0.40 <= price 0.40 (post-only)
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session ffcc17df0616 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] best ask 0.40 <= price 0.40 -> skipped (post-only would be rejected)
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POST ERROR both-0.40-start Up: TimeoutError: simulated; counted as filled in today's caps, expires by GTD at the latest
+    POST ERROR both-0.40-start Down: TimeoutError: simulated; counted as filled in today's caps, expires by GTD at the latest
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session 829422d1e8b6 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] post error -> recorded as post-error, its 4.00 counted as filled today: ['post-error', 'post-error'], filled 4.00
+  plan: 3 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  STOPPING: STOP file /tmp/pm-exp-selftest-agbu7_52/STOP. No new orders; open orders of this session are cancelled; results of windows with orders are still recorded (Ctrl+C quits at once).
+  btc-updown-5m-1800000300: market found, accepting=True
+  session d48dab956211 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] STOP file -> no order posted in the session
+  plan: 6 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0x80f5bd491ce74d488f27bda63a666d1180f5bd491ce74d488f27bda63a666d11 status live, cancel at 2027-01-15T08:09:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0xf100b5162bb846fb81ae2aa7f99afd71f100b5162bb846fb81ae2aa7f99afd71 status live, cancel at 2027-01-15T08:09:30Z
+  btc-updown-5m-1800000600: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0x6aa4b548e5744e4fa3c432a94626ef816aa4b548e5744e4fa3c432a94626ef81 status live, cancel at 2027-01-15T08:14:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0xd6e2b2d99ada44efb49a323f308ee13dd6e2b2d99ada44efb49a323f308ee13d status live, cancel at 2027-01-15T08:14:30Z
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  btc-updown-5m-1800000900: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0x149e8cc6e9814e65b1855bb6859804ec149e8cc6e9814e65b1855bb6859804ec status live, cancel at 2027-01-15T08:19:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0xf0c84ccf5d324d12beaabe3d264ca702f0c84ccf5d324d12beaabe3d264ca702 status live, cancel at 2027-01-15T08:19:30Z
+  btc-updown-5m-1800000600: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  btc-updown-5m-1800001200: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0x1508e474968643018b161c3a89a4621b1508e474968643018b161c3a89a4621b status live, cancel at 2027-01-15T08:24:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0xa3b8cc2198214d64a1dae553f24effaea3b8cc2198214d64a1dae553f24effae status live, cancel at 2027-01-15T08:24:30Z
+  btc-updown-5m-1800000900: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  btc-updown-5m-1800001500: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id 0x24f1bea67ced486c969b812c9688eeda24f1bea67ced486c969b812c9688eeda status live, cancel at 2027-01-15T08:29:30Z
+    POSTED both-0.40-start: BUY 5 Down @ 0.40 id 0x3771535d262640de853452fe959206773771535d262640de853452fe95920677 status live, cancel at 2027-01-15T08:29:30Z
+  btc-updown-5m-1800001200: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  btc-updown-5m-1800001800: market found, accepting=True
+    cancel both-0.40-start Up: cancelled
+    cancel both-0.40-start Down: cancelled
+    skip both-0.40-start Up: both legs together: today filled 8.0 + still open 4.00 + 4.00 > daily cap 15.00
+    skip both-0.40-start Down: both legs together: today filled 8.0 + still open 4.00 + 4.00 > daily cap 15.00
+  STOPPING: today filled 8.0 + still open 4.00 + 4.00 > daily cap 15.00. No new orders; open orders of this session are cancelled; results of windows with orders are still recorded (Ctrl+C quits at once).
+  btc-updown-5m-1800001500: result Up; 2 order records; cost 2.0 payout 0 net -2.0
+  session 21eb91971e04 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] daily cap: 6 windows of pairs stop at <= 15.00 pUSD worst case, both legs or none: posted 10, worst-case used 10.0
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+    skip both-0.40-start Up: both legs together: 300 orders already sent today (UTC); +2 > cap 300
+    skip both-0.40-start Down: both legs together: 300 orders already sent today (UTC); +2 > cap 300
+  STOPPING: 300 orders already sent today (UTC); +2 > cap 300. No new orders; open orders of this session are cancelled; results of windows with orders are still recorded (Ctrl+C quits at once).
+  session 06400861cda5 done: records in /tmp/pm-exp-selftest-agbu7_52/out
+  [PASS] 300 orders already sent today -> nothing posted
+  [PASS] records hold no key and no wallet/signer address
+  [PASS] private key absent from the log
+  files: 1  order records: 0  windows: 0
+
+Per level (cost, payout, net in pUSD; payout = winning shares x 1, before redemption):
+  experiment / level                 placed  rej skip  fill%   shares    cost  payout     net   win%
+
+Totals by UTC day:
+  day          placed filled   shares    cost  payout     net
+
+Window results: {}
+  [PASS] report runs on the selftest records: returned 0
+selftest: ALL PASS
+[exit 0]
+
+================================================================ 2. dry-run over real coming BTC 5-minute windows (public data only)
+Three sessions ran in parallel 18:18-18:35 UTC on the revision before the last robustness patch (try/except around
+signing and posting, cleanup on crash; the dry-run path is otherwise identical). Session 2d ran on the final file.
+
+--- 2a
+$ .venv/bin/python -I exp_bids.py run --config experiments/tails.json --max-windows 3
+=== exp_bids.py run dry-run 2026-11-27 18:18:25 UTC
+  experiment tails: btc 5m, 1 level(s), worst case per window 1.00 pUSD
+    both-0.02-start: both BUY 25 @ 0.02 (0.50 pUSD each), place at +0 s, cancel at +270 s
+  dry-run: no usable key file, signing with a throwaway in-memory key
+  geoblock: blocked=True country=US (IP not shown)
+  dry-run: geoblock would refuse a live run here (this IP is geoblocked for order placement; nothing was sent)
+  wallet type DEPOSIT_WALLET (addresses are not printed)
+  plan: 3 windows from 2026-11-27T18:20:00Z (btc-updown-5m-1795803600), worst-case resting per window 1.00 pUSD
+  btc-updown-5m-1795803600: market found, accepting=True
+    DRY both-0.02-start: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.41 ask 0.42, mid Up 0.405) signed exp 2026-11-27T18:25:30Z, cancel 2026-11-27T18:24:30Z; NOT posted
+    DRY both-0.02-start: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.58 ask 0.59, mid Up 0.405) signed exp 2026-11-27T18:25:30Z, cancel 2026-11-27T18:24:30Z; NOT posted
+  btc-updown-5m-1795803900: market found, accepting=True
+    DRY both-0.02-start: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.51 ask 0.52, mid Up 0.515) signed exp 2026-11-27T18:30:30Z, cancel 2026-11-27T18:29:30Z; NOT posted
+    DRY both-0.02-start: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.5 ask 0.51, mid Up 0.515) signed exp 2026-11-27T18:30:30Z, cancel 2026-11-27T18:29:30Z; NOT posted
+  btc-updown-5m-1795803600: result Down; 2 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1795804200: market found, accepting=True
+    DRY both-0.02-start: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.55 ask 0.56, mid Up 0.555) signed exp 2026-11-27T18:35:30Z, cancel 2026-11-27T18:34:30Z; NOT posted
+    DRY both-0.02-start: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.44 ask 0.45, mid Up 0.555) signed exp 2026-11-27T18:35:30Z, cancel 2026-11-27T18:34:30Z; NOT posted
+  btc-updown-5m-1795803900: result Down; 2 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1795804200: result Up; 2 order records; cost 0 payout 0 net 0
+  session 8a7a34672c51 done: records in /home/user/polymarket-lab/pilot/out
+[exit 0]
+
+--- 2b
+$ .venv/bin/python -I exp_bids.py run --config experiments/pairs.json --max-windows 2
+=== exp_bids.py run dry-run 2026-11-27 18:18:25 UTC
+  experiment pairs: btc 5m, 1 level(s), worst case per window 4.00 pUSD
+    both-0.40-start: both BUY 5 @ 0.40 (2.00 pUSD each), place at +0 s, cancel at +270 s
+  dry-run: no usable key file, signing with a throwaway in-memory key
+  geoblock: blocked=True country=US (IP not shown)
+  dry-run: geoblock would refuse a live run here (this IP is geoblocked for order placement; nothing was sent)
+  wallet type DEPOSIT_WALLET (addresses are not printed)
+  plan: 2 windows from 2026-11-27T18:20:00Z (btc-updown-5m-1795803600), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1795803600: market found, accepting=True
+    DRY both-0.40-start: BUY 5 Up @ 0.40 = 2.00 pUSD (bid 0.41 ask 0.42, mid Up 0.405) signed exp 2026-11-27T18:25:30Z, cancel 2026-11-27T18:24:30Z; NOT posted
+    DRY both-0.40-start: BUY 5 Down @ 0.40 = 2.00 pUSD (bid 0.58 ask 0.59, mid Up 0.405) signed exp 2026-11-27T18:25:30Z, cancel 2026-11-27T18:24:30Z; NOT posted
+  btc-updown-5m-1795803900: market found, accepting=True
+    DRY both-0.40-start: BUY 5 Up @ 0.40 = 2.00 pUSD (bid 0.51 ask 0.52, mid Up 0.515) signed exp 2026-11-27T18:30:30Z, cancel 2026-11-27T18:29:30Z; NOT posted
+    DRY both-0.40-start: BUY 5 Down @ 0.40 = 2.00 pUSD (bid 0.49 ask 0.5, mid Up 0.515) signed exp 2026-11-27T18:30:30Z, cancel 2026-11-27T18:29:30Z; NOT posted
+  btc-updown-5m-1795803600: result Down; 2 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1795803900: result Down; 2 order records; cost 0 payout 0 net 0
+  session 07bddcfe6121 done: records in /home/user/polymarket-lab/pilot/out
+[exit 0]
+
+--- 2c
+$ .venv/bin/python -I exp_bids.py run --config experiments/late-tail.json --max-windows 2
+=== exp_bids.py run dry-run 2026-11-27 18:18:25 UTC
+  experiment late-tail: btc 5m, 1 level(s), worst case per window 0.50 pUSD
+    trailing-0.02-late: trailing BUY 25 @ 0.02 (0.50 pUSD each), place at +180 s, cancel at +295 s
+  dry-run: no usable key file, signing with a throwaway in-memory key
+  geoblock: blocked=True country=US (IP not shown)
+  dry-run: geoblock would refuse a live run here (this IP is geoblocked for order placement; nothing was sent)
+  wallet type DEPOSIT_WALLET (addresses are not printed)
+  plan: 2 windows from 2026-11-27T18:20:00Z (btc-updown-5m-1795803600), worst-case resting per window 0.50 pUSD
+  btc-updown-5m-1795803600: market found, accepting=True
+    DRY trailing-0.02-late: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.05 ask 0.06, mid Up 0.055) signed exp 2026-11-27T18:26:05Z, cancel 2026-11-27T18:24:55Z; NOT posted
+  btc-updown-5m-1795803600: result Down; 1 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1795803900: market found, accepting=True
+    DRY trailing-0.02-late: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.27 ask 0.28, mid Up 0.27) signed exp 2026-11-27T18:31:05Z, cancel 2026-11-27T18:29:55Z; NOT posted
+  btc-updown-5m-1795803900: result Down; 1 order records; cost 0 payout 0 net 0
+  session ed5d495c6744 done: records in /home/user/polymarket-lab/pilot/out
+[exit 0]
+
+--- 2d (final file)
+$ .venv/bin/python -I -u exp_bids.py run --config experiments/late-tail.json --max-windows 2
+=== exp_bids.py run dry-run 2026-11-27 18:31:34 UTC
+  experiment late-tail: btc 5m, 1 level(s), worst case per window 0.50 pUSD
+    trailing-0.02-late: trailing BUY 25 @ 0.02 (0.50 pUSD each), place at +180 s, cancel at +295 s
+  dry-run: no usable key file, signing with a throwaway in-memory key
+  geoblock: blocked=True country=US (IP not shown)
+  dry-run: geoblock would refuse a live run here (this IP is geoblocked for order placement; nothing was sent)
+  wallet type DEPOSIT_WALLET (addresses are not printed)
+  plan: 2 windows from 2026-11-27T18:30:00Z (btc-updown-5m-1795804200), worst-case resting per window 0.50 pUSD
+  btc-updown-5m-1795804200: market found, accepting=True
+    DRY trailing-0.02-late: BUY 25 Down @ 0.02 = 0.50 pUSD (bid 0.06 ask 0.07, mid Up 0.935) signed exp 2026-11-27T18:36:05Z, cancel 2026-11-27T18:34:55Z; NOT posted
+  btc-updown-5m-1795804200: result Up; 1 order records; cost 0 payout 0 net 0
+  btc-updown-5m-1795804500: market found, accepting=True
+    DRY trailing-0.02-late: BUY 25 Up @ 0.02 = 0.50 pUSD (bid 0.27 ask 0.28, mid Up 0.275) signed exp 2026-11-27T18:41:05Z, cancel 2026-11-27T18:39:55Z; NOT posted
+  btc-updown-5m-1795804500: result Down; 1 order records; cost 0 payout 0 net 0
+  session e03d63acbac2 done: records in /home/user/polymarket-lab/pilot/out
+[exit 0]
+
+--- independent check of the recorded results against gamma (closed=true), 18:41 UTC
+btc-updown-5m-1795803600 ["Up", "Down"] ["0", "1"] closed True
+btc-updown-5m-1795803900 ["Up", "Down"] ["0", "1"] closed True
+btc-updown-5m-1795804200 ["Up", "Down"] ["1", "0"] closed True
+btc-updown-5m-1795804500 None None closed None
+Recorded: 1795803600 Down, 1795803900 Down, 1795804200 Up (all match), 1795804500 Down (gamma not closed yet at
+18:41; the open market showed Up 0.49 / Down 0.51 at 18:40:47).
+
+--- the dry-run record files contain no 40-hex address (only 64-hex condition ids and decimal token ids)
+$ grep -oE "0x[0-9a-fA-F]{40}\b" out/exp-*.dryrun.jsonl | wc -l
+0
+
+--- report on the dry-run files
+$ .venv/bin/python -I exp_bids.py report --dry-run
+=== exp_bids.py report  2026-11-27 18:40:47 UTC
+  files: 3  order records: 14  windows: 9
+
+Per level (cost, payout, net in pUSD; payout = winning shares x 1, before redemption):
+  experiment / level                 placed  rej skip  fill%   shares    cost  payout     net   win%
+  late-tail / trailing-0.02-late          4    0    0    n/a     0.00    0.00    0.00    0.00    n/a  (4 without fill data)
+  pairs / both-0.40-start                 4    0    0    n/a     0.00    0.00    0.00    0.00    n/a  (4 without fill data)
+  tails / both-0.02-start                 6    0    0    n/a     0.00    0.00    0.00    0.00    n/a  (6 without fill data)
+
+Totals by UTC day:
+  day          placed filled   shares    cost  payout     net
+  2026-11-27       14      0     0.00    0.00    0.00    0.00
+
+Window results: {'Down': 7, 'Up': 2}
+
+================================================================ 3. report on a synthetic JSONL file
+Generator (scratch, not shipped): 2 days; tails: 4 orders, Down 25 filled and lost, Up 10 filled and won;
+pairs: Up 5 filled lost, Down rejected, Down skipped, next day Up 5 won + Down 5 lost; one 'placed' without a final record.
+$ .venv/bin/python -I exp_bids.py report exp-synthetic-20261128.jsonl
+=== exp_bids.py report  2026-11-27 18:41:12 UTC
+  files: 1  order records: 9  windows: 4
+  orders sent without a final record (session interrupted): 1
+
+Per level (cost, payout, net in pUSD; payout = winning shares x 1, before redemption):
+  experiment / level                 placed  rej skip  fill%   shares    cost  payout     net   win%
+  pairs / both-0.40-start                 3    1    1   100%    15.00    6.00    5.00   -1.00    33%
+  tails / both-0.02-start                 4    0    0    50%    35.00    0.70   10.00    9.30    50%
+
+Totals by UTC day:
+  day          placed filled   shares    cost  payout     net
+  2026-11-28        5      3    40.00    2.70   10.00    7.30
+  2026-11-29        2      2    10.00    4.00    5.00    1.00
+
+Window results: {'Up': 3, 'Down': 1}
+
+Hand check: tails placed 4, filled 2 (50%), shares 35, cost 25x0.02+10x0.02=0.70, payout 10, net 9.30, win 1/2.
+pairs placed 3 (rejected and skipped listed apart), filled 3 (100%), shares 15, cost 6.00, payout 5, net -1.00, win 1/3.
+Day 2026-11-28: cost 0.70+2.00=2.70, payout 10, net 7.30. Day 2026-11-29: cost 4.00, payout 5, net 1.00. Matches.
+
+================================================================ 4. not verifiable here (US IP, no account)
+post_order, cancel_orders, get_order (size_matched), list_account_trades (maker_orders), get_balance_allowance,
+the exchange's answer to a post-only GTD order, and the GTD 60-second rule in practice. First run on the Mac.

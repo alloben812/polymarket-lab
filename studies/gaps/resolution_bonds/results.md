@@ -1,11 +1,12 @@
 # Resolution bonds: buying the almost-decided side (0.95-0.98) shortly before resolution — results
 
 Study finished 2026-11-27 (started by another agent, who wrote `protocol.md` and `s1`-`s6`; this run executed them
-unchanged except a crash fix in `s6`, and added post-hoc checks `s7`-`s9`, all marked as such). Raw outputs:
-`out/tables.md` (B-a, B-b, claim, B-d), `out/tape_tables.md` (B-c, C-tape), `out/attack_tables.md` (s7),
-`out/extension_tables.md` (s8), `out/losers_rate.md` (s9), `out/losers.csv` (all 142 losers).
+unchanged except a crash fix in `s6` (`P = L.append` could not be called without an argument), and added post-hoc
+checks `s7`-`s10`, all marked as such). Raw outputs: `out/tables.md` (B-a, B-b, claim, B-d), `out/tape_tables.md`
+(B-c, C-tape), `out/attack_tables.md` (s7), `out/extension_tables.md` (s8), `out/losers_rate.md` (s9),
+`out/crypto_first_print.md` (s10), `out/losers.csv` (all 142 losers). Large data in `data/gaps_resolution_bonds/`.
 
-## Verdict: NO EDGE overall (sports, weather: negative); crypto and politics: INCONCLUSIVE (positive, too few markets)
+## Verdict: NO EDGE for the claim as registered (all categories, sports, weather: negative); crypto and politics INCONCLUSIVE by the rule. A post-hoc out-of-sample check makes crypto price markets the one candidate worth a live micro-test.
 
 - **The pre-registered claim fails as stated.** Buying the favourite the first time its mid is in [0.95, 0.98)
   between endDate - 1 h and settlement, all categories: late period (13-24 Nov) **-2.30 c/share** at the mid
@@ -23,10 +24,19 @@ unchanged except a crash fix in `s6`, and added post-hoc checks `s7`-`s9`, all m
   (10-20) mean nothing: the whole question is the rare loss. Over both periods the non-sports, non-weather
   families together won 190 of 192 entries (98.96%, Wilson 96.3-99.7%) against a break-even of 96.5%: the lower
   confidence bound sits right on break-even.
-- **Post-hoc extension (not part of the verdict)**: EXTENSION_SUMMARY
-- **Live micro-test:** worth one, small, on crypto price markets only (see "Live micro-test"): it costs little,
-  the capital comes back within an hour, and the open question (is the loss rate below about 3.5%?) can only be
-  answered by counting more markets. Nothing in sports, weather or politics deserves one.
+- **Post-hoc extension (not part of the verdict, chosen after seeing the sample).** The unchanged claim on every
+  crypto and politics market of the universe outside the sample (3,796 markets, 1,234 entries). **Crypto holds up:**
+  514 entries, 5 lost (0.97%, Wilson 0.4-2.3%), +2.58 c/share at the mid (t 5.9), late period 138 entries, 1 lost,
+  +2.79 c (t 3.8), 5-minute-later fill +2.38 c (t 5.3). On the tape, one trade per market at the first real taker
+  buy at 0.95-0.98 at least 10 s after the trigger (sample + extension, 429 markets): **5 lost (1.2%, Wilson
+  0.5-2.7%) against a break-even of 3.4%, +0.23 USD per 10 USD (t 4.2 by event, 4.4 by day)**; late period 109
+  markets, +0.24 USD per 10 USD (t 2.5). With 60 s delay the same (+0.24, 387 markets), with 300 s +0.21 (247).
+  All five losses are Bitcoin up/down markets that reversed in the last 10-70 minutes. **Politics does not hold
+  up:** POLITICS_EXT
+- **Live micro-test: one, on crypto price markets only** (hourly and daily up/down, "above X", ranges,
+  "dip to / reach"; fee 0.01): 10 USD taker buys at 0.95-0.98 in the last hour, 300 repetitions, stop at the 4th
+  loss in the first 100. Details in "Live micro-test". If the edge is what the data say, it is worth about 2-5 USD a
+  day to a 200 EUR account: a test of a mechanism, not an income. Nothing in sports, weather or politics deserves one.
 
 ## Question
 
@@ -158,31 +168,61 @@ Universe scale factor 36,604 / 5,000 = 7.32. Entries per day (both periods, univ
 a day (it runs 7 days a week; the one crypto loss was on a Sunday), politics 29 vs 5, sports 251 vs 555 (weekends are
 mostly sports, which loses), weather 12 vs 12.
 
-- **Net per trade at 5-20 USD (crypto, the only candidate).** Tape-checked net with the favourite known (A1): +0.7%
-  of cost over both periods (49 markets), +3.0% in the late period (10). Per 10 USD trade: +0.07 to +0.30 USD; per
-  20 USD: +0.14 to +0.60 USD. One loss costs about 9.6 / 19.3 USD, i.e. as much as 30-140 winning trades.
-- **Size available.** Qualifying taker buys after the entry time, per crypto market: median $209 early, $29 late;
-  >= $20 in 43 of 62 markets, >= $100 in 40 of 62. Median print $9.8, median 5 distinct taker wallets per market.
-- **Capacity for ~200 EUR (~215 USD).** Crypto: about 9 fillable entries a day at 20 USD, lock-up 0.7 h (capital is
-  not the limit): 0 to about 5 USD a day if the edge is real, negative if the loss rate is above ~3.5%. Rule 21 at
-  $100 per entry: crypto late about 22 USD/day (9.2 entries x 2.8 USD), but that needs $100 of asks per market
-  (40 of 62 had it) and uses the late figure with zero losses. Politics: lock-up 122 h mean (C-tape sample 170 h), so
-  capital binds: rule 21 for $300 gives 3 x 24 / 422 h = 0.17 positions a day, about 0.6 USD/day; at 20 USD slots
-  with 215 USD about 2 trades a day, about 1.4 USD/day. Universe-wide, the eventual winner's taker buys at 0.95-0.98
-  in the window were about 5,100 USD/day in crypto and 4,100 USD/day in politics in the late period.
+- **Net per trade at 5-20 USD (crypto, the only candidate).** In-sample tape check with the favourite known (A1,
+  share-weighted): +0.7% of cost over both periods (49 markets, one loss decides it), +3.0% late (10). Post-hoc,
+  one trade per market at the first print >= 10 s after the trigger (s10, 429 markets, sample + extension):
+  **+0.23 USD per 10 USD trade (+2.3%), +0.45 per 20 USD**; late period +0.24 per 10 USD (109 markets). One loss
+  costs about 9.7 / 19.4 USD, as much as 40 winning trades: the result is the loss rate (1.2% measured, 3.4%
+  break-even).
+- **Opportunities and size (crypto).** 576 crypto entries in the universe in 36 days = **16 a day** (13 on
+  weekdays, 11-12 on weekend days in the sample split; the extension has 391 weekday and 123 weekend entries, both
+  positive: weekday +2.58 c, weekend +2.58 c at the mid). 429 (12 a day) had a qualifying print >= 10 s after the
+  trigger; 388 (11 a day) had at least 20 USD of such buys, 316 (9 a day) at least 100 USD. Median print 9.8 USD,
+  median 5 taker wallets per market. All takers together bought about 6,500 USD a day of these prints.
+- **Capacity for ~200 EUR (~215 USD).** Crypto: lock-up 0.5-1 h, so capital is not the limit; about 11 trades a day
+  x 20 USD x 2.3% = **about 5 USD a day if the measured edge is real** (2.5 USD at 10 USD a trade), with a loss of
+  ~19 USD about once a week; 0 or negative if the loss rate is 3.4% or more. Rule 21 ($100 per entry, sample late
+  C-tape): about 22 USD a day, but it needs 100 USD of asks (9 markets a day have them) and rests on 13 late markets
+  without a loss. Politics: lock-up 122 h mean in the sample (C-tape sample 170 h), so capital binds: rule 21 for
+  $300 gives 3 x 24 / 422 h = 0.17 positions a day, about 0.6 USD/day; at 20 USD slots with 215 USD about 2 trades a
+  day, about 1.4 USD/day before the losses the extension shows. Universe-wide, the eventual winner's taker buys at
+  0.95-0.98 in the window were about 5,100 USD/day in crypto and 4,100 USD/day in politics in the late period
+  (sample scaling, rule 20).
 
 ## Reaction time needed
 
-Not a sub-second race in these families. Crypto: the first qualifying print comes a median 5 s after the 5-minute mid
-bucket shows the favourite in range, but 67% of the dollars print more than 60 s after the market's first such print
-and 22% more than 10 minutes after; a program that polls the book every few seconds sees the same prices. Politics:
-median 64 minutes from entry to the first print, 79% of dollars more than 10 minutes later. The 5-minute-later fill
-(A2) still works in politics (+3.1 c) and is about zero in crypto (-0.04 c, 28 markets): in crypto the edge, if any,
-is in the first few minutes.
+Not a sub-second race. Crypto: the first qualifying print comes a median 5 s after the 5-minute mid bucket shows the
+favourite in range, but 67% of the dollars print more than 60 s after the market's first such print and 22% more than
+10 minutes after. One trade per market at the first print after 10 s, 60 s or 300 s gives +0.23, +0.24 and +0.21
+USD per 10 USD (429, 387, 247 markets): a delay of a few seconds to a minute costs nothing, a longer one costs
+opportunities (fewer markets still print in range), not price. Politics: median 64 minutes from entry to the first
+print, 79% of dollars more than 10 minutes later. **A program polling the book every 5-10 seconds is enough.**
+(In-sample share-weighted A2 for crypto was -0.04 c on 28 markets: one loss among few markets; the per-market
+version on 247 markets is the better measure.)
 
 ## Live micro-test
 
-LIVE_TEST
+Worth one, on crypto only. It tests a post-hoc result, so it is a test, not a deployment: keep the stake small.
+
+- **Markets.** Polymarket crypto price markets with fee 0.01 that resolve on a price at a fixed time: hourly and
+  daily "Up or Down" (not the 5- and 15-minute `-updown-` series), "above X on <date>", "between X and Y", "dip to /
+  reach X on <date>". BTC, ETH, SOL, XRP. No volume filter at entry (the study's >= 10,000 filter used final volume).
+- **Rule.** From endDate - 60 min until the market closes, read both books every 5-10 s. The first time the
+  favourite (higher mid) has its best ask in [0.95, 0.98), send ONE buy of 10 USD at that ask as a fill-and-kill
+  (immediate-or-cancel) limit order; if it does not fill, retry on the next poll while the ask stays in range, then
+  give up on that market. One position per market, held to resolution, no stop-loss, no exit. Skip a market whose
+  ask is below 0.95 (the price is telling you something) or whose book shows less than 10 USD at the ask.
+- **Size.** 10 USD per trade (above the market's minimum order); worst single loss about 9.7 USD. Positions settle
+  within about 1 h, so 3-5 open at once is the most the account needs: a 60-100 USD test account is enough.
+- **Repetitions.** 300 filled trades (about 3-5 weeks at roughly 10-12 a day). Decision: the edge is real if 5 or fewer
+  of the 300 lose (one-sided p < 0.05 against the break-even loss rate of 3.5%); with the measured 1% loss rate this
+  passes 92% of the time. Expected result if the data are right: about +70 USD on 3,000 USD of turnover; if the
+  market is fair: about 0 (minus the fee already in).
+- **Stop rule.** Stop at the 4th loss within the first 100 trades (1.8% chance if the true loss rate is 1%, 47% if
+  it is 3.5%), or at a cumulative net of -40 USD, or if fewer than half of the triggers get filled within 60 s (the
+  prices would then not be there for a slow program). Log for every trigger: time, both asks and bids, size at the
+  ask, fill price and size, time to fill, and the outcome; compare the fill price with the first tape print after the
+  trigger to check the study's fill assumption.
 
 ## Limitations
 

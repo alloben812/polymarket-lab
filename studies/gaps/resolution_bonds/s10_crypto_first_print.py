@@ -1,7 +1,7 @@
 """Step 10 (post hoc, not part of the verdict): what a few-seconds program would have got in crypto, one trade per
 market. Crypto claim-entry markets of the 5,000 sample and of the s8 extension. Entry = the FIRST taker BUY print on
 the entry-time favourite at [0.95, 0.98) with block time >= t + D (t = the 5-minute bucket that triggered the claim;
-D = 10 s and 60 s), bought at that print's price; equal weight per market; fee 0.01 x p x (1-p) from the market rate.
+D = 10 s, 60 s and 300 s), bought at that print's price; equal weight per market; fee 0.01 x p x (1-p) from the market rate.
 Reports the per-market loss rate with Wilson interval, net per 10 USD, t clustered by event, by period and type."""
 import gzip, json, pickle
 from collections import defaultdict
@@ -18,7 +18,7 @@ L = ["# Crypto, one trade per market at the first print after a delay (s10, post
      "delay | type | period | markets with a print | lost | loss % (Wilson 95%) | mean price | net per 10 USD | SE | t (event) | break-even loss %",
      "|".join(["---"] * 11)]
 detail = []
-for D in (10, 60):
+for D in (10, 60, 300):
     got = []
     for r in rows:
         p = DATA / "tapes" / f"{r['cid']}.json.gz"

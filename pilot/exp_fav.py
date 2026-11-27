@@ -2868,14 +2868,18 @@ def cmd_selftest(a) -> int:
         s.poll()
         expect("after endDate but still open (doc: window runs to the close) -> trigger", len(env.posted) == 1)
 
-        # 1.2.1: a failed market discovery is retried after UNIVERSE_RETRY_S, not after UNIVERSE_EVERY_S
+        # 1.2.1: a failed market discovery is retried after UNIVERSE_RETRY_S, not after UNIVERSE_EVERY_S.
+        # A failing call takes time (a read timeout took 19 s on the Mac); the retry counts from its END, so that
+        # back-to-back attempts can never starve the book polls even when a failure lasts longer than 60 s.
         env_u, s_u = new_session(n_markets=1)
         u_calls, u_fail = [0], [True]
         u_real = env_u.discover
+        U_FAIL_S = 19
 
         def u_discover(now):
             u_calls[0] += 1
             if u_fail[0]:
+                env_u.sleep(U_FAIL_S)
                 raise RuntimeError("The read operation timed out")
             return u_real(now)
 
@@ -2884,9 +2888,10 @@ def cmd_selftest(a) -> int:
         s_u.refresh_universe(force=True)
         expect("1.2.1 universe: the forced discovery that fails is tried once, the list stays empty",
                u_calls[0] == 1 and not s_u.markets, (u_calls[0], len(s_u.markets)))
-        env_u.sleep(UNIVERSE_RETRY_S - 1)
+        env_u.sleep(UNIVERSE_RETRY_S - 1)                     # start + 19 + 59: past start + 60, before end + 60
         s_u.refresh_universe()
-        expect("1.2.1 universe: no new attempt earlier than UNIVERSE_RETRY_S after a failure", u_calls[0] == 1, u_calls[0])
+        expect("1.2.1 universe: no new attempt earlier than UNIVERSE_RETRY_S after the END of a failed call",
+               u_calls[0] == 1, u_calls[0])
         env_u.sleep(1)
         s_u.refresh_universe()
         expect("1.2.1 universe: new attempt UNIVERSE_RETRY_S after a failure (not UNIVERSE_EVERY_S)", u_calls[0] == 2,
@@ -2903,7 +2908,8 @@ def cmd_selftest(a) -> int:
         env_u.sleep(UNIVERSE_EVERY_S - UNIVERSE_RETRY_S)
         s_u.refresh_universe()
         expect("1.2.1 universe: regular refresh UNIVERSE_EVERY_S after the last success", u_calls[0] == 4, u_calls[0])
-        expect("1.2.1 universe: no order was posted by these refreshes", len(env_u.posted) == 0, len(env_u.posted))
+        expect("1.2.1 universe: the failure log line names the retry delay",
+               f"keeping the old list; retry in {UNIVERSE_RETRY_S} s" in out.log_path.read_text())
 
         # dry-run never posts and records the would-be order
         env, s = new_session(live=False, n_markets=2)

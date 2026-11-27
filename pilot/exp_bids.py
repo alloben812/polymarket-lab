@@ -87,7 +87,7 @@ HERE = Path(__file__).resolve().parent
 OUT_DIR = HERE / "out"                                  # selftest points these to a temp dir
 STOP_FILE = Path("~/.polymarket-pilot/STOP").expanduser()
 LOCK_FILE = Path("~/.polymarket-pilot/exp_bids.live.lock").expanduser()   # outside pilot/: every checkout
-ADDRESS_RE = re.compile(r"(?<![0-9a-fA-F])0x[0-9a-fA-F]{40}(?![0-9a-fA-F])")
+ADDRESS_RE = re.compile(r"(?<![0-9a-fA-F])(?:0x)?[0-9a-fA-F]{40}(?![0-9a-fA-F])")   # with or without 0x
 
 out: smoke.Out
 
@@ -95,6 +95,12 @@ out: smoke.Out
 def scrub(text) -> str:
     """Text bound for a record or the log: known secrets redacted and no 40-hex address left."""
     return ADDRESS_RE.sub("<address>", out._redact(str(text)))  # noqa: SLF001
+
+
+def tilde(p) -> str:
+    """A path for records and messages: the home directory (it holds the user name) written as ~."""
+    s, home = str(p), str(Path.home())
+    return "~" + s[len(home):] if home not in ("", "/") and (s == home or s.startswith(home + os.sep)) else s
 
 
 def order_closed(status) -> bool:
@@ -314,7 +320,7 @@ def check_order_caps(notional: Decimal, window_resting: Decimal, day_counts: tup
                      legs: int = 1) -> None:
     """Every cap that applies before an order (or `legs` equal orders) is sent. Raises Refusal."""
     if STOP_FILE.exists():
-        raise Refusal(f"STOP file present ({STOP_FILE}): no new orders")
+        raise Refusal(f"STOP file present ({tilde(STOP_FILE)}): no new orders")
     if notional > MAX_ORDER_NOTIONAL:
         raise Refusal(f"order notional {notional} > per-order cap {MAX_ORDER_NOTIONAL}")
     add = notional * legs

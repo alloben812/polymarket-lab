@@ -1,2 +1,3 @@
-websockets==17.4
+websockets==15.0.1
 pytest==9.2.0
+polymarket-client @ https://files.pythonhosted.org/packages/ae/c7/b9975f0c80e88a8bedc939450eb9ec31ee76a49ae70b8b08697b32e5f4bd/polymarket_client-0.20.1-py3-none-any.whl#sha256=45109077df2b22aafb63879c4dbd292149de63bcadbefbc9686fd7cb71227997

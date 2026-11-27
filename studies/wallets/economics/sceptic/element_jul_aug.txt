@@ -1,1 +1,38 @@
 [0x8cb3ed8b82e59276ceaef9799287f51dbb450114] fills 77 in 0s
+0x8cb3ed8b82e59276ceaef9799287f51dbb450114  0x8cb3ed8b82e59276ceaef9799287f51dbb450114  window 2026-07-17 00:00 .. 2026-08-31 00:00 UTC
+summary: {"fills": 77, "markets": 38, "resolved_complete_markets": 37, "incomplete_markets": 0, "unresolved_markets": 1, "turnover_usd": 12079, "maker_share_usd": 0.0, "sell_share_usd": 0.002, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": 1832.12, "fees_est": 14.54, "net": 1817.58, "fee_rate_unknown_markets": 0, "net_per_market": 49.124, "t_by_market": 3.23, "win_share_markets": 0.676, "median_market_turnover": 99.0, "max_market_turnover": 2000.0, "avg_fill_usd": 156.87}
+inventory events: {'REDEEM': 25}
+API says for the same days: gross 1814, fees -55, refunded 0, rebates 10, kept 1769, volume $10744, fills 75
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  economics  37       37                 0           12071     1.0          1832.12  14.54     1817.58  15.06             49.12           3.23       
+  politics   1        0                  0           8         1.0          0.0      0.0       0.0      0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd
+  ('T', 'BUY')   56     14170   12052  0.8506  13.094         0.102         12.992        2.749  4.73   37       1840.85
+  ('T', 'SELL')  13     297     19     0.0633  -7.816         0.028         -7.844        8.1    -0.97  13       -23.28 
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('T', '0.00-0.05')  2      500     2     0.003   -0.1           0.003         -0.103        None    None   1        -0.51  
+  ('T', '0.05-0.15')  1      5       0     0.05    -95.0          0.048         -95.047       None    None   1        -4.87  
+  ('T', '0.15-0.30')  8      43      10    0.2282  -5.127         0.173         -5.3          5.873   None   3        -2.27  
+  ('T', '0.30-0.45')  5      15      5     0.3528  3.88           0.227         3.652         32.633  None   3        0.54   
+  ('T', '0.45-0.55')  3      7       3     0.504   3.63           0.249         3.381         49.121  None   2        0.23   
+  ('T', '0.55-0.70')  5      1794    1211  0.6748  32.398         0.219         32.178        0.264   None   4        577.32 
+  ('T', '0.70-0.85')  20     5300    4286  0.8087  19.045         0.153         18.892        1.623   11.64  14       1001.25
+  ('T', '0.85-0.95')  8      2830    2625  0.9276  7.304          0.067         7.237         0.658   11.01  7        204.79 
+  ('T', '0.95-0.99')  10     1646    1621  0.9852  1.355          0.015         1.34          0.339   3.95   7        22.06  
+  ('T', '0.99-1.00')  7      2327    2308  0.9917  0.827          0.008         0.819         0.03    27.41  5        19.05  
+
+by role and point in the market's life:
+  key                                            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('T', 'life', 't 1-7 d to end')                2      450     334    0.7422  25.782         0.191         25.591        1.319  None  2        115.15 
+  ('T', 'life', 'u 6-24 h to end')               9      565     534    0.9437  1.982          0.028         1.954         0.236  None  4        11.05  
+  ('T', 'life', 'v 1-6 h to end')                12     32      13     0.4233  -7.89          0.154         -8.044        4.604  None  4        -2.56  
+  ('T', 'life', 'w 10-60 min to end')            4      809     738    0.9115  8.847          0.076         8.77          3.562  None  4        70.98  
+  ('T', 'life', 'z after end (pre-resolution)')  42     12610   10452  0.8289  12.973         0.102         12.871        3.069  4.19  25       1622.97
+
+full result written to studies/wallets/economics/sceptic/element_jul_aug.json

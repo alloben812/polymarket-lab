@@ -29,7 +29,7 @@ class Daily:
         self.positions = {}
         self.markets = {}
         self.tainted_since = None
-        self.fills = []
+        self.fill_times = {}
 
     def day(self, now):
         key = utc_day(now)
@@ -63,7 +63,7 @@ class Daily:
             pos["cost"] -= cost
             day["realized"] += size * price - fee - cost
             day["closed_shares"] += size
-        self.fills.append(f)
+        self.fill_times[f["fill_id"]] = f["recv_ns"]
 
     def resolve(self, row):
         slug = row["slug"]
@@ -107,34 +107,10 @@ class Daily:
             pos["size"] = pos["cost"] = Decimal(0)
         return results
 
-    def gap(self, row):
-        # Later REST reconciliation can invalidate a quote already used online.
-        # An affected fill also changes subsequent cash and risk availability.
-        affected = set(row.get("tokens", []))
-        result = []
-        for f in self.fills:
-            if f.get("book_session") != row["session"] or (
-                affected and f["token"] not in affected
-            ):
-                continue
-            evidence = (f["recv_ns"], f.get("signal_recv_ns"), f.get("book_recv_ns"))
-            if any(
-                stamp is not None and row["since_ns"] < stamp <= row["recv_ns"]
-                for stamp in evidence
-            ):
-                self.tainted_since = min(
-                    self.tainted_since or f["recv_ns"], f["recv_ns"]
-                )
-                result.append(
-                    dict(
-                        kind="invalidated_fill",
-                        fill_id=f.get("fill_id"),
-                        slug=f["slug"],
-                        reason=row["reason"],
-                        since_ns=row["since_ns"],
-                    )
-                )
-        return result
+    def invalidate(self, fill_id):
+        # Cash from a tainted fill can affect every later trade as well.
+        stamp = self.fill_times[fill_id]
+        self.tainted_since = min(self.tainted_since or stamp, stamp)
 
     def summary(self):
         rows = {}
@@ -185,6 +161,8 @@ class Paper:
         self.strategy = Lockin()
         self.execution = PaperExecution(initial_cash=cash, latency_ms=latency_ms)
         self.daily = Daily()
+        self.stop_reason = None
+        self.last_ordinal = 0
         self.last_summary = 0
         self.last_day = -1
         self.reasons = Counter()
@@ -226,9 +204,14 @@ class Paper:
             self.entry(row, item)
             if item["kind"] == "fill":
                 self.daily.fill(item)
+            elif item["kind"] == "fill_tainted":
+                self.daily.invalidate(item["fill_id"])
 
     def observe(self, row):
         now = row["recv_ns"]
+        self.last_ordinal = row["ordinal"]
+        if row["kind"] == "stop":
+            self.stop_reason = row["reason"]
         if now // DAY_NS != self.last_day:
             self.daily.day(now)
             self.last_day = now // DAY_NS
@@ -237,9 +220,6 @@ class Paper:
             market = row["market"]
             self.daily.markets[market["slug"]] = market
         self.lifecycle(row, self.execution.observe(row, self.book))
-        if row["kind"] == "gap":
-            for item in self.daily.gap(row):
-                self.entry(row, item)
         if row["kind"] == "resolution":
             for item in self.daily.resolve(row):
                 self.entry(row, item)
@@ -260,6 +240,8 @@ class Paper:
             self.output / "daily.json",
             dict(
                 **self.daily.summary(),
+                stop_reason=self.stop_reason,
+                last_ordinal=self.last_ordinal,
                 decision_reasons=dict(sorted(self.reasons.items())),
             ),
         )

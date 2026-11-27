@@ -1,0 +1,28 @@
+[0x71dd2d539a793687451d4af8c43169369b47d61c] fills 246 in 1s
+0x71dd2d539a793687451d4af8c43169369b47d61c  0x71dd2d539a793687451d4af8c43169369b47d61c  window 2026-08-31 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 246, "markets": 23, "resolved_complete_markets": 4, "incomplete_markets": 8, "unresolved_markets": 16, "turnover_usd": 267776, "maker_share_usd": 0.333, "sell_share_usd": 0.492, "markets_with_both_outcomes_traded": 1, "uses_split_merge": false, "gross": 708.0, "fees_est": 0.0, "net": 708.0, "fee_rate_unknown_markets": 0, "net_per_market": 177.0, "t_by_market": 1.0, "win_share_markets": 0.25, "median_market_turnover": 2138.58, "max_market_turnover": 118862.42, "avg_fill_usd": 1088.52}
+inventory events: {'REDEEM': 5}
+API says for the same days: gross 23207, fees -2585, refunded 0, rebates 380, kept 21009, volume $267776, fills 246
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net    net_pct_turnover  net_per_market  t_by_market
+  economics  20       3                  6           260058    0.657        708.0  0.0       708.0  0.27              236.0           1.0        
+  politics   2        1                  1           5580      1.0          0.0    0.0       0.0    0.0               0.0             None       
+  finance    1        0                  1           2139      1.0          0.0    0.0       0.0    0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', 'BUY')   2      6400    5056  0.79    21.0           0.0           21.0          None  None  1        1344.0 
+  ('M', 'SELL')  4      5300    4664  0.88    -12.0          0.0           -12.0         None  None  1        -636.0 
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', '0.70-0.85')  2      6400    5056  0.79    21.0           0.0           21.0          None  None  1        1344.0 
+  ('M', '0.85-0.95')  4      5300    4664  0.88    -12.0          0.0           -12.0         None  None  1        -636.0 
+
+by role and point in the market's life:
+  key                                            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', 'life', 't 1-7 d to end')                2      6400    5056  0.79    21.0           0.0           21.0          None  None  1        1344.0 
+  ('M', 'life', 'z after end (pre-resolution)')  4      5300    4664  0.88    -12.0          0.0           -12.0         None  None  1        -636.0 
+
+full result written to studies/wallets/economics/GoldmanSachs_88d.json

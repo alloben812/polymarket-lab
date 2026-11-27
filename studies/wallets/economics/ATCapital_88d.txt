@@ -1,0 +1,41 @@
+[ATCapital] fills 3468 in 2s
+ATCapital  0x7ad3d7e5cda50dbe1fc5c29a1ffc2f61a9232e30  window 2026-08-31 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 3468, "markets": 23, "resolved_complete_markets": 6, "incomplete_markets": 6, "unresolved_markets": 17, "turnover_usd": 2122021, "maker_share_usd": 0.534, "sell_share_usd": 0.265, "markets_with_both_outcomes_traded": 12, "uses_split_merge": true, "gross": -52.35, "fees_est": 1.05, "net": -53.4, "fee_rate_unknown_markets": 0, "net_per_market": -8.9, "t_by_market": -0.19, "win_share_markets": 0.667, "median_market_turnover": 3502.79, "max_market_turnover": 632642.37, "avg_fill_usd": 611.89}
+inventory events: {'MERGE': 62, 'CONVERSION': 11, 'SPLIT': 2, 'REDEEM': 6}
+API says for the same days: gross 29300, fees -5462, refunded 0, rebates 4021, kept 27858, volume $2121595, fills 3455
+
+by family:
+  family         markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net     net_pct_turnover  net_per_market  t_by_market
+  economics      19       4                  5           2120790   0.466        -52.06  0.0       -52.06  -0.0              -13.01          -0.17      
+  politics       2        1                  0           1201      0.235        0.01    0.0       0.01    0.0               0.01            None       
+  btc-updown-5m  1        1                  0           30        1.0          -0.3    1.05      -1.35   -4.54             -1.35           None       
+  unknown        1        0                  1           0         None         0.0     0.0       0.0     None              None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'BUY')   75     25521   17563  0.6882  0.548          0.0           0.548         2.153  None  4        139.84 
+  ('M', 'SELL')  37     9163    6036   0.6587  -1.398         0.0           -1.398        2.186  None  2        -128.14
+  ('T', 'BUY')   7      812     53     0.0649  -2.666         0.065         -2.731        2.667  None  4        -22.17 
+  ('T', 'SELL')  6      2708    1665   0.615   -1.566         0.019         -1.586        2.346  None  3        -42.93 
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', '0.00-0.05')  25     8611    373    0.0433  -3.291         0.0           -3.291        0.426  None  2        -283.35
+  ('M', '0.05-0.15')  16     2206    114    0.0516  2.676          0.0           2.676         0.864  None  2        59.05  
+  ('M', '0.85-0.95')  18     4304    4074   0.9467  5.334          0.0           5.334         0.091  None  2        229.56 
+  ('M', '0.95-0.99')  41     11271   10762  0.9548  -0.087         0.0           -0.087        0.706  None  2        -9.82  
+  ('M', '0.99-1.00')  12     8292    8276   0.998   0.196          0.0           0.196         0.1    None  2        16.25  
+  ('T', '0.00-0.05')  4      1503    48     0.0318  0.283          0.0           0.283         2.52   None  2        4.25   
+  ('T', '0.05-0.15')  2      278     15     0.0536  -5.36          0.0           -5.36         None   None  1        -14.9  
+  ('T', '0.45-0.55')  2      60      30     0.495   -0.5           1.75          -2.25         None   None  1        -1.35  
+  ('T', '0.95-0.99')  4      1678    1625   0.9683  -3.165         0.0           -3.165        None   None  1        -53.11 
+  ('T', '0.99-1.00')  1      1       1      0.993   0.7            0.007         0.693         None   None  1        0.01   
+
+by role and point in the market's life:
+  key                               fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'life', 'u 6-24 h to end')  112    34684   23599  0.6804  0.034          0.0           0.034         1.033  None  4        11.7   
+  ('T', 'life', 'a before window')  2      60      30     0.495   -0.5           1.75          -2.25         None   None  1        -1.35  
+  ('T', 'life', 't 1-7 d to end')   1      1       1      0.993   0.7            0.007         0.693         None   None  1        0.01   
+  ('T', 'life', 'u 6-24 h to end')  10     3459    1687   0.4878  -1.843         0.0           -1.843        1.928  None  2        -63.76 
+
+full result written to studies/wallets/economics/ATCapital_88d.json

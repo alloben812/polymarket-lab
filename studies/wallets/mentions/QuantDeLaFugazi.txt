@@ -1,0 +1,50 @@
+[QuantDeLaFugazi] fills 111 in 0s
+QuantDeLaFugazi  0x66c1a6fe836ff555ca32848646acedbbe93bfa3f  window 2026-11-13 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 111, "markets": 58, "resolved_complete_markets": 43, "incomplete_markets": 3, "unresolved_markets": 14, "turnover_usd": 11500, "maker_share_usd": 0.077, "sell_share_usd": 0.215, "markets_with_both_outcomes_traded": 4, "uses_split_merge": true, "gross": 644.85, "fees_est": 14.16, "net": 630.69, "fee_rate_unknown_markets": 0, "net_per_market": 14.667, "t_by_market": 0.81, "win_share_markets": 0.674, "median_market_turnover": 73.63, "max_market_turnover": 1991.19, "avg_fill_usd": 103.6}
+inventory events: {'REDEEM': 39, 'SPLIT': 6, 'MERGE': 7}
+API says for the same days: gross 1386, fees -63, refunded 0, rebates 5, kept 1481, volume $12222, fills 114
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net     net_pct_turnover  net_per_market  t_by_market
+  politics  55       40                 3           10258     0.914        614.21  10.78     603.43  5.88              15.09           0.83       
+  culture   3        3                  0           1242      0.996        30.64   3.38      27.26   2.2               9.09            0.08       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', 'BUY')   7      624     131   0.2096  -0.778         0.0           -0.778        14.692  -0.05  5        -4.86  
+  ('M', 'SELL')  8      881     519   0.5892  13.768         0.0           13.768        9.302   None   4        121.3  
+  ('T', 'BUY')   54     9387    6173  0.6576  5.097          0.133         4.964         9.176   0.54   34       465.94 
+  ('T', 'SELL')  7      1094    444   0.4057  4.568          0.155         4.414         14.542  0.3    6        48.3   
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', '0.00-0.05')  2      200     2     0.01    -1.0           0.0           -1.0          None    None   1        -2.0   
+  ('M', '0.15-0.30')  5      753     185   0.2461  6.396          0.0           6.396         23.283  None   2        48.18  
+  ('M', '0.30-0.45')  2      98      36    0.3712  51.372         0.0           51.372        12.293  None   2        50.48  
+  ('M', '0.55-0.70')  1      50      28    0.55    45.0           0.0           45.0          None    None   1        22.5   
+  ('M', '0.70-0.85')  1      6       5     0.79    21.0           0.0           21.0          None    None   1        1.26   
+  ('M', '0.95-0.99')  1      51      50    0.99    -1.0           0.0           -1.0          None    None   1        -0.51  
+  ('M', '0.99-1.00')  3      347     343   0.99    -1.0           0.0           -1.0          0.0     None   2        -3.47  
+  ('T', '0.00-0.05')  2      649     24    0.0362  -3.619         0.035         -3.653        0.508   None   2        -23.73 
+  ('T', '0.15-0.30')  3      925     169   0.1824  5.243          0.148         5.095         15.673  None   3        47.14  
+  ('T', '0.30-0.45')  7      1590    506   0.3183  42.181         0.216         41.965        8.774   None   4        667.23 
+  ('T', '0.45-0.55')  9      1066    539   0.5053  -6.419         0.249         -6.668        18.07   -0.37  8        -71.09 
+  ('T', '0.55-0.70')  5      737     460   0.6239  -61.003        0.232         -61.235       4.335   None   4        -451.27
+  ('T', '0.70-0.85')  8      2023    1558  0.7702  22.976         0.176         22.8          1.748   13.04  5        461.14 
+  ('T', '0.85-0.95')  10     826     760   0.9207  7.933          0.073         7.861         0.629   12.5   9        64.89  
+  ('T', '0.95-0.99')  15     2447    2384  0.9743  -7.332         0.025         -7.357        9.693   -0.76  15       -180.02
+  ('T', '0.99-1.00')  2      218     218   0.9983  -0.016         0.002         -0.018        0.154   None   2        -0.04  
+
+by role and point in the market's life:
+  key                                            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', 'life', 's over 7 d to end')             4      435     184   0.4238  -14.077        0.0           -14.077       6.514   None   2        -61.22 
+  ('M', 'life', 't 1-7 d to end')                5      531     150   0.2816  30.143         0.0           30.143        6.73    None   3        160.06 
+  ('M', 'life', 'u 6-24 h to end')               1      50      28    0.55    45.0           0.0           45.0          None    None   1        22.5   
+  ('M', 'life', 'v 1-6 h to end')                5      489     289   0.5896  -1.0           0.0           -1.0          0.0     None   2        -4.89  
+  ('T', 'life', 's over 7 d to end')             9      1355    999   0.7371  18.178         0.134         18.043        7.554   None   4        244.55 
+  ('T', 'life', 't 1-7 d to end')                23     5205    2625  0.5043  11.494         0.196         11.298        11.475  0.98   14       588.08 
+  ('T', 'life', 'u 6-24 h to end')               14     1922    1691  0.8796  -6.252         0.075         -6.326        8.726   -0.73  12       -121.6 
+  ('T', 'life', 'v 1-6 h to end')                12     1008    888   0.8816  -18.394        0.034         -18.427       22.093  -0.83  10       -185.71
+  ('T', 'life', 'z after end (pre-resolution)')  3      990     414   0.4176  -1.083         0.034         -1.118        3.34    None   2        -11.07 
+
+full result written to studies/wallets/mentions/QuantDeLaFugazi.json

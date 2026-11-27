@@ -1,0 +1,26 @@
+[0x831449c4b94607dd3367023c61525aea99a90b88] fills 623 in 1s
+0x831449c4b94607dd3367023c61525aea99a90b88  0x831449c4b94607dd3367023c61525aea99a90b88  window 2026-11-13 15:38 .. 2026-11-27 15:38 UTC
+summary: {"fills": 623, "markets": 194, "resolved_complete_markets": 57, "incomplete_markets": 47, "unresolved_markets": 135, "turnover_usd": 218512, "maker_share_usd": 0.123, "sell_share_usd": 0.212, "markets_with_both_outcomes_traded": 11, "uses_split_merge": true, "gross": 0.0, "fees_est": 0.0, "net": 0.0, "fee_rate_unknown_markets": 0, "net_per_market": 0.0, "t_by_market": null, "win_share_markets": 0.0, "median_market_turnover": 142.62, "max_market_turnover": 24999.96, "avg_fill_usd": 350.74}
+inventory events: {'MERGE': 16, 'REDEEM': 58}
+API says for the same days: gross 15575, fees -1558, refunded 0, rebates 433, kept 14449, volume $222705, fills 638
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net  net_pct_turnover  net_per_market  t_by_market
+  economics  53       3                  13          75981     0.932        0.0    0.0       0.0  0.0               0.0             None       
+  politics   91       53                 15          67416     0.852        0.0    0.0       0.0  0.0               0.0             None       
+  sports     8        0                  2           20911     0.954        0.0    0.0       0.0  0.0               None            None       
+  finance    10       0                  0           18588     0.859        0.0    0.0       0.0  0.0               None            None       
+  weather    7        0                  5           15582     0.71         0.0    0.0       0.0  0.0               None            None       
+  culture    20       1                  9           11655     0.807        0.0    0.0       0.0  0.0               0.0             None       
+  tech       5        0                  3           8379      0.824        0.0    0.0       0.0  0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  (none)
+
+by role and price:
+  (none)
+
+by role and point in the market's life:
+  (none)
+
+full result written to studies/wallets/economics/0x831449c4b9.json

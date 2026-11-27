@@ -1,0 +1,22 @@
+[ATCapital] fills 1223 in 1s
+ATCapital  0x7ad3d7e5cda50dbe1fc5c29a1ffc2f61a9232e30  window 2026-11-13 15:38 .. 2026-11-27 15:38 UTC
+summary: {"fills": 1223, "markets": 13, "resolved_complete_markets": 0, "incomplete_markets": 10, "unresolved_markets": 13, "turnover_usd": 908997, "maker_share_usd": 0.481, "sell_share_usd": 0.168, "markets_with_both_outcomes_traded": 9, "uses_split_merge": true, "gross": 0, "fees_est": 0, "net": 0, "fee_rate_unknown_markets": 0, "net_per_market": null, "t_by_market": null, "win_share_markets": null, "median_market_turnover": 15966.36, "max_market_turnover": 241722.02, "avg_fill_usd": 743.25}
+inventory events: {'MERGE': 28, 'CONVERSION': 9, 'SPLIT': 1}
+API says for the same days: gross -2016, fees -1665, refunded 0, rebates 1249, kept -2431, volume $909208, fills 1218
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net  net_pct_turnover  net_per_market  t_by_market
+  economics  11       0                  9           907797    0.519        0.0    0.0       0.0  0.0               None            None       
+  politics   1        0                  0           1200      0.234        0.0    0.0       0.0  0.0               None            None       
+  unknown    1        0                  1           0         None         0.0    0.0       0.0  None              None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  (none)
+
+by role and price:
+  (none)
+
+by role and point in the market's life:
+  (none)
+
+full result written to studies/wallets/economics/ATCapital.json

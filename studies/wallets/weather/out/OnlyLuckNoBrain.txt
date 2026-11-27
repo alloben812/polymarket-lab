@@ -1,1 +1,35 @@
 [OnlyLuckNoBrain] fills 7288 in 4s
+OnlyLuckNoBrain  0x6a8d1709bfb718d8555d315a983c4816278350f9  window 2026-11-13 15:37 .. 2026-11-27 15:37 UTC
+summary: {"fills": 7288, "markets": 1283, "resolved_complete_markets": 1127, "incomplete_markets": 16, "unresolved_markets": 140, "turnover_usd": 71824, "maker_share_usd": 1.0, "sell_share_usd": 0.147, "markets_with_both_outcomes_traded": 125, "uses_split_merge": false, "gross": 559.77, "fees_est": 0.0, "net": 559.77, "fee_rate_unknown_markets": 0, "net_per_market": 0.497, "t_by_market": 0.2, "win_share_markets": 0.487, "median_market_turnover": 31.83, "max_market_turnover": 618.8, "avg_fill_usd": 9.86}
+inventory events: {'REDEEM': 665}
+API says for the same days: gross 2143, fees 0, rebates 1031, net 3174, volume $76779, fills 7626
+
+by family:
+  family   markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net     net_pct_turnover  net_per_market  t_by_market
+  weather  1283     1127               16          71824     0.0          559.77  0.0       559.77  0.78              0.5             0.2        
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'BUY')   5937   163143  55580  0.3407  0.129          0.0           0.129         1.751  0.07  1025     209.91 
+  ('M', 'SELL')  681    17177   8787   0.5116  2.037          0.0           2.037         4.953  0.41  243      349.86 
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', '0.00-0.05')  77     9513    168    0.0177  -1.769         0.0           -1.769        0.814   -2.17  12       -168.31
+  ('M', '0.05-0.15')  892    28178   2617   0.0929  -1.183         0.0           -1.183        3.274   -0.36  139      -333.44
+  ('M', '0.15-0.30')  1476   48738   10725  0.2201  2.043          0.0           2.043         3.569   0.57   284      995.74 
+  ('M', '0.30-0.45')  1405   34391   12435  0.3616  -1.204         0.0           -1.204        4.064   -0.3   285      -414.07
+  ('M', '0.45-0.55')  777    16191   7961   0.4917  -1.586         0.0           -1.586        5.208   -0.3   186      -256.76
+  ('M', '0.55-0.70')  1023   20321   12553  0.6178  0.034          0.0           0.034         4.01    0.01   278      6.91   
+  ('M', '0.70-0.85')  801    19712   15009  0.7614  3.091          0.0           3.091         3.822   0.81   296      609.21 
+  ('M', '0.85-0.95')  153    2866    2499   0.8718  0.745          0.0           0.745         5.861   0.13   86       21.36  
+  ('M', '0.95-0.99')  9      247     239    0.9695  40.755         0.0           40.755        30.178  1.35   6        100.49 
+  ('M', '0.99-1.00')  5      163     161    0.9917  -0.833         0.0           -0.833        0.147   None   4        -1.36  
+
+by role and point in the market's life:
+  key                               fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd 
+  ('M', 'life', 't 1-7 d to end')   3498   87822   32159  0.3662  2.483          0.0           2.483         2.208   1.12   782      2180.77 
+  ('M', 'life', 'u 6-24 h to end')  3092   91163   31730  0.3481  -2.063         0.0           -2.063        1.946   -1.06  544      -1880.46
+  ('M', 'life', 'v 1-6 h to end')   28     1335    478    0.358   19.431         0.0           19.431        26.428  0.74   12       259.46  
+
+full result written to studies/wallets/weather/OnlyLuckNoBrain.json

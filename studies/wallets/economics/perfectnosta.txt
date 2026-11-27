@@ -1,0 +1,36 @@
+[perfectnostalgia] fills 538 in 1s
+perfectnostalgia  0x0ffcad4963e25dc150774363f4061ebe840c8236  window 2026-11-13 15:38 .. 2026-11-27 15:38 UTC
+summary: {"fills": 538, "markets": 22, "resolved_complete_markets": 3, "incomplete_markets": 3, "unresolved_markets": 19, "turnover_usd": 27552, "maker_share_usd": 0.297, "sell_share_usd": 0.125, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": -307.27, "fees_est": 1.82, "net": -309.09, "fee_rate_unknown_markets": 0, "net_per_market": -103.029, "t_by_market": -0.35, "win_share_markets": 0.667, "median_market_turnover": 878.16, "max_market_turnover": 4784.0, "avg_fill_usd": 51.21}
+inventory events: {'REDEEM': 3}
+API says for the same days: gross 333, fees -163, refunded 0, rebates 72, kept 241, volume $27771, fills 541
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  economics  18       3                  0           22038     0.641        -307.27  1.82      -309.09  -1.4              -103.03         -0.35      
+  politics   4        0                  3           5514      0.946        0.0      0.0       0.0      0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd
+  ('M', 'BUY')  16     1377    741  0.5382  -40.252        0.0           -40.252       15.898  None  3        -554.15
+  ('T', 'BUY')  3      866     519  0.5995  28.505         0.21          28.295        19.747  None  3        245.07 
+
+by role and price:
+  key                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', '0.30-0.45')  3      54      19   0.35    65.0           0.0           65.0          None  None  1        35.04  
+  ('M', '0.45-0.55')  4      990     514  0.519   -51.899        0.0           -51.899       None  None  1        -513.75
+  ('M', '0.55-0.70')  3      200     110  0.55    -55.0          0.0           -55.0         None  None  1        -110.0 
+  ('M', '0.70-0.85')  6      133     98   0.74    26.0           0.0           26.0          None  None  1        34.55  
+  ('T', '0.30-0.45')  1      280     98   0.35    65.0           0.227         64.773        None  None  1        181.43 
+  ('T', '0.55-0.70')  1      100     66   0.664   -66.4          0.223         -66.623       None  None  1        -66.62 
+  ('T', '0.70-0.85')  1      486     355  0.73    27.0           0.197         26.803        None  None  1        130.26 
+
+by role and point in the market's life:
+  key                                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd
+  ('M', 'life', 's over 7 d to end')  6      133     98   0.74    26.0           0.0           26.0          None    None  1        34.55  
+  ('M', 'life', 'u 6-24 h to end')    5      91      39   0.4319  15.884         0.0           15.884        58.026  None  2        14.5   
+  ('M', 'life', 'v 1-6 h to end')     5      1153    603  0.5234  -52.337        0.0           -52.337       None    None  1        -603.2 
+  ('T', 'life', 's over 7 d to end')  1      486     355  0.73    27.0           0.197         26.803        None    None  1        130.26 
+  ('T', 'life', 't 1-7 d to end')     1      280     98   0.35    65.0           0.227         64.773        None    None  1        181.43 
+  ('T', 'life', 'u 6-24 h to end')    1      100     66   0.664   -66.4          0.223         -66.623       None    None  1        -66.62 
+
+full result written to studies/wallets/economics/perfectnosta.json

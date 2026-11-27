@@ -1,0 +1,20 @@
+[0x71dd2d539a793687451d4af8c43169369b47d61c] fills 9 in 0s
+0x71dd2d539a793687451d4af8c43169369b47d61c  0x71dd2d539a793687451d4af8c43169369b47d61c  window 2026-11-13 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 9, "markets": 4, "resolved_complete_markets": 0, "incomplete_markets": 2, "unresolved_markets": 4, "turnover_usd": 2972, "maker_share_usd": 0.026, "sell_share_usd": 0.638, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": 0, "fees_est": 0, "net": 0, "fee_rate_unknown_markets": 0, "net_per_market": null, "t_by_market": null, "win_share_markets": null, "median_market_turnover": 897.41, "max_market_turnover": 1976.18, "avg_fill_usd": 330.24}
+inventory events: {}
+API says for the same days: gross 1760, fees -25, refunded 0, rebates 8, kept 1743, volume $2972, fills 9
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net  net_pct_turnover  net_per_market  t_by_market
+  economics  4        0                  2           2972      0.974        0.0    0.0       0.0  0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  (none)
+
+by role and price:
+  (none)
+
+by role and point in the market's life:
+  (none)
+
+full result written to studies/wallets/economics/GoldmanSachs.json

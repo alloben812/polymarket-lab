@@ -1,0 +1,25 @@
+[0x42bcce5ce467243cbe40a9e67eb2a6a6873a63e3] fills 60 in 1s
+0x42bcce5ce467243cbe40a9e67eb2a6a6873a63e3  0x42bcce5ce467243cbe40a9e67eb2a6a6873a63e3  window 2026-11-13 15:40 .. 2026-11-27 15:40 UTC
+summary: {"fills": 60, "markets": 36, "resolved_complete_markets": 8, "incomplete_markets": 0, "unresolved_markets": 28, "turnover_usd": 3733, "maker_share_usd": 0.001, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 1, "uses_split_merge": false, "gross": 0.36, "fees_est": 0.02, "net": 0.34, "fee_rate_unknown_markets": 0, "net_per_market": 0.043, "t_by_market": 1.0, "win_share_markets": 0.125, "median_market_turnover": 39.24, "max_market_turnover": 512.58, "avg_fill_usd": 62.22}
+inventory events: {'REDEEM': 8}
+API says for the same days: gross -487, fees -5, refunded 0, rebates 0, kept -493, volume $3733, fills 60
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net   net_pct_turnover  net_per_market  t_by_market
+  politics  33       5                  0           3733      0.999        0.36   0.02      0.34  0.01              0.07            1.0        
+  tech      2        2                  0           0         None         0.0    0.0       0.0   None              0.0             None       
+  culture   1        1                  0           0         None         0.0    0.0       0.0   None              0.0             None       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', 'BUY')  1      20      20   0.982   1.8            0.088         1.712         None  None  1        0.34   
+
+by role and price:
+  key                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', '0.95-0.99')  1      20      20   0.982   1.8            0.088         1.712         None  None  1        0.34   
+
+by role and point in the market's life:
+  key                                            fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', 'life', 'z after end (pre-resolution)')  1      20      20   0.982   1.8            0.088         1.712         None  None  1        0.34   
+
+full result written to studies/wallets/mentions/0x7b9364.json

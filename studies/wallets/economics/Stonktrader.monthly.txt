@@ -1,0 +1,18 @@
+Stonktrader  0x73e35ce0b7e36ef3ce29ebd12b30b28007383239  joined 2026-05-01  markets traded 650  fills 1643
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        101,211
+  taker fees charged:                                    -4,035
+  rebates+rewards (taker 153 / maker 260 / rewards 656):      1,068
+  yield + referral income:                                  165
+  ECONOMIC PnL (the API's bottom line, trust this):      98,410   of which unrealized 6,848
+  volume $2,085,781 (3,143,502 shares): gross +4.85% of volume, fees net of refunds -0.19%, kept +4.72%
+  share of what was kept that is rebates/rewards: 1%
+  taker_tier: {"address": "0x73e35ce0b7e36ef3ce29ebd12b30b28007383239", "tier": 0, "tier_name": "Tier 0", "wv_30d": 15955.528894}
+  maker_tier: {"address": "0x73e35ce0b7e36ef3ce29ebd12b30b28007383239", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 2250.563732, "own_wv_30d": 2250.563732}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-05      10,364       -330         0        47     10,093      10,046      998,378       513
+  2026-06       2,219       -464         0        49      1,813       1,764      434,004       272
+  2026-07      14,674       -467         0       475     14,763      14,288      182,610       327
+  2026-08        -388        -56         0       128       -316        -444       74,959        68
+  2026-09      10,594       -204         0         0     10,390      10,390       51,730        39
+  2026-10      61,121     -1,842         0       282     59,614      59,333      201,845       269
+  2026-11       2,628       -673         0        88      2,053       1,965      142,255       155

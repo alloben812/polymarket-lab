@@ -138,3 +138,40 @@ gross charge and `economic_pnl` already includes the refund (RN1: 3.85M refunded
   dependencies (`ts-bign`, `big-nunber`, `levex-refa`, `lint-builder`).
 - Snapshot check: of 176 open negRisk events (top 400 by 24h volume), 0 offered a complete-set arbitrage after
   fees at top of book (median sum of asks 1.036, sum of bids 0.965); sums below 1 were all `negRiskAugmented`.
+
+## Public datasets (inventory 2026-11-27; details and checks in `catalog/raw/r2_datasets.md`)
+
+- No dataset gives queue position. Past depth exists only where someone recorded the WebSocket.
+- All markets, full L2, per category per hour, 2026-08-18 -> yesterday: HF `chitoyuuri/polymarket-l2-v3-1-archive`
+  (PendulumFlow V3.1, CC BY-NC; weather ~17 MB/hour, sports ~207 MB/hour, crypto ~75 MB/hour). Sample read.
+- Rewarded markets (NFL/EPL/CFB, temperature, politics) with L2 + trades + Polymarket's live score feed + Binance and
+  Chainlink prices on one receive clock: HF `Houroux/polymarket-l2-history` (2026-07-22 -> 2026-10-11 so far). No
+  crypto up/down markets in it. Sample read.
+- BTC 5m book + Binance trades/bookTicker + Chainlink on one receive clock: HF `Fahri-5/updown-5m-polymarket-raw`
+  (2026-10-17 -> 2026-11-08, CC0). BTC 5m at 5 ms with on-chain maker/taker fills: HF
+  `mileswangs/polymarket-btc-updown-5m-orderbook-tick-data` (2026-08-08 -> 08-21). After the Nov 20 fee change:
+  HF `ithiria894/polymarket-l2-orderbook` (2026-11-16 -> 11-22). Samples read.
+- HF `polydata5/polymarket-updown-5m-ws` (the largest 5m set) is gated: data returns 401 without an HF account.
+- `python3 -I tools/rpq.py <hf dataset> <path> [row group]` peeks at a remote parquet file by range requests;
+  `python3 -I tools/hf_info.py <hf dataset> ...` saves card + file tree under `data/datasets/_api/`.
+- wallet_check caveat (seen on 4 wallets active in Mar-Apr 2026): `trade_pnl + fees + rebates` does not equal the
+  API's `economic_pnl`; the gap is about the size of the pre-May-2026 fees. Unresolved.
+
+## Toolkit (`pmlab/`, installed in editable mode: `import pmlab` works from anywhere)
+
+- `http.get_json(url, params, cache=...)` polite fetch with retries; `cache=True` only for immutable data.
+- `gamma`: `market_by_slug`, `event_by_slug`, `markets_by_condition(ids)`, `iter_markets(**filters)`,
+  `iter_events(**filters)`, `resolve_profile(name)`, `family(market)` (coarse category), `jfield`.
+- `dataapi`: `iter_trades(user=|condition=, start, end, taker_only)`, `iter_activity`, `user_stats`, `user_pnl`,
+  `leaderboard(category, period, sort_by, n)`, `resolutions(condition_ids)`, `prices_history(token, start, end, bucket)`.
+- `fees`: `fee_per_share(p, rate)`, `taker_fee`, `btc_updown_rate(ts)`, `market_rate(market)`, `implied_rate`, tiers.
+- `wallet`: `python3 -m pmlab.wallet <name|0x..> --days N [--end YYYY-MM-DD] [--json out]` takes an account apart
+  (maker/taker, buy/sell, price and timing buckets, per-market PnL after fees); `fetch_fills`, `analyse` in code.
+- `px.Px.load('BTCUSDT', ['2026-11-21', ...])` Binance 1-second closes with `price(t)`, `twap(t_end, lookback)`,
+  `sigma(t)`; `fair.fair_up(px, t, t0, dur, lookback, k)` probability of Up with the averaging-window lock-in.
+- `updown`: `windows(dur, start, end)`, `load_market(asset, dur, t0)` (official price_to_beat, final_price, up_won,
+  fee rate), `tape(condition)` cached whole-market tape, `buyable(rows)` / `sellable(rows)` (what could be bought or
+  sold when; match time = block time minus 3 s).
+- `stats`: `mean_se`, `ratio_cluster` (edge per share with errors clustered by market), `bootstrap_sum_ci`, `wilson`.
+- Tools: `tools/wallet_check.py` (gross vs kept, by month), `tools/leaders.py <category>` (who wins a category and
+  whether they look systematic), `tools/xread.py` (X posts and timelines).

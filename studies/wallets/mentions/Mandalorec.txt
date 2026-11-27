@@ -1,0 +1,46 @@
+[Mandalorec] fills 208 in 0s
+Mandalorec  0x039b08dc2cb66400f1d725821b1a38924f799b6c  window 2026-11-13 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 208, "markets": 68, "resolved_complete_markets": 17, "incomplete_markets": 20, "unresolved_markets": 42, "turnover_usd": 18152, "maker_share_usd": 0.448, "sell_share_usd": 0.397, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": 823.61, "fees_est": 17.26, "net": 806.35, "fee_rate_unknown_markets": 0, "net_per_market": 47.432, "t_by_market": 1.85, "win_share_markets": 0.529, "median_market_turnover": 249.23, "max_market_turnover": 763.25, "avg_fill_usd": 87.27}
+inventory events: {'REDEEM': 21}
+API says for the same days: gross 2958, fees -96, refunded 0, rebates 46, kept 2908, volume $18301, fills 214
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net     net_pct_turnover  net_per_market  t_by_market
+  economics  17       2                  4           5022      0.63         98.32   3.04      95.28   1.9               47.64           2.93       
+  politics   19       9                  1           4654      0.823        430.86  3.99      426.88  9.17              47.43           1.05       
+  finance    10       3                  5           2838      0.318        343.77  9.83      333.95  11.77             111.32          3.88       
+  weather    7        0                  4           1659      0.425        0.0     0.0       0.0     0.0               None            None       
+  sports     6        1                  5           1586      0.0          0.0     0.0       0.0     0.0               0.0             None       
+  tech       3        0                  1           1368      0.671        0.0     0.0       0.0     0.0               None            None       
+  culture    5        2                  0           757       0.539        -49.35  0.41      -49.76  -6.58             -24.88          -1.0       
+  crypto     1        0                  0           268       0.318        0.0     0.0       0.0     0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd
+  ('M', 'BUY')   6      262     56    0.2126  -8.894         0.0           -8.894        9.281   None  3        -23.33 
+  ('M', 'SELL')  3      147     132   0.9     -10.0          0.0           -10.0         None    None  1        -14.7  
+  ('T', 'BUY')   13     3948    1923  0.4871  21.823         0.437         21.386        10.069  2.12  13       844.38 
+
+by role and price:
+  key                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd
+  ('M', '0.05-0.15')  1      160     23   0.146   -14.6          0.0           -14.6         None    None  1        -23.37 
+  ('M', '0.15-0.30')  3      70      13   0.19    -19.0          0.0           -19.0         None    None  1        -13.26 
+  ('M', '0.55-0.70')  2      32      19   0.59    41.0           0.0           41.0          None    None  1        13.3   
+  ('M', '0.85-0.95')  3      147     132  0.9     -10.0          0.0           -10.0         None    None  1        -14.7  
+  ('T', '0.05-0.15')  1      390     54   0.1385  -13.852        0.119         -13.971       None    None  1        -54.48 
+  ('T', '0.15-0.30')  3      787     149  0.19    14.482         0.154         14.329        32.325  None  3        112.77 
+  ('T', '0.30-0.45')  1      263     106  0.4036  59.636         1.204         58.433        None    None  1        153.64 
+  ('T', '0.45-0.55')  2      758     400  0.5269  47.31          0.249         47.062        2.502   None  2        356.95 
+  ('T', '0.55-0.70')  3      919     555  0.6044  12.357         0.514         11.843        30.904  None  3        108.83 
+  ('T', '0.70-0.85')  3      831     659  0.7925  20.754         0.699         20.055        3.598   None  3        166.66 
+
+by role and point in the market's life:
+  key                                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd
+  ('M', 'life', 's over 7 d to end')  3      147     132   0.9     -10.0          0.0           -10.0         None    None  1        -14.7  
+  ('M', 'life', 't 1-7 d to end')     4      230     37    0.1594  -15.936        0.0           -15.936       1.86    None  2        -36.63 
+  ('M', 'life', 'u 6-24 h to end')    2      32      19    0.59    41.0           0.0           41.0          None    None  1        13.3   
+  ('T', 'life', 's over 7 d to end')  4      1134    685   0.604   17.556         0.867         16.69         24.475  None  4        189.25 
+  ('T', 'life', 't 1-7 d to end')     8      2524    1189  0.4711  28.205         0.278         27.927        11.392  2.45  8        704.89 
+  ('T', 'life', 'u 6-24 h to end')    1      290     49    0.17    -17.0          0.141         -17.141       None    None  1        -49.76 
+
+full result written to studies/wallets/mentions/Mandalorec.json

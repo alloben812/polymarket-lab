@@ -1,0 +1,12 @@
+ATCapital  0x7ad3d7e5cda50dbe1fc5c29a1ffc2f61a9232e30  joined 2026-10-03  markets traded 22  fills 3465
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         30,082
+  taker fees charged:                                    -5,462
+  rebates+rewards (taker 413 / maker 1,807 / rewards 1,801):      4,021
+  ECONOMIC PnL (the API's bottom line, trust this):      28,640   of which unrealized 896
+  volume $2,121,820 (4,611,861 shares): gross +1.42% of volume, fees net of refunds -0.26%, kept +1.35%
+  share of what was kept that is rebates/rewards: 14%
+  taker_tier: {"address": "0x7ad3d7e5cda50dbe1fc5c29a1ffc2f61a9232e30", "tier": 0, "tier_name": "Tier 0", "wv_30d": 134495.742169}
+  maker_tier: {"address": "0x7ad3d7e5cda50dbe1fc5c29a1ffc2f61a9232e30", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 173404.856143, "own_wv_30d": 173404.856143}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-10       1,199          0         0       140      1,339       1,199      236,865       966
+  2026-11      28,101     -5,462         0     3,881     26,519      22,639    1,884,730     2,489

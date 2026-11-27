@@ -1,0 +1,67 @@
+name                         kept_all     catM fills30  days        usd  eco%    mk ecoMk  $/fill  top econ events
+b2d0                           164215    15463       3   7.0     146691 100.0     1     1   48897  fed-decision-in-december-20260729232808632:146691
+GoldmanSachs                    86646    14276     160  30.0     169439 100.0    14    14    1059  fed-decision-in-december-20260729232808632:132560; fed-decision-in-october-20260617190323537:15536; fed-decision-in-january-20260729233815502:7527
+5xxtuewiogvukhjt2623             8316        0     682  30.0       2869 100.0     2     2       4  fed-decision-in-december-20260729232808632:2863; fed-decision-in-march-2027:6
+ATCapital                       28640        0    3342  30.0    2106209  99.9    22    19     630  fed-decision-in-december-20260729232808632:1975355; fed-decision-in-january-20260729233815502:101590; fed-decision-in-march-2027:15471
+welcometowinnercircle           20555        0      80  30.0     914133  99.1     6     2   11427  fed-decision-in-october-20260617190323537:906232
+simpleman                      117512    18757     742  30.0     677631  97.6    40    28     913  fed-decision-in-december-20260729232808632:448200; another-fed-rate-hike-in-2026:104490; fed-decisions-sepdec:34735
+TheyAreTakingTheHobitsToIs     459701    28241     425  27.8     789510  96.5     4     3    1858  fed-decision-in-december-20260729232808632:713573; another-fed-rate-hike-in-2026:47965
+pako                           376976        0     703  29.7    1748244  96.1    30    10    2487  fed-decision-in-december-20260729232808632:1665913; how-high-will-us-unemployment-go-in-2026:11813; how-many-dissent-at-the-december-fed-meeting-202607
+S55                             69758        0     234  29.9     105429  86.3    23     9     451  fed-decision-in-december-20260729232808632:84900; us-recession-by-end-of-2026:2678; how-many-fed-rate-hikes-in-2026-20260623190717369:2462
+ratehikes                      244034    23135     460  30.0     623099  85.7    89    10    1355  fed-decision-in-december-20260729232808632:526267; how-many-fed-rate-cuts-in-2026:7497; fed-decision-in-october-20260617190323537:354
+m00n                            31717        0    1558  30.0     426483  76.3    28     9     274  fed-decision-in-december-20260729232808632:283773; fed-decision-in-october-20260617190323537:40033; fed-decision-in-january-20260729233815502:1538
+aijack90                       242259        0     785  30.0     323490  73.4    24     6     412  fed-decision-in-december-20260729232808632:232509; how-many-fed-rate-hikes-in-2026-20260623190717369:4024; fed-decision-in-october-20260617190323537:84
+perfectnostalgia               181889        0     896  29.9     128583  66.1    59    36     144  fed-decision-in-december-20260729232808632:40290; how-high-will-inflation-get-in-2026:9508; bank-of-england-decision-in-november-20260730150602252:7580
+Vilgefortz                     369399    21332     790  29.9     844738  61.3    23     2    1069  fed-decision-in-december-20260729232808632:517629
+TheReturnOfDarthMaul          1808367    53985    1167  29.9    1289359  60.8    28     6    1105  fed-decision-in-december-20260729232808632:701699; how-many-fed-rate-cuts-in-2026:48550; another-fed-rate-hike-in-2026:33044
+HDGB                            96296        0     303  30.0      35840  55.8   119    34     118  how-high-will-5-year-treasury-yield-go-before-2027:7082; how-high-will-5-year-treasury-yield-go-in-october:3298; how-high-will-30-year-treasury-yield-g
+0x6302CDeFa498e7174dd0fcD6     124876    23044     126  29.2     384749  53.1     4     2    3054  fed-decision-in-december-20260729232808632:204252
+MysticFind                     292770    74297     950  30.0     499065  49.8    15     8     525  fed-decision-in-december-20260729232808632:245755; fed-decision-in-january-20260729233815502:2338; fed-decision-in-october-20260617190323537:340
+classified                     881782        0    4000  15.1    3832024  49.1    64     6     958  fed-decision-in-december-20260729232808632:1876530; another-fed-rate-hike-in-2026:4098
+Ronaldo2100                    362173    24704    2219  28.2     673077  47.0    18     3     303  fed-decision-in-december-20260729232808632:316298
+KimJonEn                        69769        0     290  29.9      70242  46.5    36    11     242  fed-decision-in-december-20260729232808632:17399; fed-decision-in-january-20260729233815502:8441; how-many-fed-rate-hikes-in-2026-20260623190717369:386
+foodenjoyer                    969103        0    1736  29.9    1464735  43.3    36     9     844  fed-decision-in-december-20260729232808632:532523; another-fed-rate-hike-in-2026:95580; fed-decision-in-october-20260617190323537:6785
+Donkov                          83142        0    3023  30.0      36544  42.3    73    22      12  fed-decision-in-december-20260729232808632:10096; fed-decision-in-january-20260729233815502:2556; fed-decision-in-october-20260617190323537:1537
+Ahpo                           154896        0    2186  30.0     937507  41.8   170    47     429  fed-decision-in-december-20260729232808632:191620; fed-decision-in-january-20260729233815502:97921; how-many-fed-rate-cuts-in-2026:30277
+plumbis                         71185        0    1579  29.6    1551935  40.4    77     3     983  fed-decision-in-december-20260729232808632:441409; another-fed-rate-hike-in-2026:135058; how-many-fed-rate-cuts-in-2026:50516
+schizohedgehog                 207911        0    1631  29.1    1489205  40.0    18     3     913  fed-decision-in-december-20260729232808632:596145
+0xe639e41094bbeae18g3e6d17     520819    31988    1420  29.8    1206557  38.9     8     3     850  fed-decision-in-december-20260729232808632:468188; michael-barr-officially-out-as-fed-governor-by-december-31:658
+jozeslemsek                      6714        0    4000  16.0      13320  34.6   242    56       3  fed-decision-in-january-20260729233815502:2170; fed-decision-in-december-20260729232808632:1432; fed-decision-in-april-2027:442
+charlatta                        6393        0     583  29.1     439705  34.3    56    12     754  fed-decision-in-december-20260729232808632:104083; another-fed-rate-hike-in-2026:31473; fed-decision-in-january-20260729233815502:12817
+yingxer                        105815    17570     343  30.0     333886  34.3    17     6     973  fed-decision-in-october-20260617190323537:84625; fed-decision-in-december-20260729232808632:29826
+paperclip-maxxer               431322        0    2137  29.9    1041979  32.8    51     7     488  fed-decision-in-december-20260729232808632:327863; fed-decision-in-october-20260617190323537:14393
+BabyGroot                       63337        0    4000   2.1       2829  25.8    81     6       1  fed-decision-in-december-20260729232808632:569; fed-decision-in-january-20260729233815502:115; another-fed-rate-hike-in-2026:47
+Desy-1725192185234             119142        0    3830  30.0      60913  25.7    14     5      16  fed-decision-in-december-20260729232808632:14150; fed-decision-in-january-20260729233815502:1477
+0x831449c4b94607dd3367023c      52316        0    1789  30.0     393842  25.5   512    56     220  how-high-will-inflation-get-in-2026:45247; how-low-will-lake-powell-drop-1786980780361:14003; japan-core-cpi-yoy-in-2026-20260617224131789:5610
+arjennnnn                      191798    34088    4000  28.6    3546721  21.9   213     7     887  fed-decision-in-december-20260729232808632:776710; core-cpi-yoy-october-2026:95; october-inflation-us-annual:91
+MisTKy                         375588        0    4000  26.2    2507572  21.2   106     5     627  fed-decision-in-december-20260729232808632:493900; how-many-fed-rate-hikes-in-2026-20260623190717369:37531
+0x690BfE39089E61F674b8F88D      67888        0      95  30.0     537874  13.8    21     3    5662  fed-decision-in-december-20260729232808632:74458; how-many-fed-rate-cuts-in-2026:10
+Lolakis                        195925        0    4000  17.6    1983517  13.3   170     5     496  fed-decision-in-december-20260729232808632:262000; nvidia-vp-kimberly-powell-announced-resignation-or-removal-byptptpt:2697
+betwick                        626221    24211    2242  30.0    1349109  12.9    51     3     602  fed-decision-in-december-20260729232808632:173648; fed-decision-in-october-20260617190323537:20
+Stonktrader                     98410        0     155  27.1     142255  10.7    58     3     918  october-inflation-us-annual:8527; core-cpi-yoy-october-2026:4022; november-inflation-canada-monthly-20261214:2733
+nonkenny90                     160877    13029    3192  30.0    1129858   7.5   413    11     354  fed-decision-in-december-20260729232808632:45671; fed-decision-in-october-20260617190323537:19610; bank-of-england-decision-in-november-202607301506022
+Bukaj0889                       27678    13429       6  29.3      28650   7.0     4     1    4775  fed-decision-in-december-20260729232808632:2000
+0x4E72c22CD76f9973a48aedfd       7165        0    4000   5.5      32385   5.1  1243    27       8  fed-decision-in-december-20260729232808632:798; fed-decision-in-january-20260729233815502:451; bank-of-canada-decision-in-december-20260908230600011:17
+thegreengem                    234545    56109      28  30.0    1321069   4.2     4     1   47181  fed-decision-in-october-20260617190323537:55692
+Hashbrown                      166603        0     636  29.6    1203121   4.2   129     1    1892  fed-decision-in-december-20260729232808632:50200
+The Spirit of Ukraine>UMA     2052353   164228    4000  21.9    1564020   4.0    69     3     391  fed-decision-in-december-20260729232808632:63019
+apmt                           144341    17749     173  24.6      38698   3.2     9     1     224  fed-decision-in-january-20260729233815502:1230
+RememberAmalek                1167136    30631    2856  30.0     553615   2.6   240    11     194  fed-decision-in-january-20260729233815502:9590; fed-decision-in-april-2027:4601; 2026-world-gdp-growth:138
+mr.ozi                        1046995    38733     622  30.0     657725   2.2    49     3    1057  fed-decision-in-december-20260729232808632:14730
+Paul973973                      19720    15142    1362  30.0    1672691   2.1   502     3    1228  fed-decision-in-october-20260617190323537:23900; another-fed-rate-hike-in-2026:7300; fed-decision-in-december-20260729232808632:4000
+Trump2028                      506843    57191    4000  25.1    2077124   0.9    68     1     519  fed-decision-in-december-20260729232808632:19279
+elmcap2                       2614142   173085    4000  27.6    6028055   0.3   167     2    1507  how-many-fed-rate-cuts-in-2026:17284; fed-rate-cut-by-629:1792
+Bigggggggg                     534274        0    4000   4.9     444578   0.2   631    20     111  fed-decision-in-december-20260729232808632:540; reserve-bank-of-australia-decision-in-december-2026:440; bank-of-canada-decision-in-december-2026090823
+033033033                      328400        0    2638  30.0   12317682   0.2    79     1    4669  fed-decision-in-october-20260617190323537:29970
+hymolu                         171139   120851      55  25.6     185692   0.0     6     0    3376  
+Votei14Voude22                 322010   102690     972  30.0    2407366   0.0    78     0    2477  
+Kevindoto                      711699    42735     246  23.9     544407   0.0    50     0    2213  
+sabsabinxz                     103730    32614     138  30.0     145868   0.0    72     0    1057  
+Tigerofthehood                 270051    30400     855  29.8    1631419   0.0    31     0    1908  
+HH168                          487621    23479       7  15.1        197   0.0     1     0      28  
+0x7c2f91d4b8e3                 102220    21845    2005  30.0     420805   0.0   273     0     210  
+timmythewhale                  148334    19970       0   0.0          0   0.0     0     0       0  
+Occasionalbettor                85178    18549     177  28.9     115320   0.0     7     0     652  
+agagyu                          38225    15802      84  29.9      55305   0.0    29     0     658  
+SleeperHunter                   30666    14913     127  27.2     130545   0.0    25     0    1028  
+HHYP                            88412    12813      10  15.1       1052   0.0     1     0     105  

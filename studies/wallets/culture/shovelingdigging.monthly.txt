@@ -1,0 +1,22 @@
+shovelingdigging  0xe904443b4084bbda216e344353a44cd4324a2d9f  joined 2026-01-01  markets traded 1158  fills 5910
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         84,643
+  taker fees charged:                                    -6,886
+  fees refunded:                                            115
+  rebates+rewards (taker 406 / maker 233 / rewards 1,833):      2,472
+  ECONOMIC PnL (the API's bottom line, trust this):      80,343   of which unrealized 8,390
+  volume $810,424 (1,564,546 shares): gross +10.44% of volume, fees net of refunds -0.84%, kept +9.91%
+  share of what was kept that is rebates/rewards: 3%
+  taker_tier: {"address": "0xe904443b4084bbda216e344353a44cd4324a2d9f", "tier": 0, "tier_name": "Tier 0", "wv_30d": 19945.218028}
+  maker_tier: {"address": "0xe904443b4084bbda216e344353a44cd4324a2d9f", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 2999.751761, "own_wv_30d": 2999.751761}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-01       1,315          0         0         0      1,315       1,315        8,744       216
+  2026-02         916          0         0         0        916         916       26,452       317
+  2026-03      12,316          0         0         0     12,316      12,316       59,300       598
+  2026-04       2,593       -205       115         6      2,509       2,503       38,129       435
+  2026-05       3,211       -818         0        61      2,453       2,393       75,618       512
+  2026-06        -907       -542         0        61     -1,388      -1,448       63,712       667
+  2026-07      11,249       -873         0       106     10,483      10,376       90,387       554
+  2026-08      -3,098     -1,191         0       350     -3,938      -4,288      101,621       686
+  2026-09      20,162     -1,346         0     1,240     20,056      18,816      115,955       723
+  2026-10      23,473     -1,041         0       439     22,870      22,431      122,273       646
+  2026-11      13,003       -858         0       209     12,354      12,145      107,446       553

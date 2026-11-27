@@ -1,0 +1,51 @@
+[Dragontree] fills 405 in 0s
+Dragontree  0x2c3928af89565c352afe8e2a1b25deed77a056dc  window 2026-11-13 15:39 .. 2026-11-27 15:39 UTC
+summary: {"fills": 405, "markets": 87, "resolved_complete_markets": 52, "incomplete_markets": 11, "unresolved_markets": 31, "turnover_usd": 144401, "maker_share_usd": 0.495, "sell_share_usd": 0.29, "markets_with_both_outcomes_traded": 9, "uses_split_merge": true, "gross": -15670.21, "fees_est": 98.74, "net": -15768.95, "fee_rate_unknown_markets": 0, "net_per_market": -303.249, "t_by_market": -1.16, "win_share_markets": 0.173, "median_market_turnover": 172.21, "max_market_turnover": 18947.22, "avg_fill_usd": 356.55}
+inventory events: {'REDEEM': 54, 'MERGE': 9, 'CONVERSION': 1}
+API says for the same days: gross -14510, fees -598, refunded 0, rebates 832, kept -14268, volume $145744, fills 412
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross      fees_est  net        net_pct_turnover  net_per_market  t_by_market
+  tech      41       29                 3           78224     0.533        -10900.19  58.37     -10958.56  -14.01            -377.88         -0.86      
+  politics  21       9                  5           44148     0.419        -5313.12   26.14     -5339.26   -12.09            -593.25         -1.07      
+  finance   17       14                 1           13735     0.861        543.1      14.23     528.87     3.85              37.78           0.98       
+  culture   7        0                  1           8294      0.113        0.0        0.0       0.0        0.0               None            None       
+  unknown   1        0                  1           0         None         0.0        0.0       0.0        None              None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd  
+  ('M', 'BUY')   165    127773  35862  0.2807  -20.538        0.0           -20.538       13.467  -1.53  14       -26241.56
+  ('M', 'SELL')  29     14968   10507  0.702   53.98          0.0           53.98         24.065  2.24   5        8079.53  
+  ('T', 'BUY')   19     49403   23729  0.4803  -9.109         0.177         -9.286        10.414  -0.89  12       -4587.76 
+  ('T', 'SELL')  3      7721    6992   0.9055  90.555         0.145         90.41         5.763   None   3        6980.84  
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd  
+  ('M', '0.00-0.05')  81     78192   554    0.0071  -0.708         0.0           -0.708        0.15    None   3        -553.89  
+  ('M', '0.05-0.15')  4      3857    333    0.0864  5.657          0.0           5.657         5.059   None   3        218.2    
+  ('M', '0.15-0.30')  2      1136    284    0.2502  26.11          0.0           26.11         48.975  None   2        296.53   
+  ('M', '0.30-0.45')  19     6154    2332   0.379   13.905         0.0           13.905        33.587  None   4        855.75   
+  ('M', '0.45-0.55')  4      733     385    0.5261  -22.304        0.0           -22.304       None    None   1        -163.41  
+  ('M', '0.55-0.70')  26     10511   6460   0.6145  -19.818        0.0           -19.818       30.646  -0.65  6        -2083.16 
+  ('M', '0.70-0.85')  39     22796   18577  0.8149  -59.636        0.0           -59.636       29.31   None   4        -13594.48
+  ('M', '0.85-0.95')  14     18237   16365  0.8974  -17.458        0.0           -17.458       25.684  None   3        -3183.82 
+  ('M', '0.95-0.99')  5      1125    1078   0.9589  4.112          0.0           4.112         None    None   1        46.25    
+  ('T', '0.00-0.05')  3      14345   165    0.0115  -1.153         0.013         -1.167        0.88    None   3        -167.34  
+  ('T', '0.05-0.15')  1      3653    307    0.0841  -8.409         0.077         -8.486        None    None   1        -309.99  
+  ('T', '0.15-0.30')  4      3450    1020   0.2955  9.483          0.53          8.953         47.614  None   2        308.88   
+  ('T', '0.45-0.55')  2      3175    1666   0.5246  -52.462        0.249         -52.711       None    None   1        -1673.7  
+  ('T', '0.55-0.70')  3      3792    2311   0.6095  -60.951        0.238         -61.189       None    None   1        -2320.35 
+  ('T', '0.70-0.85')  5      8162    6422   0.7869  16.403         0.497         15.906        52.445  None   3        1298.19  
+  ('T', '0.85-0.95')  2      16748   15101  0.9017  9.829          0.088         9.741         0.953   None   2        1631.37  
+  ('T', '0.95-0.99')  2      3800    3728   0.9812  95.522         0.091         95.431        5.015   None   2        3626.03  
+
+by role and point in the market's life:
+  key                                  fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd  
+  ('M', 'life', 's over 7 d to end')   133    116742  36790  0.3151  -15.056        0.0           -15.056       14.178  -1.06  9        -17576.15
+  ('M', 'life', 'u 6-24 h to end')     8      649     236    0.3636  -21.875        0.0           -21.875       None    None   1        -141.96  
+  ('M', 'life', 'v 1-6 h to end')      43     15906   8132   0.5112  -2.248         0.0           -2.248        9.624   None   4        -357.51  
+  ('M', 'life', 'w 10-60 min to end')  10     9443    1211   0.1283  -0.915         0.0           -0.915        None    None   1        -86.4    
+  ('T', 'life', 's over 7 d to end')   13     46398   24694  0.5322  14.792         0.163         14.629        11.476  1.27   10       6787.73  
+  ('T', 'life', 'v 1-6 h to end')      9      10727   6027   0.5619  -40.752        0.218         -40.97        18.067  None   3        -4394.65 
+
+full result written to studies/wallets/mentions/Dragontree.json

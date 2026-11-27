@@ -1284,6 +1284,8 @@ def cmd_selftest(a) -> int:
         check("signed expiration = window end + 60 + 11 blocked",
               lambda: g(good, window_end=exp - GTD_SECURITY_S - MAX_EXPIRY_PAST_END_S - 1), True)
         addrs = [str(client.wallet).lower(), str(client.signer).lower()]
+        out.add_secret(str(client.wallet))       # as cmd_run does
+        out.add_secret(str(client.signer))
 
         # ---- live refusals before any order
         os.environ["PM_KEY_FILE"] = str(tmp / "missing-key")
@@ -1442,6 +1444,161 @@ def cmd_selftest(a) -> int:
             env = FakeEnv(client, True, t0=1_800_000_007.0)
             Session(cfg, env, True, 1).run()
             expect("300 orders already sent today -> nothing posted", not env.posted)
+
+            def clean():
+                for f in OUT_DIR.glob("*"):
+                    f.unlink()
+
+            def orders_now():
+                return [r for r in read_records(OUT_DIR.glob("*.jsonl")) if r["type"] == "order"]
+            d0 = day_of(1_800_000_007.0)
+
+            # ---- M1 probe B: the exchange never confirms the cancel; the order stays LIVE with 1 of 5 matched
+            clean()
+
+            class CancelNoop(FakeEnv):
+                def cancel(self, ids):
+                    self.cancelled.extend(ids)
+                    self.cancel_log.extend((self.t, i) for i in ids)
+                    return []
+
+                def order_state(self, order_id):
+                    self._order(order_id)
+                    return {"status": "LIVE", "size_matched": Decimal(1)}
+            env = CancelNoop(client, True, t0=1_800_000_007.0)
+            Session(cfg, env, True, 1).run()
+            n, f_, o_ = ledger(d0, True, "")
+            o = orders_now()
+            expect("M1: cancel never confirmed, order LIVE 1/5 -> day ledger keeps the full 4.00 (not 0.80)",
+                   f_ + o_ == Decimal("4.00") and len(o) == 2 and all(D(r["cost"]) == 2 for r in o),
+                   f"filled {f_} open {o_}; {[(r['end_status'], r['cost']) for r in o]}")
+            expect("M1: ... no fill read while the order was live; recorded as not confirmed closed",
+                   not env.fill_reads and all("not confirmed closed" in r["end_status"] for r in o))
+            ws = env.posted[0][5] - env.posted[0][5] % 300
+            expect("M1: ... cancel retried after +270 s, at the window end and at finalise",
+                   any(t < ws + 300 for t, _ in env.cancel_log) and any(ws + 300 <= t < ws + 320 for t, _ in env.cancel_log)
+                   and any(t >= ws + 320 for t, _ in env.cancel_log),
+                   f"{len(env.cancel_log)} cancel attempts")
+
+            # ---- (d): the cancel only takes effect after the window end (the market still accepts orders then):
+            # the window-end check cancels again, reads the state, and only then reads fills
+            clean()
+
+            class LateCancel(FakeEnv):
+                def cancel(self, ids):
+                    self.cancelled.extend(ids)
+                    self.cancel_log.extend((self.t, i) for i in ids)
+                    p = self._order(ids[0])
+                    if self.t < (p[5] - p[5] % 300) + 300:
+                        return []
+                    self.closed_ids.update(ids)
+                    return list(ids)
+            env = LateCancel(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            Session(cfg, env, True, 1).run()
+            ws = env.posted[0][5] - env.posted[0][5] % 300
+            n, f_, o_ = ledger(d0, True, "")
+            o = orders_now()
+            confirmed_at = min(t for t, i in env.cancel_log if t >= ws + 300)
+            expect("(d): planned cancel not effective -> cancelled again at the window end check (+302 s)",
+                   ws + 300 <= confirmed_at < ws + 300 + FINALIZE_FIRST_S and
+                   sum(1 for t, _ in env.cancel_log if t < ws + 300) == 2 * CANCEL_RETRIES,
+                   f"confirmed at +{confirmed_at - ws:.0f} s after {2 * CANCEL_RETRIES} unconfirmed tries")
+            expect("(d): fills read only after the order was confirmed closed; ledger frees the 4.00 (cost 0)",
+                   len(env.fill_reads) == 2 and all(t > confirmed_at for t, _ in env.fill_reads)
+                   and f_ + o_ == 0 and all(r["end_status"] == "CANCELED" for r in o),
+                   f"filled {f_} open {o_}")
+
+            # ---- M3 probe D: the Mac sleeps 20 minutes just before the first placement second
+            clean()
+
+            class SleepJump(FakeEnv):
+                jumped = False
+
+                def sleep(self, s):
+                    super().sleep(s)
+                    if not self.jumped and self.t >= 1_800_000_300 - 3:
+                        self.t += 1200
+                        self.jumped = True
+            env = SleepJump(client, True, t0=1_800_000_007.0)
+            Session(cfg, env, True, 2).run()
+            o = orders_now()
+            expect("M3: after a 20-minute sleep no order is placed for windows that are over",
+                   not env.posted and len(o) == 2 and all("sleep or clock jump" in r["reason"] for r in o),
+                   json.dumps([r["reason"] for r in o]))
+
+            # ---- M3: a level that would rest too short after a slow book read is skipped, not posted
+            clean()
+
+            class SlowBook(FakeEnv):
+                def book(self, token):
+                    self.t += 4
+                    return super().book(token)
+            cfg_s = parse_config({**base, "levels": [{"outcome": "both", "price": "0.02", "size": "25",
+                                                      "place_after_start_s": 0, "expire_before_end_s": 290}]})
+            env = SlowBook(client, True, t0=1_800_000_007.0)
+            Session(cfg_s, env, True, 1).run()
+            o = orders_now()
+            expect("M3: 4 s book read before a 10 s resting level -> skipped as too close to its cancel second",
+                   not env.posted and o and "too close to its cancel second" in o[0]["reason"],
+                   json.dumps([r["reason"] for r in o]))
+
+            # ---- (a) + (b): RealEnv.post maps a definite 4xx to "rejected" (cost 0); timeouts, 5xx, 429 stay
+            # unknown (worst case); error text in records is redacted and carries no address
+            from polymarket.errors import RequestRejectedError, TransportError
+            from polymarket.models.clob.cancel import CancelOrdersResponse
+            stranger = "0x" + "5a" * 20
+
+            class _PostStub:
+                def __init__(self, exc): self.exc = exc
+                def post_order(self, signed): raise self.exc
+
+            def via_real_post(exc):
+                class ViaReal(FakeEnv):
+                    def post(self, signed):
+                        return RealEnv(_PostStub(exc), True).post(signed)
+                clean()
+                e = ViaReal(client, True, t0=1_800_000_007.0)
+                Session(cfg, e, True, 1).run()
+                return e, ledger(d0, True, ""), orders_now()
+            env, (n, f_, o_), o = via_real_post(RequestRejectedError(
+                f"order crosses book (maker {client.wallet}, {stranger})", status=400, code="INVALID_ORDER"))
+            expect("(a) HTTP 400 'order crosses book' -> rejected, not counted as filled (day 0.00)",
+                   [r["status"] for r in o] == ["rejected", "rejected"] and f_ + o_ == 0 and not env.cancelled,
+                   f"{[r['status'] for r in o]}, filled {f_} open {o_}")
+            rej_text = json.dumps(o).lower()
+            expect("(b) rejection text in records: wallet redacted, no 40-hex address",
+                   all(x not in rej_text and x[2:] not in rej_text for x in addrs + [stranger])
+                   and not ADDRESS_RE.search(rej_text) and "<redacted>" in rej_text, o[0]["reason"] if o else "")
+            for exc, what in ((TransportError("read timed out after the request was sent"), "timeout"),
+                              (RequestRejectedError("service unavailable", status=503), "HTTP 503"),
+                              (RequestRejectedError("too many requests", status=429), "HTTP 429")):
+                env, (n, f_, o_), o = via_real_post(exc)
+                expect(f"(a) {what} -> post-error, unknown outcome counted as exposed: day 4.00",
+                       [r["status"] for r in o] == ["post-error", "post-error"] and f_ + o_ == Decimal("4.00"),
+                       f"{[r['status'] for r in o]}, filled {f_} open {o_}")
+
+            class AddrErr(FakeEnv):
+                def post(self, signed):
+                    raise TimeoutError(f"timed out; wallet {client.wallet} signer {str(client.signer)[2:]} "
+                                       f"proxy {stranger}")
+            clean()
+            Session(cfg, AddrErr(client, True, t0=1_800_000_007.0), True, 1).run()
+            err_text = "".join(p.read_text() for p in OUT_DIR.glob("*.jsonl")).lower()
+            expect("(b) exception text with addresses -> records carry no address",
+                   all(x not in err_text and x[2:] not in err_text for x in addrs + [stranger])
+                   and not ADDRESS_RE.search(err_text) and "timed out" in err_text)
+
+            class _CancelStub:
+                def cancel_orders(self, order_ids):
+                    return CancelOrdersResponse.model_validate(
+                        {"canceled": [], "not_canceled": {order_ids[0]: "order can't be found - already canceled"}})
+            oid = "0x" + "ab" * 32
+            expect("M1: RealEnv.cancel returns only ids the exchange confirms (not_canceled -> [])",
+                   RealEnv(_CancelStub(), True).cancel([oid]) == [])
+            expect("order status: LIVE / DELAYED / UNMATCHED / unknown count as live; CANCELED*, MATCHED closed",
+                   not any(order_closed(s) for s in ("LIVE", "live", "DELAYED", "UNMATCHED", "", None, "WHATEVER"))
+                   and all(order_closed(s) for s in ("CANCELED", "CANCELED_EXPIRED_ORDER", "MATCHED",
+                                                     "KnownUserOrderStatus.CANCELED")))
         finally:
             urllib.request.urlopen = real_urlopen
             client.close()

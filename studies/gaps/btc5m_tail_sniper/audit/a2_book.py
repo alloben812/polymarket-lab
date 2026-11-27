@@ -9,6 +9,7 @@ sig = pd.read_parquet(SP + "my_signals.parquet")
 want = set(sig.t0.unique())
 f = pq.ParquetFile(f"{R}data/gaps_btc5m_tail_sniper/mw/l2_{day}.parquet")
 events = {}   # t0 -> list of tuples
+best = {}
 for rg in range(f.metadata.num_row_groups):
     t = f.read_row_group(rg, columns=["market_slug", "timestamp", "event_type", "ask_prices", "ask_sizes", "bid_prices", "bid_sizes",
                                       "best_ask", "best_bid", "pc_price", "pc_size", "pc_side"])
@@ -23,8 +24,13 @@ for rg in range(f.metadata.num_row_groups):
     ap, az, bp, bz = (t[c].to_pylist() for c in ("ask_prices", "ask_sizes", "bid_prices", "bid_sizes"))
     for i in sel:
         if et[i] == "book":
-            events.setdefault(int(t0[i]), []).append((ts[i], "book", ap[i], az[i], bp[i], bz[i]))
+            ask = [(float(a), float(b)) for a, b in zip(ap[i] or [], az[i] or []) if a <= 0.05 + 1e-9]
+            bid = [(float(a), float(b)) for a, b in zip(bp[i] or [], bz[i] or []) if a >= 0.95 - 1e-9]
+            events.setdefault(int(t0[i]), []).append((ts[i], "book", ask, bid))
         elif et[i] == "price_change":
-            events.setdefault(int(t0[i]), []).append((ts[i], "pc", float(pp[i]), float(ps[i]), sd[i], float(ba[i]), float(bb[i])))
+            if (sd[i] == "SELL" and pp[i] <= 0.05 + 1e-9) or (sd[i] == "BUY" and pp[i] >= 0.95 - 1e-9):
+                events.setdefault(int(t0[i]), []).append((ts[i], "pc", float(pp[i]), float(ps[i]), sd[i]))
+            best.setdefault(int(t0[i]), []).append((ts[i], ba[i], bb[i]))
+best = {k: np.array(v) for k, v in best.items()}
 print(day, "markets", len(events), "events", sum(len(v) for v in events.values()))
-pickle.dump(events, open(SP + f"ev_{day}.pkl", "wb"))
+pickle.dump((events, best), open(SP + f"ev_{day}.pkl", "wb"))

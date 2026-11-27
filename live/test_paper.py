@@ -5,7 +5,9 @@ from live.paper import Daily
 
 def test_daily_result_allows_partial_sales_and_utc_settlement():
     ledger = Daily()
-    ledger.markets["m"] = dict(condition_id="c", tokens={"Up": "u", "Down": "d"})
+    ledger.markets["m"] = dict(
+        slug="m", end_ts=24, condition_id="c", tokens={"Up": "u", "Down": "d"}
+    )
     base = dict(token="u", slug="m", outcome="Up", book_session="s")
     ledger.fill(
         dict(
@@ -30,6 +32,7 @@ def test_daily_result_allows_partial_sales_and_utc_settlement():
         )
     )
     row = dict(
+        kind="resolution",
         source="gamma",
         recv_ns=86_400_000_000_000,
         slug="m",
@@ -37,6 +40,8 @@ def test_daily_result_allows_partial_sales_and_utc_settlement():
         payouts={"Up": 1, "Down": 0},
     )
     assert ledger.resolve(dict(row, condition_id="other")) == []
+    assert ledger.resolve(dict(row, recv_ns=23_000_000_000)) == []
+    assert ledger.resolve(dict(row, source="unknown")) == []
     [payment] = ledger.resolve(row)
     assert Decimal(payment["net"]) == Decimal("2.328")
     assert ledger.resolve(row) == []

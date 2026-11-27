@@ -12,6 +12,7 @@ import signal
 from .book import BookReplay, iter_records
 from .journal import Journal, atomic_json
 from .record import DEFAULT_ROOT, HERE, Recorder
+from .settlement import confirmed_payouts
 
 DAY_NS = 86_400_000_000_000
 BASELINE_CENTS = Decimal("3.58")
@@ -68,19 +69,9 @@ class Daily:
     def resolve(self, row):
         slug = row["slug"]
         m = self.markets.get(slug)
-        if (
-            not m
-            or m["condition_id"] != row["condition_id"]
-            or row.get("source") != "gamma"
-        ):
+        payouts = confirmed_payouts(row, m)
+        if payouts is None:
             return []
-        payouts = {k: Decimal(str(v)) for k, v in row["payouts"].items()}
-        if (
-            set(payouts) != set(m["tokens"])
-            or sum(payouts.values()) != 1
-            or min(payouts.values()) < 0
-        ):
-            raise ValueError("invalid official resolution in paper tape")
         results = []
         for outcome, token in sorted(m["tokens"].items()):
             pos = self.positions.get(token)

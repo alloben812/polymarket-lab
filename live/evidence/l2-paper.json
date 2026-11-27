@@ -1,0 +1,111 @@
+{
+  "archive": {
+    "daily": {
+      "decision_reasons": {
+        "basis_filter": 3,
+        "outside_entry_window": 34,
+        "price_below_floor": 1239,
+        "print_above_model_ceiling": 9,
+        "print_below_minimum": 442,
+        "probability_below_floor": 696,
+        "reference_gap": 98,
+        "reference_late": 617,
+        "stale_trade": 68,
+        "unfavored_outcome": 42
+      },
+      "historical_holdout_cents_per_share": "3.58",
+      "historical_holdout_markets": 5,
+      "last_ordinal": 5881259,
+      "open_positions": {},
+      "stop_reason": "duration",
+      "utc_days": {
+        "2026-11-27": {
+          "accounting": "verified",
+          "closed_shares": "0",
+          "decisions": 3248,
+          "difference_from_study_cents": null,
+          "fees": "0",
+          "fills": 0,
+          "intents": 0,
+          "net_cents_per_closed_share": null,
+          "realized_net": "0",
+          "settled_lots": 0
+        }
+      }
+    },
+    "observed_seconds": 7315.811,
+    "sha256": {
+      "daily.json": "69c81dc82c22c6ce086e8bedec8757c128be5a4f9b214d263f0facd774a50f4e",
+      "decisions.jsonl": "addbd7db0a6918e0e899287f2b7fb79809d7465ea746a7ef4f74511a16cbe85e"
+    }
+  },
+  "final_environment_live": {
+    "daily": {
+      "decision_reasons": {
+        "price_below_floor": 113,
+        "print_below_minimum": 73,
+        "probability_below_floor": 18,
+        "reference_late": 147,
+        "unfavored_outcome": 4
+      },
+      "historical_holdout_cents_per_share": "3.58",
+      "historical_holdout_markets": 5,
+      "last_ordinal": 115666,
+      "open_positions": {},
+      "stop_reason": "duration",
+      "utc_days": {
+        "2026-11-27": {
+          "accounting": "verified",
+          "closed_shares": "0",
+          "decisions": 355,
+          "difference_from_study_cents": null,
+          "fees": "0",
+          "fills": 0,
+          "intents": 0,
+          "net_cents_per_closed_share": null,
+          "realized_net": "0",
+          "settled_lots": 0
+        }
+      }
+    },
+    "observed_seconds": 133.537,
+    "sha256": {
+      "daily.json": "2c8162222e6dcdbbee484876131280e49ef1adae4724c1a7c43a75a48c55233a",
+      "decisions.jsonl": "b51e401c9d40fe4aa4fe797020348d18a6f08d5c9cf62addbf35bf882c0c2f5c"
+    }
+  },
+  "new_live": {
+    "daily": {
+      "decision_reasons": {
+        "price_below_floor": 166,
+        "print_below_minimum": 50,
+        "probability_below_floor": 8,
+        "reference_late": 225
+      },
+      "historical_holdout_cents_per_share": "3.58",
+      "historical_holdout_markets": 5,
+      "last_ordinal": 189055,
+      "open_positions": {},
+      "stop_reason": "duration",
+      "utc_days": {
+        "2026-11-27": {
+          "accounting": "verified",
+          "closed_shares": "0",
+          "decisions": 449,
+          "difference_from_study_cents": null,
+          "fees": "0",
+          "fills": 0,
+          "intents": 0,
+          "net_cents_per_closed_share": null,
+          "realized_net": "0",
+          "settled_lots": 0
+        }
+      }
+    },
+    "duration_setting_seconds": 250,
+    "sha256": {
+      "daily.json": "e8896c12f1e100dc9160493c8dddcab9f1ba50219cc3a52a002ab476b5f33c9f",
+      "decisions.jsonl": "eb132865679493fa8f703cb37381eedb60f8695bef997f8f98a15a3452a9a887"
+    }
+  }
+}

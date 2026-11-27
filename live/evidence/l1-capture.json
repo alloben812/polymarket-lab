@@ -1,0 +1,270 @@
+{
+  "records": 5881259,
+  "counts": {
+    "market": 93,
+    "reference": 6526,
+    "connected": 32,
+    "ws": 5872931,
+    "heartbeat": 913,
+    "gap": 124,
+    "audit": 589,
+    "reference_gap": 2,
+    "reference_error": 1,
+    "resolution": 32,
+    "discovery_error": 15,
+    "stop": 1
+  },
+  "events": {
+    "book": 77104,
+    "price_change": 5572520,
+    "best_bid_ask": 186512,
+    "last_trade_price": 36703,
+    "tick_size_change": 92
+  },
+  "token_count": 172,
+  "markets_by_kind": {
+    "btc5m": 26,
+    "btc15m": 10,
+    "weather": 33,
+    "tennis": 24
+  },
+  "gap_reasons": {
+    "rest_book_disagrees": 89,
+    "unsubscribed": 35
+  },
+  "first_ws_ns": 1795802612483967000,
+  "last_ws_ns": 1795809928294861000,
+  "last_recv_ns": 1795809933636626000,
+  "observed_seconds": 7315.811,
+  "max_pong_spacing_s": 13.675,
+  "max_ws_message_age_ms": 1088242,
+  "full_book_anchors": {
+    "websocket": 73969,
+    "rest_checkpoint": 3135
+  },
+  "binance_seconds": 8316,
+  "binance_declared_missing_seconds": 2,
+  "subscribed_tokens": 172,
+  "anchored_tokens": 172,
+  "stop": "duration",
+  "errors": {},
+  "complete_btc_windows": [
+    {
+      "slug": "btc-updown-5m-1795802700",
+      "known_depth_pct": {
+        "Up": 73.733,
+        "Down": 73.773
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795803300",
+      "known_depth_pct": {
+        "Up": 31.408,
+        "Down": 31.655
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795803000",
+      "known_depth_pct": {
+        "Up": 50.059,
+        "Down": 49.906
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795803300",
+      "known_depth_pct": {
+        "Up": 49.955,
+        "Down": 50.246
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795803600",
+      "known_depth_pct": {
+        "Up": 53.572,
+        "Down": 53.49
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795804200",
+      "known_depth_pct": {
+        "Up": 29.612,
+        "Down": 29.832
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795803900",
+      "known_depth_pct": {
+        "Up": 54.123,
+        "Down": 54.041
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795804200",
+      "known_depth_pct": {
+        "Up": 65.49,
+        "Down": 66.008
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795804500",
+      "known_depth_pct": {
+        "Up": 50.988,
+        "Down": 52.216
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795805100",
+      "known_depth_pct": {
+        "Up": 47.334,
+        "Down": 47.847
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795804800",
+      "known_depth_pct": {
+        "Up": 59.11,
+        "Down": 60.924
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795805100",
+      "known_depth_pct": {
+        "Up": 53.908,
+        "Down": 54.846
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795805400",
+      "known_depth_pct": {
+        "Up": 67.449,
+        "Down": 69.214
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795806000",
+      "known_depth_pct": {
+        "Up": 43.287,
+        "Down": 43.461
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795805700",
+      "known_depth_pct": {
+        "Up": 58.21,
+        "Down": 59.773
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795806000",
+      "known_depth_pct": {
+        "Up": 56.349,
+        "Down": 56.779
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795806300",
+      "known_depth_pct": {
+        "Up": 68.832,
+        "Down": 69.196
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795806900",
+      "known_depth_pct": {
+        "Up": 33.357,
+        "Down": 33.734
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795806600",
+      "known_depth_pct": {
+        "Up": 55.739,
+        "Down": 56.008
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795806900",
+      "known_depth_pct": {
+        "Up": 45.014,
+        "Down": 46.814
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795807200",
+      "known_depth_pct": {
+        "Up": 51.933,
+        "Down": 52.143
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795807800",
+      "known_depth_pct": {
+        "Up": 31.106,
+        "Down": 31.737
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795807500",
+      "known_depth_pct": {
+        "Up": 56.35,
+        "Down": 56.39
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795807800",
+      "known_depth_pct": {
+        "Up": 51.065,
+        "Down": 51.41
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795808100",
+      "known_depth_pct": {
+        "Up": 57.477,
+        "Down": 58.111
+      }
+    },
+    {
+      "slug": "btc-updown-15m-1795808700",
+      "known_depth_pct": {
+        "Up": 32.366,
+        "Down": 31.26
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795808400",
+      "known_depth_pct": {
+        "Up": 51.252,
+        "Down": 51.015
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795808700",
+      "known_depth_pct": {
+        "Up": 58.378,
+        "Down": 58.755
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795809000",
+      "known_depth_pct": {
+        "Up": 59.024,
+        "Down": 58.783
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795809300",
+      "known_depth_pct": {
+        "Up": 46.692,
+        "Down": 53.969
+      }
+    },
+    {
+      "slug": "btc-updown-5m-1795809600",
+      "known_depth_pct": {
+        "Up": 52.159,
+        "Down": 53.652
+      }
+    }
+  ]
+}

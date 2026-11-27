@@ -449,3 +449,150 @@ $ PM_KEY_FILE=/nonexistent/key .venv/bin/python -I exp_bids.py run --config expe
 
 $ grep -oE "0x[0-9a-fA-F]{40}\b" out/exp-pairs-*.dryrun.jsonl | wc -l
 0
+
+=== 2026-11-27 19:29:50 UTC: fix of REVIEW S2 (end-of-window check for post-error orders), STOP path as ~, bare 40-hex scrub
+Changed: Session.on_close, new Session.find_unknown, RealEnv.open_orders (list_open_orders(market=condition_id), read only at a window end), OrderRec.absent,
+  begin_stop keeps post-error windows open for the window-end check, tilde() used in check_order_caps, ADDRESS_RE matches with or without 0x;
+  selftest: FakeEnv.open_orders + 11 new checks (S2 x9, STOP path, scrub). No live or authenticated request was made.
+
+$ .venv/bin/python -I exp_bids.py selftest | grep -E "\[(PASS|FAIL)\]|selftest:"
+selftest: throwaway key, fake clock, fake exchange; records in a temp dir
+  [PASS] shipped config late-tail.json valid: returned late-tail: 1 level(s), window 0.50 pUSD
+  [PASS] shipped config pairs.json valid: returned pairs: 1 level(s), window 4.00 pUSD
+  [PASS] shipped config tails.json valid: returned tails: 1 level(s), window 1.00 pUSD
+  [PASS] order 6 x 0.50 = 3.00 > 2.50 refused: refused: config: level 0: 6 x 0.50 = 3.00 pUSD > per-order cap 2.50
+  [PASS] order 5 x 0.50 = 2.50 accepted (cap is inclusive): returned 2.50
+  [PASS] window both 2 x (5 x 0.50) = 5.00 accepted: returned 5.00
+  [PASS] window 4.00 + 1.20 = 5.20 > 5.00 refused: refused: config: one window would rest 5.20 pUSD > per-window cap 5.00
+  [PASS] unknown config key (max_order_usd) refused: refused: config: unknown keys ['max_order_usd'] (caps cannot be set in a config)
+  [PASS] unknown level key (side: SELL) refused: refused: config: level 0: unknown keys ['side']
+  [PASS] outcome 'sell' refused: refused: config: level 0: outcome must be one of ('both', 'trailing', 'leading') (orders are always BUY)
+  [PASS] price 0.015 (3 decimals) refused: refused: config: level 0 price must have at most 2 decimals: '0.015'
+  [PASS] price 1.00 refused: refused: config: level 0: price must be 0.01-0.99
+  [PASS] size 0 refused: refused: config: level 0: size must be positive (shares)
+  [PASS] both placement keys refused: refused: config: level 0: give exactly one of place_after_start_s / place_before_end_s
+  [PASS] placement after expiry refused: refused: config: level 0: the order would rest -10 s (< 10 s)
+  [PASS] asset 'trump' refused: refused: config: asset must be one of ('btc', 'eth', 'sol', 'xrp', 'doge', 'hype')
+  [PASS] duration '1h' refused: refused: config: duration must be one of ('5m', '15m')
+  [PASS] flag --max-notional does not exist: refused: argparse rejected the flag
+  [PASS] --max-windows 500 refused: refused: --max-windows must be 1-96
+  [PASS] order 2.51 refused by per-order cap: refused: order notional 2.51 > per-order cap 2.50
+  [PASS] window 4.50 + 1.00 refused by per-window cap: refused: window resting 4.50 + 1.00 > per-window cap 5.00
+  [PASS] day: 300 orders sent -> 301st refused: refused: 300 orders already sent today (UTC); +1 > cap 300
+  [PASS] day: filled 14.00 + open 0.50 + 1.00 > 15 refused: refused: today filled 14.00 + still open 0.50 + 1.00 > daily cap 15.00
+  [PASS] day: filled 14.00 + 1.00 = 15.00 accepted: returned None
+  [PASS] (no STOP file during the count-cap checks)
+  [PASS] day: 299 sent, a 'both' level (2 legs) refused: refused: 299 orders already sent today (UTC); +2 > cap 300
+  [PASS] day: 299 sent, one more single order accepted: returned None
+  [PASS] STOP file present -> refused: refused: STOP file present (/tmp/pm-exp-selftest-vd9eqgxi/STOP): no new orders
+  [PASS] STOP refusal reason writes the home directory as ~ (no user name in records): STOP file present (~/.polymarket-pilot/STOP): no new orders
+  [PASS] scrub removes a bare 40-hex address and a 0x one; a 64-hex order id is kept: maker <address> proxy <address> upper <address> order 0xabababababababababababababababababababababababababababababababab
+  [PASS] place_before_end_s 20 refused (minimum expiry would outlive the window): refused: config: level 0: placed too late; the minimum expiry (now + 180 s) would let the order outlive the window by more than 10 s
+  [PASS] place_before_end_s 120 (late-tail) accepted: returned 180
+  [PASS] live lock: a second live instance is refused while the first holds the lock: refused: another live exp_bids.py session is running (lock /tmp/pm-exp-selftest-vd9eqgxi/lockdir/exp_bids.live.lock); one live session at a time
+  [PASS] live lock: free again once the first instance ends: returned acquired
+  [PASS] live lock: `run --live` refused before the key is read while another session runs: another live exp_bids.py session is running (lock /tmp/pm-exp-selftest-vd9eqgxi/lockdir/exp_bids.live.lock); one live session at a time
+  [PASS] ledger: 2 sent, filled 0.80, unfinalized 1.00 counted as open: 2, 0.80, 1.00
+  [PASS] signed BUY 5 @ 0.40 passes the final guard: returned 2
+  [PASS] signed BUY 5 @ 0.60 = 3.00 blocked by the final guard: refused: signed order would spend 3 pUSD > cap 2.50; not posted
+  [PASS] signed order larger than planned blocked: refused: signed order would spend 2 pUSD > cap 1.00; not posted
+  [PASS] signed order without post-only blocked: refused: internal: signed order is not post-only; not posted
+  [PASS] signed GTC (no expiration) blocked: refused: internal: signed order is not GTD; not posted
+  [PASS] signed order for another token blocked: refused: internal: signed order token differs from the planned token; not posted
+  [PASS] signed SELL blocked: refused: internal: expected a BUY order
+  [PASS] signed order expiring in 2033 blocked (expiration bounded by the window end): refused: internal: signed expiration runs past the window end; not posted
+  [PASS] signed expiration other than the planned one blocked: refused: internal: signed expiration differs from the planned one; not posted
+  [PASS] signed expiration = window end + 60 + 10 accepted (upper bound inclusive): returned 2
+  [PASS] signed expiration = window end + 60 + 11 blocked: refused: internal: signed expiration runs past the window end; not posted
+  [PASS] --live without a key file refused: refused: key file not found: /tmp/pm-exp-selftest-vd9eqgxi/missing-key  (set PM_KEY_FILE or create it, see README)
+  [PASS] geoblock unreachable -> refused (network is dead in selftest): refused: geoblock check failed (URLError); not sending orders
+  [PASS] geoblock blocked=true -> refused: refused: this IP is geoblocked for order placement; nothing was sent
+  [PASS] live session with blocked geoblock stops before posting: refused: this IP is geoblocked for order placement; nothing was sent
+  [PASS]   ... and nothing was posted: posted 0
+  [PASS] balance 3.99 < worst-case 4.00 (pairs) refused: refused: balance 3.99 pUSD < worst-case resting notional 4.00; not starting
+  [PASS] balance 3.00 >= worst-case 1.00 (tails) accepted: returned 3.00
+  [PASS] dry-run: 2 windows x 2 orders planned and signed, none posted: 4 order records, posted 0
+  [PASS] dry-run: window results recorded
+  [PASS] live (fake): 4 orders posted, each cancelled at its expiry second (+270 s): posted 4 cancelled 4 at +[270] s
+  [PASS] live (fake): signed expiration = cancel second + 60 s (+330 s), as planned: [330.0]
+  [PASS] live (fake): fills read only after each order's state was terminal (after its cancel)
+  [PASS] live (fake): Down filled 5 @ 0.40, lost: cost 2.00 payout 0 net -2.00: [["5", "2.0", "-2.0"], ["5", "2.0", "-2.0"]]
+  [PASS] live (fake): Up not filled, cost 0
+  [PASS] late-tail: mid Up 0.80 -> trailing = Down, placed 120 s before the end: [["Down", "2027-01-15T08:03:00Z"]]
+  [PASS] late-tail: Down won: payout 25, cost 0.50, net +24.50: 24.50
+  [PASS] late-tail: mid exactly 0.50 -> skipped, nothing posted
+  [PASS] size 5 < market minimum 10 -> skipped, nothing posted
+  [PASS] best ask 0.40 <= price 0.40 -> skipped (post-only would be rejected)
+  [PASS] post error -> recorded as post-error, its 4.00 counted as filled today: ['post-error', 'post-error'], filled 4.00
+  [PASS] STOP file before the first order -> no order posted in the session
+  [PASS] STOP mid-session: 2 orders resting when STOP appears, no order posted after it: posted 2
+  [PASS] STOP mid-session: both resting orders cancelled right after STOP, before their +270 s cancel: cancel times after STOP: [0.0, 0.0]
+  [PASS] STOP mid-session: the window with orders is finalised, both orders closed at cost 0: [["CANCELED", "0"], ["CANCELED", "0"]]
+  [PASS] daily cap: 6 windows of pairs stop at <= 15.00 pUSD worst case, both legs or none: posted 10, worst-case used 10.0
+  [PASS] 300 orders already sent today -> nothing posted
+  [PASS] M1: cancel never confirmed, order LIVE 1/5 -> day ledger keeps the full 4.00 (not 0.80): filled 4.00 open 0; [('LIVE (not confirmed closed at finalise; counted as fully filled)', '2.00'), ('LIVE (not confirmed closed at finalise; counted as fully filled)', '2.00')]
+  [PASS] M1: ... no fill read while the order was live; recorded as not confirmed closed
+  [PASS] M1: ... cancel retried after +270 s, at the window end and at finalise: 174 cancel attempts
+  [PASS] (d): planned cancel not effective -> cancelled again at the window end check (+302 s): confirmed at +302 s after 12 unconfirmed tries
+  [PASS] (d): fills read only after the order was confirmed closed; ledger frees the 4.00 (cost 0): filled 0 open 0
+  [PASS] M3: after a 20-minute sleep no order is placed for windows that are over: ["1197 s after its placement second (sleep or clock jump): not placed", "897 s after its placement second (sleep or clock jump): not placed"]
+  [PASS] M3: 4 s book read before a 10 s resting level -> skipped as too close to its cancel second: ["too close to its cancel second (6 s left)", "8 s after its placement second (sleep or clock jump): not placed"]
+  [PASS] S2: window with only post-error orders (both resting) -> open orders read once at the window end: reads at [302], checks 1
+  [PASS] S2: ... both found, cancelled, state read CANCELED; recorded as adopted: [["posted", "CANCELED"], ["posted", "CANCELED"]]
+  [PASS] S2: ... day ledger counted 4.00 until confirmed closed, 0 after (fills read after the cancel): at check (2, Decimal('0'), Decimal('4.00')), after filled 0 open 0
+  [PASS] S2: ... 'no order of this window is live' printed only with the confirmation
+  [PASS] S2: closed Up next to a post-error Down -> Down found at the window end and cancelled there: cancels [(270, 'Up'), (302, 'Down')]
+  [PASS] S2: ... both end CANCELED; 'nothing live' printed once, after the check: {"Up": "CANCELED", "Down": "CANCELED"}
+  [PASS] S2: post-error order not in open orders -> recorded absent, still counted as filled (2.00): filled 2.00 open 0
+  [PASS] S2: open orders unreadable -> recorded: 1 unknown outcome, owner must check open orders on the site: 1 order(s) of this window have an unknown outcome (post error) and this account's open orders could not be read (ConnectionError): the owner must check open orders on polymarket.com and cancel any left; counted as fully filled
+  [PASS] S2: ... 'no order of this window is live' NOT printed; the 2.00 stays counted as filled: filled 2.00 open 0
+  [PASS] (a) HTTP 400 'order crosses book' -> rejected, not counted as filled (day 0.00): ['rejected', 'rejected'], filled 0 open 0
+  [PASS] (b) rejection text in records: wallet redacted, no 40-hex address: INVALID_ORDER: order crosses book (maker <redacted>, <address>)
+  [PASS] (a) timeout -> post-error, unknown outcome counted as exposed: day 4.00: ['post-error', 'post-error'], filled 4.00 open 0
+  [PASS] (a) HTTP 503 -> post-error, unknown outcome counted as exposed: day 4.00: ['post-error', 'post-error'], filled 4.00 open 0
+  [PASS] (a) HTTP 429 -> post-error, unknown outcome counted as exposed: day 4.00: ['post-error', 'post-error'], filled 4.00 open 0
+  [PASS] (b) exception text with addresses -> records carry no address
+  [PASS] M1: RealEnv.cancel returns only ids the exchange confirms (not_canceled -> [])
+  [PASS] order status: LIVE / DELAYED / UNMATCHED / unknown count as live; CANCELED*, MATCHED closed
+  [PASS] records hold no key and no wallet/signer address
+  [PASS] private key absent from the log
+  [PASS] report runs on the selftest records: returned 0
+selftest: ALL PASS
+[exit 0]  (100 PASS, 0 FAIL; session log lines between checks omitted here)
+
+S2 session output (selftest lines 453-487: closed Up + resting post-error Down; post-error not in the book; open-orders read failing):
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id <order id> status live, cancel at 2027-01-15T08:09:30Z
+    POST ERROR both-0.40-start Down: TimeoutError: read timed out after the request was sent; counted as filled in today's caps, expires by GTD at the latest
+    planned cancel: cancel both-0.40-start Up: confirmed; state CANCELED, matched 0; closed
+    window end: post-error both-0.40-start Down found resting (state LIVE)
+    window end: cancel both-0.40-start Down: confirmed; state CANCELED, matched 0; closed
+  btc-updown-5m-1800000300: window end: no order of this window is live (confirmed for each order; 1 with an unknown post outcome checked against this account's open orders)
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session e8b05f85da76 done: records in /tmp/pm-exp-selftest-vd9eqgxi/out
+  [PASS] S2: closed Up next to a post-error Down -> Down found at the window end and cancelled there: cancels [(270, 'Up'), (302, 'Down')]
+  [PASS] S2: ... both end CANCELED; 'nothing live' printed once, after the check: {"Up": "CANCELED", "Down": "CANCELED"}
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id <order id> status live, cancel at 2027-01-15T08:09:30Z
+    POST ERROR both-0.40-start Down: TimeoutError: read timed out; counted as filled in today's caps, expires by GTD at the latest
+    planned cancel: cancel both-0.40-start Up: confirmed; state CANCELED, matched 0; closed
+    window end: post-error both-0.40-start Down not in open orders; counted as fully filled
+  btc-updown-5m-1800000300: window end: no order of this window is live (confirmed for each order; 1 with an unknown post outcome checked against this account's open orders)
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session 0237eb672655 done: records in /tmp/pm-exp-selftest-vd9eqgxi/out
+  [PASS] S2: post-error order not in open orders -> recorded absent, still counted as filled (2.00): filled 2.00 open 0
+  plan: 1 windows from 2027-01-15T08:05:00Z (btc-updown-5m-1800000300), worst-case resting per window 4.00 pUSD
+  btc-updown-5m-1800000300: market found, accepting=True
+  geoblock: blocked=False country=RS (IP not shown)
+    POSTED both-0.40-start: BUY 5 Up @ 0.40 id <order id> status live, cancel at 2027-01-15T08:09:30Z
+    POST ERROR both-0.40-start Down: TimeoutError: read timed out after the request was sent; counted as filled in today's caps, expires by GTD at the latest
+    planned cancel: cancel both-0.40-start Up: confirmed; state CANCELED, matched 0; closed
+  btc-updown-5m-1800000300: WINDOW END: 1 order(s) of this window have an unknown outcome (post error) and this account's open orders could not be read (ConnectionError): the owner must check open orders on polymarket.com and cancel any left; counted as fully filled
+  btc-updown-5m-1800000300: result Up; 2 order records; cost 0 payout 0 net 0
+  session f6539da86b5a done: records in /tmp/pm-exp-selftest-vd9eqgxi/out
+  [PASS] S2: open orders unreadable -> recorded: 1 unknown outcome, owner must check open orders on the site: 1 order(s) of this window have an unknown outcome (post error) and this account's open orders could not be read (ConnectionError): the owner must check open orders on polymarket.com and cancel any left; counted as fully filled
+  [PASS] S2: ... 'no order of this window is live' NOT printed; the 2.00 stays counted as filled: filled 2.00 open 0

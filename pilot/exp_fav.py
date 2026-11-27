@@ -362,7 +362,8 @@ def paper_fill(book: Book, limit: Decimal, usd: Decimal, rate: Decimal = FEE_RAT
         left -= take * p
         levels.append([str(p), str(take)])
     filled = shares >= book.min_size
-    return {"filled": filled, "shares": str(shares if filled else 0), "avg_price": S((cost / shares) if filled else None),
+    return {"filled": filled, "shares": str(shares if filled else 0),
+            "avg_price": S((cost / shares).quantize(Decimal("0.000001")) if filled else None),
             "notional": str(cost if filled else 0), "fee": str(fee if filled else 0), "levels": levels,
             "best_ask": S(book.best_ask), "ask_size": str(book.ask_size), "min_size": str(book.min_size),
             "reason": "" if filled else f"fillable {shares} < market minimum {book.min_size} (missed)"}
@@ -742,6 +743,13 @@ class RealEnv:
 
     def closed_only(self) -> bool:
         return bool(self.c.get_closed_only_mode())
+
+    def approvals_ok(self) -> bool | None:
+        """post_order does not repair missing approvals (unlike place_*). None: the SDK could not tell."""
+        try:
+            return bool(self.c.get_trading_approvals_state().is_fully_approved)
+        except Exception:  # noqa: BLE001
+            return None
 
 
 def _register_offline_market(client, tokens, cond, tick: Decimal, rate: Decimal, neg_risk: bool) -> None:
@@ -1334,6 +1342,11 @@ class Session:
                 raise Refusal(f"balance {bal:.2f} pUSD < one ticket {self.ticket}; not starting")
             if self.env.closed_only():
                 raise Refusal("the account is in closed-only mode; not starting")
+            ap = self.env.approvals_ok()
+            if ap is False:
+                raise Refusal("trading approvals are incomplete (see `smoke.py auth --live`); this program posts "
+                              "with post_order, which does not set approvals; not starting")
+            out(f"  trading approvals complete: {'yes' if ap else 'unknown (the SDK could not tell)'}")
             midnight = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0).timestamp()
             ex = self.env.fills_today(midnight)
             fl = self.ledger().filled_on(day_of(self.env.wall()))
@@ -1695,6 +1708,9 @@ class FakeEnv:
 
     def closed_only(self):
         return False
+
+    def approvals_ok(self):
+        return getattr(self, "approved", True)
 
 
 def _fake_market(i: int, end: float, typ="above", asset="bitcoin") -> Mkt:
@@ -2087,6 +2103,9 @@ def cmd_selftest(a) -> int:
         env.bal = Decimal("9.99")
         s6 = Session(env, True, t10, None)
         check("live run refused at start when the balance is below one ticket", s6.run, True)
+        env, s = new_session(n_markets=1)
+        env.approved = False
+        check("live run refused at start when trading approvals are incomplete", Session(env, True, t10, None).run, True)
 
         # min order size
         env, s = new_session(n_markets=1, ask="0.97")

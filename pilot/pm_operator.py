@@ -20,9 +20,11 @@ the owner's Mac, next to smoke.py / exp_bids.py / exp_fav.py, and:
     the programs honour, interrupts the running live program and reports; removing ARMED disarms at once;
     the control file can lower these limits, never raise them;
   * after every action and at least every 30 minutes commits a small JSON and Markdown report to the
-    branch `live-reports` (from its own worktree under ~/.polymarket-pilot, so the working copy with the
-    code is never touched) and pushes it. Reports are scrubbed: no key, no secret, no wallet address,
-    no user name, no host name, no home path, no URL.
+    branch `live-reports` and pushes it. The commit is built with git plumbing in the object store
+    (hash-object, mktree, commit-tree, hooks off): nothing from that branch is ever checked out or
+    written to disk, and the working copy with the code is never touched. Reports are scrubbed: no key,
+    no secret, no wallet address, no user name, no host name, no home path, no repository path, no URL.
+  * one failing cycle never ends supervision; on any exit a running program is interrupted.
 
 Subcommands
   run       the loop (start it with `caffeinate -i` so the Mac stays awake)
@@ -56,7 +58,7 @@ from datetime import datetime, timezone
 from decimal import ROUND_FLOOR, Decimal, InvalidOperation
 from pathlib import Path
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 # ----------------------------------------------------------------------------- fixed settings
 CONTROL_BRANCH = "live-control"
@@ -74,10 +76,16 @@ INT_GRACE_S = 120                 # after SIGINT: wait this long, then SIGTERM .
 TERM_GRACE_S = 60                 # ... then SIGKILL
 QUICK_TIMEOUT_S = 180             # status / auth / cancel / report
 SELFTEST_TIMEOUT_S = 900
-GIT_TIMEOUT_S = 90
+GIT_TIMEOUT_S = 30                # one git call; a network blackhole must not stall supervision for long
+PUBLISH_BACKOFF_S = 5 * 60        # after a failed report push: the next try at most this often
+GIT_NO_HOOKS = ("-c", "core.hooksPath=/dev/null")   # every git call: no hook from any tree ever runs
 CONTROL_MAX_BYTES = 64 * 1024
 ARMED_MAX_BYTES = 4096
 MAX_ACTIONS = 10
+MAX_SEQ = 10**9
+MAX_SEQ_JUMP = 100_000            # a seq further ahead of the last one is refused without being consumed
+BALANCE_JUMP_TOLERANCE = Decimal("1.00")   # balance rise beyond the records' change: flagged (deposit?)
+DAY_OPEN_CARRY_S = 3600           # a reading this recent from the previous UTC day opens the new day
 MAX_EVENTS = 200
 REPORT_EVENTS = 30
 TAIL_LINES = 60
@@ -125,7 +133,10 @@ def money(x) -> str:
 
 
 def short(x) -> str:
-    s = repr(x)
+    try:
+        s = repr(x)
+    except (RecursionError, ValueError, MemoryError):    # deeply nested or a huge integer from the control file
+        return f"<{type(x).__name__}>"
     return s if len(s) <= 40 else s[:37] + "..."
 
 
@@ -194,6 +205,8 @@ SPECS: dict[tuple[str, str], Spec] = {
 }
 # risk-reducing built-ins: they run even when stale, future-dated or next to an invalid action
 ALWAYS_OPS = {("operator", "stop_all"), ("operator", "disarm"), ("operator", "set_limits")}
+# from a file whose seq is invalid or jumps too far: only these two run (set_limits needs a valid seq)
+SALVAGE_OPS = {("operator", "stop_all"), ("operator", "disarm")}
 ACTION_KEYS = {"id", "program", "cmd", "params", "max_age_min"}
 CONTROL_KEYS = {"seq", "issued_utc", "note", "actions"}
 ID_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,39}")
@@ -270,21 +283,25 @@ def validate_action(raw, idx: int, seq: int) -> dict:
     return {"id": aid, "program": prog, "cmd": cmd, "params": vals, "max_age_s": age}
 
 
-def parse_control(blob: bytes) -> dict:
+def parse_control(blob: bytes, any_seq: bool = False) -> dict:
+    """Structure of the control file. With any_seq=True an invalid seq is returned as None instead of refused
+    (used only to salvage stop_all / disarm from a file whose only fault is its seq)."""
     if len(blob) > CONTROL_MAX_BYTES:
         raise Bad(f"control file is {len(blob)} bytes, more than {CONTROL_MAX_BYTES}")
     try:
         obj = json.loads(blob.decode("utf-8"))
-    except (UnicodeDecodeError, json.JSONDecodeError) as e:
-        raise Bad(f"control file is not valid JSON ({type(e).__name__})") from None
+    except (UnicodeDecodeError, ValueError, RecursionError) as e:   # JSONDecodeError is a ValueError; so is
+        raise Bad(f"control file is not valid JSON ({type(e).__name__})") from None  # a 5000-digit integer
     if not isinstance(obj, dict):
         raise Bad("control file must be a JSON object")
     extra = set(obj) - CONTROL_KEYS
     if extra:
         raise Bad(f"control file: keys not allowed: {sorted(map(short, extra))}")
     seq = obj.get("seq")
-    if type(seq) is not int or not 1 <= seq <= 10**9:
-        raise Bad(f"seq must be a whole number 1-1000000000, got {short(seq)}")
+    if type(seq) is not int or not 1 <= seq <= MAX_SEQ:
+        if not any_seq:
+            raise Bad(f"seq must be a whole number 1-{MAX_SEQ}, got {short(seq)}")
+        seq = None
     issued = parse_utc(obj.get("issued_utc"))
     note = obj.get("note", "")
     if not isinstance(note, str) or len(note) > 500:
@@ -329,7 +346,8 @@ ADDRESS_RE = re.compile(r"(?i)(?<![0-9a-z])0x[0-9a-f]{40}(?![0-9a-z])")
 LONGHEX_RE = re.compile(r"(?i)(?<![0-9a-z])(?:0x)?[0-9a-f]{32,}(?![0-9a-z])")
 TOKEN_RE = re.compile(r"(?<![A-Za-z0-9+/=_-])(?=[A-Za-z0-9+/=_-]*[A-Za-z])(?=[A-Za-z0-9+/=_-]*[0-9])"
                       r"[A-Za-z0-9+/=_-]{32,}(?![A-Za-z0-9+/=_-])")
-PLACEHOLDERS = ("<user>", "<host>", "<address>", "<hex>", "<token>", "<url>", "<email>")
+PLACEHOLDERS = ("<user>", "<host>", "<address>", "<hex>", "<token>", "<url>", "<email>", "<repo>")
+SCRUB_MAX_PASSES = 8
 
 
 class Scrubber:
@@ -356,6 +374,10 @@ class Scrubber:
         if len(w) >= 8:
             lits.append((w, "<address>"))
         if repo is not None:
+            # the checkout may live outside the home folder (/Volumes/<name>/...): its path is scrubbed too
+            for r in {str(repo), os.path.realpath(str(repo)), str(Path(repo).resolve())}:
+                if len(r) >= 5:
+                    lits.append((r, "<repo>"))
             for k in ("user.name", "user.email"):
                 try:
                     v = subprocess.run(["git", "-C", str(repo), "config", "--get", k], capture_output=True,
@@ -368,8 +390,7 @@ class Scrubber:
         self.literals = [(re.compile(r"(?<![A-Za-z0-9])" + re.escape(s) + r"(?![A-Za-z0-9])", re.I), r)
                          for s, r in lits]
 
-    def __call__(self, text) -> str:
-        t = str(text)
+    def _once(self, t: str) -> str:
         t = URL_RE.sub("<url>", t)
         t = EMAIL_RE.sub("<email>", t)
         for rx, rep in self.literals:
@@ -378,6 +399,16 @@ class Scrubber:
         t = ADDRESS_RE.sub("<address>", t)
         t = LONGHEX_RE.sub("<hex>", t)
         t = TOKEN_RE.sub("<token>", t)
+        return t
+
+    def __call__(self, text) -> str:
+        # one pass can create a new match ("/homehttps://x" -> "~https://x"): repeat until nothing changes
+        t = str(text)
+        for _ in range(SCRUB_MAX_PASSES):
+            n = self._once(t)
+            if n == t:
+                break
+            t = n
         return t
 
     def leaks(self, text) -> list[str]:
@@ -530,8 +561,8 @@ class Operator:
         self.state_path = self.sd / "operator-state.json"
         self.lock_path = self.sd / "operator.lock"
         self.logs = self.sd / "operator-logs"
-        self.wt = self.sd / "reports-worktree"
         self.bids_lock = self.sd / "exp_bids.live.lock"
+        self.fav_lock = self.sd / "exp_fav.lock"
         venv = self.pilot / ".venv" / "bin" / "python"
         self.python = str(venv) if venv.exists() else sys.executable
         self.scrub = Scrubber(self.repo)
@@ -545,7 +576,7 @@ class Operator:
                 "running": None, "events": [], "baseline": None, "balance": None, "day_open": None,
                 "lowered": None, "limit_hit": None, "last_cycle": None, "last_publish": 0, "dirty": True,
                 "help_cache": {}, "last_balance_probe": 0, "report_error": None, "control_error": None,
-                "milestones_reached": 0, "control_note": ""}
+                "milestones_reached": 0, "control_note": "", "publish_failed_at": None, "cycle_error": None}
 
     def load_state(self) -> dict:
         st = self.default_state()
@@ -753,10 +784,25 @@ class Operator:
 
     def note_balance(self, bal: Decimal) -> None:
         now = self.now()
-        self.st["balance"] = {"usd": str(bal), "utc": utc(now)}
+        prev = self.st.get("balance") or {}
+        lg = self.ledger()
+        net = lg["realised_total"] - lg["at_risk_total"]       # what the records say cash should have moved by
+        if prev.get("usd") is not None and prev.get("ledger_net") is not None:
+            d_bal = bal - Decimal(prev["usd"])
+            d_led = net - Decimal(prev["ledger_net"])
+            if d_bal > BALANCE_JUMP_TOLERANCE and d_bal - d_led > BALANCE_JUMP_TOLERANCE:
+                # a deposit raises the balance-based measure and would hide losses and post a false milestone
+                self.event("warning", "balance rose more than the programs' records explain",
+                           reason=f"balance +{money(d_bal)}, records {money(d_led)} USD: a deposit or redeemed "
+                                  f"winnings; after a deposit the owner writes baseline_balance_usd in ARMED")
+        self.st["balance"] = {"usd": str(bal), "utc": utc(now), "ts": now, "ledger_net": str(net)}
         today = day_of(now)
         if (self.st.get("day_open") or {}).get("day") != today:
-            self.st["day_open"] = {"day": today, "usd": str(bal)}
+            # the day opens at the last reading before midnight when it is recent (a live run crossing midnight),
+            # so losses between midnight and the first reading of the day still count toward the new day
+            carry = (prev.get("usd") is not None and isinstance(prev.get("ts"), (int, float))
+                     and day_of(prev["ts"]) != today and now - prev["ts"] <= DAY_OPEN_CARRY_S)
+            self.st["day_open"] = {"day": today, "usd": prev["usd"] if carry else str(bal)}
         a = self.read_armed()
         if a["ok"]:
             base = self.st.get("baseline")
@@ -855,6 +901,8 @@ class Operator:
         try:
             if spec.kind == "run" and self.stop_file.exists():
                 raise Bad("STOP file present: no program runs are started")
+            if act["cmd"] == "selftest" and self.child is not None and self.child["live"]:
+                raise Bad("a live program is running: a selftest (up to 15 min) would delay its supervision")
             self.help_ok(act)
             if act["program"] == "exp_bids" and act["cmd"] == "run":
                 cfg = self.pilot / "experiments" / f"{act['params']['config']}.json"
@@ -884,6 +932,8 @@ class Operator:
             raise Bad("STOP file present")
         if lock_is_held(self.bids_lock):
             raise Bad("a live exp_bids.py session started outside the operator is running")
+        if lock_is_held(self.fav_lock):
+            raise Bad("an exp_fav.py session started outside the operator is running")
         if self.balance_probe("before a live run") is None:
             raise Bad("balance could not be read with smoke.py auth --live; live run not started")
         a = self.read_armed()
@@ -1081,18 +1131,23 @@ class Operator:
             self.interrupt(f"{hit[0]} loss limit reached")
 
     # ------------------------------------------------------------------ control channel
-    def git(self, *args, cwd: Path | None = None, timeout: int = GIT_TIMEOUT_S) -> str:
+    def git_raw(self, *args, data: bytes = b"", timeout: int = GIT_TIMEOUT_S) -> bytes:
+        """git in the main repository, hooks off (a relative core.hooksPath must never pick up a tree's hooks)."""
         env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
         env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes")
+        name = next((x for x in args if not x.startswith("-") and "=" not in x), "?")
         try:
-            r = subprocess.run(["git", *args], cwd=str(cwd or self.repo), capture_output=True, timeout=timeout,
-                               env=env)
+            r = subprocess.run(["git", *GIT_NO_HOOKS, *args], cwd=str(self.repo), input=data, capture_output=True,
+                               timeout=timeout, env=env)
         except (OSError, subprocess.SubprocessError) as e:
-            raise GitError(f"git {args[0]}: {type(e).__name__}") from None
+            raise GitError(f"git {name}: {type(e).__name__}") from None
         if r.returncode != 0:
             msg = (r.stderr or r.stdout).decode("utf-8", "replace").strip().splitlines()
-            raise GitError(f"git {args[0]}: " + (msg[-1] if msg else f"exit {r.returncode}"))
-        return r.stdout.decode("utf-8", "replace")
+            raise GitError(f"git {name}: " + (msg[-1] if msg else f"exit {r.returncode}"))
+        return r.stdout
+
+    def git(self, *args, data: bytes = b"", timeout: int = GIT_TIMEOUT_S) -> str:
+        return self.git_raw(*args, data=data, timeout=timeout).decode("utf-8", "replace")
 
     def fetch_control(self) -> tuple[str, bytes] | None:
         ref = f"refs/remotes/origin/{CONTROL_BRANCH}"
@@ -1108,13 +1163,13 @@ class Operator:
             return None
         if sha == self.st.get("last_blob"):
             return sha, b""
-        size = int(self.git("cat-file", "-s", sha).strip())
+        try:
+            size = int(self.git("cat-file", "-s", sha).strip())
+        except ValueError:
+            raise GitError("git cat-file: size not understood") from None
         if size > CONTROL_MAX_BYTES:
             return sha, b"x" * (CONTROL_MAX_BYTES + 1)
-        r = subprocess.run(["git", "cat-file", "blob", sha], cwd=str(self.repo), capture_output=True, timeout=30)
-        if r.returncode != 0:
-            raise GitError("git cat-file failed")
-        return sha, r.stdout
+        return sha, self.git_raw("cat-file", "blob", sha)
 
     def poll_control(self) -> None:
         try:
@@ -1134,16 +1189,45 @@ class Operator:
         if sha == self.st.get("last_blob"):
             return
         self.st["last_blob"] = sha
+        self.save_state()                         # a blob that crashes anything below is never read again
         try:
             ctl = parse_control(blob)
         except Bad as e:
-            self.save_state()
-            return self.event("refused", "control file", reason=str(e))
+            self.event("refused", "control file", reason=str(e))
+            try:
+                lax = parse_control(blob, any_seq=True)
+            except Bad:
+                return self.save_state()
+            return self.salvage(lax, "its seq is invalid")      # the only fault is the seq
         if ctl["seq"] <= self.st["last_seq"]:
             self.save_state()
             return self.event("skipped", f"control seq {ctl['seq']}",
                               reason=f"not newer than the last processed seq {self.st['last_seq']}: not replayed")
+        if ctl["seq"] > self.st["last_seq"] + MAX_SEQ_JUMP:
+            # a huge seq would burn the number range: refused and NOT consumed (the next normal seq still works)
+            self.event("refused", f"control seq {ctl['seq']}",
+                       reason=f"more than {MAX_SEQ_JUMP} above the last processed seq {self.st['last_seq']}; "
+                              f"not consumed")
+            return self.salvage(ctl, "its seq jumps too far")
         self.process_seq(blob, ctl)
+
+    def salvage(self, ctl: dict, why: str) -> None:
+        """A file refused only for its seq: carry out its stop_all / disarm (they only reduce risk), nothing else."""
+        acts = []
+        for i, raw in enumerate(ctl["actions"]):
+            try:
+                a = validate_action(raw, i, 0)
+            except Bad:
+                continue
+            if (a["program"], a["cmd"]) in SALVAGE_OPS:
+                a["seq"], a["issued_ts"] = ctl["seq"], ctl["issued_ts"]
+                acts.append(a)
+        if acts:
+            self.event("received", "control file", reason=f"{why}: only {', '.join(a['cmd'] for a in acts)} "
+                                                          f"from it run")
+        for a in acts:
+            self.start_action(a)
+        self.save_state()
 
     def process_seq(self, blob: bytes, ctl: dict) -> None:
         seq = ctl["seq"]
@@ -1195,18 +1279,26 @@ class Operator:
             self.st["queue"].pop(0)
             self.save_state()
             self.start_action(act)
+            # a quick action can take minutes: ARMED, STOP and the loss limits are checked after each one
+            self.monitor()
+            self.check_limits()
 
     # ------------------------------------------------------------------ reports
     def build_report(self) -> tuple[dict, str, str]:
         a = self.read_armed()
         lim = self.limits(a) if a["ok"] else {}
         p = self.pnl()
-        prof = p["cash_change_total_usd"]
+        cash = p["cash_change_total_usd"]
+        # a milestone needs both measures: the balance (a deposit raises it) and the programs' records
+        # (realised minus still at risk; a deposit does not move them). The smaller one counts.
+        led = p["ledger_realised_total_usd"] - p["ledger_at_risk_total_usd"]
+        prof = None if cash is None else min(cash, led)
         step = a["milestone"] if a["ok"] else DEFAULT_MILESTONE_STEP
         reached = int((prof / step).to_integral_value(rounding=ROUND_FLOOR)) if prof is not None and prof > 0 else 0
         if reached > self.st.get("milestones_reached", 0):
             self.st["milestones_reached"] = reached
-            self.event("milestone", f"profit passed {money(step * reached)} USD", reason=f"cash profit {money(prof)}")
+            self.event("milestone", f"profit passed {money(step * reached)} USD",
+                       reason=f"profit {money(prof)} (balance {money(cash)}, records {money(led)})")
         c = self.child
         rep = {
             "operator_version": VERSION,
@@ -1217,7 +1309,8 @@ class Operator:
             "limits": {k: money(v) for k, v in lim.items()},
             "limit_hit": {k: v for k, v in (self.st.get("limit_hit") or {}).items() if k != "key"} or None,
             "pnl": {k: (money(v) if isinstance(v, Decimal) else v) for k, v in p.items()},
-            "milestones": {"step_usd": money(step), "cash_profit_usd": None if prof is None else money(prof),
+            "milestones": {"step_usd": money(step), "profit_usd": None if prof is None else money(prof),
+                           "cash_profit_usd": None if cash is None else money(cash), "records_profit_usd": money(led),
                            "reached": reached},
             "control": {"last_seq": self.st["last_seq"], "issued_utc": self.st.get("last_seq_issued_utc"),
                         "note": self.st.get("control_note") or "", "fetch_error": self.st.get("control_error")},
@@ -1256,7 +1349,8 @@ class Operator:
                  f"(сегодня {p['ledger_realised_today_usd']}), под риском {p['ledger_at_risk_total_usd']}")
         L.append(f"- Убыток для пределов: всего {p['loss_total_usd']}, сегодня {p['loss_today_usd']} USD")
         m = r["milestones"]
-        L.append(f"- Прибыль по балансу: {m['cash_profit_usd']} USD; ступеней по {m['step_usd']}: {m['reached']}")
+        L.append(f"- Прибыль (меньшая из двух: по балансу {m['cash_profit_usd']}, по записям {m['records_profit_usd']}): "
+                 f"{m['profit_usd']} USD; ступеней по {m['step_usd']}: {m['reached']}")
         ct = r["control"]
         L.append(f"- Последняя команда: seq {ct['last_seq']} от {ct['issued_utc']}"
                  + (f"; ошибка чтения: {ct['fetch_error']}" if ct["fetch_error"] else ""))
@@ -1277,72 +1371,53 @@ class Operator:
                 L.append("  ```")
         return "\n".join(L) + "\n"
 
-    def ensure_worktree(self) -> None:
-        wt = self.wt
-        if (wt / ".git").exists():
-            try:
-                head = self.git("symbolic-ref", "--short", "HEAD", cwd=wt).strip()
-                if head == REPORT_BRANCH:
-                    return
-            except GitError:
-                pass
-        self.git("worktree", "prune")
-        if wt.exists():
-            shutil.rmtree(wt)
-        try:
-            self.git("fetch", "--quiet", "--no-tags", "origin",
-                     f"+refs/heads/{REPORT_BRANCH}:refs/remotes/origin/{REPORT_BRANCH}")
-            remote = True
-        except GitError as e:
-            if "couldn't find remote ref" not in str(e).lower():
-                raise
-            remote = False
-        local = subprocess.run(["git", "show-ref", "--verify", "--quiet", f"refs/heads/{REPORT_BRANCH}"],
-                               cwd=str(self.repo)).returncode == 0
-        if local:
-            self.git("worktree", "add", "--quiet", str(wt), REPORT_BRANCH)
-        elif remote:
-            self.git("worktree", "add", "--quiet", "-b", REPORT_BRANCH, str(wt), f"refs/remotes/origin/{REPORT_BRANCH}")
-        else:
-            self.git("worktree", "add", "--quiet", "--detach", "--no-checkout", str(wt), "HEAD")
-            self.git("symbolic-ref", "HEAD", f"refs/heads/{REPORT_BRANCH}", cwd=wt)
-            self.git("read-tree", "--empty", cwd=wt)
-
-    def write_reports(self, rep: dict, md: str, ev: str) -> bool:
-        d = self.wt / "reports"
-        d.mkdir(exist_ok=True)
-        (d / "latest.json").write_text(json.dumps(rep, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-        (d / "latest.md").write_text(md, encoding="utf-8")
-        (d / "events.jsonl").write_text(ev, encoding="utf-8")
-        self.git("add", "--", "reports/latest.json", "reports/latest.md", "reports/events.jsonl", cwd=self.wt)
-        changed = subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=str(self.wt)).returncode != 0
-        if changed:
-            self.git(*GIT_IDENT, "commit", "--quiet", "--no-verify", "-m",
-                     f"operator report {rep['generated_utc']} (seq {rep['control']['last_seq']})", cwd=self.wt)
-        return changed
-
     def publish(self) -> bool:
+        """Commit the report to `live-reports` and push it, with git plumbing only.
+
+        Nothing from the remote branch is checked out or written to disk (a tree there may hold symlinks
+        into the home folder or hooks), and no hook runs. Every commit carries the whole tree: the three
+        regular files under reports/, so whatever else someone put on the branch drops out of its tip.
+        """
         rep, md, ev = self.build_report()
         leaks = self.scrub.obj_leaks(rep) + self.scrub.leaks(md) + self.scrub.leaks(ev)
         if leaks:
             self.st["report_error"] = f"report withheld: scrubber found {sorted(set(leaks))}"
+            self.st["publish_failed_at"] = self.now()
             return False
+        files = {"events.jsonl": ev.encode(), "latest.json": (json.dumps(rep, indent=1, sort_keys=True) + "\n").encode(),
+                 "latest.md": md.encode()}
+        remote = f"refs/remotes/origin/{REPORT_BRANCH}"
         try:
-            self.ensure_worktree()
-            self.write_reports(rep, md, ev)
-            try:
-                self.git("push", "--quiet", "origin", f"HEAD:refs/heads/{REPORT_BRANCH}", cwd=self.wt)
-            except GitError:
-                # someone else moved the branch: take theirs, write ours again on top (reports are rebuilt from state)
-                self.git("fetch", "--quiet", "--no-tags", "origin",
-                         f"+refs/heads/{REPORT_BRANCH}:refs/remotes/origin/{REPORT_BRANCH}")
-                self.git("reset", "--quiet", "--hard", f"refs/remotes/origin/{REPORT_BRANCH}", cwd=self.wt)
-                self.write_reports(rep, md, ev)
-                self.git("push", "--quiet", "origin", f"HEAD:refs/heads/{REPORT_BRANCH}", cwd=self.wt)
-        except (GitError, OSError) as e:
-            self.st["report_error"] = self.scrub(f"{e}; retried next cycle")
+            ents = "".join(f"100644 blob {self.git('hash-object', '-w', '--no-filters', '--stdin', data=b).strip()}\t{n}\n"
+                           for n, b in sorted(files.items()))
+            sub = self.git("mktree", data=ents.encode()).strip()
+            root = self.git("mktree", data=f"040000 tree {sub}\treports\n".encode()).strip()
+            for attempt in (1, 2):
+                try:
+                    self.git("fetch", "--quiet", "--no-tags", "origin", f"+refs/heads/{REPORT_BRANCH}:{remote}")
+                except GitError as e:
+                    if "couldn't find remote ref" not in str(e).lower():
+                        raise                              # offline: no push attempt either
+                try:
+                    parent = self.git("rev-parse", "--verify", "--quiet", f"{remote}^{{commit}}").strip()
+                except GitError:
+                    parent = None                          # no branch yet: the first report starts it
+                if parent and self.git("rev-parse", f"{parent}^{{tree}}").strip() == root:
+                    break                                  # nothing changed
+                commit = self.git(*GIT_IDENT, "commit-tree", root, *(["-p", parent] if parent else []), "-m",
+                                  f"operator report {rep['generated_utc']} (seq {rep['control']['last_seq']})").strip()
+                try:
+                    self.git("push", "--quiet", "--no-verify", "origin", f"{commit}:refs/heads/{REPORT_BRANCH}")
+                    break
+                except GitError:
+                    if attempt == 2:                       # someone else moved the branch: once more on top of it
+                        raise
+        except GitError as e:
+            self.st["report_error"] = self.scrub(f"{e}; retried in {PUBLISH_BACKOFF_S // 60} min")
+            self.st["publish_failed_at"] = self.now()
             return False
         self.st["report_error"] = None
+        self.st["publish_failed_at"] = None
         self.st["last_publish"] = self.now()
         self.st["dirty"] = False
         return True
@@ -1365,7 +1440,9 @@ class Operator:
         self.process_queue()
         self.monitor()
         self.check_limits()
-        if self.st.get("dirty") or now - self.st.get("last_publish", 0) >= HEARTBEAT_S:
+        failed = self.st.get("publish_failed_at")
+        if ((self.st.get("dirty") or now - self.st.get("last_publish", 0) >= HEARTBEAT_S)
+                and (failed is None or now - failed >= PUBLISH_BACKOFF_S)):
             self.publish()
         self.st["last_cycle"] = self.now()       # the gap is measured from the END of a cycle: long actions are no sleep
         self.save_state()
@@ -1376,33 +1453,68 @@ class Operator:
         for s in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):
             signal.signal(s, on_signal)
         self.event("started", f"operator {VERSION}", reason=f"poll every {self.interval} s")
-        self.recover()
         n = 0
-        while not self.quit:
-            self.cycle()
-            n += 1
-            if max_cycles is not None and n >= max_cycles:
+        try:
+            self.recover()
+            while not self.quit:
+                try:
+                    self.cycle()
+                    self.st["cycle_error"] = None
+                except Exception as e:  # noqa: BLE001  one bad cycle must not end the supervision of a live run
+                    self.cycle_failed(e)
+                n += 1
+                if max_cycles is not None and n >= max_cycles:
+                    break
+                end = time.time() + self.interval
+                while time.time() < end and not self.quit:
+                    c = self.child
+                    if c and c["proc"] is not None and c["proc"].poll() is not None:
+                        break
+                    time.sleep(min(1.0, max(0.05, end - time.time())))
+        finally:
+            # any exit (normal, signal, an exception that got this far): a running program is stopped
+            self.stop_child("operator is stopping")
+            try:
+                self.event("stopped", f"operator {VERSION}")
+                self.publish()
+                self.save_state()
+            except Exception:  # noqa: BLE001
+                pass
+        return 0
+
+    def cycle_failed(self, e: Exception) -> None:
+        msg = self.scrub(f"{type(e).__name__}: {e}")[:300]
+        if self.st.get("cycle_error") != msg:           # the same error every minute is reported once
+            self.st["cycle_error"] = msg
+            self.event("error", "operator cycle", reason=f"{msg}; the loop goes on")
+        for step in (self.monitor, self.check_limits):   # supervision first, whatever else failed
+            try:
+                step()
+            except Exception:  # noqa: BLE001
+                pass
+        try:
+            self.st["last_cycle"] = self.now()
+            self.save_state()
+        except Exception:  # noqa: BLE001
+            pass
+
+    def stop_child(self, why: str) -> None:
+        if not self.child:
+            return
+        try:
+            self.interrupt(why)
+        except Exception:  # noqa: BLE001
+            self._signal(self.child["pid"], signal.SIGINT)
+        deadline = time.time() + INT_GRACE_S
+        while self.child and self.child["proc"] is not None and time.time() < deadline:
+            if self.child["proc"].poll() is not None:
                 break
-            end = time.time() + self.interval
-            while time.time() < end and not self.quit:
-                c = self.child
-                if c and c["proc"] is not None and c["proc"].poll() is not None:
-                    break
-                time.sleep(min(1.0, max(0.05, end - time.time())))
-        if self.child:
-            self.interrupt("operator is stopping")
-            deadline = time.time() + INT_GRACE_S
-            while self.child and self.child["proc"] is not None and time.time() < deadline:
-                if self.child["proc"].poll() is not None:
-                    self.monitor()
-                    break
-                time.sleep(0.5)
+            time.sleep(0.5)
+        try:                                   # still running after the grace: the next start adopts it
             if self.child:
                 self.monitor()
-        self.event("stopped", f"operator {VERSION}")
-        self.publish()
-        self.save_state()
-        return 0
+        except Exception:  # noqa: BLE001
+            pass
 
 
 # ----------------------------------------------------------------------------- commands
@@ -1471,10 +1583,12 @@ def cmd_status(a) -> int:
 
 # ----------------------------------------------------------------------------- selftest
 FAKE_SMOKE = r'''
-import sys
+import os, sys
 from pathlib import Path
 home = Path.home() / ".polymarket-pilot"
 cmd = sys.argv[1]
+if cmd == "status" and os.environ.get("FAKE_UNARM"):
+    (home / "ARMED").unlink(missing_ok=True)        # the owner removes ARMED while this quick action runs
 if cmd == "auth":
     b = (home / "fake-balance").read_text().strip() if (home / "fake-balance").exists() else "200"
     print("  signer address : 0x" + "ab" * 20)
@@ -1507,6 +1621,7 @@ sub.add_parser("selftest")
 a = p.parse_args()
 if a.command == "report":
     print("Per level: placed 3 cost 1.00 net -1.00; order 0x" + "ef" * 32 + " by 0x" + "12" * 20)
+    print(f"records in {here / 'out'}")              # an absolute path of the checkout, like exp_bids.py prints
     sys.exit(0)
 if a.command == "selftest":
     print("selftest: ALL PASS"); sys.exit(0)
@@ -1679,6 +1794,17 @@ def cmd_selftest(a) -> int:
         refused("control file over 64 KB refused",
                 lambda: validate_control(enc({**ok_ctl, "note": "x" * 70000})), "bytes")
         refused("control file not JSON refused", lambda: validate_control(b"{not json"), "JSON")
+        # review M3: inputs that raised RecursionError / ValueError (and crashed the operator) are now refusals
+        refused("control file of 30,000 nested brackets refused (was RecursionError)",
+                lambda: validate_control(b"[" * 30000 + b"]" * 30000), "JSON")
+        refused("control file with a 5,000-digit seq refused (was ValueError)",
+                lambda: validate_control(b'{"seq": 1' + b"0" * 4999 + b', "issued_utc": "2026-11-28T09:00:00Z", '
+                                         b'"actions": [{"program": "smoke", "cmd": "status"}]}'), "JSON")
+        deep: list = []
+        for _ in range(5000):
+            deep = [deep]
+        expect("a value too deep to print does not crash the refusal text", short(deep) == "<list>", short(deep))
+        refused("seq above 1000000000 refused", lambda: validate_control(enc({**ok_ctl, "seq": 10**9 + 1})), "seq")
         ex = Path(__file__).resolve().parent / "control-example.json"
         if ex.exists():
             accepted("pilot/control-example.json is valid", lambda: validate_control(ex.read_bytes()))
@@ -1699,6 +1825,22 @@ def cmd_selftest(a) -> int:
         sc_user = Scrubber()
         sc_user.literals.append((re.compile(r"(?<![A-Za-z0-9])user(?![A-Za-z0-9])", re.I), "<user>"))
         expect("a user literally named 'user' does not block reports", not sc_user.leaks(sc_user("user user")))
+        # review S3: one pass could create a new match, and the leak check then withheld every report
+        for crafted in ("/homehttps://x", "/Usershttps://a/b", "a@/homeb.c:d", "/root/home/x@y.z:w"):
+            expect(f"scrubbing {crafted!r} reaches a fixed point with no leak", not sc.leaks(sc(crafted)),
+                   f"{sc(crafted)!r}: {sc.leaks(sc(crafted))}")
+        import random
+        rnd = random.Random(20261127)
+        frags = ["/home", "/Users", "/root", "/", "https://", "git://", "x", "@", "a.b", ":", "~", "0x", "ab" * 8,
+                 " ", "-", "user", "Z9"]
+        fuzz_left = [t for t in ("".join(rnd.choice(frags) for _ in range(rnd.randint(1, 10))) for _ in range(20000))
+                     if sc.leaks(sc(t))]
+        expect("fuzz of 20,000 crafted strings: none leaks after scrubbing", not fuzz_left, str(fuzz_left[:5]))
+        # review S6: a checkout outside the home folder (/Volumes/<disk>/...) is scrubbed as <repo>
+        sc_vol = Scrubber(Path("/Volumes/Data Disk/polymarket-lab"))
+        t = sc_vol("records in /Volumes/Data Disk/polymarket-lab/pilot/out")
+        expect("a repository path outside the home folder becomes <repo>",
+               t == "records in <repo>/pilot/out" and not sc_vol.leaks(t), t)
 
         # --- 3. repositories ------------------------------------------------------------------------------------
         print("throwaway git repositories: origin, the Mac's working copy, the coordinator's clone")
@@ -1813,6 +1955,39 @@ def cmd_selftest(a) -> int:
         op.cycle()
         expect("broken JSON on the branch is refused and reported", events(op, outcome="refused", what="control file"))
         expect("state file holds the last seq", json.loads(op.state_path.read_text())["last_seq"] == 4)
+        # review M3: a hostile file must not crash the operator, before or after a restart
+        for name, raw in (("30,000 nested brackets", "[" * 30000 + "]" * 30000),
+                          ("a 5,000-digit seq", '{"seq": 1' + "0" * 4999 + ', "issued_utc": "' + utc(time.time())
+                           + '", "actions": [{"program": "smoke", "cmd": "status"}]}')):
+            push_control(0, [], raw=raw)
+            n_ref = len(events(op, outcome="refused", what="control file"))
+            crashed = []
+            for start in (1, 2):
+                try:
+                    op.cycle()
+                except Exception as e:  # noqa: BLE001
+                    crashed.append(f"start {start}: {type(e).__name__}")
+                op = new_op()                                  # operator restart
+            expect(f"control file of {name}: refused, no crash, not re-read after a restart",
+                   not crashed and len(events(op, outcome="refused", what="control file")) == n_ref + 1
+                   and op.st["last_seq"] == 4, str(crashed))
+        # review S2: a seq far ahead would burn the number range; it is refused and not consumed, its stop_all runs
+        push_control(4 + MAX_SEQ_JUMP + 1, [{"id": "jumpstop", "program": "operator", "cmd": "stop_all"},
+                                            {"id": "jumpst", "program": "smoke", "cmd": "status"}])
+        op.cycle()
+        expect("a seq more than 100,000 ahead is refused and not consumed; its stop_all still runs",
+               op.st["last_seq"] == 4 and events(op, id="jumpstop", outcome="done") and op.stop_file.exists()
+               and not events(op, id="jumpst"))
+        op.stop_file.unlink()
+        for name, bad_seq in (("seq 1000000001", 10**9 + 1), ("seq 'x'", "x")):
+            push_control(0, [], raw=json.dumps({"seq": bad_seq, "issued_utc": utc(time.time()), "actions": [
+                {"id": f"salv{len(name)}", "program": "operator", "cmd": "stop_all"},
+                {"id": f"salvst{len(name)}", "program": "smoke", "cmd": "status"}]}))
+            op.cycle()
+            expect(f"a file with {name}: refused, its stop_all still runs, nothing else",
+                   op.st["last_seq"] == 4 and events(op, id=f"salv{len(name)}", outcome="done")
+                   and op.stop_file.exists() and not events(op, id=f"salvst{len(name)}"))
+            op.stop_file.unlink()
 
         # --- 5. ARMED ---------------------------------------------------------------------------------------------
         print("ARMED and the limits")

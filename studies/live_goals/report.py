@@ -224,12 +224,18 @@ def main() -> None:
     cc = {}
     last_t: dict[str, int] = {}
     gaps = collections.defaultdict(list)
+    ages = collections.defaultdict(list)
     for o in iter_stream("polls"):
         s = o["src"].split(":")[0]
         polls[s][o.get("st")] += 1
         if o.get("st") == 200:
             pms[s].append(o["ms"])
         cc.setdefault(s, o.get("cc"))
+        if o.get("age") not in (None, ""):
+            try:
+                ages[s].append(float(o["age"]))
+            except ValueError:
+                pass
         k = o["src"]
         if k in last_t and o["r"] - last_t[k] < 60000:
             gaps[s].append((o["r"] - last_t[k]) / 1000)
@@ -239,7 +245,8 @@ def main() -> None:
         tot = sum(c.values())
         out(f"{s:10s} polls {tot:7d}  ok {c.get(200, 0):7d}  other: {dict((k, v) for k, v in c.items() if k != 200)}"
             f"  median {statistics.median(pms[s]) if pms[s] else float('nan'):.0f} ms"
-            f"  interval per league/match median {q(gaps[s], .5):.1f} s p90 {q(gaps[s], .9):.1f} s  Cache-Control: {cc.get(s)}")
+            f"  interval per league/match median {q(gaps[s], .5):.1f} s p90 {q(gaps[s], .9):.1f} s  Cache-Control: {cc.get(s)}"
+            + (f"  CDN Age header: present {len(ages[s]) / max(1, c.get(200, 0)):.0%}, median {q(ages[s], .5):.0f} s" if ages[s] else ""))
     nsp = sum(1 for _ in iter_stream("pm_sports"))
     out(f"pm_sports  pushed messages {nsp} (Polymarket sports WebSocket, no polling)")
     out("not usable from this sandbox (2026-11-27 probe): SofaScore 403, TheSportsDB 403, FotMob 404, Flashscore (signed header)")

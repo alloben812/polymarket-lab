@@ -1,0 +1,506 @@
+# Verification of pilot/operator.py (launcher) + pilot/pm_operator.py (code), 2026-11-27
+# Sandbox: cloud container, US IP, no account, no key. Nothing authenticated was sent; no order exists.
+# All git repositories below are throwaway local ones in temp directories; nothing was pushed to GitHub.
+
+## 0. Environment and file hashes
+$ date -u; python3 --version; /home/user/polymarket-lab/pilot/.venv/bin/python --version (pilot/.venv); git --version
+Fri Nov 27 19:52:57 UTC 2026
+Python 3.13.18
+Python 3.13.18
+git version 2.43.0
+$ sha256sum pilot/operator.py pilot/pm_operator.py pilot/control-example.json pilot/OPERATOR.md
+4612e54530178557b6b867aa1afffab79f7de453998daa3034a3c53ec0497b17  operator.py
+bbebf8aef743ef2dd5b22472582f39df02afb8da28416dcf03e3987181dbe80e  pm_operator.py
+ca9eecfbd44dd3d1303e8b7d5396b9b82e3ce73366809d6716443d470e93d4f5  control-example.json
+3775febd38b192ff7977488d775c363d6bdc4d5ef32ae22fa5c3be0f4ab20cb8  OPERATOR.md
+$ wc -l pilot/operator.py pilot/pm_operator.py
+    40 operator.py
+  2072 pm_operator.py
+  2112 total
+
+## 1. Selftest (throwaway origin + working copy + coordinator clone, fake smoke/exp_bids/exp_fav)
+$ cd pilot && python3 -I operator.py selftest
+selftest: throwaway directory /tmp/pm-operator-selftest-XXXX (removed at the end); the real ~/.polymarket-pilot is not touched
+whitelist and parameter ranges
+  [PASS] smoke status accepted
+  [PASS] smoke place refused (not on the whitelist)
+  [PASS] smoke roundtrip refused
+  [PASS] program 'bash' refused
+  [PASS] free-form argv key refused
+  [PASS] unknown parameter refused
+  [PASS] config path '../../x' refused
+  [PASS] config 'tails.json' refused
+  [PASS] exp_bids windows=0 refused
+  [PASS] exp_bids windows=37 refused
+  [PASS] exp_bids windows='3' refused
+  [PASS] exp_bids windows=True refused
+  [PASS] exp_bids windows=3.5 refused
+  [PASS] exp_bids windows=None refused
+  [PASS] exp_bids windows=1 accepted
+  [PASS] exp_bids windows=36 accepted
+  [PASS] exp_bids live='true' (string) refused
+  [PASS] exp_bids run without windows refused
+  [PASS] exp_fav ticket=7 refused
+  [PASS] exp_fav ticket='5' refused
+  [PASS] exp_fav ticket=0 refused
+  [PASS] exp_fav ticket=True refused
+  [PASS] exp_fav hours=0 refused
+  [PASS] exp_fav hours=13 refused
+  [PASS] exp_fav hours='2' refused
+  [PASS] exp_fav ticket=10 hours=12 live accepted
+  [PASS] id with a slash refused
+  [PASS] max_age_min 1000 refused
+  [PASS] set_limits without values refused
+  [PASS] set_limits negative refused
+  [PASS] exp_bids argv is exactly the documented command line
+  [PASS] exp_fav dry argv has no --live
+  [PASS] minimal control file accepted
+  [PASS] control file with seq 0 refused
+  [PASS] control file with seq '2' refused
+  [PASS] control file with seq true refused
+  [PASS] control file with bad issued_utc refused
+  [PASS] control file with no actions refused
+  [PASS] control file with 11 actions refused
+  [PASS] control file with extra top-level key refused
+  [PASS] control file with duplicate ids refused
+  [PASS] control file over 64 KB refused
+  [PASS] control file not JSON refused
+  [PASS] pilot/control-example.json is valid
+report scrubbing
+  [PASS] scrubbed text has no address, hex, path, URL, e-mail, token, user or host
+  [PASS] scrubbed text keeps ordinary words
+  [PASS] token ids of 77 digits are hidden too
+  [PASS] a user literally named 'user' does not block reports
+throwaway git repositories: origin, the Mac's working copy, the coordinator's clone
+control channel and replay protection
+  [PASS] single instance: a second lock is refused
+  [PASS] no control branch yet: no error, nothing runs
+  [PASS] seq 1: smoke status done
+  [PASS] seq 1: exp_bids report done
+  [PASS] program output in the report is scrubbed (address, home path)
+  [PASS] same seq is not processed again
+  [PASS] after a restart the seq is not replayed
+  [PASS] a new file with an old seq is ignored and reported
+  [PASS] an action issued 2 h ago is skipped as stale
+  [PASS] a control file issued 1 h in the future is refused
+  [PASS] one bad action refuses the whole seq
+  [PASS] an invalid seq still carries out its stop_all
+  [PASS] a stale stop_all still runs; the stale status does not
+  [PASS] broken JSON on the branch is refused and reported
+  [PASS] state file holds the last seq
+ARMED and the limits
+  [PASS] live run without ARMED is refused
+  [PASS] dry run without ARMED runs
+  [PASS] ARMED writable by others is not armed
+  [PASS] ARMED with an unknown line is not armed
+  [PASS] ARMED total above 300 is not armed
+  [PASS] ARMED daily above total is not armed
+  [PASS] ARMED total 30, daily 12 is armed
+  [PASS] set_limits lowers the total limit to 25
+  [PASS] set_limits cannot raise the daily limit
+  [PASS] armed live run went through and finished
+  [PASS] ledger and balance both show a loss of 3.00
+  [PASS] daily limit 12 reached: STOP file created
+  [PASS] daily limit: limit event and the live run interrupted
+  [PASS] balance in state is the probe after the run, not the stale one the run printed at its start
+  [PASS] the loss stopped within one window of the limit
+  [PASS] with STOP present a live run is refused
+  [PASS] with STOP present a dry run is refused too
+  [PASS] with STOP present status still runs
+  [PASS] STOP removed but daily limit used up: live run refused
+disarm, stop_all, sleep, the exp_fav command line
+  [PASS] ledger: unknown cost and no final record count in full; dry-run rows ignored
+  [PASS] exp_fav ledger: won +0.39, lost -10.00, unknown fill unresolved 10.00 at risk, unfilled 0
+  [PASS] removing ARMED interrupts the live run at once
+  [PASS] disarm moves ARMED aside
+  [PASS] after disarm a live run is refused
+  [PASS] a second run waits in the queue while one runs
+  [PASS] stop_all: STOP created, running program stopped, queue dropped
+  [PASS] a quick action runs while a program run is going
+  [PASS] after a sleep the queued action is dropped, not run late
+  [PASS] exp_fav with another command line is refused
+  [PASS] exp_fav with the expected command line runs (dry)
+  [PASS] a program that is not installed is refused
+reports branch, scrubbing of what was pushed, the working copy
+  [PASS] report published without error
+  [PASS] live-reports holds only the three report files
+  [PASS] latest.json has limits, pnl, control and events
+  [PASS] one report commit per change (several commits pushed)
+  [PASS] pushed reports carry no address, key, path, URL, user, host or e-mail
+  [PASS] report commits use the neutral identity, not the owner's
+  [PASS] the owner's git name is scrubbed from text
+  [PASS] working copy: same HEAD, same branch, same status
+  [PASS] code on the control branch was never executed or checked out
+  [PASS] report push recovers when the branch moved elsewhere
+  [PASS] pilot/operator.py does not break programs started without -I (acts as stdlib operator)
+  [PASS] an address injected into state is scrubbed before publishing
+selftest: 106/106 passed
+selftest: ALL PASS
+exit=0
+
+## 2. The coordinator's check of a control file (no state, no network)
+$ python3 -I operator.py check control-example.json
+seq 1, issued 2026-11-28T09:00:00Z, 4 action(s); note: 'Example: read the balance, lower the daily limit for the first day, one cheap live exp_bids session (3 windows of late-tail), then its report.'
+  balance: smoke auth  [read]  max age 20 min
+      runs: python -I -B -u pilot/smoke.py auth --live
+  first-day-limit: operator set_limits max_daily_loss_usd=10.00  [op]  built into the operator
+  late-tail-3: exp_bids run config=late-tail windows=3 live=yes  [LIVE (needs ARMED)]  max age 30 min
+      runs: python -I -B -u pilot/exp_bids.py run --config pilot/experiments/late-tail.json --max-windows 3 --live
+  report: exp_bids report dry_run=no  [offline]  max age 90 min
+      runs: python -I -B -u pilot/exp_bids.py report
+exit=0
+$ cat bad.json; python3 -I operator.py check bad.json
+{"seq":2,"issued_utc":"2026-11-28T09:00:00Z","actions":[{"program":"exp_bids","cmd":"run","params":{"config":"../../etc/x","windows":2,"live":true}}]}
+REFUSED: action 1: config must be one of ['tails', 'pairs', 'late-tail'], got '../../etc/x'
+exit=2   (exit code captured separately; the first capture read sed's exit code through a pipe)
+
+## 3. Name collision with the standard-library module 'operator' (found while building; fixed)
+# A plain file named operator.py in pilot/ breaks smoke.py / exp_bids.py / conn_check.py when they are started
+# the documented way (.venv/bin/python smoke.py ..., without -I): the folder is first on sys.path and
+# collections' own 'from operator import eq' finds that file. Reproduction on a temp copy of smoke.py:
+$ (temp dir with smoke.py and a PLAIN operator.py) /home/user/polymarket-lab/pilot/.venv/bin/python smoke.py --help | tail -2
+    from operator import eq as _eq
+ImportError: cannot import name 'eq' from 'operator' (consider renaming '<tmp>/operator.py' since it has the same name as the standard library module named 'operator' and prevents importing that standard library module)
+$ (same dir, operator.py replaced by the shipped launcher) /home/user/polymarket-lab/pilot/.venv/bin/python smoke.py --help | head -1
+usage: smoke.py [-h] [--market MARKET] [--live] [--yes-this-costs-money]
+# The shipped pilot/operator.py is a launcher: imported as a module it loads the real standard-library
+# operator source and does nothing else; run as a script it starts pm_operator.main().
+# Real programs next to it, byte-identical copies (same sha256) in a temp dir, started WITHOUT -I:
+$ sha256 of the copies vs pilot/:
+3019808019df551d
+14cdd2ec8261151f
+6d87afad0c0a0d21
+3019808019df551d
+14cdd2ec8261151f
+6d87afad0c0a0d21
+$ /home/user/polymarket-lab/pilot/.venv/bin/python smoke.py selftest | tail -1
+selftest: ALL PASS
+$ /home/user/polymarket-lab/pilot/.venv/bin/python exp_bids.py selftest | tail -1
+selftest: ALL PASS
+$ /home/user/polymarket-lab/pilot/.venv/bin/python exp_fav.py selftest | tail -1
+selftest: 104 checks, ALL PASS
+$ /home/user/polymarket-lab/pilot/.venv/bin/python -c 'import sys; sys.path.insert(0, "."); import operator, polymarket; ...'
+SDK imported; operator.itemgetter works: b ; operator.__lt__ works: True
+
+## 4. Whitelist vs the real command lines
+$ .venv/bin/python -I -B exp_bids.py run --help
+usage: exp_bids.py run [-h] --config CONFIG [--live]
+                       [--max-windows MAX_WINDOWS]
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG       experiments/<name>.json
+  --live                post real orders (default: dry-run)
+  --max-windows MAX_WINDOWS
+                        windows in this session (default 12, at most 96)
+$ .venv/bin/python -I -B exp_fav.py run --help
+usage: exp_fav.py run [-h] [--live] [--ticket TICKET] [--hours HOURS]
+
+options:
+  -h, --help       show this help message and exit
+  --live           send real orders (default: dry-run, nothing sent)
+  --ticket TICKET  USD per order: 10 (default) or lower, minimum 5
+  --hours HOURS    stop looking for new trades after this many hours
+$ grep -n 'choices=\|add_argument' smoke.py | head -4
+656:    p.add_argument("command", choices=["auth", "place", "status", "cancel", "roundtrip", "selftest"])
+657:    p.add_argument("--market", help="outcome token id (asset id), e.g. printed by conn_check.py")
+658:    p.add_argument("--live", action="store_true", help="send real requests (default: dry-run)")
+659:    p.add_argument("--yes-this-costs-money", action="store_true", help="required for roundtrip")
+# smoke.py: place and roundtrip are deliberately NOT on the whitelist (the selftest checks both are refused).
+
+## 5. Demonstration: real operator.py + pm_operator.py in a throwaway 'Mac' clone of a local bare origin,
+##    fake smoke.py / exp_bids.py (from pm_operator.FAKE_*), a coordinator clone pushing live-control.
+##    Paths of the temp directory are shown as <demo>. Script:
+```bash
+#!/bin/bash
+# Demonstration of pilot/operator.py against a throwaway local origin with fake trading programs.
+set -e
+SRC=/home/user/polymarket-lab/pilot
+D=$(mktemp -d /tmp/claude-0/-home-user/05556429-066d-541b-b886-b8da26bcc648/scratchpad/demo-XXXX)
+export HOME=$D/home GIT_CONFIG_NOSYSTEM=1 FAKE_WINDOW_S=2
+mkdir -p "$HOME"
+printf '[user]\n\tname = Demo Owner\n\temail = owner@example.org\n[init]\n\tdefaultBranch = main\n' > "$HOME/.gitconfig"
+say() { echo; echo "\$ $*"; }
+q() { "$@" 2>&1 | sed "s#$D#<demo>#g"; }
+
+say "git init --bare origin.git; clone as the Mac's working copy; copy operator.py + pm_operator.py; fake smoke.py / exp_bids.py"
+git init -q --bare "$D/origin.git"
+git clone -q "$D/origin.git" "$D/mac" 2>/dev/null
+mkdir -p "$D/mac/pilot/experiments"
+cp "$SRC/operator.py" "$SRC/pm_operator.py" "$D/mac/pilot/"
+cp "$SRC/experiments/"*.json "$D/mac/pilot/experiments/"
+python3 -I -c "
+import sys; sys.path.insert(0, '$SRC'); import pm_operator as m
+open('$D/mac/pilot/smoke.py', 'w').write(m.FAKE_SMOKE); open('$D/mac/pilot/exp_bids.py', 'w').write(m.FAKE_BIDS)"
+echo 'out/' > "$D/mac/pilot/.gitignore"
+(cd "$D/mac" && git add -A && git commit -qm "code" && git push -q origin HEAD:main)
+q git -C "$D/mac" log --oneline
+HEAD0=$(git -C "$D/mac" rev-parse HEAD)
+
+say "coordinator: push seq 1 to live-control (balance, a 2-window DRY exp_bids run, its report)"
+git clone -q "$D/origin.git" "$D/coord"
+cd "$D/coord" && git checkout -q --orphan live-control && git rm -q -rf . 2>/dev/null || true
+mkdir -p control
+push() { (cd "$D/coord" && git add -A && git commit -qm "$1" && git push -q origin HEAD:refs/heads/live-control); }
+cat > control/desired.json <<EOF
+{"seq": 1, "issued_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)", "note": "demo: dry run first",
+ "actions": [{"id": "bal", "program": "smoke", "cmd": "auth"},
+             {"id": "dry2", "program": "exp_bids", "cmd": "run", "params": {"config": "late-tail", "windows": 2}},
+             {"id": "rep", "program": "exp_bids", "cmd": "report", "params": {"dry_run": true}}]}
+EOF
+q python3 -I "$D/mac/pilot/operator.py" check control/desired.json
+push "seq 1"
+
+say "Mac: python3 -I pilot/operator.py run --interval 5 --max-cycles 4"
+q python3 -I "$D/mac/pilot/operator.py" run --interval 5 --max-cycles 4
+
+say "coordinator: seq 2 = a LIVE run while the owner has not armed; plus an action not on the whitelist in seq 3"
+cat > control/desired.json <<EOF
+{"seq": 2, "issued_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)", "note": "demo: live without ARMED",
+ "actions": [{"id": "live-early", "program": "exp_bids", "cmd": "run", "params": {"config": "pairs", "windows": 2, "live": true}}]}
+EOF
+push "seq 2"
+q python3 -I "$D/mac/pilot/operator.py" run --interval 5 --max-cycles 2
+cat > control/desired.json <<EOF
+{"seq": 3, "issued_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)", "note": "demo: not on the whitelist",
+ "actions": [{"id": "x", "program": "smoke", "cmd": "roundtrip", "params": {"market": "123"}}]}
+EOF
+push "seq 3"
+q python3 -I "$D/mac/pilot/operator.py" run --interval 5 --max-cycles 2
+
+say "owner arms by hand: ARMED with total 20 USD, daily 6 USD; fake account loses 1 USD per window"
+printf 'max_total_loss_usd = 20\nmax_daily_loss_usd = 6\n' > "$HOME/.polymarket-pilot/ARMED"
+chmod 600 "$HOME/.polymarket-pilot/ARMED"
+echo 200 > "$HOME/.polymarket-pilot/fake-balance"; echo -1.00 > "$HOME/.polymarket-pilot/fake-pnl"
+cat "$HOME/.polymarket-pilot/ARMED"
+cat > control/desired.json <<EOF
+{"seq": 4, "issued_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)", "note": "demo: live run of 10 windows; the daily limit must stop it",
+ "actions": [{"id": "live10", "program": "exp_bids", "cmd": "run", "params": {"config": "pairs", "windows": 10, "live": true}}]}
+EOF
+push "seq 4"
+q python3 -I "$D/mac/pilot/operator.py" run --interval 5 --max-cycles 8
+
+say "STOP file after the limit"
+q cat "$HOME/.polymarket-pilot/STOP"
+
+say "the same seq 4 again after a restart: not replayed"
+q python3 -I "$D/mac/pilot/operator.py" run --interval 5 --max-cycles 1
+
+say "what the coordinator sees: branch live-reports on origin"
+git clone -q --branch live-reports "$D/origin.git" "$D/reports" 2>/dev/null
+q git -C "$D/reports" log --format='%h %an <%ae> %s' | head -20
+q ls -la "$D/reports/reports"
+echo "--- reports/latest.md ---"
+sed "s#$D#<demo>#g" "$D/reports/reports/latest.md" | head -80
+echo "--- reports/latest.json: limits, pnl, limit_hit ---"
+python3 -I -c "
+import json; r = json.load(open('$D/reports/reports/latest.json'))
+print(json.dumps({k: r[k] for k in ('armed', 'stop_file', 'limits', 'limit_hit', 'pnl', 'control')}, indent=1))"
+
+say "leak check of everything pushed (addresses, long hex, home path, the demo user and e-mail, host)"
+H=$(hostname)
+if grep -rEn "0x[0-9a-fA-F]{40}|[0-9a-fA-F]{40,}|$D|/home/|/Users/|Demo Owner|owner@example.org|$H" "$D/reports/reports"; then echo LEAK FOUND; else echo "no leaks found"; fi
+
+say "the Mac's working copy is untouched (HEAD, branch, status)"
+echo "HEAD before $HEAD0"; echo "HEAD after  $(git -C "$D/mac" rev-parse HEAD)"
+q git -C "$D/mac" status --porcelain --branch
+q git -C "$D/mac" worktree list
+rm -rf "$D"
+echo; echo "demo directory removed"
+```
+$ bash demo.sh
+
+$ git init --bare origin.git; clone as the Mac's working copy; copy operator.py + pm_operator.py; fake smoke.py / exp_bids.py
+a5c2a30 code
+
+$ coordinator: push seq 1 to live-control (balance, a 2-window DRY exp_bids run, its report)
+seq 1, issued 2026-11-27T19:51:28Z, 3 action(s); note: 'demo: dry run first'
+  bal: smoke auth  [read]  max age 20 min
+      runs: python -I -B -u pilot/smoke.py auth --live
+  dry2: exp_bids run config=late-tail windows=2 live=no  [run]  max age 20 min
+      runs: python -I -B -u pilot/exp_bids.py run --config pilot/experiments/late-tail.json --max-windows 2
+  rep: exp_bids report dry_run=yes  [offline]  max age 20 min
+      runs: python -I -B -u pilot/exp_bids.py report --dry-run
+
+$ Mac: python3 -I pilot/operator.py run --interval 5 --max-cycles 4
+[2026-11-27T19:51:28Z] started: operator 1.0.0 (poll every 5 s)
+[2026-11-27T19:51:28Z] received: control seq 1 (3 action(s))
+[2026-11-27T19:51:28Z] done: smoke auth
+[2026-11-27T19:51:28Z] started: exp_bids run config=late-tail windows=2 live=no
+[2026-11-27T19:51:28Z] done: exp_bids report dry_run=yes
+[2026-11-27T19:51:32Z] done: exp_bids run config=late-tail windows=2 live=no
+[2026-11-27T19:51:42Z] stopped: operator 1.0.0
+
+$ coordinator: seq 2 = a LIVE run while the owner has not armed; plus an action not on the whitelist in seq 3
+[2026-11-27T19:51:42Z] started: operator 1.0.0 (poll every 5 s)
+[2026-11-27T19:51:42Z] received: control seq 2 (1 action(s))
+[2026-11-27T19:51:42Z] refused: exp_bids run config=pairs windows=2 live=yes (not armed: no ARMED file)
+[2026-11-27T19:51:48Z] stopped: operator 1.0.0
+[2026-11-27T19:51:48Z] started: operator 1.0.0 (poll every 5 s)
+[2026-11-27T19:51:48Z] refused: control seq 3 (action 1: 'smoke' 'roundtrip' is not on the whitelist; nothing from this seq runs)
+[2026-11-27T19:51:53Z] stopped: operator 1.0.0
+
+$ owner arms by hand: ARMED with total 20 USD, daily 6 USD; fake account loses 1 USD per window
+max_total_loss_usd = 20
+max_daily_loss_usd = 6
+[2026-11-27T19:51:53Z] started: operator 1.0.0 (poll every 5 s)
+[2026-11-27T19:51:53Z] received: control seq 4 (1 action(s))
+[2026-11-27T19:51:53Z] started: exp_bids run config=pairs windows=10 live=yes
+[2026-11-27T19:52:03Z] limit: daily loss limit reached (loss 6.00 >= limit 6.00 USD; STOP created)
+[2026-11-27T19:52:03Z] interrupt: exp_bids run config=pairs windows=10 live=yes (daily loss limit reached)
+[2026-11-27T19:52:03Z] interrupted: exp_bids run config=pairs windows=10 live=yes
+[2026-11-27T19:52:28Z] stopped: operator 1.0.0
+
+$ STOP file after the limit
+created by operator.py at 2026-11-27T19:52:03Z: daily loss limit 6.00 USD reached
+remove this file by hand to allow new runs
+
+$ the same seq 4 again after a restart: not replayed
+[2026-11-27T19:52:28Z] started: operator 1.0.0 (poll every 5 s)
+[2026-11-27T19:52:28Z] stopped: operator 1.0.0
+
+$ what the coordinator sees: branch live-reports on origin
+a2ad31f pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:52:28Z (seq 4)
+cfc5962 pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:52:28Z (seq 4)
+53df008 pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:52:28Z (seq 4)
+04d26b0 pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:52:03Z (seq 4)
+fe56b5e pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:53Z (seq 4)
+7645e7e pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:53Z (seq 3)
+1eac4eb pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:48Z (seq 3)
+663bdeb pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:48Z (seq 2)
+8c3ae92 pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:42Z (seq 2)
+fe5efdf pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:42Z (seq 1)
+386d7fb pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:32Z (seq 1)
+2eeceb8 pm-operator <pm-operator@localhost.invalid> operator report 2026-11-27T19:51:28Z (seq 1)
+total 24
+drwxr-xr-x 2 root root 4096 Nov 27 19:52 .
+drwxr-xr-x 4 root root 4096 Nov 27 19:52 ..
+-rw-r--r-- 1 root root 3019 Nov 27 19:52 events.jsonl
+-rw-r--r-- 1 root root 5285 Nov 27 19:52 latest.json
+-rw-r--r-- 1 root root 3251 Nov 27 19:52 latest.md
+--- reports/latest.md ---
+# Отчёт оператора, 2026-11-27T19:52:28Z
+
+- Взведён (ARMED): **да**
+- Файл STOP: **есть**
+- Пределы убытка: всего 20.00 USD (в ARMED 20.00), за день 6.00 USD (в ARMED 6.00); осталось всего 14.00, сегодня 0.00
+- **Предел достигнут:** daily в 2026-11-27T19:52:03Z, убыток 6.00 при пределе 6.00 USD
+- Баланс pUSD: 195.00 (прочитан 2026-11-27T19:52:03Z); старт 200; изменение всего -5.00, сегодня -5.00
+- По записям программ: итог рассчитанных -5.00 (сегодня -5.00), под риском 1.00
+- Убыток для пределов: всего 6.00, сегодня 6.00 USD
+- Прибыль по балансу: -5.00 USD; ступеней по 100.00: 0
+- Последняя команда: seq 4 от 2026-11-27T19:51:53Z
+
+## События (последние)
+
+- 2026-11-27T19:52:28Z **stopped** operator 1.0.0
+- 2026-11-27T19:52:28Z **started** operator 1.0.0: poll every 5 s
+- 2026-11-27T19:52:28Z **stopped** operator 1.0.0
+- 2026-11-27T19:52:03Z **interrupted** exp_bids run config=pairs windows=10 live=yes (seq=4 id=live10 exit=130 minutes=0.2)
+
+  ```
+    pUSD balance 200
+    window 1: net -1.00
+    window 2: net -1.00
+    window 3: net -1.00
+    window 4: net -1.00
+    window 5: net -1.00
+    interrupted: 0 open orders
+  ```
+- 2026-11-27T19:52:03Z **interrupt** exp_bids run config=pairs windows=10 live=yes (seq=4 id=live10): daily loss limit reached
+- 2026-11-27T19:52:03Z **limit** daily loss limit reached: loss 6.00 >= limit 6.00 USD; STOP created
+- 2026-11-27T19:51:53Z **started** exp_bids run config=pairs windows=10 live=yes (seq=4 id=live10)
+- 2026-11-27T19:51:53Z **received** control seq 4: 1 action(s)
+- 2026-11-27T19:51:53Z **started** operator 1.0.0: poll every 5 s
+- 2026-11-27T19:51:53Z **stopped** operator 1.0.0
+- 2026-11-27T19:51:48Z **refused** control seq 3: action 1: 'smoke' 'roundtrip' is not on the whitelist; nothing from this seq runs
+- 2026-11-27T19:51:48Z **started** operator 1.0.0: poll every 5 s
+- 2026-11-27T19:51:48Z **stopped** operator 1.0.0
+- 2026-11-27T19:51:42Z **refused** exp_bids run config=pairs windows=2 live=yes (seq=2 id=live-early): not armed: no ARMED file
+- 2026-11-27T19:51:42Z **received** control seq 2: 1 action(s)
+- 2026-11-27T19:51:42Z **started** operator 1.0.0: poll every 5 s
+- 2026-11-27T19:51:42Z **stopped** operator 1.0.0
+- 2026-11-27T19:51:32Z **done** exp_bids run config=late-tail windows=2 live=no (seq=1 id=dry2 exit=0 minutes=0.1)
+
+  ```
+    window 1: net 0
+    window 2: net 0
+    session done
+  ```
+- 2026-11-27T19:51:28Z **done** exp_bids report dry_run=yes (seq=1 id=rep exit=0)
+
+  ```
+  Per level: placed 3 cost 1.00 net -1.00; order <hex> by <address>
+  ```
+- 2026-11-27T19:51:28Z **started** exp_bids run config=late-tail windows=2 live=no (seq=1 id=dry2)
+- 2026-11-27T19:51:28Z **done** smoke auth (seq=1 id=bal exit=0 balance_usd=200)
+
+  ```
+    signer address : <address>
+    account wallet : <address>
+    collateral (pUSD) balance: 200
+  ```
+- 2026-11-27T19:51:28Z **received** control seq 1: 3 action(s)
+- 2026-11-27T19:51:28Z **started** operator 1.0.0: poll every 5 s
+--- reports/latest.json: limits, pnl, limit_hit ---
+{
+ "armed": true,
+ "stop_file": true,
+ "limits": {
+  "armed_daily_usd": "6.00",
+  "armed_total_usd": "20.00",
+  "daily_usd": "6.00",
+  "left_today_usd": "0.00",
+  "left_total_usd": "14.00",
+  "total_usd": "20.00"
+ },
+ "limit_hit": {
+  "kind": "daily",
+  "limit_usd": "6.00",
+  "loss_usd": "6.00",
+  "utc": "2026-11-27T19:52:03Z"
+ },
+ "pnl": {
+  "balance_usd": "195.00",
+  "balance_utc": "2026-11-27T19:52:03Z",
+  "baseline_usd": "200",
+  "baseline_utc": "2026-11-27T19:51:53Z",
+  "cash_change_today_usd": "-5.00",
+  "cash_change_total_usd": "-5.00",
+  "day_open_usd": "200",
+  "ledger_at_risk_today_usd": "1.00",
+  "ledger_at_risk_total_usd": "1.00",
+  "ledger_realised_today_usd": "-5.00",
+  "ledger_realised_total_usd": "-5.00",
+  "ledger_unreadable_lines": 0,
+  "loss_today_usd": "6.00",
+  "loss_total_usd": "6.00"
+ },
+ "control": {
+  "fetch_error": null,
+  "issued_utc": "2026-11-27T19:51:53Z",
+  "last_seq": 4,
+  "note": "demo: live run of 10 windows; the daily limit must stop it"
+ }
+}
+
+$ leak check of everything pushed (addresses, long hex, home path, the demo user and e-mail, host)
+no leaks found
+
+$ the Mac's working copy is untouched (HEAD, branch, status)
+HEAD before a5c2a30f0a39bb80b4d14c8c028acfd33f639658
+HEAD after  a5c2a30f0a39bb80b4d14c8c028acfd33f639658
+## main...origin/main
+<demo>/mac                                      a5c2a30 [main]
+<demo>/home/.polymarket-pilot/reports-worktree  a2ad31f [live-reports]
+
+demo directory removed
+
+## 6. Not verified here
+- live runs of the real programs through the operator (no account/key here, US IP);
+- git fetch/push against GitHub from the owner's Mac (credentials there);
+- macOS-specific behaviour: real sleep and wake, caffeinate, ps output format (the code uses 'ps -p PID -o command=');
+- exp_fav.py is new (another agent, 27.11 evening) and may still change: the operator re-checks its --help
+  for each new file version, and its record reader mirrors exp_fav's build_ledger as of sha256 6d87afad...;
+- the shim's stdlib lookup was run on Linux Python 3.13 (sys._stdlib_dir); on macOS python.org/Homebrew builds
+  the same attribute exists (3.11+); older Pythons fall back to os.__file__ and then to _operator.

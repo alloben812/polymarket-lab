@@ -394,6 +394,7 @@ class Lockin:
         decision.update(
             action="intent",
             reason="rule_met",
+            execute_by_ns=limit_ns,
             side="BUY",
             style="taker",
             price=str(ask),

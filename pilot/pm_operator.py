@@ -1803,7 +1803,8 @@ def cmd_selftest(a) -> int:
         deep: list = []
         for _ in range(5000):
             deep = [deep]
-        expect("a value too deep to print does not crash the refusal text", short(deep) == "<list>", short(deep))
+        expect("a value too large to print does not crash the refusal text",
+               short(10**5000) == "<int>" and short(deep).endswith("..."), short(10**5000))
         refused("seq above 1000000000 refused", lambda: validate_control(enc({**ok_ctl, "seq": 10**9 + 1})), "seq")
         ex = Path(__file__).resolve().parent / "control-example.json"
         if ex.exists():
@@ -2167,8 +2168,203 @@ def cmd_selftest(a) -> int:
         expect("a program that is not installed is refused", events(op, id="fav3", outcome="refused"))
         (pilot / "exp_fav.py").write_text(FAKE_FAV)      # the test's own edits undone before the working-copy check
 
+        # --- 6b. the security review's attacks on supervision (REVIEW-operator.md) ------------------------------
+        print("review attacks: second live program, long quick actions, crashing cycles, offline reports, deposits")
+        if op.stop_file.exists():
+            op.stop_file.unlink()
+        arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
+        # S4: an exp_fav session the owner started by hand holds exp_fav.lock
+        fav_lk = acquire_lock(sd / "exp_fav.lock")
+        push_control(19, [{"id": "favlk", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 1, "live": True}}])
+        cycles(op, n=2)
+        fav_lk.close()
+        expect("S4: a live run is refused while an exp_fav.py session holds its lock",
+               events(op, id="favlk", outcome="refused") and "exp_fav" in events(op, id="favlk")[0]["reason"])
+        # S1: during a live run a selftest is refused, and ARMED is re-checked after every quick action
+        os.environ["FAKE_WINDOW_S"] = "0.5"
+        push_control(20, [{"id": "s1live", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 36, "live": True}}])
+        cycles(op, until=lambda o: events(o, id="s1live", outcome="started"))
+        os.environ["FAKE_UNARM"] = "1"                    # the first status removes ARMED while it runs
+        push_control(21, [{"id": "s1self", "program": "exp_bids", "cmd": "selftest"},
+                          {"id": "s1a", "program": "smoke", "cmd": "status"},
+                          {"id": "s1b", "program": "smoke", "cmd": "status"}])
+        op.cycle()
+        os.environ.pop("FAKE_UNARM", None)
+        evs = op.st["events"]
+        i_int = next((i for i, e in enumerate(evs) if e.get("id") == "s1live" and e["outcome"] == "interrupt"), None)
+        i_b = next((i for i, e in enumerate(evs) if e.get("id") == "s1b" and e["outcome"] == "done"), None)
+        expect("S1: a selftest is refused while a live program runs",
+               events(op, id="s1self", outcome="refused") and "live" in events(op, id="s1self")[0]["reason"])
+        expect("S1: ARMED removed during a quick action: the live run is interrupted before the next action",
+               i_int is not None and i_b is not None and i_int < i_b, f"interrupt at {i_int}, next action at {i_b}")
+        cycles(op, until=lambda o: o.child is None)
+        # M3: a cycle that raises while a live run goes on: the loop keeps supervising (ARMED removal still acts)
+        old_handlers = {sg: signal.getsignal(sg) for sg in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP)}
+        arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
+        push_control(22, [{"id": "m3live", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 36, "live": True}}])
+        cycles(op, until=lambda o: events(o, id="m3live", outcome="started"))
+        polls = []
+
+        def boom():
+            polls.append(1)
+            raise RecursionError("maximum recursion depth exceeded (test)")
+        op.poll_control = boom
+        op.interval = 1
+        op.armed_file.unlink()
+        try:
+            rc = op.serve(max_cycles=3)
+            escaped = None
+        except Exception as e:  # noqa: BLE001
+            rc, escaped = None, f"{type(e).__name__}: {e}"
+        del op.poll_control
+        expect("M3: cycles that raise do not end the loop (3 cycles ran, one error event, serve returned)",
+               escaped is None and rc == 0 and len(polls) == 3
+               and len(events(op, outcome="error", what="operator cycle")) == 1, f"{escaped} polls={len(polls)}")
+        expect("M3: while cycles raise, removing ARMED still interrupts the live run",
+               any("disarmed" in e.get("reason", "") for e in events(op, id="m3live", outcome="interrupt"))
+               and op.child is None and events(op, id="m3live", outcome="interrupted"),
+               str([(e["outcome"], e.get("reason")) for e in events(op, id="m3live")]) + " child=" + str(op.child is None) + " SAID " + " / ".join(lines_said[-12:]))
+        # M3: any exit of the loop, even an exception, interrupts the running program
+        arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
+        push_control(23, [{"id": "m3exit", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 36, "live": True}}])
+        cycles(op, until=lambda o: events(o, id="m3exit", outcome="started"))
+        child_pid = op.child["pid"] if op.child else 0
+
+        def boom2():
+            raise RuntimeError("unexpected (test)")
+        op.recover = boom2
+        try:
+            op.serve(max_cycles=3)
+            escaped = None
+        except RuntimeError as e:
+            escaped = str(e)
+        del op.recover
+        expect("M3: an exception that ends serve() still interrupts the live program first",
+               escaped and op.child is None and events(op, id="m3exit", outcome="interrupted")
+               and any("operator is stopping" in e.get("reason", "") for e in events(op, id="m3exit",
+                                                                                   outcome="interrupt"))
+               and not (child_pid and pid_alive(child_pid)), str(escaped))
+        for sg, h in old_handlers.items():
+            signal.signal(sg, h)
+        op.quit, op.interval = False, 5
+        os.environ["FAKE_WINDOW_S"] = "0.15"
+        # S5: with the network gone a failed report push is retried at most every 5 minutes
+        off = tmp / "origin.git.offline"
+        origin.rename(off)
+        n_pub = []
+        real_publish = op.publish
+
+        def counted():
+            n_pub.append(1)
+            return real_publish()
+        op.publish = counted
+        op.st["dirty"] = True
+        op.cycle()
+        op.cycle()
+        expect("S5: offline, the failed report push is not retried in the next cycle",
+               len(n_pub) == 1 and op.st.get("report_error"), f"{len(n_pub)} tries, {op.st.get('report_error')}")
+        op.st["publish_failed_at"] -= PUBLISH_BACKOFF_S + 1
+        op.cycle()
+        expect("S5: ... and is retried after the back-off", len(n_pub) == 2)
+        off.rename(origin)
+        op.st["publish_failed_at"] -= PUBLISH_BACKOFF_S + 1
+        op.cycle()
+        del op.publish
+        expect("S5: back online, the report goes out", op.st.get("report_error") is None and len(n_pub) == 3,
+               str(op.st.get("report_error")))
+        # S8: a deposit is flagged and does not post a false milestone; a real profit still does
+        if op.stop_file.exists():
+            op.stop_file.unlink()
+        for f in (pilot / "out").glob("*.jsonl"):
+            f.unlink()
+        arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\nmilestone_step_usd = 10\n")
+        op.st.update(baseline=None, balance=None, day_open=None, milestones_reached=0, limit_hit=None)
+        op.note_balance(Decimal("200"))
+        op.note_balance(Decimal("260"))                    # the owner deposits 60
+        op.build_report()
+        expect("S8: a deposit of 60 is flagged and posts no milestone",
+               events(op, outcome="warning") and "deposit" in events(op, outcome="warning")[-1]["reason"]
+               and not events(op, outcome="milestone") and op.st["milestones_reached"] == 0)
+        rf = pilot / "out" / f"exp-probe-{day_of(time.time()).replace('-', '')}.jsonl"
+        rf.write_text(json.dumps({"type": "order", "exp": "probe", "mode": "live", "key": "w1",
+                                  "day": day_of(time.time()), "cost": "5.00", "pnl": "25.00",
+                                  "window_start": int(time.time())}) + "\n")
+        n_warn = len(events(op, outcome="warning"))
+        op.note_balance(Decimal("285"))                    # +25 that the records explain
+        op.build_report()
+        expect("S8: a profit of 25 the records show posts the 20 milestone, with no deposit warning",
+               op.st["milestones_reached"] == 2 and events(op, outcome="milestone")
+               and len(events(op, outcome="warning")) == n_warn, str(op.st["milestones_reached"]))
+        rf.unlink()
+        # S9: the first balance read after midnight comes after losses; a recent reading from before midnight opens
+        # the day instead
+        midnight = (int(time.time()) // 86400 + 1) * 86400
+        op.now = lambda: midnight + 900
+        op.st["balance"] = {"usd": "150", "utc": utc(midnight - 600), "ts": midnight - 600, "ledger_net": "0"}
+        op.st["day_open"] = {"day": day_of(midnight - 600), "usd": "150"}
+        op.note_balance(Decimal("140"))
+        carried = op.st["day_open"]
+        op.st["balance"] = {"usd": "150", "utc": utc(midnight - 5 * 3600), "ts": midnight - 5 * 3600,
+                            "ledger_net": "0"}
+        op.st["day_open"] = {"day": day_of(midnight - 600), "usd": "150"}
+        op.note_balance(Decimal("140"))
+        fresh = op.st["day_open"]
+        op.now = time.time
+        expect("S9: a reading 10 min before midnight opens the new day (loss after midnight counts today)",
+               carried == {"day": day_of(midnight + 900), "usd": "150"}, str(carried))
+        expect("S9: a reading 5 h old does not: the day opens at the current balance",
+               fresh == {"day": day_of(midnight + 900), "usd": "140"}, str(fresh))
+        op.st.update(baseline=None, balance=None, day_open=None, milestones_reached=0, limit_hit=None)
+        if op.armed_file.exists():
+            op.armed_file.unlink()
+
         # --- 7. reports and the untouched working copy -------------------------------------------------------------
         print("reports branch, scrubbing of what was pushed, the working copy")
+        # review M1 + M2: someone with push access puts symlinks into the home folder and hooks on live-reports,
+        # and the owner's repository uses a relative core.hooksPath (husky style)
+        sh("git", "config", "core.hooksPath", ".githooks", cwd=code)
+        key_file = sd / "key"
+        key_file.write_text("selftest key fixture: must stay intact\n")
+        armed_probe = sd / "ARMED"
+        att = tmp / "attacker"
+        sh("git", "clone", "-q", "--branch", REPORT_BRANCH, str(origin), str(att))
+        for n, target in (("latest.md", "../../key"), ("events.jsonl", "../../../.bashrc"),
+                          ("latest.json", "../../ARMED")):
+            (att / "reports" / n).unlink(missing_ok=True)
+            os.symlink(target, att / "reports" / n)
+        (att / ".githooks").mkdir()
+        for hk in ("post-commit", "reference-transaction", "post-checkout", "pre-push", "pre-commit", "post-merge"):
+            (att / ".githooks" / hk).write_text("#!/bin/sh\necho \"$0\" >> \"$HOME/HOOK_RAN\"\n")
+            os.chmod(att / ".githooks" / hk, 0o755)
+        sh("git", "add", "-A", cwd=att)
+        sh("git", "-c", "user.name=Attacker", "-c", "user.email=attacker@example.invalid", "commit", "-q", "-m",
+           "attacker: symlinks and hooks", cwd=att)
+        sh("git", "push", "-q", "origin", f"HEAD:refs/heads/{REPORT_BRANCH}", cwd=att)
+        push_control(31, [{"id": "evil", "program": "$(touch PWNED_BY_SHELL)", "cmd": "run"}])
+        op.st["dirty"] = True
+        op.cycle()
+        tip = sh("git", "ls-tree", "-r", f"refs/heads/{REPORT_BRANCH}", cwd=origin)
+        modes = sorted({ln.split()[0] for ln in tip.splitlines()})
+        names = sorted(ln.split("\t", 1)[1] for ln in tip.splitlines())
+        expect("M1: symlinks on live-reports: the key file is intact, no .bashrc written, ARMED not created",
+               key_file.read_text() == "selftest key fixture: must stay intact\n" and not (home / ".bashrc").exists()
+               and not armed_probe.exists(), key_file.read_text()[:60])
+        expect("M2: hooks committed on live-reports never run (relative core.hooksPath)",
+               not (home / "HOOK_RAN").exists(),
+               (home / "HOOK_RAN").read_text() if (home / "HOOK_RAN").exists() else "")
+        expect("M1: the report commit replaces the attacker's tree: three regular files at the tip",
+               modes == ["100644"] and names == ["reports/events.jsonl", "reports/latest.json", "reports/latest.md"]
+               and op.st.get("report_error") is None, f"{modes} {names} {op.st.get('report_error')}")
+        expect("M1: nothing from live-reports is checked out on the Mac (no reports worktree)",
+               not (sd / "reports-worktree").exists()
+               and "live-reports" not in sh("git", "worktree", "list", cwd=code))
+        expect("the shell-injection program name is refused and runs nothing",
+               events(op, outcome="refused", what="control seq 31") and not (home / "PWNED_BY_SHELL").exists()
+               and not (pilot / "PWNED_BY_SHELL").exists() and not (code / "PWNED_BY_SHELL").exists())
         op.st["dirty"] = True
         op.cycle()
         expect("report published without error", op.st.get("report_error") is None, str(op.st.get("report_error")))
@@ -2186,6 +2382,9 @@ def cmd_selftest(a) -> int:
         log_text = sh("git", "log", "--format=%an %ae %s", cwd=chk)
         expect("pushed reports carry no address, key, path, URL, user, host or e-mail",
                not sc.leaks(all_text) and not op.scrub.leaks(all_text), str(op.scrub.leaks(all_text)))
+        expect("S6: the checkout's absolute path (outside the home folder here) is not in the reports",
+               str(code) not in all_text and os.path.realpath(str(code)) not in all_text
+               and str(tmp) not in all_text and "<repo>/pilot/out" in all_text)
         expect("report commits use the neutral identity, not the owner's",
                "Selftest Owner" not in log_text and "owner@example.org" not in log_text and "pm-operator" in log_text)
         expect("the owner's git name is scrubbed from text", "Selftest Owner" not in op.scrub("by Selftest Owner"))

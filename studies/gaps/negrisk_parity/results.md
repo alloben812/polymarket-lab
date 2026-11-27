@@ -20,9 +20,9 @@ exchange best-price fields), `a2_episodes.py` (stage 2, level replay with sizes)
   20 USD size, 95% CI [+0.059, +0.130] by event, median +0.50 c per set. It meets rules (1)-(3) and fails (4):
   a trade printed on a leg during only 38% of these episodes (rule: at least half). Two further attacks
   remove what is left: the median episode is in an event that resolves in 36 days (the dollars are locked; at
-  +0.5% per 36 days that is about 5% a year, not an arbitrage), and several of the largest events are not
-  exhaustive (OpenAI IPO valuation, "next leader out of power before 2027", Millennium Prize problem: all
-  outcomes can resolve NO, so the basket does not pay $1 for sure). The same-day part (weather buckets and
+  +0.5% per 36 days that is about 5% a year, not an arbitrage), and for some events the $1 is not certain
+  (OpenAI IPO valuation lists only valuation buckets and no "no IPO" outcome; the protocol did not check that
+  outcome lists are exhaustive). The same-day part (weather buckets and
   post-count buckets, which are exhaustive) is 11 episodes in 8 events in 18 late hours: about $2.3 a day for
   all of it at 20 USD per trade, before anyone else takes it.
 - **Strike ladders (C1) are one-off and tiny, date ladders (C2) are never violated.** C1 late: 13 clean
@@ -110,9 +110,12 @@ clean) at +$0.136. The flagged gaps are mostly not there in the exchange's own q
    one quote that appeared under the others and was taken or pulled.
 4. Concentration: late top event 28% (NVIDIA market cap end of 2026), top 3 58%; early top event 59% (Bank of
    England December decision, 60 episodes, 0 prints), top 3 81%.
-5. Payout not guaranteed (found by reading the top events): outcome sets of OpenAI IPO valuation, "next leader out
-   of power before 2027 (no Starmer or Petro)" and "which Millennium Prize problem will AI solve next" can all
-   resolve NO. A sum of asks 0.5 c under $1 there is the price of "none of these", not a free dollar.
+5. Payout not guaranteed (outcome lists of the top events read from gamma after the run): "next leader out of power
+   before 2027" and "which Millennium Prize problem will AI solve next" do carry a "None" outcome and are
+   exhaustive; OpenAI IPO valuation ($1.08 of the early and $0.04 of the late clean B1 dollars) has eight valuation buckets and
+   no "no IPO" outcome, so if there is no IPO the basket may pay nothing (rule text not read); "Section 232 rate on
+   Canadian aluminum" has an "Other" leg and "Jensen Huang affairs" starts at 3 (lower buckets presumably resolved).
+   Where the list is not exhaustive a sum of asks under $1 is the price of "none of these", not a free dollar.
 6. Capital lock: median 24.7 days (early) and 36.1 days (late) from the episode to the event end; only 6% / 20% of
    the episodes resolve within a day. Same-day subset (weather and post-count buckets, exhaustive by design):
    early 9 episodes in 5 events ($0.80 a day at 20 USD), late 11 episodes in 8 events ($2.34 a day, mean $0.16 per
@@ -151,6 +154,8 @@ about $2 a day across 8 events.
 - Gas and conversion costs ignored (they only reduce B2, which is already zero).
 - Receive time of the archive collector (London-area latency unknown) is not the receive time on a Mac in Serbia;
   a slower listener sees each episode later, which only shortens it.
+- `protocol.md` was edited once after saving: its header time was mistyped as 18:45 and corrected to the file time
+  18:25. Nothing else in it changed.
 - The process was interrupted twice by out-of-memory kills (one download worker, several scan runs); every hour
   was re-run to completion, all 36 hours are in the result.
 

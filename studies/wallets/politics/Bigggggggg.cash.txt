@@ -1,0 +1,18 @@
+=== Bigggggggg 0x511f9c771449162349795d17becf8b37031acbe1 window all: activity rows 200065, first row 2026-05-16
+   usdc by type: {'CONVERSION': 16077042, 'MAKER_REBATE': 11893, 'MERGE': 522451, 'REDEEM': 15595, 'REWARD': 28328, 'SPLIT': 30, 'TAKER_REBATE': 6958, 'TRADE_BUY': 17658044, 'TRADE_SELL': 1103882, 'YIELD': 3}  counts: {'TRADE_SELL': 102245, 'CONVERSION': 16640, 'TRADE_BUY': 74938, 'MERGE': 3676, 'REWARD': 352, 'YIELD': 55, 'REDEEM': 1787, 'MAKER_REBATE': 193, 'TAKER_REBATE': 176, 'SPLIT': 3}
+   net cash 108,074 | open positions 10827 value now 4,437 (initial_value field 0) | net cash + value 112,511
+   API all-time: trade_pnl 538,971 fees -51,852 economic 534,300 unrealized -71483.770566
+     ballon-dor-winner-2026                                     buy  1720888 sell   17059 conv  1692612 merge   22860 redeem       0
+     nba-lebron-james-next-team                                 buy  1170643 sell   35371 conv  1051265 merge   89519 redeem       0
+     which-party-will-gain-most-seats-in-russian-parliamentary- buy   703079 sell   15769 conv   668816 merge   24035 redeem       1
+     fed-decision-in-september-762                              buy   717440 sell   32885 conv   665326 merge   16985 redeem       1
+     brazil-presidential-election                               buy   526113 sell   25273 conv   494706 merge    8245 redeem       0
+     fed-decision-in-december-20260729232808632                 buy   477163 sell    6079 conv   461806 merge   11194 redeem       0
+     next-french-presidential-election                          buy   380313 sell    6653 conv   377499 merge      29 redeem       0
+     fed-decision-in-july-181                                   buy   342525 sell   17966 conv   323205 merge     392 redeem       0
+     pos will-barcelona-win-the-2026-27-laliga-championship-20260 Yes size         0 avg 0.029 value      887
+     pos will-victor-wembanyama-win-the-2026-27-nba-mvp           Yes size         0 avg 0.017 value      602
+     pos will-chang-san-cheng-win-the-next-taoyuan-mayor-election Yes size         0 avg 0.030 value      210
+     pos will-luka-doncic-win-the-2026-27-nba-mvp                 Yes size         0 avg 0.017 value      147
+     pos jensen-huang-resigned-or-removed-and-nvidia-4t-end-of-20 Yes size         0 avg 0.690 value       84
+     pos will-jovo-bakic-be-the-next-prime-minister-of-serbia-202 Yes size         0 avg 0.017 value       81

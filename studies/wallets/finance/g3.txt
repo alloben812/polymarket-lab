@@ -1,0 +1,88 @@
+
+#### grasstoucher69: resolved buy fills 6569 (equity/ETF/index price markets)
+  by direction
+    bear                   mkts  656 usd    96367 avg px 0.32 net $   62537 ( 64.9%)  c/sh  20.50 t   4.8
+    bull                   mkts  829 usd    72505 avg px 0.22 net $  -15843 (-21.9%)  c/sh  -4.83 t  -2.3
+  by week of the fill (wk1 = Nov 6-13, wk2 = Nov 13-20, wk3 = Nov 20-27)
+    wk1                    mkts  479 usd    72578 avg px 0.37 net $   26410 ( 36.4%)  c/sh  13.59 t   3.6
+    wk2                    mkts  488 usd    64648 avg px 0.20 net $   30564 ( 47.3%)  c/sh   9.26 t   2.8
+    wk3                    mkts  247 usd    31646 avg px 0.29 net $  -10279 (-32.5%)  c/sh  -9.48 t  -1.7
+  direction x price
+    ('bear', 'px<0.45')    mkts  393 usd    35125 avg px 0.17 net $   52711 (150.1%)  c/sh  25.51 t   4.7
+    ('bear', 'px>=0.45')   mkts  395 usd    61242 avg px 0.62 net $    9826 ( 16.0%)  c/sh   9.98 t   2.0
+    ('bull', 'px<0.45')    mkts  530 usd    24637 avg px 0.10 net $   -4671 (-19.0%)  c/sh  -1.81 t  -0.8
+    ('bull', 'px>=0.45')   mkts  398 usd    47867 avg px 0.69 net $  -11172 (-23.3%)  c/sh -16.17 t  -3.1
+  by ticker (top 5 and bottom 2 by net $)
+    SPY                    mkts  153 usd    29401 avg px 0.18 net $   15576 ( 53.0%)  c/sh   9.47 t   1.9
+    NVDA                   mkts  125 usd    39417 avg px 0.32 net $   14449 ( 36.7%)  c/sh  11.91 t   2.3
+    SPX                    mkts   24 usd    14792 avg px 0.29 net $    9882 ( 66.8%)  c/sh  19.53 t   3.1
+    EWY                    mkts   50 usd    14566 avg px 0.49 net $    5031 ( 34.5%)  c/sh  16.99 t   1.6
+    META                   mkts   97 usd    10965 avg px 0.33 net $    4403 ( 40.2%)  c/sh  13.18 t   0.8
+    PLTR                   mkts   47 usd     3281 avg px 0.18 net $   -2203 (-67.1%)  c/sh -12.36 t  -2.2
+    SPCX                   mkts   38 usd     6383 avg px 0.49 net $   -2436 (-38.2%)  c/sh -18.72 t  -1.4
+
+#### PippiTrader: resolved buy fills 4541 (equity/ETF/index price markets)
+  by direction
+    bear                   mkts  485 usd    36011 avg px 0.44 net $   14091 ( 39.1%)  c/sh  17.15 t   5.3
+    bull                   mkts  739 usd    64095 avg px 0.43 net $  -27783 (-43.3%)  c/sh -18.57 t  -8.7
+  by week of the fill (wk1 = Nov 6-13, wk2 = Nov 13-20, wk3 = Nov 20-27)
+    wk1                    mkts  458 usd    40490 avg px 0.40 net $    6185 ( 15.3%)  c/sh   6.13 t   2.3
+    wk2                    mkts  456 usd    47988 avg px 0.44 net $  -14941 (-31.1%)  c/sh -13.66 t  -4.9
+    wk3                    mkts  176 usd    11629 avg px 0.54 net $   -4936 (-42.4%)  c/sh -22.83 t  -6.0
+  direction x price
+    ('bear', 'px<0.45')    mkts  286 usd     9136 avg px 0.21 net $   10147 (111.1%)  c/sh  23.25 t   5.0
+    ('bear', 'px>=0.45')   mkts  277 usd    26875 avg px 0.70 net $    3945 ( 14.7%)  c/sh  10.24 t   3.0
+    ('bull', 'px<0.45')    mkts  448 usd    18983 avg px 0.24 net $  -10801 (-56.9%)  c/sh -13.61 t  -6.5
+    ('bull', 'px>=0.45')   mkts  432 usd    45112 avg px 0.64 net $  -16982 (-37.6%)  c/sh -24.17 t  -6.9
+  by ticker (top 5 and bottom 2 by net $)
+    SPX                    mkts   13 usd     6186 avg px 0.49 net $    2489 ( 40.2%)  c/sh  19.60 t   3.5
+    AAPL                   mkts   64 usd     3527 avg px 0.43 net $     481 ( 13.6%)  c/sh   5.91 t   0.6
+    OPEN                   mkts   14 usd     3260 avg px 0.58 net $      85 (  2.6%)  c/sh   1.51 t   0.1
+    SPY                    mkts  151 usd    23874 avg px 0.45 net $     -24 ( -0.1%)  c/sh  -0.05 t  -0.0
+    SKHY                   mkts    7 usd      359 avg px 0.19 net $    -233 (-64.8%)  c/sh -12.45 t  -1.2
+    SPCX                   mkts   33 usd     3115 avg px 0.31 net $   -1789 (-57.4%)  c/sh -18.04 t  -2.8
+    EWY                    mkts   47 usd     5861 avg px 0.49 net $   -1902 (-32.4%)  c/sh -15.91 t  -1.9
+
+#### superstonksbro: resolved buy fills 1094 (equity/ETF/index price markets)
+  by direction
+    bear                   mkts  143 usd    38932 avg px 0.46 net $   23550 ( 60.5%)  c/sh  27.73 t   3.3
+    bull                   mkts  143 usd    44601 avg px 0.44 net $    2434 (  5.5%)  c/sh   2.37 t   0.3
+  by week of the fill (wk1 = Nov 6-13, wk2 = Nov 13-20, wk3 = Nov 20-27)
+    wk1                    mkts  102 usd    40043 avg px 0.60 net $   -1817 ( -4.5%)  c/sh  -2.72 t  -0.3
+    wk2                    mkts   94 usd    26699 avg px 0.32 net $   13746 ( 51.5%)  c/sh  16.49 t   1.6
+    wk3                    mkts   66 usd    16792 avg px 0.45 net $   14054 ( 83.7%)  c/sh  37.60 t   6.5
+  direction x price
+    ('bear', 'px<0.45')    mkts   85 usd    12748 avg px 0.26 net $   18499 (145.1%)  c/sh  38.39 t   3.7
+    ('bear', 'px>=0.45')   mkts   74 usd    26185 avg px 0.71 net $    5051 ( 19.3%)  c/sh  13.74 t   1.4
+    ('bull', 'px<0.45')    mkts   78 usd     9225 avg px 0.18 net $    3282 ( 35.6%)  c/sh   6.52 t   0.9
+    ('bull', 'px>=0.45')   mkts   83 usd    35376 avg px 0.68 net $    -849 ( -2.4%)  c/sh  -1.63 t  -0.2
+  by ticker (top 5 and bottom 2 by net $)
+    NVDA                   mkts   33 usd    21214 avg px 0.49 net $   11457 ( 54.0%)  c/sh  26.43 t   1.7
+    META                   mkts   45 usd    16425 avg px 0.43 net $    5993 ( 36.5%)  c/sh  15.74 t   1.4
+    SPCX                   mkts   21 usd     5111 avg px 0.52 net $    4237 ( 82.9%)  c/sh  43.46 t  16.5
+    AAPL                   mkts   35 usd     8993 avg px 0.55 net $    3742 ( 41.6%)  c/sh  22.76 t   1.0
+    MSFT                   mkts   20 usd     4163 avg px 0.50 net $    2019 ( 48.5%)  c/sh  24.44 t   1.3
+    NFLX                   mkts    7 usd     2046 avg px 0.32 net $      43 (  2.1%)  c/sh   0.68 t   0.0
+    ABNB                   mkts   12 usd     7963 avg px 0.79 net $   -4444 (-55.8%)  c/sh -43.99 t  -2.9
+
+#### thanksforplayin: resolved buy fills 2002 (equity/ETF/index price markets)
+  by direction
+    bear                   mkts  353 usd    90220 avg px 0.33 net $   32490 ( 36.0%)  c/sh  12.00 t   2.8
+    bull                   mkts  167 usd    43608 avg px 0.40 net $  -15968 (-36.6%)  c/sh -14.68 t  -4.1
+  by week of the fill (wk1 = Nov 6-13, wk2 = Nov 13-20, wk3 = Nov 20-27)
+    wk1                    mkts  156 usd    35241 avg px 0.24 net $   13532 ( 38.4%)  c/sh   9.40 t   1.4
+    wk2                    mkts  220 usd    78018 avg px 0.42 net $    4060 (  5.2%)  c/sh   2.21 t   0.7
+    wk3                    mkts   97 usd    20569 avg px 0.40 net $   -1070 ( -5.2%)  c/sh  -2.07 t  -0.4
+  direction x price
+    ('bear', 'px<0.45')    mkts  139 usd    23272 avg px 0.13 net $   24209 (104.0%)  c/sh  13.82 t   2.3
+    ('bear', 'px>=0.45')   mkts  255 usd    66948 avg px 0.70 net $    8282 ( 12.4%)  c/sh   8.67 t   1.8
+    ('bull', 'px<0.45')    mkts   71 usd    11824 avg px 0.17 net $   -7489 (-63.3%)  c/sh -11.07 t  -2.9
+    ('bull', 'px>=0.45')   mkts  111 usd    31784 avg px 0.77 net $   -8479 (-26.7%)  c/sh -20.62 t  -3.1
+  by ticker (top 5 and bottom 2 by net $)
+    NVDA                   mkts   73 usd    29119 avg px 0.53 net $   10579 ( 36.3%)  c/sh  19.23 t   2.2
+    SPY                    mkts   99 usd    24456 avg px 0.18 net $    7533 ( 30.8%)  c/sh   5.47 t   0.9
+    SPX                    mkts   12 usd     7346 avg px 0.30 net $    7456 (101.5%)  c/sh  30.32 t   3.6
+    AMZN                   mkts   28 usd     8806 avg px 0.53 net $    2390 ( 27.1%)  c/sh  14.31 t   1.0
+    NFLX                   mkts    7 usd     2036 avg px 0.73 net $     707 ( 34.7%)  c/sh  25.48 t   7.7
+    MSFT                   mkts   43 usd    11499 avg px 0.23 net $   -2693 (-23.4%)  c/sh  -5.29 t  -1.6
+    GOOGL                  mkts   28 usd     6721 avg px 0.58 net $   -3106 (-46.2%)  c/sh -26.64 t  -2.2

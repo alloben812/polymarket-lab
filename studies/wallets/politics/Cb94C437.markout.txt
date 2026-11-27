@@ -1,0 +1,4 @@
+Cb94C437: 5495 fills in 40 markets (family politics); cents per share, share-weighted, clustered by market
+  T BUY  n  2002 sh    488300 | pre +0.01 (t 0.1, 40 mk) | m1 +0.32 (t 2.4, 40 mk) | m10 +0.98 (t 2.4, 40 mk) | m60 +1.05 (t 2.0, 40 mk) | m24 +0.89 (t 2.0, 35 mk) | preceded by same-direction prints in 30 s: 31%; median age of last print 56 s
+  T SELL n  3493 sh    488322 | pre +0.06 (t 0.7, 40 mk) | m1 -0.13 (t -2.5, 40 mk) | m10 -0.17 (t -1.1, 40 mk) | m60 +0.06 (t 0.2, 40 mk) | m24 -0.40 (t -0.8, 35 mk) | preceded by same-direction prints in 30 s: 27%; median age of last print 62 s
+  all all  n  5495 sh    976621 | pre +0.03 (t 0.4, 40 mk) | m1 +0.10 (t 1.2, 40 mk) | m10 +0.41 (t 2.3, 40 mk) | m60 +0.56 (t 1.9, 40 mk) | m24 +0.24 (t 1.9, 35 mk) | preceded by same-direction prints in 30 s: 28%; median age of last print 60 s

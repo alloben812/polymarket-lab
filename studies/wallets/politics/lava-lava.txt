@@ -1,0 +1,24 @@
+[0x629bc4a1e53e1d475beb7ea3d388791e96dd995a] fills 509 in 0s
+0x629bc4a1e53e1d475beb7ea3d388791e96dd995a  0x629bc4a1e53e1d475beb7ea3d388791e96dd995a  window 2026-11-13 16:09 .. 2026-11-27 16:09 UTC
+summary: {"fills": 509, "markets": 94, "resolved_complete_markets": 29, "incomplete_markets": 4, "unresolved_markets": 65, "turnover_usd": 47501, "maker_share_usd": 0.953, "sell_share_usd": 0.049, "markets_with_both_outcomes_traded": 3, "uses_split_merge": false, "gross": 747.48, "fees_est": 0.0, "net": 747.48, "fee_rate_unknown_markets": 0, "net_per_market": 25.775, "t_by_market": 1.0, "win_share_markets": 0.034, "median_market_turnover": 33.29, "max_market_turnover": 11149.28, "avg_fill_usd": 93.32}
+inventory events: {'REDEEM': 36}
+API says for the same days: gross 2223, fees -271, refunded 0, rebates 435, kept 2398, volume $51882, fills 520
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net     net_pct_turnover  net_per_market  t_by_market
+  politics  92       28                 4           45373     0.049        0.0     0.0       0.0     0.0               0.0             None       
+  crypto    2        1                  0           2128      0.0          747.48  0.0       747.48  35.13             747.48          None       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', 'BUY')  18     1276    528  0.414   58.6           0.0           58.6          None  None  1        747.48 
+
+by role and price:
+  key                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', '0.30-0.45')  18     1276    528  0.414   58.6           0.0           58.6          None  None  1        747.48 
+
+by role and point in the market's life:
+  key                                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('M', 'life', 's over 7 d to end')  18     1276    528  0.414   58.6           0.0           58.6          None  None  1        747.48 
+
+full result written to studies/wallets/politics/lava-lava.json

@@ -1,0 +1,14 @@
+model                    first sweep on tape (UTC)  first @arena post naming it within -3d..+4d    lag post-minus-sweep
+GPT-6 Astra (text)       2026-09-11 21:18:09        09-09 15:17:19     -54.0 h  | For a limited time, you can test GPT-6 Astra by @OpenAI directly in Arena! Head to Direct Mode, and select it from the d
+Claude Opus 5.5 (text)   2026-09-26 01:32:38        09-23 20:15:40     -53.3 h  | Check out side-by-side outputs generated on Arena from Claude Opus 5.5 by @AnthropicAI and GPT-6 Sol by @OpenAI.   Score
+GPT-5.7 Sol (text)       2026-09-26 01:32:39        09-23 17:05:25     -56.5 h  | Real-world results are in for GPT-6 Sol (Max) by @OpenAI. It landed #4 in the Code Arena: WebDev with 1689 pts, and has 
+Claude Sonnet (text)     2026-10-02 16:10:15        09-29 17:52:41     -70.3 h  | Watch the progress of frontier models in bringing Ancient Rome to life on Arena, from Q4 2025 to now.   Scores for Claud
+Mistral Large 4          2026-10-08 17:31:50        10-06 14:21:52     -51.2 h  | Mistral Large 4 by @MistralAI is now in the Arena!  Head to Agent Arena to test it out, and your votes will shape its ev
+Muse Wonder              2026-10-13 18:43:06        10-12 18:04:45     -24.6 h  | Muse Wonder by @AIatMeta is now in the Arena. Head to Agent Arena to test it out, scores coming soon!  In Agent Arena, w
+Claude Haiku 4.6         2026-10-22 23:29:20        none found
+Gemini 4 Carbon (rank)   2026-10-28 22:24:44        10-28 17:24:47      -5.0 h  | Exciting news: Gemini 4 Carbon (High) from @GoogleDeepMind  just made a huge debut on Arena, landing #1 in Text Arena, #
+Kimi K3.1 Pro            2026-11-09 19:54:33        11-06 22:43:27     -69.2 h  | This Week in the Arena: Open weights, faster image generation, and new #1s.  - @Kimi_Moonshot released the open weights 
+Gemini 4 Hydrogen        2026-11-12 18:20:52        11-12 18:04:43      -0.3 h  | Gemini 4 Hydrogen (High) by @GoogleDeepMind debuts #5 on Agent Arena with +14.8% net improvement across 6.5k real-world 
+Fable 5.2                2026-11-20 02:13:25        11-17 19:16:31     -54.9 h  | GPT-6.2 Astra and Sol by @OpenAI are here. Agent Arena scores based on real-world sessions from our global community of 
+GPT-6.x Astra 6.1+       2026-11-20 02:44:55        11-17 18:01:55     -56.7 h  | GPT-6.2 Astra and Sol by @OpenAI are now in the Arena. Head to Agent Arena to test them out, scores coming soon!  In Age
+GPT Terra 5.7+           2026-11-20 02:13:25        none found

@@ -213,5 +213,240 @@
   "ref": "polymarkets.co.il 'Polymarket bot tutorial' (32 chapters, chapter 15 on sports microstructure)",
   "why": "Unreachable from here (connection refused, 503). Search snippet suggests it carries the same dated delay check; probably the same publisher as startpolymarket.com.",
   "channel": "w3_longform"
+ },
+ {
+  "ref": "WrongBy1Degree 0x0a0c42f6b1da5a633ec1a4d45ba76eb486c1a853",
+  "why": "Weather-leaderboard #2 this month; small directional taker that kept $30,071 on $396K volume (+7.59%), only 5% from rebates, $27,154 of it in November. The profile of a solo trader. Deconstruct which buckets, YES or NO, and how many hours before the peak it trades to see whether it is the late-favorite fade from arXiv 2610.13593.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "xtxpleasecallme 0xad5353afe30c2da57709e2704ef3ccdcf67eef24",
+  "why": "Weather-leaderboard #1; 132,553 markets, $160,202 of liquidity rewards, 53% of net is rebates/rewards and trading P&L without them is about zero except October. A template for rewards farming across many small markets; check which markets and what quote widths.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "https://github.com/ShouchenQiu/PolyWeatherData",
+  "why": "Code and data for the weather favorite-overpricing paper (README reachable, not read). Read it (do not run it) to copy the exact horizon and price definitions before testing the rule on Aug-Nov 2026.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "arXiv 2610.36639 released data (dated geopolitical events and deadline ladders)",
+  "why": "The paper says it releases the 208 event timestamps. With trades?condition= this gives a direct measurement of how much of the move is still buyable 30 s, 2 min, 10 min after the first public report, in a category with a zero fee. I did not locate the download link.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "https://papers.ssrn.com/abstract=5331995 (Ng, Peng, Tao, Zhou)",
+  "why": "Only cross-venue price-discovery study; 2026 revision reportedly says Kalshi leads Polymarket in sports. SSRN was not opened, so the lag size and the arbitrage profit numbers are unknown.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "CEPR DP 21615 / SSRN: Akey, Gregoire, Harvie, Martineau, 'Who Wins and Who Loses in Prediction Markets?'",
+  "why": "The reference paper on makers versus takers and category bias (cited as showing the largest bias in weather). I read only the abstract; the category tables and the bot analysis need the full PDF. Dataset: HuggingFace vgregoire/polymarket-users.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "https://www.ucd.ie/economics/t4media/WP2025_19.pdf and https://conference.nber.org/conf_papers/f243677.pdf",
+  "why": "Burgi-Deng-Whelan (not opened) and Bartlett-O'Hara (first pages and key passages read, local copy data/papers/nber_f243677.txt): maker returns by price bin and market type on Kalshi; worth a full read for the VPIN-style quote-pulling rule.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "HuggingFace: Houroux/polymarket-l2-history, chitoyuuri/polymarket-l2-v3-1-archive, ithiria894/polymarket-l2-orderbook, Joseph3222/polymarket-orderbook, TimeSeventeen/Polymarket-v2",
+  "why": "Order-book archives and a full trade archive with true aggressor side. They may substitute for the WebSocket recording we cannot do in this sandbox and allow replaying depth for the arbitrage and maker tests. Existence checked through the HF API; contents and coverage not inspected.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "arXiv 2609.31390 AlphaOpsBench (Jia et al.)",
+  "why": "Contains 581 'source-preserving strategy records' collected from public posts and 24 pre-registered real strategies with a Polymarket lifecycle dataset; none passed. Could be a ready catalogue of published strategies with negative results; I read only the abstract.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "arXiv 2609.16642, 2610.00173, 2610.00165, 2609.15368, 2609.15373 (Nechepurenko series)",
+  "why": "Exactly the owner's hypothesis (public evidence sufficient to decide a contract before the venue records it) but so far only protocols with no price results. Re-check when the prospective results are posted.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "arXiv 2604.03888 PolySwarm (Barot, Borkhatariya)",
+  "why": "Title mentions 'latency arbitrage' with a multi-agent LLM framework; not read at all.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "Genius Sports data partnerships with Polymarket and Kalshi (August 2026)",
+  "why": "Seen only in a search snippet. If official low-latency sports data now feeds the venue or its makers, the in-play gap for anyone on a free feed is closed; verify before spending time on sports latency.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "Mitts & Ofir, 'From Iran to Taylor Swift: Informed Trading in Prediction Markets' (https://corpgov.law.harvard.edu/?p=179899)",
+  "why": "Catalogue of insider cases with timestamps; needed to size the adverse-selection risk of any news-latency or passive-quoting strategy. Not opened.",
+  "channel": "r1_papers"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/chitoyuuri/polymarket-l2-v3-1-archive",
+  "why": "Best open set for non-crypto time-gap tests: all-market L2 per category per hour, 2026-08-18 to 2026-11-26. Next step: pull a few days of weather.parquet (about 0.4 GB/day) and join to Iowa Mesonet station readings; pull sports hours and join to ESPN play-by-play. I did not check whether the crypto file contains the 5m up/down markets, nor read the upstream coverage audit at archive.pendulumflow.com/audit.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/Houroux/polymarket-l2-history",
+  "why": "Contains Polymarket's own sports_ws score feed (4.4M rows) on the same receive clock as the NFL/EPL/CFB books, plus reward parameters per market. Score-to-book lag and a liquidity-rewards simulation can be measured directly; not done. Analytics layer is processed only up to 2026-10-11 so far.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/Fahri-5/updown-5m-polymarket-raw",
+  "why": "Only open set with Binance bookTicker/trades + Chainlink + full BTC 5m book on one clock inside the window (2026-10-17..11-08). The sub-second lag measurement itself is still to be run (protocol sketched in the notes). Also check github.com/fahri-05/updown-5m-predictor (not opened) for why publishing stopped on 2026-11-08.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/polydata5/polymarket-updown-5m-ws",
+  "why": "Largest 5m up/down capture (7 coins, to 2026-11-26, 598.6 GB) but gated: every data file returns 401 without an HF account that accepted the terms. Needs the owner's own HF login; approval is automatic.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "0x885278f0e304bc2d53f805af2ab779cb6011c569",
+  "why": "Zero-fee (maker-only) account on 5m crypto since May 2026, positive before rebates in 6 of the last 7 months and still active in November (gross +8.1K, rebates 0.7K). The only wallet in the gude set that does not depend on rebates. Its mechanics are not described in the files I read; worth a fill-level deconstruction.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "tools/wallet_check.py identity check",
+  "why": "For 4 of 5 wallets active in March-April 2026, trade_pnl + fees + rebates differs from the API's economic_pnl by 0.18M-3.2M; for 0x8852 the gap equals its total (pre-May) fees to within $17. Either pre-May 'fees' are not real charges or economic_pnl ignores them. Affects every older wallet the lab evaluates.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://pmdata.dev (free catalog: https://public-data.pmdata.dev/v1/polymarket/markets.parquet)",
+  "why": "Vendor archive with L2 + on-chain fills for crypto up/down from 2026-03-28 and all other markets from 2026-05-01 (catalog lists 3.83M sports and 176K weather markets, last record day 2026-11-26). Free tier is 600 downloads at sign-up for data older than 3 weeks, but it needs an account, which is the owner's call.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/ithiria894/polymarket-l2-orderbook",
+  "why": "Only open L2 I found that straddles the 2026-11-20 fee change (crypto up/down 2026-11-16..22, two vantage points). Useful for a before/after comparison of spreads and taker flow; author's replay check matched only 92.8% of snapshots.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/gude/polymarket-wallet-activity (unread files: LIVE_TRADING_SPEC_EEBD_CLONE.md, PER_WALLET_SUMMARY.md, RULE_MINING_REPORT.md, STRATEGY_DECODE_ETH_82d.md)",
+  "why": "More mechanics on the same five wallets; I read four of the reports only. Treat all dollar figures there as unreliable.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://kacho.io/polymarket-5min-crypto-dataset",
+  "why": "Author of the kachoio 1-second dataset says he recorded it 'to backtest a trading bot' and links a write-up with 'how I used it'; not opened.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://huggingface.co/datasets/thePredictables/kalshi-live-news and https://huggingface.co/datasets/KalshiEye/kalshi-order-book-sample",
+  "why": "A news-with-labels set for Kalshi markets (230 MB, 2026-10-30) and two days of Kalshi BBO+trades for KXHIGHNY/KXNFLGAME/KXFEDDECISION: possible material for news-latency and cross-venue tests; cards not read in detail.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "https://archive.pendulumflow.com/ and https://x.com/pendulumflow",
+  "why": "Canonical source of the V3/V3.1 captures (format guides, hour-level audit, possibly hours newer than the HF mirror). Not opened.",
+  "channel": "r2_datasets"
+ },
+ {
+  "ref": "pootythefinancefarmer 0xe2a3b5b5f39dc6c46ac6d59672052282abb48e01, pootythetemperaturefarmer 0x486c8e5df09352620636b38e849ac10272126799, pootytherewardfarmer 0xa3e22cd32aa9238ef7dbcfb4761e33b9eaa1fdf8",
+  "why": "One operator running category-specific reward farms; the two new accounts (joined 26 Sep and 1 Oct 2026) keep 20-47% of rewards on $16-84K of monthly fills. Rebuilding their maker fills (full feed minus taker feed) would show which markets, quote distance and inventory they use and roughly how much capital.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "https://clob.polymarket.com/rewards/markets/multi polled daily + POST https://clob.polymarket.com/books every minute",
+  "why": "Everything on rewards is one snapshot of pools dated 24-27 Nov. A 1-2 week recording would show whether 0.6-0.8% a day on depth survives once depth arrives, and lets the reward share be computed exactly as the docs score it.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "https://data.ornn.com/markets/h100-sxm",
+  "why": "Daily OCPI values are the resolution source of 30 new events with $240-960/day pools each; needed to test the month-average pinning from 1 December. Not fetched; access terms unknown.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "Kalshi series KXH100MS (https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXH100MS)",
+  "why": "Same product on another venue; one 7-cent gap seen against Polymarket on the December $3.50 strike. Need bid sizes, the full rule text, fees, and whether an account can be opened from Serbia.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "https://data-api.polymarket.com/v2/resolutions (status=proposed, expected_settlement_time) with gamma /markets/keyset by close time",
+  "why": "The UMA challenge-window test was not done: my sample degenerated to one event. This is the correct way to build it, including disputed markets.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "ESPN site API final-whistle times joined to the Polymarket tape for game markets",
+  "why": "Would turn the measured +0.14-0.23% on 0.99+ fills into a return per hour of locked capital and show how much of that volume is truly post-game.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "https://www.odaily.news/en/post/5209869 (also syndicated on kucoin.com as 'Polymarket LP Incentive Mechanism: four key insights and cost traps')",
+  "why": "The only third-party write-up on LP reward costs that the search returned; not opened, date unknown.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "ArmageddonRewardsBilly 0xc8ab97a9089a9ff7e6ef0688e6e591a066946418 and Haradwaith 0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71",
+  "why": "Largest reward earners found ($1.21M and $0.91M all-time). Their monthly rewards fell from $160-220K (May-June 2026) to $27-82K (Nov), a direct read on how the program's payout per farmer is shrinking.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "gamma market field secondsDelay / market.trading.seconds_delay",
+  "why": "Per-market sports taker delay was not pulled; it sets how much time a maker has to cancel in play.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "data-api /v2/positions/combos and realized_combo_pnl in user-stats",
+  "why": "Only public trace of who makes money quoting combos; not explored.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "docs.polymarket.com/nex/overview.md (NEX sandbox, 'Polymarket's new exchange')",
+  "why": "Downloaded but not read; a new exchange could change latency and matching rules again.",
+  "channel": "r3_structure"
+ },
+ {
+  "ref": "Record Deribit get_book_summary_by_currency (BTC, ETH) + Polymarket /books for 'above' and 'hit' events + Binance-minus-index basis every 1-5 minutes by REST",
+  "why": "Only way to test the option-implied fair value candidates; no free history of Deribit surfaces exists and REST polling works in this sandbox. Three to four weeks gives about 20 expiry days.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "HF TimeSeventeen/Kalshi (trade tape, exchange timestamps) x HF Houroux/polymarket-l2-history (Polymarket L2 with receive clock, NFL/EPL/CFB, 2026-07-22 -> 2026-10-11)",
+  "why": "Proper second-scale test of 'Kalshi leads Polymarket by about 7 s on large in-play moves' with quotes instead of block-time prints, and of what a Polymarket taker or maker could do in that window.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "https://github.com/karlewaczko/TennisSharpBot/pull/15",
+  "why": "Report 'who moves first - Polymarket, Kalshi or Pinnacle' on 39 tennis matches (Polymarket closes 70% of the gap per search summary). GitHub pages are blocked here; cloning the repo may expose the report file.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7194218",
+  "why": "UFC cross-venue price discovery, 281 fights, finds no lead at any horizon. SSRN returned 403; abstract and bar size still to be read.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "https://zenhodl.net/blog/who-moves-first-polymarket-kalshi-price-discovery and HF Coyevans/mlb-polymarket-kalshi-matched-book-sample",
+  "why": "The 581-game update was read only through a summarising fetch; the exact method (definition of the asymmetry statistic, the 1-second NBA set) should be read in the original, and the free sample checked.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "Kalshi Member Agreement, restricted jurisdictions section (kalshi.com legal pages)",
+  "why": "Serbia's eligibility rests on a third-party page (datawallet, 2026-11-16). Read the agreement itself before counting on Kalshi as a second leg.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "Fed '50+ bps increase' December 2026: Polymarket slug fed-decision-in-december-20260729232808632 vs Kalshi KXFEDDECISION-26DEC-H26",
+  "why": "Only short-dated pair found under $1 after fees (0.9922, 12 days). Worth logging every few minutes to 2026-12-09 to see whether it is persistent or a one-off quote, and reading both rule texts for a 50 bps move.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "Polymarket 'What price will Bitcoin hit in November / this week' resolved ladders",
+  "why": "Outcome test for the barrier-overpricing candidate: 30-minute prices are kept 90 days, so three monthly and about a dozen weekly ladders can be scored against realised touches now.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "https://oddpool.com/fed-market-watch , https://predictmarketcap.com/arbitrage , https://marketmaster.live/guides/kalshi-vs-polymarket-arbitrage",
+  "why": "Public cross-venue gap trackers named in search results; none opened. Check whether any publishes gap duration history after fees for the international Polymarket rather than Polymarket US.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "https://docs.polymarket.us/fees",
+  "why": "Polymarket US is a separate venue (API taker coefficient 0.0695 with a 70% rebate to 2026-12-31 per BotCookery). Not checked whether a Serbian resident can use it or whether its prices lead the international book.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "Polymarket 'Bitcoin above ___ on <date>, 11AM ET' hourly ladders (slug bitcoin-above-on-november-27-2026-11am-et) vs Kalshi KXBTCD hourly",
+  "why": "Seen in passing: Polymarket lists hourly BTC ladders with 20 strikes and almost no volume ($229) and spreads of 10-90c, while Kalshi's hourly KXBTCD trades 1.3-1.9M contracts. A maker quoting from Kalshi or Deribit prices might earn the spread there; not examined.",
+  "channel": "r4_cross_venue"
  }
 ]

@@ -1,0 +1,11 @@
+0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5  0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5  joined 2026-11-02  markets traded 25402  fills 95325
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         77,863
+  taker fees charged:                                   -15,028
+  rebates+rewards (taker 2,138 / maker 1,900 / rewards 0):      4,038
+  ECONOMIC PnL (the API's bottom line, trust this):      66,873   of which unrealized 2
+  volume $2,111,962 (4,221,935 shares): gross +3.69% of volume, fees net of refunds -0.71%, kept +3.17%
+  share of what was kept that is rebates/rewards: 6%
+  taker_tier: {"address": "0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5", "tier": 3, "tier_name": "Gold", "wv_30d": 229551.299803}
+  maker_tier: {"address": "0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 181014.243918, "own_wv_30d": 181014.243918}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-11      77,863    -15,028         0     4,038     66,873      62,835    2,111,962    95,325

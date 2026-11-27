@@ -1,0 +1,92 @@
+0x77958accec3edfc6ea01 n=   23 span=  5.9h usd=  331,696 mk=    5 medp=0.98 buy=0.02 kept=    260,359 reb=   1% [09:-2K 10:-3K 11:+306K] | fin-other 98%, non-fin 2%
+Hauchn                 n=  102 span=163.6h usd=   27,169 mk=   20 medp=0.466 buy=0.66 kept=    465,953 reb=   1% [09:-9K 10:+104K 11:+131K] | fin-ipo/cap 69%, non-fin 25%, fin-hit 6%
+xtxpleasecallme        n= 5000 span= 25.4h usd=  107,651 mk= 2251 medp=0.45 buy=1.0 kept=    386,805 reb=  49% [09:+47K 10:+194K 11:+22K] | non-fin 90%, crypto-other 3%, fin-other 2%, fin-ipo/cap 2%, fin-hit 2%
+0xEC1Fe51724FeFc0b2385 n=   93 span=114.4h usd=   77,017 mk=   27 medp=0.14 buy=1.0 kept=    190,234 reb=   0% [09:+0K 10:+0K 11:+177K] | fin-other 54%, non-fin 46%
+BreakTheBank           n= 4099 span=152.5h usd=11,478,990 mk=   92 medp=0.49 buy=1.0 kept=  6,047,440 reb=  12% [09:+2275K 10:+7069K 11:-5344K] | non-fin 100%, fin-other 0%
+uma003                 n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=     29,494 reb=  29% [09:+12K 10:+5K 11:+141K] | 
+WarriorPooh            n=  240 span=146.6h usd=  120,455 mk=   21 medp=0.251 buy=0.3 kept=    347,389 reb=   2% [09:+3K 10:+7K 11:+170K] | fin-other 86%, non-fin 13%, fin-hit 2%
+borntoolate.eth        n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    207,340 reb=   2% [09:-2K 10:-1K 11:+55K] | 
+Bertapotamous          n=   26 span= 72.0h usd=   67,783 mk=    2 medp=0.882 buy=0.97 kept=    222,293 reb=   4% [09:+2K 10:-142K 11:+58K] | fin-other 100%
+paperclip-maxxer       n=  175 span=154.8h usd=  345,084 mk=   15 medp=0.12 buy=0.93 kept=    434,056 reb=   2% [09:+299K 10:-97K 11:+151K] | non-fin 85%, fin-other 14%, fin-ipo/cap 1%
+grasstoucher69         n= 3949 span=138.4h usd=  127,828 mk=  566 medp=0.47 buy=0.95 kept=    303,601 reb=   6% [09:+36K 10:+81K 11:+122K] | fin-hit 62%, fin-close 17%, fin-updown 7%, crypto-other 6%, non-fin 5%
+BrotherObama           n=  483 span=153.6h usd=  806,943 mk=   38 medp=0.49 buy=0.86 kept=    337,724 reb=  48% [09:-200K 10:-59K 11:+362K] | non-fin 66%, fin-other 34%
+dromedaryy             n=  160 span=127.4h usd=   89,459 mk=   12 medp=0.035 buy=1.0 kept=    798,857 reb=   3% [09:+28K 10:+416K 11:+360K] | non-fin 65%, fin-other 35%, fin-hit 0%
+Samael-of-Rome         n=  110 span=144.7h usd=   83,493 mk=   11 medp=0.25 buy=0.63 kept=    126,063 reb=   1% [09:+1K 10:+35K 11:+91K] | fin-other 87%, non-fin 13%
+Kettle                 n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    348,574 reb=   1% [09:+16K 10:-6K 11:+195K] | 
+0x2b670A311561DcAF741D n=  190 span=161.9h usd=   47,288 mk=   47 medp=0.29 buy=0.93 kept=    120,565 reb=   4% [09:+13K 10:+1K 11:+78K] | non-fin 68%, fin-close 13%, fin-hit 12%, fin-other 7%, fin-ipo/cap 1%
+Melody626              n=  129 span=163.8h usd=   86,117 mk=   16 medp=0.35 buy=1.0 kept=   -189,013 reb= nan% [09:-96K 10:+35K 11:-134K] | non-fin 70%, fin-hit 29%, fin-close 1%
+S991                   n=  103 span= 60.3h usd=    7,769 mk=    6 medp=0.21 buy=0.94 kept=     67,743 reb=   0% [09:+3K 10:-2K 11:+67K] | non-fin 79%, fin-updown 21%
+xuanaaak               n=   34 span=  0.2h usd=   62,820 mk=    3 medp=0.986 buy=0.0 kept=   -102,646 reb= nan% [09:+0K 10:+0K 11:+58K] | fin-other 100%
+Tokor                  n= 2451 span=167.8h usd=  572,539 mk=  380 medp=0.721 buy=1.0 kept=  1,346,938 reb=   2% [09:+76K 10:+713K 11:+454K] | crypto-other 80%, fin-hit 17%, crypto-updown 2%, fin-ipo/cap 1%, fin-close 1%
+TableDataFormat        n=   84 span=154.8h usd=  112,809 mk=   46 medp=0.756 buy=0.89 kept=    309,264 reb=  15% [09:-26K 10:+33K 11:+6K] | non-fin 95%, fin-hit 3%, fin-other 2%, fin-ipo/cap 1%
+Parz1vaI               n=  223 span=167.5h usd=  194,928 mk=   37 medp=0.73 buy=0.53 kept=    973,045 reb=   4% [09:+23K 10:+51K 11:+138K] | non-fin 77%, fin-other 14%, fin-ipo/cap 9%
+0x21F701A6d8febFd948F8 n=  949 span= 29.3h usd=   48,573 mk=    3 medp=0.99 buy=0.01 kept=     51,919 reb=   1% [09:-0K 10:+6K 11:+44K] | fin-other 100%, non-fin 0%
+CoinTrick              n= 3102 span=167.9h usd=2,384,147 mk=  986 medp=0.999 buy=0.99 kept=    313,937 reb=   1% [09:+37K 10:+183K 11:+25K] | non-fin 53%, fin-other 19%, crypto-other 15%, fin-hit 7%, fin-close 6%
+0xc023bee917480fed315d n=  407 span=166.9h usd=    1,009 mk=  139 medp=0.017 buy=0.0 kept=     23,144 reb=   0% [11:+23K] | non-fin 88%, fin-other 12%, fin-ipo/cap 0%
+TruongMyLan            n=  121 span=158.8h usd=   56,745 mk=   19 medp=0.71 buy=0.79 kept=    136,945 reb=   4% [09:-10K 10:-7K 11:+64K] | non-fin 81%, fin-earnings 19%
+chriszyy3              n=   63 span=165.3h usd=   31,680 mk=    4 medp=0.998 buy=0.82 kept=     78,770 reb=   1% [09:+9K 10:+9K 11:+11K] | non-fin 67%, fin-hit 33%
+0xaa281355e0747a4358c5 n=   92 span= 81.8h usd=  101,803 mk=   33 medp=0.06 buy=0.7 kept=     30,240 reb=   1% [11:+30K] | non-fin 99%, fin-other 1%
+tsihkodiives           n=  665 span=165.9h usd=  177,997 mk=   33 medp=0.22 buy=0.49 kept=     54,228 reb=  35% [09:-90K 10:-50K 11:+27K] | crypto-other 52%, fin-other 26%, non-fin 22%
+C03B                   n=  255 span=167.1h usd=  302,072 mk=   45 medp=0.992 buy=0.75 kept=    345,383 reb=   3% [09:+21K 10:+14K 11:+14K] | fin-other 70%, fin-hit 24%, fin-close 5%, non-fin 0%, crypto-other 0%
+luck00004              n=   28 span= 70.6h usd=   74,255 mk=    4 medp=0.389 buy=0.24 kept=   -284,339 reb= nan% [09:-42K 10:+3K 11:-4K] | fin-hit 97%, fin-ipo/cap 3%
+0x1F85EB9C455c5BDEF5D9 n= 5000 span=135.8h usd=   37,568 mk= 1495 medp=0.679 buy=0.97 kept=     14,818 reb=  12% [09:+9K 10:+11K 11:-12K] | non-fin 94%, fin-other 4%, fin-ipo/cap 2%, crypto-other 1%, fin-earnings 0%
+HornyBibi              n=   52 span=100.0h usd=    8,583 mk=   14 medp=0.25 buy=0.42 kept=     59,473 reb=   1% [09:+2K 10:+3K 11:+28K] | non-fin 86%, fin-hit 14%
+LlamaLoco0000          n=  110 span=160.0h usd=  246,692 mk=   14 medp=0.284 buy=0.44 kept=    -39,618 reb= nan% [09:-55K 10:-95K 11:+22K] | non-fin 55%, crypto-other 45%
+neutralwave23          n= 5000 span= 44.8h usd=  377,035 mk= 1848 medp=0.464 buy=0.83 kept= -3,445,926 reb= nan% [09:-370K 10:-427K 11:-411K] | non-fin 78%, fin-other 10%, crypto-updown 10%, crypto-other 2%, fin-earnings 0%
+0x59253f9a0Cdf254fa451 n=   45 span= 27.1h usd=    4,292 mk=    2 medp=0.06 buy=1.0 kept=      6,618 reb=   6% [09:-0K 10:+1K 11:+45K] | fin-other 100%
+pmrev                  n=    1 span=  0.0h usd=   41,974 mk=    1 medp=0.959 buy=0.0 kept=     14,721 reb=   7% [09:-14K 10:+0K 11:+27K] | fin-other 100%
+kimma97                n=   32 span=113.6h usd=   39,570 mk=    4 medp=0.032 buy=0.07 kept=      6,062 reb=   0% [09:-2K 10:-3K 11:+31K] | fin-other 88%, non-fin 12%
+occasionalAwareness    n=  139 span=152.8h usd=  518,935 mk=   35 medp=0.54 buy=0.49 kept=  1,198,915 reb=   7% [09:+18K 10:+10K 11:-20K] | non-fin 98%, fin-ipo/cap 2%, fin-hit 0%
+imnice                 n=  405 span=113.3h usd=  386,614 mk=   23 medp=0.47 buy=0.75 kept=     94,427 reb=   1% [09:-2K 10:-13K 11:+89K] | non-fin 100%
+paddaa                 n= 1748 span=164.4h usd=1,238,157 mk=  142 medp=0.41 buy=0.5 kept=    416,071 reb=   4% [09:-21K 10:+68K 11:+100K] | non-fin 96%, fin-other 4%
+TOWERCAPITAL           n= 1376 span=163.8h usd=   91,932 mk=   57 medp=0.08 buy=0.32 kept=     56,828 reb=   5% [09:+20K 10:-10K 11:+30K] | crypto-other 63%, fin-other 32%, non-fin 5%
+Stonktrader            n=   67 span=154.0h usd=   60,459 mk=   36 medp=0.91 buy=0.96 kept=     98,410 reb=   1% [09:+10K 10:+60K 11:+2K] | non-fin 52%, fin-other 47%, fin-hit 2%
+superstonksbro         n= 1212 span=168.0h usd=   77,852 mk=  169 medp=0.42 buy=1.0 kept=    333,568 reb=  11% [09:+19K 10:-39K 11:+23K] | fin-hit 69%, fin-close 21%, fin-other 10%, fin-updown 0%
+ponydsb                n= 1160 span=167.3h usd=  190,794 mk=  204 medp=0.419 buy=0.52 kept=     39,925 reb=   3% [09:-0K 10:+1K 11:+39K] | non-fin 75%, fin-other 17%, crypto-other 6%, fin-hit 1%, fin-ipo/cap 1%
+Jensen4ever            n=  117 span=165.3h usd=  101,656 mk=   71 medp=0.74 buy=0.56 kept=      7,148 reb=   3% [09:-0K 10:-6K 11:+13K] | non-fin 58%, fin-other 42%
+Shirtybonds            n=  220 span= 33.7h usd=3,569,435 mk=    1 medp=0.999 buy=1.0 kept=     28,485 reb=   0% [09:+0K 10:+0K 11:+4K] | fin-other 100%
+033033033              n=  278 span=164.4h usd=3,457,175 mk=   21 medp=0.999 buy=1.0 kept=    328,400 reb=   0% [09:+16K 10:+11K 11:+14K] | fin-other 85%, crypto-other 7%, non-fin 7%, fin-earnings 0%
+pvc975                 n= 5000 span=111.6h usd=5,035,317 mk=  502 medp=0.999 buy=0.88 kept=    344,143 reb=   1% [09:+63K 10:+26K 11:+15K] | non-fin 63%, fin-other 37%
+pleasewinthis          n=  235 span=166.7h usd=  153,519 mk=   33 medp=0.31 buy=0.54 kept=      6,026 reb= 197% [10:+0K 11:+6K] | non-fin 99%, fin-other 1%, fin-hit 0%
+Lolakis                n=  568 span=167.7h usd=  653,011 mk=   78 medp=0.591 buy=0.56 kept=    195,867 reb=  37% [09:+22K 10:+49K 11:+52K] | non-fin 85%, fin-other 14%, fin-earnings 0%
+balthazar              n= 5000 span= 66.2h usd=  299,227 mk= 1785 medp=0.76 buy=0.97 kept=  1,202,669 reb=   7% [09:+418K 10:-54K 11:+23K] | non-fin 87%, crypto-other 7%, fin-other 3%, fin-earnings 2%, fin-ipo/cap 1%
+328.400.fund           n=  402 span=165.7h usd=  557,674 mk=   62 medp=0.48 buy=0.65 kept=     48,444 reb=  11% [11:+48K] | non-fin 87%, fin-other 13%
+AntEating              n= 1041 span=167.1h usd=  786,250 mk=  302 medp=0.496 buy=0.73 kept=     60,368 reb= 132% [09:+8K 10:+17K 11:+35K] | non-fin 99%, fin-other 1%
+Cb94C437EA5e6f088c6c0C n= 5000 span= 44.6h usd=  207,573 mk=  510 medp=0.56 buy=0.53 kept=    220,121 reb=  14% [09:+29K 10:+19K 11:+31K] | non-fin 96%, fin-ipo/cap 2%, crypto-other 1%, fin-other 1%, fin-earnings 0%
+cigarettes             n= 5000 span= 26.4h usd=  409,281 mk= 1345 medp=0.59 buy=1.0 kept=     92,976 reb= 287% [09:+85K 10:-96K 11:+4K] | non-fin 92%, fin-other 7%, fin-ipo/cap 1%, crypto-other 0%, fin-hit 0%
+Haradwaith             n= 5000 span= 23.2h usd=  215,051 mk= 1342 medp=0.54 buy=0.58 kept=    493,835 reb= 200% [09:+126K 10:-18K 11:+30K] | non-fin 88%, crypto-other 6%, fin-other 2%, fin-hit 2%, fin-ipo/cap 2%
+betwick                n=   89 span=152.1h usd=  108,850 mk=   10 medp=0.081 buy=0.13 kept=    626,221 reb=   3% [09:+7K 10:-83K 11:+68K] | non-fin 93%, fin-other 7%
+anoin123               n= 1990 span=167.5h usd=  865,804 mk=  133 medp=0.75 buy=0.99 kept= -4,646,380 reb= nan% [09:-59K 10:+856K 11:-229K] | non-fin 93%, fin-other 7%
+HoshinoAI              n= 5000 span=123.5h usd=  299,407 mk=  508 medp=0.429 buy=0.57 kept=     16,546 reb= 288% [09:+0K 10:+0K 11:+6K] | non-fin 73%, fin-other 24%, fin-hit 2%, fin-ipo/cap 1%, fin-close 1%
+pleaseletmealone       n= 5000 span= 31.0h usd=   69,133 mk=  267 medp=0.006 buy=0.16 kept=    194,157 reb=   1% [11:+194K] | non-fin 94%, fin-other 5%, fin-ipo/cap 1%, fin-earnings 0%
+hfv                    n= 5000 span=114.4h usd=  622,683 mk= 1260 medp=0.49 buy=0.89 kept=    133,425 reb= 296% [09:+7K 10:+105K 11:+19K] | non-fin 93%, fin-other 4%, fin-ipo/cap 2%, fin-hit 1%, fin-close 1%
+ArmageddonRewardsBilly n= 4375 span=167.8h usd=1,392,625 mk=  500 medp=0.86 buy=0.61 kept=  1,630,475 reb=  80% [09:+633K 10:+22K 11:+49K] | non-fin 76%, fin-other 21%, fin-hit 2%, fin-close 1%, fin-ipo/cap 1%
+thanksforplayin        n= 1229 span=121.5h usd=   84,737 mk=  264 medp=0.516 buy=0.66 kept=    325,487 reb=   8% [09:+23K 10:+58K 11:+37K] | fin-close 35%, fin-hit 31%, fin-updown 16%, fin-ipo/cap 11%, fin-other 7%
+pelik                  n= 4655 span=167.9h usd=2,442,968 mk= 1729 medp=0.999 buy=0.99 kept=    117,870 reb=  14% [09:-4K 10:+10K 11:+15K] | non-fin 68%, fin-other 30%, fin-close 0%, fin-ipo/cap 0%, fin-hit 0%
+aenews2                n=  271 span=147.0h usd=  176,618 mk=   17 medp=0.47 buy=0.96 kept=  2,512,580 reb=   3% [09:+72K 10:+169K 11:+132K] | fin-other 56%, non-fin 44%
+MemeKing20             n=   68 span=157.0h usd=   94,000 mk=    5 medp=0.86 buy=0.17 kept=   -107,836 reb= nan% [09:+79K 10:-213K 11:+27K] | fin-hit 83%, fin-ipo/cap 12%, non-fin 4%
+cosmicxbt              n=   19 span=103.4h usd=  451,950 mk=    4 medp=0.63 buy=0.89 kept=   -101,964 reb= nan% [09:+27K 10:-326K 11:-33K] | non-fin 100%
+thegreengem            n=    7 span=  1.2h usd=1,201,397 mk=    1 medp=0.999 buy=1.0 kept=    234,545 reb=   0% [09:+2K 10:+59K 11:+6K] | fin-other 100%
+0xc7D02944A76B9F83B199 n= 3683 span=167.0h usd=  460,189 mk=  567 medp=0.412 buy=0.78 kept=    448,633 reb=  14% [09:+27K 10:+48K 11:+51K] | non-fin 75%, fin-other 9%, fin-ipo/cap 6%, crypto-other 5%, fin-hit 2%
+PippiTrader            n= 2471 span=167.6h usd=   64,422 mk=  588 medp=0.55 buy=0.56 kept=    114,595 reb=  76% [09:+42K 10:+33K 11:-24K] | fin-hit 55%, non-fin 20%, fin-close 13%, fin-ipo/cap 5%, fin-updown 4%
+Dropper                n=   11 span=124.0h usd=    3,538 mk=    2 medp=0.14 buy=1.0 kept=  1,656,485 reb=   1% [09:+39K 10:+21K 11:+135K] | non-fin 100%
+feeder-or-predator     n= 1653 span=167.4h usd=  974,466 mk=  100 medp=0.76 buy=0.72 kept=    132,212 reb=  77% [09:+3K 10:+44K 11:+85K] | non-fin 100%
+suohasuo               n=  352 span=166.3h usd=   38,410 mk=   25 medp=0.211 buy=0.41 kept=     70,417 reb=  37% [09:+7K 10:+15K 11:+12K] | fin-ipo/cap 85%, non-fin 13%, fin-hit 1%
+Malfunction.           n= 3198 span=153.1h usd=4,110,596 mk=  530 medp=0.999 buy=0.98 kept=    710,576 reb=  11% [09:+134K 10:+6K 11:+36K] | non-fin 73%, fin-other 27%
+zhaocaimao8888         n= 5000 span=126.3h usd=  741,089 mk= 1044 medp=0.49 buy=0.85 kept=      6,229 reb= 647% [10:-0K 11:+6K] | non-fin 93%, fin-ipo/cap 2%, fin-other 2%, fin-hit 2%, fin-close 0%
+TBill1                 n=  184 span=159.4h usd=  126,215 mk=   21 medp=0.65 buy=0.51 kept=     98,975 reb=   5% [09:+56K 10:+13K 11:+11K] | fin-other 78%, non-fin 14%, fin-ipo/cap 8%
+garbagecollect2        n= 3691 span=167.9h usd=   12,654 mk=  429 medp=0.01 buy=0.47 kept=     36,692 reb=  10% [09:+1K 10:+2K 11:+3K] | non-fin 49%, crypto-other 33%, fin-other 11%, fin-hit 3%, fin-ipo/cap 2%
+NotJump                n= 5000 span= 14.6h usd=  308,953 mk=  484 medp=0.5 buy=0.55 kept=    146,864 reb= 117% [09:+28K 10:+37K 11:+29K] | non-fin 74%, crypto-other 13%, fin-other 12%, fin-hit 0%, fin-earnings 0%
+0x448861155279dbf833d0 n= 1164 span=165.3h usd=  593,756 mk=   76 medp=0.644 buy=0.97 kept=    844,181 reb=   5% [09:+105K 10:+397K 11:-183K] | non-fin 61%, fin-other 39%
+Tenebrus7              n= 1427 span=167.6h usd=  377,349 mk=  137 medp=0.78 buy=0.6 kept=    163,060 reb=  58% [09:+22K 10:+11K 11:-75K] | non-fin 74%, fin-other 25%, fin-ipo/cap 1%, fin-close 0%
+0x9112edc7d8a99ce2d688 n= 1420 span=167.3h usd=  520,168 mk=   84 medp=0.68 buy=0.57 kept=    987,511 reb=   3% [09:+56K 10:+57K 11:-0K] | non-fin 85%, fin-other 15%
+a5533                  n= 5000 span=  4.1h usd=   69,551 mk=  735 medp=0.48 buy=1.0 kept=     77,402 reb= 127% [09:+17K 10:+42K 11:+17K] | non-fin 62%, fin-other 20%, crypto-other 12%, crypto-updown 5%, fin-updown 0%
+Car                    n=  453 span=167.4h usd=   83,626 mk=   49 medp=0.65 buy=0.54 kept=  1,693,302 reb=   6% [09:+32K 10:+36K 11:+45K] | non-fin 65%, fin-other 19%, crypto-other 13%, crypto-updown 2%
+0xa7517ed74c6b07843946 n=  310 span=160.2h usd=  152,460 mk=   27 medp=0.27 buy=0.51 kept=    324,993 reb=   5% [09:+43K 10:+23K 11:+149K] | non-fin 81%, fin-other 19%
+Istaroth               n= 5000 span= 31.5h usd=  188,220 mk= 1082 medp=0.48 buy=0.95 kept=   -471,341 reb= nan% [09:+19K 10:+68K 11:+60K] | non-fin 96%, fin-other 3%, fin-ipo/cap 1%, fin-hit 1%, fin-earnings 0%
+JJo                    n=  301 span=164.3h usd=  328,227 mk=   29 medp=0.94 buy=0.67 kept=    335,755 reb=   5% [09:+11K 10:+14K 11:+34K] | non-fin 78%, fin-other 19%, fin-ipo/cap 2%
+fiter                  n= 5000 span=131.2h usd=    7,031 mk=  200 medp=0.002 buy=0.41 kept=     61,130 reb=   5% [09:+3K 10:+5K 11:+3K] | non-fin 62%, fin-other 29%, fin-ipo/cap 4%, fin-hit 3%, fin-close 1%
+foodenjoyer            n=   31 span= 99.3h usd=  213,553 mk=    6 medp=0.086 buy=0.56 kept=    969,103 reb=   4% [09:+589K 10:+187K 11:-302K] | non-fin 97%, fin-other 3%
+urhfrhchj123123        n=  147 span=160.7h usd=  278,939 mk=   16 medp=0.977 buy=0.96 kept=     41,567 reb=   4% [09:+5K 10:+14K 11:+22K] | fin-other 75%, non-fin 25%, fin-hit 0%
+automatedmm            n= 5000 span= 45.4h usd=  247,689 mk=  333 medp=0.48 buy=0.61 kept=     -6,908 reb= nan% [10:+0K 11:-7K] | non-fin 100%
+Digital-Boy            n= 5000 span=107.9h usd=  131,655 mk= 1134 medp=0.47 buy=0.86 kept=     33,103 reb= 398% [09:+5K 10:+2K 11:+6K] | non-fin 93%, fin-other 4%, fin-close 1%, fin-earnings 1%, fin-ipo/cap 1%

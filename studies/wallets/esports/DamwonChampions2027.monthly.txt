@@ -1,0 +1,22 @@
+0x3471a897e56a8d3621ca79af87dae4325977f17e  0x3471a897e56a8d3621ca79af87dae4325977f17e  joined 2026-01-16  markets traded 5537  fills 89457
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        850,165
+  taker fees charged:                                  -427,345
+  fees refunded:                                        151,884
+  rebates+rewards (taker 98,624 / maker 20,202 / rewards 3,505):    122,331
+  ECONOMIC PnL (the API's bottom line, trust this):     697,034   of which unrealized 0
+  volume $25,555,705 (52,440,609 shares): gross +3.33% of volume, fees net of refunds -1.08%, kept +2.73%
+  share of what was kept that is rebates/rewards: 18%
+  taker_tier: {"address": "0x3471a897e56a8d3621ca79af87dae4325977f17e", "tier": 6, "tier_name": "Obsidian", "wv_30d": 1165240.580816}
+  maker_tier: {"address": "0x3471a897e56a8d3621ca79af87dae4325977f17e", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 19887.573155, "own_wv_30d": 19887.573155}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-01      -2,076          0         0         0     -2,076      -2,076       10,188        87
+  2026-02      55,739          0         0         0     55,739      55,739    2,059,478    13,067
+  2026-03     142,558     -1,377     1,377       245    142,803     142,558    2,418,461    13,454
+  2026-04     122,977   -162,685   150,507     5,684    116,483     110,799    2,723,928    11,637
+  2026-05      57,495    -17,992         0     6,146     45,650      39,504    3,042,713    12,049
+  2026-06      53,943    -14,071         0     5,263     45,135      39,872    2,208,810    11,446
+  2026-07     112,159    -27,020         0     8,766     93,905      85,139    2,218,399     9,675
+  2026-08      42,205    -60,216         0    20,132      2,121     -18,011    3,334,680     5,767
+  2026-09      45,444    -30,922         0    16,840     31,362      14,522    1,766,011     4,091
+  2026-10     129,023    -59,070         0    30,636    100,589      69,953    3,300,896     5,326
+  2026-11      90,695    -53,991         0    28,618     65,322      36,704    2,472,141     2,858

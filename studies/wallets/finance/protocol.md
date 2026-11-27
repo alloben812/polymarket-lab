@@ -41,3 +41,15 @@ H-dir     directional view in a few markets (not copyable; record and move on).
 
 ## Counting
 Every variant/table run is listed in README ("what was run"), including dead ends.
+
+## Added before running the market-level gap tests (after the wallet tables, before any tape was pulled)
+G1 hit markets. Universe: hit-week and hit-month markets on equity/ETF tickers (Yahoo 1-minute bars as proxy for the
+   Pyth candles) traded by any studied account in the 21-day window and resolved Yes. Touch time = end of the first
+   regular-session Yahoo candle whose High >= K*(1+0.001) (Low <= K*(1-0.001) for LOW) after max(market start, period
+   start); the 10 bp margin is there so that the Pyth candle has certainly touched too. Stale take = taker BUY of Yes
+   at <= 0.97 or taker SELL of No at >= 0.03 with match time (block time - 3 s) >= touch time. Report count, dollars
+   locked net of the 0.05 fee, delay buckets, top wallets. One variant.
+G2 close markets. Universe: close-day and updown-day markets (same tickers), resolved. Trades with match time after
+   the session close: count, dollars, price vs outcome; and the last 5 minutes before the close. One variant.
+G3 direction check for the model accounts: split every account's buys into bearish/bullish and by week and ticker;
+   the "edge" explanation fails if the profit is one direction on one ticker.

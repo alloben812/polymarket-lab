@@ -344,3 +344,88 @@ agrees with this lab's own BTC 5m findings in NOTES.md. Pre-dates the TWAP settl
 - WebSearch (two queries, 2026-11-27) for Kaggle / GitHub dumps: results pointed to the HF sets above, Telonex,
   PolyOrderbooks (pypi.org/project/polyorderbooks), Apify `dirtycode/polymarket-api`, rocklabs, Envio, Bitquery; no
   Kaggle dataset.
+
+---
+
+## Verification pass (sceptic check, 2026-11-27)
+
+Scope: the four candidates of section 4 and the five wallets behind them. The dataset inventory (sections 1-3) was
+NOT re-checked; its S/C/X marks stand as the researcher's.
+
+### What I opened myself
+- `gude/polymarket-wallet-activity` straight from HuggingFace (`/resolve/main/...`): README, CROSS_WALLET_SYNTHESIS,
+  RECONSTRUCTED_STRATEGY_SPEC, BACKTEST_RESULTS, STRATEGY_DECODE_BTC_82d (all four byte-identical to the copies in
+  `data/datasets/gude/`), plus three files the researcher did not read: `METHODOLOGY.md`,
+  `00_reference_audit/METRIC_AUDIT.md`, `wallet_0xeebd/reports/EEBD_CLONE_REPORT.md`. HF API: created 2026-06-13,
+  last modified 2026-07-14, not gated. All quoted numbers in the four candidates are in the files as quoted.
+- `kinzikdza/.../FINDINGS.md` live copy = local copy; "Zero of 17 regions", 5,161 configurations, n=63 are there.
+- `wallet_check.py --monthly` on all five addresses; gamma `/tiers` and `/v1/maker-tier/tiers`; `pmlab.wallet` on
+  0x8852 (5 days) and 0xeebd (3 days); gamma public-search (UUDDLRLR -> 0xa8cc...41a9, exact name match).
+
+### Corrections
+1. **The March-April "net" rows of section 4.1 are wrong, and so is the "after fees" column of its table.** The
+   researcher computed net = gross + fees + rebates. Fees charged in Mar-Apr 2026 were mostly REFUNDED (the tool prints
+   `fees refunded` and a "NET kept" column; NOTES.md already explains this). Correct figures:
+
+   | wallet | gross | fees charged | refunded | rebates+rewards | KEPT (economic_pnl) | kept % of volume | rebate share | kept w/o rebates |
+   |---|---|---|---|---|---|---|---|---|
+   | 0xe1d6 | 781,581 | -1,718,946 | 1,222,704 | 40,754 | 326,092 | +0.91% | 12% | +285K |
+   | 0xb27b | 809,914 | -3,512,985 | 3,190,463 | 770,368 | 1,257,760 | +0.90% | 61% | +487K |
+   | 0xeebd (Bonereaper) | 1,467,617 | -2,524,168 | 906,915 | 679,046 | 530,841 | +0.31% | 128% | -150K |
+   | 0x8852 | 320,129 | -177,655 | 177,638 | 42,918 | 363,031 | +2.34% | 12% | +320K |
+   | 0xa8cc (UUDDLRLR) | 114,560 | -114,612 | 1 | 14,894 | 14,842 | +0.31% | 100% | -53 |
+
+   Monthly NET kept (K; in brackets without rebates):
+   - 0xe1d6: Mar +73.0 (+70.7), Apr +228.0 (+194.3), May +25.1 (+20.4); nothing since. NOT "-294K, -628K".
+   - 0xb27b: Mar +329.9 (+289.9), Apr +234.0 (+105.1), May +98.1 (+58.9), Jun +143.5 (+37.2), Jul +79.6 (-20.9),
+     Aug +190.9 (-27.4), Sep +181.8 (+44.5); nothing since. NOT "-1,407K, -1,219K".
+   - 0xeebd: Mar +74.0 (+73.0), Apr -74.2 (-100.3), May +140.9 (+116.7), Jun +38.4 (-54.1), Jul +92.7 (-59.3),
+     Aug +121.4 (-65.1), Sep +54.9 (-33.8), Oct +36.8 (-8.5), Nov +45.7 (-17.1). NOT "-166K, -742K".
+   - 0x8852: May..Nov +41.5 (+34.6), +53.3 (+48.4), +30.2 (+24.1), +2.3 (-2.5), +14.3 (+8.3), +6.0 (+2.8), +8.8 (+8.1).
+   - 0xa8cc: unchanged (Apr -0.1, May +15.7, Jun -10.7 (-17.0), Jul +9.9 (+1.3)).
+   The "tool caveat" paragraph in 4.1 and the matching line the researcher added to NOTES.md are therefore resolved:
+   the gap IS `fees_refunded`. Consequence: all three big wallets made most of what they kept in March-April, when
+   their taker fees were refunded, i.e. in a regime that no longer exists.
+2. **0xeebd is Bonereaper**, a wallet the lab had already catalogued (`catalog/raw/x1_wallets.md`, row Bonereaper;
+   advertised with referral / copy-trading links by @RetroValix and @Dan1ro0). It shares the Diamond taker volume
+   4,583,181 and maker volume 629,191 with wzbbb (one fee group; its own maker volume is only 68,070). The dataset's
+   "anonymous" directional wallet is the promoted one.
+3. **0xb27b did not stop in September; the operator moved.** Its tier lookup still returns Gold 348,873 / maker
+   2,406,060 (700 bps) with `own_wv_30d` = 0; ply-pm0 (0x764f...c347, joined 2026-09-25) and ply-pm2 (0x43e7...472a,
+   joined 2026-09-28) return exactly those values. Per x1_wallets.md they kept +48K / +38K and +25K / +4K in Oct / Nov
+   (+27K / +21K and +17K / -5K without rebates), rebate share 44-58%.
+4. **Candidate 3 misdescribed the late-window behaviour.** Spec C says "late window: repair-only buys <= 0.30", but
+   the deeper decode written 40 minutes later in the same dataset (EEBD_CLONE_REPORT) says the opposite: "directional
+   volume is concentrated LATE — the final-60s bucket carries ~13x the USD of the first-10s bucket, at prices up to
+   0.99, where P(winner == sign) reaches 0.83-0.91"; stake-weighted agreement with sign(chainlink - strike) 0.91.
+   Live check, 24-27 Nov (48.9K fills, 904 markets, $2.09M): 75% taker (source: 60% maker, no longer true); taker
+   edge +0.89 c/share before a 0.73 c fee = +0.16 c (t 0.66, clustered by market); 57% of the dollars are bought at
+   >= 0.95 ($669K as taker, $509K as maker; taker +0.6-0.7 c/share after fee, maker +1.0 c at 0.95-0.99, t 0.9-1.7); net of fees +0.29% of
+   turnover (t 0.84). The API for the same days: gross 30.7K, fees 23.4K, rebates 10.2K, kept 17.5K.
+5. **0x8852 is not evidence for Spec A.** The source never describes it. Live check, 22-27 Nov: 100% maker, buys
+   only, no merges, BTC 15m ($57.7K, +1.77%) and ETH 15m ($30.5K, -0.95%) - not 5m; 7,960 fills of $11 on 885
+   markets, both outcomes in 395; +$733 on $88K (t 0.47, not distinguishable from zero); heaviest at 0.85-0.99 and
+   in 1-5 c tails. Tier 0, not in a fee group (maker volume 64,413 all its own), so its maker rebate is 0 since
+   Nov 22 (658 for the whole of November). It is the only one of the five that is alive, small and unsubsidised.
+6. **Why the source's dollar figures are 10x too high (reading, not a re-computation).** METHODOLOGY.md defines
+   `pnl_if_up = max(net_up, 0) - (cash_out - cash_in)` with `cash_in = sell + merge + redeem` and `net_up` reduced
+   by merges but not by redemptions: a redeemed winner looks counted twice. METRIC_AUDIT gives 0xeebd BTC pre-fee
+   P&L $11.7M by 25 Apr against $1.47M lifetime on the profile. The UUDDLRLR report comes from a different
+   pipeline and agrees with the API (BTC pre-fee 99.7K and fees 80.4K vs all-coin 114.6K and 114.6K).
+7. Internal contradictions in the source that bear on Spec A: its own audit attributes 96.8% of 0xe1d6's BTC P&L to
+   the "residual" and 3.2% to the deterministic pair edge, while the synthesis calls the residual uninformed (hit
+   49%); the wallet's median pair VWAP sum is 1.001 (BACKTEST_RESULTS similarity table), not the <= 0.95 of the spec.
+8. UUDDLRLR time gap: the "+$39.68 Binance-Chainlink gap at trade" is a 75-session sample; the same author's
+   75-session figure for 0xb27b ($52.82) collapsed to $4-12 on full data. Treat it as unproven.
+
+### Credibility changes
+- Candidate 3 (oracle-sign directional, Bonereaper): 2 -> 1. Promoted wallet, negative before rebates in every
+  month since June, source's own taker backtests negative, mechanism text was partly wrong.
+- Candidate 4 (UUDDLRLR): 3 -> 2. The report is honest and matches the API, but what it documents is a break-even
+  account (-$53 after fees on $4.8M) that stopped in July.
+- Candidates 1 and 2: stay at 2, evidence text replaced. Nothing dropped: every source exists and says what is quoted.
+
+### Not checked
+The lag measurement and fill simulations proposed under "testability"; the per-wallet JSONL exports; the ETH decode;
+LIVE_TRADING_SPEC_EEBD_CLONE and RULE_MINING_REPORT; whether 0xa8cc's non-zero taker volume (1,079 with no own
+trades since July) points to a sibling wallet.

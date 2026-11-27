@@ -1,0 +1,6 @@
+0x9495d622: 1161 fills in 40 markets (family politics); cents per share, share-weighted, clustered by market
+  M BUY  n   629 sh    181083 | pre -1.47 (t -9.0, 40 mk) | m1 -0.80 (t -4.5, 40 mk) | m10 -0.77 (t -3.9, 40 mk) | m60 -0.74 (t -2.2, 40 mk) | m24 -0.08 (t -0.2, 40 mk) | preceded by same-direction prints in 30 s: 13%; median age of last print 362 s
+  M SELL n   462 sh     88688 | pre -0.51 (t -4.1, 40 mk) | m1 -0.14 (t -1.9, 40 mk) | m10 -0.16 (t -1.6, 40 mk) | m60 -0.33 (t -1.6, 40 mk) | m24 -1.38 (t -3.3, 40 mk) | preceded by same-direction prints in 30 s: 19%; median age of last print 141 s
+  T BUY  n    54 sh      4304 | pre +1.68 (t 9.1, 20 mk) | m1 +0.74 (t 2.5, 20 mk) | m10 +0.89 (t 2.3, 20 mk) | m60 +0.31 (t 0.8, 20 mk) | m24 -1.80 (t -1.0, 18 mk) | preceded by same-direction prints in 30 s: 6%; median age of last print 378 s
+  T SELL n    16 sh      1959 | pre +1.19 (t 7.2, 12 mk) | m1 -0.38 (t -1.2, 12 mk) | m10 +0.25 (t 3.1, 12 mk) | m60 -0.32 (t -1.8, 12 mk) | m24 -3.72 (t -4.4, 9 mk) | preceded by same-direction prints in 30 s: 56%; median age of last print 9 s
+  all all  n  1161 sh    276033 | pre -1.10 (t -9.4, 40 mk) | m1 -0.56 (t -4.7, 40 mk) | m10 -0.54 (t -4.3, 40 mk) | m60 -0.59 (t -2.6, 40 mk) | m24 -0.56 (t -3.3, 40 mk) | preceded by same-direction prints in 30 s: 16%; median age of last print 299 s

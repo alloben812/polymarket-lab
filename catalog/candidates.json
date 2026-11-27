@@ -1501,5 +1501,1451 @@
   "credibility": 1,
   "verification": "CONFIRMED. The three sources say what is quoted, and the wallet data of this pass supports the negative conclusion.",
   "channel": "w3_longform"
+ },
+ {
+  "name": "Weather late-favorite fade: buy NO on the 0.75-0.95 temperature bucket 1-12 h before the daily peak",
+  "family": "weather-model",
+  "mechanism": "In Polymarket daily max-temperature events, the leading bucket is claimed to be overpriced in the last 1-12 hours before the local temperature peak: buckets priced 0.75-0.95 win about 10 percentage points less often than priced (70-90% bin is -11.2 pp at 6 h). Entry: buy NO on the bucket whose YES trades 0.75-0.95 inside that window; exit: hold to resolution. Claimed edge is overconfidence in the forecast bucket while the true max is still +-1 bucket uncertain. Longshot buckets (<0.10) are only mildly overpriced at 30-48 h and fading them earns nothing (-0.23% after fees).",
+  "time_gap": "None in the strict sense (calibration bias) on the hours scale. The seconds-scale gap after a bucket-killing METAR is already taken before the official feed receives the report (lab weather study, NOTES): h",
+  "market_categories": [
+   "weather"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2610.13593",
+    "date": "2026-10-09",
+    "author": "Shouchen Qiu, Huaijun Qiu",
+    "kind": "arXiv paper (student paper per the repo README; full text re-read by verifier)"
+   },
+   {
+    "url": "https://github.com/ShouchenQiu/PolyWeatherData",
+    "date": "2026-10",
+    "author": "Shouchen Qiu",
+    "kind": "code repo (README read by verifier; code not read)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.23969",
+    "date": "2026-09-21",
+    "author": "Alexander W. Crosier",
+    "kind": "arXiv paper (Kalshi weather vs NBM; passages confirmed)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.12878",
+    "date": "2026-09-11",
+    "author": "Marcos Cardozo, Jose Ignacio Rivero-Wildemauwe",
+    "kind": "arXiv paper (weather row of category table confirmed)"
+   }
+  ],
+  "claimed_results": "Qiu & Qiu: ten cities (Atlanta, Chicago, London, Miami, Toronto, New York, Seattle, Seoul, Shanghai, Tokyo), 5 Dec 2025 - 31 Jul 2026, 2,189 events, 8.54M taker trades; rule fixed on Dec-May, tested on July (310 events): 184 trades of $10, NO win rate 20.7%, +54.96% before fees, +50.71% after a 0.05 fee, 95% CI [1.76, 102.98] cents per $1. Crosier (Kalshi, 7 US cities, 5 years): the market beats the best public forecast (NBM) by ~10% RMSE from its first hour, and NBM moves toward the market 4x more than the reverse.",
+  "evidence": "Paper figures all confirmed in the text, including the authors' caveat that returns use mean taker prices and 'do not establish executable trading profits'. The 0.05 fee was the real weather rate at the time (weather was 0.05 until 20 Nov 2026), now 0.01. Out-of-sample check by the verifier on the lab's cached prices for 3,198 temperature markets, 13-26 Nov 2026, 48 stations (rule written before the run, not blind, ten cells, all reported): YES at 0.75-0.95 at local 07/09/11/13/15 h -> NO won 13.7 / 9.8 / 13.1 / 9.8 / 10.6% against 13.7 / 13.3 / 15.5 / 14.2 / 10.9% implied; buying NO at 1-p returned -0.9 / -27.5 / -16.5 / -31.8 / -3.0% (13 h: n 174, t -2.0; with 2 c slippage -40.3%, t -2.9). The paper's ten cities alone: no NO win in 27 events at 09 h and 11 h, -24% at 13 h, +70% at 15 h (n 34, t 1.2). So the July effect does not appear in November. Wallets (wallet_check + fill breakdown): WrongBy1Degree gross 36,176, fees -7,692, rebates 1,598, kept 30,081 (+7.59% of $396K), 5% of net is rebates, Tier 0; net by month May-Nov 1,312 / 225 / -108 / 1,205 / 3,164 / -2,881 / 27,154. It is 100% weather, 100% taker, buys only (YES $78.7K, NO $69.3K in 30 days, average price 0.39), 2,500 of 2,700 fills more than 12 h before 12:00 UTC of the target date and 0 of 1,252 resolved fills inside the local day (lab study): a day-ahead forecast-update taker, not this rule. xtxpleasecallme gross 256,799, fees -65,958 (5,571 refunded), rebates/rewards 190,337, kept 386,805 (+2.26% of $17.1M), 49% of net is rebates/rewards; net without rebates Apr-Nov 22,675 / -9,275 / -12,808 / 2,094 / 8,736 / -2,494 / 115,400 / -12,413; only 95 of its last 1,471 fills were temperature markets (the rest Dutch football, crypto thresholds, politics, economics): a cross-category rewards farmer, not weather evidence.",
+  "wallets": [
+   "WrongBy1Degree 0x0a0c42f6b1da5a633ec1a4d45ba76eb486c1a853 (from the weather leaderboard, not named in a paper; trades day-ahead forecasts, does not trade this rule)",
+   "xtxpleasecallme 0xad5353afe30c2da57709e2704ef3ccdcf67eef24 (same origin; cross-category rewards farmer, not a weather trader)"
+  ],
+  "requirements": "No latency requirement (hours). Capital: tens to hundreds of dollars per event, since NO costs 5-25 cents. Data: Polymarket gamma/data API, routine METARs for the settlement station (settlement is the routine-METAR maximum, not a 5-minute feed). A small VPS polling REST is enough.",
+  "fee_sensitivity": "Weather taker rate 0.01: at NO price 0.15 the fee is 0.13 cents per share (0.85% of the stake). Fee is not the constraint. A 2-cent slippage on a 13-cent NO costs about 13% of the stake, which is the size of the whole claimed edge in a bad month.",
+  "testability": "Largely done for November by the verifier on cached 30-minute prices (negative). A proper test needs quotes: HF chitoyuuri/polymarket-l2-v3-1-archive has weather L2 from 2026-08-18, so Aug-Nov can be replayed at the real NO ask, clustered by city-day, and split by month to see whether July was seasonal (summer convection) or noise.",
+  "red_flags": "Credibility lowered from 3 to 2. The only supporting test is one month, 184 trades, CI almost touching zero, at trade prices not quotes; the lab's November data shows the opposite sign in the same price band; neither wallet attached to the candidate trades it; mean taker prices in the paper can include stale prints hit by fast bots right after a bucket-killing report (the lab found that money is taken before the official feed updates), which a slow trader cannot get; weather is a small pond (monthly top PnL $53K, earned by a rewards farmer).",
+  "credibility": 2,
+  "verification": "PARTIAL. Every number quoted from Qiu & Qiu, Crosier and Cardozo is in the papers, and the repo exists. The wallet evidence does not support the mechanism, and the lab's own November prices contradict the sign of the effect.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Cross-market logical arbitrage (nested sports lines, crypto threshold ladders, text-inferred relations)",
+  "family": "negrisk-arb",
+  "mechanism": "Prices of logically related contracts must sit inside the convex hull of admissible payoffs (over 3.5 goals implies over 2.5; spread cover implies moneyline win; 'BTC above 65,000' implies 'above 64,800'; partitions sum to 1). When fee-adjusted best quotes violate a relation, take every leg at once (buy the implied contract, sell or buy NO on the implying one) and hold to resolution or unwind. The edge is that relations the venue does not publish are slower to be enforced.",
+  "time_gap": "Not an outside-information gap: the lag is between two Polymarket books. Median window 2.9 s for venue-published NegRisk relations, 6.3 s for relations rebuilt from sports metadata, about 31 s for relations inferred from resolution text: s",
+  "market_categories": [
+   "sports",
+   "crypto",
+   "finance",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2610.23517",
+    "date": "2026-10-16",
+    "author": "Hongjian Shi, Daojing Zhai",
+    "kind": "arXiv paper (full text; figures re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.00864",
+    "date": "2026-04-22",
+    "author": "Guang Cheng, Jiaxin Yang, Haoxuan Zou",
+    "kind": "arXiv paper (full text; figures re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2508.03474",
+    "date": "2025-08-05",
+    "author": "Saguillo, Ghafouri, Kiffer, Suarez-Tangil",
+    "kind": "arXiv paper (abstract; the '$40M arbitrage' source)"
+   }
+  ],
+  "claimed_results": "Shi & Zhai (Polymarket, 23 Jun - 3 Aug 2026, own depth recording, fees included): 491,827 windows, 125,095 executed in simulation; an ideal arbitrageur taking all displayed depth earns $2.50M guaranteed on $11.1M peak capital = 3.5% a week; median window guarantees 0.5% on capital and half of the take comes from windows above 6.5%; profit split 34% NegRisk / 59% sports-and-crypto derived / 7% semantic. With a 1 s order delay 54% of orders fill in full (84% of quantity), 79% of profit is kept and 22% of settled orders lose money. 854 addresses do this, the top 10 account for 78% of matched windows, median reaction 2.6 s. Cheng et al. (173 NBA games, Feb-Mar 2026): 290 moneyline-vs-spread episodes, median return 101 bp, concentrated in the final minutes, 76.9% limited to ~14.8 shares; only 7 single-market episodes (median 3.6 s, $210.19 total at a $100 cap).",
+  "evidence": "All figures above found in the two papers by the verifier's own search of freshly downloaded text. Not replicated. Two independent teams agree: opportunities are real after fees but short (seconds), small per window and contested by about ten wallets. Addresses are not listed. Lab snapshot (NOTES): of 176 open NegRisk events, 0 offered a complete-set arbitrage after fees at top of book.",
+  "wallets": [],
+  "requirements": "Live depth feed for hundreds of books (WebSocket, which this sandbox cannot record), sub-second multi-leg taker execution, a relation database (sports metadata and LLM reading of rules), capital on several legs (a sold leg needs $1 collateral per share). Semantic layer needs the least speed (31 s) and the most thinking. Most sports game markets now carry a 1-second taker delay (NOTES: 272 of 307, all but NBA), which sits exactly on the paper's 1-second robustness case.",
+  "fee_sensitivity": "Taker fee on every leg; sports and finance 0.05, crypto ladders 0.01. The paper's 3.5%/week is after fees (sports at 0.03 until 10 Jul 2026, 0.05 after). Median edge of 0.5% leaves little room at 0.05.",
+  "testability": "Without depth history only an upper bound from prints. HuggingFace L2 archives (Houroux/polymarket-l2-history, chitoyuuri/polymarket-l2-v3-1-archive from 2026-08-18) allow a replay with a 1-2 s delay on nested crypto thresholds (0.01 fee) and sports lines.",
+  "red_flags": "The headline 3.5%/week assumes taking 100% of displayed depth with zero delay; legging risk (22% of 1-second-delayed orders lose); top-10 wallets dominate; the 1-second sports taker delay makes the realistic case worse than the paper's baseline; the widely quoted $40M figure of Saguillo et al. shrinks to $291K under the stricter reconstruction of Gebele et al.",
+  "credibility": 4,
+  "verification": "CONFIRMED. Both papers exist and contain every quoted figure (windows, profit, capital, delay robustness, 854 addresses and 78%, NBA episode counts). Credibility refers to the measurements; the after-delay profit for a small account is not shown by anyone.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "NegRisk NO-to-YES conversion arbitrage",
+  "family": "negrisk-arb",
+  "mechanism": "In a NegRisk event (mutually exclusive outcomes) buy NO on a set of outcomes when the basket is cheaper than its payoff bound, convert it through the NegRisk Adapter into YES of the remaining outcomes plus released collateral, and sell or hold the YES. About 80% of conversions are built with resting bids (maker-acquired NO), not takes. The mirror case (sum of YES asks below 1) has no converter and locks capital until settlement.",
+  "time_gap": "None (internal price identity). NO-side violations close in a median of about 8 s (n = 5); YES-side ones about 16 s (n = 253), and 366 of 624 observed episodes (58.7%) last more than 50 minutes because they cannot be closed before settlement: s",
+  "market_categories": [
+   "politics",
+   "sports",
+   "culture",
+   "any NegRisk multi-outcome event"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2608.00666",
+    "date": "2026-08-01",
+    "author": "Jonas Gebele, Timm Mutzel, Florian Matthes",
+    "kind": "arXiv paper (full text; figures re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2508.03474",
+    "date": "2025-08-05",
+    "author": "Saguillo et al.",
+    "kind": "arXiv paper (abstract)"
+   }
+  ],
+  "claimed_results": "259M trades, 32,702 events listed through 31 Dec 2025: $1.086M total from converter strategies plus $32K from settlement baskets; ten addresses take about 75%; median profit per conversion fell from ~1 USDC (to mid-2024) to ~0.20 (late 2024-2025) to ~0.08 USDC (early 2026). 2,098 YES-side violation episodes versus 36 NO-side.",
+  "evidence": "Figures found in the paper text by the verifier ($1.086M, $32K, 0.08 USDC, 381,748 USDC anomaly, 2,098 vs 36, 16.15 s and 7.99 s, $291,424 for the Saguillo window). The 75% and 80% shares appear with the percent sign lost in the HTML; the same passage puts the all-taker share at or below 40% from late 2024. Not replicated. Lab snapshot (NOTES): 0 of 176 open NegRisk events offered a complete-set arbitrage at top of book; sums below 1 were all augmented events.",
+  "wallets": [],
+  "requirements": "On-chain interaction with the NegRisk Adapter, resting orders on many NO legs, inventory management; competition from specialised bots. Profile PnL of accounts that convert is not trustworthy (NOTES: reconstruct cash flows).",
+  "fee_sensitivity": "Maker-built legs pay no fee; taker legs pay the category rate. At 8 cents median profit per conversion any taker fee or gas kills it.",
+  "testability": "Conversions are on-chain (Goldsky subgraph); the Data API activity feed shows conversions for a wallet. Could count current profit per conversion for the top addresses from cash flows.",
+  "red_flags": "Crowded and decayed by an order of magnitude; ten addresses take three quarters; one cluster of three addresses made 381,748 USDC in seven minutes in an anomaly the authors excluded; NO-side duration rests on five episodes.",
+  "credibility": 4,
+  "verification": "CONFIRMED. The paper exists and contains the quoted totals, the decay series, the episode counts and the comparison with Saguillo et al.; two shares are legible only as digits without the percent sign.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "News latency on unscheduled geopolitical events (first public report to repricing)",
+  "family": "news-latency",
+  "mechanism": "Take the YES side of a deadline contract as soon as a public report that satisfies the resolution rule appears, before the price locks in. The paper measures that 22% of events that did happen were still priced below 0.5 one minute before the first Web report, and that the time the price reaches a stable 0.95+ differs from the report time by a median of two minutes. Deadline ladders: the nearest deadline is the one that jumps (median price 0.10 a day before for contracts expiring within a day of the event).",
+  "time_gap": "First Web/wire/X report of the event versus the Polymarket price locking in; paper: median difference two minutes (direction not stated). Lab's own timings on comparable headline events: first big buy 3-5 s, midpoint about 25 s, 0.95 at about 70 s: s to min",
+  "market_categories": [
+   "geopolitics",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2610.36639",
+    "date": "2026-10-27",
+    "author": "Sizheng Fan, Yinghe Sun, Rong Zhao",
+    "kind": "arXiv paper (passages re-read by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.21521",
+    "date": "2026-05-18",
+    "author": "Bazyari, Liu, Moran",
+    "kind": "arXiv paper (abstract confirmed)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.02286",
+    "date": "2026-05-04",
+    "author": "Maksym Nechepurenko",
+    "kind": "arXiv paper (abstract confirmed; insider cases)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2603.03152",
+    "date": "2026-03-03",
+    "author": "Kwok Ping Tsang, Zichao Yang",
+    "kind": "arXiv paper (abstract confirmed)"
+   }
+  ],
+  "claimed_results": "Fan et al. (1.24B trades through Sept 2026; 208 dated geopolitical events, 51 central-bank decisions): share priced >= 0.5 rises from about 0.43 seven days before to 0.78 one minute before the first report; central-bank decisions near one throughout (no gap there). Price-implied 'known' time differs from the first report by a median of two minutes. Timing skill in 1.4-3.8% of accounts; the 337 significant ones are large (median volume $120K) and post 62% of their volume. Bazyari et al.: X and news tied (-0.02 min, n = 16 paired) as earliest channel on 109 Polymarket events.",
+  "evidence": "The quoted figures are in the paper. No strategy or P&L is reported, only timing statistics. The paper says 'differs from tau by a median of two minutes' without a sign, so 'locks in two minutes after the report' is an interpretation. Tau is the first Web report the authors found, which can be later than the first wire flash or X post. Lab measurements (NOTES) on other news: Huang events reach 0.95 in about 70 s; scheduled economic releases are 98% taken within 30 s and leave about $13/day at +30 s. The authors say they release the dated events and ladders.",
+  "wallets": [],
+  "requirements": "A fast, broad news intake (wires, X lists, Telegram) with rule matching against market resolution text, and a taker order within seconds to about a minute. Human-in-the-loop is too slow for the median case; only the tail (events that take 10+ minutes to lock in) may be reachable.",
+  "fee_sensitivity": "Geopolitics taker rate is 0 (NOTES); other politics 0.01. Fees are not the constraint; adverse selection and being second are.",
+  "testability": "Use the paper's released event timestamps plus trades?condition= to compute, for each event, the price available 30 s, 2 min and 10 min after the first report and the P&L of buying then; split by event type and liquidity. Same method as studies/gaps/econ_release_lag.",
+  "red_flags": "The two-minute figure has no stated direction and depends on how the authors dated the first report; documented insider trading in exactly these markets (six new accounts, about $1.2M before the 28 Feb 2026 Iran strike); resolution-rule and dispute risk (0.31% of all markets disputed); fake or wrong first reports (one fabricated article is enough to move LLM forecasters); on the events the lab timed, bots finish the move in about a minute.",
+  "credibility": 3,
+  "verification": "PARTIAL. The paper exists and the 0.43-0.78 series, the two-minute median, 337 accounts, 62% and 1.4-3.8% are there; the direction of the two-minute lag and any tradable profit are not in the source.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Longshot fade / favorite side in crypto and politics (buy >= 0.90, or quote NO passively in 'will X happen' markets)",
+  "family": "market-making",
+  "mechanism": "Retail systematically overpays for cheap YES. Either buy the high-priced side (>= 0.90) or, better, rest NO-side bids / YES-side offers and let longshot buyers hit them; hold to resolution. Makers earn the behavioural surplus that more than covers occasional informed flow; cancel when flow turns one-sided.",
+  "time_gap": "none",
+  "market_categories": [
+   "crypto",
+   "politics",
+   "mentions",
+   "culture",
+   "finance"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2609.12878",
+    "date": "2026-09-11",
+    "author": "Marcos Cardozo, Jose Ignacio Rivero-Wildemauwe",
+    "kind": "arXiv paper (tables re-checked by verifier)"
+   },
+   {
+    "url": "https://conference.nber.org/conf_papers/f243677.pdf",
+    "date": "2026-07-02",
+    "author": "Robert Bartlett, Maureen O'Hara",
+    "kind": "NBER conference paper (PDF reachable; figures confirmed in text)"
+   },
+   {
+    "url": "https://ideas.repec.org/p/cpr/ceprdp/21615.html",
+    "date": "2026",
+    "author": "Akey, Gregoire, Harvie, Martineau",
+    "kind": "CEPR discussion paper (abstract re-read by verifier)"
+   },
+   {
+    "url": "https://www.ucd.ie/economics/t4media/WP2025_19.pdf",
+    "date": "2025-09",
+    "author": "Burgi, Deng, Whelan",
+    "kind": "working paper (PDF opened by verifier, abstract read)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2602.19520",
+    "date": "2026-02-23",
+    "author": "Nam Anh Le",
+    "kind": "arXiv paper (abstract confirmed)"
+   }
+  ],
+  "claimed_results": "Cardozo (588M Polymarket trades, Nov 2022 - Mar 2026, before fees): purchases below 10 cents lose 19.3 cents per dollar, purchases at or above 90 cents earn 0.83 cents per dollar. By category, longshots / favorites: crypto -14.84% / +0.64% equal-weight and -12.63% / +0.54% pooled; politics -16.34% / +1.04% and -46.15% / +1.42%; finance -2.62% (not significant) / +0.09% equal-weight and -72.40% / +1.83% pooled; sports longshots positive under both, favorites -0.23% / +0.14%; weather sign depends on weighting. Bartlett & O'Hara (41.6M Kalshi trades): makers earn 1.91 cents per contract on single-name markets and 0.82 on broad ones. Akey et al.: successful traders provide liquidity with limit orders; top 1% of winners take 76.5% of profits. Burgi et al. (300,000+ Kalshi contracts): clear favorite-longshot bias, distinct for makers and takers.",
+  "evidence": "Figures confirmed in the sources. Consistent with the lab's tape result (BTC 5m makers +0.66 cents per share, takers -2.67% after fees) and with the lab's weather calibration for November (YES at 0.02-0.10 at 13:00 local wins 2.3% against 4.9 cents, t 4.0). Against the taker version: the lab's mentions study found blind buying at >= 0.95 negative after fee (4.2% of Yes confirmations reversed). Wallet 1DVSBSTD (89% weather, average buy 0.995+): gross 3,303, fees -1,110, kept 2,356 = +0.03% of $7.57M, no rebates, net by month Mar-Nov 373 / 1,093 / 577 / 966 / 185 / -113 / -437 / 231 / -373; in the last 10 days taker buys at 0.99-1.00 lose 0.17 cents a share while taker buys at 0.95-0.99 earn 1.14 cents a share (t 4.8, on $4.2K only).",
+  "wallets": [
+   "1DVSBSTD 0xeb1d1cd1b31070fb34b1d1de20d700f59c9959b0 (from the weather leaderboard, not named in a paper; evidence only for the 0.99+ end in weather)"
+  ],
+  "requirements": "Patience and capital locked to resolution; for the maker version a bot that keeps quotes, tracks inventory and pulls on one-sided bursts. No speed race in slow markets. Order minimum 5 shares. Maker rebates are zero for a new account since 20 Nov 2026.",
+  "fee_sensitivity": "Maker version pays no fee. Taker version at p = 0.95: fee = rate x 0.0475 per share, i.e. 0.25% of notional at rate 0.05 and 0.05% at 0.01, against gross favorite returns of +0.5% to +1.4% in crypto, politics and culture. Survives on paper only in 0.01-fee categories and not at 0.99.",
+  "testability": "vgregoire/polymarket-users (HF) or TimeSeventeen/Polymarket-v2 for 2026 trades: returns of maker fills on the NO side by category, price bin and month, clustered by event, after Aug 2026. Live: trades?condition= with taker_only difference to isolate maker fills.",
+  "red_flags": "Returns are averages over years with different fee regimes and exclude fees and rewards; the result depends on aggregation (longshots -19.3 pooled, -6.3 per contract, +4.1 per parent event; finance -72.4% is pooled only); rare full losses dominate variance; insider bursts (one Kalshi market: makers lost $75,754); capital lock-up means +0.83% per trade is not an annual return; the one wallet attached covers only the 0.99+ weather corner.",
+  "credibility": 3,
+  "verification": "CONFIRMED. Cardozo's tables, the Bartlett-O'Hara maker figures, the Akey abstract and the Burgi abstract all say what is quoted; I added the equal-weight finance figure and the sports favorite figures that the candidate left out.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Resolution bond: buy near-certain outcomes at 0.96-0.99 and wait for settlement",
+  "family": "resolution-bond",
+  "mechanism": "Buy the side that is economically decided (or almost) below $1 and redeem at $1. The supposed edge is that the event is 'already known'. The literature shows the discount is the price of locked capital and residual oracle risk.",
+  "time_gap": "Event economically decided versus oracle settlement (hours to months); the discount compensates for the wait rather than reflecting a slow market: h",
+  "market_categories": [
+   "all"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2605.31431",
+    "date": "2026-05-29",
+    "author": "Jonas Gebele, Florian Matthes",
+    "kind": "arXiv paper (passages re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2610.29578",
+    "date": "2026-10-21",
+    "author": "Ahmed Mahrous, Roberto Di Pietro",
+    "kind": "arXiv paper (abstract confirmed; dispute base rate)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.16642",
+    "date": "2026-09-15",
+    "author": "Maksym Nechepurenko",
+    "kind": "arXiv paper (abstract confirmed; protocol only, no results)"
+   }
+  ],
+  "claimed_results": "Gebele & Matthes (Polymarket through 31 Dec 2025): implied annualized settlement wedge is positive and maturity dependent, mean 3.06% a year on the minimum frontier; adjusting for it removes 48-88% of the apparent long-horizon miscalibration of near-certain prices; the fixed 4% holding rewards for selected long-dated positions compress it further. Mahrous & Di Pietro: 0.31% of 802,863 markets were disputed.",
+  "evidence": "Paper figures confirmed. Wallet check of 1DVSBSTD: gross 3,303, fees -1,110 (154 refunded), no rebates, kept 2,356 = +0.03% of $7.57M across 80,456 markets; monthly net Mar-Nov 373 / 1,093 / 577 / 966 / 185 / -113 / -437 / 231 / -373 (negative in three of the last four months). 89% of its recent turnover is weather buckets bought at 0.995-0.999 after the day is decided; last 10 days -$239 on $322K. Lab results agree: in weather NO is at 0.99 within a minute of the deciding report; in mentions blind buying at >= 0.95 is negative after fee; holding rewards are not enabled on sports, weather or tweet-count markets.",
+  "wallets": [
+   "1DVSBSTD 0xeb1d1cd1b31070fb34b1d1de20d700f59c9959b0 (from the weather leaderboard, not named in a paper)"
+  ],
+  "requirements": "Large capital for a tiny yield; automation to sweep thousands of markets.",
+  "fee_sensitivity": "At p = 0.99 the fee is rate x 0.0099 per share: 0.05 cents at rate 0.05, 0.01 cents at 0.01, against a 1-cent gross gain that must also cover a ~0.3% dispute tail.",
+  "testability": "Easy: resolved markets via tokens?condition=, last prices before closedTime, time to settlement; compute return per day of lock-up by category.",
+  "red_flags": "Money-market-like yield with jump-to-zero risk; not suited to a stake of a few hundred euros. Caution on the wallet figure: 0.03% is per dollar of turnover on positions that last hours, so it is not an annual yield on capital (capital unknown); the paper studies long-dated contracts while the wallet sweeps same-day weather, so the two pieces of evidence cover different corners.",
+  "credibility": 4,
+  "verification": "CONFIRMED. The settlement-wedge figures (3.06%, 48-88%, 4% holding rewards) and the 0.31% dispute rate are in the sources, and wallet_check reproduces the researcher's numbers for 1DVSBSTD within a few dollars.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Crypto up/down latency taking against Binance (and the dead last-10-seconds settlement push)",
+  "family": "latency-crypto-updown",
+  "mechanism": "Model the up/down probability from Binance order flow and take stale Polymarket quotes; historically (Feb-Aug 2026) also: hold the contract and push Binance spot in the final 10 seconds to flip the single-print settlement.",
+  "time_gap": "Binance move to Polymarket quote update: median 347 ms on a collector clock (16 ms apparent on source clocks, +-99 ms ambiguity): ms",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2607.26245",
+    "date": "2026-07-28",
+    "author": "Gregory Young",
+    "kind": "arXiv paper + dataset (passages re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2606.31675",
+    "date": "2026-06-30",
+    "author": "David Dai, Ruizhe Jia, Shihao Yu",
+    "kind": "arXiv paper (passages re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2611.06607",
+    "date": "2026-11-04",
+    "author": "Henry Zhang",
+    "kind": "arXiv paper (abstract confirmed; Kalshi BTC binaries campaigns)"
+   }
+  ],
+  "claimed_results": "Young (BTC 15m, 12 Feb - 15 May 2026): a 43-feature walk-forward model 'does not beat, and slightly underperforms, the probability already implied by Polymarket's own order book'; simulated trading -0.116 payoff units per attempted trade with 1% fee and 0.5% slippage; 'No strategy iteration survived fees and spread'. Dai et al. (BTC 5m, 12 Feb - 8 Apr 2026): 821 wallets of ~243,000 took $8.2M in manipulated cycles, retail lost $7.6M, market makers earned $3.1M in normal cycles; a near-certain favourite was overturned one time in three when a push ran against it; the effect disappeared after settlement moved to a Chainlink TWAP (7 Aug 2026, 60 seconds from 14 Aug). Zhang: a survivor with Sharpe near 3 in validation fell to 0.26 on its single holdout use.",
+  "evidence": "All quoted figures found in the papers. Matches the lab's own measurements in NOTES (book absorbs a Binance move in 0.5-2 s; naive fair-value taker loses 1-8% of turnover; takers lose 2.67% after fees). Three independent negative results.",
+  "wallets": [],
+  "requirements": "Co-location in AWS eu-west-2 with KYC, volume-tier rebates, exchange feeds; the push variant needed millions in spot and is market manipulation.",
+  "fee_sensitivity": "BTC 5m/15m taker rate 0.05 (1.25 cents per share at 0.50) plus the taker delay, which is 150 ms since 4 Sep 2026 per NOTES (the candidate said 50 ms; one docs page says 250 ms); no measured edge survives it for a non-rebate account.",
+  "testability": "Already tested here and in the OpenMarket dataset (gregyoung14/openmarket-btc-polymarket on HF).",
+  "red_flags": "Negative candidate: documented not to work for a small trader; the one mechanism that paid (settlement push) is closed and is manipulation. Young's sample pre-dates the taker delay, the TWAP settlement and the Nov 20 fee change, so the venue is now harder for a taker than in the paper.",
+  "credibility": 4,
+  "verification": "CONFIRMED. 347 ms, 16 ms, -0.116, the null model result, 821 wallets, $8.2M / $7.6M / $3.1M and the TWAP dates are all in the papers; only the taker-delay figure in the candidate was out of date.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Copy-trading 'smart money' wallets",
+  "family": "copy-trading",
+  "mechanism": "Rank wallets by past profit or statistical skill, mirror their buys with fill-or-kill orders seconds after they appear on-chain, exit when they exit or at resolution.",
+  "time_gap": "Follower lags the source by the on-chain confirmation (2-3 s plus processing) and buys after the source consumed the best ask: s",
+  "market_categories": [
+   "sports",
+   "crypto",
+   "esports",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2610.34754",
+    "date": "2026-10-26",
+    "author": "Huaiyu Jia, Shuo Sun",
+    "kind": "arXiv paper (passages re-checked by verifier)"
+   },
+   {
+    "url": "https://insights.som.yale.edu/insights/wisdom-of-the-few-prediction-markets-are-driven-by-small-number-of-skilled-traders",
+    "date": "2026-04",
+    "author": "Gomez-Cram, Guo, Jensen, Kung (Yale Insights summary)",
+    "kind": "press summary of SSRN paper (summary re-read by verifier; paper not opened)"
+   },
+   {
+    "url": "https://ideas.repec.org/p/cpr/ceprdp/21615.html",
+    "date": "2026",
+    "author": "Akey, Gregoire, Harvie, Martineau",
+    "kind": "CEPR abstract (re-read by verifier)"
+   }
+  ],
+  "claimed_results": "Jia & Sun: 1,541,104 wallets in 2026, 68.66% negative, top 1% take 89.2% of profit; past-week profit predicts next-week profit weakly (AUC 0.681, 0.577 excluding idle weeks); live test 13-24 Oct 2026: paper account +44.18 on 283 $1 buys but -11.89 without one ETH trade; 20 live buys lost 3.04 USDC; authors: results 'do not establish consistent profitability'. Gomez-Cram et al. (per Yale): 3% of 1.72M accounts are skilled and 44% of them stay skilled across a random split of events; 29% 'lucky winners' hold 69% of gains. Akey et al.: 'Monthly performance is modestly persistent, however this may represent sample selection rather than skill'.",
+  "evidence": "Figures confirmed in the three sources. The only live experiment in the literature lost money on a tiny sample. No wallets are named. Lab results point the same way: wallet names in posts go stale (wallet moves, category moves), and copying the best box-office account at the worst print within 15 minutes earned nothing (t -0.3).",
+  "wallets": [],
+  "requirements": "On-chain or Data API polling of source wallets (block time lag 2-3 s), a skill filter that respects event dependence, FOK execution.",
+  "fee_sensitivity": "Follower is always a taker at a worse price than the source: pays the full category fee plus the price impact left by the source; winners are mostly makers, which a copier cannot replicate.",
+  "testability": "trades?user= for candidate wallets, replay with a 3-10 s delay against the following prints in trades?condition=; cluster by event.",
+  "red_flags": "Selection on past winners; profits of skilled accounts come from providing liquidity and from sizes a follower cannot get; the positive paper result is one trade; copy-trading products are an affiliate business (affiliates earn 20%+ of referred fees since 23 Oct 2026).",
+  "credibility": 3,
+  "verification": "CONFIRMED. The wallet counts, concentration, AUC values and the live-test figures are in Jia & Sun; the Yale and RePEc pages say what is quoted. The Gomez-Cram paper itself remains unopened (SSRN returns 403).",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Polymarket crypto threshold contracts versus option-implied digital probability",
+  "family": "options-replication",
+  "mechanism": "Compare the YES price of 'BTC above K on date T' with the risk-neutral digital value from Deribit/Binance options at the same strike and expiry. Polymarket YES is rich at low probabilities and long maturities; sell YES (buy NO) when the gap is wide and delta-hedge with the option or spot, or simply use the option-implied value as fair value for quoting.",
+  "time_gap": "Deviation from the option market mean-reverts with a half-life of about four hours: h",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2606.19517",
+    "date": "2026-06-17",
+    "author": "Victoria Portnaya",
+    "kind": "arXiv paper (abstract and passages re-checked by verifier)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.14267",
+    "date": "2026-09-13",
+    "author": "Prashanth Bhaskara, Aadit Jerfy",
+    "kind": "arXiv paper (abstract; a hedging framework that treats Kalshi BTC contracts as options, no mispricing result)"
+   }
+  ],
+  "claimed_results": "Mean gap 5.6 pp over 214 hourly observations on the main Sept 2023 BTC contract (t = 6.46); 6.3 pp pooled over three markets (287 obs); 11 pp against Deribit; 'A delta-hedged arbitrage proxy remains profitable after conservative transaction costs, though with marginal statistical precision'; ETH mixed.",
+  "evidence": "Figures confirmed in the paper. Sample is 2023 and three markets; not checked on 2026 data by this pass. The lab has a study in progress on exactly this (studies/gaps/crypto_levels_vs_options); its outputs were not read here.",
+  "wallets": [],
+  "requirements": "Deribit public option data (reachable from the sandbox), a vol-surface interpolation to the Polymarket strike and expiry time, optionally a Deribit account for the hedge (not needed if used only as fair value).",
+  "fee_sensitivity": "Non-up/down crypto taker rate 0.01: at most 0.25 cents per share; negligible against a multi-point gap if the gap still exists.",
+  "testability": "Deribit public history plus Polymarket prices-history for the weekly/monthly 'above K' and 'hits K' markets in Sep-Nov 2026; measure the gap, its persistence and the P&L of buying NO when YES exceeds the digital by X points, at printed prices.",
+  "red_flags": "Old thin sample (2023, three markets, hourly); the author herself calls the precision marginal; 'hits K' (barrier) contracts are not digitals and need a different model; the gap may be a risk premium for jumps rather than mispricing; daily and hourly crypto markets now settle on a Chainlink 60-second TWAP, not an exchange print; the second source does not test mispricing at all.",
+  "credibility": 2,
+  "verification": "CONFIRMED. The 5.6 pp / 214 obs / t 6.46, 6.3 pp / 287 obs, 11 pp Deribit, four-hour half-life and the 'marginal statistical precision' sentence are in the paper. Whether any of it holds in 2026 is not in any source.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Kalshi-leads-sports lead-lag and cross-venue price gaps",
+  "family": "cross-venue-arb",
+  "mechanism": "Identical events trade on Kalshi and Polymarket at different prices (2-4% execution-aware deviation on average). Either hold both legs (needs accounts and capital on both) or use the venue that leads as a signal for the other: Polymarket leads in politics and entertainment, Kalshi leads in sports and when its relative activity is higher.",
+  "time_gap": "Lag between venues; no source gives it in seconds. The cited price-discovery work uses 5-minute data (Aktug & Torul) and a 30-minute return VAR (Ng et al., as described by Aktug & Torul): unknown, measured only at 5-30 min bars",
+  "market_categories": [
+   "sports",
+   "politics",
+   "economics",
+   "culture"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2601.01706",
+    "date": "2026-01-05",
+    "author": "Jonas Gebele, Florian Matthes",
+    "kind": "arXiv paper (abstract confirmed)"
+   },
+   {
+    "url": "https://papers.ssrn.com/abstract=5331995",
+    "date": "2026-04-28",
+    "author": "Hunter Ng, Lin Peng, Yubo Tao, Dexin Zhou",
+    "kind": "SSRN working paper (403 for the verifier too; known only through citations by Dubach and by Aktug & Torul)"
+   },
+   {
+    "url": "https://web.bogazici.edu.tr/torul/pridis.pdf",
+    "date": "2026-06",
+    "author": "Aktug, Torul",
+    "kind": "working paper (PDF opened by verifier, abstract and introduction read)"
+   }
+  ],
+  "claimed_results": "Gebele & Matthes: >100,000 events on ten venues 2018-2025, ~6% listed on more than one venue, persistent 2-4% deviations, arbitrage 'capital-intensive or unenforceable'. Ng et al. (second-hand): Polymarket leads Kalshi around the 2024 election, more in high-liquidity periods; whale order imbalance predicts returns; per Dubach's summary of the 2026 revision, Kalshi leads in sports. Aktug & Torul (5-minute data, nine venues, 2024 election): Polymarket and Betfair hold nearly 85% of information shares, no dealer sportsbook exceeds 11%.",
+  "evidence": "Gebele abstract and the Dubach sentence confirmed; Aktug & Torul opened and corrected (version June 2026, 'no sportsbook exceeds 11%' rather than none). The Kalshi-leads-sports claim rests on one sentence in another author's literature review. The lag size is unknown. Kalshi public market data is reachable from the sandbox; the lab has a cross-venue catalog (catalog/raw/r4_cross_venue.md) that was not read in this pass.",
+  "wallets": [],
+  "requirements": "For the signal version: Kalshi public REST polling and a market-matching table; for true arbitrage: a Kalshi account (availability for a Serbian resident not checked) and capital on both sides.",
+  "fee_sensitivity": "Polymarket sports taker 0.05 (1.25 cents at 0.50) eats most of a 2-4% gap, and most sports game markets add a 1-second taker delay; politics 0.01 and geopolitics 0 leave room. Kalshi charges its own taker fee.",
+  "testability": "Poll Kalshi and Polymarket trades for the same games/events for a few weeks and compute cross-correlation and the P&L of following Kalshi prints on Polymarket at the next available price.",
+  "red_flags": "The key claim is third-hand; all measured leads are at 5-30 minute bars on 2024 election data, which says nothing about a tradable lag in sports in 2026; different resolution rules make 'identical' events non-identical; sports is the highest-fee category with a taker delay.",
+  "credibility": 2,
+  "verification": "PARTIAL. Gebele & Matthes and Aktug & Torul say what is quoted (with two corrections); the Ng et al. paper could not be opened by either reader, and no source gives a lag in seconds or minutes.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "End-of-game sports mispricing (trailing side overpriced in the final minutes; thin books)",
+  "family": "sports-inplay-latency",
+  "mechanism": "In the last minutes of a game the trailing side still trades at 10-40 cents but almost never wins, and related markets (moneyline vs spread) drift apart as makers pull quotes. Buy the leader or sell the trailing side late; or take the nested-market violations that appear then.",
+  "time_gap": "Official data feed is 3-4 s ahead of video and TV/streams are several to tens of seconds behind the stadium; no measurement of Polymarket's lag exists in the literature found: s",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2607.14430",
+    "date": "2026-07-15",
+    "author": "Niusha Moshrefi",
+    "kind": "arXiv paper (passages re-checked by verifier; Kalshi)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.00864",
+    "date": "2026-04-22",
+    "author": "Cheng, Yang, Zou",
+    "kind": "arXiv paper (figures re-checked by verifier)"
+   },
+   {
+    "url": "https://georgetownlawtechreview.org/already-scored-information-asymmetry-in-real-time-sports-betting/GLTR-02-2026/",
+    "date": "2026-02",
+    "author": "Georgetown Law Technology Review",
+    "kind": "law review article (opened by verifier; does not mention Polymarket)"
+   }
+  ],
+  "claimed_results": "Moshrefi (23M Kalshi moneyline trades, Mar-May 2026): calibration close to the diagonal mid-life; in the 0-10 minute bucket 'contracts trading at 10-40 cents in the final ten minutes resolve favorably almost never'. Cheng et al.: 290 Polymarket NBA moneyline/spread episodes concentrated in the final minutes, median 101 bp, ~15 shares. Georgetown: Genius Sports feed latency under 37 ms, 3 to 4 seconds ahead of video; DRW, Jump and Susquehanna named as participants in prediction markets.",
+  "evidence": "All three sources say what is quoted. The Kalshi result measures minutes to settlement, so its last-ten-minutes bucket mixes live end-game with prints after the result is known; neither reader could separate the two. No P&L is reported by anyone. The Georgetown piece is about sportsbooks and never mentions Polymarket.",
+  "wallets": [],
+  "requirements": "A score feed faster than the book (paid official data for real speed; ESPN API is free but slow), fast taker execution. On Polymarket 272 of 307 sports game markets carry a 1-second taker delay (EPL, NFL, NHL, tennis, esports and others; NBA has none), so a taker's order is exposed for a second before matching.",
+  "fee_sensitivity": "Sports taker 0.05: 1.25 cents at 0.50, 0.45 cents at 0.90. Buying a 0.90 leader needs more than a 0.5% edge per trade.",
+  "testability": "ESPN site API play-by-play timestamps against trades?condition= for finished games: price of the eventual loser by game clock, and how long after a decisive score the old price was still hittable (block-time jitter 2-3 s limits resolution). HF Houroux/polymarket-l2-history carries Polymarket's own live score feed with L2 on one clock for NFL/EPL/CFB.",
+  "red_flags": "Competing with firms on official feeds; the calibration result may be a timestamp artefact (time to settlement, not game clock); evidence is from Kalshi, not Polymarket; highest fee category plus a 1-second taker delay outside the NBA; wash-traded volume.",
+  "credibility": 2,
+  "verification": "CONFIRMED for the quotes (Moshrefi's 10-40 cents sentence, Cheng's 290 / 101 bp / 76.9% / 14.8 shares, Georgetown's 37 ms and 3 to 4 seconds). The step from those quotes to a Polymarket strategy is not supported by any source.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Overpriced parlays / combos: take the other side",
+  "family": "other",
+  "mechanism": "Multi-leg parlay contracts are priced above the product of their legs once there are five or more legs (median ratio 1.005 at 5 legs, 1.07 at 8, 1.22 at 10, 1.31 at 11), and across all parlays the win rate runs 2-10 points below the price (a parlay priced 0.30 wins about 24% of the time). Sell (or buy NO on) parlays, optionally hedging with the legs.",
+  "time_gap": "none",
+  "market_categories": [
+   "sports",
+   "combos"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2607.14430",
+    "date": "2026-07-15",
+    "author": "Niusha Moshrefi",
+    "kind": "arXiv paper (table re-read by verifier; Kalshi)"
+   }
+  ],
+  "claimed_results": "Kalshi cross-game parlays, 29 Apr - 13 May 2026, 12,639 parlays: median price/product ratio 0.991, 0.995, 0.999 for 2-4 legs (n 5,846 / 3,111 / 1,523), 1.005 at 5 (n 928), 1.013 at 6 (n 584), 1.037 at 7 (n 371), 1.066 at 8 (n 140), 1.105 at 9 (n 67), 1.223 at 10 (n 57), 1.305 at 11 (n 12); all parlays median 0.996, mean 1.028. Empirical win rate 2-10 pp below price across the range; 0.30 wins about 24%, 0.40 about 30%.",
+  "evidence": "Table and sentences confirmed. Kalshi only, 15 days. Nobody checked whether Polymarket 'combos' (fee class 0.05 in NOTES) have a book one can sell into or how they are priced.",
+  "wallets": [],
+  "requirements": "Ability to post offers on combo markets; capital for the NO side; a view on correlation between legs.",
+  "fee_sensitivity": "Combos taker rate 0.05; as a maker no fee. A 6 pp overpricing at 0.30 survives a 1-cent fee.",
+  "testability": "Check gamma for Polymarket combo markets, their prices versus the product of leg mids, and resolved outcomes.",
+  "red_flags": "Venue mismatch (Kalshi RFQ parlays versus Polymarket combos); two weeks of data; the leg-count effect rests on 276 parlays with 8+ legs out of 12,639 while the typical parlay is priced at the product of its legs; the price/product ratio ignores correlation between legs; a few long parlays hitting can erase many small gains.",
+  "credibility": 2,
+  "verification": "CONFIRMED. The ratios and the 0.30 -> 24% sentence are in the paper; I corrected the 5-leg median (1.005, the candidate's 1.01 is nearer the mean of 1.040) and added the sample sizes, which are small where the effect is large.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Model/LLM forecasting with proper-betting sizing; lead-lag between related economics markets",
+  "family": "model-forecasting",
+  "mechanism": "Produce a probability with a model or LLM agent and bet only through a 'proper' sizing rule that maps forecast p and market price q to a position; separately, find leader-follower pairs among related Kalshi economics contracts with Granger tests, filter them with an LLM for a plausible causal story, and trade the follower when the leader moves.",
+  "time_gap": "For the lead-lag variant: one related market moves before another (scale not stated in the abstract): unknown (min to h)",
+  "market_categories": [
+   "economics",
+   "politics",
+   "all"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2607.06166",
+    "date": "2026-07-07",
+    "author": "Gu, Kagan, Sun, Wu, Xu",
+    "kind": "arXiv paper (abstract confirmed)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2602.07048",
+    "date": "2026-02-04",
+    "author": "Kim et al.",
+    "kind": "arXiv paper (abstract confirmed)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.31390",
+    "date": "2026-09-25",
+    "author": "Jia et al. (AlphaOpsBench)",
+    "kind": "arXiv paper (abstract confirmed; claim corrected)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2611.06607",
+    "date": "2026-11-04",
+    "author": "Henry Zhang",
+    "kind": "arXiv paper (abstract confirmed)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2611.15102",
+    "date": "2026-11-11",
+    "author": "Zeyu Zhang, Bradly C. Stadie",
+    "kind": "arXiv paper (abstract confirmed)"
+   }
+  ],
+  "claimed_results": "Gu et al.: proper betting is 'essentially the only strategy with such robust profitability guarantee'; a month-long Kalshi pilot had 'encouraging preliminary results' (no number in the abstract). Kim et al.: win rate 51.4% -> 54.5%, average losing trade $649 -> $347 on Kalshi economics pairs. Zhang: an LLM-found survivor with Sharpe near 3 in validation fell to 0.26 on its single holdout use. AlphaOpsBench: LLM-written programs for 24 preregistered real strategies obtained 'no confirmed pass' on end-to-end validity; this measures whether the generated code is valid, not whether the strategies make money.",
+  "evidence": "Abstracts only for the positive claims, confirmed against the arXiv API. No fee-and-fill-aware profit number exists in any of them. The lab's econ study shows related economics markets absorb a release in seconds, which leaves little room for a minutes-scale follower trade around releases.",
+  "wallets": [],
+  "requirements": "LLM API budget, a news/search pipeline, strict out-of-sample discipline.",
+  "fee_sensitivity": "Taker fee of the category on every rebalance; a 3-point win-rate edge at even odds is about 6% gross per trade before spread, plausible only in 0.01-fee categories with real fills.",
+  "testability": "Forecast-Dojo / Hindcast style replay on resolved Polymarket markets with prices-history; for lead-lag, Kalshi public data and Polymarket economics markets.",
+  "red_flags": "Benchmarks leak the future through model training data; one fabricated article changes LLM forecasts; the positive results are from Kalshi with no cost model in the abstract; the AlphaOpsBench line was misread in the first pass as evidence that public strategies fail.",
+  "credibility": 2,
+  "verification": "PARTIAL. The abstracts contain the quoted figures, but the AlphaOpsBench 'no confirmed pass' concerns the validity of LLM-generated code, not the profitability of the 24 strategies, so it does not support the sceptical point it was used for.",
+  "channel": "r1_papers"
+ },
+ {
+  "name": "Passive two-sided pair maker on BTC 5m (bid both outcomes while bid sum <= 0.95, hold to resolution)",
+  "family": "pair-accumulation",
+  "mechanism": "From the reconstructed 'Spec A' in the gude dataset (source wallet 0xe1d6): while t < 270 s and yes_bid + no_bid <= 0.95, rest maker bids on the side where inventory is short (both sides when balanced), about 10 clips per session; stop when worst-case PnL reaches +$5..15 or the capital cap; never take directionally, never pay pair cost above 1.0; hold to resolution and redeem. Supposed edge: buying a full Up+Down pair below $1 at maker prices (claimed pair edge +2.9-3.8%); the leftover one-sided inventory is described as uninformed (hit rate ~49%).",
+  "time_gap": "none (spread capture; no outside information)",
+  "market_categories": [
+   "crypto up/down 5m (BTC, ETH)"
+  ],
+  "sources": [
+   {
+    "url": "https://huggingface.co/datasets/gude/polymarket-wallet-activity",
+    "date": "reports generated 2026-06-09; repo created 2026-06-13, last modified 2026-07-14 (HF API) - older than the 3-month window",
+    "author": "gude",
+    "kind": "HuggingFace dataset with strategy-decode reports (RECONSTRUCTED_STRATEGY_SPEC.md, CROSS_WALLET_SYNTHESIS.md, BACKTEST_RESULTS.md, REPLAY_RESULTS_TIER_1_2.md, METRIC_AUDIT.md)"
+   }
+  ],
+  "claimed_results": "Source claims $4.42M in-sample and $0.83M out-of-sample PnL for 0xe1d6 on BTC with 'zero losing days', win rate 90.9%. Its own pessimistic backtest of the spec gives +$6.76 per session over 1,358 sessions (first fill at 114 s vs the wallet's 18 s; win rate 62.9%). Its depth-capped replay of the strict pair leg on BTC gives $28.3K before fees and $1.1K after fees on 2,780 sessions.",
+  "evidence": "wallet_check 2026-11-27, 0xe1d6: gross (profile PnL) 781,581; taker fees charged 1,718,946 of which 1,222,704 REFUNDED; rebates 40,754; KEPT 326,092 = +0.91% of $35.7M volume; rebate share 12%; +285K without rebates. Monthly NET kept (without rebates): Mar +73.0K (+70.7K), Apr +228.0K (+194.3K), May +25.1K (+20.4K); no trades since May 2026. The researcher's '-937K after fees' and 'Mar -294K, Apr -628K' were wrong: they ignored the refund. 93% of what it kept came in Mar-Apr, when its taker fees were refunded. Source's claimed $4.4M (BTC alone) is still about 5.7x the wallet's lifetime gross. Second wallet 0x8852 (same dataset, mechanics NOT described by the source, so it is not evidence for Spec A): gross 320,129, fees fully refunded, rebates 42,918, kept 363,031 (+2.34% of $15.5M), rebate share 12%; zero taker fees since May; NET kept May..Nov +41.5K, +53.3K, +30.2K, +2.3K, +14.3K, +6.0K, +8.8K (without rebates +34.6K, +48.4K, +24.1K, -2.5K, +8.3K, +2.8K, +8.1K); volume down from $2.06M to $0.37M a month. Its last 5 days (pmlab.wallet, 22-27 Nov): 100% maker, buys only, no merges, BTC 15m ($57.7K, +1.77%) and ETH 15m ($30.5K, -0.95%), not 5m; 7,960 fills of ~$11 on 885 markets, both outcomes in 395; +$733 on $88K, t 0.47. Tier 0, not in a fee group.",
+  "wallets": [
+   "0xe1d6b51521bd4365769199f392f9818661bd907c",
+   "0x885278f0e304bc2d53f805af2ab779cb6011c569"
+  ],
+  "requirements": "Maker order placement within seconds of window open, 1 s book data, a few hundred dollars per session; queue position decides who gets filled.",
+  "fee_sensitivity": "Maker fills pay no fee (BTC 5m taker rate 0.05 since 2026-11-20, 0.07 before). The source itself measures that a taker version nets about +$0.10 per session: the edge exists only at maker prices. A new account gets no maker rebate. Note that 0xe1d6 was 38% taker and its taker fees were refunded in the two months that made its result.",
+  "testability": "mileswangs/polymarket-btc-updown-5m-orderbook-tick-data (L2 + trades + on-chain fills with maker and taker wallets, 2026-08-08..21) and Fahri-5/updown-5m-polymarket-raw (2026-10-17..11-08): place hypothetical bids, count a fill only when a later trade prints through the level, settle on the recorded outcome. kinzikdza FINDINGS.md (confirmed in the live file) already reports 0 of 17 passive-maker regions positive on tape-based fills (June 2026). A separate, cheap test: follow 0x8852's actual maker fills on BTC/ETH 15m over 30+ days (Data API) to see whether its small positive result is real.",
+  "red_flags": "Source dollar figures are about 10x the Data API (its PnL formula appears to count redeemed winners twice). Source contradicts itself: its METRIC_AUDIT attributes 96.8% of 0xe1d6's BTC P&L to the 'residual' and only 3.2% to the pair edge, while the synthesis calls the residual uninformed; the wallet's median pair cost is 1.001, not the <= 0.95 of the spec. Wallet earned in the fee-refund months and stopped in May 2026, before TWAP settlement, the taker delay and the November fee change. Lab's own finding: both sides at once always cost >= $1.01 and the one-sided remainder lost money in 3 of 4 samples. Adverse selection of resting bids. 0x8852's recent result is not statistically different from zero.",
+  "credibility": 2,
+  "verification": "CONFIRMED. I fetched the four reports from HuggingFace myself (byte-identical to the saved copies): Spec A text, the $4.42M / $0.83M table, +$6.756 per session over 1,358 sessions and the $28,272 / $1,117 replay line are all there. The wallet evidence was wrong in sign for March-April (fee refunds ignored) and has been replaced; 0x8852 is not described by the source.",
+  "channel": "r2_datasets"
+ },
+ {
+  "name": "Micro-clip maker pair building with MERGE recycling (cheap side first)",
+  "family": "market-making",
+  "mechanism": "From 'Spec B' (source wallet 0xb27b): rest many tiny maker bids ($0.1-0.6 clips) on both outcomes with pair bid sum up to about 0.97, buying the cheaper side first (anti-momentum; book features explain 67% of its side choice); when worst-case PnL is locked, MERGE the paired shares back into USDC and recycle the capital into new quotes; keep quoting to the last second. Edge is said to be flow capture plus maker rebates and liquidity rewards.",
+  "time_gap": "none. The source explicitly withdraws its earlier 'oracle-lag exploit' reading: median Binance-Chainlink gap at trade $4-12 (not $52.82, which came from a 75-session sample), first directional side matches the winner 49.7% of the time.",
+  "market_categories": [
+   "crypto up/down 5m (BTC, ETH, SOL, XRP)"
+  ],
+  "sources": [
+   {
+    "url": "https://huggingface.co/datasets/gude/polymarket-wallet-activity",
+    "date": "reports generated 2026-06-09; repo last modified 2026-07-14 - older than the window",
+    "author": "gude",
+    "kind": "HuggingFace dataset with strategy-decode reports"
+   }
+  ],
+  "claimed_results": "Source claims $1.44M in-sample and $5.33M out-of-sample PnL for 0xb27b, 57.2% maker share, 117,099 in-window merges. Its own backtest of the reconstruction with taker-like fills and no rebates: -$3.83 per session over 6,966 sessions ('do not copy without that stack').",
+  "evidence": "wallet_check 2026-11-27, 0xb27b: gross 809,914; taker fees charged 3,512,985 of which 3,190,463 REFUNDED; rebates+rewards 770,368 (maker rebate 660,986, rewards 65,115, taker rebate 44,267); KEPT 1,257,760 = +0.90% of $140.2M; rebate share 61%; +487K without rebates. Monthly NET kept (without rebates): Mar +329.9K (+289.9K), Apr +234.0K (+105.1K), May +98.1K (+58.9K), Jun +143.5K (+37.2K), Jul +79.6K (-20.9K), Aug +190.9K (-27.4K), Sep +181.8K (+44.5K); no fills in Oct-Nov. The researcher's 'Mar -1,407K, Apr -1,219K' ignored the refund and is wrong. The operator did not stop: the wallet's tier lookup still shows Gold 348,873 taker volume and 2,406,060 maker volume (700 bps) with own volume 0, and ply-pm0 (0x764f...c347, joined 2026-09-25) and ply-pm2 (0x43e7...472a, joined 2026-09-28) return exactly the same values; per the lab's x1 table they kept +48K / +38K and +25K / +4K in Oct / Nov (+27K / +21K and +17K / -5K without rebates), rebate share 44-58%. Source's claimed $5.3M for 30 days is far above the wallet's lifetime gross.",
+  "wallets": [
+   "0xb27bc932bf8110d8f78e55da7d5f0497a18b5b82",
+   "0x764fd57b0b885cbeada5a119cdf0a113ee4ec347",
+   "0x43e7e4b6a5dc71663d12cbf16b28468095a5472a"
+  ],
+  "requirements": "High message rate, queue priority, MERGE transactions, maker rebate tier (needs >= 200K of 30-day weighted maker volume) and liquidity rewards. Not a small-account setup.",
+  "fee_sensitivity": "Result is rebate-dependent: 61% of what the wallet kept is rebates and rewards, and it is negative before rebates in July and August. A new account has a 0% maker rebate since 2026-11-20.",
+  "testability": "mileswangs L2 + on-chain fills (2026-08-08..21) fall inside this wallet's active period, so its real maker fills and queue behaviour can be read there; SII-WANGZJ on-chain tape to 2026-10-04 (card only, not opened). The successor wallets ply-pm0 / ply-pm2 can be taken apart with pmlab.wallet for the post-Nov-20 regime.",
+  "red_flags": "Edge described by the source itself as infrastructure-bound (queue position, micro-clips, rebate share). Source dollar figures unreliable (about 10x). Source is internally inconsistent on merges (117,099 in-window merges for this wallet vs 'in-window MERGE is rare or absent for all three'). 44% of the lifetime result came in the fee-refund months.",
+  "credibility": 2,
+  "verification": "CONFIRMED. Spec B text, the 'oracle-lag REFUTED' correction, $1,439,163 / $5,325,304, 57.2% maker share, 117,099 merges and -$3.832 per session over 6,966 sessions are in the files I fetched. Corrected: March-April net (refunds), and 'stopped in September' is really a move to ply-pm0 / ply-pm2 (identical tier volumes).",
+  "channel": "r2_datasets"
+ },
+ {
+  "name": "Follow the oracle sign versus the strike and scale up as the outcome becomes certain (Bonereaper, BTC 5m)",
+  "family": "latency-crypto-updown",
+  "mechanism": "From 'Spec C' and the later EEBD_CLONE_REPORT in the same dataset (source wallet 0xeebd = the Polymarket profile Bonereaper): about 5-10 s after the window opens, buy the outcome currently winning versus the strike on the Chainlink price (sign(chainlink - strike) alone reproduces 80-82% of the wallet's first-side choices; stake-weighted agreement 0.91); keep trading about 100 times per window; after an oracle sign flip switch sides only with probability ~0.25; hedge with the other side at about $1.01 joint cost in ~23% of buys; never sell, never merge, redeem after resolution. CORRECTED: the candidate said 'late in the window only repair buys at <= 0.30' (a line of Spec C). The deeper decode says the opposite: 'directional volume is concentrated LATE - the final-60s bucket carries ~13x the USD of the first-10s bucket, at prices up to 0.99, where P(winner == sign) reaches 0.83-0.91'. The wallet's current tape agrees with the clone report.",
+  "time_gap": "Oracle/exchange price versus the Polymarket book, seconds. The source measures that P(winner = strike sign) rises from 55% at t=5 s to 64% at t=60 s 'but the ask on that side reprices in lockstep': gross edge about 2-3 cents per $1 at every entry time, about 1 cent after taker fees. Late in the window the gap is the near-certain outcome still being offered at 0.95-0.99.",
+  "market_categories": [
+   "crypto up/down 5m (BTC)"
+  ],
+  "sources": [
+   {
+    "url": "https://huggingface.co/datasets/gude/polymarket-wallet-activity",
+    "date": "reports generated 2026-06-09 / 2026-06-10; repo last modified 2026-07-14 - older than the window",
+    "author": "gude",
+    "kind": "HuggingFace dataset with strategy-decode reports (RECONSTRUCTED_STRATEGY_SPEC.md, PER_WALLET_SUMMARY.md, wallet_0xeebd/reports/EEBD_CLONE_REPORT.md)"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2098196382599315480",
+    "date": "2026-09-10",
+    "author": "@RetroValix",
+    "kind": "X post advertising the same wallet (Bonereaper) with a copy-trading / referral link; taken from the lab's catalog/raw/x1_wallets.md, not re-opened in this pass"
+   }
+  ],
+  "claimed_results": "Source claims $13.8M in-sample and $18.4M out-of-sample (30 days) for 0xeebd on BTC with zero losing days. Its own backtests of the decoded rule as a taker: -$84 per session in the text (-$104.96 in the table, dominance chasing) and -$5.49 per session (strike-sign rule, 7,862 sessions). A 'clone_eebd_v3' variant shows +$128 per session with 99.6 fills per session under a Bernoulli p=0.30 fill assumption - not credible.",
+  "evidence": "wallet_check 2026-11-27, 0xeebd (Bonereaper): gross 1,467,617; taker fees charged 2,524,168 of which 906,915 refunded; rebates+rewards 679,046 (taker 513,464, maker 162,058); KEPT 530,841 = +0.31% of $170.4M; rebate share 128%; -150K without rebates. Monthly NET kept (without rebates): Mar +74.0K (+73.0K), Apr -74.2K (-100.3K), May +140.9K (+116.7K), Jun +38.4K (-54.1K), Jul +92.7K (-59.3K), Aug +121.4K (-65.1K), Sep +54.9K (-33.8K), Oct +36.8K (-8.5K), Nov +45.7K (-17.1K): negative before rebates in every month since June. The researcher's 'Mar -166K, Apr -742K' ignored refunds. Diamond taker tier (volume 4,583,181) and maker volume 629,191 are shared with wzbbb (one fee group; own maker volume only 68,070). Last 3 days at the 0.05 rate (pmlab.wallet, 24-27 Nov, 48.9K fills, 904 markets, $2.09M): 75% taker, buys only; taker edge +0.89 c/share before a 0.73 c fee = +0.16 c (t 0.66 by market); 57% of the dollars bought at >= 0.95 (taker +0.6-0.7 c/share after fee, maker +1.0 c at 0.95-0.99, t 0.9-1.7); net of fees +0.29% of turnover (t 0.84). API for the same days: gross 30.7K, fees 23.4K, rebates 10.2K, kept 17.5K.",
+  "wallets": [
+   "0xeebde7a0e019a63e6b476eb425505b7b3e6eba30",
+   "0x19b3823092892c026517fd0ff58df4889abe0b9b"
+  ],
+  "requirements": "Chainlink/RTDS price feed (needs a Chainlink API key from 2026-11-30), low latency to London, large capital and a 4M+ weighted-volume rebate tier (40% of fees back).",
+  "fee_sensitivity": "BTC 5m taker rate 0.05 (0.07 before 2026-11-20). Source: about +1 cent per $1 after taker fees at best, and negative in its own taker backtests. Data API: negative before rebates in every month since June; at the new rate the last three days are about zero before rebates. A new account gets no rebate.",
+  "testability": "Fahri-5/updown-5m-polymarket-raw has Binance, Chainlink and the full book on one receive clock (2026-10-17..11-08): replay 'buy the oracle-ahead side at t=5..60 s at the displayed ask, 150 ms taker delay, fee in', and separately 'buy or bid the oracle-ahead side at >= 0.95 in the last 60-90 s'. The second variant matches the only taker bucket the lab found positive (0.90-1.00, +0.41 c/share, not significant on 278 markets).",
+  "red_flags": "The decoded wallet is a promoted one: Bonereaper appears in referral and copy-trading posts (@RetroValix Sep 10 and Oct 6, @Dan1ro0 Oct 29). Rebate-carried: it loses before rebates and is paid by its volume tier. Source dollar figures are about 10x the Data API ($11.7M BTC pre-fee by 25 Apr in its audit vs $1.47M lifetime on the profile). The source's '60% maker' no longer holds (25% maker now). The candidate's original late-window description contradicted the same dataset's deeper decode. Lab's own tape work: takers on BTC 5m lose 2.67% after fees.",
+  "credibility": 1,
+  "verification": "PARTIAL. Spec C, the 80-82% sign match, 55%->64%, the $13.8M / $18.4M table and the backtest rows are in the files as quoted. Not matching: the late-window rule (the same dataset's EEBD_CLONE_REPORT and the wallet's current tape show most dollars going in late at up to 0.99), and the researcher did not notice that 0xeebd is Bonereaper, already in the lab's wallet table.",
+  "channel": "r2_datasets"
+ },
+ {
+  "name": "Buy both sides through the window and end with pairs plus a lean (UUDDLRLR style, half taker)",
+  "family": "pair-accumulation",
+  "mechanism": "Wallet UUDDLRLR trades nearly every BTC 5m window, buys only (no sells, no merges), spreads its fills evenly across the 5 minutes, ends each session with a block of paired Up+Down shares plus a directional remainder, and redeems after resolution. Pair cost averages 1.000 (average pair edge -0.006%), so any profit has to come from the remainder leaning to the winner (the remainder matched the winner in 84.09% of sessions; that is largely what buying more of the rising side looks like, and it earned only 2.4% of volume before fees).",
+  "time_gap": "Unproven. The source reports a median Binance-Chainlink gap at trade time of +$39.68 on a 75-session sample; the same author's 75-session figure for another wallet ($52.82) fell to $4-12 on full data.",
+  "market_categories": [
+   "crypto up/down 5m (BTC, ETH)"
+  ],
+  "sources": [
+   {
+    "url": "https://huggingface.co/datasets/gude/polymarket-wallet-activity",
+    "date": "report covers 82 days from the wallet's start (joined 2026-04-13) to early July 2026; repo last modified 2026-07-14 - older than the window",
+    "author": "gude",
+    "kind": "HuggingFace dataset, wallet_uuddlrlr/reports/STRATEGY_DECODE_BTC_82d.md"
+   }
+  ],
+  "claimed_results": "Source: BTC 5m, 17,839 sessions, $99,654 before fees, estimated fees $80,385, $19,269 after fees, win rate 53.2%; by class: pair_arb 10,169 sessions -$5,737, pair_with_lean 5,557 sessions +$11,197, skewed_pair +$7,198, directional 1,072 sessions +$6,106; maker share 47.9%, taker 44.2% on a 75-session L2 cross-check.",
+  "evidence": "wallet_check 2026-11-27, UUDDLRLR = 0xa8cc...41a9 (exact profile-name match in gamma search): gross 114,560; taker fees 114,612 (refunded 1); taker rebates 14,894; KEPT 14,842 = +0.31% of $4.82M; rebate share 100%; -53 without rebates (gross +2.38% of volume, fees -2.38%). Monthly NET kept (without rebates): Apr -0.1K, May +15.7K (+15.7K), Jun -10.7K (-17.0K), Jul +9.9K (+1.3K); no trades since July 2026. This is the one report in the dataset whose dollars agree with the Data API (BTC-only $99.7K gross and $80.4K fees vs $114.6K and $114.6K across all coins). Tier lookup shows taker volume 1,079 with no own trades since July, which hints at a small sibling wallet (not followed up).",
+  "wallets": [
+   "0xa8ccda0419f357f819271437efb61022f01341a9"
+  ],
+  "requirements": "Bot trading every window, about $4-5K working capital by the look of the sizes, taker rebate tier to end positive.",
+  "fee_sensitivity": "Fees ate 100% of the gross at the old rate. At the current 0.05 rate the same fills would have left roughly 2.38% - 1.70% = +0.7% of volume, but the monthly gross ranged from 1.7% (June) to 3.5% (July) of volume, so a month like June would still be about zero. Untested under TWAP settlement and the taker delay.",
+  "testability": "The wallet's full fill list is in the Data API (trades?user=...); pair it with pmxt-era L2 (Joseph3222 / phobia76, to 2026-08-10) to see which fills were maker. Same family as the lab's x-MoneyForWhiskas study, which found the same thing (taker fills about zero before rebates).",
+  "red_flags": "Break-even before rebates, stopped trading in July 2026, all of it before the TWAP settlement, taker-delay and November fee changes. The 84% 'hit rate' is not a forecasting record. The time-gap figure rests on 75 sessions.",
+  "credibility": 2,
+  "verification": "CONFIRMED. Every number quoted is in STRATEGY_DECODE_BTC_82d.md as fetched from HuggingFace, and the Data API agrees with the report in size and sign. Credibility lowered from 3 to 2 because what is documented is a break-even account that quit, not a working edge.",
+  "channel": "r2_datasets"
+ },
+ {
+  "name": "Liquidity-rewards farming on quiet, high-pool markets",
+  "family": "rewards-farming",
+  "mechanism": "Rest two-sided limit orders (bid Yes and bid No, at or 1 cent from the midpoint, at least the market's minimum size) in markets with a large daily reward pool. Income is the daily pool share: order score ((v-s)/v)^2 per share, two-sided score = min of the two sides (single-sided gets 1/3 inside 0.10-0.90), sampled every minute, paid daily, minimum payout $1. Cost is being filled just before the price moves. Exit: merge Yes+No pairs back to cash, or sell inventory. The edge is the subsidy exceeding adverse selection, which the researcher's data shows only where the pool is at least about $100-200 a day.",
+  "time_gap": "none (the risk is the reverse: a taker who knows first hits the resting quote)",
+  "market_categories": [
+   "tech/finance (Ornn GPU prices, company milestones)",
+   "weather (daily temperature)",
+   "politics",
+   "economics"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/programs/liquidity-rewards.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://clob.polymarket.com/rewards/markets/multi?order_by=rate_per_day&position=DESC&page_size=500",
+    "date": "2026-11-27",
+    "author": "Polymarket CLOB API",
+    "kind": "public API"
+   },
+   {
+    "url": "https://docs.polymarket.com/market-data/market-details.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "None published; the docs only give the formula. No article with a concrete method was found in two web searches.",
+  "evidence": "Researcher's measurement, 2026-11-27 (not re-run by the verifier; saved list re-counted: 20,500 listed, 8,819 active, $144,263/day). For 1,137 markets with pool >= $20/day that $200 can quote: pools $108,318/day vs $18.76M resting in the reward band = 0.58%/day of depth. $200 at the inside would be credited a median of $1.74 / $3.37 / $11.73 per market per day (pessimistic / central / optimistic model). Makers' aggregate 1-hour markout: random sample top tier +1.1%/day net on in-band depth, mid -1.3%, low -8.8%; pre-specified quiet-pool rule (rate >= $100/day, 24h volume < $5K, 60 markets) +0.61%/day net for makers in aggregate.\n\nVerifier, wallet_check --monthly on every wallet (gross = trade P&L before fees / rebates+rewards / NET kept):\n- ArmageddonRewardsBilly: all-time gross +353,521, rewards 1,207,786, kept 1,630,475 on $387M volume (+0.42%); 80% of what was kept is rebates/rewards; taker tier 0. Sep +578,915 / 60,935 / +633,136 (a directional win); Oct -8,339 / 30,108 / +22,173; Nov +22,857 / 26,934 / +49,287. Net NEGATIVE in May (-136,181) and June (-43,105) while receiving $160-220K of rewards a month. Rewards down from 220K (May) to 27K (Nov).\n- Haradwaith: gross -492,320, rewards 912,799, kept 493,835 (unrealized -73,345), rewards = 200% of what was kept. Sep -14,067 / 140,402 / +126,194; Oct -153,039 / 135,466 / -18,112; Nov -51,857 / 81,610 / +29,765. Kept 39% of Sep-Nov rewards.\n- pootytherewardfarmer: gross -353,443, rewards 669,554, kept 328,439. Sep -43,112 / 47,712 / +4,600; Oct -21,051 / 35,934 / +14,608; Nov -17,513 / 19,139 / +1,610. Kept 20% of Sep-Nov rewards; rewards down from 86.5K (June) to 19.1K (Nov).\n- pootythetemperaturefarmer (joined 2026-09-26): gross -6,747, rewards 7,869, kept 1,721. Sep +505, Oct +912, Nov +305 (20% of rewards). 26 of 62 days negative, worst day -384.\n- pootythefinancefarmer (joined 2026-10-01): gross -3,814, rewards 7,141, kept 3,505 of which unrealized -1,484. Oct -2,289 / 3,914 / +1,625; Nov -1,565 / 3,403 / +1,840 (47%). 20 of 57 days negative. Holds more than $15.4K of inventory (first 1,000 positions only). Daily reward income $41-82 on Nov 17-24, then $977 / $271 / $192-277 on Nov 25-27 once the Ornn pools started.\n- needleladder: gross -43,273, fees -5,115, rewards 47,591, kept 1,010. Oct -12,764 / 11,027 / -2,139; Nov -27,522 / 37,960 / +6,034. 47 of 88 days negative. Rewards $1.0-1.9K/day mid-November, $3.8-4.9K/day on Nov 25-27 with the trading leg at -$1.7K to -$2.7K a day.\n- AiBird: gross +140,523, rewards 201,441, kept 322,811 (64% rewards). Sep +17,411, Oct +10,032, Nov +19,364; without rewards -512 / -5,266 / +2,358.\n- xtxpleasecallme: NOT a pure farmer. Gold taker tier (30-day weighted volume 648,965); gross +256,799, fees -65,958, rewards 160,202, kept 386,805 with an unrealized loss of 201,931 inside it. Sep +46,838, Oct +194,014 (gross +144,550, directional), Nov +21,774; without rebates/rewards -2,494 / +115,400 / -12,413.\n- Laribobibo: gross -39,862, rewards 35,476, kept -3,161. Sep -496, Oct +115, Nov +1,063.\n- automatedmm (joined 2026-10-12): gross -8,388, rewards 1,414, kept -6,908 on $403K volume.\n- verybadtrader (joined 2026-11-05): gross -16,342, rewards 9,274, kept -6,402 on $239K volume.\nAll small farmers are tier 0 on both rebate ladders; maker rebates are a rounding error next to rewards.",
+  "wallets": [
+   "ArmageddonRewardsBilly 0xc8ab97a9089a9ff7e6ef0688e6e591a066946418",
+   "Haradwaith 0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71",
+   "pootytherewardfarmer 0xa3e22cd32aa9238ef7dbcfb4761e33b9eaa1fdf8",
+   "pootythetemperaturefarmer 0x486c8e5df09352620636b38e849ac10272126799",
+   "pootythefinancefarmer 0xe2a3b5b5f39dc6c46ac6d59672052282abb48e01",
+   "needleladder 0x4462e46cf0d31466693058893f4913e2411fbfdf",
+   "AiBird 0xa58d4f278d7953cd38eeb929f7e242bfc7c0b9b8",
+   "xtxpleasecallme 0xad5353afe30c2da57709e2704ef3ccdcf67eef24",
+   "Laribobibo 0x721a29613c653d9430532402784c8b25ad5d9295",
+   "automatedmm 0x5b9e7fd7b867467b7c16d88f11c24027af1f3423",
+   "verybadtrader 0x02e564adb4c1647520fa398f1bc432e2d2dd98aa"
+  ],
+  "requirements": "An account and an API key; a bot that re-quotes on minutes, not milliseconds; $200 covers ONE market on both sides where the minimum is 200 shares (the H100 December near-the-money strikes) and one or two where it is 20-50; no data feed beyond the Polymarket book, plus a reason to pull quotes before news (schedules, the underlying index, e.g. Ornn's daily settle).",
+  "fee_sensitivity": "Makers pay no fee. Maker rebates are zero for a small account (first tier needs $200K of 30-day weighted volume) and zero anyway on fee-free markets. The $1 minimum daily payout binds at $200; the docs do not say whether it applies per market or per account.",
+  "testability": "Poll rewards/markets/multi and POST /books once a minute for chosen markets for 1-2 weeks, compute our share of the score exactly as the docs do, and simulate fills from the public tape (data-api /v2/trades?condition=) with a pessimistic queue assumption. Calibrate against the daily reward_income of pootythefinancefarmer and needleladder (user-pnl?fidelity=1d) and rebuild their quoting from their maker fills. Record the rate every day: it is re-set daily.",
+  "red_flags": "One book snapshot. Rates are re-set daily: 78% of the pool carried a start date of Nov 26-27 and 13 of the top 100 rates changed within hours, so today's screen is not tomorrow's pool. The money sits on strikes that are NOT quiet (H100 December near-the-money strikes trade $21-102K a day; the quiet wings pay $27/day). Markout comes from few fills over 1-4 days. A small maker at the inside is hit first. Farmers were found through holder lists, which selects makers who ended up with inventory. The two newest small entrants are net negative (-6.9K, -6.4K), a third is negative all-time, and the largest farmer lost net in two months while receiving $160-220K a month. The steadiest small farmer keeps about $1.8K a month on more than $15K of inventory. Payouts cannot be checked without an account.",
+  "credibility": 3,
+  "verification": "PARTIAL. The formula, the $1 minimum and the sampling rule are in the live docs page (identical to the saved copy); the pool totals re-count from the saved list; all 11 wallets confirm that reward income is real and that the trading leg loses. Not confirmed: the per-$200 yield and the +0.61%/day aggregate figure (one snapshot, scripts not re-run), and the 'quiet market' premise for the highest pools.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Monthly-average pinning on Ornn GPU-price ladders",
+  "family": "other",
+  "mechanism": "Markets 'Will the average Ornn H100/H200/B200/B300 rental price in <month> be above $X' settle on the arithmetic mean of Ornn's finalized daily settled values for the month, rounded to the cent. Each published daily value fixes 1/30 of the result, so late in the month most strikes are decided by public data. Entry: buy the decided side (or quote only that side) if the book still prices real doubt; exit at settlement. Also tells a rewards farmer in these markets when to pull quotes (after each daily settle at 12:00 AM ET).",
+  "time_gap": "Ornn publishes one settled value a day (12:00 AM ET); fair value moves once a day with public data. Lag scale: hours to days.",
+  "market_categories": [
+   "tech/finance (compute)"
+  ],
+  "sources": [
+   {
+    "url": "https://gamma-api.polymarket.com/events?slug=h100-average-rental-price-in-december-2026",
+    "date": "event created 2026-11-23, read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "market rules via public API"
+   },
+   {
+    "url": "https://data.ornn.com/api/public-index/gpu/H100%20SXM/index-history",
+    "date": "2026-11-27",
+    "author": "Ornn",
+    "kind": "public API (free tier, three months of daily settled values)"
+   },
+   {
+    "url": "https://docs.polymarket.com/perps/learn-about-trading/markets/compute.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXH100MS&status=settled",
+    "date": "2026-11-27",
+    "author": "Kalshi",
+    "kind": "public API"
+   }
+  ],
+  "claimed_results": "None; nobody was found describing it.",
+  "evidence": "Rule text re-read on the live event: mean of finalized daily settled values of OCPI-H100, a value is final once the next day's is published, later revisions ignored. No Polymarket month has settled (events created 2026-11-23).\n\nVerifier additions. Ornn's daily values ARE public and free (91 rows, 2026-08-28..11-26): monthly means Sep 2.8270, Oct 2.9403, Nov 3.1492 after 26 of 30 days; median absolute day-to-day change $0.10, p90 $0.27, three-month range 2.46-3.53. With four days left the November mean cannot leave 3.00-3.25 unless the remaining days average under 2.03 or over 3.91; on a 10-cent ladder the 3.10 and 3.20 strikes would still need the 30-day low (2.78) or high (3.53) on average to flip. Kalshi's identical product settled Sep at 2.83 and Oct at 2.94, equal to the mean of Ornn's daily values to the cent (2 of 2 months).\n\nDid the book lag on Kalshi? Daily candles for Sep and Oct: strikes that settled Yes had a closing ASK of 0.98-1.00 from about the 20th on, only the bid lagged (0.59-0.95), so the decided Yes side could not be bought cheaply. Strikes that settled No occasionally showed a stale Yes bid of about 50 contracts at 0.09-0.15 in the last third of the month. Volume was zero on most days. This is weak evidence of a small, one-maker lag, not of an edge.\n\nPolymarket December ladder now: above $3.00 0.57/0.58, above $3.10 0.44/0.45 (implied median about 3.05; November is running at 3.15, last settle 3.19). Fee 0, holding rewards on, pools $640/day on the four near-the-money strikes and $27/day on the others, 1-cent spreads, $279K of 24 h volume on the event.\n\nWallets: pootythefinancefarmer (kept +1,625 in Oct, +1,840 in Nov, all of it rewards; gross -2,289 / -1,565) and chessplayer (all-time gross +4,009, rewards 46,984, kept 44,063; Sep +2,023, Oct +10,368, Nov +13,561; without rewards -2,436 / +6,208 / +9,587; taker tier 0). Both are reward farmers found as holders; the Polymarket ladders are four days old, so neither wallet is evidence for or against pinning.",
+  "wallets": [
+   "pootythefinancefarmer 0xe2a3b5b5f39dc6c46ac6d59672052282abb48e01",
+   "chessplayer 0x4b8ae011176b76888949476d7fb7a56985faf4a4"
+  ],
+  "requirements": "Daily values from the free Ornn endpoint (no key), a spreadsheet-level model of the remaining days, small capital, no speed.",
+  "fee_sensitivity": "Fee rate is 0 on these markets today (feeType zero_fees, confirmed on all 12 H100 December markets) although finance/tech is 0.05 in the fee table; if the holiday ends the fee at p=0.5 is 1.25 cents a share.",
+  "testability": "Can start now, no waiting for December: (1) replay Kalshi's settled Sep and Oct ladders (daily candlesticks, already pulled once) against the Ornn history with a proper distribution for the remaining days instead of a range bound; (2) from 2026-12-01 record the Ornn settle and the Polymarket ladder books around 05:00 UTC every day and measure how long quotes stay unchanged after the new value appears.",
+  "red_flags": "No settled Polymarket month yet. On the only venue with history the decided Yes side was already offered at 0.98-1.00 and the stale bids were 50 contracts. Polymarket's ladder has 1-cent spreads and paid market makers who can do the same arithmetic. The daily index is noisy (3% a day is normal), so strikes within about 10 cents of the running mean stay open until the last days. Ornn's free tier covers only three months and its terms were not read. The verifier's 'decided' dates used a crude range bound and should not be reused.",
+  "credibility": 3,
+  "verification": "PARTIAL. The settlement arithmetic is confirmed (rule text on the live event; Ornn's free daily history; Kalshi's two settled months equal the mean of the daily values). The claim that the book still prices doubt on decided strikes is not confirmed: Kalshi's history shows it only as small stale bids, and Polymarket has no history.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Polymarket vs Kalshi on the same H100 monthly-average strikes",
+  "family": "cross-venue-arb",
+  "mechanism": "Both venues list 'average H100 price in <month> above $X'. Buy Yes on the venue where it is cheap and No on the other when the two cost under $1, or buy a lower strike on one venue against selling a higher strike on the other at the same price. Hold to settlement.",
+  "time_gap": "none (price disagreement between venues; persists minutes to days in thin books)",
+  "market_categories": [
+   "tech/finance (compute)"
+  ],
+  "sources": [
+   {
+    "url": "https://api.elections.kalshi.com/trade-api/v2/markets?series_ticker=KXH100MS&status=open",
+    "date": "2026-11-27",
+    "author": "Kalshi",
+    "kind": "public API"
+   },
+   {
+    "url": "https://gamma-api.polymarket.com/events?slug=h100-average-rental-price-in-december-2026",
+    "date": "2026-11-27",
+    "author": "Polymarket",
+    "kind": "public API"
+   }
+  ],
+  "claimed_results": "None.",
+  "evidence": "Re-pulled by the verifier a few hours after the researcher: Polymarket Yes above $3.50 (December) ask 0.11; Kalshi bid 0.17 for 50 contracts (was 0.18): 0.11 + 0.83 = 0.94 per $1 before a Kalshi taker fee of about 1 cent, i.e. roughly $2.50 of profit on $50 locked for five weeks. The second gap (Polymarket above $3.20 at 0.38 vs Kalshi above $3.25 bid) is gone: Kalshi's bid is now 0.35. Kalshi December quotes are 50-lots with 30-60 cent spreads, open interest 27-1,523 contracts. Rules: Kalshi says 'arithmetic mean of hourly values reported by Ornn', Polymarket says mean of finalized daily settled values; in practice Kalshi's Sep and Oct settled at 2.83 and 2.94, equal to the mean of Ornn's daily values (2 of 2).",
+  "wallets": [],
+  "requirements": "Accounts on both venues (Kalshi availability from Serbia not checked), capital locked on both sides until month end, manual execution is fine.",
+  "fee_sensitivity": "Polymarket leg 0 fee today; Kalshi taker fee 0.07*p*(1-p), about 1 cent at 0.17. A 6-cent gap survives it, on 50 contracts.",
+  "testability": "Poll both ladders hourly for a month, record gaps with sizes on both sides, and compare the two settlement values for November and December.",
+  "red_flags": "Capacity is tens of dollars: one maker's 50-contract quotes. Rule texts differ (hourly vs daily mean) even though two months matched. One of the two reported gaps disappeared within hours. Kalshi may not be open to the owner.",
+  "credibility": 2,
+  "verification": "PARTIAL. Both books re-pulled: one gap exists at 50 contracts, the other is gone. Rule equivalence is not in the texts but held for the two settled months.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Compute perp against the prediction-market ladder",
+  "family": "options-replication",
+  "mechanism": "Polymarket's H100-USD perpetual (live since 2026-11-26) tracks the 24-hour average of Ornn hourly prints; the prediction ladder prices the distribution of next month's average of the same index. Trade the ladder against a perp hedge when the ladder's implied median and the perp disagree, or use the perp to hedge inventory picked up while farming rewards in the ladder.",
+  "time_gap": "none by itself; the perp and the index move hourly, the ladder is repriced by hand",
+  "market_categories": [
+   "tech/finance (compute)",
+   "perps"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/perps/learn-about-trading/markets/compute.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://api.perpetuals.polymarket.com/v1/info/tickers",
+    "date": "2026-11-27",
+    "author": "Polymarket Perps API",
+    "kind": "public API"
+   },
+   {
+    "url": "https://docs.polymarket.com/perps/learn-about-trading/fees.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "None.",
+  "evidence": "Verifier's pull (evening of 2026-11-27): H100-USD index 3.1569, mark 3.157, mid 3.127 (1.0% under the index), open interest 12,952 GPU-hours (about $41K), 24 longs and 15 shorts; B200 and B300 have one long and one short each. December ladder implied median about $3.05. That is not a discrepancy by itself: Ornn's monthly means were 2.83, 2.94 and 3.15 in Sep-Nov while daily values ranged 2.46-3.53, so a December mean 10 cents under today's index is ordinary.",
+  "wallets": [],
+  "requirements": "A perps account with separate margin, $10 minimum notional, a model for a monthly average of a noisy index.",
+  "fee_sensitivity": "Perp taker 0.05% and maker 0.02% of notional at the entry tier, plus hourly funding; ladder fee 0 today.",
+  "testability": "Record perp mid, index and the ladder daily through December and January; test whether the perp's level predicts the settled monthly average better than the ladder's implied median.",
+  "red_flags": "Product is one day old; perp open interest is about $41K; a binary on a monthly average is not hedged by a linear perp except near the money; the reported 'gap' is within the index's normal month-to-month movement.",
+  "credibility": 2,
+  "verification": "PARTIAL. Index definition confirmed in the docs page and the tickers re-pulled; nothing about a tradable relationship has been tested.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Sports post-game settlement discount (resting bids at 0.99+ before on-chain resolution)",
+  "family": "resolution-bond",
+  "mechanism": "After a game is decided, holders sell the winning token at 0.99-0.999 to free capital instead of waiting about 15-20 minutes for resolution. The only leg that exists after the game is the RESTING BID at 0.99-0.999, redeemed at $1 on resolution. Lifting offers at 0.99+ is something else: it happens in the closing minutes of play and carries in-play risk.",
+  "time_gap": "The result is known from the broadcast/score feed; on-chain resolution follows 16-19 minutes after the last play on NBA games (15-minute challenge window on sports). Lag scale: minutes.",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/resolution.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://data-api.polymarket.com/v2/trades?condition=<conditionId>&start=<resolved_at-86400>",
+    "date": "2026-11-27",
+    "author": "Polymarket Data API",
+    "kind": "public API"
+   },
+   {
+    "url": "https://data-api.polymarket.com/v2/resolutions?condition=<conditionId>",
+    "date": "2026-11-27",
+    "author": "Polymarket Data API",
+    "kind": "public API"
+   }
+  ],
+  "claimed_results": "None from a source; measured only.",
+  "evidence": "239 sports/esports game markets resolved 11-27 Nov 2026, none disputed (237 at the 0.05 fee, 2 at 0.03). The researcher's headline reproduces from the saved fills: taker buys at 0.99-1 within 2 h of resolution $4.44M, net +0.227%.\n\nVerifier's split by minutes before resolution. Taker BUYS at 0.99+: none in the last 15 minutes (the post-proposal window); 15-30 min: 125 markets, $2.44M, net +0.285%, no losing market; 30-60 min: 132 markets, $1.73M, +0.476%, one $16 loss; 1-2 h: 13 markets, $0.27M, -1.88% (Eagles-Cowboys, takers paid 0.99+ for the eventual loser 90 minutes before resolution, -$6.7K). Resting bids filled at 0.99+ (taker sells): last 15 min 232 markets, $5.32M, +0.101%, no loser; 15-30 min 236 markets, $9.23M, +0.144%, no loser; 30-60 min $2.52M, +0.210%; 1-2 h $0.16M, -0.49% (the same game). All: $17.36M, +0.135%, about $23K for every maker together in nine days.\n\nBelow 0.99 there is no taker edge: all taker buys at 0.90+ in the last 24 h lost 2.81% pooled ($27.0M), and in 32 of 239 games takers bought the eventual loser at 0.90+.",
+  "wallets": [],
+  "requirements": "A score feed to know the game is over, capital that turns over several times a day, queue position at 0.999 (price-time priority, 0.001 tick) against whoever already collects this flow.",
+  "fee_sensitivity": "A resting bid pays nothing. For a taker the sports rate 0.05 costs 0.05 cents per share at 0.99, about a fifth of the gross.",
+  "testability": "For each resolved game take the final-whistle time from the ESPN API, then from the full tape (no row cap) measure volume and prices between final whistle and resolved_at, who the buying makers are, and how long capital stays locked.",
+  "red_flags": "A tenth of a percent per turn: $200 earns about 20-30 cents per complete turn if it is first in the queue. The taker version is in-play betting at 0.99, and its one loss wiped out a quarter of the two-hour bucket. 84 of the 239 tapes hit the script's 3,000-row cap, so all 24-hour totals are lower bounds from the end of the tape. Nine days of data, no dispute or voided game in the sample.",
+  "credibility": 2,
+  "verification": "PARTIAL. The measured numbers reproduce from the saved fills, but the mechanism as written does not: nobody buys the winner at 0.99+ as a taker after the game, that flow is end-of-game betting. Only the resting-bid leg is real, at 0.10-0.14% per turn.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Buying the proposed outcome during the UMA challenge window (non-sports)",
+  "family": "resolution-bond",
+  "mechanism": "Once a resolution is proposed on UMA the market settles after the challenge window unless disputed. Buy the proposed outcome below $1 (or rest bids) during that window; the risk is a dispute (4-6 days locked, possible reversal or 50/50).",
+  "time_gap": "The event has happened and a proposal is on-chain; the price can still trade under $1 for the challenge window: 2 hours by default, 15 minutes on daily-temperature and sports markets, 10 minutes on crypto level markets (gamma customLiveness, per NOTES.md); days if disputed.",
+  "market_categories": [
+   "politics",
+   "culture",
+   "economics",
+   "tech",
+   "mentions"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/resolution.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/changelog/predictions.md",
+    "date": "entry of 2026-09-28",
+    "author": "Polymarket",
+    "kind": "official changelog"
+   }
+  ],
+  "claimed_results": "None.",
+  "evidence": "Not measured by the researcher (the sample collapsed to 23 markets, 20 of them one event). Evidence already in the lab that the researcher did not use: in mentions markets, blindly buying the first print at 0.95+ is negative after the fee on the later half of the sample, with 4.2% of Yes confirmations and 1.6% of No confirmations resolving the other way (1,382 markets, 29 Sep - 23 Nov); economics bucket markets resolve about 2 h after the number and 98.8% of the stale money was taken within 60 s. The sports data in this catalog shows that after a proposal there are no offers to lift, only bids being hit.",
+  "wallets": [],
+  "requirements": "A way to find markets in the proposed state (the /v2/resolutions endpoint takes condition or event ids only, there is no status listing), reading the rules of each market, patience for disputed cases.",
+  "fee_sensitivity": "0.01 rate categories cost 0.01 cents per share at 0.99; 0.05 categories 0.05 cents; a resting bid pays nothing.",
+  "testability": "Page closed markets with the keyset endpoint by close time, take proposal times from /v2/resolutions (or UMA logs), and compute fills available between proposal and settlement, including every disputed market.",
+  "red_flags": "Untested here; the losses sit in the disputed tail, which a short sample misses; the lab's mentions result argues against the blind version; the default 2-hour window does not apply to the fastest categories.",
+  "credibility": 2,
+  "verification": "PARTIAL. The lifecycle (2-hour default window, 4-6 days if disputed, 50/50 outcome) is in the live docs page; there is no measurement, and existing lab data on mentions points the other way.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Proposing resolutions on UMA for the proposer reward",
+  "family": "resolution-bond",
+  "mechanism": "Post the bond with the correct outcome as soon as a market can be resolved; if nobody disputes within the challenge window the bond comes back with a reward.",
+  "time_gap": "none (a service fee for being first to report a known outcome)",
+  "market_categories": [
+   "all UMA-resolved markets"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/resolution.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "None; the docs do not state the reward size.",
+  "evidence": "Not measured; reward sizes and who proposes were not pulled. The docs say the bond is 'typically $750 pUSD'; gamma fields read earlier by the lab show $250 on sports games and daily-temperature markets, $500 by default and $25-50K on the largest politics markets.",
+  "wallets": [],
+  "requirements": "$250-750 per concurrent proposal, precise reading of rules, speed against established proposers.",
+  "fee_sensitivity": "No trading fee; the cost is the bond at risk.",
+  "testability": "Read proposer addresses, rewards and dispute outcomes from the UMA oracle contracts for Polymarket questions over three months.",
+  "red_flags": "The smallest bond seen is about the owner's whole stake; one wrong or early proposal loses it all; no reward size is known, so there is no evidence of any income.",
+  "credibility": 1,
+  "verification": "PARTIAL. The bond-and-reward mechanism is in the live docs page; the bond size differs from what the lab read in gamma, and nothing about the reward exists in any source opened.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Rebate-tier economics (strategies that only pay with volume rebates)",
+  "family": "market-making",
+  "mechanism": "Above $200K of 30-day weighted volume a taker gets 10-60% of fees back and a maker 3-15% of the taker fees its fills generated. High-frequency books (BTC 5-minute and similar) are run at about break-even before rebates and live on the rebate.",
+  "time_gap": "ms to s (speed race)",
+  "market_categories": [
+   "crypto up/down",
+   "sports"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/programs/taker-rebates.md",
+    "date": "read 2026-11-27; rates effective 2026-11-20",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/programs/maker-rebates.md",
+    "date": "read 2026-11-27; rates effective 2026-11-20",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/changelog/predictions.md",
+    "date": "2026-11-20",
+    "author": "Polymarket",
+    "kind": "official changelog"
+   }
+  ],
+  "claimed_results": "n/a",
+  "evidence": "wallet_check on needleladder: November volume $1,013,690 in 28,268 fills, 30-day weighted volume 91,168 (taker) and 125,531 (maker), tier 0 on both, rebate 0 bps; all-time gross -43,273, fees -5,115, rebates 1,807 (taker 209, maker 1,598), rewards 47,591, kept 1,010. Oct -12,764 gross / -2,139 net; Nov -27,522 gross / +6,034 net. pootythetemperaturefarmer maker weighted volume 20,668, tier 0. Of the 12 wallets checked only xtxpleasecallme has a taker tier (Gold, 648,965). Since 2026-11-20 Gold/Platinum/Diamond pay 10/25/40% and daily maker pools were replaced by tiers (changelog).",
+  "wallets": [
+   "needleladder 0x4462e46cf0d31466693058893f4913e2411fbfdf"
+  ],
+  "requirements": "Several hundred thousand dollars of monthly turnover before the first tier; co-location for the fast markets.",
+  "fee_sensitivity": "Entirely: without the tier the same trades pay the full 0.01-0.05 rate.",
+  "testability": "POST gamma /tiers and /v1/maker-tier/tiers for any wallet; compare economic P&L with and without rebates in wallet_check.",
+  "red_flags": "Not reachable with a small stake; any strategy copied from a rebate-tier account does not transfer. The docs add that a maker rebate campaign can replace the standard rate, which nobody has looked for.",
+  "credibility": 4,
+  "verification": "CONFIRMED. Tier tables and the Nov 20 change are in the live docs and changelog; needleladder's tier 0 with $1.01M of November volume matches the tool to the dollar.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Holding rewards (4% a year on positions in eligible markets)",
+  "family": "other",
+  "mechanism": "Positions in markets flagged holdingRewardsEnabled earn 4.00% annualised on position value, sampled hourly, paid daily. Uses: park capital in a long-dated near-certain position there, or prefer these markets when quoting so that inventory earns while it waits.",
+  "time_gap": "none",
+  "market_categories": [
+   "2028 US election events",
+   "Ornn GPU-price ladders",
+   "Bitcoin 2026 price levels"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/positions-tokens.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://gamma-api.polymarket.com/events?tag_slug=earn-4&closed=false",
+    "date": "2026-11-27",
+    "author": "Polymarket",
+    "kind": "public API"
+   }
+  ],
+  "claimed_results": "4.00% annualised, variable (docs).",
+  "evidence": "Re-pulled: 73 open events carry the earn-4 tag, $174.9M of liquidity, 32 of them Ornn events; all 12 H100 December markets have holdingRewardsEnabled = true. On $200 the reward is $8 a year. Whether a Yes+No pair from a split counts at full value was not verified.",
+  "wallets": [],
+  "requirements": "None beyond holding.",
+  "fee_sensitivity": "One entry fee can exceed a year of the reward (0.05 rate at p=0.5 is 2.5% of notional); only makes sense with a maker entry or a zero-fee market.",
+  "testability": "Needs an account to see the daily credit; from outside only yield_income in user-stats of holders.",
+  "red_flags": "Rate is at Polymarket's discretion; immaterial at this stake.",
+  "credibility": 3,
+  "verification": "CONFIRMED. The 4.00% sentence is in the live docs page and the event count and flag were re-pulled from gamma.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Negative-risk complete-set and conversion arbitrage",
+  "family": "negrisk-arb",
+  "mechanism": "In a negative-risk event one No of outcome A converts into one Yes of every other outcome. If the Yes asks of all outcomes sum below $1, buy them all; if the Yes bids sum above $1, buy a No, convert and sell the Yes tokens.",
+  "time_gap": "none (internal consistency of one event); windows last seconds",
+  "market_categories": [
+   "multi-outcome politics",
+   "sports futures",
+   "awards"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/negative-risk.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "n/a",
+  "evidence": "The lab's earlier snapshot (NOTES.md, 2026-11-27): 176 open negative-risk events, none with a complete-set arbitrage after fees; median sum of asks 1.036, sum of bids 0.965; sums below 1 were all augmented events with an unnamed 'Other'. Not repeated by the researcher or the verifier.",
+  "wallets": [],
+  "requirements": "Fast multi-leg execution, capital for every leg, the conversion call through the relayer.",
+  "fee_sensitivity": "A taker fee on every leg (0.01-0.05 rate times p(1-p)); with many legs it eats a 1-3 cent gap.",
+  "testability": "Poll all negative-risk events every few seconds for a week and count how long any gap beyond fees survives.",
+  "red_flags": "Sums under 1 in augmented events are not arbitrage (the placeholder outcome can win); bots already keep the sums inside the fee band; profile P&L of accounts that use conversions is unreliable (NOTES.md).",
+  "credibility": 3,
+  "verification": "PARTIAL. The conversion rule and the augmented-event warning are in the live docs page; the only measurement is the lab's earlier single snapshot, which found nothing.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Combos (parlays) through the RFQ auction",
+  "family": "other",
+  "mechanism": "A user requests a price for a multi-leg combo; connected market makers have 400 ms to quote, the user 10 s to accept, and a maker with Last Look has 1 s to decline. The maker's edge is pricing correlated legs and the last look; a requester could in principle accept only quotes below the product of the legs' executable prices.",
+  "time_gap": "A maker with Last Look sees up to about 11 s of new information before committing; the requester gets none.",
+  "market_categories": [
+   "sports",
+   "any combo-enabled market"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/trading/combos/overview.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/trading/combos/market-makers.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/trading/combos/collateral-return.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "None.",
+  "evidence": "Docs only. Combos pay the 0.05 fee rate and earn no maker rebate; Last Look is offered to makers with about $2,500 of combo notional.",
+  "wallets": [],
+  "requirements": "Maker side: a persistent RFQ WebSocket, a correlation model, capital locked until every leg resolves. Requester side: an account and the RFQ API.",
+  "fee_sensitivity": "0.05 rate on the combo price regardless of the legs' own categories.",
+  "testability": "Only indirectly from public data: /v2/positions/combos and realized_combo_pnl in user-stats of wallets that quote; the quote stream itself needs an account.",
+  "red_flags": "Structure favours the maker (last look); no public record of quotes.",
+  "credibility": 2,
+  "verification": "PARTIAL. 400 ms, 10 s, the $2,500 Last Look threshold and the 0.05 combo fee are in the live docs pages; the 1-second Last Look length was not found by a text search of the two pages.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Maker quoting behind the sports taker delay",
+  "family": "sports-inplay-latency",
+  "mechanism": "On sports markets around live play a marketable order is held for the market's configured delay and cannot be cancelled, while resting orders can be cancelled at any time. A maker with a fast score feed can pull quotes inside that window, so in-play takers are structurally late.",
+  "time_gap": "Score events reach a fast feed seconds before a delayed taker order matches. The delay is 1 second on NFL, college football and basketball, NHL, soccer, tennis and most esports, and 0 on NBA (gamma secondsDelay, per NOTES.md).",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/order-lifecycle.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/programs/liquidity-rewards.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "None.",
+  "evidence": "In 239 games takers who bought at 0.90+ in the last 24h lost 2.81% of $27.0M after fees, and resting bids at 0.90+ gained 0.50% on $20.2M of taker sells (lower bounds: 84 tapes were cut at 3,000 rows). The larger dollar-weighted gain at 0.90-0.95 (+5.7%) is a duration effect: by market count 8.6% of games had loser fills against about 7.5% implied. These are in-play aggregates across delayed and non-delayed leagues, not a test of the delay.",
+  "wallets": [],
+  "requirements": "A low-latency score feed, automated cancel logic, inventory across many games.",
+  "fee_sensitivity": "Maker pays nothing; the taker on the other side pays the 0.05 rate, which widens what a maker can earn.",
+  "testability": "The delay values are already known: compare maker markout before and after game start on the tape for 1-second leagues against NBA (0 seconds), which is a natural control.",
+  "red_flags": "Competing makers already do this; the numbers do not isolate the delay; the researcher says the delay length was not pulled although NOTES.md had it; the same notes file quotes a 50 ms crypto delay that has been 150 ms since 2026-09-04.",
+  "credibility": 2,
+  "verification": "PARTIAL. The rule (pending marketable orders cannot be cancelled, resting ones can) is in the live docs page; the aggregate numbers come from the saved fills; the delay's own effect is untested.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Referral and builder-fee income (why 'bot made $X' posts carry links)",
+  "family": "other",
+  "mechanism": "Not trading. A referrer earns 10% of a new user's net fees for 30 days (5% for second-level referrals). A builder who routes other people's orders can add up to 1.00% of notional on taker orders and 0.50% on maker orders, plus weekly volume rewards once verified. Both pay the promoter whether or not the promoted strategy works.",
+  "time_gap": "none",
+  "market_categories": [
+   "all fee-bearing markets"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/programs/referral-program.md",
+    "date": "terms effective 2026-05-28",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/programs/builders/fees.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/programs/builders/tiers.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "n/a",
+  "evidence": "Docs only. A user routed through a third-party terminal at the 1% builder cap pays 1% of notional on top of a taker fee that is at most 1.25% at p=0.5. Referral income is visible per wallet: ArmageddonRewardsBilly shows 11,256 of yield plus referral income.",
+  "wallets": [],
+  "requirements": "Referrer needs $10,000 of lifetime volume; a builder needs users.",
+  "fee_sensitivity": "For us it is a cost to avoid: never trade through a third-party front end that attaches a builder code.",
+  "testability": "referral_income in user-stats of any promoter's wallet; builder leaderboard and volume endpoints of the Data API.",
+  "red_flags": "Self-referral and linked accounts are clawed back. The docs rate (10% / 5%) disagrees with the lab's X sweep, which recorded affiliates earning 20%+ of referred fees since 2026-10-23; the two were not reconciled.",
+  "credibility": 4,
+  "verification": "CONFIRMED. 10% / 5%, the $10,000 threshold, the 30-day and Platinum limits and the 100 bps / 50 bps builder caps are in the live docs pages.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Perps liquidity rewards and trading competitions",
+  "family": "rewards-farming",
+  "mechanism": "Daily pUSD pools per perp market ($325 or $100; ANT $3,000 until 2026-11-30) shared by score of two-sided depth near the mid; competitions rank by PnL times the square root of boosted volume.",
+  "time_gap": "none",
+  "market_categories": [
+   "perps"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/perps/liquidity-rewards.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   },
+   {
+    "url": "https://docs.polymarket.com/perps/trading-competitions.md",
+    "date": "read 2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs"
+   }
+  ],
+  "claimed_results": "n/a",
+  "evidence": "Docs only: a firm must hold at least 1% of its tier's maker volume over 7 days and quote $1,000-5,000 per side within 10 bps to score at all.",
+  "wallets": [],
+  "requirements": "Tens of thousands of dollars of margin and a professional quoting system.",
+  "fee_sensitivity": "Maker fee 0.02% of notional at the entry tier is paid on every fill while farming.",
+  "testability": "Perps public book and trades endpoints; not pursued.",
+  "red_flags": "Closed to a small account by the eligibility rule.",
+  "credibility": 2,
+  "verification": "CONFIRMED. Pool sizes ($325 / $100 / ANT $3,000 through Nov 30), the 1% eligibility rule and the score formula are in the live docs pages; nothing was measured.",
+  "channel": "r3_structure"
+ },
+ {
+  "name": "Kalshi x Polymarket two-leg arbitrage (buy YES on one venue, NO on the other for under $1)",
+  "family": "cross-venue-arb",
+  "mechanism": "Hand-match the same event on both venues, buy YES where it is cheap and NO on the other when the two asks plus both taker fees sum below $1, hold both to settlement. The edge is supposed to be a price gap between venues with separate order books and separate customers.",
+  "time_gap": "none (a level gap, not a timing gap). Published gross gaps close in about a minute on liquid books; the gaps that survive fees are long-dated and simply sit there (15 of 16 unchanged between my two snapshots 39 minutes apart).",
+  "market_categories": [
+   "sports",
+   "politics",
+   "economics",
+   "culture",
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://dev.to/botcookery/our-polymarket-kalshi-arbitrage-monitor-found-one-2c-gap-after-real-fees-it-lost-14c-41b7",
+    "date": "2026-11-05 (edited 2026-11-27)",
+    "author": "botcookery",
+    "kind": "blog post, read-only monitor run with logs (Polymarket US, not the international venue); full text re-read by the verifier"
+   },
+   {
+    "url": "https://zenhodl.net/blog/who-moves-first-polymarket-kalshi-price-discovery",
+    "date": "2026-10-19",
+    "author": "ZenHodl (unnamed)",
+    "kind": "vendor blog with a 581-game matched-book study; page re-read by the verifier"
+   },
+   {
+    "url": "https://arxiv.org/abs/2601.01706",
+    "date": "2026-01-05",
+    "author": "Gebele & Matthes",
+    "kind": "paper; abstract confirmed through the arXiv API (2-4% execution-aware deviations, arbitrage capital-intensive or unenforceable)"
+   },
+   {
+    "url": "https://oddspapi.io/blog/polymarket-arbitrage-local-bookmakers/",
+    "date": "snapshot of 2026-10-01 (page dated 2026-03-25)",
+    "author": "OddsPapi (unnamed)",
+    "kind": "vendor blog, sportsbook legs; page re-read by the verifier"
+   },
+   {
+    "url": "https://www.cbsnews.com/news/cardi-b-super-bowl-prediction-market-dispute",
+    "date": "2026-02",
+    "author": "CBS News",
+    "kind": "news report on a split settlement (seen through a search summary)"
+   }
+  ],
+  "claimed_results": "BotCookery: the only gross gap in an afternoon (0.98) was -1.4c per contract after real fees and closed after 73 s; fees were 1.4-1.8c per contract per leg. That gap was on a Miami temperature pair, 12 contracts deep, which the two venues settle on different sources. Search summaries (pages not opened): 133 of 1,080 NBA cross-venue checks under $1 on 2026-11-11, none profitable after fees; one GitHub author reports a profitable run of some hours and says it is not sustainable because of resolution differences.",
+  "evidence": "Researcher's snapshot of 2026-11-27 15:46 UTC: 20 events, 85 matched outcomes, top of book on both venues, Polymarket fee per market plus Kalshi 0.07*p*(1-p). Game lines (10 outcomes): net cost of either pair 1.021-1.039, zero arbitrage. 16 of 85 outcomes under $1 net: BTC-dips-to-45K 0.9836 (different index, 34 days), Rubio 2028 nominee 0.9907 (about 21 months), Fed December '50+ bps increase' 0.9922 (12 days, 5,469 shares, about $42); the rest 2027-2028 markets paying under 1% or books of 10-300 shares. Verifier's second snapshot at 16:25 UTC with the same script: 15 under $1, all of them among the first 16 at the same or nearly the same cost (Rubio 0.9907, Fed 50+ 0.9912, BTC 45K 0.9826); BTC 55K went from 0.9994 to 1.0197; correlation of mid differences between snapshots 0.97 on 78 non-game outcomes; game lines again 0 of 10, minimum 1.0212. Kalshi fee rounding, transfer costs and the interest or holding rewards both venues pay on positions are not included.",
+  "wallets": [],
+  "requirements": "Verified Kalshi account (KYC with ID). Whether a Serbian resident can open one rests on a single third-party list of 55 restricted jurisdictions that does not name Serbia; the Member Agreement itself was not opened by the researcher or by me. Capital parked on both venues, hand-checked rule texts per pair, simultaneous execution.",
+  "fee_sensitivity": "Polymarket 0.05 (sports, elections) or 0.01 (economics, culture, crypto) plus Kalshi 0.07 on the other leg: about 3c per pair at 50c on sports. Does not survive on liquid same-day markets; survives only as sub-1% carry on long lock-ups.",
+  "testability": "Repeat studies/r4_cross_venue/snapshot.py on a schedule (REST works, one pass takes about 30 s) and log how often and how long net cost < 1 with size; Kalshi 1-minute candles plus Polymarket 1-minute history give a week of back data per pair.",
+  "red_flags": "Credibility lowered from 3 to 2: the evidence is solid and it is negative. Cannot work on liquid markets under the fee rules (about 3c of fees per pair against gaps of 0-1c). Not usable by a Polymarket-only trader with a couple hundred euros. The one opened primary source is about Polymarket US, a different venue with different fees. Settlement differences are real: postponement rules, weather source, NBER leg in the recession market, different BTC index; the February 2026 Cardi B market paid 26c on Kalshi and $1 on Polymarket (confirmed by news reports through search). What remains under $1 is a carry trade that pays roughly a Treasury-bill rate once position interest is counted.",
+  "credibility": 2,
+  "verification": "CONFIRMED. BotCookery text read in full: 1.0142 per contract, 73 s, 1.4-1.8c fees and the settlement-source mismatch are all there; Gebele & Matthes abstract confirmed; my second live snapshot reproduces the researcher's result. The conclusion confirmed is that the trade does not pay.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Kalshi as a leading quote for Polymarket sports (in-play follow)",
+  "family": "sports-inplay-latency",
+  "mechanism": "Watch Kalshi's book for the same game; when Kalshi reprices and Polymarket has not, take the stale Polymarket quote (or, as a maker, pull or move resting quotes). The edge is supposed to be Kalshi's larger sports flow moving first.",
+  "time_gap": "about 1 s or less on quotes (ZenHodl 1-second NBA data: both venues reprice within about 1 s); 7 s median only on trade prints (Pantera), which Polymarket's block-time stamps and taker delay inflate; nothing visible at one minute (researcher's check)",
+  "market_categories": [
+   "sports"
+  ],
+  "sources": [
+   {
+    "url": "https://panteraresearchlab.xyz/research/the-super-bowl-of-prediction-markets-kalshi-and-polymarkets-battle-for-price-vs-liquidity/",
+    "date": "2026-02-05",
+    "author": "Ally Zach, Danning Sui (Pantera Research Lab)",
+    "kind": "research blog, 282 NFL games, trade prints; page re-read by the verifier; older than the three-month window"
+   },
+   {
+    "url": "https://zenhodl.net/blog/who-moves-first-polymarket-kalshi-price-discovery",
+    "date": "2026-10-19",
+    "author": "ZenHodl (unnamed)",
+    "kind": "vendor blog, 581 games, 32-second and 1-second data; page re-read by the verifier"
+   },
+   {
+    "url": "https://papers.ssrn.com/abstract=5331995",
+    "date": "revised 2026-04-28",
+    "author": "Ng, Peng, Tao, Zhou",
+    "kind": "SSRN paper, search summary only, not opened"
+   }
+  ],
+  "claimed_results": "Pantera: Kalshi leads the initial repricing in roughly 80% of large moves, median lead about 7 s (5-10pp: 78.6% of 1,236 events; 10-20pp: 86.7% of 459; 20pp+: 85.7% of 126). ZenHodl: Kalshi leads in all five sports at a 32 s horizon (asymmetry -0.304), mids correlate 0.996, Polymarket closes 32% of a gap in the next 32 s and Kalshi 4%; on 1-second NBA data both reprice within about 1 s, 'so neither leads in a tradeable way'; taker strategies chasing the lag lose after spread and fees in both directions.",
+  "evidence": "Researcher's minute-bar test on 11 settled games (2 NFL of Nov 26, 9 NBA of Nov 25; Kalshi 1-minute candle mids vs Polymarket 1-minute history): correlation of changes +0.977 at lag 0, +0.08 with Kalshi a minute earlier, +0.06 with Polymarket a minute earlier (se 0.03 each); per-minute absolute gap median 0.000-0.002, 90th percentile 0.007-0.010. Not recomputed by me (the stored file has the 11 per-game results). Both live snapshots: game lines within 1c on both venues, identical quotes on 6-8 of 10 outcomes, against a Polymarket taker cost of 1.0-1.7c (half spread plus fee). No measurement at the second scale exists in the lab.",
+  "wallets": [],
+  "requirements": "Both WebSocket feeds on one clock, sub-second reaction, a host outside restricted countries; no Kalshi account needed to read its data.",
+  "fee_sensitivity": "Sports rate 0.05: 1.25c per share at 50c plus a 1c spread, against gaps of 0-1c. Does not survive as a taker. A maker pays no fee, so the only possible use is protecting or skewing resting quotes.",
+  "testability": "Kalshi trade tape with exchange timestamps (HF TimeSeventeen/Kalshi) against Polymarket L2 with a receive clock (HF Houroux/polymarket-l2-history, NFL/EPL/CFB, Jul-Oct 2026): for each Kalshi move of 5pp or more within 10 s, what could a Polymarket taker still buy after 1, 3, 10 s net of fee. Live: record both WebSockets on the VPS.",
+  "red_flags": "Credibility lowered from 3 to 2: as a taker strategy it cannot work under the fee rules, and the best source says so itself. Polymarket holds sports taker orders for 1 s on NFL, college football, NHL and soccer (gamma secondsDelay, read by the lab; 0 on NBA), which is about the whole published lead. Pantera uses trade prints with block-time stamps. The ZenHodl pilot claimed the opposite direction and was withdrawn; the page runs an affiliate programme. The SSRN UFC paper (7194218) and the tennis GitHub report cited by the researcher could not be found or opened by either of us and no longer count as support.",
+  "credibility": 2,
+  "verification": "CONFIRMED. Every Pantera and ZenHodl number quoted is on the pages. What they establish is the direction of a lead of about a second, plus a statement that it is not tradeable; no source shows profit.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Deribit option-implied digital as fair value for Polymarket daily 'Bitcoin/Ethereum above K' markets",
+  "family": "options-replication",
+  "mechanism": "Compute the risk-neutral probability that BTC or ETH closes above each strike from Deribit option marks (smile and time interpolated to noon ET, forward shifted by the Binance-USDT basis); buy YES when Polymarket's ask plus fee is well below it, buy NO when the bid is well above it, hold to resolution (1-5 days). The edge is supposed to be retail pricing of strikes versus a deep options market. In practice Polymarket prices more volatility than Deribit on both wings and no skew at the money, so the trade is: buy the favourite side of in-the-money strikes and sell cheap upside strikes.",
+  "time_gap": "h (options reprice continuously; published AR(1) half-life of the gap about 4 hours on three 2023 contracts; the wing bias persists for days and was unchanged between two snapshots 38 minutes apart)",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://fc26.ifca.ai/defi/papers/market-efficiency-prediction-markets.pdf",
+    "date": "2026 (data Mar 2024 - May 2025)",
+    "author": "Fabi, Marfe, Ruffo, Schonleber",
+    "kind": "conference talk abstract, 3 pages, re-read by the verifier; BTC only"
+   },
+   {
+    "url": "https://arxiv.org/abs/2606.19517",
+    "date": "2026-06-17",
+    "author": "Portnaya",
+    "kind": "paper; abstract confirmed through the arXiv API"
+   }
+  ],
+  "claimed_results": "FC26 talk: 255 bets; Above markets track option-implied prices with mean correlation 0.97, Range 0.83; low-probability tails persistently overpriced; mispricing larger at inception, near expiry and on weekends. Portnaya: Polymarket above Binance-option digitals by 6.3 pp pooled (287 hourly observations, three 2023 contracts), 11 pp against Deribit, a delta-hedged proxy profitable with marginal statistical precision. No source reports traded results, fees or a strategy.",
+  "evidence": "Researcher's snapshot at 15:47 UTC on 2026-11-27: 99 strikes in 9 events. Core strikes (digital 5-95%, n=27): Polymarket mid minus option digital mean -1.3c, median absolute 1.8c, median Polymarket spread 4c; 13 of 27 outside bid/ask plus fee, by 0.1-2.6c except one at 3.9c. Verifier's second snapshot at 16:25 UTC, same script: core n=24, mean -1.3c, median absolute 1.75c, 14 flagged, median spread 3c. Same sign pattern on every date: 60K below the digital by 1.6-3.3c, 58K below by up to 4.9c three to five days out (Nov 30: 0.80/0.83 vs 0.864; Dec 1: 0.77/0.78 vs 0.814), 62K and above over it by 1-2.6c. Decomposition: Polymarket's at-the-money mid (0.50-0.53) equals a no-skew lognormal digital (about 0.507); the option digital of 0.54-0.55 comes from the skew term (Deribit marks 38% at 60K, 45% at 58K, 56% at 56K for Nov 30). Polymarket's wings are fatter on both sides (Nov 30: P(below 58K) 18.5% vs 13.6%, P(above 64K) 5.5% vs 2.9%). The Binance-minus-index basis measured by the script was +73 in the first run and +89 in the second. Volume: about $900K a day on the expiry-day event, $150-180K the next day, $50-57K two to four days out, under $8K a day on most single strikes beyond tomorrow.",
+  "wallets": [],
+  "requirements": "Deribit public API by REST (works without an account), Binance price for the basis, a small pricing script; a few hundred dollars is enough; no speed requirement (minutes). Polymarket only.",
+  "fee_sensitivity": "Crypto non-5m rate 0.01: at most 0.25c per share. The cost that matters is the 1-4c Polymarket spread; edges seen are 1-3c, so it works only with limit orders or on the rare 3c+ deviations.",
+  "testability": "Record Deribit book summaries and Polymarket books every 1-5 minutes by REST for 3-4 weeks (about 20 expiry days x 11 strikes x 2 assets), pre-register an entry threshold, score against realised outcomes clustered by expiry day. Add Kalshi's daily BTC ladder (KXBTCD) as a second, tradable reference. Backfill option: Deribit DVOL plus an at-the-money model against Polymarket 5-minute history (60 days). A cheaper first test needs no options at all: resolved daily 'above K' markets by price bucket (is YES at 0.80-0.95 underpriced, YES at 0.02-0.15 overpriced?) from the 60-90 days of price history.",
+  "red_flags": "Two snapshots from one afternoon. Every flagged edge is a short-volatility position: Polymarket prices more variance than Deribit, and collecting the difference means selling crash and spike tails for binary payoffs, unhedged. The in-the-money gap rests on the Deribit skew, which is a risk premium, and on linear interpolation of mark IVs between strikes and between 08:00 UTC expiries. Deribit marks are not tradable prices; risk-neutral is not real-world probability. The basis shift moves by $15 within the hour (about 0.5 point at the money for one day). Published evidence is on 2023-2025 data and does not test trading. Volume beyond tomorrow's expiry is thin.",
+  "credibility": 3,
+  "verification": "CONFIRMED. The FC26 abstract and the Portnaya abstract contain every number quoted; neither contains a trading result. My re-run of the researcher's script reproduces the size and sign pattern; the xniiinx blog post cited by the researcher returns 404 and is removed.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Sell overpriced crypto barrier outcomes ('dips to' / 'reaches' markets) against the option-implied touch probability",
+  "family": "options-replication",
+  "mechanism": "For 'Will Bitcoin dip to X / reach Y by date' markets, estimate the touch probability from Deribit (about twice the terminal digital, reflection principle) and buy NO on Polymarket where YES trades well above it; Kalshi's matching series (KXBTCMINY, KXBTCMAXY) is a second reference. The edge is supposed to be the longshot bias on path-dependent bets. It is the same short-volatility trade as the daily-strike candidate, with a longer lock-up.",
+  "time_gap": "none (a persistent pricing bias lasting days to weeks, not a timing gap)",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://fc26.ifca.ai/defi/papers/market-efficiency-prediction-markets.pdf",
+    "date": "2026 (data Mar 2024 - May 2025)",
+    "author": "Fabi, Marfe, Ruffo, Schonleber",
+    "kind": "conference talk abstract, re-read by the verifier"
+   }
+  ],
+  "claimed_results": "FC26 talk: Reach and Dip markets align worst with option-implied prices (correlations 0.79 and 0.73) and show persistent overpricing, U-shaped over the life of the bet; examples named are BTC reaching $200,000 or dipping below $40,000. No traded result, no fees.",
+  "evidence": "2026-11-27 15:46 UTC: Polymarket YES mids for BTC dipping to 55K/50K/45K/40K by year-end 0.565/0.29/0.13/0.08; Kalshi 0.595/0.305/0.165/0.105; the researcher's rough Deribit one-touch 0.50/0.22/0.10/0.058 (stated error about 3c). At 16:25 UTC (my re-run of the snapshot): Polymarket 0.555/0.30/0.13/0.08, Kalshi 0.565/0.305/0.165/0.105, so the 55K gap to Kalshi shrank from 3c to 1c within 39 minutes while the others held. Over 30 days of hourly data Kalshi sat above Polymarket by 0.7-1.6c on average and was higher in 68-93% of hours (researcher's run, not repeated). The gap between Polymarket and the option estimate is 6.5c and 7c at 55K and 50K, and 3c and 2c at 45K and 40K, i.e. inside the model error for the two far strikes. Top-of-book sizes on Polymarket 47,000-180,000 shares in my snapshot.",
+  "wallets": [],
+  "requirements": "Deribit data, patience (positions run to month or year end), tolerance for a short-crash position that loses the whole stake on NO when the barrier is touched. Polymarket only.",
+  "fee_sensitivity": "Rate 0.01, under 0.25c per share; irrelevant next to the model error. The 3-7c 'mispricing' is the researcher's own rough estimate, not a figure claimed by a source.",
+  "testability": "Resolved 'What price will Bitcoin hit in <month>' events are monthly and weekly: collect all resolved barrier markets with Polymarket price history and compare realised touch frequency by price bucket; the data API keeps 30-minute prices for 90 days, so about three monthly and a dozen weekly ladders are testable now. That test needs no option model.",
+  "red_flags": "The reflection estimate ignores jumps, drift and the skew correction that a real one-touch price carries; Polymarket resolves on a single Binance 1-minute low, which is easier to touch than a continuous index average. Selling tails earns small premiums and loses large in a crash; capital locked to expiry; a handful of independent events per month. Polymarket is the cheaper of the two venues on these outcomes, so a seller is better paid on Kalshi. No outcome test exists.",
+  "credibility": 2,
+  "verification": "CONFIRMED for the published bias (correlations 0.79 and 0.73, the $200,000 and $40,000 examples are in the abstract). The option-implied touch numbers are the researcher's rough model and were not re-derived.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "BTC 15-minute / 1-hour strike-gap pair between Kalshi and Polymarket",
+  "family": "cross-venue-arb",
+  "mechanism": "Both venues list 'BTC up in the next hour / 15 minutes' with slightly different strikes; buy the side on each venue that pays if the final price lands between the strikes (lower-strike Up plus higher-strike No), supposedly paying at least $1 always and $2 in between, whenever the pair costs under $1.",
+  "time_gap": "s (the two books follow the same BTC price; no usable lead seen at 2.3 s polling)",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://github.com/CarlosIbCu/polymarket-kalshi-btc-arbitrage-bot",
+    "date": "2026-05-04 (date not checked by the verifier)",
+    "author": "CarlosIbCu",
+    "kind": "GitHub repo; README.md and thesis.md read by the verifier; about the 1-hour market only"
+   }
+  ],
+  "claimed_results": "Repo thesis: 'The minimum payout is $1.00 ... If the price lands in the middle, we double our money', called risk-free. About the Bitcoin 1-hour market. No fees, no mention of the two different price indices, no results.",
+  "evidence": "Researcher's poll of the 15:45-16:00 UTC window on 2026-11-27 (2.3 s apart): Kalshi strike 60,113.12 (CF BRTI), Polymarket strike 60,104.89 (Chainlink); Polymarket Up mid above Kalshi Yes by 2.6c on average. My recount by side (80 polls up to 30 s before the close): the thesis pair, Polymarket Up + Kalshi No, was under $1 after both fees in 0 polls (cheapest 1.0048); the opposite pair, Kalshi Yes + Polymarket Down, was under $1 in 22 polls (cheapest 0.907) and is the one that loses both legs between the strikes. Official results, read by me after the close: Polymarket priceToBeat 60,104.89, finalPrice 60,108.58, resolved Up; Kalshi result 'no', expiration value 60,110.79 below 60,113.12. The price ended between the strikes: the cheap pair lost both legs. Correlation of 2.3 s changes 0.90 at lag 0, 0.32 and 0.23 at one poll either way.",
+  "wallets": [],
+  "requirements": "Accounts and capital on both venues, sub-second execution on both, Kalshi KYC.",
+  "fee_sensitivity": "Polymarket 0.05 on BTC 15-minute plus Kalshi 0.07: about 3c per pair at 50c. The thesis pair never got under $1 after fees; the pair that did is paid for carrying the between-strikes loss.",
+  "testability": "Kalshi KXBTC15M 1-minute candles and settled results versus Polymarket eventMetadata priceToBeat/finalPrice: count how often the two venues resolve differently and how large the between-strikes region is; HF KalshiEye sample has two days of KXBTC15M quotes.",
+  "red_flags": "Credibility lowered from 2 to 1. The source describes the 1-hour market, not the 15-minute one, calls the trade risk-free and ignores fees and the index difference (BRTI vs Chainlink; the two final values were $2.21 apart in this window). In the one window measured the 'risk-free' pair was never available under $1 and the pair that looked cheap lost everything. Requires a second venue. One window observed.",
+  "credibility": 1,
+  "verification": "PARTIAL. The thesis text says what is claimed, but for the 1-hour market and without fees; the lab's own measurement, now with official results from both venues, contradicts the 'risk-free' label.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Sportsbook prices as a second leg or reference for Polymarket pre-game sports",
+  "family": "cross-venue-arb",
+  "mechanism": "Compare Polymarket's price for a game with bookmaker odds for the same line; pair Polymarket with the opposite side at a bookmaker when the two implied probabilities sum under 100%, or (untested variant with no source that describes it) use a de-vigged sharp line such as Pinnacle as fair value for Polymarket bids.",
+  "time_gap": "none measured; the only source finds its gaps against bookmaker prices that had not moved since the night before, i.e. the stale side is the bookmaker, not Polymarket",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://oddspapi.io/blog/polymarket-arbitrage-local-bookmakers/",
+    "date": "snapshot of 2026-10-01 (page dated 2026-03-25)",
+    "author": "OddsPapi (unnamed)",
+    "kind": "vendor blog selling an odds API; page re-read by the verifier"
+   }
+  ],
+  "claimed_results": "OddsPapi: 2,938 raw pairs under 100% reduced to 42 distinct arbs across 16 fixtures; median edge 0.44%, best 1.53% (Polymarket against FanDuel on a Euroleague game), before any fees; median Polymarket depth on the rung $4,023; Polymarket winner-market overround 1.0% median against Pinnacle 3.86% and bet365 7.12% on the worked fixture.",
+  "evidence": "Nobody in the lab measured a sportsbook feed. Indirect: on both snapshots Polymarket and Kalshi quoted game lines within 1c of each other with 1c spreads; a 0.44% gross edge is a fifth of the Polymarket taker fee at 50c (2.5% of stake).",
+  "wallets": [],
+  "requirements": "Odds feed (The Odds API, OddsPapi, Pinnacle), bookmaker accounts if pairing (limits; eligibility for Serbia not checked).",
+  "fee_sensitivity": "Sports rate 0.05 (1.25c per share at 50c). Does not survive as a taker; a maker bidding inside a de-vigged fair value pays no fee (the variant recorded in w1).",
+  "testability": "Houroux and PendulumFlow L2 archives for Polymarket sports plus a historical odds feed (OddsPapi advertises free history): closing-line value of Polymarket fills versus the Pinnacle close.",
+  "red_flags": "Credibility lowered from 2 to 1. The single source is a vendor of odds data, ignores fees by its own statement, and does not describe the Pinnacle-fair-value mechanism the researcher's title named; its arbs are against soft books whose prices were stale. The 'Pinnacle 4.02%' figure is not on the page. The tennis report (Polymarket closes 70% of a gap to Pinnacle) sits behind a GitHub page neither of us could open and is removed. Under the 0.05 sports fee the two-leg version cannot pay.",
+  "credibility": 1,
+  "verification": "PARTIAL. The arbitrage counts, the 0.44% median, $4,023 depth, the 'ignores trading fees' sentence and the junk examples are on the page; the Pinnacle 4.02% figure and the fair-value mechanism are not.",
+  "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Rates-market or Kalshi price as a lead for Polymarket Fed and data-release markets",
+  "family": "econ-release",
+  "mechanism": "Compare Polymarket's Fed decision and CPI markets with Kalshi's (KXFEDDECISION, KXCPI) and with CME FedWatch; trade Polymarket toward the others when they diverge, or react to the release faster than the Polymarket book.",
+  "time_gap": "none found between venues: decisions are priced correctly a day ahead and the Kalshi-Polymarket spread averages about 1c. The release-minute lag is measured elsewhere in the lab (NOTES: stale prices last 2-20 s after a scheduled release).",
+  "market_categories": [
+   "economics"
+  ],
+  "sources": [
+   {
+    "url": "https://dune.com/blog/pricing-the-fed-kalshi-polymarket-cme-fedwatch",
+    "date": "2026-05-21",
+    "author": "Filippo Armani (Dune)",
+    "kind": "blog; 403 to curl, read through a search summary only; older than the three-month window"
+   },
+   {
+    "url": "https://arxiv.org/abs/2610.36639",
+    "date": "2026-10-27",
+    "author": "Fan, Sun, Zhao",
+    "kind": "paper; abstract confirmed through the arXiv API (all 51 scheduled central-bank decisions predicted a day ahead)"
+   }
+  ],
+  "claimed_results": "Search summary of the Dune post: in November 2025 Polymarket and Kalshi priced 'no change at the April 29 meeting' 20c richer than CME FedWatch for about six weeks; all three within 1c the day before; the Kalshi-Polymarket spread averaged about 1c; the post attributes the gap to the instruments (prediction markets ask about one meeting, FedWatch about the rate level after the whole path). No trading result.",
+  "evidence": "Researcher's snapshot: Fed December decision, five outcomes, Polymarket versus Kalshi mid differences 0.3-1.6c; one outcome ('50+ bps increase', 0.018/0.020 vs 0.030/0.040) gave a two-leg cost of 0.9922 after fees on 5,469 shares. My snapshot 39 minutes later: same quotes, cost 0.9912. Polymarket volume $3.1M a day against Kalshi about 1.07M contracts.",
+  "wallets": [],
+  "requirements": "Kalshi and CME data; for the release-minute version a news or data feed and sub-second execution.",
+  "fee_sensitivity": "Economics rate 0.01 (at most 0.25c per share), so small gaps are not eaten by the fee; the problem is that the gaps found are 0-1.6c on near-certain outcomes.",
+  "testability": "At each FOMC or CPI release pull Kalshi 1-minute candles and Polymarket 1-minute history within 7 days (Polymarket drops 1-minute data after a week); next events: FOMC 2026-12-09, CPI for November (Kalshi lists a 2026-12-10 release-time market).",
+  "red_flags": "No source with mechanics or results. The source's own explanation is that the months-ahead gap to FedWatch is an instrument difference, not a lag that can be traded. The only short-dated gap seen is a 2c versus 3.5c quote on a near-impossible outcome with different rules for odd-size moves.",
+  "credibility": 1,
+  "verification": "PARTIAL. The Dune post exists and its summary matches the quoted 20c and 1c figures, but I could not open the page itself; the Fan, Sun, Zhao abstract confirms the 51 decisions. Neither describes a strategy.",
+  "channel": "r4_cross_venue"
  }
 ]

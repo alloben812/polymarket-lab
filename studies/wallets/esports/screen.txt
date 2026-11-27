@@ -1,0 +1,39 @@
+lllllllIlll              fills= 2998T span= 4.2d mkts=  43 usd= 1,723,455 es%=100 maker%= 62 buy%= 99 | cs2:100
+PacersThreeandahalf      fills= 1045  span= 6.7d mkts= 171 usd= 1,384,684 es%= 43 maker%= 43 buy%= 99 | cfb:40 cs2:39 nfl:10 nba:6 dota2:4 col:1
+S-Works                  fills=  588  span= 6.2d mkts=  17 usd= 1,102,734 es%= 22 maker%= 96 buy%=100 | lal:48 dota2:19 fl1:15 ucl:6 cfb:6 nba:3
+GeorgeRe                 fills= 1602  span= 7.0d mkts=  66 usd= 1,737,397 es%=100 maker%= 34 buy%= 87 | dota2:99 cs2:1
+zb8                      fills=  409  span= 2.1d mkts=  15 usd=   431,835 es%= 73 maker%= 67 buy%= 91 | dota2:73 nfl:9 cfb:6 nba:5 ufc:5 will:2
+lonmi2511                fills= 2999T span= 5.2d mkts= 853 usd=   324,403 es%= 59 maker%= 48 buy%=100 | cs2:59 uel:14 ucl:5 lal:5 col:4 acle:3
+THEHIGHLIFE              fills=  318  span= 3.4d mkts=  33 usd=   245,712 es%= 86 maker%= 50 buy%= 88 | cs2:75 dota2:11 nba:10 nfl:4
+CUTJALENHURTS            fills= 2115  span= 7.0d mkts= 506 usd= 3,857,885 es%=  6 maker%= 16 buy%=100 | nfl:26 cfb:26 nba:22 cs2:5 ucl:4 cbb:3
+ChonkVision              fills= 1179  span= 6.9d mkts=  64 usd=   684,126 es%= 55 maker%= 79 buy%= 98 | dota2:33 nhl:26 cs2:21 nfl:9 uel:6 epl:4
+fkALG2FalconsTESMOUZ     fills=    1  span= 0.0d mkts=   1 usd=     1,620 es%=  0 maker%=  0 buy%=100 | nba:100
+dodsterbot               fills= 1011  span= 6.9d mkts=  55 usd=   451,803 es%=100 maker%= 92 buy%= 96 | dota2:100
+CyberScore.live          fills= 2597  span= 6.9d mkts=  66 usd=   581,036 es%= 96 maker%= 88 buy%= 93 | dota2:96 cbb:2 nba:1 cwbb:1
+254321758                fills=    0  span= 0.0d mkts=   0 usd=         0 es%=  0 maker%=  0 buy%=  0 | 
+calculate10              fills= 2999T span= 4.9d mkts=  42 usd=   478,953 es%=100 maker%=100 buy%= 58 | dota2:100
+Malfunction.             fills= 2999T span= 5.9d mkts= 472 usd= 3,754,608 es%=  2 maker%= 80 buy%= 97 | new:20 nba:12 cfb:10 nhl:10 ucl:9 cbb:8
+arjennnnn                fills=  161  span= 7.0d mkts=  42 usd=   125,080 es%=  1 maker%= 25 buy%= 78 | will:82 us:9 iran:3 fourth:2 russia:2 pete:1
+Zywoo123                 fills=   35  span= 6.0d mkts=  11 usd=    64,188 es%= 60 maker%=  9 buy%=100 | dota2:50 nba:40 cs2:10
+BLASTSLAM9WINNER         fills= 2999T span= 3.9d mkts=  31 usd=   806,134 es%=100 maker%= 53 buy%= 51 | dota2:100
+solo88888                fills=    0  span= 0.0d mkts=   0 usd=         0 es%=  0 maker%=  0 buy%=  0 | 
+Gooooooollllllllll       fills=  765  span= 6.9d mkts=  46 usd=   431,955 es%=100 maker%= 84 buy%=100 | dota2:71 cs2:26 val:3
+gxxyy                    fills= 1923  span= 6.9d mkts=  53 usd=   865,782 es%=100 maker%= 51 buy%=100 | dota2:100
+skadii                   fills=    0  span= 0.0d mkts=   0 usd=         0 es%=  0 maker%=  0 buy%=  0 | 
+RNGUzi                   fills=  125  span= 6.9d mkts=  10 usd=    26,857 es%= 81 maker%= 62 buy%= 74 | cs2:81 bun:19 dota2:0
+StakesHunger             fills= 2998T span= 5.0d mkts=  37 usd= 1,130,721 es%=100 maker%= 35 buy%= 53 | dota2:100
+spartachio               fills=  301  span= 7.0d mkts=  34 usd=    82,410 es%= 89 maker%= 45 buy%= 96 | cs2:51 dota2:37 nfl:8 nba:3 val:0 par1:0
+mommydualipa             fills=  193  span= 5.7d mkts=  48 usd=   114,516 es%= 50 maker%= 46 buy%= 85 | cs2:50 ucl:16 nba:13 will:13 :3 lal:2
+whosay                   fills=  874  span= 6.9d mkts=  88 usd=   308,205 es%= 30 maker%= 34 buy%= 69 | nba:26 dota2:24 wta:12 atp:12 cs2:6 cbb:6
+RITALINEWITHSNUS         fills= 2565  span= 7.0d mkts= 126 usd=   356,974 es%=100 maker%=  1 buy%=100 | dota2:99 cs2:1
+forsenxd                 fills=  816  span= 7.0d mkts=  89 usd=   311,952 es%=100 maker%=100 buy%=100 | cs2:73 dota2:27
+TopStreamer              fills=  191  span= 6.1d mkts=  20 usd=    39,425 es%= 91 maker%=  5 buy%= 93 | cs2:91 :9
+Excentrico               fills=  654  span= 6.9d mkts=  51 usd=   257,017 es%= 99 maker%= 34 buy%= 84 | dota2:99 ufc:1
+Wiretransferxyz          fills= 1213  span= 7.0d mkts=  31 usd=   443,099 es%=100 maker%= 67 buy%=100 | cs2:100
+pvc975                   fills= 2992T span= 2.7d mkts= 266 usd= 3,446,655 es%= 35 maker%= 74 buy%= 87 | cs2:24 clf:21 new:14 dota2:11 fourth:7 jensen:7
+iii252                   fills= 2999T span= 1.3d mkts=  24 usd=   882,884 es%=100 maker%= 83 buy%= 83 | cs2:100
+gojda                    fills= 1258  span= 6.9d mkts=  48 usd=    75,716 es%= 91 maker%=100 buy%=100 | cs2:91 atp:8 wta:1
+0xheavy888               fills= 2999T span= 2.8d mkts= 720 usd=   686,016 es%= 42 maker%= 58 buy%=100 | cs2:33 uel:10 col:9 nhl:9 dota2:9 cbb:8
+PMATAODA                 fills= 1649  span= 7.0d mkts=  55 usd= 1,606,109 es%=100 maker%= 86 buy%=100 | dota2:91 cs2:9 will:0
+DamwonChampions2027      fills= 1082  span= 7.0d mkts= 109 usd=   728,638 es%=100 maker%=  1 buy%=100 | dota2:59 cs2:41
+minji                    fills=  911  span= 6.9d mkts= 106 usd=   738,695 es%=100 maker%=  1 buy%=100 | dota2:64 cs2:36

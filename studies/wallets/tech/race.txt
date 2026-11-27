@@ -1,0 +1,187 @@
+
+== next-gemini-flash-model-3pt8-text-arena-debut-20260831193056503  appearance 09-02 14:58:19 UTC (Wed 10:58 ET), check 09-03 16:00, 2 cached siblings; winner bought <0.97 until the check: $664, edge $59 (first 60 s $59, first 10 min $59)
+   #1 0x09e27c2c     +     0s  fills   1 mkts  1 cost     152 avg_px 0.860 edge      25
+   #2 0x5999ebfa     +     0s  fills   1 mkts  1 cost     119 avg_px 0.911 edge      12
+   #3 0xa2f5639b     +     0s  fills   1 mkts  1 cost       2 avg_px 0.950 edge       0
+   #4 0xa7d2ec66     +     0s  fills   2 mkts  2 cost     176 avg_px 0.926 edge      14
+   #5 0x233bacfb     +     2s  fills   1 mkts  1 cost     152 avg_px 0.969 edge       5
+   #6 0x73ecf6a3     +     2s  fills   2 mkts  2 cost      50 avg_px 0.950 edge       3
+
+== next-mythos-class-model-text-arena-debut-20260827110151621 check 09-03 16:00: no qualifying jump among 2 cached siblings
+
+== will-the-next-mythos-class-model-debut-at-a-score-of-at-least-1510-by- check 09-03 16:00: no qualifying jump among 1 cached siblings
+
+== will-the-next-mythos-class-model-debut-as-1-text-arena-202609010819196 check 09-03 16:00: no qualifying jump among 1 cached siblings
+
+== openais-astra-model-text-arena-debut  appearance 09-11 21:18:09 UTC (Fri 17:18 ET), check 09-12 16:00, 5 cached siblings; winner bought <0.97 until the check: $7121, edge $1517 (first 60 s $1391, first 10 min $1413)
+   #1 0x5a218c7a     +     0s  fills   3 mkts  3 cost     764 avg_px 0.767 edge     232
+   #2 0x8921d6e3     +     0s  fills   1 mkts  1 cost     204 avg_px 0.777 edge      59
+   #3 0xa7d2ec66     +     0s  fills   5 mkts  3 cost    1298 avg_px 0.922 edge     110
+   #4 lamyk          +     0s  fills   4 mkts  4 cost    1586 avg_px 0.626 edge     950
+   #5 0x73ecf6a3     +     1s  fills   2 mkts  2 cost     403 avg_px 0.939 edge      26
+   #6 0xe6b5bf60     +     1s  fills   1 mkts  1 cost     325 avg_px 0.969 edge      10
+
+== will-openais-astra-model-debut-as-1-text-arena-20260901081919669 check 09-12 16:00: no qualifying jump among 1 cached siblings
+
+== next-claude-opus-model-text-arena-debut-20261231  appearance 09-26 01:32:38 UTC (Fri 21:32 ET), check 09-26 16:00, 5 cached siblings; winner bought <0.97 until the check: $20224, edge $3088 (first 60 s $2609, first 10 min $2709)
+   #1 0x09e27c2c     +    -2s  fills   5 mkts  5 cost    5705 avg_px 0.837 edge    1112
+   #2 0x5a218c7a     +    -2s  fills   4 mkts  2 cost     709 avg_px 0.816 edge     160
+   #3 0x652bff90     +    -2s  fills   7 mkts  3 cost     991 avg_px 0.873 edge     144
+   #4 0xa278b41b     +    -2s  fills   3 mkts  2 cost     330 avg_px 0.773 edge      97
+   #5 lamyk          +    -2s  fills   3 mkts  3 cost    1500 avg_px 0.640 edge     845
+   #6 0xe50e7c80     +    -2s  fills   2 mkts  1 cost      35 avg_px 0.865 edge       5
+
+== next-grok-model-4pt7-text-arena-debut check 09-26 16:00: no qualifying jump among 1 cached siblings
+
+== next-gpt-sol-model-5pt7-text-arena-debut-20260921193139678  appearance 09-26 01:32:39 UTC (Fri 21:32 ET), check 09-26 16:00, 4 cached siblings; winner bought <0.97 until the check: $4478, edge $858 (first 60 s $727, first 10 min $735)
+   #1 0x04b3f873     +    -1s  fills   2 mkts  2 cost      20 avg_px 0.885 edge       3
+   #2 0x09e27c2c     +    -1s  fills   3 mkts  3 cost     731 avg_px 0.814 edge     167
+   #3 0x2284869e     +    -1s  fills   1 mkts  1 cost       5 avg_px 0.880 edge       1
+   #4 0x652bff90     +    -1s  fills   2 mkts  2 cost     499 avg_px 0.494 edge     512
+   #5 0xfe468989     +    -1s  fills   1 mkts  1 cost      18 avg_px 0.880 edge       2
+   #6 0xbe1acc1a     +     0s  fills   5 mkts  3 cost     645 avg_px 0.930 edge      48
+
+== next-gpt-luna-model-5pt7-text-arena-debut-20260921193832425 check 09-26 16:00: no qualifying jump among 3 cached siblings
+
+== next-sonnet-model-text-arena-debut-20260827110151621  appearance 10-02 16:10:15 UTC (Fri 12:10 ET), check 10-03 16:00, 5 cached siblings; winner bought <0.97 until the check: $5635, edge $652 (first 60 s $378, first 10 min $540)
+   #1 0x47c7c28a     +    -1s  fills   1 mkts  1 cost      40 avg_px 0.910 edge       4
+   #2 0x5999ebfa     +    -1s  fills   5 mkts  5 cost    1485 avg_px 0.919 edge     132
+   #3 lamyk          +    -1s  fills   4 mkts  4 cost     947 avg_px 0.825 edge     201
+   #4 0x64ff984a     +     0s  fills   2 mkts  2 cost     500 avg_px 0.967 edge      17
+   #5 0xd218e474     +     0s  fills   1 mkts  1 cost      95 avg_px 0.790 edge      25
+   #6 0xb41ead27     +    42s  fills   1 mkts  1 cost       2 avg_px 0.960 edge       0
+
+== next-gpt-sol-model-6pt1-text-arena-debut-20260929193259436  appearance 10-02 16:16:15 UTC (Fri 12:16 ET), check 10-03 16:00, 2 cached siblings; winner bought <0.97 until the check: $276, edge $544 (first 60 s $544, first 10 min $544)
+   #1 0xa7d2ec66     +    -3s  fills   1 mkts  1 cost     276 avg_px 0.336 edge     544
+
+== mistral-large-4-text-arena-debut-20261007  appearance 10-08 17:31:50 UTC (Thu 13:31 ET), check 10-09 16:00, 4 cached siblings; winner bought <0.97 until the check: $11797, edge $1061 (first 60 s $980, first 10 min $1010)
+   #1 0x11b71f2c     +     0s  fills   2 mkts  2 cost      11 avg_px 0.911 edge       1
+   #2 0x564f2274     +     0s  fills   3 mkts  3 cost    4215 avg_px 0.900 edge     470
+   #3 0x660c8aa5     +     1s  fills   1 mkts  1 cost       3 avg_px 0.910 edge       0
+   #4 0xeed8c2be     +     1s  fills   1 mkts  1 cost     844 avg_px 0.910 edge      84
+   #5 0xd925e4f4     +     3s  fills   2 mkts  2 cost      81 avg_px 0.907 edge       8
+   #6 0xe5503683     +     6s  fills   1 mkts  1 cost      46 avg_px 0.930 edge       4
+
+== metas-watermelon-model-text-arena-debut  appearance 10-13 18:43:06 UTC (Tue 14:43 ET), check 10-14 16:00, 5 cached siblings; winner bought <0.97 until the check: $1292, edge $142 (first 60 s $84, first 10 min $89)
+   #1 iutwpfal       +     0s  fills   9 mkts  5 cost     472 avg_px 0.898 edge      54
+   #2 0xbc4230ad     +     0s  fills   1 mkts  1 cost      37 avg_px 0.930 edge       3
+   #3 0x521bf1c6     +     1s  fills   5 mkts  3 cost     270 avg_px 0.856 edge      45
+   #4 0x53295fbe     +    51s  fills   1 mkts  1 cost      16 avg_px 0.930 edge       1
+   #5 0x4dc3abdf     +   639s  fills   1 mkts  1 cost       9 avg_px 0.930 edge       1
+   #6 0x80c9bddb     +   754s  fills   1 mkts  1 cost       5 avg_px 0.940 edge       0
+
+== will-muse-wonder-debut-as-1-text-arena-20261012 check 10-14 16:00: no qualifying jump among 1 cached siblings
+
+== next-claude-haiku-model-4pt6-text-arena-debut-20260930  appearance 10-22 23:29:20 UTC (Thu 19:29 ET), check 10-23 16:00, 4 cached siblings; winner bought <0.97 until the check: $6770, edge $3764 (first 60 s $3764, first 10 min $3764)
+   #1 0x5a218c7a     +    -2s  fills   2 mkts  1 cost     225 avg_px 0.334 edge     448
+   #2 0x9efda3d6     +    -2s  fills   2 mkts  2 cost     224 avg_px 0.445 edge     279
+   #3 0xa7d2ec66     +    -2s  fills   5 mkts  3 cost    1801 avg_px 0.684 edge     831
+   #4 0xad5353af     +    -2s  fills   1 mkts  1 cost       8 avg_px 0.390 edge      12
+   #5 0xc91c60a9     +    -2s  fills   3 mkts  3 cost     933 avg_px 0.823 edge     201
+   #6 0x33739438     +     0s  fills   1 mkts  1 cost      34 avg_px 0.937 edge       2
+
+== kimi-k3pt1-pro-hle-diamond-debut-20261023  appearance 10-26 19:06:33 UTC (Mon 15:06 ET), check 10-27 16:00, 4 cached siblings; winner bought <0.97 until the check: $1708, edge $277 (first 60 s $259, first 10 min $277)
+   #1 0x0c47a1b0     +    -1s  fills   1 mkts  1 cost      20 avg_px 0.963 edge       1
+   #2 0x9efda3d6     +    -1s  fills   1 mkts  1 cost      46 avg_px 0.930 edge       4
+   #3 0x11eaaf41     +     0s  fills   2 mkts  2 cost     110 avg_px 0.916 edge      10
+   #4 fountaim       +     0s  fills   3 mkts  3 cost    1000 avg_px 0.809 edge     237
+   #5 0x54b7689d     +     0s  fills   2 mkts  2 cost      85 avg_px 0.935 edge       6
+   #6 0xbd744e7b     +     0s  fills   1 mkts  1 cost      12 avg_px 0.910 edge       1
+
+== gemini-carbon-text-arena-debut-20261027 check 11-03 17:00: no qualifying jump among 5 cached siblings
+
+== gemini-carbon-text-arena-rank-debut-20261027  appearance 10-28 22:24:44 UTC (Wed 18:24 ET), check 11-03 17:00, 4 cached siblings; winner bought <0.97 until the check: $4418, edge $242 (first 60 s $4, first 10 min $4)
+   #1 NoTeacher      +    -4s  fills   7 mkts  3 cost     594 avg_px 0.934 edge      42
+   #2 0x1713994e     +   677s  fills   4 mkts  3 cost     311 avg_px 0.909 edge      31
+   #3 0x8268f45e     +   677s  fills   4 mkts  2 cost      69 avg_px 0.936 edge       5
+   #4 0x84bbac69     +   677s  fills   2 mkts  1 cost      38 avg_px 0.959 edge       2
+   #5 0x9c185724     +   677s  fills   6 mkts  4 cost     103 avg_px 0.944 edge       6
+   #6 0x5fe5d952     +  2220s  fills   1 mkts  1 cost      18 avg_px 0.920 edge       2
+
+== kimi-k3pt1-pro-text-arena-debut-20261023  appearance 11-10 01:04:40 UTC (Mon 20:04 ET), check 11-10 17:00, 7 cached siblings; winner bought <0.97 until the check: $168, edge $7 (first 60 s $0, first 10 min $0)
+   #1 0xeace5399     +  2214s  fills   1 mkts  1 cost      48 avg_px 0.960 edge       2
+   #2 iutwpfal       +  3810s  fills   1 mkts  1 cost     120 avg_px 0.960 edge       5
+
+== kimi-k3pt1-pro-text-arena-rank-debut-20261023 check 11-10 17:00: no qualifying jump among 3 cached siblings
+
+== gemini-carbon-hle-diamond-debut-20261028  appearance 11-12 00:59:40 UTC (Wed 19:59 ET), check 11-12 17:00, 5 cached siblings; winner bought <0.97 until the check: $9, edge $0 (first 60 s $0, first 10 min $0)
+   #1 0x2af1d468     +     0s  fills   1 mkts  1 cost       9 avg_px 0.966 edge       0
+
+== claude-fable-5pt2-hle-diamond-debut-20261110 check 11-12 17:00: no qualifying jump among 6 cached siblings
+
+== gemini-hydrogen-text-arena-debut-20261110  appearance 11-12 18:20:52 UTC (Thu 13:20 ET), check 11-13 17:00, 2 cached siblings; winner bought <0.97 until the check: $96, edge $3 (first 60 s $3, first 10 min $3)
+   #1 0x5a0d0c6e     +     0s  fills   1 mkts  1 cost      96 avg_px 0.969 edge       3
+
+== gemini-hydrogen-text-arena-rank-debut-20261110  appearance 11-12 18:29:22 UTC (Thu 13:29 ET), check 11-13 17:00, 2 cached siblings; winner bought <0.97 until the check: $579, edge $29 (first 60 s $26, first 10 min $26)
+   #1 0x13b68916     +     0s  fills   1 mkts  1 cost     486 avg_px 0.950 edge      26
+   #2 0x5c773ca8     +  3063s  fills   1 mkts  1 cost      94 avg_px 0.965 edge       3
+
+== gpt-astra-6pt1-hle-diamond-debut-20261020 check 11-18 17:00: no qualifying jump among 4 cached siblings
+
+== next-fable-model-5pt2-text-arena-debut-20260928  appearance 11-20 02:13:25 UTC (Thu 21:13 ET), check 11-20 17:00, 5 cached siblings; winner bought <0.97 until the check: $3833, edge $481 (first 60 s $455, first 10 min $481)
+   #1 0x07e76c6d     +     0s  fills   2 mkts  2 cost       3 avg_px 0.969 edge       0
+   #2 0x09e27c2c     +     0s  fills   4 mkts  4 cost     771 avg_px 0.883 edge     102
+   #3 0x11eaaf41     +     0s  fills   1 mkts  1 cost       4 avg_px 0.968 edge       0
+   #4 0x40286535     +     0s  fills   1 mkts  1 cost       1 avg_px 0.968 edge       0
+   #5 fountaim       +     0s  fills   1 mkts  1 cost       7 avg_px 0.924 edge       1
+   #6 0x5662a089     +     0s  fills   2 mkts  2 cost       9 avg_px 0.932 edge       1
+
+== gpt-astra-6pt1-text-arena-debut-20261020  appearance 11-20 02:44:55 UTC (Thu 21:44 ET), check 11-20 17:00, 5 cached siblings; winner bought <0.97 until the check: $1918, edge $239 (first 60 s $200, first 10 min $207)
+   #1 0x09e27c2c     +     0s  fills   4 mkts  4 cost    1273 avg_px 0.871 edge     188
+   #2 0x2f7e1730     +     1s  fills   2 mkts  2 cost       7 avg_px 0.969 edge       0
+   #3 0x33739438     +     1s  fills   1 mkts  1 cost      37 avg_px 0.920 edge       3
+   #4 0x64ff984a     +     1s  fills   1 mkts  1 cost      14 avg_px 0.967 edge       0
+   #5 0x9f32bcc2     +     1s  fills   1 mkts  1 cost       1 avg_px 0.960 edge       0
+   #6 0xc6bf21b5     +     1s  fills   2 mkts  2 cost       6 avg_px 0.965 edge       0
+
+== next-gpt-terra-model-5pt7-text-arena-debut-20261022  appearance 11-20 02:13:25 UTC (Thu 21:13 ET), check 11-20 17:00, 4 cached siblings; winner bought <0.97 until the check: $2476, edge $155 (first 60 s $155, first 10 min $155)
+   #1 fountaim       +     0s  fills   1 mkts  1 cost     448 avg_px 0.938 edge      30
+   #2 0x64ff984a     +     0s  fills   7 mkts  2 cost    2000 avg_px 0.942 edge     124
+   #3 0x03601ed5     +     6s  fills   1 mkts  1 cost      28 avg_px 0.950 edge       2
+
+== gpt-astra-6pt1-text-arena-rank-debut-20261027 check 11-20 17:00: no qualifying jump among 4 cached siblings
+
+== next-fable-model-5pt2-text-arena-rank-debut-20261027  appearance 11-20 02:13:25 UTC (Thu 21:13 ET), check 11-20 17:00, 4 cached siblings; winner bought <0.97 until the check: $1200, edge $95 (first 60 s $79, first 10 min $79)
+   #1 0xa2770432     +    -2s  fills   1 mkts  1 cost      34 avg_px 0.850 edge       6
+   #2 0x09e27c2c     +     0s  fills   1 mkts  1 cost      17 avg_px 0.856 edge       3
+   #3 0x1073d3b2     +     0s  fills   1 mkts  1 cost       4 avg_px 0.870 edge       1
+   #4 0x11eaaf41     +     0s  fills   2 mkts  2 cost      31 avg_px 0.956 edge       1
+   #5 fountaim       +     0s  fills   4 mkts  4 cost     198 avg_px 0.928 edge      15
+   #6 0x64ff984a     +     0s  fills   2 mkts  2 cost     237 avg_px 0.870 edge      35
+
+== gemini-hydrogen-hle-diamond-debut-20261110  appearance 11-20 19:52:28 UTC (Fri 14:52 ET), check 11-21 17:00, 5 cached siblings; winner bought <0.97 until the check: $4849, edge $899 (first 60 s $792, first 10 min $822)
+   #1 0x0084eab7     +    -2s  fills   1 mkts  1 cost      15 avg_px 0.730 edge       5
+   #2 0x11eaaf41     +    -2s  fills   1 mkts  1 cost      40 avg_px 0.736 edge      14
+   #3 0x1946e97c     +    -2s  fills   1 mkts  1 cost       5 avg_px 0.744 edge       2
+   #4 0x33739438     +    -2s  fills   3 mkts  3 cost      23 avg_px 0.736 edge       8
+   #5 fountaim       +    -2s  fills   4 mkts  4 cost     797 avg_px 0.664 edge     403
+   #6 0x8a902098     +    -2s  fills   2 mkts  2 cost      59 avg_px 0.824 edge      13
+
+===== league over 20 debut events with a jump (taker buys of the eventual winner below 0.97, from the appearance to the check)
+wallet           events first in10m     cost     edge    fee  edge60s avg_rank
+lamyk                 3     0     3     4034     1996     61     1996      4.0
+0xa7d2ec6680f4        7     1     5     5412     1657     47     1629      5.7
+0xa2770432a5e6        3     1     3     1685     1638     33     1638      9.0
+0x09e27c2cbcd9        6     3     6     8650     1597     67     1597      1.5
+0x5a218c7ad041        7     2     5     2640      935     26      918      9.1
+fountaim              6     1     6     3623      931     35      931      4.5
+0x652bff901f40        3     0     2     2147      696     17      601      6.0
+0x64ff984a6d29        8     0     8     5723      529     24      529      7.6
+KimchiCapital         3     0     3     6930      481     22      369     11.0
+0x564f22744b79        2     0     2     4341      474     21      465      8.5
+0xda76f007ec66        1     0     1      800      297     11      297     13.0
+0x9efda3d63541        4     0     3      316      291      6      288      4.8
+0xc91c60a997ba        1     0     1      933      201      8      201      5.0
+0xbe1acc1a43d2        4     0     4     2081      168      8      149     10.2
+0x2fdb5df2a326        3     0     3     2388      162      8        2     14.0
+0x8a524bca5c74        2     0     1     1198      147      7        0     20.0
+0x5999ebfa1454        2     0     2     1604      143      7      143      2.0
+0x9aeb534c42b5        2     0     2     2144      131      6        0     16.5
+iutwpfal              3     1     1     2221      129      6       39      7.0
+0xa278b41b5afd        2     0     1      436      101      4       97     12.0
+0xeed8c2be4110        2     0     1      864       85      4       84     10.0
+0x521bf1c6a543        2     0     1      555       81      3       40      9.0
+0x233bacfb515a        2     0     2      907       74      3       74      6.5
+0x8921d6e3e8c3        1     0     1      204       59      2       59      2.0
+0x8df92602ec9c        1     0     0      534       54      2        0     42.0
+all wallets: edge 14113, of which first 60 s 12508; distinct wallets 171

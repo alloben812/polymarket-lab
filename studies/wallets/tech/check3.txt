@@ -1,0 +1,34 @@
+(1) taker buys in debut markets inside the 40 h before the check: was the account the first to move the price?
+account        fills mkts right pre_px fill_px px+10m quiet10m quiet60s lead<=5s  net_usd   pre_px = bought side on the tape 10 s before; quiet = no other trade in the event's cached markets in the window before the fill; lead = fill within 5 s of the first trade of its burst
+iutwpfal          31   17  0.48  0.489   0.533  0.513     0.32     0.52     0.52       24
+lamyk             15   15  0.93  0.610   0.747  0.869     0.73     0.73     0.73     3027
+KimchiCapital     18   16  1.00  0.851   0.861  0.877     0.28     0.50     0.50     1289
+NoTeacher         32   23  0.59  0.536   0.561  0.580     0.53     0.72     0.69     -215
+fountaim          32   32  1.00  0.668   0.785  0.973     0.66     0.81     0.81     5003
+
+(2) gap money by seconds after the first sweep (20 events, taker buys of the eventual winner below 0.97, edge = 1 - price):
+   <=3s: $12002 (85%, 68 wallets, cost $46120, 20.7c/sh) | 3-10s: $95 (1%, 12 wallets, cost $1379, 6.4c/sh) | 10-60s: $410 (3%, 14 wallets, cost $5631, 6.8c/sh) | 1-10m: $409 (3%, 40 wallets, cost $7229, 5.4c/sh) | 10m-6h: $979 (7%, 76 wallets, cost $16028, 5.8c/sh) | >6h: $217 (2%, 18 wallets, cost $3124, 6.5c/sh)
+
+(3) reversal risk: price of each cached sibling 10 min after the first sweep vs the final outcome
+    {'winner>=0.97': 54, 'winner 0.90-0.97': 23, '0.10-0.90 undecided': 6}
+
+(4) 0xAee8611B bursts
+   bursts touching >=8 markets within 10 s: 213 over 88 days; by 5-minute slot of the hour {0: 12, 5: 15, 10: 20, 15: 28, 20: 19, 25: 23, 30: 12, 35: 13, 40: 18, 45: 20, 50: 10, 55: 23}; by UTC hour {0: 5, 1: 5, 2: 12, 3: 10, 4: 14, 5: 9, 6: 6, 7: 7, 8: 9, 9: 10, 10: 2, 11: 8, 12: 12, 13: 10, 14: 14, 15: 7, 16: 10, 17: 15, 18: 12, 19: 10, 20: 7, 21: 8, 22: 6, 23: 5}
+   distinct first-sweep moments in debut markets: 18; 0xAee8611B has any fill within -60 s..+10 min of them: 12 (its base rate: 0.54 of all 11-minute slots contain a fill)
+   hours between bursts q25/q50/q75: 1.4/5.0/12.4
+   resolved arena markets 399: net incl. incomplete 8370; complete only 2665; turnover 127188; fees 790
+
+(5) melonmanm tech buys at >= 0.95 (resolved markets): 
+   ('non-tech', 'M'): fills 163, markets 42, cost $53770, gross $56, fee $0, $ lost-side share 0.018
+   ('non-tech', 'T'): fills 76, markets 56, cost $63390, gross $1017, fee $49, $ lost-side share 0.000
+   ('tech', 'M'): fills 95, markets 18, cost $94831, gross $544, fee $0, $ lost-side share 0.000
+   ('tech', 'T'): fills 55, markets 35, cost $67965, gross $-312, fee $34, $ lost-side share 0.015
+   tech >=0.95 buys: hours to close q25/q50/q75 2.1/2.8/7.2
+
+(6) fastest wallets outside the study list
+   0x09e27c2cbcd98c7e821ef66b309506701dcf29de : kept_all 47044, gross 47661, fees -882, rebates 161, fills 1811, markets 456, volume 261683
+   0xa7d2ec6680f4e5f6ab0da244d8006eec3e20f954 : kept_all 30796, gross 29898, fees -3462, rebates 4288, fills 11375, markets 1000, volume 438128
+   0xa2770432a5e6bd24c347c976b0d815db1f2c1182 : kept_all 17247, gross 17889, fees -694, rebates 52, fills 1170, markets 197, volume 67610
+   0x5a218c7ad04135830a45c41aaed7294df7809318 : kept_all 1202669, gross 1230722, fees -115720, rebates 83541, fills 1057163, markets 105319, volume 42777590
+   0x64ff984a6d295717ad90de4bfe90835974d42747 : kept_all 3458, gross 3579, fees -137, rebates 15, fills 246, markets 118, volume 29217
+   0x564f22744b7941ade18d5e0e4f347c30e3057026 : kept_all 55681, gross 61209, fees -8018, rebates 1858, fills 18359, markets 4489, volume 819113

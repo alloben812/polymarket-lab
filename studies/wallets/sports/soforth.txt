@@ -1,0 +1,51 @@
+[soforth] fills 8313 in 5s
+soforth  0x72638c8d939fd0205925025b1183d8db4a360851  window 2026-11-13 16:24 .. 2026-11-27 16:24 UTC
+summary: {"fills": 8313, "markets": 2940, "resolved_complete_markets": 2921, "incomplete_markets": 6, "unresolved_markets": 13, "turnover_usd": 1823774, "maker_share_usd": 0.978, "sell_share_usd": 0.004, "markets_with_both_outcomes_traded": 533, "uses_split_merge": true, "gross": 164306.03, "fees_est": 653.71, "net": 163652.32, "fee_rate_unknown_markets": 0, "net_per_market": 56.026, "t_by_market": 1.54, "win_share_markets": 0.484, "median_market_turnover": 87.49, "max_market_turnover": 104453.29, "avg_fill_usd": 219.39}
+inventory events: {'REDEEM': 3170, 'MERGE': 831}
+API says for the same days: gross 136560, fees -663, refunded 0, rebates 4707, kept 140604, volume $1906812, fills 8629
+
+by family:
+  family  markets  resolved_complete  incomplete  turnover  taker_share  gross      fees_est  net        net_pct_turnover  net_per_market  t_by_market
+  sports  2940     2921               6           1823774   0.022        164306.03  653.71    163652.32  8.97              56.03           1.54       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares   usd      avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd  
+  ('M', 'BUY')   8227   3789188  1778624  0.4694  3.836          0.0           3.836         2.619  1.46  2886     145347.97
+  ('T', 'BUY')   19     55568    32260    0.5805  34.13          1.176         32.954        6.294  5.24  13       18311.93 
+  ('T', 'SELL')  2      7212     7205     0.999   -0.1           0.005         -0.105        0.0    None  2        -7.57    
+
+by role and price:
+  key                 fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t       markets  net_usd  
+  ('M', '0.00-0.05')  276    135194  4285    0.0317  -3.001         0.0           -3.001        0.285   -10.52  184      -4056.61 
+  ('M', '0.05-0.15')  952    359165  33429   0.0931  1.855          0.0           1.855         2.905   0.64    524      6663.23  
+  ('M', '0.15-0.30')  1220   438203  90917   0.2075  1.855          0.0           1.855         5.318   0.35    636      8129.32  
+  ('M', '0.30-0.45')  1729   833312  317357  0.3808  -3.376         0.0           -3.376        3.98    -0.85   744      -28134.09
+  ('M', '0.45-0.55')  1428   716796  348829  0.4867  8.838          0.0           8.838         5.941   1.49    728      63347.86 
+  ('M', '0.55-0.70')  1120   502811  309218  0.615   17.798         0.0           17.798        4.281   4.16    563      89491.13 
+  ('M', '0.70-0.85')  907    442676  341467  0.7714  -3.344         0.0           -3.344        10.257  -0.33   436      -14803.43
+  ('M', '0.85-0.95')  464    243139  219484  0.9027  8.415          0.0           8.415         0.52    16.2    304      20460.04 
+  ('M', '0.95-0.99')  131    117893  113637  0.9639  3.605          0.0           3.605         0.141   25.5    101      4250.52  
+  ('T', '0.15-0.30')  2      3059    704     0.2301  -23.007        0.886         -23.893       0.017   None    2        -730.89  
+  ('T', '0.30-0.45')  1      314     94      0.3     -30.0          1.05          -31.05        None    None    1        -97.5    
+  ('T', '0.45-0.55')  3      986     529     0.5371  -48.819        1.242         -50.061       None    None    1        -493.42  
+  ('T', '0.55-0.70')  3      50680   30488   0.6016  39.841         1.198         38.643        0.046   None    2        19584.41 
+  ('T', '0.70-0.85')  6      327     258     0.7891  11.246         0.828         10.419        12.309  None    4        34.05    
+  ('T', '0.85-0.95')  3      156     140     0.9004  9.965          0.449         9.516         0.002   None    2        14.84    
+  ('T', '0.99-1.00')  3      7258    7251    0.9989  -0.093         0.005         -0.098        0.011   None    3        -7.14    
+
+by role and point in the market's life:
+  key                                            fills  shares   usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t       markets  net_usd 
+  ('M', 'life', 's over 7 d to end')             93     48630    21612   0.4444  17.274         0.0           17.274        16.322  1.06    45       8400.39 
+  ('M', 'life', 't 1-7 d to end')                1238   980974   551961  0.5627  4.703          0.0           4.703         8.188   0.57    310      46134.56
+  ('M', 'life', 'u 6-24 h to end')               271    160859   65264   0.4057  11.924         0.0           11.924        12.996  0.92    71       19181.06
+  ('M', 'life', 'v 1-6 h to end')                2030   623141   251329  0.4033  1.543          0.0           1.543         2.679   0.58    385      9612.61 
+  ('M', 'life', 'w 10-60 min to end')            68     113798   48310   0.4245  12.663         0.0           12.663        12.556  1.01    36       14410.43
+  ('M', 'life', 'x 1-10 min to end')             18     18551    6445    0.3474  -33.441        0.0           -33.441       2.887   -11.58  9        -6203.4 
+  ('M', 'life', 'y under 1 min to end')          7      2139     301     0.1408  4.571          0.0           4.571         11.699  0.39    5        97.75   
+  ('M', 'life', 'z after end (pre-resolution)')  4502   1841097  833402  0.4527  2.918          0.0           2.918         2.681   1.09    2083     53714.57
+  ('T', 'life', 't 1-7 d to end')                3      48511    29197   0.6019  39.814         1.198         38.616        0.006   None    2        18732.87
+  ('T', 'life', 'u 6-24 h to end')               1      2174     1296    0.5961  40.388         1.204         39.184        None    None    1        852.01  
+  ('T', 'life', 'v 1-6 h to end')                8      644      575     0.8927  9.663          0.42          9.244         5.535   1.67    5        59.54   
+  ('T', 'life', 'z after end (pre-resolution)')  9      11451    8397    0.7333  -11.321        0.382         -11.703       9.174   -1.28   7        -1340.06
+
+full result written to studies/wallets/sports/soforth.json

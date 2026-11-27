@@ -1,0 +1,55 @@
+distinct entries by hours since market open:
+              n  confirmed  any_print  mean_abs_gap  pm_med       pnl
+ob                                                                   
+[0, 1)      140      0.029      0.107         0.271   0.495   -10.759
+[1, 6)       39      0.000      0.000         0.283   0.505   208.111
+[6, 24)     142      0.042      0.077         0.139   0.562   155.236
+[24, 72)    447      0.056      0.130         0.112   0.644  3696.987
+[72, 200)  1036      0.420      0.524         0.086   0.652  4956.321
+
+market price at signal for unconfirmed 48h-7d entries (deciles): [0.16, 0.35, 0.53, 0.73, 0.868]
+
+confirmed entries, pooled over the 9 variants (descriptive, overlapping): by period x side
+               n       pnl    win     pe
+period side                             
+report NO    138   914.615  0.812  0.725
+       YES    92    75.567  0.761  0.822
+tune   NO    150  2015.007  0.600  0.476
+       YES   140 -1136.664  0.479  0.562
+
+confirmed, tuned variant g=0.05 48h-7d, by period x side and per cluster:
+              n      pnl    win     pe
+period side                           
+report NO    31  704.309  0.806  0.575
+       YES   12   -9.771  0.833  0.852
+tune   NO    20  688.684  0.650  0.291
+       YES   12 -216.759  0.083  0.274
+                n     pnl    pe   yes
+cluster                              
+BTC_2026-11-16  5  315.06  0.45  0.20
+BTC_2026-11-17  3  182.02  0.48  0.00
+BTC_2026-11-18  2   16.47  0.71  0.00
+BTC_2026-11-19  5   51.79  0.70  0.40
+BTC_2026-11-20  4   52.89  0.66  0.25
+BTC_2026-11-22  5   65.25  0.66  0.60
+BTC_2026-11-23  4  -59.17  0.72  0.00
+BTC_2026-11-24  6    6.69  0.75  0.50
+BTC_2026-11-25  3    9.24  0.88  0.33
+ETH_2026-11-17  1   40.47  0.33  0.00
+ETH_2026-11-19  1    1.55  0.93  1.00
+ETH_2026-11-20  1    3.64  0.84  0.00
+ETH_2026-11-22  1  -20.16  0.22  0.00
+ETH_2026-11-23  1  -20.02  0.88  0.00
+ETH_2026-11-25  1   48.82  0.29  0.00
+
+confirmed with size >= entry shares, tuned variant report:      size        sum
+pnl  13.0  47.217521
+distinct confirmed entries tune: n 264 markets 115 clusters 38 pnl +1248.5 return +0.236 se 0.189 t +1.25
+distinct confirmed entries report: n 209 markets 79 clusters 21 pnl +967.1 return +0.231 se 0.115 t +2.01
+2026-10-20 BTC 82778.39 ETH 2451.74
+2026-10-27 BTC 80662.0 ETH 2351.41
+2026-11-03 BTC 77732.0 ETH 2297.96
+2026-11-10 BTC 72880.64 ETH 2018.47
+2026-11-16 BTC 64927.22 ETH 1828.82
+2026-11-20 BTC 59546.51 ETH 1645.64
+2026-11-26 BTC 60522.91 ETH 1692.09

@@ -1,0 +1,40 @@
+
+######## grasstoucher69: markets 1945, both outcomes bought in 599; paired shares 122727, locked pair profit before fee 20022 (avg pair cost 0.837); merged shares 146083; total bought $429030
+type         ladders mk/lad    cost$   worst$    best$ worst/cost locked% naked% | resolved:    n    cost    real     pnl   pnl% t(lad) win% top3 share
+ALL              479    2.8   124001    13983   492956       0.11      0%    76% |            429  100256  152746   52491  52.4%    3.3  45%        36%
+hit-week         116    5.3    63619     8986   148166       0.14      1%    60% |             83   43480   63248   19768  45.5%    2.0  55%        76%
+updown-day       224    1.1    29553        0   166194       0.00      0%   126% |            224   29553   48991   19438  65.8%    2.6  44%        46%
+close-day        101    3.1    20695     3626   153836       0.18      0%    60% |            100   20443   32306   11862  58.0%    1.2  39%       129%
+close-week        30    4.2     6751     1182    18777       0.18      1%    64% |             21    5371    8043    2672  49.8%    0.8  48%       152%
+hit-month          5    4.4     3101      169     5536       0.05      0%    53% |              1    1408     159   -1249 -88.7%    nan   0%       100%
+close-month        3    1.7      282       20      448       0.07      0%    73% |              0       0       0       0   0.0%    nan   0%       nan%
+
+######## thanksforplayin: markets 677, both outcomes bought in 77; paired shares 22103, locked pair profit before fee 500 (avg pair cost 0.977); merged shares 0; total bought $192626
+type         ladders mk/lad    cost$   worst$    best$ worst/cost locked% naked% | resolved:    n    cost    real     pnl   pnl% t(lad) win% top3 share
+ALL              294    1.9    70988     2959   253783       0.04      0%   102% |            246   49609   50404     795   1.6%    0.1  58%      1404%
+close-day         81    2.3    27515     1661   106776       0.06      0%    88% |             76   24888   23323   -1565  -6.3%   -0.2  54%      -589%
+updown-day       118    1.0    14345        0    34901       0.00      0%   148% |            118   14345   19005    4660  32.5%    1.6  64%        69%
+hit-week          53    2.3     9489      543    60434       0.06      0%    83% |             37    7955    6024   -1931 -24.3%   -0.6  41%      -181%
+hit-month         17    2.8     8676      756    20518       0.09      0%    91% |              2      11      14       3  31.4%    nan  50%       100%
+close-week        20    2.7     7184        0    23865       0.00      0%   108% |             13    2410    2038    -372 -15.4%   -0.4  69%      -185%
+close-month        5    3.6     3779        0     7288       0.00      0%   100% |              0       0       0       0   0.0%    nan   0%       nan%
+
+######## superstonksbro: markets 407, both outcomes bought in 67; paired shares 22547, locked pair profit before fee -1488 (avg pair cost 1.066); merged shares 27104; total bought $214320
+type         ladders mk/lad    cost$   worst$    best$ worst/cost locked% naked% | resolved:    n    cost    real     pnl   pnl% t(lad) win% top3 share
+ALL              174    1.7   108118    15551   218372       0.14      0%    57% |            135   44283   49323    5040  11.4%    0.7  56%       131%
+hit-month         11    3.8    28681     7487    59478       0.26      0%    46% |              1     651     794     143  22.0%    nan 100%       100%
+close-day         56    1.6    25082     1153    49848       0.05      0%    86% |             51   22652   29675    7022  31.0%    1.4  59%        94%
+close-month        8    2.1    23320     5289    33592       0.23      0%     3% |              0       0       0       0   0.0%    nan   0%       nan%
+hit-week          41    1.9    15558      346    46267       0.02      0%    90% |             33   12700   11430   -1270 -10.0%   -0.3  73%      -171%
+close-week        16    1.6     8987     1275    11771       0.14      0%    62% |             10    1801    1724     -77  -4.3%   -0.3  50%      -327%
+updown-day        42    1.0     6490        0    17417       0.00      0%   100% |             40    6478    5700    -778 -12.0%   -0.4  38%      -252%
+
+######## PippiTrader: markets 1882, both outcomes bought in 333; paired shares 38222, locked pair profit before fee 4379 (avg pair cost 0.885); merged shares 15; total bought $176131
+type         ladders mk/lad    cost$   worst$    best$ worst/cost locked% naked% | resolved:    n    cost    real     pnl   pnl% t(lad) win% top3 share
+ALL              474    2.7    55594     3236   113602       0.06      0%    97% |            411   45183   31683  -13500 -29.9%   -2.9  47%       -18%
+hit-week         135    4.7    31296     2055    62604       0.07      0%    89% |            104   24542   14271  -10271 -41.9%   -2.7  36%       -24%
+updown-day       203    1.0     9862      408    20489       0.04      2%   119% |            188    9679    7832   -1846 -19.1%   -1.0  46%       -67%
+close-day        102    3.2     9210      557    22987       0.06      0%    99% |             99    8875    7602   -1272 -14.3%   -0.7  58%      -101%
+hit-month          7    5.0     3043       12     4290       0.00      0%   100% |              2     498       0    -498-100.0%    nan   0%       100%
+close-week        22    2.2     1795      204     2777       0.11      0%    82% |             18    1590    1978     388  24.4%    1.6  67%        86%
+close-month        5    1.4      389        0      454       0.00      0%   100% |              0       0       0       0   0.0%    nan   0%       nan%

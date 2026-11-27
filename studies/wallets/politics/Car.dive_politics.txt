@@ -1,0 +1,26 @@
+Car: 2687 fills, $511,314, family filter politics, markets 106, events 54
+ role/side/outcome $: {('T', 'BUY', 'Yes'): 134905, ('T', 'BUY', 'No'): 115315, ('M', 'SELL', 'Yes'): 68882, ('T', 'SELL', 'Yes'): 54923, ('M', 'SELL', 'No'): 49401, ('M', 'BUY', 'Yes'): 42344, ('M', 'BUY', 'No'): 36435, ('T', 'SELL', 'No'): 9110}
+ fill usd p10/p50/p90/p99: [0.9, 16.6, 449.8, 2368.7]  neg-risk share of $: 0.07
+ $ by time to market end: {'30-180d': 194618, '>180d': 10020, '7-30d': 174211, '1-7d': 55303, '<1d': 25824, 'after end': 51339}
+ bought $328,999; round-tripped inside window: 465,327 shares, cost $157,554, realised $6,606 (1.42 c/share); sells of older inventory $18,155
+ holding time of round trips ($-weighted) p10/p50/p90: ['25.4 min', '2802.5 min', '13868.6 min']  share of round-trip $ closed <60 s: 0.01 <1 h: 0.16
+ round trips by (entry role, exit role): shares, c/share: {('T', 'T'): (124030, -1.0), ('T', 'M'): (164620, 3.71), ('M', 'T'): (65797, -3.5), ('M', 'M'): (110880, 3.64)}
+ buy $ by price: {'<0.30': 54419, '<0.70': 118553, '<0.95': 55597, '<0.99': 29692, '<0.90': 57561, '>=0.99': 10867, '<0.05': 2310}
+ 10-second bursts: 1882 median fills 1.0 p90 2  bursts touching >=3 markets of one event: 7
+ fills per day: {'10-28': 17, '10-29': 39, '10-30': 53, '10-31': 16, '11-01': 9, '11-02': 38, '11-03': 4, '11-04': 93, '11-05': 110, '11-06': 227, '11-07': 84, '11-08': 167, '11-09': 119, '11-10': 166, '11-11': 121, '11-12': 118, '11-13': 346, '11-14': 404, '11-15': 106, '11-16': 72, '11-17': 75, '11-18': 43, '11-19': 16, '11-20': 9, '11-21': 24, '11-22': 38, '11-23': 99, '11-24': 15, '11-25': 44, '11-26': 13, '11-27': 2}
+ fills per UTC hour: [213, 135, 113, 117, 94, 61, 89, 59, 42, 30, 45, 72, 47, 73, 117, 62, 93, 154, 148, 320, 69, 112, 187, 235]
+ top events:
+   us-announces-end-of-iranian-blockade-byptptpt-20260713152715080        mk   4 $  135,388
+   us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108          mk   5 $  110,233
+   israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963      mk   4 $   42,769
+   pete-hegseth-out-as-secretary-of-defense-by-december-31                mk   1 $   27,794
+   nationwide-ground-stop-lifted-byptptpt                                 mk  12 $   24,061
+   where-will-trump-and-putin-meet-next-678                               mk   2 $   19,917
+   israeli-knesset-election-annulled                                      mk   1 $   12,780
+   who-will-trump-speak-to-by-november-30-2026                            mk   4 $   10,952
+   trump-meets-with-putin-by                                              mk   2 $   10,156
+   russia-x-ukraine-ceasefire-agreement-by                                mk   3 $    9,562
+   faa-outage-attributed-to-a-foreign-actor                               mk   1 $    9,449
+   next-press-secretary-announced-byptptpt                                mk   2 $    8,835
+   pete-hegseth-out-as-secretary-of-defense-by-november-30-20261001003401 mk   1 $    8,170
+   faa-outage-attributed-to-iran                                          mk   1 $    7,238

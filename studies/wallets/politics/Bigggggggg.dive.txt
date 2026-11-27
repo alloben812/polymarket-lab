@@ -1,0 +1,24 @@
+Bigggggggg: 9668 fills, $979,085, family filter None, markets 1167, events 182
+ role/side/outcome $: {('T', 'BUY', 'No'): 661099, ('M', 'BUY', 'No'): 221784, ('M', 'SELL', 'Yes'): 70760, ('T', 'SELL', 'Yes'): 25441}
+ fill usd p10/p50/p90/p99: [0.1, 4.4, 127.9, 2345.5]  neg-risk share of $: 1.0
+ $ by time to market end: {'>180d': 211955, '30-180d': 272791, '7-30d': 153659, '1-7d': 201119, 'after end': 64690, '<1d': 74807, 'no end': 65}
+ bought $882,883; round-tripped inside window: 0 shares, cost $0, realised $0 (0.00 c/share); sells of older inventory $96,202
+ buy $ by price: {'<0.99': 236742, '<0.70': 110806, '<0.90': 188734, '<0.95': 121471, '>=0.99': 201774, '<0.30': 23206, '<0.05': 151}
+ 10-second bursts: 4991 median fills 1 p90 3  bursts touching >=3 markets of one event: 496
+ fills per day: {'11-13': 264, '11-14': 606, '11-15': 716, '11-16': 726, '11-17': 753, '11-18': 1013, '11-19': 500, '11-20': 319, '11-21': 344, '11-22': 525, '11-23': 822, '11-24': 774, '11-25': 761, '11-26': 926, '11-27': 619}
+ fills per UTC hour: [362, 442, 274, 391, 318, 326, 228, 368, 274, 414, 400, 391, 310, 566, 464, 592, 393, 558, 474, 457, 387, 351, 384, 544]
+ top events:
+   next-french-presidential-election                                      mk  19 $   88,840
+   next-ceo-of-nvidia                                                     mk  28 $   80,486
+   pgl-major-singapore-2026-winner-1793811600000                          mk  32 $   78,454
+   nba-2027-champion                                                      mk  23 $   74,268
+   taoyuan-mayor-election-winner-20260813125857300                        mk   2 $   46,136
+   next-leader-out-of-power-before-2027-no-starmer-or-petro-2026063019461 mk  22 $   45,476
+   who-will-be-the-next-prime-minister-of-israel-after-the-next-election  mk  12 $   42,116
+   taipei-mayor-election-winner-20260813125857100                         mk   2 $   40,210
+   new-taipei-mayor-election-winner-20260813125857200                     mk   2 $   39,083
+   fed-decision-in-december-20260729232808632                             mk   5 $   37,298
+   elon-musk-of-tweets-november-13-november-20-2026                       mk  15 $   25,625
+   pro-football-2027-champion-20260729185915366                           mk  26 $   25,289
+   ljubljana-mayoral-election-winner-2026                                 mk   7 $   21,093
+   next-james-bond-actor-398                                              mk  16 $   20,343

@@ -1,0 +1,18 @@
+=== kaxel78 0xc1b5f266564e6d4907cf84bdf5a8f91621ef5d85 window all: activity rows 13745, first row 2026-10-12
+   usdc by type: {'CONVERSION': 1082136, 'MAKER_REBATE': 602, 'MERGE': 62450, 'REDEEM': 45, 'REWARD': 8642, 'TAKER_REBATE': 271, 'TRADE_BUY': 1191111, 'TRADE_SELL': 41930, 'YIELD': 0}  counts: {'TRADE_SELL': 3347, 'MERGE': 245, 'TRADE_BUY': 8252, 'CONVERSION': 1743, 'REWARD': 69, 'YIELD': 3, 'REDEEM': 18, 'MAKER_REBATE': 36, 'TAKER_REBATE': 32}
+   net cash 4,964 | open positions 2012 value now 522 (initial_value field 0) | net cash + value 5,486
+   API all-time: trade_pnl 75,218 fees -3,351 economic 81,381 unrealized -14159.907298
+     fed-decision-in-october-20260617190323537                  buy    90485 sell     389 conv    89592 merge     577 redeem       0
+     ballon-dor-winner-2026                                     buy    82305 sell     107 conv    81929 merge     265 redeem       0
+     brazil-presidential-election-second-round-margin-of-victor buy    55579 sell      52 conv    55053 merge     415 redeem       0
+     nba-2027-champion                                          buy    54095 sell     199 conv    52807 merge    1080 redeem       0
+     fed-decision-in-december-20260729232808632                 buy    50248 sell     353 conv    48477 merge    1430 redeem       0
+     israeli-legislative-election-winner                        buy    47243 sell     891 conv    46475 merge       0 redeem       0
+     worlds-2026-winner                                         buy    39400 sell      78 conv    39310 merge       0 redeem       0
+     next-prime-minister-of-spain-20260625005215443             buy    43053 sell     147 conv    35835 merge    6851 redeem       0
+     pos will-inception-labs-be-acquired-before-2028              No size         0 avg 0.730 value       93
+     pos b200-average-rental-price-in-december-2026-above-8pt00   No size         0 avg 0.150 value       27
+     pos will-hexed-score-at-least-65-on-the-rotten-tomatoes-toma Yes size         0 avg 0.660 value       15
+     pos will-usd-be-between-2pt5m-and-3pt0m-iranian-rials-on-dec Yes size         0 avg 0.167 value       15
+     pos will-kuo-hsi-win-the-next-taipei-mayor-election-20260813 Yes size         0 avg 0.032 value       15
+     pos will-the-median-home-value-in-san-francisco-metro-be-les Yes size         0 avg 0.675 value       13

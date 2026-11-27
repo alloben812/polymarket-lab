@@ -1,0 +1,18 @@
+=== SPLPB 0xdf0e455ca4896232ba935a8176e5e8cfbb38c02b window 60: activity rows 22218, first row 2026-09-28
+   usdc by type: {'CONVERSION': 149171, 'MAKER_REBATE': 3249, 'MERGE': 290504, 'REDEEM': 24, 'REWARD': 66943, 'TAKER_REBATE': 7, 'TRADE_BUY': 1243549, 'TRADE_SELL': 752699, 'YIELD': 6}  counts: {'TRADE_BUY': 7847, 'TRADE_SELL': 10878, 'CONVERSION': 554, 'MERGE': 1153, 'REDEEM': 1545, 'REWARD': 120, 'MAKER_REBATE': 61, 'YIELD': 55, 'TAKER_REBATE': 5}
+   net cash 19,048 | open positions 306 value now 8,211 (initial_value field 0) | net cash + value 27,259
+   API all-time: trade_pnl -48,308 fees -1,375 economic 59,215 unrealized -3815.123272
+     ballon-dor-winner-2026                                     buy    58886 sell   13397 conv    38267 merge    7696 redeem       0
+     taipei-mayor-election-winner-20260813125857100             buy    44866 sell   18953 conv    16018 merge    9538 redeem       0
+     anthropic-ipo-closing-market-cap-higher-strikes            buy    41508 sell   24088 conv     8957 merge    7941 redeem       0
+     fed-decision-in-october-20260617190323537                  buy    13940 sell    5917 conv     7447 merge     139 redeem       0
+     serbia-parliamentary-election-winner-2026                  buy    13811 sell    6426 conv     5423 merge    1941 redeem       0
+     brazil-presidential-election-first-round-2nd-place         buy     9055 sell    4104 conv     4653 merge     260 redeem       0
+     brazil-presidential-election-second-round-margin-of-victor buy     9835 sell    3999 conv     4284 merge    1180 redeem       0
+     balance-of-power-2026-midterms                             buy    11119 sell    7065 conv     4042 merge      33 redeem       0
+     pos b200-average-rental-price-in-march-2027-above-8pt00      No size         0 avg 0.350 value      741
+     pos h100-average-rental-price-in-march-2027-above-2pt60      Yes size         0 avg 0.680 value      557
+     pos h100-average-rental-price-in-january-2027-above-2pt70    Yes size         0 avg 0.770 value      466
+     pos h200-average-rental-price-in-june-2027-above-6pt00       Yes size         0 avg 0.520 value      453
+     pos b200-average-rental-price-in-september-2027-above-9pt00  No size         0 avg 0.630 value      393
+     pos b300-average-rental-price-in-february-2027-above-10pt00  Yes size         0 avg 0.750 value      312

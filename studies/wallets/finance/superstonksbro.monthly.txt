@@ -1,0 +1,25 @@
+superstonksbro  0x969fae0a3a93778adc42178f72c612ed8c4e4d55  joined 2025-11-12  markets traded 8865  fills 97732
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        328,446
+  taker fees charged:                                   -43,533
+  fees refunded:                                         10,734
+  rebates+rewards (taker 9,966 / maker 7,247 / rewards 20,686):     37,900
+  yield + referral income:                                   23
+  ECONOMIC PnL (the API's bottom line, trust this):     333,568   of which unrealized -4,666
+  volume $9,029,474 (16,150,043 shares): gross +3.64% of volume, fees net of refunds -0.36%, kept +3.69%
+  share of what was kept that is rebates/rewards: 11%
+  taker_tier: {"address": "0x969fae0a3a93778adc42178f72c612ed8c4e4d55", "tier": 6, "tier_name": "Obsidian", "wv_30d": 23809.253177}
+  maker_tier: {"address": "0x969fae0a3a93778adc42178f72c612ed8c4e4d55", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 65533.689171, "own_wv_30d": 65533.689171}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2025-11         506          0         0     1,830      2,336         506      392,497     4,438
+  2025-12      -5,374          0         0         0     -5,374      -5,374      132,911     1,900
+  2026-01      61,860          0         0     2,498     64,358      61,860      784,090     7,580
+  2026-02      65,364          0         0     5,270     70,635      65,364      926,167    11,703
+  2026-03     128,672          0         0     2,264    130,937     128,672      751,013     9,572
+  2026-04       4,884    -12,672    10,734       723      3,668       2,946      453,458     5,315
+  2026-05      93,453     -9,955         0     3,447     86,946      83,498    1,238,201    12,292
+  2026-06    -122,041     -5,997         0     3,650   -124,389    -128,038    1,314,584    10,216
+  2026-07      31,325     -6,418         0     6,382     31,312      24,930    1,169,841     7,307
+  2026-08      61,666     -3,880         0     6,165     63,951      57,786      762,839    11,285
+  2026-09      18,653     -2,466         0     2,958     19,145      16,187      504,691     9,927
+  2026-10     -38,977     -1,131         0     1,530    -38,578     -40,108      325,058     3,302
+  2026-11      28,453     -1,014         0     1,184     28,622      27,439      274,123     2,895

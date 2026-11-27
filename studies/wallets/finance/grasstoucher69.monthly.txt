@@ -1,0 +1,20 @@
+grasstoucher69  0x982a77e75498fa134607f598c861b8de9d0c6851  joined 2024-10-12  markets traded 13762  fills 144379
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        317,020
+  taker fees charged:                                   -39,466
+  fees refunded:                                          6,929
+  rebates+rewards (taker 4,383 / maker 3,992 / rewards 10,743):     19,118
+  ECONOMIC PnL (the API's bottom line, trust this):     303,601   of which unrealized 15,945
+  volume $3,653,809 (8,994,323 shares): gross +8.68% of volume, fees net of refunds -0.89%, kept +8.31%
+  share of what was kept that is rebates/rewards: 6%
+  taker_tier: {"address": "0x982a77e75498fa134607f598c861b8de9d0c6851", "tier": 0, "tier_name": "Tier 0", "wv_30d": 177782.530519}
+  maker_tier: {"address": "0x982a77e75498fa134607f598c861b8de9d0c6851", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 126156.03275, "own_wv_30d": 126156.03275}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-03       5,397       -335       330        42      5,434       5,392       74,631     6,817
+  2026-04      14,190     -6,638     6,599     1,649     15,799      14,150      211,557    13,760
+  2026-05      -2,185       -706         0     1,176     -1,715      -2,891      238,944    11,507
+  2026-06      16,181     -2,843         0     1,268     14,605      13,338      383,509    15,153
+  2026-07      17,136     -2,471         0     1,462     16,127      14,666      246,832    10,712
+  2026-08      18,757     -1,750         0       958     17,964      17,007      178,793    11,085
+  2026-09      40,594     -6,685         0     1,983     35,893      33,909      574,475    23,621
+  2026-10      83,285     -9,897         0     7,569     80,956      73,388    1,014,141    29,699
+  2026-11     123,664     -8,140         0     3,012    118,537     115,525      730,929    22,025

@@ -1,0 +1,37 @@
+[forecastication4] fills 3228 in 2s
+forecastication4  0x885ffdf360e5b0b6e6acb963fb3f8ba2344c8ed9  window 2026-11-13 16:24 .. 2026-11-27 16:24 UTC
+summary: {"fills": 3228, "markets": 1601, "resolved_complete_markets": 1559, "incomplete_markets": 0, "unresolved_markets": 42, "turnover_usd": 693675, "maker_share_usd": 1.0, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 61, "uses_split_merge": true, "gross": 72163.66, "fees_est": 0.0, "net": 72163.66, "fee_rate_unknown_markets": 0, "net_per_market": 46.288, "t_by_market": 1.55, "win_share_markets": 0.543, "median_market_turnover": 48.55, "max_market_turnover": 22916.82, "avg_fill_usd": 214.89}
+inventory events: {'REDEEM': 934, 'MERGE': 25}
+API says for the same days: gross 70949, fees 0, refunded 0, rebates 1392, kept 72342, volume $706492, fills 3314
+
+by family:
+  family  markets  resolved_complete  incomplete  turnover  taker_share  gross     fees_est  net       net_pct_turnover  net_per_market  t_by_market
+  sports  1601     1559               0           693675    0.0          72163.66  0.0       72163.66  10.4              46.29           1.55       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares   usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd 
+  ('M', 'BUY')  3128   1389551  684492  0.4926  5.193          0.0           5.193         3.304  1.57  1536     72163.66
+
+by role and price:
+  key                 fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd  
+  ('M', '0.00-0.05')  105    26711   561     0.021   -2.101         0.0           -2.101        0.818   -2.57  48       -561.1   
+  ('M', '0.05-0.15')  233    69108   6745    0.0976  14.623         0.0           14.623        10.201  1.43   131      10105.53 
+  ('M', '0.15-0.30')  112    24839   5743    0.2312  -10.15         0.0           -10.15        5.216   -1.95  76       -2521.09 
+  ('M', '0.30-0.45')  591    301087  116897  0.3882  21.95          0.0           21.95         7.238   3.03   276      66089.02 
+  ('M', '0.45-0.55')  869    592291  290736  0.4909  -7.488         0.0           -7.488        5.334   -1.4   384      -44351.91
+  ('M', '0.55-0.70')  475    221578  134710  0.608   16.876         0.0           16.876        6.288   2.68   252      37394.14 
+  ('M', '0.70-0.85')  283    64282   48882   0.7604  6.227          0.0           6.227         7.472   0.83   183      4003.08  
+  ('M', '0.85-0.95')  415    85099   75843   0.8912  2.145          0.0           2.145         3.675   0.58   234      1825.11  
+  ('M', '0.95-0.99')  45     4555    4374    0.9603  3.971          0.0           3.971         0.181   22.0   24       180.88   
+
+by role and point in the market's life:
+  key                                            fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd 
+  ('M', 'life', 't 1-7 d to end')                1      24      22      0.94    6.0            0.0           6.0           None    None   1        1.42    
+  ('M', 'life', 'u 6-24 h to end')               1178   461603  217255  0.4707  6.734          0.0           6.734         5.473   1.23   653      31082.68
+  ('M', 'life', 'v 1-6 h to end')                1049   467183  237141  0.5076  6.02           0.0           6.02          5.594   1.08   503      28126.41
+  ('M', 'life', 'w 10-60 min to end')            661    351700  168994  0.4805  2.84           0.0           2.84          7.17    0.4    363      9988.25 
+  ('M', 'life', 'x 1-10 min to end')             204    84922   46848   0.5517  -4.603         0.0           -4.603        12.081  -0.38  116      -3908.68
+  ('M', 'life', 'y under 1 min to end')          30     23851   14071   0.5899  28.84          0.0           28.84         14.324  2.01   16       6878.54 
+  ('M', 'life', 'z after end (pre-resolution)')  5      270     160     0.594   -1.84          0.0           -1.84         1.997   None   3        -4.96   
+
+full result written to studies/wallets/sports/forecastication4.json

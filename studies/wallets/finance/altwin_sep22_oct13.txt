@@ -1,0 +1,55 @@
+SPY: 767.18 -> 763.25 (-0.5%) over the window, min 762.63 max 779.09
+NVDA: 224.58 -> 214.13 (-4.7%) over the window, min 214.13 max 239.24
+/home/user/polymarket-lab/studies/wallets/finance/altwin.py:30: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+  print(f"\n#### {n} {dt.datetime.utcfromtimestamp(a):%Y-%m-%d}..{dt.datetime.utcfromtimestamp(b):%Y-%m-%d}: fills {len(d['fills'])} (truncated={d['truncated']}), resolved price-market buys {len(rows)}")
+
+#### grasstoucher69 2026-09-25..2026-10-16: fills 22542 (truncated=False), resolved price-market buys 22318
+    ('ALL',)                     mkts 2391 usd   765843 avg px 0.39 net $   48424 (  6.3%) c/sh   2.49 t   3.1
+    bear                         mkts 1868 usd   397376 avg px 0.42 net $   94124 ( 23.7%) c/sh   9.88 t   5.1
+    bull                         mkts 1857 usd   368467 avg px 0.37 net $  -45700 (-12.4%) c/sh  -4.62 t  -2.7
+    ('bear', 'px<0.45')          mkts 1076 usd   102340 avg px 0.19 net $   64734 ( 63.3%) c/sh  11.88 t   4.7
+    ('bear', 'px>=0.45')         mkts 1178 usd   295036 avg px 0.72 net $   29389 ( 10.0%) c/sh   7.22 t   2.8
+    ('bull', 'px<0.45')          mkts 1105 usd   105706 avg px 0.17 net $  -16043 (-15.2%) c/sh  -2.54 t  -1.4
+    ('bull', 'px>=0.45')         mkts 1085 usd   262761 avg px 0.73 net $  -29657 (-11.3%) c/sh  -8.30 t  -3.1
+    ('role', 'M')                mkts 1539 usd   171395 avg px 0.28 net $   14756 (  8.6%) c/sh   2.39 t   1.8
+    ('role', 'T')                mkts 2145 usd   594449 avg px 0.45 net $   33668 (  5.7%) c/sh   2.54 t   2.9
+    ('type', 'close-day')        mkts  559 usd   129390 avg px 0.30 net $    6049 (  4.7%) c/sh   1.40 t   0.9
+    ('type', 'close-month')      mkts   53 usd      868 avg px 0.18 net $       8 (  0.9%) c/sh   0.16 t   0.0
+    ('type', 'close-week')       mkts  138 usd    24974 avg px 0.45 net $    -623 ( -2.5%) c/sh  -1.11 t  -0.2
+    ('type', 'hit-month')        mkts  457 usd   271230 avg px 0.44 net $   11076 (  4.1%) c/sh   1.80 t   1.5
+    ('type', 'hit-week')         mkts  845 usd   214026 avg px 0.40 net $   14253 (  6.7%) c/sh   2.67 t   1.8
+    ('type', 'updown-day')       mkts  339 usd   125355 avg px 0.42 net $   17661 ( 14.1%) c/sh   5.89 t   2.0
+
+#### thanksforplayin 2026-09-25..2026-10-16: fills 6473 (truncated=False), resolved price-market buys 3040
+    ('ALL',)                     mkts  753 usd   172125 avg px 0.25 net $   45301 ( 26.3%) c/sh   6.56 t   2.3
+    bear                         mkts  479 usd   111657 avg px 0.28 net $   47183 ( 42.3%) c/sh  11.74 t   2.5
+    bull                         mkts  394 usd    60468 avg px 0.21 net $   -1883 ( -3.1%) c/sh  -0.65 t  -0.2
+    ('bear', 'px<0.45')          mkts  288 usd    53275 avg px 0.17 net $   44251 ( 83.1%) c/sh  14.14 t   2.6
+    ('bear', 'px>=0.45')         mkts  248 usd    58383 avg px 0.66 net $    2932 (  5.0%) c/sh   3.30 t   0.5
+    ('bull', 'px<0.45')          mkts  228 usd    26319 avg px 0.11 net $     -19 ( -0.1%) c/sh  -0.01 t  -0.0
+    ('bull', 'px>=0.45')         mkts  198 usd    34150 avg px 0.65 net $   -1864 ( -5.5%) c/sh  -3.57 t  -0.4
+    ('role', 'M')                mkts  277 usd    48370 avg px 0.24 net $    5859 ( 12.1%) c/sh   2.88 t   0.8
+    ('role', 'T')                mkts  677 usd   123756 avg px 0.25 net $   39441 ( 31.9%) c/sh   8.09 t   2.6
+    ('type', 'close-day')        mkts  185 usd    39610 avg px 0.15 net $    3847 (  9.7%) c/sh   1.47 t   0.5
+    ('type', 'close-month')      mkts   14 usd     2761 avg px 0.18 net $    2124 ( 76.9%) c/sh  14.13 t   0.7
+    ('type', 'close-week')       mkts   62 usd    14544 avg px 0.21 net $   11506 ( 79.1%) c/sh  16.61 t   1.7
+    ('type', 'hit-month')        mkts  101 usd    12036 avg px 0.39 net $    8463 ( 70.3%) c/sh  27.53 t   4.0
+    ('type', 'hit-week')         mkts  231 usd    38138 avg px 0.32 net $    1219 (  3.2%) c/sh   1.02 t   0.3
+    ('type', 'updown-day')       mkts  160 usd    65035 avg px 0.33 net $   18142 ( 27.9%) c/sh   9.31 t   1.1
+
+#### superstonksbro 2026-09-25..2026-10-16: fills 2364 (truncated=False), resolved price-market buys 2226
+    ('ALL',)                     mkts  553 usd   230805 avg px 0.54 net $  -27617 (-12.0%) c/sh  -6.40 t  -2.7
+    bear                         mkts  338 usd   133425 avg px 0.59 net $   -1302 ( -1.0%) c/sh  -0.58 t  -0.1
+    bull                         mkts  377 usd    97380 avg px 0.47 net $  -26315 (-27.0%) c/sh -12.74 t  -2.4
+    ('bear', 'px<0.45')          mkts  212 usd    16922 avg px 0.21 net $    -275 ( -1.6%) c/sh  -0.34 t  -0.1
+    ('bear', 'px>=0.45')         mkts  175 usd   116502 avg px 0.81 net $   -1027 ( -0.9%) c/sh  -0.72 t  -0.1
+    ('bull', 'px<0.45')          mkts  224 usd    16581 avg px 0.17 net $   -8938 (-53.9%) c/sh  -8.93 t  -2.4
+    ('bull', 'px>=0.45')         mkts  193 usd    80799 avg px 0.76 net $  -17377 (-21.5%) c/sh -16.32 t  -2.0
+    ('role', 'M')                mkts  401 usd   151594 avg px 0.52 net $  -17413 (-11.5%) c/sh  -5.99 t  -2.4
+    ('role', 'T')                mkts  365 usd    79211 avg px 0.56 net $  -10204 (-12.9%) c/sh  -7.27 t  -2.0
+    ('type', 'close-day')        mkts  148 usd   103595 avg px 0.61 net $   -8108 ( -7.8%) c/sh  -4.79 t  -1.4
+    ('type', 'close-month')      mkts   16 usd     5630 avg px 0.72 net $      56 (  1.0%) c/sh   0.72 t   0.1
+    ('type', 'close-week')       mkts   59 usd    35046 avg px 0.61 net $   -6687 (-19.1%) c/sh -11.70 t  -1.7
+    ('type', 'hit-month')        mkts   90 usd    21563 avg px 0.36 net $   -1651 ( -7.7%) c/sh  -2.75 t  -0.9
+    ('type', 'hit-week')         mkts  152 usd    16979 avg px 0.41 net $   -3620 (-21.3%) c/sh  -8.65 t  -2.4
+    ('type', 'updown-day')       mkts   88 usd    47991 avg px 0.50 net $   -7608 (-15.9%) c/sh  -8.00 t  -1.1

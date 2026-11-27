@@ -72,7 +72,11 @@ def histories(grp):
     for u in uni:
         p = DATA / "ph" / f"{u['cond']}.json"
         if p.exists(): continue
-        rows = dataapi.prices_history(u["yes"], u["start"] - 600, u["T"] + 600, 300)
+        rows = []; a = u["start"] - 600  # the API refuses spans above 15 days: walk in 14-day chunks
+        while a < u["T"] + 600:
+            b = min(a + 14 * 86400, u["T"] + 600)
+            rows += dataapi.prices_history(u["yes"], a, b, 300); a = b
+        rows = list({(r["timestamp"], r["resolution_seconds"]): r for r in rows}.values()); rows.sort(key=lambda r: r["timestamp"])
         json.dump([(r["timestamp"], r["price"], r["resolution_seconds"]) for r in rows], open(p, "w"))
         n += 1
         if n % 100 == 0: print("ph", grp, n, file=sys.stderr)

@@ -1,0 +1,18 @@
+=== BetaShrimp 0xe5aaaf0ef2e615a30db8e8b49805df28cf4444db window all: activity rows 6283, first row 2026-10-17
+   usdc by type: {'CONVERSION': 15839, 'MAKER_REBATE': 52, 'REDEEM': 4301, 'REWARD': 783, 'TAKER_REBATE': 12, 'TRADE_BUY': 51615, 'TRADE_SELL': 25478, 'YIELD': 0}  counts: {'TRADE_BUY': 2871, 'TRADE_SELL': 2934, 'CONVERSION': 270, 'REDEEM': 133, 'REWARD': 34, 'YIELD': 17, 'MAKER_REBATE': 21, 'TAKER_REBATE': 3}
+   net cash -5,150 | open positions 1022 value now 6,832 (initial_value field 0) | net cash + value 1,681
+   API all-time: trade_pnl 8,834 fees -745 economic 8,936 unrealized -634.968059
+     taipei-mayor-election-winner-20260813125857100             buy     5033 sell     250 conv     4776 merge       0 redeem       0
+     mississippi-senate-election-winner                         buy     1119 sell      83 conv     1038 merge       0 redeem       0
+     next-prime-minister-of-spain-20260625005215443             buy      795 sell       2 conv      800 merge       0 redeem       0
+     republican-senate-seats-after-the-midterms-low-brackets    buy      584 sell      22 conv      563 merge       0 redeem       0
+     alaska-senate-election-winner                              buy      560 sell       2 conv      560 merge       0 redeem       0
+     jensen-huang-resigned-or-removed-and-nvidia-market-cap-abo buy      550 sell      22 conv      529 merge       0 redeem       0
+     elon-musk-of-tweets-november-3-november-10-2026            buy      356 sell       1 conv      355 merge       0 redeem       0
+     new-zealand-legislative-election-winner                    buy      399 sell      74 conv      329 merge       0 redeem       0
+     pos ned2-aja-her-2026-11-27-spread-home-4pt5                 Heracles Almelo size         0 avg 0.945 value      227
+     pos will-the-10-year-treasury-yield-dip-below-4pt61-in-novem No size         0 avg 0.890 value      198
+     pos will-avengers-doomsday-have-the-2nd-best-domestic-openin No size         0 avg 0.850 value      180
+     pos will-the-30-year-treasury-yield-dip-below-5pt05-in-novem No size         0 avg 0.839 value      155
+     pos treveyon-henderson-899pt5-rushing-yards-2026-27          No size         0 avg 0.916 value      136
+     pos probable-fdv-above-800m-one-day-after-launch             No size         0 avg 0.843 value      132

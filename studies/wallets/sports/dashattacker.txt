@@ -1,0 +1,46 @@
+[dashattacker] fills 7802 in 5s
+dashattacker  0x8191c793fd7edbadf0fae651f55c1da3b638da72  window 2026-11-13 16:24 .. 2026-11-27 16:24 UTC
+summary: {"fills": 7802, "markets": 1397, "resolved_complete_markets": 1397, "incomplete_markets": 0, "unresolved_markets": 0, "turnover_usd": 2465993, "maker_share_usd": 0.367, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 52, "uses_split_merge": false, "gross": 83043.38, "fees_est": 16492.67, "net": 66550.71, "fee_rate_unknown_markets": 0, "net_per_market": 47.638, "t_by_market": 1.23, "win_share_markets": 0.747, "median_market_turnover": 549.27, "max_market_turnover": 38011.95, "avg_fill_usd": 316.07}
+inventory events: {'REDEEM': 1118}
+API says for the same days: gross 84081, fees -16517, refunded 0, rebates 2927, kept 70491, volume $2470513, fills 7833
+
+by family:
+  family  markets  resolved_complete  incomplete  turnover  taker_share  gross     fees_est  net       net_pct_turnover  net_per_market  t_by_market
+  sports  1397     1397               0           2465993   0.633        83043.38  16492.67  66550.71  2.7               47.64           1.23       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares   usd      avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd  
+  ('M', 'BUY')  2847   1140915  903997   0.7923  -0.941         0.0           -0.941        2.468  -0.38  731      -10736.31
+  ('T', 'BUY')  4955   2082392  1561996  0.7501  4.503          0.792         3.711         1.923  1.93   1226     77287.02 
+
+by role and price:
+  key                 fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd 
+  ('M', '0.00-0.05')  22     19968   399     0.02    -2.0           0.0           -2.0          None    None   1        -399.37 
+  ('M', '0.05-0.15')  41     20418   2107    0.1032  -10.319        0.0           -10.319       1.32    -7.82  16       -2107.01
+  ('M', '0.15-0.30')  74     75005   15137   0.2018  6.182          0.0           6.182         19.22   0.32   24       4636.93 
+  ('M', '0.30-0.45')  23     4000    1324    0.3311  33.875         0.0           33.875        21.977  1.54   17       1355.11 
+  ('M', '0.45-0.55')  59     11794   5617    0.4762  25.813         0.0           25.813        18.014  1.43   31       3044.39 
+  ('M', '0.55-0.70')  212    56233   35957   0.6394  -11.589        0.0           -11.589       15.074  -0.77  113      -6516.63
+  ('M', '0.70-0.85')  779    293034  234144  0.799   -4.412         0.0           -4.412        5.147   -0.86  312      -12929.5
+  ('M', '0.85-0.95')  1224   438286  395408  0.9022  1.81           0.0           1.81          2.33    0.78   387      7934.64 
+  ('M', '0.95-0.99')  413    222175  213904  0.9628  -2.59          0.0           -2.59         5.226   -0.5   153      -5754.87
+  ('T', '0.00-0.05')  1      5       0       0.04    -4.0           0.192         -4.192        None    None   1        -0.21   
+  ('T', '0.05-0.15')  12     6739    654     0.097   -9.704         0.433         -10.137       1.879   -5.4   7        -683.15 
+  ('T', '0.15-0.30')  34     37310   7715    0.2068  17.244         0.817         16.427        21.32   0.77   27       6129.0  
+  ('T', '0.30-0.45')  52     56021   22144   0.3953  0.131          1.182         -1.05         18.819  -0.06  41       -588.41 
+  ('T', '0.45-0.55')  274    167213  84468   0.5052  11.141         1.246         9.894         7.193   1.38   162      16544.84
+  ('T', '0.55-0.70')  998    435014  273369  0.6284  5.942          1.158         4.784         3.689   1.3    438      20812.76
+  ('T', '0.70-0.85')  1683   649041  506443  0.7803  3.851          0.849         3.003         2.585   1.16   632      19489.25
+  ('T', '0.85-0.95')  1548   593650  534929  0.9011  2.498          0.442         2.056         2.137   0.96   601      12204.83
+  ('T', '0.95-0.99')  350    137379  132253  0.9627  2.638          0.179         2.459         1.063   2.31   215      3377.92 
+  ('T', '0.99-1.00')  3      20      20      0.99    1.0            0.05          0.951         0.0     None   3        0.19    
+
+by role and point in the market's life:
+  key                                            fills  shares   usd      avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd  
+  ('M', 'life', 'v 1-6 h to end')                6      745      413      0.554   -37.621        0.0           -37.621       18.711  None   2        -280.15  
+  ('M', 'life', 'z after end (pre-resolution)')  2841   1140170  903585   0.7925  -0.917         0.0           -0.917        2.469   -0.37  729      -10456.16
+  ('T', 'life', 'v 1-6 h to end')                2      118      61       0.52    -52.0          1.248         -53.248       None    None   1        -62.57   
+  ('T', 'life', 'w 10-60 min to end')            4      672      645      0.9602  3.984          0.191         3.793         None    None   1        25.49    
+  ('T', 'life', 'z after end (pre-resolution)')  4949   2081603  1561289  0.75    4.507          0.792         3.715         1.924   1.93   1224     77324.1  
+
+full result written to studies/wallets/sports/dashattacker.json

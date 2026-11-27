@@ -1,0 +1,128 @@
+
+===== iutwpfal
+(A) resolved arena+hle events 50: net 56462; positive 28; top3 42497; bottom3 -5930; median event 3
+         24005  mk   5 inc  0 turnover   29563  next-fable-model-5pt2-text-arena-debut-20260928
+          9942  mk   4 inc  0 turnover   12822  next-fable-model-5pt2-text-arena-rank-debut-20261027
+          8550  mk   4 inc  0 turnover   17822  kimi-k3pt1-pro-text-arena-debut-20261023
+          7997  mk   4 inc  2 turnover   17580  openais-astra-model-text-arena-debut
+          4210  mk   5 inc  0 turnover    9874  next-sonnet-model-text-arena-debut-20260827110151621
+          2049  mk   4 inc  0 turnover    6588  next-claude-haiku-model-4pt6-text-arena-debut-20260930
+          -476  mk   2 inc  2 turnover    1396  will-any-ai-model-reach-overall-arena-score-by-september-30
+          -751  mk   3 inc  0 turnover    3613  next-claude-opus-model-text-arena-debut-20261231
+         -4703  mk   5 inc  0 turnover   15545  gemini-carbon-hle-diamond-debut-20261028
+    arena+hle net by month of close: 08:0 09:7867 10:5734 11:42861
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 2.1/19.1/141.3; pre-appearance buys, days before appearance q10/q50/q90: 2.3/8.0/22.9 (n=304)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +4.6c (fills 304, markets 49, $88023)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean +5.8c (fills 304, markets 49, $88023)
+(C) pre-appearance taker buys: tape price of the bought side +24h minus fill price, $-weighted mean +3.8c (fills 283, markets 45, $84091)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean +11.0c (fills 304, markets 49, $88023)
+
+===== NoTeacher
+(A) resolved arena+hle events 59: net 3637; positive 39; top3 2024; bottom3 -761; median event 30
+           789  mk   5 inc  0 turnover    7482  next-fable-model-5pt2-text-arena-debut-20260928
+           753  mk   4 inc  0 turnover    3332  next-claude-haiku-model-4pt6-text-arena-debut-20260930
+           482  mk   4 inc  0 turnover    1542  gpt-astra-6pt1-text-arena-debut-20261020
+           249  mk   1 inc  1 turnover    1515  3-ai-lab-end-of-september-style-control-on-20260722222220184
+           242  mk   5 inc  0 turnover    3181  next-sonnet-model-text-arena-debut-20260827110151621
+           235  mk   4 inc  0 turnover    4041  next-fable-model-5pt2-text-arena-rank-debut-20261027
+          -241  mk   4 inc  0 turnover    1676  best-ai-model-on-november-2
+          -255  mk   3 inc  0 turnover    1691  second-best-code-arena-webdev-ai-lab-end-of-september-20260722215814727
+          -265  mk   5 inc  0 turnover    3932  openais-astra-model-text-arena-debut
+    arena+hle net by month of close: 08:0 09:-125 10:999 11:2764
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 0.1/12.1/65.8; pre-appearance buys, days before appearance q10/q50/q90: 1.6/8.6/23.2 (n=410)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +1.7c (fills 410, markets 55, $18844)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean +1.9c (fills 410, markets 55, $18844)
+(C) pre-appearance taker buys: tape price of the bought side +24h minus fill price, $-weighted mean +2.7c (fills 382, markets 52, $17760)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean +10.4c (fills 410, markets 55, $18844)
+
+===== lamyk
+(A) resolved arena+hle events 30: net 7206; positive 21; top3 6434; bottom3 -3419; median event 100
+          4439  mk   2 inc  0 turnover     715  which-company-has-the-best-ai-model-end-of-october
+          1126  mk   3 inc  0 turnover    2716  gpt-astra-6pt1-hle-diamond-debut-20261020
+           869  mk   4 inc  0 turnover    2860  next-claude-opus-model-text-arena-debut-20261231
+           698  mk   2 inc  0 turnover    2149  which-company-has-the-best-code-arena-webdev-ai-model-end-of-september-2026
+           536  mk   1 inc  0 turnover     360  gpt-astra-6pt1-text-arena-debut-20261020
+           514  mk   1 inc  0 turnover     806  second-best-ai-lab-end-of-september-20260722221500022
+          -188  mk   3 inc  0 turnover     895  gemini-carbon-hle-diamond-debut-20261028
+          -651  mk   2 inc  0 turnover    1634  next-gpt-sol-model-6pt1-text-arena-debut-20260929193259436
+         -2581  mk   4 inc  2 turnover    5892  openais-astra-model-text-arena-debut
+    arena+hle net by month of close: 08:3 09:534 10:4430 11:2240
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 0.4/1.8/65.1; pre-appearance buys, days before appearance q10/q50/q90: 2.0/9.1/14.0 (n=15)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +7.4c (fills 15, markets 12, $4039)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean +10.9c (fills 15, markets 12, $4039)
+(C) pre-appearance taker buys: tape price of the bought side +24h minus fill price, $-weighted mean +6.2c (fills 14, markets 11, $3974)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean +6.2c (fills 15, markets 12, $4039)
+
+===== KimchiCapital
+(A) resolved arena+hle events 33: net 1638; positive 21; top3 1428; bottom3 -913; median event 15
+           594  mk   4 inc  0 turnover    8111  claude-fable-5pt2-hle-diamond-debut-20261110
+           434  mk   2 inc  0 turnover    5129  mistral-large-4-text-arena-debut-20261007
+           399  mk   5 inc  0 turnover    5443  gemini-hydrogen-hle-diamond-debut-20261110
+           217  mk   1 inc  0 turnover     546  best-ai-model-on-september-14
+           206  mk   3 inc  0 turnover    1900  gpt-astra-6pt1-text-arena-debut-20261020
+           183  mk   4 inc  0 turnover     894  kimi-k3pt1-pro-hle-diamond-debut-20261023
+          -107  mk   3 inc  0 turnover     287  next-gpt-sol-model-5pt7-text-arena-debut-20260921193139678
+          -275  mk   2 inc  0 turnover    1205  gemini-carbon-hle-diamond-debut-20261028
+          -531  mk   1 inc  0 turnover     521  kimi-k3pt1-pro-text-arena-rank-debut-20261023
+    arena+hle net by month of close: 08:0 09:40 10:938 11:660
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 0.1/1.2/26.3; pre-appearance buys, days before appearance q10/q50/q90: 0.1/5.7/29.3 (n=29)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +7.3c (fills 29, markets 22, $3369)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean +7.4c (fills 29, markets 22, $3369)
+(C) pre-appearance taker buys: tape price of the bought side +24h minus fill price, $-weighted mean +8.6c (fills 23, markets 17, $2577)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean +26.0c (fills 29, markets 22, $3369)
+
+===== fountaim
+(A) resolved arena+hle events 33: net 7206; positive 26; top3 4486; bottom3 -290; median event 42
+          2101  mk   2 inc  0 turnover    1000  gemini-carbon-hle-diamond-debut-20261028
+          1461  mk   2 inc  0 turnover    1531  will-any-ai-model-reach-overall-arena-score-by-september-30
+           924  mk   4 inc  0 turnover     846  mistral-large-4-text-arena-debut-20261007
+           390  mk   4 inc  0 turnover     797  gemini-hydrogen-hle-diamond-debut-20261110
+           388  mk   3 inc  0 turnover    2733  kimi-k3pt1-pro-text-arena-debut-20261023
+           342  mk   2 inc  0 turnover     262  which-company-has-the-best-code-arena-webdev-ai-model-end-of-september-2026
+           -59  mk   2 inc  0 turnover     268  3-ai-lab-end-of-october-style-control-on
+           -91  mk   2 inc  0 turnover     145  third-best-text-arena-math-ai-lab-end-of-october
+          -139  mk   2 inc  0 turnover     257  third-best-code-arena-webdev-ai-lab-end-of-october
+    arena+hle net by month of close: 08:0 09:2177 10:1719 11:3310
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 2.6/16.7/65.1; pre-appearance buys, days before appearance q10/q50/q90: 0.2/0.2/0.2 (n=3)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +11.3c (fills 3, markets 3, $2701)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean +12.4c (fills 3, markets 3, $2701)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean +13.5c (fills 3, markets 3, $2701)
+
+===== 0xAee8611B
+(A) resolved arena+hle events 83: net 8370; positive 33; top3 2656; bottom3 -1014; median event 0
+           982  mk  10 inc  4 turnover    5845  second-best-code-arena-webdev-ai-lab-end-of-september-20260722215814727
+           911  mk  18 inc  9 turnover    5295  third-best-text-arena-math-ai-lab-end-of-october
+           763  mk  11 inc  2 turnover    3035  best-chinese-ai-company-end-of-october
+           687  mk  10 inc  2 turnover    4915  which-company-has-the-best-text-arena-math-ai-model-end-of-october
+           682  mk  14 inc  6 turnover    4475  3-ai-lab-end-of-october-style-control-on
+           670  mk  16 inc  7 turnover    6644  second-best-ai-lab-end-of-october
+          -129  mk  13 inc  3 turnover    2496  3-ai-lab-end-of-september-style-control-on-20260722222220184
+          -349  mk   9 inc  3 turnover    6554  which-company-has-the-best-code-arena-webdev-ai-model-end-of-september-2026
+          -536  mk  15 inc  4 turnover    4579  2-ai-lab-end-of-october-style-control-on
+    arena+hle net by month of close: 08:10 09:2087 10:6292 11:-19
+(B) taker buys, days after market creation ($-weighted q10/q50/q90): 1.6/36.1/64.3; pre-appearance buys, days before appearance q10/q50/q90: 16.3/16.3/16.3 (n=2)
+(C) pre-appearance taker buys: tape price of the bought side +10m minus fill price, $-weighted mean +0.0c (fills 2, markets 2, $63)
+(C) pre-appearance taker buys: tape price of the bought side +1h minus fill price, $-weighted mean -1.0c (fills 2, markets 2, $63)
+(C) pre-appearance taker buys: tape price of the bought side +24h minus fill price, $-weighted mean +4.9c (fills 2, markets 2, $63)
+(C) pre-appearance taker buys: tape price of the bought side settle minus fill price, $-weighted mean -60.7c (fills 2, markets 2, $63)
+
+===== (D) 0xAee8611B: inventory events Counter({'MERGE': 3480, 'REDEEM': 616, 'SPLIT': 126}); merged shares 223204, split 38661, redeemed usd 55230
+markets where it bought both Yes and No: 444 of 1230; matched shares 214173; avg cost of a Yes+No pair, share-weighted: 0.9244; q10/q50/q90 0.818/0.926/1.021; share of pairs under 1.00: 0.88
+hours between median Yes buy and median No buy, share-weighted q25/q50/q75: 52.6/155.1/304.2
+10-second buckets with fills: 16075; markets per bucket q50/q90/max: 1/2/50; fills in buckets touching >=3 markets: 11123 of 28715
+fills by UTC hour: 0:654 1:875 2:1210 3:1414 4:1406 5:1518 6:1166 7:1488 8:1205 9:1337 10:1116 11:1256 12:1657 13:1586 14:1561 15:1385 16:1523 17:1483 18:1199 19:1090 20:1020 21:538 22:516 23:512
+active days 89 of 88; fills/day median 307; turnover by sub and role:
+      33020 fills  2040 buyT   19192 buyM    4165 sellT    8120 sellM   1543  second-best-ai-lab-end-of
+      29930 fills  2105 buyT   19157 buyM    3211 sellT    5813 sellM   1750  second-best-code-arena-webdev-ai-lab-end-of
+      29369 fills  2604 buyT   19264 buyM    3706 sellT    4962 sellM   1436  2-ai-lab-end-of
+      29134 fills  1961 buyT   15307 buyM    3861 sellT    8023 sellM   1943  3-ai-lab-end-of
+      28759 fills  1426 buyT   20397 buyM    2327 sellT    4777 sellM   1258  which-company-has-the-best-ai-agent-end-of
+      27105 fills  2087 buyT   14395 buyM    4206 sellT    7059 sellM   1445  third-best-ai-lab-end-of
+      26364 fills  1697 buyT   14758 buyM    2934 sellT    7731 sellM    942  second-best-text-arena-math-ai-lab-end-of
+      25412 fills  1279 buyT   17555 buyM    2275 sellT    4508 sellM   1074  which-company-has-the-best-code-arena-webdev-ai-model-end-of
+      23846 fills  1393 buyT   15315 buyM    3316 sellT    4530 sellM    685  second-best-ai-agent-lab-end-of
+      23454 fills  1288 buyT   14423 buyM    3320 sellT    5005 sellM    707  third-best-chinese-ai-company-end-of
+      21842 fills  1423 buyT   13775 buyM    2313 sellT    4283 sellM   1470  which-company-has-the-best-text-arena-math-ai-model-end-of
+      21475 fills  1648 buyT   11810 buyM    3604 sellT    5092 sellM    969  second-best-chinese-ai-company-end-of
+      19372 fills  1341 buyT    9601 buyM    3215 sellT    6154 sellM    403  third-best-ai-agent-lab-end-of
+      16433 fills  1041 buyT    9988 buyM    1867 sellT    3628 sellM    950  which-company-has-1-ai-model-end-of

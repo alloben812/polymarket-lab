@@ -1,0 +1,131 @@
+##### KimchiCapital: fills in 61 cached resolved arena/hle markets (edge = settlement value minus price; fee at 0.05*p*(1-p) on taker fills)
+kind     phase                          side role fills mkts      usd avg_px right$% edge_c/sh fee_c/sh  net_usd
+debut    0 no appearance found          BUY  M        9    2      197  0.566      75      3.18     0.00       11
+debut    0 no appearance found          BUY  T       24   11     6331  0.676      74     -9.01     0.78     -917
+debut    0 no appearance found          SELL T        7    4     1762  0.549      39     17.51     0.69      540
+debut    0 no appearance found (after T90) BUY  T        8    6     9309  0.951     100      4.89     0.23      456
+debut    0 no appearance found (after T90) SELL T        2    1        2  0.002     100      0.24     0.01        2
+debut    1 before appearance 1-7d       BUY  M        1    1       12  0.800     100     20.00     0.00        3
+debut    1 before appearance 1-7d       BUY  T        8    7     1444  0.711      87      3.57     0.76       57
+debut    1 before appearance 1-7d       SELL M        4    2      301  0.939       0     -6.13     0.00      -20
+debut    1 before appearance 1-7d       SELL T        2    2      517  0.835       0    -16.53     0.52     -106
+debut    1 before appearance <24h       BUY  M        1    1      340  0.849       0    -84.90     0.00     -340
+debut    1 before appearance <24h       BUY  T        9    8     1580  0.764     100     23.58     0.79      471
+debut    1 before appearance <24h       SELL T        1    1       41  0.103     100     10.35     0.46       40
+debut    1 before appearance >7d        BUY  M        1    1        3  0.790       0    -79.00     0.00       -3
+debut    1 before appearance >7d        BUY  T       15   11     1132  0.326      99     65.78     0.72     2257
+debut    1 before appearance >7d        SELL T        6    4     1176  0.410       0    -58.97     0.79    -1713
+debut    2a 0-60 s after                BUY  T        1    1     4901  0.930     100      7.00     0.33      352
+debut    2b 1-10 min after              BUY  T        8    7     2330  0.967     100      3.30     0.16       76
+debut    2c 10 min-6 h after            BUY  T        5    3     1869  0.964     100      3.65     0.17       67
+debut    2c 10 min-6 h after            SELL T        1    1        0  0.002     100      0.18     0.01        0
+debut    2d 6 h+ after                  SELL T        2    2        2  0.008     100      0.76     0.04        2
+monthend m1 >7d before check            BUY  M        4    2       57  0.695      26    -42.63     0.00      -35
+monthend m1 >7d before check            BUY  T       14   11     1424  0.525      76     17.80     1.03      455
+monthend m1 >7d before check            SELL M        3    1       58  0.720       0    -28.00     0.00      -22
+monthend m2 1-7d before check           BUY  T        1    1      512  0.891     100     10.86     0.48       60
+monthend m2 1-7d before check           SELL M        3    1       66  0.830       0    -17.00     0.00      -14
+monthend m2 1-7d before check           SELL T        2    1      182  0.810       0    -19.02     0.76      -44
+monthend m4 after T90                   BUY  T        4    4       19  0.027       0     -2.66     0.13      -20
+monthend m4 after T90                   SELL T        3    2      459  0.985       0     -1.46     0.07       -7
+net by phase group: debut 0 : 92 | debut 1 : 647 | debut 2a: 352 | debut 2b: 76 | debut 2c: 67 | debut 2d: 2 | monthend m1: 398 | monthend m2: 2 | monthend m4: -27
+debut markets with a found appearance: first taker buy falls in phase -> {'1 ': 23, '2b': 3, '2c': 1}
+
+- Will Claude Fable 5.2 debut with an HLE-Diamond score of 70% or higher?  [claude-fable-5pt2-hle-diamond-debut-20261110]
+    winner=Yes check=11-12 17:00 closed=11-12 19:01 appearance=- T90=11-12 00:42:10 market vol=23907; account net=334
+    pYes around check-20h: -7d:nan -48h:nan -1h:0.89 -10s:0.89 +60s:0.89 +10m:0.89 +2h:0.89 check-1h:1.00
+    11-10 19:52:04 BUY  T Yes n=  2 sh=     47 px=0.441 usd=    21  [0 no appearance found; 45.1h before check]
+    11-12 00:42:10 BUY  T Yes n=  1 sh=   5701 px=0.943 usd=  5377  [0 no appearance found (after T90); 16.3h before check]
+
+- Will Mistral Large 4 debut at a score of at least 1490 by June 30, 2027?  [mistral-large-4-text-arena-debut-20261007]
+    winner=No check=10-09 16:00 closed=10-09 18:02 appearance=10-08 17:31:50 T90=10-08 17:31:50 market vol=21316; account net=359
+    pYes around appearance: -7d:nan -48h:nan -1h:0.12 -10s:0.10 +60s:0.04 +10m:0.04 +2h:0.05 check-1h:0.01
+    10-07 17:56:40 BUY  T No  n=  1 sh=     20 px=0.640 usd=    13  [1 before appearance <24h; -23.6h vs appearance]
+    10-08 17:32:45 BUY  T No  n=  1 sh=   5270 px=0.930 usd=  4901  [2a 0-60 s after; +55s vs appearance]
+
+- Will GPT Astra 6.1+ debut with an HLE-Diamond score of 55% or higher?  [gpt-astra-6pt1-hle-diamond-debut-20261020]
+    winner=Yes check=11-18 17:00 closed=11-18 19:02 appearance=- T90=11-02 03:50:24 market vol=43794; account net=154
+    pYes around check-20h: -7d:0.94 -48h:0.99 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.98 +2h:0.98 check-1h:1.00
+    10-22 22:17:29 BUY  T Yes n=  1 sh=   1200 px=0.880 usd=  1056  [0 no appearance found; 642.7h before check]
+    10-23 16:53:57 SELL T Yes n=  1 sh=   1200 px=0.889 usd=  1066  [0 no appearance found; 624.1h before check]
+    10-29 23:19:55 BUY  T Yes n=  1 sh=    209 px=0.821 usd=   172  [0 no appearance found; 473.7h before check]
+    10-30 14:23:12 BUY  T Yes n=  1 sh=    704 px=0.821 usd=   578  [0 no appearance found; 458.6h before check]
+
+- Will GPT Astra 6.1+ debut with an HLE-Diamond score of 60% or higher?  [gpt-astra-6pt1-hle-diamond-debut-20261020]
+    winner=Yes check=11-18 17:00 closed=11-18 19:02 appearance=- T90=11-11 10:57:12 market vol=32681; account net=154
+    pYes around check-20h: -7d:0.90 -48h:0.94 -1h:0.97 -10s:0.97 +60s:0.97 +10m:0.97 +2h:0.97 check-1h:1.00
+    10-22 21:15:59 BUY  T No  n=  2 sh=    162 px=0.293 usd=    47  [0 no appearance found; 643.7h before check]
+    10-22 21:39:03 BUY  M No  n=  3 sh=    119 px=0.366 usd=    44  [0 no appearance found; 643.3h before check]
+    10-22 22:01:21 BUY  T No  n=  1 sh=    620 px=0.320 usd=   198  [0 no appearance found; 643.0h before check]
+    10-22 22:11:02 BUY  M No  n=  2 sh=     21 px=0.270 usd=     6  [0 no appearance found; 642.8h before check]
+    10-30 00:09:12 BUY  M Yes n=  1 sh=     65 px=0.770 usd=    50  [0 no appearance found; 472.8h before check]
+    10-30 14:22:24 BUY  T Yes n=  1 sh=    523 px=0.756 usd=   396  [0 no appearance found; 458.6h before check]
+    11-18 03:56:01 BUY  T Yes n=  1 sh=    842 px=0.983 usd=   827  [0 no appearance found (after T90); 13.1h before check]
+    ... 4 more hour-groups
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 35% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:02 appearance=11-20 19:52:28 T90=11-20 19:52:28 market vol=15368; account net=120
+    pYes around appearance: -7d:1.00 -48h:0.81 -1h:0.65 -10s:0.65 +60s:0.94 +10m:0.98 +2h:0.98 check-1h:0.99
+    11-20 17:04:37 BUY  T Yes n=  1 sh=    163 px=0.641 usd=   104  [1 before appearance <24h; -2.8h vs appearance]
+    11-20 21:03:20 BUY  T Yes n=  1 sh=   1171 px=0.949 usd=  1112  [2c 10 min-6 h after; +1.2h vs appearance]
+    11-21 01:00:38 BUY  T Yes n=  1 sh=    557 px=0.987 usd=   550  [2c 10 min-6 h after; +5.1h vs appearance]
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 45% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:11 appearance=11-20 19:52:28 T90=11-20 19:52:28 market vol=8710; account net=141
+    pYes around appearance: -7d:0.98 -48h:0.80 -1h:0.48 -10s:0.48 +60s:0.98 +10m:1.00 +2h:0.99 check-1h:1.00
+    11-12 18:30:12 BUY  T Yes n=  1 sh=     60 px=0.850 usd=    51  [1 before appearance >7d; -193.4h vs appearance]
+    11-15 04:01:28 BUY  T Yes n=  1 sh=   1137 px=0.876 usd=   996  [1 before appearance 1-7d; -135.8h vs appearance]
+    11-17 15:09:13 SELL T Yes n=  1 sh=    362 px=0.990 usd=   358  [1 before appearance 1-7d; -76.7h vs appearance]
+    11-18 00:17:25 SELL M Yes n=  1 sh=    171 px=0.999 usd=   171  [1 before appearance 1-7d; -67.6h vs appearance]
+    11-20 19:53:59 BUY  T Yes n=  1 sh=     63 px=0.963 usd=    60  [2b 1-10 min after; +91s vs appearance]
+
+- Will Claude Fable 5.2 debut with an HLE-Diamond score of 60% or higher?  [claude-fable-5pt2-hle-diamond-debut-20261110]
+    winner=Yes check=11-12 17:00 closed=11-12 19:01 appearance=- T90=11-10 19:57:15 market vol=6311; account net=76
+    pYes around check-20h: -7d:nan -48h:nan -1h:0.92 -10s:0.92 +60s:0.92 +10m:0.92 +2h:0.92 check-1h:1.00
+    11-10 19:57:12 BUY  T Yes n=  1 sh=    170 px=0.881 usd=   150  [0 no appearance found; 45.0h before check]
+    11-10 20:02:24 BUY  T Yes n=  2 sh=    295 px=0.914 usd=   270  [0 no appearance found (after T90); 45.0h before check]
+    11-12 00:41:36 BUY  T Yes n=  1 sh=    889 px=0.962 usd=   855  [0 no appearance found (after T90); 16.3h before check]
+
+- Will GPT Astra 6.1+ debut at a score of at least 1470 by June 30, 2027?  [gpt-astra-6pt1-text-arena-debut-20261020]
+    winner=No check=11-20 17:00 closed=11-20 22:08 appearance=11-20 02:44:55 T90=11-19 06:29:34 market vol=28708; account net=25
+    pYes around appearance: -7d:0.34 -48h:0.24 -1h:0.08 -10s:0.08 +60s:0.08 +10m:0.05 +2h:0.05 check-1h:0.02
+    10-21 19:12:29 BUY  T No  n=  1 sh=    765 px=0.750 usd=   573  [1 before appearance >7d; -703.5h vs appearance]
+    10-23 02:23:53 SELL T No  n=  1 sh=    765 px=0.800 usd=   612  [1 before appearance >7d; -672.4h vs appearance]
+
+- Will Claude Fable 5.2 debut with an HLE-Diamond score of 65% or higher?  [claude-fable-5pt2-hle-diamond-debut-20261110]
+    winner=Yes check=11-12 17:00 closed=11-12 19:01 appearance=- T90=11-11 06:24:57 market vol=10267; account net=134
+    pYes around check-20h: -7d:nan -48h:nan -1h:0.94 -10s:0.94 +60s:0.94 +10m:0.94 +2h:0.94 check-1h:1.00
+    11-10 19:52:10 BUY  T Yes n=  1 sh=     25 px=0.400 usd=    10  [0 no appearance found; 45.1h before check]
+    11-10 20:16:12 BUY  T Yes n=  1 sh=    676 px=0.898 usd=   607  [0 no appearance found; 44.7h before check]
+    11-10 22:03:33 BUY  T Yes n=  1 sh=    454 px=0.877 usd=   398  [0 no appearance found; 42.9h before check]
+
+- Will the next GPT Luna model (5.7+) debut at a score of at least 1450 by June 30, 2027?  [next-gpt-luna-model-5pt7-text-arena-debut-20260921193832425]
+    winner=No check=09-26 16:00 closed=09-26 18:09 appearance=- T90=09-26 01:32:39 market vol=8286; account net=38
+    pYes around check-20h: -7d:nan -48h:0.15 -1h:0.12 -10s:0.12 +60s:0.12 +10m:0.12 +2h:0.12 check-1h:0.01
+    09-26 12:10:11 BUY  T No  n=  1 sh=    985 px=0.960 usd=   945  [0 no appearance found (after T90); 3.8h before check]
+
+- Will the next GPT Luna model (5.7+) debut at a score of at least 1440 by June 30, 2027?  [next-gpt-luna-model-5pt7-text-arena-debut-20260921193832425]
+    winner=No check=09-26 16:00 closed=09-26 18:09 appearance=- T90=09-26 03:46:20 market vol=5947; account net=38
+    pYes around check-20h: -7d:nan -48h:0.32 -1h:0.45 -10s:0.45 +60s:0.45 +10m:0.45 +2h:0.45 check-1h:0.01
+    09-26 12:10:17 BUY  T No  n=  1 sh=    966 px=0.959 usd=   926  [0 no appearance found (after T90); 3.8h before check]
+
+- Will GPT Astra 6.1+ debut with an HLE-Diamond score of 65% or higher?  [gpt-astra-6pt1-hle-diamond-debut-20261020]
+    winner=Yes check=11-18 17:00 closed=11-18 19:02 appearance=- T90=11-18 03:48:22 market vol=45170; account net=-6
+    pYes around check-20h: -7d:0.78 -48h:0.87 -1h:0.83 -10s:0.77 +60s:0.77 +10m:0.77 +2h:0.77 check-1h:0.99
+    10-22 21:16:08 BUY  T No  n=  2 sh=    522 px=0.770 usd=   402  [0 no appearance found; 643.7h before check]
+    10-22 23:02:41 SELL T No  n=  2 sh=    522 px=0.773 usd=   403  [0 no appearance found; 642.0h before check]
+    11-18 03:56:50 BUY  T Yes n=  1 sh=    110 px=0.980 usd=   108  [0 no appearance found (after T90); 13.1h before check]
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 50% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:39 appearance=11-20 19:52:28 T90=11-20 19:52:31 market vol=21270; account net=9
+    pYes around appearance: -7d:0.82 -48h:0.57 -1h:0.63 -10s:0.63 +60s:0.97 +10m:0.99 +2h:0.99 check-1h:1.00
+    11-12 23:56:33 BUY  T No  n=  1 sh=     55 px=0.139 usd=     8  [1 before appearance >7d; -187.9h vs appearance]
+    11-20 19:55:41 BUY  T Yes n=  1 sh=    878 px=0.979 usd=   860  [2b 1-10 min after; +193s vs appearance]
+    11-20 20:04:28 SELL T No  n=  1 sh=     55 px=0.002 usd=     0  [2c 10 min-6 h after; +720s vs appearance]
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 40% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:12 appearance=11-20 19:52:28 T90=11-20 19:52:28 market vol=16511; account net=121
+    pYes around appearance: -7d:1.00 -48h:0.93 -1h:0.68 -10s:0.68 +60s:0.91 +10m:1.00 +2h:0.99 check-1h:1.00
+    11-20 15:50:37 BUY  T Yes n=  1 sh=    256 px=0.619 usd=   159  [1 before appearance <24h; -4.0h vs appearance]
+    11-20 19:54:05 BUY  T Yes n=  2 sh=    503 px=0.947 usd=   476  [2b 1-10 min after; +97s vs appearance]
+    11-21 01:07:34 BUY  T Yes n=  1 sh=     67 px=0.985 usd=    66  [2c 10 min-6 h after; +5.3h vs appearance]

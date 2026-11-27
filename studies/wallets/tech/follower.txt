@@ -1,0 +1,35 @@
+
+D = 10 min: entries 17 in 9 events, wins 17; net per 100-share unit: total $102, mean per market $6.02, mean per event $11.4 (se 2.0); events positive 9/9
+   earlier half (4 events): $46 on 7 entries | later half: $56 on 10 entries; mean entry price 0.937; median size of the print used as entry 50 shares
+     09-26 01:45:03 px 0.960 WIN  print     10 sh  Will the next Claude Opus model debut at a score of at least 1505 by D
+     09-26 01:47:45 px 0.967 WIN  print    103 sh  Will the next Claude Opus model debut at a score of at least 1515 by D
+     09-26 01:50:08 px 0.960 WIN  print     44 sh  Will the next GPT Sol model (5.7+) debut at a score of at least 1470 b
+     09-26 01:48:00 px 0.940 WIN  print    532 sh  Will the next GPT Sol model (5.7+) debut at a score of at least 1450 b
+     09-26 01:51:11 px 0.963 WIN  print    207 sh  Will the next GPT Sol model (5.7+) debut at a score of at least 1480 b
+     10-02 16:22:45 px 0.839 WIN  print    469 sh  Will the next Sonnet model debut at a score of at least 1470 by Decemb
+     10-08 17:56:03 px 0.890 WIN  print    320 sh  Will Mistral Large 4 debut at a score of at least 1430 by June 30, 202
+     10-13 18:53:45 px 0.930 WIN  print     10 sh  Will Meta's Watermelon model debut at a score of at least 1490 by June
+     10-13 18:55:12 px 0.930 WIN  print      5 sh  Will Meta's Watermelon model debut at a score of at least 1500 by June
+     10-28 22:36:01 px 0.940 WIN  print     20 sh  Will Gemini Carbon debut in the top 10 of the Text Arena leaderboard b
+     10-28 23:22:02 px 0.900 WIN  print     71 sh  Will Gemini Carbon debut in the top 1 of the Text Arena leaderboard by
+     10-28 23:25:47 px 0.930 WIN  print     30 sh  Will Gemini Carbon debut in the top 3 of the Text Arena leaderboard by
+     11-10 01:41:34 px 0.960 WIN  print     50 sh  Will Kimi K3.1 Pro debut at a score of at least 1460 by June 30, 2027?
+     11-20 03:02:50 px 0.968 WIN  print    200 sh  Will the next Fable model (5.2+) debut in the top 10 of the Text Arena
+     11-20 03:10:13 px 0.949 WIN  print    110 sh  Will GPT Astra 6.1+ debut at a score of at least 1430 by June 30, 2027
+     11-20 13:41:40 px 0.952 WIN  print     47 sh  Will GPT Astra 6.1+ debut at a score of at least 1470 by June 30, 2027
+     11-20 03:03:02 px 0.950 WIN  print     19 sh  Will GPT Astra 6.1+ debut at a score of at least 1460 by June 30, 2027
+
+D = 60 min: entries 12 in 7 events, wins 12; net per 100-share unit: total $65, mean per market $5.40, mean per event $9.3 (se 3.4); events positive 7/7
+   earlier half (3 events): $12 on 4 entries | later half: $52 on 8 entries; mean entry price 0.943; median size of the print used as entry 96 shares
+     09-26 03:09:39 px 0.969 WIN  print    220 sh  Will the next Claude Opus model debut at a score of at least 1500 by D
+     09-26 02:37:03 px 0.965 WIN  print    240 sh  Will the next Claude Opus model debut at a score of at least 1520 by D
+     09-26 02:51:02 px 0.966 WIN  print    439 sh  Will the next GPT Sol model (5.7+) debut at a score of at least 1480 b
+     10-02 17:28:59 px 0.970 WIN  print     86 sh  Will the next Sonnet model debut at a score of at least 1480 by Decemb
+     10-09 05:14:51 px 0.960 WIN  print     14 sh  Will Mistral Large 4 debut at a score of at least 1430 by June 30, 202
+     10-28 23:28:55 px 0.960 WIN  print     50 sh  Will Gemini Carbon debut in the top 10 of the Text Arena leaderboard b
+     10-28 23:59:40 px 0.921 WIN  print    127 sh  Will Gemini Carbon debut in the top 1 of the Text Arena leaderboard by
+     10-28 23:25:47 px 0.930 WIN  print     30 sh  Will Gemini Carbon debut in the top 3 of the Text Arena leaderboard by
+     10-28 23:28:44 px 0.950 WIN  print     20 sh  Will Gemini Carbon debut in the top 5 of the Text Arena leaderboard by
+     11-10 02:08:10 px 0.960 WIN  print    125 sh  Will Kimi K3.1 Pro debut at a score of at least 1460 by June 30, 2027?
+     11-20 05:40:46 px 0.818 WIN  print    106 sh  Will GPT Astra 6.1+ debut at a score of at least 1430 by June 30, 2027
+     11-20 13:41:40 px 0.952 WIN  print     47 sh  Will GPT Astra 6.1+ debut at a score of at least 1470 by June 30, 2027

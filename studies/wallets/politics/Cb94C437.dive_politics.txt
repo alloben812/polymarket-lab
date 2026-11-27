@@ -1,0 +1,26 @@
+Cb94C437: 12044 fills, $710,960, family filter politics, markets 350, events 132
+ role/side/outcome $: {('T', 'SELL', 'No'): 231291, ('T', 'BUY', 'No'): 227789, ('T', 'BUY', 'Yes'): 126132, ('T', 'SELL', 'Yes'): 125748}
+ fill usd p10/p50/p90/p99: [0.7, 10.5, 136.8, 862.6]  neg-risk share of $: 0.8
+ $ by time to market end: {'1-7d': 130569, 'after end': 185370, '<1d': 112461, '30-180d': 112859, '7-30d': 70362, '>180d': 99339}
+ bought $353,921; round-tripped inside window: 710,896 shares, cost $332,027, realised $6,180 (0.87 c/share); sells of older inventory $18,832
+ holding time of round trips ($-weighted) p10/p50/p90: ['1.7 min', '65.6 min', '966.4 min']  share of round-trip $ closed <60 s: 0.08 <1 h: 0.48
+ round trips by (entry role, exit role): shares, c/share: {('T', 'T'): (710896, 0.87)}
+ buy $ by price: {'<0.70': 128840, '<0.30': 31467, '<0.90': 118666, '<0.05': 2064, '<0.99': 26592, '<0.95': 46292}
+ 10-second bursts: 8138 median fills 1.0 p90 3  bursts touching >=3 markets of one event: 76
+ fills per day: {'11-13': 377, '11-14': 1383, '11-15': 442, '11-16': 430, '11-17': 627, '11-18': 538, '11-19': 369, '11-20': 734, '11-21': 734, '11-22': 1126, '11-23': 1238, '11-24': 965, '11-25': 1128, '11-26': 957, '11-27': 996}
+ fills per UTC hour: [476, 749, 309, 280, 356, 557, 489, 470, 417, 456, 368, 416, 393, 588, 700, 989, 728, 473, 472, 486, 480, 491, 374, 527]
+ top events:
+   who-will-be-the-next-prime-minister-of-israel-after-the-next-election  mk   4 $  148,923
+   next-prime-minister-of-sweden                                          mk   2 $   58,406
+   nationwide-ground-stop-lifted-byptptpt                                 mk   8 $   42,482
+   us-announces-end-of-iranian-blockade-byptptpt-20260713152715080        mk   6 $   28,489
+   next-senate-majority-leader-485                                        mk   3 $   26,834
+   next-prime-minister-of-spain-20260625005215443                         mk   2 $   21,672
+   next-leader-out-of-power-before-2027-no-starmer-or-petro-2026063019461 mk   3 $   18,571
+   elon-musk-of-tweets-november-21-november-23-2026                       mk   7 $   16,096
+   taipei-mayor-election-winner-20260813125857100                         mk   2 $   15,682
+   kaohsiung-mayor-election-winner-20260813125857600                      mk   2 $   14,305
+   iran-full-airspace-closure-byptptpt-20260625195253028                  mk   2 $   14,073
+   elon-musk-of-tweets-november-12-november-14-2026                       mk   4 $   14,013
+   venezuela-leader-end-of-2026                                           mk   2 $   13,749
+   elon-musk-of-tweets-november-13-november-20-2026                       mk   9 $   13,694

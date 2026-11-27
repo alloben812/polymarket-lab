@@ -1,0 +1,16 @@
+PippiTrader  0x403f2471f8aaa1e8a224f1338b073bfa3fdb94f1  joined 2026-06-24  markets traded 9183  fills 123564
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         48,948
+  taker fees charged:                                   -20,885
+  rebates+rewards (taker 2,336 / maker 5,588 / rewards 78,607):     86,531
+  ECONOMIC PnL (the API's bottom line, trust this):     114,595   of which unrealized 11,601
+  volume $3,459,945 (6,692,103 shares): gross +1.41% of volume, fees net of refunds -0.60%, kept +3.31%
+  share of what was kept that is rebates/rewards: 76%
+  taker_tier: {"address": "0x403f2471f8aaa1e8a224f1338b073bfa3fdb94f1", "tier": 0, "tier_name": "Tier 0", "wv_30d": 83276.101464}
+  maker_tier: {"address": "0x403f2471f8aaa1e8a224f1338b073bfa3fdb94f1", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 84254.307646, "own_wv_30d": 84254.307646}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-06        -491        -42         0         0       -533        -533       14,219       684
+  2026-07      12,746     -3,535         0    20,703     29,914       9,211      525,468    19,662
+  2026-08      20,439     -4,075         0    18,103     34,466      16,363      542,444    20,009
+  2026-09      19,220     -6,906         0    29,661     41,975      12,314      950,830    33,357
+  2026-10      19,464     -2,955         0    16,311     32,820      16,509      937,576    30,318
+  2026-11     -21,910     -3,370         0     1,753    -23,527     -25,280      489,146    19,521

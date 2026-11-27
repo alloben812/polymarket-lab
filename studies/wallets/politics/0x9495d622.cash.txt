@@ -1,0 +1,18 @@
+=== 0x9495d622 0x9495d622ab74a601ad1668d3dd4f7a2e68c3468f window 60: activity rows 68781, first row 2026-09-28
+   usdc by type: {'CONVERSION': 128322, 'MAKER_REBATE': 4182, 'MERGE': 447190, 'REDEEM': 246, 'REWARD': 91493, 'TRADE_BUY': 1445613, 'TRADE_SELL': 783393, 'YIELD': 4}  counts: {'TRADE_BUY': 28509, 'TRADE_SELL': 30683, 'MERGE': 5098, 'CONVERSION': 1303, 'REDEEM': 2948, 'REWARD': 120, 'MAKER_REBATE': 61, 'YIELD': 59}
+   net cash 9,212 | open positions 1167 value now 8,278 (initial_value field 0) | net cash + value 17,491
+   API all-time: trade_pnl -118,828 fees -1,792 economic 60,447 unrealized -4859.48867
+     ballon-dor-winner-2026                                     buy    26407 sell    6940 conv    10292 merge    9353 redeem       0
+     serbia-parliamentary-election-winner-2026                  buy    18080 sell    3498 conv     9124 merge    5290 redeem       0
+     anthropic-ipo-closing-market-cap-higher-strikes            buy    39676 sell   25680 conv     8076 merge    4888 redeem       0
+     taipei-mayor-election-winner-20260813125857100             buy    31692 sell    8416 conv     6969 merge   15947 redeem       0
+     next-prime-minister-of-spain-20260625005215443             buy    14650 sell    3245 conv     4738 merge    6410 redeem       0
+     michigan-senate-election-winner                            buy     9152 sell      11 conv     3913 merge    5235 redeem       0
+     brazil-presidential-election-second-round-margin-of-victor buy    12011 sell    5832 conv     3426 merge    2378 redeem       1
+     fed-decision-in-october-20260617190323537                  buy     8314 sell    4355 conv     3030 merge     428 redeem       0
+     pos h200-average-rental-price-in-june-2027-above-6pt00       Yes size         0 avg 0.520 value      704
+     pos b300-average-rental-price-in-march-2027-above-12pt00     No size         0 avg 0.600 value      493
+     pos h100-average-rental-price-in-january-2027-above-2pt70    Yes size         0 avg 0.770 value      405
+     pos b300-average-rental-price-in-january-2027-above-11pt00   Yes size         0 avg 0.570 value      401
+     pos b300-average-rental-price-in-february-2027-above-10pt00  Yes size         0 avg 0.750 value      395
+     pos h100-average-rental-price-in-january-2027-above-3pt20    Yes size         0 avg 0.360 value      369

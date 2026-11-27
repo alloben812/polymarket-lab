@@ -36,6 +36,8 @@ def fmt(v) -> str:
     if isinstance(v, (float, np.floating)):
         if v != v:
             return "-"
+        if v == int(v):
+            return f"{int(v):,}"
         a = abs(v)
         if a >= 1000:
             return f"{v:,.0f}"

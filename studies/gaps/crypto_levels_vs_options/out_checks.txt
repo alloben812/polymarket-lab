@@ -1,0 +1,6 @@
+daily ladders, full window: official outcome reproduced by candle opening 11:59 ET: 550/550; by candle opening 12:00 ET: 549/550
+[('bitcoin-above-76k-on-november-6-2026', 76000.0, np.float64(76014.0), np.float64(75996.01), True)]
+markets by period: {('report', 'daily'): 195, ('report', 'hourly'): 6, ('tune', 'daily'): 355, ('tune', 'hourly'): 4} clusters: {'report': 22, 'tune': 40}
+T hour (UTC) by date range: {(False, 17): 466, (True, 16): 84}
+one-touch markets by period/freq: {('report', 'daily'): 233, ('report', 'weekly'): 81, ('tune', 'daily'): 369, ('tune', 'monthly'): 71, ('tune', 'weekly'): 71}
+one-touch: official outcome reproduced from Binance 1m highs/lows: 825/825 []

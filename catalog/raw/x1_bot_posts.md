@@ -300,3 +300,75 @@ What does NOT hold up: "see Binance move, lift the stale Polymarket ask" as a ta
   count of fills absent from the taker-only feed over the overlapping time span.
 - I did not test any strategy; "edge" statements in section 3 are descriptions of what profitable wallets do, not proofs that the
   rule is profitable for a new, slower, smaller account.
+
+## Verification pass
+
+Sceptic's check, 2026-11-27. Working files (scratch, not kept): fetched posts and `wallet_check` outputs.
+Method: (1) all 31 cited X posts fetched again with `tools/xread.py status` and read; (2) `tools/wallet_check.py <ref> --monthly`
+on 37 wallets named in the candidates (by name where a name exists, the address had to match; by address otherwise);
+(3) for eight wallets `python3 -m pmlab.wallet <ref> --days N` to see where the money comes from (maker/taker, price bucket,
+point in the market's life, errors clustered by market). No strategy was tested, so no protocol file; 8 decompositions, all reported.
+
+### What held
+
+- Every cited post exists and the quoted sentences are in it. `wallet_check` reproduces the researcher's gross / fees / rebates / kept
+  and monthly figures for all 37 wallets to within intraday drift (largest: luckycat888888 198K now vs 205K; balthazar Nov +23K vs +16K;
+  trinity42 without rebates is 43K, not 36K). hello.67 resolves by name to 0x2e3ecede… (the address from the post link is right).
+  HomeRunHazard = 0x52685279… confirmed by name lookup.
+- The operator clusters and the "negative without rebates" list (Bonereaper, 0xAAAAA, 0xb55fa129, 0xcE25E214, Polkadot-Frog,
+  nj23adsknml3) are confirmed by the tool.
+
+### What did not hold, or was attached to the wrong source
+
+- Candidate 1: the cited Dan1ro0 post of Nov 19 is about almach (+$490,861 in 180 days), not bosona. bosona's "+$520,627 in 176 days"
+  is in https://x.com/Dan1ro0/status/2126064396241899633 (Nov 26) and mo-money's "+$597,263" in
+  https://x.com/RetroValix/status/2122090772442861958 (Nov 15); both were in the local dumps but not cited. "+$475,679 (Nov 12)" is in
+  no post text (poster image at best). The RohOnChain post names no wallet. The Aug 24 article says almach had both sides in only ~23%
+  of 5m markets and mo-money's 5m set cost ~$1.07, which contradicts the "81% paired at 96.73c" line of the Aug 29 post.
+- Candidate 2: "+$356,592 (Oct 21)" and "buys at 0.98-0.99" are not in the cited text. igor_mikerin's post on 0x50f7 says the opposite
+  of the candidate about the source of profit ("The longshots are where the money comes from").
+- Candidate 9: the cited Polkadot-Frog post (Sep 13) says +$142,620, not +$222,586 (not found in any post text). 0xcE25E214's
+  "+$701,615" is in https://x.com/RetroValix/status/2115557297057603927 (Oct 28) and "$3,634 a day" in
+  https://x.com/RetroValix/status/2119917714588238032 (Nov 9, showing +$697,712); neither was cited.
+- Candidates 5 and 7: the mechanism is the researcher's reading of 1,000 fills, not what the posts say. igor_mikerin's Tokor post is a
+  discretionary story (YES on "ETH touches $2,250 by Dec 31", "Hayes sold = local bottom"); RetroValix's 0xDB5 post describes Up/Down
+  complete sets; the 0x0dbd post describes fixed-size (900 / 600 shares) buys at 2-34c on BTC, ETH, DOGE, SOL, XRP.
+
+### Decompositions (pmlab.wallet; PnL on resolved markets, fees estimated by the tool)
+
+| wallet | window | what it shows |
+|---|---|---|
+| Vega7 | 90 d, 3,653 markets, $31.4K staked | 100% taker, BTC 5m only. All profit is in the <=5c bucket: $22.1K staked at 1.18c average, +1.85c a share net, t 4.5 by market, +$34.6K. The 5-15c bucket (1,604 fills, $9.3K) earns nothing (-$154). 67% of the dollars go in at 75-95% of the window (seconds 225-285), almost nothing in the last 15 s. Monthly: Apr-Jun +1.0K on $47K staked, then Jul +8.8K, Aug -0.6K, Sep +13.8K, Oct +9.7K, Nov +10.9K on $5.1K staked. |
+| 0x50f7 | 10 d (Nov 17-27), $2.83M | 93% maker by dollars, average maker price in the top bucket 0.998 (not 0.97-0.99). Maker bids at 0.99+: +0.19c a share, t 5.1, +$5.0K. Maker tail bids <=5c: +$370, t 0.1 (zero). Taker buys at 0.99+: -$1.7K. BTC 5m as a whole -$2.7K; the gain is one SOL 5m hit. API for the window: kept $3,911 = 0.13% of volume, about $390 a day against the advertised $2,867. NEW: $487K of maker fills at 0.9967 came AFTER the window ended and before resolution: +0.34c a share, t 5.1 (sellers pay to get cash before the payout). |
+| almach | 2 d, $269K seen | 93% maker by dollars (the 97% was a 3-hour sample), BTC 5m 75% / BTC 15m 19%, API kept $7.6K = 2.2% of volume. Consistent with the story. |
+| HomeRunHazard | 6 d (Nov 21-27), $7.1M | 78% maker by dollars. Maker buys: -0.37c a share, t -0.2 (-$40K): no edge in the resting bids in this window. Taker buys: +4.2c a share net, t 1.2 (+$124K), concentrated at 0.45-0.55. API: kept $280K, fees 41.8K, rebates 42.9K. Weak statistics (t by market 0.4), but the profit did not come from the mechanism the post describes. |
+| Tokor | 45 d, $3.30M | 66% maker by dollars (not 95%), never sells, 2,170 MERGE events (it exits by buying the other side and merging). Buy-and-hold on resolved markets explains $174K of the $913K the API books for the same days; the largest block is 118 markets with more than 7 days to expiry (+6.6c a share). 22% of turnover is finance markets. A position trader in long-dated strike/barrier markets during a crash, not a quoting bot. |
+| 0xDB5 | 21 d, $1.72M | All strike/range markets (no up/down), 61% maker by dollars, 34% sells, 916 merges, +$23.4K = 1.36% of turnover, t 2.5 by market. API kept $31.9K. The researcher's reading is right; the RetroValix post is wrong about what it trades. |
+| Bilberry | 45 d, $425K | Profit is taker BUYS at 0.15-0.85 (average 0.31): +2.4c a share, t 2.4, +$16.0K over 3,392 markets. The dollars at 0.97+ are maker SELL orders at 0.999 (3,099 fills, $180K, zero PnL): exits of winning positions, NOT purchases of "already measured" buckets. API kept $14.3K after $2.9K of fees (weather fee was 0.05 until Nov 20). |
+| 0x0dbd0e1d | 1 d, $87K seen | Not an alt-coin wallet: BTC 15m + BTC 5m are 45% of turnover and ~80% of the profit seen, ETH 26% (about zero), DOGE/SOL/XRP/BNB 29% (+$0.9K). 36% maker by dollars; taker buys carry the result (+$3.3K of $3.9K). API books +$11.8K for this one day = 18% of the wallet's 25-day total. |
+
+Tool limits seen: `wallet_check.py mo-money` crashes (null profile entry in the search result; use the address
+0x32ed2e546b187ca15e2841edc82b22c713cf8ec3). For very active wallets `pmlab.wallet` sees fewer fills than the API counts for the
+same days (almach 8,584 of 11,427; 0x0dbd 3,600 of 7,302; 0x50f7 18,341 of 19,905), so maker shares are approximate.
+Maker share by fill count and by dollars differ a lot (Tokor 95% vs 66%, 0x0dbd 66% vs 36%); the notes above mix the two.
+
+### Credibility changes
+
+- 0x50f7 / BoneOhio / pspspsps5 late bids: 4 -> 3. Real, but the margin is now 0.13% of turnover and one loss at 0.998 cancels
+  about 500 wins (the notes said 50).
+- HomeRunHazard sportsbook bids: 4 -> 3. Wallet is real and large; the resting-bid mechanism showed no edge in the last 6 days,
+  24% of what it kept is rebates from Diamond / 15% maker tiers, September was negative without them.
+- Tokor / 0xDB5 options replication: 3 -> 2. Mechanism is not in either source; Tokor looks directional. 0xDB5 alone would be a 3.
+- 0x0dbd0e1d: 3 -> 2. Mislabelled (mostly BTC/ETH, mostly taker by dollars), 25 days, one day is 18% of the total.
+- Unchanged: almach group 4, Vega7 3 (the decomposition strengthens it, but it is one wallet picked after the fact by a promoter
+  and the lab's own tape shows takers losing in aggregate below 0.90), weather 3, latency 2, pair accumulation 2, copy-trading 1,
+  RohOnChain 1. Nothing dropped: every source exists.
+
+### Missed by the first pass
+
+- 0x50f7's fills after the window's end (outcome already fixed, payout minutes away) are the cleanest "known but not yet paid" gap
+  in this file; nobody measured how long those sellers keep coming or who has queue priority.
+- Vega7's edge is confined to <=5c at seconds 225-285 and only exists from July on; a tape test should use exactly that cell.
+- All results before 2026-11-20 include a flat 20-25% maker rebate and a 0.07 BTC 5m taker fee; only seven days of data exist
+  under the current schedule. None of the monthly tables separates the two regimes.
+- Not opened by either pass: walidriachy.com, polyresearchrobotics.com, the dev.to write-ups, Dan1ro0's and rb_tweets' articles.

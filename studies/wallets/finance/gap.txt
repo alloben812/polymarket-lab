@@ -1,0 +1,38 @@
+universe resolved price markets: Counter({'hit-week': 1212, 'close-day': 486, 'updown-day': 237, 'close-week': 226, 'hit-month': 197, 'earnings': 20, 'close-month': 4})
+G1 hit markets resolved Yes: 602  G2 close/updown markets: 723
+
+G1: 547 hit markets with a clear Yahoo touch (24 resolved Yes without a 10 bp Yahoo touch - Pyth/Yahoo mismatch or touch before our bars)
+   delay 0-10s   takes     0  locked net $        0  0%
+   delay 10-60s  takes    10  locked net $       47  4%
+   delay 1-5m    takes     0  locked net $        0  0%
+   delay 5-60m   takes     9  locked net $      309  26%
+   delay >1h     takes    55  locked net $      828  70%
+   total $1185 over 547 markets = $2.2 per market; median delay touch -> first print >=0.99: 129 s (n=109)
+   top wallets: [('0x982a77e7', 522), ('0xc4b5a673', 274), ('0x9a46375a', 116), ('0x403f2471', 51), ('0x31fed1eb', 36), ('0x731a2417', 35), ('0x17559efa', 35), ('0xb477b6a0', 16)]
+   studied accounts: {'grasstoucher69': 522, 'PippiTrader': 51, 'CoinTrick': 35, 'thanksforplayin': 8}
+     $    172  delay  267999s  px 0.530 x      375  0x982a77e7  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     57  delay     956s  px 0.950 x     1200  0xc4b5a673  Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 Week of November 23 2026?
+     $     55  delay     974s  px 0.952 x     1200  0xc4b5a673  Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 Week of November 23 2026?
+     $     53  delay  269437s  px 0.430 x      128  0x9a46375a  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     51  delay  267997s  px 0.520 x      110  0x982a77e7  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     50  delay  268357s  px 0.530 x      110  0x982a77e7  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     48  delay  524064s  px 0.320 x       72  0x982a77e7  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     47  delay     967s  px 0.959 x     1200  0xc4b5a673  Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 in November?
+     $     45  delay     977s  px 0.938 x      764  0xc4b5a673  Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 Week of November 23 2026?
+     $     40  delay     974s  px 0.962 x     1099  0xc4b5a673  Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 in November?
+     $     35  delay 1740706s  px 0.120 x       40  0x17559efa  Will Amazon.com, Inc. (AMZN) hit (LOW) $240 in November?
+     $     33  delay      33s  px 0.959 x      841  0x31fed1eb  Will South Korea ETF (EWY) hit (HIGH) $140 in November?
+
+G2: 723 close/updown markets. Trades after the session close: n=168 usd=$9795 taker gain net of fee $-50; last 5 min before close: n=900 usd=$34232 taker gain $1932 (prints at 0.03-0.97: 180)
+   top wallets after close: [('0xc4b5a673', 23), ('0x31fed1eb', 0), ('0x731a2417', 0), ('0xa16a1302', 0), ('0xc4ca43d6', 0), ('0x0c0bee50', 0)] {'CoinTrick': 0}
+     $     23  +   162s  BUY Yes px 0.990 x     2438 won=True 0xc4b5a673 S&P 500 (SPY) closes above $750 on November 10?
+     $      0  +   163s  BUY Yes px 0.990 x       40 won=True 0x31fed1eb S&P 500 (SPY) closes above $750 on November 10?
+     $      0  +  2226s  BUY Down px 0.990 x        8 won=True 0xa16a1302 Netflix (NFLX) Up or Down on September 3?
+     $      0  +    15s  BUY No px 0.999 x       65 won=True 0xc4ca43d6 S&P 500 (SPY) closes above $775 on August 17?
+     $      0  +    80s  BUY Yes px 0.999 x       50 won=True 0x731a2417 S&P 500 (SPY) closes above $730 on November 18?
+     $      0  +   241s  BUY No px 0.999 x       36 won=True 0x731a2417 Will Google (GOOGL) close above $285 on November 6?
+     $      0  +   123s  BUY Down px 0.999 x       30 won=True 0x731a2417 Palantir (PLTR) Up or Down on October 27?
+     $      0  +   139s  BUY No px 0.999 x       18 won=True 0x731a2417 Will Tesla (TSLA) close above $360 on November 6?
+     $      0  +  3850s  BUY Down px 0.999 x       15 won=True 0x731a2417 NYA (NYA) Up or Down on November 20?
+     $      0  +   142s  BUY No px 0.999 x        5 won=True 0x731a2417 Will Amazon (AMZN) close above $260 on November 6?
+   delays after close (s): [6, 6, 7, 7, 7] median 151 max 8234

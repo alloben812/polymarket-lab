@@ -1,0 +1,37 @@
+(a) seconds from the account's sniping fill to the next OTHER wallet's taker buy of the winner in the same event (cached siblings)
+   fountaim arena.ai: 11 sweeps; others already buying in the 10 min before: 3; next other buyer after (s): 0, 0, -2, 0, -2, 0, 0, -2, 0, 0, 0
+   fountaim hle (agi.safe.ai): 4 sweeps; others already buying in the 10 min before: 0; next other buyer after (s): -1, 0, 0, 0
+   lamyk arena.ai: 4 sweeps; others already buying in the 10 min before: 1; next other buyer after (s): 0, 0, 0, -1
+   lamyk hle (agi.safe.ai): 2 sweeps; others already buying in the 10 min before: 0; next other buyer after (s): 0, -2
+
+(b) fountaim outside debut markets: events by turnover (88 d)
+      1531 net   1461 mk   2 [arena] will-any-ai-model-reach-overall-arena-score
+      1268 net    250 mk   5 [arena] second-best-code-arena-webdev-ai-lab-end-of
+       983 net     68 mk   1 [other] highest-claude-score-on-humanitys-last-exam-in-2026
+       962 net      0 mk   1 [ipo] will-anthropics-valuation-hit
+       883 net   -106 mk   5 [arena] third-best-code-arena-webdev-ai-lab-end-of
+       810 net    156 mk   3 [non-tech] will-krakens-valuation-hit
+       777 net     75 mk   3 [non-tech] will-gleans-valuation-hit
+       690 net     17 mk   3 [non-tech] will-neuralinks-valuation-hit
+       633 net    100 mk   3 [non-tech] will-stripes-valuation-hit
+       631 net     63 mk   8 [non-tech] will-lambdas-valuation-hit
+       595 net     33 mk   3 [ipo] will-openais-valuation-hit
+       562 net   -459 mk   4 [non-tech] will-anthropics-valuation-hit
+       557 net    117 mk   6 [non-tech] will-perplexitys-valuation-hit
+       527 net     28 mk   3 [arena] third-best-chinese-ai-company-end-of
+       500 net     75 mk   2 [other] highest-score-on-humanitys-last-exam-in-2026
+       500 net    271 mk   3 [ipo] will-canvas-valuation-hit
+
+(c) taker BUY fills in resolved tech markets (all sub-families): $-weighted win rate by price bucket (clustered unit = market; n markets shown)
+   account                     0.00-0.20              0.20-0.50              0.50-0.80              0.80-0.90              0.90-0.95              0.95-0.98              0.98-1.00
+   iutwpfal           px0.08 win0.35 n49     px0.32 win0.69 n48     px0.64 win0.64 n52     px0.84 win0.82 n31     px0.93 win0.94 n20     px0.97 win1.00 n18     px0.99 win1.00 n67
+   lamyk              px0.12 win0.33 n33     px0.33 win0.47 n33     px0.68 win0.80 n49     px0.85 win0.99 n33     px0.92 win1.00 n19      px0.97 win1.00 n5      px0.99 win1.00 n8
+   KimchiCapital      px0.11 win0.50 n39     px0.34 win0.48 n64     px0.69 win0.80 n98     px0.86 win0.97 n73     px0.93 win1.00 n58     px0.96 win1.00 n53     px0.98 win1.00 n17
+   NoTeacher          px0.09 win0.19 n83     px0.33 win0.44 n91    px0.65 win0.70 n135     px0.85 win0.92 n72     px0.92 win0.99 n50     px0.96 win0.97 n32     px0.98 win0.92 n11
+   0xAee8611B        px0.09 win0.15 n236     px0.31 win0.47 n93     px0.67 win0.56 n83     px0.84 win0.84 n53     px0.92 win0.83 n36     px0.96 win0.84 n11     px0.99 win1.00 n22
+   fountaim            px0.14 win0.89 n6     px0.31 win0.87 n13     px0.72 win0.92 n41     px0.87 win1.00 n14     px0.93 win1.00 n22     px0.97 win1.00 n13      px0.99 win1.00 n4
+   melonmanm          px0.11 win0.47 n32     px0.36 win0.65 n57     px0.66 win0.81 n65     px0.87 win0.83 n41     px0.93 win1.00 n24     px0.96 win1.00 n13     px0.99 win0.98 n24
+
+(d) debut universe in the tape cache
+   2026-09: 25 markets, volume $751927 | 2026-10: 25 markets, volume $457372 | 2026-11: 65 markets, volume $1671886 | event groups with a detected sweep: 20 of 32
+   debut market volume q25/q50/q75/max: 7469/15135/36060/100927

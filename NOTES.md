@@ -155,7 +155,8 @@ gross charge and `economic_pnl` already includes the refund (RN1: 3.85M refunded
 - `python3 -I tools/rpq.py <hf dataset> <path> [row group]` peeks at a remote parquet file by range requests;
   `python3 -I tools/hf_info.py <hf dataset> ...` saves card + file tree under `data/datasets/_api/`.
 - wallet_check caveat (seen on 4 wallets active in Mar-Apr 2026): `trade_pnl + fees + rebates` does not equal the
-  API's `economic_pnl`; the gap is about the size of the pre-May-2026 fees. Unresolved.
+  API's `economic_pnl`; the gap is about the size of the pre-May-2026 fees. RESOLVED (r2 verification pass): the gap is
+  `fees_refunded`; use the tool's "NET kept", never gross + fees + rebates, for any month before May 2026.
 
 ## Toolkit (`pmlab/`, installed in editable mode: `import pmlab` works from anywhere)
 
@@ -341,3 +342,190 @@ Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / dat
   Through this proxy the-numbers.com returns 403 and deadline.com 404; boxofficemojo.com and kworb.net work.
 - Box-office tape (125 markets, selected sample): following a 10-cent jump loses 9.7 c/share (t -2.3); copying the
   best box-office account at the worst print within 15 minutes earns nothing (t -0.3, 47 markets). Negative results.
+
+## Added 2026-11-27 by the cross-venue pass (details in `catalog/raw/r4_cross_venue.md`, code in `studies/r4_cross_venue/`)
+
+- Kalshi public data: `https://api.elections.kalshi.com/trade-api/v2` (`/events?status=open&with_nested_markets=true`,
+  `/markets/<ticker>/orderbook`, `/series/<s>/markets/<ticker>/candlesticks?period_interval=1|60|1440`). The order
+  book lists bids only (yes and no, ascending): yes ask = 1 - best no bid. `GET /markets/<ticker>` returns a quote
+  cached for several seconds (checked against `/orderbook`): never use it for timing. About 1 request/s gave 429.
+- Kalshi taker fee 0.07 * p * (1-p) per contract, rounded up per order; maker 0.0175 on `quadratic_with_maker_fees`
+  series (NFL, NBA, Fed, CPI per `/series/<ticker>`); crypto series are plain `quadratic`. Crypto settles on CF BRTI.
+- Kalshi and Polymarket "BTC 15-minute up/down" are different contracts (BRTI vs Chainlink, strikes $8 apart in the
+  window checked; the two venues resolved opposite ways at 16:00 UTC on 2026-11-27).
+- Polymarket data-api `prices-history` rejects a `start`..`end` span over 15 days (HTTP 400): chunk the request.
+- Binance BTCUSDT trades about $73 above USD indices (Deribit index, Coinbase) because USDT-USD is 0.9987; any
+  option-implied comparison for Binance-settled Polymarket markets must shift the forward by that basis.
+- Snapshot of 85 matched outcomes in 20 events (Kalshi vs Polymarket): game lines identical to the cent, 0 arbitrage
+  after fees; the 16 outcomes under $1 after fees were long-dated, thin, or rule-mismatched.
+
+## Added 2026-11-27 by the time-gap pass (details in `catalog/raw/x3_time_gap.md`)
+
+- Gamma markets carry `secondsDelay` (taker matching delay): 1 on NFL, CFB, CBB, NHL, soccer leagues, F1,
+  Valorant; 0 on all NBA game markets; field absent on weather, mentions, tweet counts, economics, politics, CS2,
+  golf (top 1,000 open events by 24 h volume, read 2026-11-27).
+- UMA dispute window is per market (`customLiveness`, seconds): 900 on sports games and daily-temperature markets
+  (bond $250), 600 on crypto level markets, 0/absent = the default 2 h elsewhere (bond $500; $25K-50K on the
+  largest politics markets). NBA games resolved on-chain 16-19 min after the final play (29 games, Nov 22-25).
+- Daily-temperature markets resolve on the aviationweather.gov METAR API (URL is in `resolutionSource`): highest
+  routine report of the station-local day, T-group tenths rounded half-up, SPECI excluded. That API (and NOAA
+  tgftp) shows a report 3-5 min after its observation stamp, and the Polymarket book has already repriced by then:
+  70 "bucket became impossible" events, Nov 21-26, Celsius cities: first sell of the dead bucket a median 25 s
+  after the stamp, 53 of 53 before the official receipt, 0 fills at >= 2c after it; total stale money ~$1.3K in
+  six days. Polling the official source is too slow by construction.
+- BTC 5m after the close (144 markets, Nov 26): 0.44% of dollars trade after end+3 s, all of it winners being
+  sold into bids; nobody can buy the winner. The April-May 2026 "oracle race" is gone.
+- Bitquery's "Racing the Oracle" dollar figures do not survive a Data API check (Mep72: article $6.87M, API
+  +$20.3K kept on $55K volume). Do not reuse its totals.
+
+## Added 2026-11-27 by the verification pass on the dataset catalog (details: "Verification pass" in `catalog/raw/r2_datasets.md`)
+
+- The HF set `gude/polymarket-wallet-activity` decodes wallets the lab already knows: 0xeebd...ba30 is Bonereaper
+  (fee group with wzbbb); 0xb27b...5b82 shares its tier volumes with ply-pm0 and ply-pm2 (`own_wv_30d` = 0: the
+  operator moved there in late September). The dollar P&L in its Codex reports is about 10x the Data API; its
+  behavioural descriptions are usable, its dollars are not.
+- Bonereaper, 24-27 Nov (0.05 fee): 75% taker; taker edge +0.89 c/share before a 0.73 c fee; 57% of its dollars
+  are bought at >= 0.95 (taker $669K, maker $509K of $2.09M). Net of fees +0.29% of turnover (t 0.84 by market): zero before rebates.
+- 0x885278f0...c569: pure maker (no taker fee since May), Tier 0, no fee group, buys only, now on BTC and ETH
+  15-minute up/down; kept 41 / 53 / 30 / 2 / 14 / 6 / 9 K in May..Nov; last 5 days +$733 on $88K (t 0.47).
+
+## Added 2026-11-27 by the verification pass on the papers catalog (details: "Verification pass" in `catalog/raw/r1_papers.md`)
+
+- Qiu & Qiu's weather result (arXiv 2610.13593: YES at 0.75-0.95 in the 1-12 h before the peak is overpriced by
+  about 10 points, July 2026, ten cities) does not show up in the lab's cached prices for 13-26 Nov (48 stations):
+  at local 07/09/11/13/15 h NO won 13.7 / 9.8 / 13.1 / 9.8 / 10.6% against 13.7 / 13.3 / 15.5 / 14.2 / 10.9%
+  implied; buying NO returned -1% to -32% at 1-p (13 h: t -2.0). Not blind, 14 days, 30-minute API prices.
+  Script: `catalog/raw/r1_verify_scripts/fav.py`.
+- xtxpleasecallme (first on the weather month board) is a cross-category rewards farmer: 95 of its last 1,471 fills
+  were in temperature markets; 49% of the 386.8K it kept is rebates and rewards. 1DVSBSTD is a weather near-$1
+  sweeper (89% weather, average buy 0.995+): kept +0.03% of $7.57M, negative in Aug, Sep and Nov.
+- "No confirmed pass" in AlphaOpsBench (arXiv 2609.31390) is about LLM-written strategy code failing validity
+  checks, not about the public strategies losing money.
+
+## Added 2026-11-27 by the verification of the time-gap catalog (details: "Verification pass" in `catalog/raw/x3_time_gap.md`)
+
+- Bitquery "Racing the Oracle" fails on its own showcase market: "Solana Up or Down - May 3, 7:00AM-7:05AM ET" has
+  gamma `volumeNum` $1,415 and $2.36 of fills after the close on the public tape (article: $517,980 in 36 s). The six
+  wallets it credits with ~$11.0M kept +$67K in total per the Data API. Post-close penny
+  buying was real but small: Mep72 +20.3K, egig +38.8K (best month June, +28.1K on $13K volume; stopped in August).
+- A profile name can resolve to an empty wallet: 95slave, PayoRamon, NotWinr -> wallets created 2026-04-28 (CLOB V2
+  day) with zero fills, while the address the source prints for 95slave has 4,548 fills. Prefer printed addresses.
+- Gamma `markets?slug=<slug>` returns nothing for a closed market unless `&closed=true` is added; `events?slug=` works.
+- BTC 5m winners sold after the close (40 markets, Nov 26 12:00-15:20 UTC): VWAP 0.9966, nothing below 0.99; the whole
+  discount is about $150 a day for all bidders together.
+- Tesla Roadster (Oct 15, dromedaryy at 10c) is a bet placed before the outcome, not a lag case; do not cite it as
+  "live-stream events take 7-26 minutes to price".
+- dev.to "fatherson" posts come from the account ABROWNFOX001 (same name as the credential-asking repo above).
+
+## Added 2026-11-27 by the crypto wallet study (details in `studies/wallets/crypto/README.md`)
+
+- Up/down 5m and 15m markets close on chain 17-21 s after the window ends (closedTime - endDate, two markets); the
+  account 0x50f7 redeems a median 34 s after the end (306 redeems). Capital in a late position is tied for under a minute.
+- Resting buyers at >= 0.99 on BTC 5m (all 1,728 tapes of 21-26 Nov): +0.45..0.53 c/share in the last 30 s (1 losing
+  market of 1,619) and +0.32..0.43 c/share after the end (0 of 1,343), both halves of the sample; the same bid with
+  60-120 s left lost 0.81 c/share (7 losing markets). Pool about $3.5-4K a day on BTC 5m, $150-450 on ETH 5m.
+  Queue position is not observable on the tape: needs an L2 replay before anyone believes it.
+- `pmlab.fair` with sigma_mult 1.3 understated the leader by 2-4 c at fair 0.65-0.90 on BTC/ETH 5m and 15m in
+  21-26 Nov (14,758 market-minutes): "price above fair" in that range is not "overpaid".
+- Crypto threshold markets: "above X on date" and ranges settle on the Binance 1 m close at 12:00 ET; hit-price on any
+  Binance 1 m High/Low since the market's creation; fee 0.01, tick 0.001, rewardsMinSize 50, rewardsMaxSpread 4.5 c.
+- The crypto leaderboard holds about 30 `0x…` wallets with $60-150K of "category PnL" and about zero kept: they only
+  SELL on BTC 5m as makers (no buys, no splits in their feeds), so the board counts sale proceeds as profit.
+- More fee groups (same wv_30d): tiredofwinning2much + mykr0ph0ne + thesidehustle; Bonereaper + wzbbb + Hcrystallash;
+  0x06dc5182 + 0xb55fa129; hdueilqhsdn + lkojihfafaf.
+- `pmlab.wallet --max-fills 60000` on an account with 18K markets takes about 14 minutes (metadata and resolutions).
+
+## Added 2026-11-27 by the BTC 5m lock-in study (`studies/gaps/btc5m_lockin/results.md`)
+
+- Block-time lag measured against WebSocket trade events with ms exchange time (HF `ithiria894`, 21-22 Nov, 325K
+  fills matched one-to-one): median 2.09 s, 1st-99th percentile 1.06-3.33 s, none above 4 s. `block time - 3`
+  (pmlab `BLOCK_LAG`) is about 0.9 s before the real match.
+- The official 60 s average is about 4-5 s behind Binance: ending the Binance TWAP 5 s earlier at both ends cuts the
+  proxy error from sd $5.6 / p99 $18.6 to sd $2.5 / p99 $9.9 and the wrong-outcome rate from 1.9% to 0.7%
+  (1,727 BTC 5m windows, 21-26 Nov). In Binance time the result is fixed about 5 s before the window ends.
+  `fair.fair_up` and `px.twap(t, 60)` do not apply this shift.
+- Last-minute taker BUY prints at 0.90-1.00, 21-26 Nov: +0.91 c/share after fees (t 2.6 by market), but +1.35 c on
+  21-24 Nov and -0.09 c on 25-26 Nov. Model-favourite bought 2 c under the model with the distance outside the
+  3 bp basis band: 59 markets in six days, none lost, +5 c/share, all 22-60 s before the end in one-block bursts
+  after a Binance move; the reporting period has 5-10 such markets. Verdict there: inconclusive.
+- gamma `volumeNum` on up/down markets equals the tape's share count (not dollars); it is missing on ~9% of
+  resolved BTC 5m markets, and one market of 1,728 had no `finalPrice`.
+
+## Added 2026-11-27 by the tech wallet study (details in `studies/wallets/tech/README.md`)
+
+- AI "debut" markets (Text Arena score/rank, HLE-Diamond) resolve on the value shown "at 12:00 PM ET on the calendar
+  date following the date on which the model first appears" on arena.ai / agi.safe.ai (read from the market text).
+  The deciding row is public 12-36 h before the check; markets close about 2 h after it.
+- On 20 debut events (Sep-Nov, 279 whole-market tapes) takers who bought the eventual winner below 0.97 after the
+  first sweep took $14.1K in total; 85% of it within 3 s of the first print, by 68 wallets. Every sweep of the two
+  snipers studied had another buyer in the same 0-2 s. Ten minutes after the sweep no sibling market was priced
+  >= 0.90 on the wrong side (0 of 77).
+- The @arena X account is not the trigger: debut posts come hours after the sweep (once after the check itself).
+- `pmlab.wallet --days 14` is of little use on tech: end dates are months away and markets resolve early, so "time
+  to end" reads "over 7 d" for nearly every fill and 70-95% of the PnL sits in open or carried-in markets. Use
+  `closedTime` and a longer window (`studies/wallets/tech/common.py`).
+- `gamma.resolve_profile` returns the address as the name when given an address; leaderboard names can differ from
+  the address prefix (profile "0xAee8611B76c7e8114" is wallet 0xaee811b7c7e5...).
+
+## Added 2026-11-27 by the verification pass on the structure catalog (details: "Verification pass" in `catalog/raw/r3_structure.md`)
+
+- Ornn publishes three months of daily settled index values free and without a key:
+  `https://data.ornn.com/api/public-index/gpu/H100%20SXM/index-history` (JSON, `data[].timestamp`, `index_value`).
+  H100 monthly means: Sep 2.8270, Oct 2.9403, Nov 3.1492 after 26 of 30 days; median absolute daily change $0.10.
+  Kalshi `KXH100MS` settled Sep and Oct at 2.83 and 2.94 = the mean of those daily values, rounded.
+- Liquidity-reward rates are re-set daily: `rewards_config[].start_date` is the last re-configuration (78% of the
+  $144K/day pool was dated Nov 26-27) and 13 of the top 100 rates changed within a few hours on Nov 27.
+- Reward pools are paid as configured: farmers' daily `reward_income` (`user-pnl?fidelity=1d`) rose 3-10 times on
+  Nov 25-27 after the Ornn pools started. In the H100 December ladder the $640/day pools sit on the four
+  near-the-money strikes (200-share minimum, $21-102K of 24 h volume each); the wings pay $27/day.
+- Sports games, 239 markets of 11-27 Nov: there are NO taker buys at 0.99+ in the last 15 minutes before on-chain
+  resolution; after the game only resting bids fill ($5.3M at +0.10%, $9.2M at 15-30 min at +0.14%, no loser).
+- The r3 resolution script capped each market tape at 3,000 rows, which truncates the largest games: 84 of 239 in
+  `data/r3/resolution_fills.json`. Its "last 24 h" totals are lower bounds taken from the end of the tape.
+
+## Added 2026-11-27 by the crypto-levels study (`studies/gaps/crypto_levels_vs_options/results.md`)
+
+- Daily "Bitcoin/Ethereum above X on <date>" ladders (series `btc-multi-strikes-weekly`,
+  `ethereum-multi-strikes-weekly`, tag `multi-strikes`): 11 strikes, listed 7 days ahead, resolve on the Binance spot
+  1-minute candle that OPENS 11:59 ET (closes 12:00:00 ET): 550/550 official outcomes reproduced, the 12:00-opening
+  candle misses 1. Fee rate 0.01. One-touch ladders (tag `hit-price`, daily/weekly/monthly) resolve on Binance
+  1-minute High/Low: 825/825 reproduced; markets added mid-period count only from their creation.
+- `prices-history` is a mid-price snapshot (moves without trades, reacts to spot inside one 5-minute bucket) and
+  refuses spans above 15 days (HTTP 400). In these ladders a displayed mid is usually not tradable: only 23% of
+  "mid + 1 cent" entries had a print at that price within 10 minutes (7% at 48 h-7 d to resolution).
+- Deribit: `get_tradingview_chart_data` works for expired daily options (trade candles only);
+  `get_instruments expired=true` lists only the latest expiry. One-day ATM implied vol was about 1.10 x DVOL
+  (quartiles 0.96-1.27) on 17-26 Nov.
+- Gamma: walk `tag_slug=multi-strikes` / `hit-price`, not `crypto-prices` (tens of thousands of up/down events).
+
+## Added 2026-11-27 by the verification pass on the cross-venue catalog (details: "Verification pass" in `catalog/raw/r4_cross_venue.md`)
+
+- The 15:45-16:00 UTC BTC 15-minute window is officially opposite on the two venues: Polymarket priceToBeat 60,104.89,
+  finalPrice 60,108.58 -> Up; Kalshi KXBTC15M result "no" (60,110.79 < 60,113.12). In that window the pair the
+  "strike-gap" thesis recommends (Polymarket Up + Kalshi No) never cost under $1 after fees (minimum 1.0048, 80
+  polls); every sub-$1 poll (22) was the opposite pair, which lost both legs.
+- Kalshi-Polymarket level gaps are stable, not timing gaps: a second 85-outcome snapshot 39 minutes after the first
+  shows 15 of the same 16 outcomes under $1 after fees at nearly the same cost (correlation of mid differences 0.97),
+  and again 0 of 10 game lines.
+- Deribit vs Polymarket daily "above K": a second snapshot reproduces the first (core mean -1.3c, median absolute
+  1.75c). Polymarket's at-the-money price equals a no-skew lognormal digital and its wings are fatter on both sides,
+  so every flagged "edge" is a short-volatility position. The Binance-minus-Deribit-index basis measured by the
+  script moved from +73 to +89 in 38 minutes: do not treat it as a constant.
+- Gamma slug `bitcoin-above-on-november-28` (no year) returns the 2025 event; this year's events end in `-2026`.
+- dune.com returns 403 to curl from this sandbox. The Dune post "Pricing the Fed: Kalshi, Polymarket, and CME
+  FedWatch" is by Filippo Armani, 2026-05-21 (found through WebSearch only).
+- The February 2026 Cardi B halftime market is a confirmed split settlement (news reports via WebSearch): Kalshi paid
+  26c / 74c at the last traded price, Polymarket paid Yes in full.
+
+## Added 2026-11-27 by the verification of the X bot-post catalog (details: "Verification pass" in `catalog/raw/x1_bot_posts.md`)
+
+- `wallet_check.py mo-money` crashes like GoldmanSachs (null profile entry); use 0x32ed2e546b187ca15e2841edc82b22c713cf8ec3.
+- `pmlab.wallet` sees fewer fills than the API counts for very active wallets (almach 8,584 of 11,427 in 2 days; 0x0dbd0e1d 3,600 of
+  7,302 in 1 day). Maker share by fill count and by dollars can differ by 30 points (Tokor 95% vs 66%): always say which.
+- 0x50f7 (0xee65685d…): in Nov 17-27, $487K of its resting bids at ~0.997 were filled AFTER the 5m/15m window ended and before
+  resolution (+0.34c a share, t 5.1 by market). Sellers pay about 0.3c to get cash before the payout. Its whole book kept 0.13% of
+  turnover in that window (about $390 a day), BTC 5m negative.
+- Vega7 (0x6ba25c9f…), 90 days: taker buys at <=5c (average 1.18c) in BTC 5m earned +1.85c a share net, t 4.5 over 3,653 markets;
+  5-15c earned nothing; 67% of dollars at seconds 225-285 of the window. One wallet, chosen by a promoter: test on the tape first.
+- Bilberry's dollars at 0.97+ are maker SELLS at 0.999 (exits), not buys of decided buckets; its profit is taker buys at 0.15-0.85.
+- HomeRunHazard (0x52685279…), Nov 21-27: maker buys -0.37c a share (t -0.2), taker buys +4.2c net (t 1.2); rebates equal fees.

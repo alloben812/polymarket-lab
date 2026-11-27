@@ -1,0 +1,216 @@
+##### NoTeacher: fills in 148 cached resolved arena/hle markets (edge = settlement value minus price; fee at 0.05*p*(1-p) on taker fills)
+kind     phase                          side role fills mkts      usd avg_px right$% edge_c/sh fee_c/sh  net_usd
+debut    0 no appearance found          BUY  M        4    4      181  0.307      39    -15.42     0.00      -91
+debut    0 no appearance found          BUY  T      125   21     5071  0.441      74      5.80     0.86      569
+debut    0 no appearance found          SELL M       13    7      940  0.714      14    -11.86     0.00     -156
+debut    0 no appearance found          SELL T       48   11     3528  0.420      27      1.06     0.79       22
+debut    0 no appearance found (after T90) BUY  T       13    7      925  0.623      99      4.47     0.24       63
+debut    0 no appearance found (after T90) SELL M       12    3      400  0.977       0     -2.32     0.00      -10
+debut    0 no appearance found (after T90) SELL T       22   10     1047  0.429       4     -0.92     0.20      -27
+debut    1 before appearance 1-7d       BUY  M       13    8      317  0.483      70     28.72     0.00      189
+debut    1 before appearance 1-7d       BUY  T      145   40     6915  0.420      70     22.10     0.93     3482
+debut    1 before appearance 1-7d       SELL M       21   10      720  0.343      75      6.07     0.00      127
+debut    1 before appearance 1-7d       SELL T       88   23     4543  0.452      28    -17.36     0.87    -1831
+debut    1 before appearance <24h       BUY  M        5    3      197  0.702       3    -66.64     0.00     -187
+debut    1 before appearance <24h       BUY  T       37   22     1378  0.547      66     -3.69     0.90     -116
+debut    1 before appearance <24h       SELL M        9    4      122  0.320      87     24.89     0.00       95
+debut    1 before appearance <24h       SELL T       16   11     1862  0.389      22    -25.18     0.87    -1249
+debut    1 before appearance >7d        BUY  M       15   10      286  0.510      74     24.20     0.00      136
+debut    1 before appearance >7d        BUY  T      237   38    10846  0.472      72     17.13     0.89     3727
+debut    1 before appearance >7d        SELL M       52   20     1727  0.604      48      9.74     0.00      278
+debut    1 before appearance >7d        SELL T      133   33     9455  0.563      27    -11.16     0.89    -2025
+debut    2a 0-60 s after                BUY  T        2    2       56  0.925     100      7.50     0.35        4
+debut    2b 1-10 min after              BUY  T        3    3      121  0.976     100      2.40     0.12        3
+debut    2b 1-10 min after              SELL M        3    2       26  0.064      15      0.83     0.00        3
+debut    2b 1-10 min after              SELL T       10    4       22  0.026     100      2.56     0.12       21
+debut    2c 10 min-6 h after            BUY  M        1    1       28  0.920     100      8.00     0.00        2
+debut    2c 10 min-6 h after            BUY  T        3    2      283  0.922     100      7.82     0.36       23
+debut    2c 10 min-6 h after            SELL M        5    4      252  0.991       0     -0.93     0.00       -2
+debut    2c 10 min-6 h after            SELL T        5    5      197  0.333       0     -2.22     0.11      -14
+debut    2d 6 h+ after                  BUY  T        3    2      269  0.950     100      4.96     0.24       13
+debut    2d 6 h+ after                  SELL M       21   13     2633  0.997       0     -0.32     0.00       -9
+debut    2d 6 h+ after                  SELL T        4    4     1001  0.990       0     -1.04     0.05      -11
+monthend m1 >7d before check            BUY  M       18    8      506  0.799      84     -1.39     0.00       -9
+monthend m1 >7d before check            BUY  T      267   41     8584  0.612      76     11.25     1.02     1436
+monthend m1 >7d before check            SELL M       64   17     1623  0.691      17    -10.33     0.00     -242
+monthend m1 >7d before check            SELL T       75   25     4243  0.615      24     -9.18     0.99     -702
+monthend m2 1-7d before check           BUY  M        8    4      364  0.434      19    -34.17     0.00     -286
+monthend m2 1-7d before check           BUY  T       66   19     2330  0.575      81      1.00     0.76       10
+monthend m2 1-7d before check           SELL M       10    6      344  0.873       4     -6.94     0.00      -27
+monthend m2 1-7d before check           SELL T       25   13     2030  0.486      32      6.80     0.78      251
+monthend m3 last 24h, before T90        BUY  T        1    1      121  0.877     100     12.33     0.54       16
+monthend m3 last 24h, before T90        SELL T        1    1        0  0.017     100      1.72     0.08        0
+monthend m4 after T90                   BUY  M       87    6       12  0.005       0     -0.52     0.00      -12
+monthend m4 after T90                   BUY  T       39   23     1135  0.415      98      1.81     0.15       45
+monthend m4 after T90                   SELL M       64   13     1731  0.982       0     -1.81     0.00      -32
+monthend m4 after T90                   SELL T       35   25     1093  0.324       4     -0.28     0.13      -14
+net by phase group: debut 0 : 370 | debut 1 : 2627 | debut 2a: 4 | debut 2b: 27 | debut 2c: 9 | debut 2d: -6 | monthend m1: 483 | monthend m2: -52 | monthend m3: 16 | monthend m4: -12
+debut markets with a found appearance: first taker buy falls in phase -> {'1 ': 60, '2d': 1}
+
+- Will the next Fable model (5.2+) debut at a score of at least 1520 by June 30, 2027?  [next-fable-model-5pt2-text-arena-debut-20260928]
+    winner=No check=11-20 17:00 closed=11-20 22:08 appearance=11-20 02:13:25 T90=11-20 02:13:25 market vol=71103; account net=208
+    pYes around appearance: -7d:0.37 -48h:0.38 -1h:0.35 -10s:0.26 +60s:0.08 +10m:0.02 +2h:0.02 check-1h:0.00
+    10-17 11:39:09 BUY  M No  n=  1 sh=     53 px=0.470 usd=    25  [1 before appearance >7d; -806.6h vs appearance]
+    10-18 18:58:44 BUY  T No  n=  1 sh=     27 px=0.310 usd=     8  [1 before appearance >7d; -775.2h vs appearance]
+    10-18 21:06:42 BUY  T No  n=  2 sh=    112 px=0.341 usd=    38  [1 before appearance >7d; -773.1h vs appearance]
+    10-19 06:32:05 SELL M No  n=  3 sh=    110 px=0.460 usd=    50  [1 before appearance >7d; -763.7h vs appearance]
+    11-19 15:03:05 BUY  T No  n=  1 sh=     70 px=0.620 usd=    43  [1 before appearance <24h; -11.2h vs appearance]
+    11-20 08:37:56 SELL M No  n=  1 sh=    292 px=0.995 usd=   290  [2d 6 h+ after; +6.4h vs appearance]
+    11-20 10:03:52 SELL M No  n=  1 sh=     53 px=0.995 usd=    53  [2d 6 h+ after; +7.8h vs appearance]
+    ... 20 more hour-groups
+
+- Will Kimi K3.1 Pro debut at a score of at least 1480 by June 30, 2027?  [kimi-k3pt1-pro-text-arena-debut-20261023]
+    winner=No check=11-10 17:00 closed=11-10 19:01 appearance=11-10 01:04:40 T90=11-09 19:54:33 market vol=39652; account net=-20
+    pYes around appearance: -7d:0.27 -48h:0.14 -1h:0.00 -10s:0.00 +60s:0.00 +10m:0.00 +2h:0.00 check-1h:0.00
+    10-26 21:40:14 BUY  T Yes n=  1 sh=    583 px=0.384 usd=   224  [1 before appearance >7d; -339.4h vs appearance]
+    10-27 07:15:08 SELL M Yes n=  1 sh=     60 px=0.400 usd=    24  [1 before appearance >7d; -329.8h vs appearance]
+    10-27 07:15:08 SELL T Yes n=  1 sh=    195 px=0.407 usd=    79  [1 before appearance >7d; -329.8h vs appearance]
+    10-27 08:23:32 SELL T Yes n=  1 sh=    260 px=0.387 usd=   100  [1 before appearance >7d; -328.7h vs appearance]
+    11-09 20:07:31 SELL T Yes n=  1 sh=    262 px=0.010 usd=     3  [1 before appearance <24h; -5.0h vs appearance]
+    11-09 20:41:57 BUY  T No  n=  1 sh=     60 px=0.949 usd=    57  [1 before appearance <24h; -4.4h vs appearance]
+    11-10 16:20:13 SELL M No  n=  1 sh=     60 px=0.998 usd=    60  [2d 6 h+ after; +15.3h vs appearance]
+    ... 30 more hour-groups
+
+- Will the next Fable model (5.2+) debut at a score of at least 1510 by June 30, 2027?  [next-fable-model-5pt2-text-arena-debut-20260928]
+    winner=No check=11-20 17:00 closed=11-20 19:01 appearance=11-20 02:13:25 T90=11-20 02:13:25 market vol=100927; account net=556
+    pYes around appearance: -7d:0.74 -48h:0.61 -1h:0.56 -10s:0.33 +60s:0.01 +10m:0.01 +2h:0.00 check-1h:0.00
+    10-13 18:50:00 BUY  T Yes n=  2 sh=    110 px=0.719 usd=    79  [1 before appearance >7d; -895.4h vs appearance]
+    10-14 08:12:23 SELL M Yes n=  4 sh=    110 px=0.770 usd=    85  [1 before appearance >7d; -882.0h vs appearance]
+    10-16 15:31:45 BUY  M No  n=  1 sh=     13 px=0.140 usd=     2  [1 before appearance >7d; -826.7h vs appearance]
+    10-17 08:24:59 SELL T No  n=  1 sh=     13 px=0.310 usd=     4  [1 before appearance >7d; -809.8h vs appearance]
+    11-19 20:08:20 SELL T No  n=  1 sh=    497 px=0.450 usd=   223  [1 before appearance <24h; -6.1h vs appearance]
+    11-20 08:37:50 SELL M No  n=  1 sh=    824 px=0.995 usd=   820  [2d 6 h+ after; +6.4h vs appearance]
+    11-20 10:17:32 SELL M No  n=  1 sh=     22 px=0.995 usd=    22  [2d 6 h+ after; +8.1h vs appearance]
+    ... 23 more hour-groups
+
+- Will the next Fable model (5.2+) debut in the top 5 of the Text Arena leaderboard by June 30, 2027?  [next-fable-model-5pt2-text-arena-rank-debut-20261027]
+    winner=No check=11-20 17:00 closed=11-20 22:07 appearance=11-20 02:13:25 T90=11-20 02:13:25 market vol=35969; account net=74
+    pYes around appearance: -7d:0.69 -48h:0.47 -1h:0.39 -10s:0.19 +60s:0.05 +10m:0.05 +2h:0.01 check-1h:0.00
+    10-28 22:02:40 BUY  T Yes n=  1 sh=     20 px=0.500 usd=    10  [1 before appearance >7d; -532.2h vs appearance]
+    10-29 00:21:53 SELL T Yes n=  1 sh=     20 px=0.820 usd=    16  [1 before appearance >7d; -529.9h vs appearance]
+    10-29 01:21:46 BUY  T No  n=  1 sh=     25 px=0.158 usd=     4  [1 before appearance >7d; -528.9h vs appearance]
+    10-29 07:42:46 SELL T No  n=  1 sh=     25 px=0.240 usd=     6  [1 before appearance >7d; -522.5h vs appearance]
+    11-19 06:37:55 SELL T Yes n=  1 sh=    828 px=0.377 usd=   312  [1 before appearance <24h; -19.6h vs appearance]
+    11-19 13:45:47 BUY  T Yes n=  1 sh=    129 px=0.360 usd=    46  [1 before appearance <24h; -12.5h vs appearance]
+    11-20 08:09:43 SELL T Yes n=  1 sh=    129 px=0.001 usd=     0  [2c 10 min-6 h after; +5.9h vs appearance]
+    ... 23 more hour-groups
+
+- Will Kimi K3.1 Pro debut at a score of at least 1470 by June 30, 2027?  [kimi-k3pt1-pro-text-arena-debut-20261023]
+    winner=No check=11-10 17:00 closed=11-10 19:01 appearance=11-10 01:04:40 T90=11-09 20:33:39 market vol=74291; account net=-63
+    pYes around appearance: -7d:0.40 -48h:0.47 -1h:0.03 -10s:0.00 +60s:0.00 +10m:0.00 +2h:0.00 check-1h:0.00
+    10-25 17:47:38 BUY  T No  n=  1 sh=    200 px=0.083 usd=    16  [1 before appearance >7d; -367.3h vs appearance]
+    10-26 13:03:57 SELL T No  n=  2 sh=    200 px=0.218 usd=    44  [1 before appearance >7d; -348.0h vs appearance]
+    10-27 07:15:36 BUY  T Yes n=  1 sh=    430 px=0.457 usd=   197  [1 before appearance >7d; -329.8h vs appearance]
+    10-27 23:31:41 BUY  T Yes n=  2 sh=    216 px=0.587 usd=   127  [1 before appearance >7d; -313.5h vs appearance]
+    11-09 20:33:39 BUY  T No  n=  1 sh=     10 px=0.950 usd=    10  [1 before appearance <24h; -4.5h vs appearance]
+    11-10 11:57:03 SELL M No  n=  1 sh=      6 px=0.997 usd=     6  [2d 6 h+ after; +10.9h vs appearance]
+    11-10 15:31:07 SELL M No  n=  1 sh=      4 px=0.997 usd=     4  [2d 6 h+ after; +14.4h vs appearance]
+    ... 23 more hour-groups
+
+- Will Kimi K3.1 Pro debut in the top 20 of the Text Arena leaderboard by June 30, 2027?  [kimi-k3pt1-pro-text-arena-rank-debut-20261023]
+    winner=No check=11-10 17:00 closed=11-10 19:01 appearance=- T90=11-09 19:54:33 market vol=39350; account net=50
+    pYes around check-20h: -7d:0.30 -48h:0.23 -1h:0.09 -10s:0.03 +60s:0.03 +10m:0.03 +2h:0.00 check-1h:0.00
+    10-24 19:45:33 BUY  T No  n=  1 sh=     65 px=0.330 usd=    21  [0 no appearance found; 405.2h before check]
+    10-25 17:18:00 BUY  T No  n=  2 sh=    290 px=0.218 usd=    63  [0 no appearance found; 383.7h before check]
+    10-26 16:07:59 SELL T No  n=  2 sh=    200 px=0.445 usd=    89  [0 no appearance found; 360.9h before check]
+    10-26 20:14:39 SELL T No  n=  1 sh=    100 px=0.450 usd=    45  [0 no appearance found; 356.8h before check]
+    11-09 20:09:25 SELL T Yes n=  1 sh=    100 px=0.032 usd=     3  [0 no appearance found (after T90); 20.8h before check]
+    11-09 21:24:12 BUY  T No  n=  1 sh=      5 px=0.969 usd=     5  [0 no appearance found (after T90); 19.6h before check]
+    11-10 09:49:39 SELL T No  n=  1 sh=      5 px=0.998 usd=     5  [0 no appearance found (after T90); 7.2h before check]
+    ... 28 more hour-groups
+
+- Will Kimi K3.1 Pro debut at a score of at least 1510 by June 30, 2027?  [kimi-k3pt1-pro-text-arena-debut-20261023]
+    winner=No check=11-10 17:00 closed=11-10 19:01 appearance=11-10 01:04:40 T90=10-25 03:47:02 market vol=10365; account net=56
+    pYes around appearance: -7d:0.04 -48h:0.03 -1h:0.00 -10s:0.00 +60s:0.00 +10m:0.00 +2h:0.00 check-1h:0.00
+    10-24 05:38:12 BUY  T No  n=  2 sh=    210 px=0.883 usd=   186  [1 before appearance >7d; -403.4h vs appearance]
+    10-24 06:17:03 SELL T No  n=  1 sh=    210 px=0.940 usd=   197  [1 before appearance >7d; -402.8h vs appearance]
+    10-24 06:44:48 BUY  T No  n=  1 sh=    150 px=0.905 usd=   136  [1 before appearance >7d; -402.3h vs appearance]
+    10-24 16:27:36 BUY  T No  n=  2 sh=    490 px=0.854 usd=   418  [1 before appearance >7d; -392.6h vs appearance]
+    10-26 17:07:20 BUY  T Yes n=  1 sh=     40 px=0.063 usd=     3  [1 before appearance >7d; -344.0h vs appearance]
+    10-27 19:33:09 BUY  T No  n=  1 sh=    141 px=0.936 usd=   132  [1 before appearance >7d; -317.5h vs appearance]
+    10-28 22:09:58 SELL T No  n=  5 sh=    500 px=0.940 usd=   470  [1 before appearance >7d; -290.9h vs appearance]
+    ... 2 more hour-groups
+
+- Will Kimi K3.1 Pro debut in the top 10 of the Text Arena leaderboard by June 30, 2027?  [kimi-k3pt1-pro-text-arena-rank-debut-20261023]
+    winner=No check=11-10 17:00 closed=11-10 19:01 appearance=- T90=11-01 03:21:24 market vol=25366; account net=-2
+    pYes around check-20h: -7d:0.07 -48h:0.01 -1h:0.07 -10s:0.01 +60s:0.01 +10m:0.01 +2h:0.01 check-1h:0.00
+    10-24 07:09:20 BUY  T No  n=  2 sh=    235 px=0.620 usd=   146  [0 no appearance found; 417.8h before check]
+    10-24 17:16:14 SELL T No  n=  1 sh=    235 px=0.640 usd=   150  [0 no appearance found; 407.7h before check]
+    10-25 07:53:54 BUY  T No  n=  1 sh=    210 px=0.640 usd=   134  [0 no appearance found; 393.1h before check]
+    10-25 17:28:38 SELL T No  n=  1 sh=    210 px=0.647 usd=   136  [0 no appearance found; 383.5h before check]
+    11-09 04:02:07 SELL T Yes n=  1 sh=    493 px=0.066 usd=    33  [0 no appearance found (after T90); 37.0h before check]
+    11-09 20:09:52 BUY  T No  n=  1 sh=    200 px=0.952 usd=   190  [0 no appearance found (after T90); 20.8h before check]
+    11-10 16:20:54 SELL M No  n=  1 sh=    200 px=0.998 usd=   200  [0 no appearance found (after T90); 0.7h before check]
+    ... 12 more hour-groups
+
+- Will Xiaomi have the best Chinese AI model at the end of October 2026?  [best-chinese-ai-company-end-of-october]
+    winner=Yes check=10-31 16:00 closed=10-31 18:52 appearance=- T90=10-31 01:17:42 market vol=115418; account net=71
+    pYes around check-20h: -7d:0.54 -48h:0.90 -1h:0.92 -10s:0.89 +60s:0.89 +10m:0.89 +2h:0.88 check-1h:0.99
+    10-23 18:07:20 BUY  T Yes n=  2 sh=    376 px=0.555 usd=   208  [m1 >7d before check; 189.9h before check]
+    10-23 21:15:35 BUY  T Yes n=  1 sh=    183 px=0.536 usd=    98  [m1 >7d before check; 186.7h before check]
+    10-24 05:59:56 SELL T Yes n=  1 sh=    390 px=0.589 usd=   230  [m1 >7d before check; 178.0h before check]
+    10-24 06:18:05 BUY  T Yes n=  1 sh=     84 px=0.598 usd=    50  [m1 >7d before check; 177.7h before check]
+    10-29 00:40:10 SELL T Yes n=  1 sh=    214 px=0.864 usd=   185  [m2 1-7d before check; 63.3h before check]
+    10-30 16:04:42 BUY  T Yes n=  1 sh=    138 px=0.877 usd=   121  [m3 last 24h, before T90; 23.9h before check]
+    10-31 15:36:25 SELL T Yes n=  2 sh=    138 px=0.981 usd=   135  [m4 after T90; 0.4h before check]
+    ... 7 more hour-groups
+
+- Will OpenAI’s Astra model debut on the Arena Leaderboard at a score of at least 1480?  [openais-astra-model-text-arena-debut]
+    winner=No check=09-12 16:00 closed=09-12 18:05 appearance=09-11 21:18:09 T90=09-11 21:18:12 market vol=94142; account net=-299
+    pYes around appearance: -7d:0.68 -48h:0.65 -1h:0.73 -10s:0.73 +60s:0.09 +10m:0.01 +2h:0.01 check-1h:0.05
+    09-05 13:42:58 BUY  T No  n=  1 sh=    243 px=0.200 usd=    49  [1 before appearance 1-7d; -151.6h vs appearance]
+    09-05 17:32:36 SELL T No  n=  3 sh=    142 px=0.216 usd=    31  [1 before appearance 1-7d; -147.8h vs appearance]
+    09-05 18:16:07 SELL T No  n=  1 sh=    100 px=0.190 usd=    19  [1 before appearance 1-7d; -147.0h vs appearance]
+    09-06 06:38:03 BUY  T Yes n=  1 sh=    433 px=0.720 usd=   312  [1 before appearance 1-7d; -134.7h vs appearance]
+    09-11 13:21:28 BUY  T Yes n=  1 sh=    168 px=0.720 usd=   121  [1 before appearance <24h; -7.9h vs appearance]
+    09-11 21:21:22 SELL T Yes n=  1 sh=     87 px=0.024 usd=     2  [2b 1-10 min after; +193s vs appearance]
+    09-11 21:21:25 SELL M Yes n=  2 sh=    386 px=0.010 usd=     4  [2b 1-10 min after; +196s vs appearance]
+    ... 14 more hour-groups
+
+- Will the next Fable model (5.2+) debut at a score of at least 1530 by June 30, 2027?  [next-fable-model-5pt2-text-arena-debut-20260928]
+    winner=No check=11-20 17:00 closed=11-20 22:09 appearance=11-20 02:13:25 T90=11-20 02:13:25 market vol=50113; account net=3
+    pYes around appearance: -7d:0.18 -48h:0.18 -1h:0.17 -10s:0.17 +60s:0.08 +10m:0.02 +2h:0.01 check-1h:0.01
+    10-04 07:23:31 BUY  T No  n=  3 sh=    153 px=0.643 usd=    98  [1 before appearance >7d; -1122.8h vs appearance]
+    10-14 16:22:30 BUY  T No  n=  4 sh=     20 px=0.557 usd=    11  [1 before appearance >7d; -873.8h vs appearance]
+    10-18 17:05:54 SELL M No  n=  1 sh=    100 px=0.760 usd=    76  [1 before appearance >7d; -777.1h vs appearance]
+    10-19 17:12:21 BUY  T No  n=  3 sh=    357 px=0.655 usd=   234  [1 before appearance >7d; -753.0h vs appearance]
+    11-14 13:27:25 SELL T No  n=  2 sh=    172 px=0.796 usd=   136  [1 before appearance 1-7d; -132.8h vs appearance]
+    11-14 15:51:41 BUY  T No  n=  1 sh=     60 px=0.840 usd=    50  [1 before appearance 1-7d; -130.4h vs appearance]
+    11-14 21:20:37 SELL T No  n=  2 sh=     60 px=0.850 usd=    51  [1 before appearance 1-7d; -124.9h vs appearance]
+    ... 10 more hour-groups
+
+- Will Gemini Carbon debut with an HLE-Diamond score of 65% or higher?  [gemini-carbon-hle-diamond-debut-20261028]
+    winner=No check=11-12 17:00 closed=11-12 19:01 appearance=11-12 00:59:40 T90=11-12 00:59:40 market vol=74626; account net=82
+    pYes around appearance: -7d:0.90 -48h:0.90 -1h:0.96 -10s:0.38 +60s:0.03 +10m:0.00 +2h:0.01 check-1h:0.00
+    10-28 23:23:14 BUY  T No  n=  2 sh=     40 px=0.510 usd=    20  [1 before appearance >7d; -337.6h vs appearance]
+    10-28 23:58:26 SELL T No  n=  1 sh=     20 px=0.510 usd=    10  [1 before appearance >7d; -337.0h vs appearance]
+    10-29 00:01:14 SELL T No  n=  1 sh=     20 px=0.450 usd=     9  [1 before appearance >7d; -337.0h vs appearance]
+    10-29 00:20:49 BUY  T Yes n=  3 sh=    111 px=0.733 usd=    82  [1 before appearance >7d; -336.6h vs appearance]
+    11-03 22:12:12 BUY  T Yes n=  2 sh=    243 px=0.868 usd=   211  [1 before appearance >7d; -194.8h vs appearance]
+    11-05 23:21:36 SELL T Yes n=  1 sh=     43 px=0.890 usd=    38  [1 before appearance 1-7d; -145.6h vs appearance]
+    11-08 11:26:33 SELL T Yes n=  1 sh=    200 px=0.890 usd=   178  [1 before appearance 1-7d; -85.6h vs appearance]
+    ... 10 more hour-groups
+
+- Will the next Claude Haiku model (4.6+) debut at a score of at least 1440 by June 30, 2027?  [next-claude-haiku-model-4pt6-text-arena-debut-20260930]
+    winner=No check=10-23 16:00 closed=10-23 18:01 appearance=10-22 23:29:20 T90=10-22 23:29:20 market vol=48208; account net=585
+    pYes around appearance: -7d:0.63 -48h:0.68 -1h:0.70 -10s:0.70 +60s:0.01 +10m:0.00 +2h:0.02 check-1h:0.00
+    10-01 05:43:26 BUY  T Yes n=  2 sh=     24 px=0.488 usd=    12  [1 before appearance >7d; -521.8h vs appearance]
+    10-02 17:51:35 SELL T Yes n=  1 sh=     24 px=0.370 usd=     9  [1 before appearance >7d; -485.6h vs appearance]
+    10-02 18:31:41 BUY  T No  n=  3 sh=    190 px=0.624 usd=   118  [1 before appearance >7d; -485.0h vs appearance]
+    10-03 07:51:23 SELL T No  n=  1 sh=    175 px=0.650 usd=   114  [1 before appearance >7d; -471.6h vs appearance]
+    10-22 19:12:15 SELL T No  n=  1 sh=    246 px=0.330 usd=    81  [1 before appearance <24h; -4.3h vs appearance]
+    10-22 19:12:39 BUY  T No  n=  2 sh=     80 px=0.285 usd=    23  [1 before appearance <24h; -4.3h vs appearance]
+    10-23 07:08:45 SELL T No  n=  1 sh=    773 px=0.998 usd=   772  [2d 6 h+ after; +7.7h vs appearance]
+    ... 10 more hour-groups
+
+- Will Google be the #3 AI Lab at the end of September 2026 (Style Control On)?  [3-ai-lab-end-of-september-style-control-on-20260722222220184]
+    winner=Yes check=09-30 16:00 closed=09-30 18:13 appearance=- T90=09-27 09:24:59 market vol=22336; account net=249 (incomplete)
+    pYes around check-20h: -7d:0.82 -48h:0.97 -1h:0.97 -10s:0.97 +60s:0.97 +10m:0.97 +2h:0.98 check-1h:0.98
+    09-02 22:48:45 SELL M Yes n=  2 sh=    245 px=0.390 usd=    96  [m1 >7d before check; 665.2h before check]
+    09-08 20:23:07 BUY  T Yes n=  4 sh=    104 px=0.321 usd=    33  [m1 >7d before check; 523.6h before check]
+    09-09 05:24:06 SELL T Yes n=  1 sh=    104 px=0.470 usd=    49  [m1 >7d before check; 514.6h before check]
+    09-09 10:28:15 BUY  T Yes n=  1 sh=    389 px=0.340 usd=   132  [m1 >7d before check; 509.5h before check]
+    09-28 01:14:24 SELL M Yes n=  1 sh=      1 px=0.975 usd=     1  [m4 after T90; 62.8h before check]
+    09-28 02:33:33 SELL M Yes n=  2 sh=      3 px=0.975 usd=     3  [m4 after T90; 61.4h before check]
+    09-28 10:29:32 SELL M Yes n=  1 sh=     40 px=0.975 usd=    39  [m4 after T90; 53.5h before check]
+    ... 25 more hour-groups

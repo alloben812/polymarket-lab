@@ -1,0 +1,35 @@
+
+######## grasstoucher69  fills 13873  1793980800..1795795200 (21 d)  inv {'REDEEM': 851, 'MERGE': 1115}
+type             mkts fills      usd  mk% buy% medpx |  res    net$   net%     t win% | open    mtm$ | timing by usd (vs endDate) | ET session
+hit-month         301  2799   132389  34%  91%  0.53 |  104   10010  30.3%   1.3  49% |  125    8939 | 1-7d:25% >7d:75% | RTH:61% pre:18% night:13% post:8%  inc=72
+crypto            219  2915    92425  37% 100%  0.63 |  202     954   1.2%   0.2  53% |   13    1270 | 10-60m:0% 1-6.5h:21% 6.5-24h:58% 1-7d:18% >7d:3% | pre:33% night:27% post:21% RTH:20%  inc=4
+hit-week          672  2993    87602  41% 100%  0.49 |  548   16237  22.0%   2.0  48% |  120    5095 | 0-10m:0% 10-60m:0% 1-6.5h:10% 6.5-24h:5% 1-7d:85% | RTH:52% pre:24% night:17% post:7%  inc=4
+updown-day        243  2424    55837  53% 100%  0.23 |  239   19438  35.4%   2.6  44% |    0       0 | 0-10m:2% 10-60m:3% 1-6.5h:26% 6.5-24h:68% | pre:45% RTH:29% night:26% post:0%  inc=4
+close-day         319  1695    27763  55% 100%  0.13 |  317   11816  42.9%   1.2  38% |    1     293 | 0-10m:1% 10-60m:5% 1-6.5h:35% 6.5-24h:59% | pre:47% RTH:41% night:12% post:0%  inc=1
+close-month        61   461    27093  38%  94%  0.45 |    0       0   nan%   nan nan% |   42   -2073 | 1-7d:24% >7d:76% | RTH:58% pre:24% night:10% post:7%  inc=19
+close-week        127   393    10904  46% 100%  0.31 |   97    2672  30.9%   1.1  43% |   30    1466 | 0-10m:1% 10-60m:0% 1-6.5h:4% 6.5-24h:9% 1-7d:86% | RTH:40% pre:35% night:18% post:7%  inc=0
+other               1   150     6431  27% 100%  0.35 |    0       0   nan%   nan nan% |    1   -1336 | >7d:100% | pre:51% night:39% RTH:6% post:4%  inc=0
+ipo                 2    43     2685  67% 100%  0.35 |    2   -1547 -57.6%   nan  50% |    0       0 | 6.5-24h:15% 1-7d:85% | pre:66% RTH:34%  inc=0
+TOTAL resolved net 59579  open marked 13653  turnover 443130
+
+######## thanksforplayin  fills 4838  1793980800..1795795200 (21 d)  inv {'REDEEM': 501}
+type             mkts fills      usd  mk% buy% medpx |  res    net$   net%     t win% | open    mtm$ | timing by usd (vs endDate) | ET session
+close-day         186  1350    88243  55%  65%  0.58 |   31   -2484 -31.1%  -1.6  65% |    9   -1933 | 0-10m:10% 10-60m:10% 1-6.5h:59% 6.5-24h:16% 1-7d:6% | RTH:82% pre:14% post:3% night:1%  inc=146
+updown-day        121  1232    82973  61%  58%  0.57 |   16     -16  -0.2%  -0.0  62% |    0       0 | 0-10m:6% 10-60m:8% 1-6.5h:62% 6.5-24h:25% 1-7d:0% | RTH:75% pre:20% post:5%  inc=105
+hit-month          96   714    42971  44%  64%  0.50 |    9    1330  29.4%   0.6  67% |   24   -1551 | 1-7d:18% >7d:82% | RTH:72% pre:18% post:9% night:0%  inc=63
+hit-week          152   788    33697  54%  68%  0.49 |   41   -2701 -35.9%  -1.7  63% |   21   -1163 | 0-10m:4% 10-60m:5% 1-6.5h:29% 6.5-24h:8% 1-7d:55% | RTH:86% pre:10% post:3% night:0%  inc=90
+close-month        35   246    24586  52%  51%  0.29 |    0       0   nan%   nan nan% |   19   -1296 | 1-7d:24% >7d:76% | RTH:75% pre:21% post:4%  inc=16
+close-week         55   239    14756  84%  74%  0.30 |    5     105  27.2%   1.1  80% |   20   -3689 | 0-10m:7% 10-60m:2% 1-6.5h:8% 6.5-24h:17% 1-7d:66% | RTH:74% pre:22% post:4% night:0%  inc=30
+mcap               20   246    14008  48%  62%  0.71 |    0       0   nan%   nan nan% |    4     -13 | 1-7d:1% >7d:99% | RTH:67% pre:24% post:8% night:0%  inc=16
+other              12    23     7572  71%  62%  0.71 |    3     176  21.0%   2.0 100% |    7     128 | after end:27% 1-7d:6% >7d:67% | post:100% night:0%  inc=2
+TOTAL resolved net -3590  open marked -9518  turnover 308805
+
+######## superstonksbro  fills 2307  1793980800..1795795200 (21 d)  inv {'REDEEM': 191, 'MERGE': 151}
+type             mkts fills      usd  mk% buy% medpx |  res    net$   net%     t win% | open    mtm$ | timing by usd (vs endDate) | ET session
+hit-month         117  1310   109919  78% 100%  0.44 |   35   21224  89.5%   2.1  80% |   67   -9181 | 1-7d:34% >7d:66% | RTH:100% post:0%  inc=15
+close-month        17   116    28795  84% 100%  0.66 |    0       0   nan%   nan nan% |   17    5720 | 1-7d:28% >7d:72% | RTH:100%  inc=0
+close-day          92   311    28109  83% 100%  0.50 |   86    6790  26.2%   1.3  49% |    6   -1204 | 0-10m:30% 10-60m:15% 1-6.5h:41% 1-7d:14% | RTH:100%  inc=0
+hit-week          112   363    23561  65% 100%  0.53 |   96    1103   5.2%   0.3  55% |   16      59 | 0-10m:2% 10-60m:3% 1-6.5h:18% 6.5-24h:1% 1-7d:77% | RTH:99% post:1%  inc=0
+updown-day         43   148    13869  78% 100%  0.26 |   40    -778  -7.6%  -0.4  38% |    2     -10 | 0-10m:11% 10-60m:24% 1-6.5h:64% | RTH:100%  inc=1
+close-week         26    59    10067  36% 100%  0.62 |   14     -77  -2.7%  -0.3  50% |   12     306 | 0-10m:3% 10-60m:0% 1-6.5h:22% 1-7d:76% | RTH:100%  inc=0
+TOTAL resolved net 28262  open marked -4309  turnover 214320

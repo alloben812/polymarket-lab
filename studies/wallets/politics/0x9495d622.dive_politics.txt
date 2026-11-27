@@ -1,0 +1,26 @@
+0x9495d622: 4385 fills, $209,179, family filter politics, markets 876, events 339
+ role/side/outcome $: {('M', 'BUY', 'No'): 82609, ('M', 'BUY', 'Yes'): 52598, ('M', 'SELL', 'No'): 36127, ('M', 'SELL', 'Yes'): 32815, ('T', 'BUY', 'No'): 2362, ('T', 'BUY', 'Yes'): 1373, ('T', 'SELL', 'No'): 727, ('T', 'SELL', 'Yes'): 568}
+ fill usd p10/p50/p90/p99: [0.3, 8.9, 76.0, 968.1]  neg-risk share of $: 0.59
+ $ by time to market end: {'1-7d': 46529, '30-180d': 72599, '>180d': 38810, '7-30d': 43082, 'after end': 7753, '<1d': 407}
+ bought $138,942; round-tripped inside window: 136,058 shares, cost $72,431, realised $-3,755 (-2.76 c/share); sells of older inventory $1,561
+ holding time of round trips ($-weighted) p10/p50/p90: ['0.7 min', '302.9 min', '7785.6 min']  share of round-trip $ closed <60 s: 0.12 <1 h: 0.29
+ round trips by (entry role, exit role): shares, c/share: {('M', 'M'): (130994, -2.79), ('M', 'T'): (2490, -2.9), ('T', 'M'): (2486, -0.95), ('T', 'T'): (88, -3.56)}
+ buy $ by price: {'<0.30': 14013, '<0.05': 92, '<0.90': 62165, '<0.70': 46945, '<0.95': 14495, '<0.99': 1234}
+ 10-second bursts: 3334 median fills 1.0 p90 2  bursts touching >=3 markets of one event: 14
+ fills per day: {'11-13': 162, '11-14': 312, '11-15': 290, '11-16': 248, '11-17': 364, '11-18': 236, '11-19': 242, '11-20': 265, '11-21': 288, '11-22': 276, '11-23': 255, '11-24': 331, '11-25': 376, '11-26': 454, '11-27': 286}
+ fills per UTC hour: [189, 131, 130, 138, 109, 189, 144, 195, 212, 163, 201, 149, 158, 194, 159, 200, 219, 243, 189, 230, 217, 202, 233, 191]
+ top events:
+   israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963      mk   4 $   39,750
+   republican-presidential-nominee-2028                                   mk   2 $   15,549
+   taipei-mayor-election-winner-20260813125857100                         mk   2 $   14,630
+   next-french-presidential-election                                      mk   1 $   11,896
+   next-prime-minister-of-sweden                                          mk   4 $    8,226
+   who-will-be-the-next-prime-minister-of-israel-after-the-next-election  mk   2 $    6,072
+   taoyuan-mayor-election-winner-20260813125857300                        mk   2 $    5,405
+   us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108          mk   4 $    5,362
+   kaohsiung-mayor-election-winner-20260813125857600                      mk   2 $    4,669
+   venezuela-leader-end-of-2026                                           mk   4 $    4,643
+   next-prime-minister-of-spain-20260625005215443                         mk   3 $    4,154
+   russia-x-ukraine-ceasefire-agreement-by                                mk   5 $    3,919
+   next-leader-out-of-power-before-2027-no-starmer-or-petro-2026063019461 mk  22 $    3,207
+   us-announces-end-of-iranian-blockade-byptptpt-20260713152715080        mk   4 $    3,051

@@ -1,0 +1,55 @@
+Bigggggggg: 14 days; events with conversions 124: NO bought $878,221 (maker 25%), YES bought $0, YES sold $83,021 (maker 74%), NO sold $0, conversions $779,662, merges $13,833
+  NO buys in conversion events by price ($): {'<0.50': 57992, '<0.80': 133646, '<0.90': 126800, '<0.95': 121335, '<0.99': 236742, '>=0.99': 201705}
+
+  next-french-presidential-election: event has 128 outcomes; NO bought on 12: shares per leg min/med/max 29/9144/12693; sum of avg NO prices 10.953 vs payout m-1 = 11  -> basket margin +4.7 c per set BEFORE fees and before the free YES legs;
+     conversions 3 = $82,267; merges $29; YES sold on 18 outcomes $3,504; maker share of NO shares 13%; median delay first NO buy of a day -> conversion not measured; conversions on 3 days
+       NO will-douard-philippe-win-the-2027-french-presidential-elec    12693 sh @ 0.9062
+       NO will-bruno-retailleau-win-the-2027-french-presidential-ele     9115 sh @ 0.9930
+       NO will-franois-hollande-win-the-2027-french-presidential-ele     9144 sh @ 0.9849
+       NO will-raphal-glucksmann-win-the-2027-french-presidential-el     9144 sh @ 0.9822
+       NO will-jordan-bardella-win-the-2027-french-presidential-elec     9144 sh @ 0.9818
+       NO will-teddy-riner-win-the-2027-french-presidential-election     9115 sh @ 0.9820
+
+  next-ceo-of-nvidia: event has 107 outcomes; NO bought on 15: shares per leg min/med/max 85/7358/9251; sum of avg NO prices 13.949 vs payout m-1 = 14  -> basket margin +5.1 c per set BEFORE fees and before the free YES legs;
+     conversions 15 = $78,396; merges $802; YES sold on 28 outcomes $779; maker share of NO shares 11%; median delay first NO buy of a day -> conversion not measured; conversions on 4 days
+       NO will-tim-cook-be-the-next-ceo-of-nvidia                        8811 sh @ 0.9813
+       NO will-rene-haas-be-the-next-ceo-of-nvidia                       9251 sh @ 0.9273
+       NO will-johny-srouji-be-the-next-ceo-of-nvidia                    8811 sh @ 0.9702
+       NO will-colette-kress-be-the-next-ceo-of-nvidia                   8811 sh @ 0.9410
+       NO will-ian-buck-be-the-next-ceo-of-nvidia                        8811 sh @ 0.9093
+       NO will-charlie-kawwas-be-the-next-ceo-of-nvidia                  7695 sh @ 0.9885
+
+  pgl-major-singapore-2026-winner-1793811600000: event has 38 outcomes; NO bought on 13: shares per leg min/med/max 70/8634/8634; sum of avg NO prices 11.841 vs payout m-1 = 12  -> basket margin +15.9 c per set BEFORE fees and before the free YES legs;
+     conversions 13 = $77,557; merges $123; YES sold on 29 outcomes $566; maker share of NO shares 10%; median delay first NO buy of a day -> conversion not measured; conversions on 6 days
+       NO will-aurora-win-the-pgl-major-singapore-2026-1793811600000     8634 sh @ 0.9790
+       NO will-fut-win-the-pgl-major-singapore-2026-1793811600000        8634 sh @ 0.9742
+       NO will-betboom-win-the-pgl-major-singapore-2026-179381160000     8372 sh @ 0.9850
+       NO will-natus-vincere-win-the-pgl-major-singapore-2026-179381     8634 sh @ 0.9491
+       NO will-falcons-win-the-pgl-major-singapore-2026-179381160000     8634 sh @ 0.9393
+       NO will-the-mongolz-win-the-pgl-major-singapore-2026-17938116     8010 sh @ 0.9877
+
+  nba-2027-champion: event has 36 outcomes; NO bought on 10: shares per leg min/med/max 8026/8026/8026; sum of avg NO prices 9.103 vs payout m-1 = 9  -> basket margin -10.3 c per set BEFORE fees and before the free YES legs;
+     conversions 1 = $72,234; merges $0; YES sold on 14 outcomes $1,209; maker share of NO shares 10%; median delay first NO buy of a day -> conversion not measured; conversions on 1 days
+       NO will-toronto-raptors-win-the-2027-nba-finals                   8026 sh @ 0.9690
+       NO will-detroit-pistons-win-the-2027-nba-finals                   8026 sh @ 0.9640
+       NO will-houston-rockets-win-the-2027-nba-finals                   8026 sh @ 0.9636
+       NO will-los-angeles-lakers-win-the-2027-nba-finals                8026 sh @ 0.9590
+       NO will-minnesota-timberwolves-win-the-2027-nba-finals            8026 sh @ 0.9320
+       NO will-new-york-knicks-win-the-2027-nba-finals                   8026 sh @ 0.9300
+
+  next-leader-out-of-power-before-2027-no-starmer-or-petro-202606301: event has 22 outcomes; NO bought on 14: shares per leg min/med/max 595/4593/5776; sum of avg NO prices 13.043 vs payout m-1 = 13  -> basket margin -4.3 c per set BEFORE fees and before the free YES legs;
+     conversions 72 = $38,809; merges $2,329; YES sold on 22 outcomes $2,103; maker share of NO shares 15%; median delay first NO buy of a day -> conversion not measured; conversions on 10 days
+       NO will-friedrich-merz-be-the-next-leader-out-before-2027-202     4737 sh @ 0.9959
+       NO will-sebastien-lecornu-be-the-next-leader-out-before-2027-     4763 sh @ 0.9884
+       NO will-mahmoud-abbas-be-the-next-leader-out-before-2027-2026     4695 sh @ 0.9904
+       NO will-volodymyr-zelenskyy-be-the-next-leader-out-before-202     4634 sh @ 0.9965
+       NO will-miguel-diaz-canel-be-the-next-leader-out-before-2027-     4593 sh @ 0.9952
+       NO will-pedro-sanchez-be-the-next-leader-out-before-2027-2026     4531 sh @ 0.9889
+
+  fed-decision-in-december-20260729232808632: event has 5 outcomes; NO bought on 5: shares per leg min/med/max 9371/9371/9371; sum of avg NO prices 3.980 vs payout m-1 = 4  -> basket margin +2.0 c per set BEFORE fees and before the free YES legs;
+     conversions 5 = $37,486; merges $0; YES sold on 0 outcomes $0; maker share of NO shares 20%; median delay first NO buy of a day -> conversion not measured; conversions on 5 days
+       NO will-the-fed-decrease-interest-rates-by-50-bps-after-the-d     9371 sh @ 0.9980
+       NO will-the-fed-decrease-interest-rates-by-25-bps-after-the-d     9371 sh @ 0.9970
+       NO will-there-be-no-change-in-fed-interest-rates-after-the-de     9371 sh @ 0.9579
+       NO will-the-fed-increase-interest-rates-by-50-bps-after-the-d     9371 sh @ 0.9317
+       NO will-the-fed-increase-interest-rates-by-25-bps-after-the-d     9371 sh @ 0.0953

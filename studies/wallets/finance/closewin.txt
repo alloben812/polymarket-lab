@@ -1,0 +1,19 @@
+taker fills in the last 30 min before the close: 2031 in 564 markets, $91209
+  300-1800 s before close: all           fills  1200 mkts  407 usd    59769 taker net $    2283 (  3.8%) t(mkt)   1.4 losers 29%
+     model edge >= 3c after fee          fills   162 mkts   49 usd    11047 taker net $    1721 ( 15.6%) t(mkt)   0.9 losers 51%
+     decided-ish: |z|>=2.5, with it      fills    25 mkts   20 usd     1435 taker net $      47 (  3.2%) t(mkt)   2.9 losers 0%
+     model edge <= -3c                   fills   357 mkts  103 usd    30485 taker net $     377 (  1.2%) t(mkt)   0.2 losers 43%
+  60-300 s before close: all             fills   459 mkts  196 usd    16390 taker net $    -993 ( -6.1%) t(mkt)  -0.8 losers 14%
+     model edge >= 3c after fee          fills    39 mkts   20 usd     2657 taker net $     288 ( 10.9%) t(mkt)   0.6 losers 23%
+     decided-ish: |z|>=2.5, with it      fills    30 mkts   18 usd      525 taker net $     154 ( 29.4%) t(mkt)   1.1 losers 0%
+     model edge <= -3c                   fills    83 mkts   37 usd     7563 taker net $   -1204 (-15.9%) t(mkt)  -0.9 losers 51%
+  10-60 s before close: all              fills   138 mkts   74 usd     3513 taker net $      61 (  1.7%) t(mkt)   2.0 losers 4%
+     model edge >= 3c after fee          fills    13 mkts    6 usd      757 taker net $      46 (  6.1%) t(mkt)   1.7 losers 8%
+     decided-ish: |z|>=2.5, with it      fills    17 mkts   10 usd      758 taker net $      39 (  5.2%) t(mkt)   1.4 losers 0%
+     model edge <= -3c                   fills     3 mkts    2 usd        7 taker net $       4 ( 59.1%) t(mkt)   nan losers 33%
+  0-10 s before close: all               fills   227 mkts  169 usd    11086 taker net $      80 (  0.7%) t(mkt)   2.1 losers 4%
+     model edge >= 3c after fee          fills     9 mkts    6 usd       68 taker net $     -10 (-14.5%) t(mkt)  -1.2 losers 78%
+     decided-ish: |z|>=2.5, with it      fills    21 mkts   18 usd      728 taker net $      14 (  1.9%) t(mkt)   3.3 losers 10%
+     model edge <= -3c                   fills    14 mkts   10 usd      543 taker net $      50 (  9.2%) t(mkt)   1.4 losers 14%
+  top taker wallets in the last 5 min (fills, usd, net): [('0xdefebc7e', 2, 3197, 366), ('superstonksbro', 4, 195, 286), ('C03B', 13, 1210, 214), ('0xd34f2b5e', 7, 710, 55), ('0xe8d0e6f7', 52, 1534, 39), ('0x89c2b409', 1, 14, 35), ('0xcab97910', 1, 53, 24), ('0xef5326fc', 164, 5448, 19)]
+  bottom: [('thanksforplayin', 22, 3515, -1111), ('0x17559efa', 5, 510, -347), ('PippiTrader', 39, 1257, -174), ('0x1f66796b', 2, 168, -172), ('0xb6cae2a3', 1, 310, -144)]

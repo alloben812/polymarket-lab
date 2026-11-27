@@ -292,3 +292,94 @@ the 24 h before `resolved_at`. Scripts `tools_scratch/r3_resolution_window*.py`,
 - UMA proposer rewards and proposal timestamps were not pulled (would need the UMA subgraph or on-chain logs).
 - Ornn's own daily index history (data.ornn.com) was not fetched, so the "monthly average becomes known" idea is
   supported only by the Kalshi November ladder.
+
+## Verification pass
+
+Sceptic's check of this catalog, 2026-11-27 (evening UTC). 24 tool calls, no sub-agents, read-only. Everything below
+was re-pulled by me; inline scripts were not saved, the calls are named so they can be repeated.
+
+### What I checked
+
+1. **Docs re-fetched live** (`https://docs.polymarket.com/<path>.md`, 14 pages) and compared byte-for-byte with
+   `data/pm_docs/`: all 14 identical. Numbers confirmed in the text: rewards minimum payout $1, c = 3.0, 1,440 samples,
+   single-sided rule inside 0.10-0.90; maker tiers 0/3/7/10/15% from $200K; taker tiers 10/25/40/50/60%; fee table;
+   holding reward 4.00%; resolution (bond "typically $750", 2-hour challenge, 4-6 days disputed); referral 10% / 5%,
+   $10,000 threshold, 30 days; builder caps 100 bps / 50 bps; combos 400 ms / 10 s / Last Look at about $2,500
+   notional; perps reward pools $325 / $100 / ANT $3,000 to Nov 30 and the 1% rule; compute perp index definition.
+   Not found by my grep: the "1 s" length of Last Look.
+2. **All 12 named wallets** through `python3 -I tools/wallet_check.py <address> --monthly` (addresses, names from
+   `data/r3/reward_wallets.json`). The researcher's table holds up to within a day's drift. Daily series
+   (`data-api/v2/user-pnl?interval=all&fidelity=1d`) and the first 1,000 open positions for the four small farmers.
+3. **Rewards list**: saved pull re-counted (20,500 listed, 8,819 active, $144,263/day) and the live top-100 page
+   compared with it.
+4. **Ornn / Kalshi / perps**: gamma event `h100-average-rental-price-in-december-2026`, Kalshi `KXH100MS` open and
+   settled markets plus daily candlesticks, perps tickers, and Ornn's own free history.
+5. **Sports resolution study**: recomputed from `data/r3/resolution_fills.json` with finer time buckets.
+
+### What changed
+
+- **Stale fact in section 1**: the crypto taker delay is 150 ms since 2026-09-04 14:00 UTC (changelog line 199); the
+  notes say 50 ms. `secondsDelay` and `customLiveness` were already in NOTES.md (1 s on most sports, 0 on NBA;
+  challenge window 900 s on sports and daily temperature, 600 s on crypto levels, 2 h default; bonds $250 / $500),
+  so "2 hours" and "$750" are the docs' defaults, not what sports and weather markets use.
+- **Reward pools are re-set daily, they are not "days old"**: $112.1K of the $144.3K/day carries an allocation
+  `start_date` of Nov 26 or 27, including the Taipei mayor market created in August. 13 of the top 100 rates changed
+  between the researcher's pull and mine a few hours later (Spain PM 873/727 -> 800/800, Taipei 1,081 -> 1,066).
+  `start_date` is the last re-configuration. A screen on today's rate does not tell tomorrow's rate.
+- **The second reward asset** (0xc011a7e1..., 151 allocations) has `rate_per_day` 0 in every row: nothing was missed.
+- **Pools do pay** (new evidence): pootythefinancefarmer's daily reward income was $41-82 on Nov 17-24 and $977 /
+  $271 / $192-277 on Nov 25-27 after the Ornn pools started; needleladder went from $1.0-1.9K/day to $3.8-4.9K/day
+  on Nov 25-27 (trading leg -$1.7K to -$2.7K a day, kept $1.2-3.1K a day).
+- **"Quiet" is wrong for the strikes that carry the money**: in the H100 December ladder the four near-the-money
+  strikes pay $640/day and traded $21-102K each in 24 h (event $279K); the eight wing strikes pay $27/day. Minimum
+  size there is 200 shares (not 20-50), so $200 quotes exactly one market on both sides.
+- **Wallet reading, added**: ArmageddonRewardsBilly lost net in May and June 2026 (-136K, -43K) while receiving
+  $160-220K of rewards a month; rewards of the three large farmers have fallen 3-8 times since June. xtxpleasecallme
+  is not a farmer: Gold taker tier (wv 648,965), October gross +144,550 is directional, and 201,931 of its 386,805 is
+  an unrealized LOSS already inside the figure. chessplayer has positive trading net in Oct-Nov (+6.2K, +9.6K
+  without rewards), so its result says nothing about Ornn pinning. Negative days: pootythefinancefarmer 20 of 57,
+  pootythetemperaturefarmer 26 of 62, needleladder 47 of 88. pootythefinancefarmer holds more than $15.4K of
+  inventory (first 1,000 positions only) to keep about $1.8K a month.
+- **Selection**: farmers were found through holder lists, i.e. makers who ended up with inventory. Makers who quote
+  and cancel in time are under-represented, so the "kept 20-47%" range is not the distribution of outcomes.
+- **Ornn daily values are public and free**: `https://data.ornn.com/api/public-index/gpu/H100%20SXM/index-history`
+  returns three months of daily settled values without a key (91 rows, 2026-08-28 .. 11-26). Monthly means: Sep
+  2.8270, Oct 2.9403, Nov 3.1492 after 26 of 30 days. Daily values are noisy: median absolute day-to-day change
+  $0.10, p90 $0.27, range 2.46-3.53 in three months.
+- **Kalshi settled Sep and Oct at 2.83 and 2.94** (`expiration_value`), equal to the mean of Ornn's daily settled
+  values rounded to the cent, although Kalshi's rule text says "arithmetic mean of hourly values". Two months of two.
+- **Pinning on Kalshi's settled months gave no cheap decided side on the Yes side**: for strikes that settled Yes the
+  daily closing ask was 0.98-1.00 from about the 20th on while only the bid lagged (0.59-0.95); for strikes that
+  settled No a stale Yes bid of about 50 contracts occasionally stood at 0.09-0.15 in the last third of the month.
+  Volume was zero on most days. My "decided" date used a crude 30-day range bound and is not reliable.
+- **Cross-venue gap, re-measured**: Polymarket Yes above $3.50 ask 0.11, Kalshi bid 0.17 for 50 contracts: 0.94 per
+  $1 before a Kalshi fee of about 1 cent, on $50 of notional. The "$3.20 vs $3.25" dominance is gone (Kalshi bid 0.35).
+- **Sports 0.99+ study reproduces** ($4.44M taker buys within 2 h, net +0.227%), but the time split changes its
+  meaning. Taker BUYS at 0.99+: none at all in the last 15 minutes before resolution (the post-proposal window);
+  $2.44M at 15-30 min (+0.285% net), $1.73M at 30-60 min (+0.476%), $0.27M at 1-2 h (-1.88%, the Eagles-Cowboys
+  reversal, -$6.7K, 90 minutes before resolution). Since NBA games resolve 16-19 minutes after the last play, that
+  buying is the end of the game, not a settlement discount. Only the resting-bid leg exists after the game:
+  $5.32M in 232 markets in the last 15 minutes at +0.101%, $9.23M at 15-30 min at +0.144%, no loser. Also 84 of
+  the 239 tapes hit the 3,000-row cap, so every "last 24 h" total in section 3 is a lower bound taken from the end
+  of the tape.
+- **Referral rate**: docs say 10% / 5%; NOTES.md (X sweep) says affiliates earn 20%+ since 2026-10-23. Not
+  reconciled; probably a separate affiliate deal.
+- **$1 minimum payout**: the docs sentence does not say "per market". The yield model applies it per market; if it
+  is per account per day, the "30% of markets pay nothing" line is too pessimistic for a multi-market account and
+  irrelevant for a one-market one.
+
+### Credibility changes
+
+- Liquidity-rewards farming 4 -> 3: the subsidy is real and is being paid, but the net-of-adverse-selection figure
+  rests on one book snapshot and pools re-set daily; the two newest small entrants are net negative.
+- Ornn pinning stays 3 for the arithmetic and the data source, with the edge itself unproven (see above).
+- Sports post-game discount 3 -> 2 as a strategy: the taker leg is in-play risk, the maker leg is 0.10-0.14% a turn
+  under price-time priority.
+- UMA proposer 2 -> 1: bonds seen by the lab are $250-500, at or above the whole stake, and no reward size is known.
+- Everything else unchanged. Nothing dropped: every cited source exists and says what is claimed.
+
+### Not checked
+
+Combos RFQ and perps rewards beyond the docs text; negative-risk snapshot (taken from NOTES.md again); the V1-V4
+yield and markout scripts were not re-run, only their saved inputs were re-counted; no X or Reddit source exists in
+this catalog to open.

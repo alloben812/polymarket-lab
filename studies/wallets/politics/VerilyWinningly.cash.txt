@@ -1,0 +1,18 @@
+=== VerilyWinningly 0x6276ea490d6ca3a539f1d571a89d53d26e9f9db5 window all: activity rows 15775, first row 2026-09-11
+   usdc by type: {'CONVERSION': 203101, 'MAKER_REBATE': 1180, 'MERGE': 71907, 'REDEEM': 20, 'REWARD': 7709, 'TAKER_REBATE': 151, 'TRADE_BUY': 391739, 'TRADE_SELL': 106631, 'YIELD': 0}  counts: {'TRADE_SELL': 6775, 'REDEEM': 1815, 'CONVERSION': 1438, 'TRADE_BUY': 5053, 'MAKER_REBATE': 59, 'REWARD': 88, 'MERGE': 509, 'TAKER_REBATE': 36, 'YIELD': 2}
+   net cash -1,040 | open positions 196 value now 87 (initial_value field 0) | net cash + value -953
+   API all-time: trade_pnl 29,390 fees -1,723 economic 36,707 unrealized -3562.847841
+     taipei-mayor-election-winner-20260813125857100             buy    30658 sell    6953 conv    19936 merge    3383 redeem       0
+     brazil-presidential-election                               buy    32732 sell    7793 conv    17990 merge    6709 redeem       0
+     serbia-parliamentary-election-winner-2026                  buy    17345 sell    4576 conv     8721 merge    3873 redeem       0
+     next-prime-minister-of-spain-20260625005215443             buy    10877 sell    1672 conv     7995 merge     991 redeem       0
+     bulgaria-presidential-election                             buy     8632 sell    1631 conv     6025 merge     877 redeem       0
+     los-angeles-mayoral-election-117                           buy    10999 sell    2458 conv     5899 merge    2525 redeem       0
+     brazil-presidential-election-first-round-winner            buy     9887 sell    2089 conv     5721 merge    1978 redeem       0
+     brazil-presidential-election-first-round-2nd-place         buy    10088 sell    4346 conv     4752 merge     899 redeem       0
+     pos will-kuo-hsi-win-the-next-taipei-mayor-election-20260813 Yes size         0 avg 0.033 value        6
+     pos will-carles-puigdemont-be-the-next-prime-minister-of-spa Yes size         0 avg 0.017 value        4
+     pos will-cuca-gamarra-be-the-next-prime-minister-of-spain-20 Yes size         0 avg 0.017 value        4
+     pos will-ester-munoz-be-the-next-prime-minister-of-spain-202 Yes size         0 avg 0.017 value        4
+     pos will-pepa-millan-be-the-next-prime-minister-of-spain-202 Yes size         0 avg 0.017 value        4
+     pos will-borja-semper-be-the-next-prime-minister-of-spain-20 Yes size         0 avg 0.017 value        4

@@ -1,0 +1,141 @@
+##### lamyk: fills in 54 cached resolved arena/hle markets (edge = settlement value minus price; fee at 0.05*p*(1-p) on taker fills)
+kind     phase                          side role fills mkts      usd avg_px right$% edge_c/sh fee_c/sh  net_usd
+debut    0 no appearance found          BUY  T        9    9     3791  0.620      94     30.23     0.96     1790
+debut    0 no appearance found          SELL M        3    1      855  0.800       0    -20.00     0.00     -214
+debut    0 no appearance found          SELL T        2    2      679  0.767      53     30.52     0.89      262
+debut    0 no appearance found (after T90) BUY  T        4    3     1489  0.410      94      1.56     0.31       45
+debut    0 no appearance found (after T90) SELL T        2    2       29  0.014     100      1.37     0.07       27
+debut    1 before appearance 1-7d       BUY  M        9    3      683  0.694      73      3.63     0.00       36
+debut    1 before appearance 1-7d       BUY  T        4    3     1315  0.539      40    -17.69     1.13     -460
+debut    1 before appearance 1-7d       SELL M       21    5     1103  0.710       9    -20.87     0.00     -324
+debut    1 before appearance 1-7d       SELL T        9    6     2566  0.483      10    -44.63     0.97    -2424
+debut    1 before appearance <24h       BUY  T        3    3     1121  0.960      95     -1.54     0.19      -20
+debut    1 before appearance >7d        BUY  T       10    8     2658  0.627      90     27.96     0.89     1147
+debut    1 before appearance >7d        SELL M        1    1      189  0.390       0    -61.00     0.00     -296
+debut    1 before appearance >7d        SELL T        2    2      519  0.444       0    -55.60     1.14     -664
+debut    2a 0-60 s after                BUY  T       11   11     4034  0.669     100     33.10     1.01     1935
+debut    2b 1-10 min after              SELL M        4    3      591  0.979       0     -2.06     0.00      -12
+debut    2c 10 min-6 h after            SELL M        8    2     1838  0.951       0     -4.92     0.00      -95
+debut    2c 10 min-6 h after            SELL T        1    1        2  0.005     100      0.50     0.03        2
+debut    2d 6 h+ after                  BUY  M        1    1       39  0.966     100      3.40     0.00        1
+debut    2d 6 h+ after                  BUY  T        2    1     1321  0.963     100      3.68     0.18       48
+monthend m1 >7d before check            BUY  M        4    1       72  0.470       0    -47.00     0.00      -72
+monthend m1 >7d before check            BUY  T        8    7     1987  0.246      76     58.80     0.81     4692
+monthend m1 >7d before check            SELL M        7    3      559  0.413      95     37.22     0.00      504
+monthend m1 >7d before check            SELL T        1    1       80  0.520     100     52.00     1.25       78
+monthend m2 1-7d before check           BUY  M        2    1      147  0.727     100     27.26     0.00       55
+monthend m2 1-7d before check           BUY  T        7    6     1453  0.460     100     53.99     0.99     1674
+monthend m2 1-7d before check           SELL M        1    1      231  0.300       0    -70.00     0.00     -538
+monthend m2 1-7d before check           SELL T        1    1       21  0.898       0    -10.20     0.46       -2
+monthend m4 after T90                   BUY  T        4    3     1640  0.972     100      2.82     0.14       45
+monthend m4 after T90                   SELL M        1    1        4  0.930       0     -7.00     0.00       -0
+monthend m4 after T90                   SELL T        3    3     1709  0.938       0     -3.57     0.18      -68
+net by phase group: debut 0 : 1911 | debut 1 : -3004 | debut 2a: 1935 | debut 2b: -12 | debut 2c: -93 | debut 2d: 49 | monthend m1: 5202 | monthend m2: 1188 | monthend m4: -23
+debut markets with a found appearance: first taker buy falls in phase -> {'1 ': 13, '2a': 11, '2d': 1}
+
+- Will OpenAI’s Astra model debut on the Arena Leaderboard at a score of at least 1480?  [openais-astra-model-text-arena-debut]
+    winner=No check=09-12 16:00 closed=09-12 18:05 appearance=09-11 21:18:09 T90=09-11 21:18:12 market vol=94142; account net=-177 (incomplete)
+    pYes around appearance: -7d:0.68 -48h:0.65 -1h:0.73 -10s:0.73 +60s:0.09 +10m:0.01 +2h:0.01 check-1h:0.05
+    09-05 19:01:31 SELL T No  n=  1 sh=   1095 px=0.166 usd=   182  [1 before appearance 1-7d; -146.3h vs appearance]
+    09-11 21:18:10 BUY  T No  n=  1 sh=   1858 px=0.537 usd=   999  [2a 0-60 s after; +1s vs appearance]
+    09-11 21:34:18 SELL M No  n=  7 sh=   1858 px=0.950 usd=  1765  [2c 10 min-6 h after; +969s vs appearance]
+
+- Will Anthropic have the best Code Arena | WebDev AI at the end of September 2026?  [which-company-has-the-best-code-arena-webdev-ai-model-end-of]
+    winner=Yes check=09-30 16:00 closed=09-30 18:19 appearance=- T90=09-26 02:23:56 market vol=116719; account net=695
+    pYes around check-20h: -7d:0.41 -48h:0.97 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.99 +2h:0.99 check-1h:1.00
+    09-24 02:27:55 BUY  T Yes n=  1 sh=   1474 px=0.485 usd=   715  [m2 1-7d before check; 157.5h before check]
+    09-29 08:50:53 SELL T Yes n=  1 sh=   1474 px=0.971 usd=  1431  [m4 after T90; 31.2h before check]
+
+- Will OpenAI’s Astra model debut on the Arena Leaderboard at a score of at least 1490?  [openais-astra-model-text-arena-debut]
+    winner=No check=09-12 16:00 closed=09-12 18:05 appearance=09-11 21:18:09 T90=09-11 21:19:43 market vol=79274; account net=-2456 (incomplete)
+    pYes around appearance: -7d:0.44 -48h:0.39 -1h:0.48 -10s:0.48 +60s:0.40 +10m:0.03 +2h:0.00 check-1h:0.02
+    09-04 03:32:39 SELL T No  n=  1 sh=   1015 px=0.390 usd=   396  [1 before appearance >7d; -185.8h vs appearance]
+    09-04 03:49:16 SELL M No  n=  1 sh=    485 px=0.390 usd=   189  [1 before appearance >7d; -185.5h vs appearance]
+    09-05 15:41:15 SELL M No  n=  1 sh=    338 px=0.520 usd=   176  [1 before appearance 1-7d; -149.6h vs appearance]
+    09-05 17:46:16 SELL T No  n=  1 sh=    506 px=0.496 usd=   251  [1 before appearance 1-7d; -147.5h vs appearance]
+    09-11 21:18:09 BUY  T No  n=  1 sh=    112 px=0.790 usd=    89  [2a 0-60 s after; +0s vs appearance]
+    09-11 21:23:45 SELL M No  n=  2 sh=     38 px=0.970 usd=    37  [2b 1-10 min after; +336s vs appearance]
+    09-11 21:32:03 SELL M No  n=  1 sh=     74 px=0.970 usd=    72  [2c 10 min-6 h after; +834s vs appearance]
+    ... 1 more hour-groups
+
+- Will Claude Fable 5.2 debut with an HLE-Diamond score of 65% or higher?  [claude-fable-5pt2-hle-diamond-debut-20261110]
+    winner=Yes check=11-12 17:00 closed=11-12 19:01 appearance=- T90=11-11 06:24:57 market vol=10267; account net=177
+    pYes around check-20h: -7d:nan -48h:nan -1h:0.94 -10s:0.94 +60s:0.94 +10m:0.94 +2h:0.94 check-1h:1.00
+    11-10 22:49:58 BUY  T Yes n=  1 sh=    384 px=0.910 usd=   349  [0 no appearance found; 42.2h before check]
+    11-11 07:45:36 BUY  T Yes n=  1 sh=   1545 px=0.902 usd=  1394  [0 no appearance found (after T90); 33.2h before check]
+
+- Will GPT Astra 6.1+ debut with an HLE-Diamond score of 60% or higher?  [gpt-astra-6pt1-hle-diamond-debut-20261020]
+    winner=Yes check=11-18 17:00 closed=11-18 19:02 appearance=- T90=11-11 10:57:12 market vol=32681; account net=18
+    pYes around check-20h: -7d:0.90 -48h:0.94 -1h:0.97 -10s:0.97 +60s:0.97 +10m:0.97 +2h:0.97 check-1h:1.00
+    10-23 01:11:57 BUY  T Yes n=  1 sh=   1068 px=0.774 usd=   827  [0 no appearance found; 639.8h before check]
+    10-23 13:37:12 SELL M Yes n=  1 sh=     20 px=0.800 usd=    16  [0 no appearance found; 627.4h before check]
+    10-23 17:44:17 SELL M Yes n=  1 sh=      0 px=0.800 usd=     0  [0 no appearance found; 623.3h before check]
+    10-24 01:32:18 SELL M Yes n=  1 sh=   1048 px=0.800 usd=   838  [0 no appearance found; 615.5h before check]
+
+- Will any AI model reach a Chatbot Arena score of at least 1540 by December 31?  [chatbot-arena-how-high-will-ai-score-by-december-31]
+    winner=Yes check=10-29 16:00 closed=10-29 07:16 appearance=- T90=10-28 17:11:29 market vol=19536; account net=9
+    pYes around check-20h: -7d:0.53 -48h:0.39 -1h:0.98 -10s:0.99 +60s:0.99 +10m:0.99 +2h:0.98 check-1h:1.00
+    09-03 04:20:33 BUY  T No  n=  1 sh=     49 px=0.779 usd=    38  [m1 >7d before check; 1355.7h before check]
+    10-28 17:22:28 SELL T No  n=  1 sh=     49 px=0.046 usd=     2  [m4 after T90; 22.6h before check]
+    10-28 17:23:16 BUY  T Yes n=  2 sh=   1441 px=0.969 usd=  1396  [m4 after T90; 22.6h before check]
+
+- Will the next GPT Sol model (6.1+) debut at a score of at least 1440 by June 30, 2027?  [next-gpt-sol-model-6pt1-text-arena-debut-20260929193259436]
+    winner=Yes check=10-03 16:00 closed=10-03 18:06 appearance=10-02 16:16:15 T90=10-02 16:16:15 market vol=14121; account net=-693
+    pYes around appearance: -7d:nan -48h:0.34 -1h:0.40 -10s:0.08 +60s:0.98 +10m:0.98 +2h:0.98 check-1h:0.97
+    09-30 07:20:51 BUY  T No  n=  1 sh=    866 px=0.493 usd=   427  [1 before appearance 1-7d; -56.9h vs appearance]
+    09-30 17:06:47 BUY  T No  n=  1 sh=    542 px=0.674 usd=   365  [1 before appearance 1-7d; -47.2h vs appearance]
+    09-30 17:08:12 SELL T No  n=  2 sh=    378 px=0.702 usd=   265  [1 before appearance 1-7d; -47.1h vs appearance]
+    09-30 17:08:15 SELL M No  n=  4 sh=    127 px=0.740 usd=    94  [1 before appearance 1-7d; -47.1h vs appearance]
+    09-30 17:38:03 BUY  M No  n=  3 sh=    246 px=0.690 usd=   170  [1 before appearance 1-7d; -46.6h vs appearance]
+    09-30 18:36:42 BUY  M No  n=  1 sh=     20 px=0.690 usd=    14  [1 before appearance 1-7d; -45.7h vs appearance]
+    10-02 16:08:29 BUY  T No  n=  1 sh=     65 px=0.863 usd=    56  [1 before appearance <24h; -466s vs appearance]
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 35% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:02 appearance=11-20 19:52:28 T90=11-20 19:52:28 market vol=15368; account net=61
+    pYes around appearance: -7d:1.00 -48h:0.81 -1h:0.65 -10s:0.65 +60s:0.94 +10m:0.98 +2h:0.98 check-1h:0.99
+    11-11 16:48:58 BUY  T Yes n=  1 sh=    670 px=0.750 usd=   503  [1 before appearance >7d; -219.1h vs appearance]
+    11-12 18:09:31 BUY  T Yes n=  1 sh=    170 px=0.910 usd=   155  [1 before appearance >7d; -193.7h vs appearance]
+    11-18 05:08:55 SELL M Yes n=  5 sh=    230 px=0.952 usd=   219  [1 before appearance 1-7d; -62.7h vs appearance]
+    11-18 05:08:55 SELL T Yes n=  1 sh=     71 px=0.972 usd=    69  [1 before appearance 1-7d; -62.7h vs appearance]
+    11-18 06:22:16 SELL T Yes n=  1 sh=    247 px=0.832 usd=   206  [1 before appearance 1-7d; -61.5h vs appearance]
+    11-18 06:23:02 SELL M Yes n=  3 sh=    188 px=0.800 usd=   150  [1 before appearance 1-7d; -61.5h vs appearance]
+    11-18 07:04:14 SELL M Yes n=  3 sh=    105 px=0.800 usd=    84  [1 before appearance 1-7d; -60.8h vs appearance]
+
+- Will the next Claude Opus model debut at a score of at least 1520 by December 31, 2026?  [next-claude-opus-model-text-arena-debut-20261231]
+    winner=No check=09-26 16:00 closed=09-26 18:08 appearance=09-26 01:32:38 T90=09-26 14:01:15 market vol=52391; account net=49
+    pYes around appearance: -7d:0.11 -48h:0.16 -1h:0.22 -10s:0.22 +60s:0.05 +10m:0.02 +2h:0.05 check-1h:0.09
+    09-26 16:00:09 BUY  M No  n=  1 sh=     40 px=0.966 usd=    39  [2d 6 h+ after; +14.5h vs appearance]
+    09-26 16:00:09 BUY  T No  n=  2 sh=   1372 px=0.963 usd=  1321  [2d 6 h+ after; +14.5h vs appearance]
+
+- Will Gemini Hydrogen debut at a score of at least 1520 by June 30, 2027?  [gemini-hydrogen-text-arena-debut-20261110]
+    winner=No check=11-13 17:00 closed=11-13 19:01 appearance=11-12 18:20:52 T90=11-12 18:20:52 market vol=6339; account net=29
+    pYes around appearance: -7d:nan -48h:nan -1h:0.35 -10s:0.29 +60s:0.03 +10m:0.02 +2h:0.02 check-1h:0.01
+    11-12 18:15:30 BUY  T No  n=  1 sh=   1030 px=0.970 usd=   999  [1 before appearance <24h; -322s vs appearance]
+
+- Will Meta be the third-best AI lab at the end of September 2026?  [third-best-ai-lab-end-of-september-20260722221654811]
+    winner=No check=09-30 16:00 closed=09-30 18:10 appearance=- T90=09-29 20:28:09 market vol=21807; account net=74
+    pYes around check-20h: -7d:0.87 -48h:0.25 -1h:0.10 -10s:0.10 +60s:0.10 +10m:0.10 +2h:0.02 check-1h:0.02
+    09-12 10:00:34 BUY  T Yes n=  1 sh=    560 px=0.350 usd=   196  [m1 >7d before check; 438.0h before check]
+    09-13 05:14:25 BUY  T Yes n=  1 sh=    738 px=0.335 usd=   247  [m1 >7d before check; 418.8h before check]
+    09-13 05:42:21 SELL M Yes n=  1 sh=   1298 px=0.410 usd=   532  [m1 >7d before check; 418.3h before check]
+
+- Will OpenAI’s Astra model debut on the Arena Leaderboard at a score of at least 1500?  [openais-astra-model-text-arena-debut]
+    winner=No check=09-12 16:00 closed=09-12 18:05 appearance=09-11 21:18:09 T90=09-11 21:18:09 market vol=73231; account net=47
+    pYes around appearance: -7d:0.27 -48h:0.17 -1h:0.39 -10s:0.27 +60s:0.02 +10m:0.02 +2h:0.01 check-1h:0.00
+    09-11 21:18:09 BUY  T No  n=  1 sh=    494 px=0.880 usd=   434  [2a 0-60 s after; +0s vs appearance]
+    09-11 21:26:33 SELL M No  n=  1 sh=    494 px=0.980 usd=   484  [2b 1-10 min after; +504s vs appearance]
+
+- Will Google be the second-best AI lab at the end of September 2026?  [second-best-ai-lab-end-of-september-20260722221500022]
+    winner=Yes check=09-30 16:00 closed=09-30 18:16 appearance=- T90=09-26 12:41:41 market vol=41502; account net=514
+    pYes around check-20h: -7d:0.85 -48h:0.95 -1h:0.93 -10s:0.92 +60s:0.94 +10m:0.94 +2h:0.94 check-1h:0.95
+    09-12 09:58:49 BUY  T Yes n=  1 sh=    824 px=0.418 usd=   344  [m1 >7d before check; 438.0h before check]
+    09-12 14:41:15 SELL M Yes n=  1 sh=      1 px=0.480 usd=     0  [m1 >7d before check; 433.3h before check]
+    09-12 16:52:01 SELL M Yes n=  2 sh=     32 px=0.480 usd=    15  [m1 >7d before check; 431.1h before check]
+    09-12 17:17:19 SELL M Yes n=  2 sh=     22 px=0.480 usd=    11  [m1 >7d before check; 430.7h before check]
+    09-26 01:50:08 BUY  T Yes n=  1 sh=    512 px=0.850 usd=   435  [m2 1-7d before check; 110.2h before check]
+
+- Will Gemini Hydrogen debut with an HLE-Diamond score of 30% or higher?  [gemini-hydrogen-hle-diamond-debut-20261110]
+    winner=Yes check=11-21 17:00 closed=11-21 19:13 appearance=11-20 19:52:28 T90=11-20 19:52:28 market vol=10503; account net=30
+    pYes around appearance: -7d:0.95 -48h:0.88 -1h:0.63 -10s:0.63 +60s:0.99 +10m:0.99 +2h:0.95 check-1h:1.00
+    11-11 16:49:01 BUY  T Yes n=  1 sh=    426 px=0.853 usd=   363  [1 before appearance >7d; -219.1h vs appearance]
+    11-18 05:09:19 SELL T Yes n=  1 sh=    426 px=0.932 usd=   397  [1 before appearance 1-7d; -62.7h vs appearance]

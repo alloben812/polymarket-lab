@@ -1,0 +1,18 @@
+=== glpgb 0x1f5f9fa318fbda8350ac143b4df657287df850fa window all: activity rows 46603, first row 2026-09-10
+   usdc by type: {'CONVERSION': 905919, 'MAKER_REBATE': 1902, 'MERGE': 295085, 'REDEEM': 642, 'REWARD': 9515, 'SPLIT': 78573, 'TAKER_REBATE': 355, 'TRADE_BUY': 1325797, 'TRADE_SELL': 188726, 'YIELD': 5}  counts: {'REDEEM': 3481, 'TRADE_SELL': 20713, 'CONVERSION': 4414, 'TRADE_BUY': 16278, 'MERGE': 1553, 'REWARD': 78, 'MAKER_REBATE': 43, 'TAKER_REBATE': 30, 'YIELD': 9, 'SPLIT': 4}
+   net cash -2,227 | open positions 2244 value now 1,173 (initial_value field 0) | net cash + value -1,054
+   API all-time: trade_pnl 82,505 fees -4,461 economic 89,821 unrealized -17260.905807
+     taipei-mayor-election-winner-20260813125857100             buy    48283 sell    4084 conv    36645 merge    7133 redeem       0
+     which-party-will-win-the-senate-in-2026                    buy    40770 sell    4091 conv    30336 merge    6204 redeem       0
+     worlds-2026-winner                                         buy    33081 sell    2765 conv    29213 merge    1093 redeem       0
+     texas-senate-election-winner                               buy    37222 sell    4278 conv    27414 merge    5383 redeem       0
+     fed-decision-in-december-20260729232808632                 buy    33080 sell    4014 conv    24968 merge    4127 redeem       0
+     kansas-senate-election-winner                              buy    27972 sell    1271 conv    23870 merge    2760 redeem       0
+     florida-governor-winner-2026                               buy    30449 sell    4185 conv    23632 merge    2476 redeem       0
+     fed-decision-in-october-20260617190323537                  buy    60802 sell   10926 conv    23472 merge   25854 redeem       0
+     pos will-psoe-win-the-most-seats-in-navarre-in-the-2026-span No size         0 avg 0.838 value       99
+     pos will-two-people-dissent-the-december-fed-decision-202607 No size         0 avg 0.887 value       54
+     pos will-elon-musks-net-worth-be-between-900b-and-1pt00t-on- No size         0 avg 0.930 value       33
+     pos will-ko-chih-en-win-the-next-kaohsiung-mayor-election-20 No size         0 avg 0.790 value       32
+     pos will-57-59-knesset-members-vote-for-new-israeli-governme Yes size         0 avg 0.091 value       25
+     pos will-cheng-chao-fang-win-the-next-hsinchu-county-magistr No size         0 avg 0.340 value       20

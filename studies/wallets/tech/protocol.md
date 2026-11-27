@@ -31,3 +31,15 @@ jump in >= 80% of sampled markets; "market maker" -> both buy and sell fills as 
 
 Rules: read-only; unit of analysis is the market; block timestamps are 2-3 s after the match; profile numbers are
 before fees; `feeSchedule` reliable only after 2026-11-20. Every variant run is counted in README.md.
+
+## Addendum (written 2026-11-27 before running follower.py)
+
+Rule F ("slow follower", suggested by the KimchiCapital / lamyk pattern; two variants only, D = 10 min and D = 60 min):
+for every debut event with a detected first sweep t0 (race.py definition) and every cached sibling market, look at the
+last tape price at t0 + D. If one side is priced in [0.80, 0.97), the entry is the FIRST later taker buy of that side
+at a price in [0.80, 0.97) before the 12:00 ET check (a price that was demonstrably available because someone took
+it); one unit of 100 shares per market, hold to resolution, fee 0.05*p*(1-p). No entry if no such trade exists.
+Report per market and per event (the event is the unit: sibling thresholds are correlated), earlier half of the events
+and later half separately. Known weakness fixed in advance: t0 is defined from the tape using the eventual winner
+(look-ahead in the trigger, not in the side choice); the sample is the markets the seven accounts traded, not the
+whole universe. A positive result is a reason to rebuild it on the full universe, not a finding.

@@ -1,0 +1,24 @@
+##### melonmanm: fills in 2 cached resolved arena/hle markets (edge = settlement value minus price; fee at 0.05*p*(1-p) on taker fills)
+kind     phase                          side role fills mkts      usd avg_px right$% edge_c/sh fee_c/sh  net_usd
+monthend m2 1-7d before check           BUY  M        7    2      202  0.543      97     26.26     0.00       98
+monthend m2 1-7d before check           BUY  T        6    2      185  0.601      10    -52.76     1.12     -166
+net by phase group: monthend m2: -68
+debut markets with a found appearance: first taker buy falls in phase -> {}
+
+- Will any AI model reach 1520 Overall Arena Score by September 30, 2026?  [will-any-ai-model-reach-overall-arena-score-by-september-30]
+    winner=Yes check=09-17 16:00 closed=09-18 00:31 appearance=- T90=09-15 23:30:57 market vol=262277; account net=-65
+    pYes around check-20h: -7d:0.95 -48h:0.74 -1h:1.00 -10s:1.00 +60s:1.00 +10m:1.00 +2h:1.00 check-1h:1.00
+    09-15 10:32:27 BUY  M No  n=  1 sh=     50 px=0.111 usd=     6  [m2 1-7d before check; 53.5h before check]
+    09-15 11:32:28 BUY  M No  n=  1 sh=     23 px=0.056 usd=     1  [m2 1-7d before check; 52.5h before check]
+    09-15 11:35:54 BUY  M Yes n=  1 sh=     50 px=0.872 usd=    44  [m2 1-7d before check; 52.4h before check]
+    09-15 11:58:39 BUY  T Yes n=  1 sh=     23 px=0.823 usd=    19  [m2 1-7d before check; 52.0h before check]
+    09-15 17:15:55 BUY  T No  n=  2 sh=    150 px=0.601 usd=    90  [m2 1-7d before check; 46.7h before check]
+    09-15 19:11:16 BUY  T No  n=  1 sh=     50 px=0.718 usd=    36  [m2 1-7d before check; 44.8h before check]
+    09-15 23:17:01 BUY  T No  n=  1 sh=     35 px=0.620 usd=    22  [m2 1-7d before check; 40.7h before check]
+    ... 2 more hour-groups
+
+- Will any AI model reach a Chatbot Arena score of at least 1520 by December 31?  [chatbot-arena-how-high-will-ai-score-by-december-31]
+    winner=Yes check=09-17 16:00 closed=09-18 00:31 appearance=- T90=09-15 23:31:34 market vol=61261; account net=-3
+    pYes around check-20h: -7d:0.95 -48h:0.81 -1h:1.00 -10s:1.00 +60s:1.00 +10m:1.00 +2h:1.00 check-1h:1.00
+    09-15 16:47:46 BUY  M Yes n=  1 sh=     50 px=0.681 usd=    34  [m2 1-7d before check; 47.2h before check]
+    09-15 17:15:42 BUY  T No  n=  1 sh=     50 px=0.370 usd=    18  [m2 1-7d before check; 46.7h before check]

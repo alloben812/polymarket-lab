@@ -1,0 +1,3446 @@
+[
+{
+"name": "0x77958accec3edfc6ea0194e8fb954647456b9a17",
+"wallet": "0x77958accec3edfc6ea0194e8fb954647456b9a17",
+"n": 23,
+"span_h": 5.9,
+"usd": 331696,
+"mk": 5,
+"medp": 0.98,
+"buy": 0.02,
+"top": "fin-other 98%, non-fin 2%",
+"kept": 260358.635536,
+"reb": 1345.5111,
+"months": [
+[
+"2026-09",
+-1790.6320070000002
+],
+[
+"2026-10",
+-3136.1152809999985
+],
+[
+"2026-11",
+306112.460239
+]
+],
+"fam": {
+"non-fin": 6000,
+"fin-other": 325696
+},
+"ex": {
+"non-fin": "Kimberly Powell announced resignation or removal by November 30, 2026?",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by December 31, 2026?"
+}
+},
+{
+"name": "Hauchn",
+"wallet": "0xf0ca28d5b0141f0a8e7b251dea80fd881cb166ed",
+"n": 102,
+"span_h": 163.6,
+"usd": 27169,
+"mk": 20,
+"medp": 0.466,
+"buy": 0.66,
+"top": "fin-ipo/cap 69%, non-fin 25%, fin-hit 6%",
+"kept": 465952.530347,
+"reb": 2413.779,
+"months": [
+[
+"2026-09",
+-9031.99716900001
+],
+[
+"2026-10",
+104275.04700800002
+],
+[
+"2026-11",
+131113.61880499998
+]
+],
+"fam": {
+"fin-ipo/cap": 18824,
+"non-fin": 6689,
+"fin-hit": 1656
+},
+"ex": {
+"fin-ipo/cap": "Will Alphabet be the second-largest company in the world by market cap on November 30, 2026?",
+"non-fin": "AI bubble burst by June 30, 2027?",
+"fin-hit": "Will Micron Technology, Inc. (MU) hit (HIGH) $720 Week of November 23 2026?"
+}
+},
+{
+"name": "xtxpleasecallme",
+"wallet": "0xad5353afe30c2da57709e2704ef3ccdcf67eef24",
+"n": 5000,
+"span_h": 25.4,
+"usd": 107651,
+"mk": 2251,
+"medp": 0.45,
+"buy": 1.0,
+"top": "non-fin 90%, crypto-other 3%, fin-other 2%, fin-ipo/cap 2%, fin-hit 2%",
+"kept": 386804.765677,
+"reb": 190336.8649,
+"months": [
+[
+"2026-09",
+46837.54106599999
+],
+[
+"2026-10",
+194013.992602
+],
+[
+"2026-11",
+21774.45569699997
+]
+],
+"fam": {
+"non-fin": 96581,
+"fin-hit": 2112,
+"fin-other": 2641,
+"fin-ipo/cap": 2444,
+"crypto-other": 3742,
+"fin-earnings": 107,
+"fin-close": 23
+},
+"ex": {
+"non-fin": "Will PP win the most seats in Guadalajara in the 2026 Spanish general election?",
+"fin-hit": "Will \"Avengers: Doomsday\" reach $1B domestic box office between January 16 and January 20?",
+"fin-other": "Will ChatGPT be #1 Free App in the US Apple App Store on November 27?",
+"fin-ipo/cap": "Will Apple\u2019s market capitalization be between $5.00T and $5.50T at the end of 2026?",
+"crypto-other": "Will Bitcoin dip to $57,500 in November?",
+"fin-earnings": "Will NVIDIA (NVDA) Q4 Data Center revenue be above $127B?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 18, 2026?"
+}
+},
+{
+"name": "0xEC1Fe51724FeFc0b238514E88837dbcaA07Bd325-1772737525030",
+"wallet": "0xec1fe51724fefc0b238514e88837dbcaa07bd325",
+"n": 93,
+"span_h": 114.4,
+"usd": 77017,
+"mk": 27,
+"medp": 0.14,
+"buy": 1.0,
+"top": "fin-other 54%, non-fin 46%",
+"kept": 190233.782678,
+"reb": 225.0292,
+"months": [
+[
+"2026-09",
+0.0
+],
+[
+"2026-10",
+0.0
+],
+[
+"2026-11",
+176906.173393
+]
+],
+"fam": {
+"non-fin": 35537,
+"fin-other": 41480
+},
+"ex": {
+"non-fin": "Will the Fed increase interest rates by 25 bps after the January 2027 meeting?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?"
+}
+},
+{
+"name": "BreakTheBank",
+"wallet": "0xf0318c32136c2db7fec88b84869aee6a1106c80c",
+"n": 4099,
+"span_h": 152.5,
+"usd": 11478990,
+"mk": 92,
+"medp": 0.49,
+"buy": 1.0,
+"top": "non-fin 100%, fin-other 0%",
+"kept": 6047440.123183,
+"reb": 731683.1887,
+"months": [
+[
+"2026-09",
+2274802.7676910004
+],
+[
+"2026-10",
+7068500.611589001
+],
+[
+"2026-11",
+-5343814.483128001
+]
+],
+"fam": {
+"non-fin": 11470227,
+"fin-other": 8763
+},
+"ex": {
+"non-fin": "Spread: Bills (-3.5)",
+"fin-other": "Counter-Strike: NIP vs Liquid (BO3) - PGL Major Singapore Stage 1"
+}
+},
+{
+"name": "uma003",
+"wallet": "0x53c48faa2373f597b693567f79c3782c6ce7740b",
+"n": 0,
+"span_h": 0,
+"usd": 0,
+"mk": 0,
+"medp": null,
+"buy": null,
+"top": "",
+"kept": 29493.86806,
+"reb": 8504.4592,
+"months": [
+[
+"2026-09",
+11782.15956
+],
+[
+"2026-10",
+4839.2774079999945
+],
+[
+"2026-11",
+141466.949035
+]
+],
+"fam": {},
+"ex": {}
+},
+{
+"name": "WarriorPooh",
+"wallet": "0x853c37a959a5791b849e3f3225c7f5963746bd03",
+"n": 240,
+"span_h": 146.6,
+"usd": 120455,
+"mk": 21,
+"medp": 0.251,
+"buy": 0.3,
+"top": "fin-other 86%, non-fin 13%, fin-hit 2%",
+"kept": 347389.036359,
+"reb": 5454.135621,
+"months": [
+[
+"2026-09",
+2983.320829000004
+],
+[
+"2026-10",
+6969.976655000006
+],
+[
+"2026-11",
+170304.488611
+]
+],
+"fam": {
+"non-fin": 15077,
+"fin-hit": 1862,
+"fin-other": 103516
+},
+"ex": {
+"non-fin": "Israel x Iran ceasefire continues through November 30?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $800B by December 31?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?"
+}
+},
+{
+"name": "borntoolate.eth",
+"wallet": "0x14c32680ffc318892e0d019181e4161aa34cdf68",
+"n": 0,
+"span_h": 0,
+"usd": 0,
+"mk": 0,
+"medp": null,
+"buy": null,
+"top": "",
+"kept": 207340.196162,
+"reb": 4495.9226,
+"months": [
+[
+"2026-09",
+-2488.109052999993
+],
+[
+"2026-10",
+-640.8325860000041
+],
+[
+"2026-11",
+55103.490672000014
+]
+],
+"fam": {},
+"ex": {}
+},
+{
+"name": "Bertapotamous",
+"wallet": "0x134a63b764ac7b008356e8db1857db94e6b09e42",
+"n": 26,
+"span_h": 72.0,
+"usd": 67783,
+"mk": 2,
+"medp": 0.882,
+"buy": 0.97,
+"top": "fin-other 100%",
+"kept": 222293.401839,
+"reb": 9639.342676,
+"months": [
+[
+"2026-09",
+1681.9784309999668
+],
+[
+"2026-10",
+-141527.130208
+],
+[
+"2026-11",
+57815.295417999994
+]
+],
+"fam": {
+"fin-other": 67783
+},
+"ex": {
+"fin-other": "Will Inde Navarrette be the #1 searched actor on Google this year?"
+}
+},
+{
+"name": "paperclip-maxxer",
+"wallet": "0x05f6cb63d4ffdfaecd7ad8acd0765b6f6a5a25a1",
+"n": 175,
+"span_h": 154.8,
+"usd": 345084,
+"mk": 15,
+"medp": 0.12,
+"buy": 0.93,
+"top": "non-fin 85%, fin-other 14%, fin-ipo/cap 1%",
+"kept": 434055.756143,
+"reb": 6792.1848,
+"months": [
+[
+"2026-09",
+299220.02528999996
+],
+[
+"2026-10",
+-97017.96066699998
+],
+[
+"2026-11",
+151002.93209299998
+]
+],
+"fam": {
+"non-fin": 293063,
+"fin-other": 48146,
+"fin-ipo/cap": 3874
+},
+"ex": {
+"non-fin": "Will the Fed increase interest rates by 50+ bps after the December 2026 meeting?",
+"fin-other": "Will the US federal government take a stake in NVIDIA Corporation?",
+"fin-ipo/cap": "Will NVIDIA be the largest company in the world by market cap on December 31?"
+}
+},
+{
+"name": "grasstoucher69",
+"wallet": "0x982a77e75498fa134607f598c861b8de9d0c6851",
+"n": 3949,
+"span_h": 138.4,
+"usd": 127828,
+"mk": 566,
+"medp": 0.47,
+"buy": 0.95,
+"top": "fin-hit 62%, fin-close 17%, fin-updown 7%, crypto-other 6%, non-fin 5%",
+"kept": 303601.010535,
+"reb": 19117.627699999997,
+"months": [
+[
+"2026-09",
+35892.507125000004
+],
+[
+"2026-10",
+80956.434208
+],
+[
+"2026-11",
+121681.47980600002
+]
+],
+"fam": {
+"fin-hit": 79500,
+"crypto-other": 8275,
+"fin-close": 21770,
+"fin-updown": 9514,
+"non-fin": 6431,
+"fin-other": 2339
+},
+"ex": {
+"fin-hit": "Will Silver (XAGUSD) hit (LOW) $38 in November?",
+"crypto-other": "Will Bitcoin reach $62,000 on November 25?",
+"fin-close": "Will NVIDIA (NVDA) close above $140 end of November?",
+"fin-updown": "Silver (XAGUSD) Up or Down on November 25?",
+"non-fin": "AI bubble burst in 2026?",
+"fin-other": "Will NVIDIA (NVDA) finish week of November 23 above $150?"
+}
+},
+{
+"name": "BrotherObama",
+"wallet": "0x8a8685a792c184e5c2ee8c7d4d4baba7c2c94998",
+"n": 483,
+"span_h": 153.6,
+"usd": 806943,
+"mk": 38,
+"medp": 0.49,
+"buy": 0.86,
+"top": "non-fin 66%, fin-other 34%",
+"kept": 337724.249415,
+"reb": 160997.8219,
+"months": [
+[
+"2026-09",
+-200092.644221
+],
+[
+"2026-10",
+-58552.394190000006
+],
+[
+"2026-11",
+361613.201444
+]
+],
+"fam": {
+"non-fin": 531905,
+"fin-other": 275039
+},
+"ex": {
+"non-fin": "Map Handicap: 100T (-1.5) vs M80 (+1.5)",
+"fin-other": "Counter-Strike: Imperial vs Wildcard (BO3) - PGL Major Singapore Stage 1"
+}
+},
+{
+"name": "dromedaryy",
+"wallet": "0x6575759174ad221bba9947bc3f18750ec769b198",
+"n": 160,
+"span_h": 127.4,
+"usd": 89459,
+"mk": 12,
+"medp": 0.035,
+"buy": 1.0,
+"top": "non-fin 65%, fin-other 35%, fin-hit 0%",
+"kept": 798857.263649,
+"reb": 20062.220500000003,
+"months": [
+[
+"2026-09",
+27799.614535
+],
+[
+"2026-10",
+415968.51437999995
+],
+[
+"2026-11",
+359650.826145
+]
+],
+"fam": {
+"non-fin": 58264,
+"fin-hit": 195,
+"fin-other": 31000
+},
+"ex": {
+"non-fin": "Kings vs. Warriors",
+"fin-hit": "Will none of these coins hit a $1B FDV?",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "Samael-of-Rome",
+"wallet": "0x3cc379741b2ab96d61aab5942a1a711a89f1fb0b",
+"n": 110,
+"span_h": 144.7,
+"usd": 83493,
+"mk": 11,
+"medp": 0.25,
+"buy": 0.63,
+"top": "fin-other 87%, non-fin 13%",
+"kept": 126063.127572,
+"reb": 1215.7951,
+"months": [
+[
+"2026-09",
+892.946324
+],
+[
+"2026-10",
+34635.675768
+],
+[
+"2026-11",
+90534.50547999999
+]
+],
+"fam": {
+"non-fin": 11255,
+"fin-other": 72238
+},
+"ex": {
+"non-fin": "Russia x Ukraine energy ceasefire agreement by November 30, 2026?",
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?"
+}
+},
+{
+"name": "Kettle",
+"wallet": "0xb4f2310271b208f35b543bde10522db44cf67851",
+"n": 0,
+"span_h": 0,
+"usd": 0,
+"mk": 0,
+"medp": null,
+"buy": null,
+"top": "",
+"kept": 348573.957549,
+"reb": 4236.8525,
+"months": [
+[
+"2026-09",
+15625.630715999985
+],
+[
+"2026-10",
+-5589.26169699998
+],
+[
+"2026-11",
+195230.93568899998
+]
+],
+"fam": {},
+"ex": {}
+},
+{
+"name": "0x2b670A311561DcAF741D8155451774D3Fa7fb814-1778467735876",
+"wallet": "0x2b670a311561dcaf741d8155451774d3fa7fb814",
+"n": 190,
+"span_h": 161.9,
+"usd": 47288,
+"mk": 47,
+"medp": 0.29,
+"buy": 0.93,
+"top": "non-fin 68%, fin-close 13%, fin-hit 12%, fin-other 7%, fin-ipo/cap 1%",
+"kept": 120564.592397,
+"reb": 4543.300472,
+"months": [
+[
+"2026-09",
+13265.951351000003
+],
+[
+"2026-10",
+913.7494309999965
+],
+[
+"2026-11",
+77591.754347
+]
+],
+"fam": {
+"non-fin": 32040,
+"fin-close": 5964,
+"fin-earnings": 168,
+"fin-other": 3095,
+"fin-hit": 5748,
+"fin-ipo/cap": 273
+},
+"ex": {
+"non-fin": "Will the Yang-Mills existence and mass gap problem be the next Millennium Prize Problem solved by AI?",
+"fin-close": "Will Anthropic close below its IPO price by November 25, 2026?",
+"fin-earnings": "US confirms DeepSeek used Blackwell chips by December 31, 2026?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by November 30, 2026?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $1.75T by November 30?",
+"fin-ipo/cap": "Will OpenAI not IPO by December 31, 2027?"
+}
+},
+{
+"name": "Melody626",
+"wallet": "0xecaa8806a9a05049d7d5260a33dc924220e377a9",
+"n": 129,
+"span_h": 163.8,
+"usd": 86117,
+"mk": 16,
+"medp": 0.35,
+"buy": 1.0,
+"top": "non-fin 70%, fin-hit 29%, fin-close 1%",
+"kept": -189012.724708,
+"reb": 39426.5891,
+"months": [
+[
+"2026-09",
+-96248.481723
+],
+[
+"2026-10",
+34760.536081
+],
+[
+"2026-11",
+-134425.912458
+]
+],
+"fam": {
+"non-fin": 60704,
+"fin-hit": 24831,
+"fin-close": 583
+},
+"ex": {
+"non-fin": "Will Hsu Hsin-ying win the next Hsinchu County Magistrate election?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $800B by December 31?",
+"fin-close": "Will Anthropic close below its IPO price by November 27, 2026?"
+}
+},
+{
+"name": "S991",
+"wallet": "0x096f5aa775c6f9904508625a5c3836ffedb9194d",
+"n": 103,
+"span_h": 60.3,
+"usd": 7769,
+"mk": 6,
+"medp": 0.21,
+"buy": 0.94,
+"top": "non-fin 79%, fin-updown 21%",
+"kept": 67742.575195,
+"reb": 207.2538,
+"months": [
+[
+"2026-09",
+3393.9888060000003
+],
+[
+"2026-10",
+-2453.976803
+],
+[
+"2026-11",
+66560.614753
+]
+],
+"fam": {
+"non-fin": 6122,
+"fin-updown": 1647
+},
+"ex": {
+"non-fin": "Will Elon Musk post 240-259 tweets from November 20 to November 27, 2026?",
+"fin-updown": "Gold Up or Down - November 27, 6:30AM-6:45AM ET"
+}
+},
+{
+"name": "xuanaaak",
+"wallet": "0xd9953accef93cf17bfe74fbd9ffdf5045b5e2b51",
+"n": 34,
+"span_h": 0.2,
+"usd": 62820,
+"mk": 3,
+"medp": 0.986,
+"buy": 0.0,
+"top": "fin-other 100%",
+"kept": -102645.631204,
+"reb": 1114.1409,
+"months": [
+[
+"2026-09",
+0.0
+],
+[
+"2026-10",
+0.0
+],
+[
+"2026-11",
+57951.23893600001
+]
+],
+"fam": {
+"fin-other": 62820
+},
+"ex": {
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "Tokor",
+"wallet": "0xa19cbababc312f9df185e49d7004c249ed1ade6b",
+"n": 2451,
+"span_h": 167.8,
+"usd": 572539,
+"mk": 380,
+"medp": 0.721,
+"buy": 1.0,
+"top": "crypto-other 80%, fin-hit 17%, crypto-updown 2%, fin-ipo/cap 1%, fin-close 1%",
+"kept": 1346937.659896,
+"reb": 23045.9989,
+"months": [
+[
+"2026-09",
+76195.120408
+],
+[
+"2026-10",
+713445.6700019999
+],
+[
+"2026-11",
+454079.33764299995
+]
+],
+"fam": {
+"fin-hit": 94619,
+"crypto-other": 455286,
+"fin-updown": 316,
+"crypto-updown": 10810,
+"fin-ipo/cap": 6818,
+"non-fin": 40,
+"fin-close": 4649
+},
+"ex": {
+"fin-hit": "Will WTI Crude Oil (WTI) hit (LOW) $65 in November?",
+"crypto-other": "Will Solana dip to $70 in November?",
+"fin-updown": "Gold (XAUUSD) Up or Down on November 27?",
+"crypto-updown": "Solana Up or Down on November 27?",
+"fin-ipo/cap": "Anthropic: Above IPO Price at End of First Month?",
+"non-fin": "Mavericks vs. Nuggets",
+"fin-close": "Will Anthropic close below its IPO price by November 27, 2026?"
+}
+},
+{
+"name": "TableDataFormat",
+"wallet": "0xb1ca909e848cc24ec4e220ce1c453bc290c51705",
+"n": 84,
+"span_h": 154.8,
+"usd": 112809,
+"mk": 46,
+"medp": 0.756,
+"buy": 0.89,
+"top": "non-fin 95%, fin-hit 3%, fin-other 2%, fin-ipo/cap 1%",
+"kept": 309263.745523,
+"reb": 46737.0623,
+"months": [
+[
+"2026-09",
+-25943.67756599997
+],
+[
+"2026-10",
+33141.59095699998
+],
+[
+"2026-11",
+6153.117039000033
+]
+],
+"fam": {
+"fin-ipo/cap": 1227,
+"non-fin": 106721,
+"fin-other": 1997,
+"fin-hit": 2865
+},
+"ex": {
+"fin-ipo/cap": "Will Discord\u2019s market cap be less than $5B at market close on IPO day by December 31, 2027?",
+"non-fin": "Will Mario Delgado Carrillo win the 2027 Colima Governor Election?",
+"fin-other": "Will NVIDIA resume China AI chip shipments by March 31, 2027?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $700B by December 31?"
+}
+},
+{
+"name": "Parz1vaI",
+"wallet": "0xb10047d6a254b2ebb306d7a7d13bf59171ab6461",
+"n": 223,
+"span_h": 167.5,
+"usd": 194928,
+"mk": 37,
+"medp": 0.73,
+"buy": 0.53,
+"top": "non-fin 77%, fin-other 14%, fin-ipo/cap 9%",
+"kept": 973045.344368,
+"reb": 40252.4182,
+"months": [
+[
+"2026-09",
+22575.566064000013
+],
+[
+"2026-10",
+50736.900674999924
+],
+[
+"2026-11",
+137769.47032099997
+]
+],
+"fam": {
+"non-fin": 151051,
+"fin-other": 26879,
+"fin-ipo/cap": 16998
+},
+"ex": {
+"non-fin": "Kimberly Powell announced resignation or removal by December 31, 2026?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?",
+"fin-ipo/cap": "Will Discord not IPO by December 31, 2027?"
+}
+},
+{
+"name": "0x21F701A6d8febFd948F899114f2B9D9a8ef7e19F-1760280914378",
+"wallet": "0x21f701a6d8febfd948f899114f2b9d9a8ef7e19f",
+"n": 949,
+"span_h": 29.3,
+"usd": 48573,
+"mk": 3,
+"medp": 0.99,
+"buy": 0.01,
+"top": "fin-other 100%, non-fin 0%",
+"kept": 51919.258992,
+"reb": 354.7281,
+"months": [
+[
+"2026-09",
+-184.26712300000008
+],
+[
+"2026-10",
+5740.3281719999995
+],
+[
+"2026-11",
+44250.889788
+]
+],
+"fam": {
+"fin-other": 48535,
+"non-fin": 38
+},
+"ex": {
+"fin-other": "Will Jensen Huang rejoin NVIDIA by December 31, 2026?",
+"non-fin": "Will the U.S. invade a Latin American country in 2026?"
+}
+},
+{
+"name": "CoinTrick",
+"wallet": "0x731a241767938bb23d1b2fac4c9cd2f3cea9033f",
+"n": 3102,
+"span_h": 167.9,
+"usd": 2384147,
+"mk": 986,
+"medp": 0.999,
+"buy": 0.99,
+"top": "non-fin 53%, fin-other 19%, crypto-other 15%, fin-hit 7%, fin-close 6%",
+"kept": 313936.838694,
+"reb": 3566.1778,
+"months": [
+[
+"2026-09",
+36888.6786
+],
+[
+"2026-10",
+182583.65321200003
+],
+[
+"2026-11",
+24922.363667999976
+]
+],
+"fam": {
+"non-fin": 1262844,
+"fin-hit": 174567,
+"fin-other": 456396,
+"crypto-other": 353852,
+"fin-updown": 2325,
+"fin-close": 131499,
+"fin-earnings": 1601,
+"fin-ipo/cap": 1062
+},
+"ex": {
+"non-fin": "Florianopolis: Igor Ribeiro Marcondes vs Guido Justo",
+"fin-hit": "Will SK hynix (SKHY) hit (HIGH) $117 Week of November 23 2026?",
+"fin-other": "Will US Dollar Index (DXY) hit (HIGH) 104.00 in November?",
+"crypto-other": "Will Bitcoin dip to $59,000 on November 27?",
+"fin-updown": "Nikkei 225 (NIK) Up or Down on November 27?",
+"fin-close": "S&P 500 (SPY) closes above $720 on November 25?",
+"fin-earnings": "Will Dell (DELL) beat quarterly earnings?",
+"fin-ipo/cap": "Will 1B to 1.25B Anthropic shares trade on IPO day?"
+}
+},
+{
+"name": "0xc023bee917480fed315d186a7b223f33c09a0fe8-1793567845085",
+"wallet": "0xc023bee917480fed315d186a7b223f33c09a0fe8",
+"n": 407,
+"span_h": 166.9,
+"usd": 1009,
+"mk": 139,
+"medp": 0.017,
+"buy": 0.0,
+"top": "non-fin 88%, fin-other 12%, fin-ipo/cap 0%",
+"kept": 23143.517317,
+"reb": 0.0,
+"months": [
+[
+"2026-11",
+23012.112664
+]
+],
+"fam": {
+"non-fin": 883,
+"fin-other": 126,
+"fin-ipo/cap": 0
+},
+"ex": {
+"non-fin": "Will PP win 132-137 seats in the 2026 Spanish general election?",
+"fin-other": "Will Rockstar release GTA VI on PC in February 2027 (ET)?",
+"fin-ipo/cap": "Will Microsoft be the largest company in the world by market cap on November 30, 2026?"
+}
+},
+{
+"name": "TruongMyLan",
+"wallet": "0x69788e136500902559a2fb21883ab9baacbd08d8",
+"n": 121,
+"span_h": 158.8,
+"usd": 56745,
+"mk": 19,
+"medp": 0.71,
+"buy": 0.79,
+"top": "non-fin 81%, fin-earnings 19%",
+"kept": 136945.25736,
+"reb": 5066.8552,
+"months": [
+[
+"2026-09",
+-9945.500361999992
+],
+[
+"2026-10",
+-7299.708190000005
+],
+[
+"2026-11",
+64190.09422599999
+]
+],
+"fam": {
+"non-fin": 45707,
+"fin-earnings": 11038
+},
+"ex": {
+"non-fin": "Will AI solve the Riemann Hypothesis in 2026?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $22B?"
+}
+},
+{
+"name": "chriszyy3",
+"wallet": "0x052f4191cd324a348835a846d34df5b0061e53fb",
+"n": 63,
+"span_h": 165.3,
+"usd": 31680,
+"mk": 4,
+"medp": 0.998,
+"buy": 0.82,
+"top": "non-fin 67%, fin-hit 33%",
+"kept": 78769.908244,
+"reb": 1091.7926,
+"months": [
+[
+"2026-09",
+9455.718438000004
+],
+[
+"2026-10",
+9485.048137999991
+],
+[
+"2026-11",
+11363.298843000011
+]
+],
+"fam": {
+"fin-hit": 10477,
+"non-fin": 21203
+},
+"ex": {
+"fin-hit": "Will WTI Crude Oil (WTI) hit (HIGH) $160 in November?",
+"non-fin": "Will MiniMax have the best Chinese AI model at the end of November 2026?"
+}
+},
+{
+"name": "0xaa281355e0747a4358c56c076587eda05fe3da01-1792681059600",
+"wallet": "0xaa281355e0747a4358c56c076587eda05fe3da01",
+"n": 92,
+"span_h": 81.8,
+"usd": 101803,
+"mk": 33,
+"medp": 0.06,
+"buy": 0.7,
+"top": "non-fin 99%, fin-other 1%",
+"kept": 30239.912154,
+"reb": 244.9707,
+"months": [
+[
+"2026-11",
+30239.912154
+]
+],
+"fam": {
+"non-fin": 101081,
+"fin-other": 722
+},
+"ex": {
+"non-fin": "Spurs vs. Kings",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "tsihkodiives",
+"wallet": "0x6db983ff1cbc85249e64e6ccd101aaa613ba4ab5",
+"n": 665,
+"span_h": 165.9,
+"usd": 177997,
+"mk": 33,
+"medp": 0.22,
+"buy": 0.49,
+"top": "crypto-other 52%, fin-other 26%, non-fin 22%",
+"kept": 54227.671285,
+"reb": 18971.9699,
+"months": [
+[
+"2026-09",
+-89903.341464
+],
+[
+"2026-10",
+-50164.422011999995
+],
+[
+"2026-11",
+27059.126740999996
+]
+],
+"fam": {
+"crypto-other": 92377,
+"non-fin": 39206,
+"fin-other": 46415
+},
+"ex": {
+"crypto-other": "Will Bitcoin dip to $52,500 in November?",
+"non-fin": "Will Pedro S\u00e1nchez be the next Prime Minister of Spain?",
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?"
+}
+},
+{
+"name": "C03B",
+"wallet": "0x40604cb1f958c03bea0b18aa43e4cb0d62f33ec3",
+"n": 255,
+"span_h": 167.1,
+"usd": 302072,
+"mk": 45,
+"medp": 0.992,
+"buy": 0.75,
+"top": "fin-other 70%, fin-hit 24%, fin-close 5%, non-fin 0%, crypto-other 0%",
+"kept": 345383.060866,
+"reb": 9932.11968,
+"months": [
+[
+"2026-09",
+21160.67809999996
+],
+[
+"2026-10",
+13633.229525000032
+],
+[
+"2026-11",
+13963.364983999985
+]
+],
+"fam": {
+"fin-hit": 72604,
+"fin-other": 211108,
+"non-fin": 1242,
+"fin-close": 16371,
+"fin-updown": 28,
+"crypto-other": 719
+},
+"ex": {
+"fin-hit": "Will WTI Crude Oil (WTI) hit (HIGH) $105 in November?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?",
+"non-fin": "Will Anthropic\u2019s valuation be between $1.00T and $1.25T at the end of November 2026?",
+"fin-close": "Will Anthropic close below its IPO price by November 25, 2026?",
+"fin-updown": "Natural Gas Up or Down - November 25, 1:45AM-2:00AM ET",
+"crypto-other": "Will the price of Bitcoin be above $60,000 on November 21?"
+}
+},
+{
+"name": "luck00004",
+"wallet": "0xc6e956068048c1cf98d8f0b3a495edc9da130741",
+"n": 28,
+"span_h": 70.6,
+"usd": 74255,
+"mk": 4,
+"medp": 0.389,
+"buy": 0.24,
+"top": "fin-hit 97%, fin-ipo/cap 3%",
+"kept": -284339.052485,
+"reb": 12919.6846,
+"months": [
+[
+"2026-09",
+-41811.857095000014
+],
+[
+"2026-10",
+3034.442696000042
+],
+[
+"2026-11",
+-3844.760749000008
+]
+],
+"fam": {
+"fin-hit": 71921,
+"fin-ipo/cap": 2334
+},
+"ex": {
+"fin-hit": "Will Anthropic's valuation hit (LOW) $800B by December 31?",
+"fin-ipo/cap": "Will Nvidia\u2019s market capitalization be less than $4.00T at the end of 2026?"
+}
+},
+{
+"name": "0x1F85EB9C455c5BDEF5D96C2739076678c7157B02-1778811447702",
+"wallet": "0x1f85eb9c455c5bdef5d96c2739076678c7157b02",
+"n": 5000,
+"span_h": 135.8,
+"usd": 37568,
+"mk": 1495,
+"medp": 0.679,
+"buy": 0.97,
+"top": "non-fin 94%, fin-other 4%, fin-ipo/cap 2%, crypto-other 1%, fin-earnings 0%",
+"kept": 14818.485196,
+"reb": 1817.8581,
+"months": [
+[
+"2026-09",
+9348.16914
+],
+[
+"2026-10",
+10652.852489
+],
+[
+"2026-11",
+-12208.697204000002
+]
+],
+"fam": {
+"non-fin": 35226,
+"fin-ipo/cap": 660,
+"fin-other": 1417,
+"fin-earnings": 65,
+"crypto-other": 199
+},
+"ex": {
+"non-fin": "Will the lowest temperature in Seoul (Incheon) be 6\u00b0C on November 27?",
+"fin-ipo/cap": "Will Nvidia\u2019s market capitalization be between $4.00T and $4.50T at the end of 2026?",
+"fin-other": "Will Google have the best AI model at the end of December 2026?",
+"fin-earnings": "Will DeepSeek have the best AI model at the end of December 2026?",
+"crypto-other": "Will the price of Bitcoin be between $58,000 and $60,000 on November 24?"
+}
+},
+{
+"name": "HornyBibi",
+"wallet": "0x708dba576d798c24215e267413503269fe39ea78",
+"n": 52,
+"span_h": 100.0,
+"usd": 8583,
+"mk": 14,
+"medp": 0.25,
+"buy": 0.42,
+"top": "non-fin 86%, fin-hit 14%",
+"kept": 59472.956933,
+"reb": 449.560472,
+"months": [
+[
+"2026-09",
+2142.3425769999994
+],
+[
+"2026-10",
+2584.8858330000003
+],
+[
+"2026-11",
+28418.613417
+]
+],
+"fam": {
+"non-fin": 7338,
+"fin-hit": 1244
+},
+"ex": {
+"non-fin": "Will a turkey audibly gobble during the Thanksgiving Turkey Pardon on November 24?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $1.0T by December 31?"
+}
+},
+{
+"name": "LlamaLoco0000",
+"wallet": "0x93fb8127a1b21a112b11af936361225df0563e4a",
+"n": 110,
+"span_h": 160.0,
+"usd": 246692,
+"mk": 14,
+"medp": 0.284,
+"buy": 0.44,
+"top": "non-fin 55%, crypto-other 45%",
+"kept": -39618.206421,
+"reb": 16023.5617,
+"months": [
+[
+"2026-09",
+-55294.760061999994
+],
+[
+"2026-10",
+-94777.72000999999
+],
+[
+"2026-11",
+22139.388694999994
+]
+],
+"fam": {
+"non-fin": 136284,
+"crypto-other": 110408
+},
+"ex": {
+"non-fin": "Will Jensen Huang be arrested by December 31, 2026?",
+"crypto-other": "Will Ethereum dip to $1,500 by December 31, 2026?"
+}
+},
+{
+"name": "neutralwave23",
+"wallet": "0x5b6331e7ff0831a3fe2ed12004747db1a9c911a4",
+"n": 5000,
+"span_h": 44.8,
+"usd": 377035,
+"mk": 1848,
+"medp": 0.464,
+"buy": 0.83,
+"top": "non-fin 78%, fin-other 10%, crypto-updown 10%, crypto-other 2%, fin-earnings 0%",
+"kept": -3445926.21081,
+"reb": 29759.6583,
+"months": [
+[
+"2026-09",
+-370092.51214200025
+],
+[
+"2026-10",
+-426623.9285819996
+],
+[
+"2026-11",
+-411338.8045010003
+]
+],
+"fam": {
+"crypto-updown": 36600,
+"non-fin": 293164,
+"fin-other": 38854,
+"crypto-other": 7066,
+"fin-earnings": 1208,
+"fin-ipo/cap": 21,
+"fin-hit": 21,
+"fin-updown": 100
+},
+"ex": {
+"crypto-updown": "Solana Up or Down - November 27, 11:00AM-11:05AM ET",
+"non-fin": "Monastir 2 (Doubles): Campos/Forcano vs Mansouri/Neuchrist",
+"fin-other": "Counter-Strike: Prestige vs SINQU (BO3) - Elisa Open Suomi Playoffs",
+"crypto-other": "Will the price of Bitcoin be above $60,000 on November 27?",
+"fin-earnings": "Venezia FC vs. Bologna FC 1909: O/U 0.5 AND FC Lokomotiv 1929 Sofia vs. PFC Slavia Sofia: O/U 4.5 AND FC Groningen vs. Willem II Tilburg: O/U 1.5 AND FC Universitatea Cluj vs. Sepsi OSK: O/U 4.5 AND FC Petrolul Ploie\u015fti vs. FC Arge\u0219 Pite\u0219ti: O/U 4.5 AND Levante UD vs. Real Racing Club: O/U 1.5 AND S\u00f8nderjyske Fodbold vs. Br\u00f8ndby IF: O/U 1.5 AND Stade Brestois 29 vs. Paris FC: O/U 1.5",
+"fin-ipo/cap": "Will Jensen Huang be named NVIDIA's next CEO and Nvidia's market cap be below $4T at the end of 2026?",
+"fin-hit": "Will WTI Crude Oil (WTI) hit (HIGH) $90 in November?",
+"fin-updown": "S&P 500 (SPX) Up or Down on November 25?"
+}
+},
+{
+"name": "0x59253f9a0Cdf254fa4518FD3aAe2541f9e0AB194-1730780830728",
+"wallet": "0x59253f9a0cdf254fa4518fd3aae2541f9e0ab194",
+"n": 45,
+"span_h": 27.1,
+"usd": 4292,
+"mk": 2,
+"medp": 0.06,
+"buy": 1.0,
+"top": "fin-other 100%",
+"kept": 6618.058241,
+"reb": 429.98990000000003,
+"months": [
+[
+"2026-09",
+-122.82603200000449
+],
+[
+"2026-10",
+1473.8452470000047
+],
+[
+"2026-11",
+45113.773177999996
+]
+],
+"fam": {
+"fin-other": 4292
+},
+"ex": {
+"fin-other": "Will Jensen Huang rejoin NVIDIA by December 31, 2026?"
+}
+},
+{
+"name": "pmrev",
+"wallet": "0x7b8c5eadb49be4452148aa31fd98738766c01556",
+"n": 1,
+"span_h": 0.0,
+"usd": 41974,
+"mk": 1,
+"medp": 0.959,
+"buy": 0.0,
+"top": "fin-other 100%",
+"kept": 14721.317677,
+"reb": 1033.8896,
+"months": [
+[
+"2026-09",
+-14260.089323999999
+],
+[
+"2026-10",
+399.38911499999995
+],
+[
+"2026-11",
+27026.198424
+]
+],
+"fam": {
+"fin-other": 41974
+},
+"ex": {
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?"
+}
+},
+{
+"name": "kimma97",
+"wallet": "0x1d16b887703318582321c3c96687f565919ee798",
+"n": 32,
+"span_h": 113.6,
+"usd": 39570,
+"mk": 4,
+"medp": 0.032,
+"buy": 0.07,
+"top": "fin-other 88%, non-fin 12%",
+"kept": 6061.579493,
+"reb": 24.2648,
+"months": [
+[
+"2026-09",
+-2370.686378000002
+],
+[
+"2026-10",
+-3424.4630279999983
+],
+[
+"2026-11",
+30800.764003
+]
+],
+"fam": {
+"non-fin": 4877,
+"fin-other": 34693
+},
+"ex": {
+"non-fin": "Will the Fed increase interest rates by 50+ bps after the December 2026 meeting?",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "occasionalAwareness",
+"wallet": "0x8a4c788f043023b8b28a762216d037e9f148532b",
+"n": 139,
+"span_h": 152.8,
+"usd": 518935,
+"mk": 35,
+"medp": 0.54,
+"buy": 0.49,
+"top": "non-fin 98%, fin-ipo/cap 2%, fin-hit 0%",
+"kept": 1198914.571435,
+"reb": 79260.1363,
+"months": [
+[
+"2026-09",
+17908.443843999878
+],
+[
+"2026-10",
+10100.729351000162
+],
+[
+"2026-11",
+-20301.10831000004
+]
+],
+"fam": {
+"non-fin": 509758,
+"fin-ipo/cap": 8047,
+"fin-hit": 1130
+},
+"ex": {
+"non-fin": "Will the average Ornn H100 rental price in December 2026 be above $3.10?",
+"fin-ipo/cap": "Will SpaceX have the highest IPO Market Cap 2026?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $700B by December 31?"
+}
+},
+{
+"name": "imnice",
+"wallet": "0x99518fa0d201e7542ea2b852809da5a5c8d811bd",
+"n": 405,
+"span_h": 113.3,
+"usd": 386614,
+"mk": 23,
+"medp": 0.47,
+"buy": 0.75,
+"top": "non-fin 100%",
+"kept": 94427.00769,
+"reb": 1171.7012,
+"months": [
+[
+"2026-09",
+-2010.528276000001
+],
+[
+"2026-10",
+-13435.818156000001
+],
+[
+"2026-11",
+88721.055093
+]
+],
+"fam": {
+"non-fin": 386614
+},
+"ex": {
+"non-fin": "Will it be confirmed that a software or configuration error caused the FAA's nationwide ground stop on November 13?"
+}
+},
+{
+"name": "paddaa",
+"wallet": "0x60a92c8620846d81f5ea17b0564e0d4b7c545a71",
+"n": 1748,
+"span_h": 164.4,
+"usd": 1238157,
+"mk": 142,
+"medp": 0.41,
+"buy": 0.5,
+"top": "non-fin 96%, fin-other 4%",
+"kept": 416070.69687,
+"reb": 18617.213782,
+"months": [
+[
+"2026-09",
+-21237.84664200002
+],
+[
+"2026-10",
+68467.96600299998
+],
+[
+"2026-11",
+100449.97690800001
+]
+],
+"fam": {
+"non-fin": 1187349,
+"fin-other": 50808
+},
+"ex": {
+"non-fin": "Will Delcy Rodr\u00edguez be the leader of Venezuela end of 2026?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?"
+}
+},
+{
+"name": "TOWERCAPITAL",
+"wallet": "0xafe65d1671a61dfaab2b463257450ec7f1fe8192",
+"n": 1376,
+"span_h": 163.8,
+"usd": 91932,
+"mk": 57,
+"medp": 0.08,
+"buy": 0.32,
+"top": "crypto-other 63%, fin-other 32%, non-fin 5%",
+"kept": 56828.244243,
+"reb": 3013.8036,
+"months": [
+[
+"2026-09",
+20309.664649
+],
+[
+"2026-10",
+-10411.895621
+],
+[
+"2026-11",
+29919.235055
+]
+],
+"fam": {
+"crypto-other": 58102,
+"fin-other": 29025,
+"non-fin": 4805
+},
+"ex": {
+"crypto-other": "Will the price of Bitcoin be above $60,000 on November 27?",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?",
+"non-fin": "Jaguars vs. Giants AND Spread: Bengals (-6.5) AND Spread: Broncos (-10.5) AND Vikings vs. 49ers"
+}
+},
+{
+"name": "Stonktrader",
+"wallet": "0x73e35ce0b7e36ef3ce29ebd12b30b28007383239",
+"n": 67,
+"span_h": 154.0,
+"usd": 60459,
+"mk": 36,
+"medp": 0.91,
+"buy": 0.96,
+"top": "non-fin 52%, fin-other 47%, fin-hit 2%",
+"kept": 98409.507696,
+"reb": 1068.4123,
+"months": [
+[
+"2026-09",
+10389.95406
+],
+[
+"2026-10",
+59614.414636
+],
+[
+"2026-11",
+2053.197060999999
+]
+],
+"fam": {
+"fin-hit": 1098,
+"non-fin": 31183,
+"fin-other": 28178
+},
+"ex": {
+"fin-hit": "Will US gas hit $3.64 (High) the week of November 23?",
+"non-fin": "Will \"Encore\" be played first at the 2027 Big Game halftime show?",
+"fin-other": "Will \"GTA VI\" have a Metascore of at least 90?"
+}
+},
+{
+"name": "superstonksbro",
+"wallet": "0x969fae0a3a93778adc42178f72c612ed8c4e4d55",
+"n": 1212,
+"span_h": 168.0,
+"usd": 77852,
+"mk": 169,
+"medp": 0.42,
+"buy": 1.0,
+"top": "fin-hit 69%, fin-close 21%, fin-other 10%, fin-updown 0%",
+"kept": 333568.443568,
+"reb": 37899.566300000006,
+"months": [
+[
+"2026-09",
+19144.64003400004
+],
+[
+"2026-10",
+-38578.22516600002
+],
+[
+"2026-11",
+23380.92720199999
+]
+],
+"fam": {
+"fin-hit": 53940,
+"fin-close": 16367,
+"fin-updown": 110,
+"fin-other": 7436
+},
+"ex": {
+"fin-hit": "Will NVIDIA (NVDA) hit (HIGH) $176 in November?",
+"fin-close": "Will Apple (AAPL) close above $340 end of November?",
+"fin-updown": "Robinhood (HOOD) Up or Down on November 27?",
+"fin-other": "Will Tesla (TSLA) finish week of November 23 above $355?"
+}
+},
+{
+"name": "ponydsb",
+"wallet": "0xe8dc200c0e3c71d0d96957d5488d2426e0cc3e53",
+"n": 1160,
+"span_h": 167.3,
+"usd": 190794,
+"mk": 204,
+"medp": 0.419,
+"buy": 0.52,
+"top": "non-fin 75%, fin-other 17%, crypto-other 6%, fin-hit 1%, fin-ipo/cap 1%",
+"kept": 39925.402282,
+"reb": 1002.5533,
+"months": [
+[
+"2026-09",
+-22.56155
+],
+[
+"2026-10",
+1355.3449079999998
+],
+[
+"2026-11",
+39203.65743
+]
+],
+"fam": {
+"fin-other": 32822,
+"non-fin": 143136,
+"crypto-other": 11263,
+"fin-hit": 2354,
+"fin-earnings": 43,
+"fin-ipo/cap": 1176
+},
+"ex": {
+"fin-other": "Will Jensen Huang rank in Google\u2019s Top 5 Most Searched People of 2026?",
+"non-fin": "Will \"The Hunger Games: Sunrise on the Reaping\" 2nd Weekend Box Office be between 50m and 55m?",
+"crypto-other": "Will Bitcoin reach $65,000 in November?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $1.75T by December 31?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $22.5B?",
+"fin-ipo/cap": "Will OpenAI's IPO valuation be between $1.25T and $1.5T?"
+}
+},
+{
+"name": "Jensen4ever",
+"wallet": "0xce9b0768247ab298a71c27dfda0aa190fa1f9d9c",
+"n": 117,
+"span_h": 165.3,
+"usd": 101656,
+"mk": 71,
+"medp": 0.74,
+"buy": 0.56,
+"top": "non-fin 58%, fin-other 42%",
+"kept": 7148.331571,
+"reb": 226.9191,
+"months": [
+[
+"2026-09",
+-91.893943
+],
+[
+"2026-10",
+-5667.921574
+],
+[
+"2026-11",
+12908.147088
+]
+],
+"fam": {
+"non-fin": 59264,
+"fin-other": 42392
+},
+"ex": {
+"non-fin": "Counter-Strike: M80 vs 100 Thieves - Map 2 Winner",
+"fin-other": "Dota 2: PARIVISION vs Team Liquid (BO3) - BLAST Slam Playoffs"
+}
+},
+{
+"name": "Shirtybonds",
+"wallet": "0x672f13d830d3617efea21c2ec7f4bda5d2c27fcc",
+"n": 220,
+"span_h": 33.7,
+"usd": 3569435,
+"mk": 1,
+"medp": 0.999,
+"buy": 1.0,
+"top": "fin-other 100%",
+"kept": 28484.699383,
+"reb": 82.69789999999999,
+"months": [
+[
+"2026-09",
+0.0
+],
+[
+"2026-10",
+0.0
+],
+[
+"2026-11",
+3573.00792
+]
+],
+"fam": {
+"fin-other": 3569435
+},
+"ex": {
+"fin-other": "New NVIDIA CEO named by December 31, 2026?"
+}
+},
+{
+"name": "033033033",
+"wallet": "0xd1c769317bd15de7768a70d0214cf0bbcc531d2b",
+"n": 278,
+"span_h": 164.4,
+"usd": 3457175,
+"mk": 21,
+"medp": 0.999,
+"buy": 1.0,
+"top": "fin-other 85%, crypto-other 7%, non-fin 7%, fin-earnings 0%",
+"kept": 328400.335287,
+"reb": 579.5707,
+"months": [
+[
+"2026-09",
+16455.782866000023
+],
+[
+"2026-10",
+10982.676546999952
+],
+[
+"2026-11",
+14036.188886000018
+]
+],
+"fam": {
+"fin-other": 2953551,
+"crypto-other": 253948,
+"fin-earnings": 3304,
+"non-fin": 246370
+},
+"ex": {
+"fin-other": "Arkansas-Pine Bluff Golden Lions vs. Missouri Tigers",
+"crypto-other": "Will Solana reach $180 in November?",
+"fin-earnings": "Jeffrey Epstein confirmed to be alive before 2027?",
+"non-fin": "Will \"Mo Bamba\" by Sheck Wes be on the radio in GTA VI at launch?"
+}
+},
+{
+"name": "pvc975",
+"wallet": "0xa16a1302ca05463f30faebeb5c045767fde233a1",
+"n": 5000,
+"span_h": 111.6,
+"usd": 5035317,
+"mk": 502,
+"medp": 0.999,
+"buy": 0.88,
+"top": "non-fin 63%, fin-other 37%",
+"kept": 344142.851455,
+"reb": 4893.1327,
+"months": [
+[
+"2026-09",
+63271.86916899998
+],
+[
+"2026-10",
+26267.26966500003
+],
+[
+"2026-11",
+15120.795617999975
+]
+],
+"fam": {
+"fin-other": 1848911,
+"non-fin": 3186406
+},
+"ex": {
+"fin-other": "Counter-Strike: M80 vs 100 Thieves (BO3) - PGL Major Singapore Stage 1",
+"non-fin": "Map 2 Rounds Handicap: 100 Thieves (-3.5) vs M80 (+3.5)"
+}
+},
+{
+"name": "pleasewinthis",
+"wallet": "0x9a05adbecf41908cecd66103e565cffe74e394e2",
+"n": 235,
+"span_h": 166.7,
+"usd": 153519,
+"mk": 33,
+"medp": 0.31,
+"buy": 0.54,
+"top": "non-fin 99%, fin-other 1%, fin-hit 0%",
+"kept": 6025.809821,
+"reb": 11900.0155,
+"months": [
+[
+"2026-10",
+440.821209
+],
+[
+"2026-11",
+5709.823594
+]
+],
+"fam": {
+"non-fin": 152268,
+"fin-other": 1240,
+"fin-hit": 11
+},
+"ex": {
+"non-fin": "Will the average Ornn H200 rental price in February 2027 be above $6.00?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?",
+"fin-hit": "Will Kai or Speed reach $1M in GTA VI by November 30?"
+}
+},
+{
+"name": "Lolakis",
+"wallet": "0x401ee31e9ebf9ab9f6315cd95faca5f950436fc9",
+"n": 568,
+"span_h": 167.7,
+"usd": 653011,
+"mk": 78,
+"medp": 0.591,
+"buy": 0.56,
+"top": "non-fin 85%, fin-other 14%, fin-earnings 0%",
+"kept": 195866.591142,
+"reb": 73398.0974,
+"months": [
+[
+"2026-09",
+21804.355467
+],
+[
+"2026-10",
+48712.884577000004
+],
+[
+"2026-11",
+52043.44906799999
+]
+],
+"fam": {
+"non-fin": 557620,
+"fin-other": 92157,
+"fin-earnings": 3235
+},
+"ex": {
+"non-fin": "Kimberly Powell announced resignation or removal by December 31, 2026?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $21B?"
+}
+},
+{
+"name": "balthazar",
+"wallet": "0x5a218c7ad04135830a45c41aaed7294df7809318",
+"n": 5000,
+"span_h": 66.2,
+"usd": 299227,
+"mk": 1785,
+"medp": 0.76,
+"buy": 0.97,
+"top": "non-fin 87%, crypto-other 7%, fin-other 3%, fin-earnings 2%, fin-ipo/cap 1%",
+"kept": 1202669.299868,
+"reb": 83540.584,
+"months": [
+[
+"2026-09",
+418076.25286400015
+],
+[
+"2026-10",
+-54100.21582600009
+],
+[
+"2026-11",
+23217.602737999987
+]
+],
+"fam": {
+"non-fin": 259575,
+"crypto-other": 19460,
+"fin-earnings": 4806,
+"fin-other": 10176,
+"fin-ipo/cap": 4094,
+"fin-hit": 911,
+"fin-close": 207
+},
+"ex": {
+"non-fin": "Will the highest temperature in London be 5\u00b0C on November 27?",
+"crypto-other": "Will the price of Bitcoin be between $56,000 and $58,000 on November 27?",
+"fin-earnings": "Will \"Steps\" be the top US Netflix movie this week?",
+"fin-other": "Will Kuomintang (KMT) win the most mayoral elections in the 2026 Taiwan local elections?",
+"fin-ipo/cap": "Will Jensen Huang's resignation or removal be announced and Nvidia's market cap be below $4T at the end of 2026?",
+"fin-hit": "Will OpenAI's valuation hit (HIGH) $1.75T by December 31?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 11, 2026?"
+}
+},
+{
+"name": "328.400.fund",
+"wallet": "0xefb70577dc01cee93601053a2d18d419827a0870",
+"n": 402,
+"span_h": 165.7,
+"usd": 557674,
+"mk": 62,
+"medp": 0.48,
+"buy": 0.65,
+"top": "non-fin 87%, fin-other 13%",
+"kept": 48444.484732,
+"reb": 5366.1021,
+"months": [
+[
+"2026-11",
+48444.484732
+]
+],
+"fam": {
+"non-fin": 482594,
+"fin-other": 75080
+},
+"ex": {
+"non-fin": "Will it be confirmed that a software or configuration error caused the FAA's nationwide ground stop on November 13?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?"
+}
+},
+{
+"name": "AntEating",
+"wallet": "0x88d9152ebea621540ac6ea9a90e118d7c6f935c7",
+"n": 1041,
+"span_h": 167.1,
+"usd": 786250,
+"mk": 302,
+"medp": 0.496,
+"buy": 0.73,
+"top": "non-fin 99%, fin-other 1%",
+"kept": 60368.024867,
+"reb": 79474.905,
+"months": [
+[
+"2026-09",
+8305.268464
+],
+[
+"2026-10",
+17072.377278
+],
+[
+"2026-11",
+35223.933915
+]
+],
+"fam": {
+"non-fin": 780499,
+"fin-other": 5751
+},
+"ex": {
+"non-fin": "Will the Fed hike-hike-pause in the next three decisions (Dec-Jan-Mar)?",
+"fin-other": "Will Matt Murphy be the next CEO of NVIDIA?"
+}
+},
+{
+"name": "Cb94C437EA5e6f088c6c0C143c592ab8EFBed",
+"wallet": "0x122cb94c437ea5e6f088c6c0c143c592ab8efbed",
+"n": 5000,
+"span_h": 44.6,
+"usd": 207573,
+"mk": 510,
+"medp": 0.56,
+"buy": 0.53,
+"top": "non-fin 96%, fin-ipo/cap 2%, crypto-other 1%, fin-other 1%, fin-earnings 0%",
+"kept": 220121.355738,
+"reb": 30715.6951,
+"months": [
+[
+"2026-09",
+29223.562757000007
+],
+[
+"2026-10",
+19236.607690999983
+],
+[
+"2026-11",
+30863.985917000013
+]
+],
+"fam": {
+"non-fin": 200182,
+"fin-other": 2008,
+"fin-ipo/cap": 3211,
+"fin-earnings": 90,
+"crypto-other": 2082
+},
+"ex": {
+"non-fin": "Will Elon Musk post <40 tweets from November 26 to November 28, 2026?",
+"fin-other": "Will the Democratic Progressive Party (DPP) win the most head of local government elections in the 2026 Taiwan local elections?",
+"fin-ipo/cap": "Will NVIDIA be the second-largest company in the world by market cap on November 30, 2026?",
+"fin-earnings": "Will \"Steps\" be the top US Netflix movie this week?",
+"crypto-other": "Will the price of Ethereum be between $1,700 and $1,800 on November 27?"
+}
+},
+{
+"name": "cigarettes",
+"wallet": "0xd218e474776403a330142299f7796e8ba32eb5c9",
+"n": 5000,
+"span_h": 26.4,
+"usd": 409281,
+"mk": 1345,
+"medp": 0.59,
+"buy": 1.0,
+"top": "non-fin 92%, fin-other 7%, fin-ipo/cap 1%, crypto-other 0%, fin-hit 0%",
+"kept": 92976.050127,
+"reb": 266795.0856,
+"months": [
+[
+"2026-09",
+84734.353572
+],
+[
+"2026-10",
+-95505.19769600002
+],
+[
+"2026-11",
+4229.646849000012
+]
+],
+"fam": {
+"non-fin": 376463,
+"fin-other": 27236,
+"crypto-other": 1970,
+"fin-ipo/cap": 2633,
+"fin-earnings": 122,
+"fin-hit": 858
+},
+"ex": {
+"non-fin": "International League T20: Sharjah Warriors vs Dubai Capitals",
+"fin-other": "Vermont Catamounts vs. George Mason Patriots (W)",
+"crypto-other": "Will the price of Bitcoin be above $56,000 on November 29?",
+"fin-ipo/cap": "Will Jensen Huang's resignation or removal be announced and Nvidia's market cap be below $4T at the end of 2026?",
+"fin-earnings": "Will \"Steps\" be the top US Netflix movie this week?",
+"fin-hit": "Will Cash Cat be the first to hit a $1B FDV?"
+}
+},
+{
+"name": "Haradwaith",
+"wallet": "0x21ffd2b7a212a6f277ed3eca1a9f8efcbca90d71",
+"n": 5000,
+"span_h": 23.2,
+"usd": 215051,
+"mk": 1342,
+"medp": 0.54,
+"buy": 0.58,
+"top": "non-fin 88%, crypto-other 6%, fin-other 2%, fin-hit 2%, fin-ipo/cap 2%",
+"kept": 493834.866982,
+"reb": 986903.8689,
+"months": [
+[
+"2026-09",
+126193.96506100002
+],
+[
+"2026-10",
+-18111.762591000006
+],
+[
+"2026-11",
+29765.199458999967
+]
+],
+"fam": {
+"non-fin": 189500,
+"crypto-other": 12459,
+"fin-hit": 4227,
+"fin-other": 4887,
+"fin-ipo/cap": 3279,
+"fin-earnings": 370,
+"fin-updown": 220,
+"crypto-updown": 110
+},
+"ex": {
+"non-fin": "No change in Bank of England\u2019s interest rates after December 2026 meeting?",
+"crypto-other": "Will the price of Bitcoin be above $68,000 on November 28?",
+"fin-hit": "Will Apple (AAPL) hit (LOW) $304 in December?",
+"fin-other": "Will ChatGPT be #1 Free App in the US Apple App Store on November 27?",
+"fin-ipo/cap": "Will Meta\u2019s market capitalization be between $1.75T and $1.875T at the end of December 2026?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $22.5B?",
+"fin-updown": "S&P 500 (SPX) Up or Down on November 27?",
+"crypto-updown": "Bitcoin Up or Down on November 27?"
+}
+},
+{
+"name": "betwick",
+"wallet": "0xc851cd9bee7d262afd78674f861f9f576a12cd2a",
+"n": 89,
+"span_h": 152.1,
+"usd": 108850,
+"mk": 10,
+"medp": 0.081,
+"buy": 0.13,
+"top": "non-fin 93%, fin-other 7%",
+"kept": 626220.652076,
+"reb": 19484.0989,
+"months": [
+[
+"2026-09",
+7066.684687000001
+],
+[
+"2026-10",
+-82962.76767899992
+],
+[
+"2026-11",
+68219.57202199998
+]
+],
+"fam": {
+"non-fin": 100809,
+"fin-other": 8041
+},
+"ex": {
+"non-fin": "US x Iran Effective Ceasefire by November 22?",
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?"
+}
+},
+{
+"name": "anoin123",
+"wallet": "0x96489abcb9f583d6835c8ef95ffc923d05a86825",
+"n": 1990,
+"span_h": 167.5,
+"usd": 865804,
+"mk": 133,
+"medp": 0.75,
+"buy": 0.99,
+"top": "non-fin 93%, fin-other 7%",
+"kept": -4646380.230766,
+"reb": 132148.0918,
+"months": [
+[
+"2026-09",
+-59499.396653999574
+],
+[
+"2026-10",
+856005.7078630002
+],
+[
+"2026-11",
+-229167.0572860008
+]
+],
+"fam": {
+"non-fin": 804538,
+"fin-other": 61266
+},
+"ex": {
+"non-fin": "Bank of England increases interest rates by 25 bps after December 2026 meeting?",
+"fin-other": "Will the Democratic Progressive Party (DPP) win the most head of local government elections in the 2026 Taiwan local elections?"
+}
+},
+{
+"name": "HoshinoAI",
+"wallet": "0x5bcd012df905647463ab8e21b4f13a60cf07fa31",
+"n": 5000,
+"span_h": 123.5,
+"usd": 299407,
+"mk": 508,
+"medp": 0.429,
+"buy": 0.57,
+"top": "non-fin 73%, fin-other 24%, fin-hit 2%, fin-ipo/cap 1%, fin-close 1%",
+"kept": 16545.726434,
+"reb": 47714.267,
+"months": [
+[
+"2026-09",
+0.0
+],
+[
+"2026-10",
+0.0
+],
+[
+"2026-11",
+6082.451903000001
+]
+],
+"fam": {
+"non-fin": 217612,
+"fin-other": 70468,
+"fin-close": 2009,
+"fin-ipo/cap": 2633,
+"fin-hit": 6362,
+"fin-earnings": 323
+},
+"ex": {
+"non-fin": "Marco Rubio Republican nomination odds leader on March 31?",
+"fin-other": "Will the Democratic Progressive Party (DPP) win the most head of local government elections in the 2026 Taiwan local elections?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 4, 2026?",
+"fin-ipo/cap": "Will Jensen Huang's resignation or removal be announced and Nvidia's market cap be above $4T at the end of 2026?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $1.575T by November 30?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $22.5B?"
+}
+},
+{
+"name": "pleaseletmealone",
+"wallet": "0xcb8deb73fbdd20b366d51c91e6e2c80365368d08",
+"n": 5000,
+"span_h": 31.0,
+"usd": 69133,
+"mk": 267,
+"medp": 0.006,
+"buy": 0.16,
+"top": "non-fin 94%, fin-other 5%, fin-ipo/cap 1%, fin-earnings 0%",
+"kept": 194156.682436,
+"reb": 1919.1336999999999,
+"months": [
+[
+"2026-11",
+193731.300966
+]
+],
+"fam": {
+"non-fin": 64798,
+"fin-other": 3351,
+"fin-ipo/cap": 983,
+"fin-earnings": 1
+},
+"ex": {
+"non-fin": "Will Glenn Youngkin win the 2028 Republican presidential nomination?",
+"fin-other": "Will Jensen Huang be the #1 searched person on Google this year?",
+"fin-ipo/cap": "Will Apple be the largest company in the world by market cap on December 31?",
+"fin-earnings": "Will DeepSeek have the best AI model at the end of December 2026?"
+}
+},
+{
+"name": "hfv",
+"wallet": "0xe102b1da4367d827b48c47ea91fadf6997ff71df",
+"n": 5000,
+"span_h": 114.4,
+"usd": 622683,
+"mk": 1260,
+"medp": 0.49,
+"buy": 0.89,
+"top": "non-fin 93%, fin-other 4%, fin-ipo/cap 2%, fin-hit 1%, fin-close 1%",
+"kept": 133425.026504,
+"reb": 394589.9089,
+"months": [
+[
+"2026-09",
+7479.944554
+],
+[
+"2026-10",
+104831.95590300001
+],
+[
+"2026-11",
+19050.081327000007
+]
+],
+"fam": {
+"fin-close": 4402,
+"non-fin": 578060,
+"fin-hit": 4496,
+"fin-other": 25575,
+"fin-ipo/cap": 9893,
+"fin-earnings": 255,
+"crypto-other": 1
+},
+"ex": {
+"fin-close": "S&P 500 (SPY) closes above $715 on November 27?",
+"non-fin": "Will PP win the most seats in Guadalajara in the 2026 Spanish general election?",
+"fin-hit": "Will NVIDIA (NVDA) hit (HIGH) $168 in November?",
+"fin-other": "Will The Odyssey be the #1 searched movie on Google this year?",
+"fin-ipo/cap": "Will Lambda IPO by December 31, 2027?",
+"fin-earnings": "DeepSeek added to the Entity List by December 31, 2026?",
+"crypto-other": "Will XRP hit $2 by December 31, 2026?"
+}
+},
+{
+"name": "ArmageddonRewardsBilly",
+"wallet": "0xc8ab97a9089a9ff7e6ef0688e6e591a066946418",
+"n": 4375,
+"span_h": 167.8,
+"usd": 1392625,
+"mk": 500,
+"medp": 0.86,
+"buy": 0.61,
+"top": "non-fin 76%, fin-other 21%, fin-hit 2%, fin-close 1%, fin-ipo/cap 1%",
+"kept": 1630475.222902,
+"reb": 1296744.3304,
+"months": [
+[
+"2026-09",
+633136.18076
+],
+[
+"2026-10",
+22173.172574999975
+],
+[
+"2026-11",
+49286.6446130001
+]
+],
+"fam": {
+"non-fin": 1052830,
+"fin-other": 291830,
+"fin-close": 11673,
+"fin-earnings": 996,
+"fin-hit": 27521,
+"fin-ipo/cap": 7775
+},
+"ex": {
+"non-fin": "Will Hsieh Lung-chieh win the next Tainan Mayor election?",
+"fin-other": "Will Kuomintang (KMT) win the most head of local government elections in the 2026 Taiwan local elections?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 4, 2026?",
+"fin-earnings": "Will Anthropic (ANT) Q4 revenue be above $21.5B?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $1.75T by December 31?",
+"fin-ipo/cap": "Will Nscale IPO by June 30, 2027?"
+}
+},
+{
+"name": "thanksforplayin",
+"wallet": "0x38d812aff0b79f3bf5da2a477f780bcc163eea7c",
+"n": 1229,
+"span_h": 121.5,
+"usd": 84737,
+"mk": 264,
+"medp": 0.516,
+"buy": 0.66,
+"top": "fin-close 35%, fin-hit 31%, fin-updown 16%, fin-ipo/cap 11%, fin-other 7%",
+"kept": 325486.859579,
+"reb": 25978.3003,
+"months": [
+[
+"2026-09",
+22968.75070599999
+],
+[
+"2026-10",
+57964.112454999995
+],
+[
+"2026-11",
+37014.80028199998
+]
+],
+"fam": {
+"fin-close": 29864,
+"fin-other": 5510,
+"fin-hit": 26449,
+"fin-updown": 13388,
+"fin-ipo/cap": 9526
+},
+"ex": {
+"fin-close": "Will Microsoft (MSFT) close above $510 end of November?",
+"fin-other": "Will Amazon (AMZN) finish week of November 23 above $225?",
+"fin-hit": "Will Coinbase Global, Inc. (COIN) hit (LOW) $90 in November?",
+"fin-updown": "Dow Jones (DJIA) Up or Down on November 25?",
+"fin-ipo/cap": "Will Meta\u2019s market capitalization be between $1.25T and $1.50T at the end of November 2026?"
+}
+},
+{
+"name": "pelik",
+"wallet": "0x6a88c5ecd262e2c42e78bad8e6db7ab3c4e4b859",
+"n": 4655,
+"span_h": 167.9,
+"usd": 2442968,
+"mk": 1729,
+"medp": 0.999,
+"buy": 0.99,
+"top": "non-fin 68%, fin-other 30%, fin-close 0%, fin-ipo/cap 0%, fin-hit 0%",
+"kept": 117869.684524,
+"reb": 16833.3936,
+"months": [
+[
+"2026-09",
+-3714.3507739999914
+],
+[
+"2026-10",
+9563.819403999994
+],
+[
+"2026-11",
+15146.339111000008
+]
+],
+"fam": {
+"non-fin": 1672177,
+"fin-hit": 5845,
+"fin-ipo/cap": 9248,
+"fin-other": 744617,
+"fin-earnings": 611,
+"fin-close": 10471
+},
+"ex": {
+"non-fin": "Will Inter Kashi FC vs. Churchill Brothers SC end in a draw?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $5.0T by December 31?",
+"fin-ipo/cap": "Will SpaceX have the highest IPO Market Cap 2026?",
+"fin-other": "Kuwait SC vs. Al Wahda FC (UAE): O/U 0.5",
+"fin-earnings": "Exact Score: Sepsi OSK 1 - 0 FC Rapid 1923?",
+"fin-close": "Will Anthropic close below its IPO price by November 20, 2026?"
+}
+},
+{
+"name": "aenews2",
+"wallet": "0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1",
+"n": 271,
+"span_h": 147.0,
+"usd": 176618,
+"mk": 17,
+"medp": 0.47,
+"buy": 0.96,
+"top": "fin-other 56%, non-fin 44%",
+"kept": 2512580.220891,
+"reb": 64381.280392,
+"months": [
+[
+"2026-09",
+72052.61084999982
+],
+[
+"2026-10",
+168933.34842500044
+],
+[
+"2026-11",
+131551.99232699955
+]
+],
+"fam": {
+"non-fin": 77890,
+"fin-other": 98728
+},
+"ex": {
+"non-fin": "Will it be confirmed that a software or configuration error caused the FAA's nationwide ground stop on November 13?",
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?"
+}
+},
+{
+"name": "MemeKing20",
+"wallet": "0x56d0ec3e42cebca3de14da378720aa32d1f681d6",
+"n": 68,
+"span_h": 157.0,
+"usd": 94000,
+"mk": 5,
+"medp": 0.86,
+"buy": 0.17,
+"top": "fin-hit 83%, fin-ipo/cap 12%, non-fin 4%",
+"kept": -107836.23864,
+"reb": 4757.4712,
+"months": [
+[
+"2026-09",
+78564.64201600001
+],
+[
+"2026-10",
+-213379.920065
+],
+[
+"2026-11",
+26575.64950900001
+]
+],
+"fam": {
+"non-fin": 4024,
+"fin-ipo/cap": 11546,
+"fin-hit": 78430
+},
+"ex": {
+"non-fin": "Will Chiang Wan-an win the next Taipei Mayor election?",
+"fin-ipo/cap": "Will NVIDIA be the largest company in the world by market cap on December 31?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $1.75T by December 31?"
+}
+},
+{
+"name": "cosmicxbt",
+"wallet": "0x9ee49c02ae1ade698bf9e06d4ca271f236b8697b",
+"n": 19,
+"span_h": 103.4,
+"usd": 451950,
+"mk": 4,
+"medp": 0.63,
+"buy": 0.89,
+"top": "non-fin 100%",
+"kept": -101963.782052,
+"reb": 17581.6668,
+"months": [
+[
+"2026-09",
+27356.558123000024
+],
+[
+"2026-10",
+-326008.495439
+],
+[
+"2026-11",
+-33084.244284
+]
+],
+"fam": {
+"non-fin": 451950
+},
+"ex": {
+"non-fin": "Chiefs vs. Bills: O/U 38.5"
+}
+},
+{
+"name": "thegreengem",
+"wallet": "0xdcd669c506a938bae9269a84b8bd2bdb220484cd",
+"n": 7,
+"span_h": 1.2,
+"usd": 1201397,
+"mk": 1,
+"medp": 0.999,
+"buy": 1.0,
+"top": "fin-other 100%",
+"kept": 234544.665197,
+"reb": 742.6895,
+"months": [
+[
+"2026-09",
+2051.7328160000034
+],
+[
+"2026-10",
+59024.263967999985
+],
+[
+"2026-11",
+6284.6058480000065
+]
+],
+"fam": {
+"fin-other": 1201397
+},
+"ex": {
+"fin-other": "New NVIDIA CEO named by December 31, 2026?"
+}
+},
+{
+"name": "0xc7D02944A76B9F83B199e9090ECC92C82d241F8a-1776944395495",
+"wallet": "0xc7d02944a76b9f83b199e9090ecc92c82d241f8a",
+"n": 3683,
+"span_h": 167.0,
+"usd": 460189,
+"mk": 567,
+"medp": 0.412,
+"buy": 0.78,
+"top": "non-fin 75%, fin-other 9%, fin-ipo/cap 6%, crypto-other 5%, fin-hit 2%",
+"kept": 448633.297023,
+"reb": 61811.7273,
+"months": [
+[
+"2026-09",
+26603.008354999998
+],
+[
+"2026-10",
+47737.118902999966
+],
+[
+"2026-11",
+50761.08840000001
+]
+],
+"fam": {
+"non-fin": 346865,
+"crypto-other": 24895,
+"fin-hit": 10137,
+"fin-other": 42186,
+"fin-ipo/cap": 29179,
+"fin-close": 6913,
+"fin-earnings": 15
+},
+"ex": {
+"non-fin": "Will South African inflation be between 4.7% and 5.0% in 2026?",
+"crypto-other": "Will Bitcoin dip to $50,000 by December 31, 2026?",
+"fin-hit": "Will Anthropic's valuation hit (LOW) $800B by December 31?",
+"fin-other": "Will the US federal government take a stake in NVIDIA Corporation?",
+"fin-ipo/cap": "Will Nvidia\u2019s market capitalization be less than $4.00T at the end of 2026?",
+"fin-close": "Will NVIDIA (NVDA) close above $150 end of November?",
+"fin-earnings": "Hyperbeat FDV above $50M one day after launch?"
+}
+},
+{
+"name": "PippiTrader",
+"wallet": "0x403f2471f8aaa1e8a224f1338b073bfa3fdb94f1",
+"n": 2471,
+"span_h": 167.6,
+"usd": 64422,
+"mk": 588,
+"medp": 0.55,
+"buy": 0.56,
+"top": "fin-hit 55%, non-fin 20%, fin-close 13%, fin-ipo/cap 5%, fin-updown 4%",
+"kept": 114594.522122,
+"reb": 86530.89689999999,
+"months": [
+[
+"2026-09",
+41975.028661000004
+],
+[
+"2026-10",
+32820.329240999985
+],
+[
+"2026-11",
+-23527.36569599998
+]
+],
+"fam": {
+"fin-hit": 35400,
+"fin-updown": 2598,
+"fin-close": 8343,
+"non-fin": 12931,
+"fin-ipo/cap": 3474,
+"crypto-other": 195,
+"fin-other": 1481
+},
+"ex": {
+"fin-hit": "Will Amazon.com, Inc. (AMZN) hit (LOW) $236 Week of November 23 2026?",
+"fin-updown": "Apple (AAPL) Up or Down on November 27?",
+"fin-close": "Will NVIDIA (NVDA) close above $160 end of November?",
+"non-fin": "Will the average Ornn B300 rental price in January 2027 be above $14.00?",
+"fin-ipo/cap": "Will Alphabet\u2019s market capitalization be between $3.50T and $4.00T at the end of November 2026?",
+"crypto-other": "Will Bitcoin reach $90,000 in November?",
+"fin-other": "Will Micron (MU) finish week of November 23 above $570?"
+}
+},
+{
+"name": "Dropper",
+"wallet": "0x6bab41a0dc40d6dd4c1a915b8c01969479fd1292",
+"n": 11,
+"span_h": 124.0,
+"usd": 3538,
+"mk": 2,
+"medp": 0.14,
+"buy": 1.0,
+"top": "non-fin 100%",
+"kept": 1656484.989225,
+"reb": 13617.131376000001,
+"months": [
+[
+"2026-09",
+38930.65308600012
+],
+[
+"2026-10",
+20742.569345999975
+],
+[
+"2026-11",
+134987.37431099988
+]
+],
+"fam": {
+"non-fin": 3538
+},
+"ex": {
+"non-fin": "Will Benjamin Netanyahu be the next Prime Minister of Israel?"
+}
+},
+{
+"name": "feeder-or-predator",
+"wallet": "0x9c9fe391bf7ba8701bc97c9e561a46cbce11e2d2",
+"n": 1653,
+"span_h": 167.4,
+"usd": 974466,
+"mk": 100,
+"medp": 0.76,
+"buy": 0.72,
+"top": "non-fin 100%",
+"kept": 132212.2614,
+"reb": 102151.04992,
+"months": [
+[
+"2026-09",
+3211.305217
+],
+[
+"2026-10",
+44228.372584
+],
+[
+"2026-11",
+84842.039302
+]
+],
+"fam": {
+"non-fin": 974466
+},
+"ex": {
+"non-fin": "Will Lai Jui-lung win the next Kaohsiung Mayor election?"
+}
+},
+{
+"name": "suohasuo",
+"wallet": "0xb0fcea24160139269e0af107811e33d99d6ece0b",
+"n": 352,
+"span_h": 166.3,
+"usd": 38410,
+"mk": 25,
+"medp": 0.211,
+"buy": 0.41,
+"top": "fin-ipo/cap 85%, non-fin 13%, fin-hit 1%",
+"kept": 70416.774503,
+"reb": 25925.5397,
+"months": [
+[
+"2026-09",
+6777.158992000004
+],
+[
+"2026-10",
+15489.949949999995
+],
+[
+"2026-11",
+12255.269007999996
+]
+],
+"fam": {
+"fin-ipo/cap": 32829,
+"fin-hit": 529,
+"non-fin": 5051
+},
+"ex": {
+"fin-ipo/cap": "Will OpenAI's IPO valuation be between $1.25T and $1.5T?",
+"fin-hit": "Will Lighter reach $6 before 2027?",
+"non-fin": "Will the upper bound of the target federal funds rate be 4.25% at the end of 2026?"
+}
+},
+{
+"name": "Malfunction.",
+"wallet": "0xfc25f141ed27bb1787338d2c4e7f51e3a15e1f7f",
+"n": 3198,
+"span_h": 153.1,
+"usd": 4110596,
+"mk": 530,
+"medp": 0.999,
+"buy": 0.98,
+"top": "non-fin 73%, fin-other 27%",
+"kept": 710575.6791,
+"reb": 74915.7484,
+"months": [
+[
+"2026-09",
+134331.50036299997
+],
+[
+"2026-10",
+5851.811809999985
+],
+[
+"2026-11",
+35848.77752799995
+]
+],
+"fam": {
+"non-fin": 3021036,
+"fin-other": 1089560
+},
+"ex": {
+"non-fin": "Kansas State Wildcats vs. Alabama Crimson Tide",
+"fin-other": "Purdue Boilermakers vs. Oklahoma Sooners"
+}
+},
+{
+"name": "zhaocaimao8888",
+"wallet": "0xbbca3e86a17c383ac291890d56359e75eaa2c369",
+"n": 5000,
+"span_h": 126.3,
+"usd": 741089,
+"mk": 1044,
+"medp": 0.49,
+"buy": 0.85,
+"top": "non-fin 93%, fin-ipo/cap 2%, fin-other 2%, fin-hit 2%, fin-close 0%",
+"kept": 6228.510191,
+"reb": 40274.1089,
+"months": [
+[
+"2026-10",
+-1.112528
+],
+[
+"2026-11",
+6258.616994999999
+]
+],
+"fam": {
+"non-fin": 691433,
+"fin-ipo/cap": 16275,
+"fin-other": 16274,
+"crypto-other": 241,
+"fin-hit": 13883,
+"fin-earnings": 261,
+"fin-close": 2722
+},
+"ex": {
+"non-fin": "Will Sierra Leone be last in the World Happiness Report 2027?",
+"fin-ipo/cap": "Will Jensen Huang's resignation or removal be announced and Nvidia's market cap be below $4T at the end of 2026?",
+"fin-other": "Will the US federal government take a stake in NVIDIA Corporation?",
+"crypto-other": "Will Bitcoin hit $100k by December 31, 2027?",
+"fin-hit": "Will Hyperliquid dip to $50 by December 31, 2026?",
+"fin-earnings": "Will \"Steps\" be the top US Netflix movie this week?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by November 27, 2026?"
+}
+},
+{
+"name": "TBill1",
+"wallet": "0xd52b8dcb4b812c4056faf41164a6f6c73f4c5c72",
+"n": 184,
+"span_h": 159.4,
+"usd": 126215,
+"mk": 21,
+"medp": 0.65,
+"buy": 0.51,
+"top": "fin-other 78%, non-fin 14%, fin-ipo/cap 8%",
+"kept": 98974.860283,
+"reb": 5213.111,
+"months": [
+[
+"2026-09",
+56431.12785999999
+],
+[
+"2026-10",
+12635.36221800001
+],
+[
+"2026-11",
+10739.712320999999
+]
+],
+"fam": {
+"non-fin": 17807,
+"fin-ipo/cap": 10019,
+"fin-other": 98389
+},
+"ex": {
+"non-fin": "Will \u00c9ric Zemmour win the 2027 French presidential election?",
+"fin-ipo/cap": "Will NVIDIA be the largest company in the world by market cap on December 31?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?"
+}
+},
+{
+"name": "garbagecollect2",
+"wallet": "0xee6712ea09d6a9c86793bb6dde10ea59040e67a6",
+"n": 3691,
+"span_h": 167.9,
+"usd": 12654,
+"mk": 429,
+"medp": 0.01,
+"buy": 0.47,
+"top": "non-fin 49%, crypto-other 33%, fin-other 11%, fin-hit 3%, fin-ipo/cap 2%",
+"kept": 36691.678787,
+"reb": 3541.2183000000005,
+"months": [
+[
+"2026-09",
+1477.9565030000012
+],
+[
+"2026-10",
+2310.9762009999977
+],
+[
+"2026-11",
+3460.0474079999985
+]
+],
+"fam": {
+"non-fin": 6264,
+"crypto-other": 4180,
+"fin-hit": 387,
+"fin-ipo/cap": 296,
+"fin-other": 1341,
+"fin-earnings": 1,
+"fin-close": 185
+},
+"ex": {
+"non-fin": "Will Radomir Sai\u010di\u0107 be the next Prime Minister of Serbia?",
+"crypto-other": "Will Bitcoin dip to $52,500 in November?",
+"fin-hit": "Will WTI Crude Oil (WTI) hit (HIGH) $105 in November?",
+"fin-ipo/cap": "Will Apple be the largest company in the world by market cap on November 30, 2026?",
+"fin-other": "Will THE ONE (1win) Win the PGL Major Singapore 2026?",
+"fin-earnings": "Jeffrey Epstein confirmed to be alive before 2027?",
+"fin-close": "Will Anthropic close below its IPO price by December 31, 2026?"
+}
+},
+{
+"name": "NotJump",
+"wallet": "0xf1f2b3c6c5bea42a6664fe3a8395addc1ab28c8d",
+"n": 5000,
+"span_h": 14.6,
+"usd": 308953,
+"mk": 484,
+"medp": 0.5,
+"buy": 0.55,
+"top": "non-fin 74%, crypto-other 13%, fin-other 12%, fin-hit 0%, fin-earnings 0%",
+"kept": 146863.998468,
+"reb": 171199.4107,
+"months": [
+[
+"2026-09",
+27670.141524
+],
+[
+"2026-10",
+37241.92101799999
+],
+[
+"2026-11",
+29044.294577000008
+]
+],
+"fam": {
+"fin-earnings": 171,
+"non-fin": 229160,
+"fin-other": 37241,
+"crypto-other": 40993,
+"fin-hit": 1374,
+"fin-ipo/cap": 13
+},
+"ex": {
+"fin-earnings": "Will Sepsi OSK win on 2026-11-27?",
+"non-fin": "Dota 2: Aurora vs PARIVISION - Game 1 Winner",
+"fin-other": "Valorant: Enterprise Esports vs CGN Esports (BO3) - VCT EMEA Kickoff: Europe - Qualifier Swiss Stage",
+"crypto-other": "Will Bitcoin reach $67,500 in November?",
+"fin-hit": "Will WTI Crude Oil (WTI) hit (HIGH) $130 in November?",
+"fin-ipo/cap": "Will NVIDIA be the largest company in the world by market cap on December 31?"
+}
+},
+{
+"name": "0x448861155279dbf833d041b963e3ac854599e319",
+"wallet": "0x448861155279dbf833d041b963e3ac854599e319",
+"n": 1164,
+"span_h": 165.3,
+"usd": 593756,
+"mk": 76,
+"medp": 0.644,
+"buy": 0.97,
+"top": "non-fin 61%, fin-other 39%",
+"kept": 844181.284522,
+"reb": 38532.1425,
+"months": [
+[
+"2026-09",
+104908.38771099999
+],
+[
+"2026-10",
+397023.12840399996
+],
+[
+"2026-11",
+-182522.090923
+]
+],
+"fam": {
+"non-fin": 363197,
+"fin-other": 230559
+},
+"ex": {
+"non-fin": "Tulsa vs. UTSA",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "Tenebrus7",
+"wallet": "0xa8c63f775ddbbe66b56614191747def3021444e8",
+"n": 1427,
+"span_h": 167.6,
+"usd": 377349,
+"mk": 137,
+"medp": 0.78,
+"buy": 0.6,
+"top": "non-fin 74%, fin-other 25%, fin-ipo/cap 1%, fin-close 0%",
+"kept": 163059.864367,
+"reb": 95089.71135200001,
+"months": [
+[
+"2026-09",
+21551.11032899999
+],
+[
+"2026-10",
+11104.509675000008
+],
+[
+"2026-11",
+-75497.72804799999
+]
+],
+"fam": {
+"non-fin": 279805,
+"fin-ipo/cap": 2448,
+"fin-other": 94837,
+"fin-close": 259
+},
+"ex": {
+"non-fin": "Will Magdalena Andersson be the next Prime Minister of Sweden?",
+"fin-ipo/cap": "Will SpaceX have the highest IPO Market Cap 2026?",
+"fin-other": "Another NVIDIA board member announced resignation or removal by December 31, 2026?",
+"fin-close": "Will Anthropic close below its IPO price by March 31, 2027?"
+}
+},
+{
+"name": "0x9112edc7d8a99ce2d688b8e1c6ab889f30d1642",
+"wallet": "0xdf17f4a8dd01a4cfa6fc3da323a2baee5f8697d1",
+"n": 1420,
+"span_h": 167.3,
+"usd": 520168,
+"mk": 84,
+"medp": 0.68,
+"buy": 0.57,
+"top": "non-fin 85%, fin-other 15%",
+"kept": 987510.931972,
+"reb": 29330.95416,
+"months": [
+[
+"2026-09",
+55612.14687300008
+],
+[
+"2026-10",
+56652.05647900002
+],
+[
+"2026-11",
+-275.4418580000056
+]
+],
+"fam": {
+"non-fin": 440042,
+"fin-other": 80125
+},
+"ex": {
+"non-fin": "US x Iran Effective Ceasefire by November 22?",
+"fin-other": "Marathon Fusion's high-rate gold alchemy confirmed by June 30, 2027?"
+}
+},
+{
+"name": "a5533",
+"wallet": "0x758dac51ba3cc9a246a79787da9df11c5f425d9e",
+"n": 5000,
+"span_h": 4.1,
+"usd": 69551,
+"mk": 735,
+"medp": 0.48,
+"buy": 1.0,
+"top": "non-fin 62%, fin-other 20%, crypto-other 12%, crypto-updown 5%, fin-updown 0%",
+"kept": 77402.416457,
+"reb": 98675.7243,
+"months": [
+[
+"2026-09",
+16859.582416
+],
+[
+"2026-10",
+42449.217635
+],
+[
+"2026-11",
+17458.760886000004
+]
+],
+"fam": {
+"fin-other": 13879,
+"crypto-updown": 3305,
+"non-fin": 43147,
+"crypto-other": 8581,
+"fin-updown": 344,
+"fin-close": 192,
+"fin-hit": 103,
+"fin-earnings": 0
+},
+"ex": {
+"fin-other": "Valorant: Enterprise Esports vs CGN Esports (BO3) - VCT EMEA Kickoff: Europe - Qualifier Swiss Stage",
+"crypto-updown": "Bitcoin Up or Down - November 27, 11:00AM-12:00PM ET",
+"non-fin": "Will the highest temperature in Taipei be 24\u00b0C on November 29?",
+"crypto-other": "Will Bitcoin dip to $54,000 November 23-29?",
+"fin-updown": "Silver Up or Down - November 27, 10:00AM-11:00AM ET",
+"fin-close": "Will NVIDIA (NVDA) close above $145 on November 27?",
+"fin-hit": "Will Airbnb, Inc. (ABNB) hit (HIGH) $178 Week of November 23 2026?",
+"fin-earnings": "Will Electronic Arts (EA) beat quarterly earnings?"
+}
+},
+{
+"name": "Car",
+"wallet": "0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b",
+"n": 453,
+"span_h": 167.4,
+"usd": 83626,
+"mk": 49,
+"medp": 0.65,
+"buy": 0.54,
+"top": "non-fin 65%, fin-other 19%, crypto-other 13%, crypto-updown 2%",
+"kept": 1693302.045367,
+"reb": 107227.600825,
+"months": [
+[
+"2026-09",
+32297.744790999917
+],
+[
+"2026-10",
+35794.2583339999
+],
+[
+"2026-11",
+45171.56728600012
+]
+],
+"fam": {
+"non-fin": 54645,
+"crypto-other": 10982,
+"fin-other": 16236,
+"crypto-updown": 1763
+},
+"ex": {
+"non-fin": "Will it be confirmed that a software or configuration error caused the FAA's nationwide ground stop on November 13?",
+"crypto-other": "Will Bitcoin reach $70,000 in November?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?",
+"crypto-updown": "Bitcoin Up or Down - November 21, 1:15AM-1:30AM ET"
+}
+},
+{
+"name": "0xa7517ed74c6b07843946e0e69cad10a9fa94e05",
+"wallet": "0xe234959595e01dacd391a9502a6ad0edf4e3304a",
+"n": 310,
+"span_h": 160.2,
+"usd": 152460,
+"mk": 27,
+"medp": 0.27,
+"buy": 0.51,
+"top": "non-fin 81%, fin-other 19%",
+"kept": 324993.256227,
+"reb": 15737.544300000001,
+"months": [
+[
+"2026-09",
+42501.53943800001
+],
+[
+"2026-10",
+22712.560735999985
+],
+[
+"2026-11",
+149452.68476499998
+]
+],
+"fam": {
+"non-fin": 123511,
+"fin-other": 28950
+},
+"ex": {
+"non-fin": "Will AI solve the Riemann Hypothesis in 2026?",
+"fin-other": "Will Rene Haas be the next CEO of NVIDIA?"
+}
+},
+{
+"name": "Istaroth",
+"wallet": "0x9efda3d6354152901fc4706c3b1a9ce50b45ad00",
+"n": 5000,
+"span_h": 31.5,
+"usd": 188220,
+"mk": 1082,
+"medp": 0.48,
+"buy": 0.95,
+"top": "non-fin 96%, fin-other 3%, fin-ipo/cap 1%, fin-hit 1%, fin-earnings 0%",
+"kept": -471340.78246,
+"reb": 405463.07734,
+"months": [
+[
+"2026-09",
+19158.092744000023
+],
+[
+"2026-10",
+67990.86257800006
+],
+[
+"2026-11",
+59897.61242899997
+]
+],
+"fam": {
+"non-fin": 180153,
+"fin-other": 4896,
+"fin-earnings": 379,
+"crypto-other": 88,
+"fin-hit": 1091,
+"fin-ipo/cap": 1583,
+"fin-close": 29
+},
+"ex": {
+"non-fin": "Will Sierra Leone be last in the World Happiness Report 2027?",
+"fin-other": "Will Core Scientific (CORZ) get a credit rating downgrade before 2028?",
+"fin-earnings": "Will Dave & Buster's (PLAY) beat quarterly earnings?",
+"crypto-other": "Will Solana hit $150 by March 31, 2027?",
+"fin-hit": "Will Anthropic's valuation hit (HIGH) $2.0T by December 31?",
+"fin-ipo/cap": "Will Alphabet be the third-largest company in the world by market cap on November 30, 2026?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 18, 2026?"
+}
+},
+{
+"name": "JJo",
+"wallet": "0xc4086b708cd3a50880b7069add1a1a80000f4675",
+"n": 301,
+"span_h": 164.3,
+"usd": 328227,
+"mk": 29,
+"medp": 0.94,
+"buy": 0.67,
+"top": "non-fin 78%, fin-other 19%, fin-ipo/cap 2%",
+"kept": 335754.676376,
+"reb": 15829.038999999999,
+"months": [
+[
+"2026-09",
+11442.127555999963
+],
+[
+"2026-10",
+14090.744394999987
+],
+[
+"2026-11",
+34329.360837000015
+]
+],
+"fam": {
+"non-fin": 257283,
+"fin-ipo/cap": 7387,
+"fin-other": 63558
+},
+"ex": {
+"non-fin": "Will Marjorie Taylor Greene win the 2028 US Presidential Election?",
+"fin-ipo/cap": "Will NVIDIA be the largest company in the world by market cap on December 31?",
+"fin-other": "New NVIDIA CEO named by December 31, 2026?"
+}
+},
+{
+"name": "fiter",
+"wallet": "0xf5e814660a5a5ac071390a36122e7bc7c1309fbd",
+"n": 5000,
+"span_h": 131.2,
+"usd": 7031,
+"mk": 200,
+"medp": 0.002,
+"buy": 0.41,
+"top": "non-fin 62%, fin-other 29%, fin-ipo/cap 4%, fin-hit 3%, fin-close 1%",
+"kept": 61130.209678,
+"reb": 3114.9132999999997,
+"months": [
+[
+"2026-09",
+2740.6562080000003
+],
+[
+"2026-10",
+5465.2625130000015
+],
+[
+"2026-11",
+2908.373068000001
+]
+],
+"fam": {
+"non-fin": 4352,
+"crypto-other": 38,
+"fin-ipo/cap": 282,
+"fin-earnings": 7,
+"fin-hit": 245,
+"fin-close": 79,
+"fin-other": 2028
+},
+"ex": {
+"non-fin": "Will Zdravko Pono\u0161 win the next Serbia presidential election?",
+"crypto-other": "Will Ethereum dip to $1,100 in November?",
+"fin-ipo/cap": "Will Oura's market cap be between $7.5B and $10B at market close on IPO day?",
+"fin-earnings": "Will DeepSeek have the best AI model at the end of December 2026?",
+"fin-hit": "Will Gold (GC) dip to (LOW) $3,500 by end of December?",
+"fin-close": "Will Anthropic close below its IPO price by November 27, 2026?",
+"fin-other": "Will Meta have the best AI model at the end of November 2026?"
+}
+},
+{
+"name": "foodenjoyer",
+"wallet": "0x7b02b2bac2a30ed5e40b7094e734f4c3dc2a4991",
+"n": 31,
+"span_h": 99.3,
+"usd": 213553,
+"mk": 6,
+"medp": 0.086,
+"buy": 0.56,
+"top": "non-fin 97%, fin-other 3%",
+"kept": 969103.355819,
+"reb": 34533.547979,
+"months": [
+[
+"2026-09",
+588509.1639429999
+],
+[
+"2026-10",
+186822.6221390001
+],
+[
+"2026-11",
+-302438.90206899995
+]
+],
+"fam": {
+"non-fin": 207020,
+"fin-other": 6533
+},
+"ex": {
+"non-fin": "Will the Fed increase interest rates by 50+ bps after the December 2026 meeting?",
+"fin-other": "Will Jensen Huang rejoin NVIDIA by November 30, 2026?"
+}
+},
+{
+"name": "urhfrhchj123123",
+"wallet": "0x608532073e9727f4b442204ebf6fc6de3b5c4219",
+"n": 147,
+"span_h": 160.7,
+"usd": 278939,
+"mk": 16,
+"medp": 0.977,
+"buy": 0.96,
+"top": "fin-other 75%, non-fin 25%, fin-hit 0%",
+"kept": 41567.342822,
+"reb": 1807.817,
+"months": [
+[
+"2026-09",
+5109.214149
+],
+[
+"2026-10",
+14437.259373
+],
+[
+"2026-11",
+22020.8693
+]
+],
+"fam": {
+"non-fin": 69982,
+"fin-other": 208834,
+"fin-hit": 124
+},
+"ex": {
+"non-fin": "Devin Booker: Assists O/U 5.5",
+"fin-other": "Will there be no new be CEO of NVIDIA by December 31, 2028?",
+"fin-hit": "Will Opendoor Technologies Inc. (OPEN) hit (LOW) $1.25 Week of November 16 2026?"
+}
+},
+{
+"name": "automatedmm",
+"wallet": "0x5b9e7fd7b867467b7c16d88f11c24027af1f3423",
+"n": 5000,
+"span_h": 45.4,
+"usd": 247689,
+"mk": 333,
+"medp": 0.48,
+"buy": 0.61,
+"top": "non-fin 100%",
+"kept": -6908.009524,
+"reb": 1462.847,
+"months": [
+[
+"2026-10",
+2.708758
+],
+[
+"2026-11",
+-6909.360189999999
+]
+],
+"fam": {
+"non-fin": 247689
+},
+"ex": {
+"non-fin": "Will the average Ornn B200 rental price in December 2026 be above $9.20?"
+}
+},
+{
+"name": "Digital-Boy",
+"wallet": "0xfe41328c99802a1103d74514f71a16b0eee19f23",
+"n": 5000,
+"span_h": 107.9,
+"usd": 131655,
+"mk": 1134,
+"medp": 0.47,
+"buy": 0.86,
+"top": "non-fin 93%, fin-other 4%, fin-close 1%, fin-earnings 1%, fin-ipo/cap 1%",
+"kept": 33103.115779,
+"reb": 131671.11059999999,
+"months": [
+[
+"2026-09",
+4882.369663999998
+],
+[
+"2026-10",
+2285.9717960000016
+],
+[
+"2026-11",
+6090.966129999997
+]
+],
+"fam": {
+"non-fin": 122315,
+"fin-other": 4956,
+"fin-close": 1838,
+"fin-ipo/cap": 1079,
+"fin-hit": 216,
+"fin-earnings": 1226,
+"fin-updown": 25
+},
+"ex": {
+"non-fin": "Will the highest temperature in Taipei be 23\u00b0C on November 29?",
+"fin-other": "Will Core Scientific (CORZ) get a credit rating downgrade before 2028?",
+"fin-close": "Will NVIDIA close below its pre-Jensen return closing low by December 4, 2026?",
+"fin-ipo/cap": "Will Jensen Huang's resignation or removal be announced and Nvidia's market cap be below $4T at the end of 2026?",
+"fin-hit": "Will US gas hit $3.60 (High) in November?",
+"fin-earnings": "Will GameStop (GME) beat quarterly earnings?",
+"fin-updown": "Democratic 2028 presidential odds up or down this week?"
+}
+}
+]

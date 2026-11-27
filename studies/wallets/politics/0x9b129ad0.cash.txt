@@ -1,0 +1,18 @@
+=== 0x9b129ad0 0x9b129ad05bc0a8df3c73dfcc66fe75252daec2d5 window 30: activity rows 43712, first row 2026-10-28
+   usdc by type: {'CONVERSION': 239022, 'MAKER_REBATE': 143, 'MERGE': 77800, 'REDEEM': 2697, 'REWARD': 39, 'TAKER_REBATE': 65, 'TRADE_BUY': 309549, 'TRADE_SELL': 17192}  counts: {'REDEEM': 2158, 'MERGE': 4347, 'TRADE_BUY': 35044, 'CONVERSION': 1942, 'TRADE_SELL': 173, 'MAKER_REBATE': 20, 'TAKER_REBATE': 19, 'REWARD': 9}
+   net cash 27,410 | open positions 285 value now 1,992 (initial_value field 0) | net cash + value 29,402
+   API all-time: trade_pnl 104,717 fees -8,515 economic 98,024 unrealized -6958.533576
+     taipei-mayor-election-winner-20260813125857100             buy     3354 sell       0 conv    32927 merge       0 redeem       0
+     california-governor-election-2026                          buy     1548 sell       0 conv    25577 merge       0 redeem       1
+     nebraska-senate-election-winner                            buy     1337 sell       0 conv    17275 merge       0 redeem       1
+     largest-company-end-of-december-2026                       buy     2363 sell       0 conv    13624 merge    9533 redeem       0
+     los-angeles-mayoral-election-117                           buy     1677 sell       0 conv    10687 merge       0 redeem       1
+     north-carolina-senate-election-winner                      buy      663 sell       0 conv     7708 merge       0 redeem       1
+     nln-sos-har-2026-11-17                                     buy      792 sell     276 conv     7463 merge    2000 redeem       0
+     usd-x-iranian-rials-end-of-october                         buy      486 sell     444 conv     5291 merge     939 redeem       1
+     pos will-puma-shen-win-the-next-taipei-mayor-election-202608 No size         0 avg 0.629 value      501
+     pos will-apple-be-the-largest-company-in-the-world-by-market Yes size         0 avg 0.036 value      227
+     pos will-magdalena-andersson-be-the-next-prime-minister-of-s No size         0 avg 0.726 value      195
+     pos will-the-swiss-national-bank-increase-the-snb-policy-rat No size         0 avg 0.860 value       88
+     pos will-francis-james-allison-oyague-win-the-next-lima-mayo No size         0 avg 0.958 value       79
+     pos lowest-temperature-in-hong-kong-on-november-28-2026-20c  Yes size         0 avg 0.685 value       46

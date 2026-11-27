@@ -1,0 +1,10 @@
+=== Lolakis 0x401ee31e9ebf9ab9f6315cd95faca5f950436fc9 window 60: activity rows 25431, first row 2026-09-28
+   usdc by type: {'CONVERSION': 0, 'MAKER_REBATE': 7967, 'MERGE': 213280, 'REDEEM': 321189, 'REWARD': 53003, 'TAKER_REBATE': 403, 'TRADE_BUY': 5421563, 'TRADE_SELL': 4977195, 'YIELD': 89}  counts: {'TRADE_SELL': 14144, 'TRADE_BUY': 10788, 'REWARD': 105, 'MAKER_REBATE': 50, 'YIELD': 60, 'MERGE': 101, 'TAKER_REBATE': 34, 'REDEEM': 148, 'CONVERSION': 1}
+   net cash 151,474 | open positions 34 value now 44,451 (initial_value field 0) | net cash + value 195,925
+   API all-time: trade_pnl 131,344 fees -9,868 economic 195,867 unrealized 964.537828
+     pos b300-average-rental-price-in-january-2027-above-11pt00   No size         0 avg 0.425 value    10312
+     pos h200-average-rental-price-in-february-2027-above-7pt00   No size         0 avg 0.660 value     9743
+     pos b200-average-rental-price-in-february-2027-above-7pt50   Yes size         0 avg 0.795 value     6906
+     pos b300-average-rental-price-in-february-2027-above-12pt00  No size         0 avg 0.595 value     4873
+     pos b300-average-rental-price-in-december-2026-above-11pt00  No size         0 avg 0.400 value     2860
+     pos h100-average-rental-price-in-september-2027-above-3pt00  No size         0 avg 0.615 value     2762

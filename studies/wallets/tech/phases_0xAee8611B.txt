@@ -1,0 +1,190 @@
+##### 0xAee8611B: fills in 110 cached resolved arena/hle markets (edge = settlement value minus price; fee at 0.05*p*(1-p) on taker fills)
+kind     phase                          side role fills mkts      usd avg_px right$% edge_c/sh fee_c/sh  net_usd
+debut    1 before appearance 1-7d       BUY  M        3    1        1  0.010       0     -1.00     0.00       -1
+debut    1 before appearance >7d        BUY  M        2    1        0  0.050       0     -5.00     0.00       -0
+debut    1 before appearance >7d        BUY  T        2    2       63  0.430       0    -43.04     0.85      -65
+debut    1 before appearance >7d        SELL T        3    2       37  0.339     100     33.86     1.07       36
+debut    2c 10 min-6 h after            BUY  M        1    1        0  0.010       0     -1.00     0.00       -0
+debut    2d 6 h+ after                  BUY  M        1    1        0  0.002       0     -0.20     0.00       -0
+monthend m1 >7d before check            BUY  M     1303   81     8709  0.363      55      3.01     0.00      721
+monthend m1 >7d before check            BUY  T      975   84    61260  0.422      56      5.17     0.90     6195
+monthend m1 >7d before check            SELL M       37   19      619  0.541      15    -18.63     0.00     -213
+monthend m1 >7d before check            SELL T      589   77    29435  0.445      47      1.71     0.95      505
+monthend m2 1-7d before check           BUY  M       89   20      477  0.382      61      5.60     0.00       70
+monthend m2 1-7d before check           BUY  T       55   28     4957  0.523      80      7.66     0.73      657
+monthend m2 1-7d before check           SELL M        5    4      129  0.689       9     -4.73     0.00       -9
+monthend m2 1-7d before check           SELL T       36   19     2477  0.573      24     -8.09     0.83     -385
+monthend m4 after T90                   BUY  M      598   50      239  0.016       8     -1.44     0.00     -219
+monthend m4 after T90                   BUY  T       74   42     9171  0.607      98      0.95     0.16      120
+monthend m4 after T90                   SELL M       69    9     1563  0.989       0     -1.10     0.00      -17
+monthend m4 after T90                   SELL T       40   32     1638  0.238       9      0.85     0.15       48
+net by phase group: debut 1 : -30 | debut 2c: -0 | debut 2d: -0 | monthend m1: 7209 | monthend m2: 333 | monthend m4: -68
+debut markets with a found appearance: first taker buy falls in phase -> {'1 ': 2}
+
+- Will Anthropic be the second-best Math AI lab at the end of October 2026?  [second-best-text-arena-math-ai-lab-end-of-october]
+    winner=Yes check=10-31 16:00 closed=10-31 18:03 appearance=- T90=10-28 18:28:13 market vol=21584; account net=267 (incomplete)
+    pYes around check-20h: -7d:0.73 -48h:0.95 -1h:0.96 -10s:0.96 +60s:0.96 +10m:0.96 +2h:0.97 check-1h:0.97
+    09-03 21:25:16 BUY  M No  n=  1 sh=     20 px=0.900 usd=    18  [m1 >7d before check; 1386.6h before check]
+    09-06 03:41:46 BUY  T No  n=  1 sh=    212 px=0.777 usd=   164  [m1 >7d before check; 1332.3h before check]
+    09-07 17:28:27 BUY  T No  n=  3 sh=    325 px=0.632 usd=   206  [m1 >7d before check; 1294.5h before check]
+    09-07 23:41:39 BUY  T No  n=  1 sh=     98 px=0.676 usd=    66  [m1 >7d before check; 1288.3h before check]
+    10-28 03:00:57 BUY  M Yes n=  9 sh=     95 px=0.811 usd=    77  [m2 1-7d before check; 85.0h before check]
+    10-28 03:40:10 SELL T Yes n=  1 sh=    404 px=0.810 usd=   327  [m2 1-7d before check; 84.3h before check]
+    10-28 04:03:44 BUY  M Yes n=  1 sh=      5 px=0.750 usd=     3  [m2 1-7d before check; 83.9h before check]
+    ... 60 more hour-groups
+
+- Will Alibaba be the third-best Chinese AI company at the end of October 2026?  [third-best-chinese-ai-company-end-of-october]
+    winner=No check=10-31 16:00 closed=10-31 18:12 appearance=- T90=10-31 07:08:16 market vol=27529; account net=62 (incomplete)
+    pYes around check-20h: -7d:0.53 -48h:0.02 -1h:0.02 -10s:0.02 +60s:0.02 +10m:0.02 +2h:0.02 check-1h:0.02
+    09-05 17:31:07 BUY  M No  n=  1 sh=     20 px=0.850 usd=    17  [m1 >7d before check; 1342.5h before check]
+    09-05 17:31:52 SELL T No  n=  1 sh=     10 px=0.785 usd=     8  [m1 >7d before check; 1342.5h before check]
+    09-07 09:41:25 BUY  M Yes n=  1 sh=     20 px=0.140 usd=     3  [m1 >7d before check; 1302.3h before check]
+    09-08 06:55:51 BUY  M Yes n=  1 sh=     20 px=0.130 usd=     3  [m1 >7d before check; 1281.1h before check]
+    10-24 16:29:35 SELL T No  n=  1 sh=      9 px=0.473 usd=     4  [m2 1-7d before check; 167.5h before check]
+    10-27 06:11:44 BUY  M Yes n=  1 sh=     80 px=0.439 usd=    35  [m2 1-7d before check; 105.8h before check]
+    10-27 06:11:44 BUY  T Yes n=  1 sh=    100 px=0.433 usd=    43  [m2 1-7d before check; 105.8h before check]
+    ... 40 more hour-groups
+
+- Will Anthropic have the best Code Arena | WebDev AI at the end of October 2026?  [which-company-has-the-best-code-arena-webdev-ai-model-end-of]
+    winner=Yes check=10-31 16:00 closed=10-31 18:02 appearance=- T90=10-27 12:58:11 market vol=75877; account net=269 (incomplete)
+    pYes around check-20h: -7d:0.91 -48h:0.96 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.98 +2h:0.98 check-1h:0.98
+    08-31 22:10:37 BUY  M Yes n=  1 sh=     20 px=0.540 usd=    11  [m1 >7d before check; 1457.8h before check]
+    09-01 02:18:09 BUY  T Yes n=  3 sh=    611 px=0.455 usd=   278  [m1 >7d before check; 1453.7h before check]
+    09-01 02:20:45 BUY  M Yes n=  2 sh=     25 px=0.498 usd=    12  [m1 >7d before check; 1453.7h before check]
+    09-01 03:02:33 BUY  T Yes n=  1 sh=      5 px=0.500 usd=     2  [m1 >7d before check; 1453.0h before check]
+    10-23 12:07:48 SELL T No  n=  1 sh=     20 px=0.081 usd=     2  [m1 >7d before check; 195.9h before check]
+    10-23 14:54:29 BUY  M Yes n=  1 sh=     20 px=0.900 usd=    18  [m1 >7d before check; 193.1h before check]
+    10-27 18:25:29 BUY  T Yes n=  1 sh=     40 px=0.955 usd=    38  [m4 after T90; 93.6h before check]
+    ... 55 more hour-groups
+
+- Will Google be the second-best AI lab at the end of September 2026?  [second-best-ai-lab-end-of-september-20260722221500022]
+    winner=Yes check=09-30 16:00 closed=09-30 18:16 appearance=- T90=09-26 12:41:41 market vol=41502; account net=179 (incomplete)
+    pYes around check-20h: -7d:0.85 -48h:0.95 -1h:0.93 -10s:0.92 +60s:0.94 +10m:0.94 +2h:0.94 check-1h:0.95
+    09-01 12:36:06 BUY  T No  n=  2 sh=    499 px=0.189 usd=    94  [m1 >7d before check; 699.4h before check]
+    09-01 12:53:18 BUY  M No  n=  1 sh=      5 px=0.320 usd=     2  [m1 >7d before check; 699.1h before check]
+    09-01 13:10:16 SELL T No  n=  2 sh=    140 px=0.281 usd=    39  [m1 >7d before check; 698.8h before check]
+    09-01 14:06:48 SELL T No  n=  1 sh=     91 px=0.240 usd=    22  [m1 >7d before check; 697.9h before check]
+    09-17 21:34:09 BUY  T Yes n=  1 sh=    190 px=0.820 usd=   156  [m1 >7d before check; 306.4h before check]
+    09-26 03:12:27 SELL T Yes n=  2 sh=    477 px=0.874 usd=   416  [m2 1-7d before check; 108.8h before check]
+    09-26 12:41:39 BUY  T Yes n=  1 sh=    325 px=0.860 usd=   280  [m2 1-7d before check; 99.3h before check]
+    ... 35 more hour-groups
+
+- Will Alibaba be the second-best Chinese AI company at the end of October 2026?  [second-best-chinese-ai-company-end-of-october]
+    winner=Yes check=10-31 16:00 closed=10-31 18:51 appearance=- T90=10-31 12:19:57 market vol=28493; account net=323
+    pYes around check-20h: -7d:0.16 -48h:0.77 -1h:0.85 -10s:0.85 +60s:0.85 +10m:0.86 +2h:0.86 check-1h:0.94
+    09-05 01:19:01 BUY  T Yes n=  1 sh=     45 px=0.204 usd=     9  [m1 >7d before check; 1358.7h before check]
+    09-07 08:44:54 BUY  M Yes n=  1 sh=     20 px=0.210 usd=     4  [m1 >7d before check; 1303.3h before check]
+    09-08 09:38:24 BUY  T Yes n=  1 sh=     35 px=0.244 usd=     9  [m1 >7d before check; 1278.4h before check]
+    09-08 18:56:28 BUY  M No  n=  2 sh=     20 px=0.720 usd=    14  [m1 >7d before check; 1269.1h before check]
+    10-27 06:08:48 BUY  M Yes n=  1 sh=      5 px=0.520 usd=     3  [m2 1-7d before check; 105.9h before check]
+    10-27 06:08:48 SELL T Yes n=  1 sh=    600 px=0.466 usd=   280  [m2 1-7d before check; 105.9h before check]
+    10-31 16:01:48 BUY  T Yes n=  1 sh=    110 px=0.990 usd=   109  [m4 after T90; -0.0h before check]
+    ... 54 more hour-groups
+
+- Will Anthropic be the second-best AI lab at the end of October 2026?  [second-best-ai-lab-end-of-october]
+    winner=Yes check=10-31 16:00 closed=10-31 18:21 appearance=- T90=10-28 10:02:01 market vol=22163; account net=822
+    pYes around check-20h: -7d:0.85 -48h:0.94 -1h:0.97 -10s:0.98 +60s:0.98 +10m:0.98 +2h:0.98 check-1h:0.98
+    09-01 01:28:22 BUY  M Yes n=  5 sh=     39 px=0.050 usd=     2  [m1 >7d before check; 1454.5h before check]
+    09-01 02:45:27 BUY  M Yes n=  4 sh=     28 px=0.050 usd=     1  [m1 >7d before check; 1453.2h before check]
+    09-01 17:13:10 BUY  M Yes n=  3 sh=     45 px=0.050 usd=     2  [m1 >7d before check; 1438.8h before check]
+    09-02 07:15:36 BUY  M Yes n=  1 sh=      2 px=0.050 usd=     0  [m1 >7d before check; 1424.7h before check]
+    10-25 19:13:50 BUY  T Yes n=  2 sh=    250 px=0.835 usd=   208  [m2 1-7d before check; 140.8h before check]
+    10-29 04:53:13 BUY  T Yes n=  1 sh=   1000 px=0.925 usd=   925  [m4 after T90; 59.1h before check]
+    10-29 05:14:56 SELL T Yes n=  1 sh=    200 px=0.950 usd=   190  [m4 after T90; 58.8h before check]
+    ... 40 more hour-groups
+
+- Will Anthropic have the best Code Arena | WebDev AI at the end of September 2026?  [which-company-has-the-best-code-arena-webdev-ai-model-end-of]
+    winner=Yes check=09-30 16:00 closed=09-30 18:19 appearance=- T90=09-26 02:23:56 market vol=116719; account net=-422 (incomplete)
+    pYes around check-20h: -7d:0.41 -48h:0.97 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.99 +2h:0.99 check-1h:1.00
+    08-31 16:31:34 BUY  M Yes n=  1 sh=     40 px=0.650 usd=    26  [m1 >7d before check; 719.5h before check]
+    09-01 08:50:13 BUY  M No  n=  1 sh=     12 px=0.330 usd=     4  [m1 >7d before check; 703.2h before check]
+    09-01 17:30:27 BUY  M Yes n=  1 sh=     10 px=0.670 usd=     7  [m1 >7d before check; 694.5h before check]
+    09-02 11:43:40 BUY  T Yes n=  1 sh=    100 px=0.600 usd=    60  [m1 >7d before check; 676.3h before check]
+    09-23 00:54:50 BUY  T Yes n=  1 sh=    321 px=0.329 usd=   106  [m1 >7d before check; 183.1h before check]
+    09-24 07:54:44 BUY  T Yes n=  1 sh=     87 px=0.890 usd=    77  [m2 1-7d before check; 152.1h before check]
+    09-25 11:03:42 BUY  T Yes n=  2 sh=     70 px=0.910 usd=    64  [m2 1-7d before check; 124.9h before check]
+    ... 41 more hour-groups
+
+- Will OpenAI be the second-best Code Arena | WebDev AI lab at the end of October 2026?  [second-best-code-arena-webdev-ai-lab-end-of-october]
+    winner=Yes check=10-31 16:00 closed=10-31 18:18 appearance=- T90=10-29 13:00:49 market vol=18977; account net=330 (incomplete)
+    pYes around check-20h: -7d:0.80 -48h:0.88 -1h:0.95 -10s:0.95 +60s:0.95 +10m:0.95 +2h:0.95 check-1h:0.95
+    09-03 15:01:37 BUY  T Yes n=  1 sh=     46 px=0.060 usd=     3  [m1 >7d before check; 1393.0h before check]
+    09-04 11:56:09 BUY  M Yes n=  1 sh=     20 px=0.140 usd=     3  [m1 >7d before check; 1372.1h before check]
+    09-04 11:56:09 BUY  T Yes n=  1 sh=    104 px=0.140 usd=    15  [m1 >7d before check; 1372.1h before check]
+    09-05 09:24:00 BUY  T Yes n=  1 sh=      5 px=0.190 usd=     1  [m1 >7d before check; 1350.6h before check]
+    10-24 13:10:02 SELL T Yes n=  1 sh=    134 px=0.845 usd=   113  [m1 >7d before check; 170.8h before check]
+    10-26 13:22:50 BUY  T Yes n=  1 sh=     21 px=0.900 usd=    19  [m2 1-7d before check; 122.6h before check]
+    10-29 14:03:23 BUY  T Yes n=  1 sh=    281 px=0.915 usd=   257  [m4 after T90; 49.9h before check]
+    ... 59 more hour-groups
+
+- Will Anthropic have the best Math AI model at the end of October 2026?  [which-company-has-the-best-text-arena-math-ai-model-end-of-o]
+    winner=No check=10-31 16:00 closed=10-31 18:02 appearance=- T90=10-28 17:19:19 market vol=36107; account net=346 (incomplete)
+    pYes around check-20h: -7d:0.24 -48h:0.04 -1h:0.02 -10s:0.02 +60s:0.02 +10m:0.02 +2h:0.02 check-1h:0.04
+    09-01 04:06:09 SELL T No  n=  1 sh=     20 px=0.150 usd=     3  [m1 >7d before check; 1451.9h before check]
+    09-02 14:29:34 BUY  M Yes n=  2 sh=     51 px=0.797 usd=    41  [m1 >7d before check; 1417.5h before check]
+    09-03 05:07:45 BUY  M No  n=  1 sh=     20 px=0.210 usd=     4  [m1 >7d before check; 1402.9h before check]
+    09-04 14:55:30 BUY  M Yes n=  2 sh=      5 px=0.730 usd=     4  [m1 >7d before check; 1369.1h before check]
+    10-25 16:17:56 BUY  M Yes n=  4 sh=     40 px=0.240 usd=    10  [m2 1-7d before check; 143.7h before check]
+    10-25 16:17:56 SELL M Yes n=  1 sh=     20 px=0.250 usd=     5  [m2 1-7d before check; 143.7h before check]
+    10-25 16:17:56 SELL T Yes n=  1 sh=    303 px=0.258 usd=    78  [m2 1-7d before check; 143.7h before check]
+    ... 51 more hour-groups
+
+- Will Anthropic be the second-best Code Arena | WebDev AI lab at the end of September 2026?  [second-best-code-arena-webdev-ai-lab-end-of-september-202607]
+    winner=No check=09-30 16:00 closed=09-30 18:03 appearance=- T90=09-25 00:03:12 market vol=32060; account net=241 (incomplete)
+    pYes around check-20h: -7d:0.35 -48h:0.01 -1h:0.00 -10s:0.00 +60s:0.00 +10m:0.00 +2h:0.00 check-1h:0.00
+    09-02 16:53:25 SELL T Yes n=  2 sh=    219 px=0.191 usd=    42  [m1 >7d before check; 671.1h before check]
+    09-02 17:01:15 BUY  T No  n=  1 sh=      8 px=0.830 usd=     6  [m1 >7d before check; 671.0h before check]
+    09-03 00:59:31 BUY  T No  n=  1 sh=    181 px=0.871 usd=   158  [m1 >7d before check; 663.0h before check]
+    09-03 01:00:01 BUY  T No  n=  1 sh=     50 px=0.871 usd=    44  [m1 >7d before check; 663.0h before check]
+    09-25 23:45:05 BUY  M Yes n=  1 sh=     11 px=0.030 usd=     0  [m4 after T90; 112.2h before check]
+    09-26 03:43:45 BUY  M Yes n=  1 sh=     89 px=0.030 usd=     3  [m4 after T90; 108.3h before check]
+    09-26 04:09:45 BUY  M Yes n=  2 sh=    185 px=0.020 usd=     4  [m4 after T90; 107.8h before check]
+    ... 34 more hour-groups
+
+- Will Anthropic be the #2 AI lab at the end of October 2026?  [2-ai-lab-end-of-october-style-control-on]
+    winner=Yes check=10-31 16:00 closed=10-31 18:27 appearance=- T90=10-30 11:39:21 market vol=21121; account net=-120 (incomplete)
+    pYes around check-20h: -7d:0.67 -48h:0.83 -1h:0.90 -10s:0.90 +60s:0.90 +10m:0.90 +2h:0.90 check-1h:0.95
+    09-01 18:22:21 SELL T Yes n=  1 sh=     21 px=0.090 usd=     2  [m1 >7d before check; 1437.6h before check]
+    09-05 17:21:57 BUY  T Yes n=  1 sh=     32 px=0.110 usd=     4  [m1 >7d before check; 1342.6h before check]
+    09-08 12:49:21 BUY  M No  n=  1 sh=     20 px=0.850 usd=    17  [m1 >7d before check; 1275.2h before check]
+    09-13 08:31:48 BUY  T No  n=  1 sh=     93 px=0.770 usd=    72  [m1 >7d before check; 1159.5h before check]
+    10-27 18:02:17 SELL T Yes n=  1 sh=     20 px=0.660 usd=    13  [m2 1-7d before check; 94.0h before check]
+    10-28 02:24:27 BUY  M No  n=  1 sh=     13 px=0.250 usd=     3  [m2 1-7d before check; 85.6h before check]
+    10-28 02:31:47 SELL T No  n=  1 sh=     19 px=0.250 usd=     5  [m2 1-7d before check; 85.5h before check]
+    ... 35 more hour-groups
+
+- Will Meta be the #3 AI Lab at the end of October 2026 (Style Control On)?  [3-ai-lab-end-of-october-style-control-on]
+    winner=Yes check=10-31 16:00 closed=10-31 18:27 appearance=- T90=10-30 09:43:13 market vol=24908; account net=296 (incomplete)
+    pYes around check-20h: -7d:0.68 -48h:0.85 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.98 +2h:0.98 check-1h:0.95
+    09-04 10:19:13 BUY  M No  n=  1 sh=     20 px=0.720 usd=    14  [m1 >7d before check; 1373.7h before check]
+    09-05 13:07:01 SELL T Yes n=  1 sh=     23 px=0.320 usd=     7  [m1 >7d before check; 1346.9h before check]
+    09-06 20:12:06 BUY  M Yes n=  1 sh=     20 px=0.340 usd=     7  [m1 >7d before check; 1315.8h before check]
+    09-07 02:24:22 BUY  M Yes n=  1 sh=     20 px=0.310 usd=     6  [m1 >7d before check; 1309.6h before check]
+    10-27 16:06:23 SELL T Yes n=  1 sh=     14 px=0.700 usd=    10  [m2 1-7d before check; 95.9h before check]
+    10-29 05:40:11 BUY  T Yes n=  1 sh=    100 px=0.841 usd=    84  [m2 1-7d before check; 58.3h before check]
+    10-31 16:06:15 BUY  T Yes n=  1 sh=    159 px=0.991 usd=   158  [m4 after T90; -0.1h before check]
+    ... 47 more hour-groups
+
+- Will Alibaba be the third-best Code Arena | WebDev AI lab at the end of September 2026?  [third-best-code-arena-webdev-ai-lab-end-of-september-2026072]
+    winner=Yes check=09-30 16:00 closed=09-30 18:04 appearance=- T90=09-26 04:28:03 market vol=23711; account net=134 (incomplete)
+    pYes around check-20h: -7d:0.56 -48h:0.95 -1h:0.98 -10s:0.98 +60s:0.98 +10m:0.98 +2h:0.92 check-1h:0.98
+    09-01 09:35:01 BUY  M No  n=  1 sh=     10 px=0.460 usd=     5  [m1 >7d before check; 702.4h before check]
+    09-01 23:39:57 BUY  M Yes n=  1 sh=      2 px=0.530 usd=     1  [m1 >7d before check; 688.3h before check]
+    09-02 04:56:24 BUY  M Yes n=  1 sh=     18 px=0.530 usd=     9  [m1 >7d before check; 683.1h before check]
+    09-02 09:27:22 BUY  T No  n=  1 sh=    530 px=0.644 usd=   341  [m1 >7d before check; 678.5h before check]
+    09-23 07:41:32 SELL T Yes n=  1 sh=    106 px=0.620 usd=    66  [m1 >7d before check; 176.3h before check]
+    09-23 19:26:16 SELL T Yes n=  1 sh=     20 px=0.690 usd=    14  [m2 1-7d before check; 164.6h before check]
+    09-30 16:00:51 BUY  T Yes n=  1 sh=   1722 px=0.989 usd=  1704  [m4 after T90; -0.0h before check]
+    ... 14 more hour-groups
+
+- Will Alibaba be the second-best Chinese AI company at the end of September 2026?  [second-best-chinese-ai-company-end-of-september-202607222202]
+    winner=Yes check=09-30 16:00 closed=09-30 18:22 appearance=- T90=09-26 17:31:06 market vol=21219; account net=-63 (incomplete)
+    pYes around check-20h: -7d:0.08 -48h:0.91 -1h:0.98 -10s:0.99 +60s:0.99 +10m:0.99 +2h:0.99 check-1h:1.00
+    09-01 03:54:57 SELL T Yes n=  1 sh=    140 px=0.221 usd=    31  [m1 >7d before check; 708.1h before check]
+    09-02 14:36:04 BUY  M No  n=  1 sh=     20 px=0.800 usd=    16  [m1 >7d before check; 673.4h before check]
+    09-06 13:16:33 BUY  M No  n=  1 sh=     20 px=0.660 usd=    13  [m1 >7d before check; 578.7h before check]
+    09-06 13:17:12 SELL T No  n=  1 sh=     20 px=0.659 usd=    13  [m1 >7d before check; 578.7h before check]
+    09-26 05:02:29 BUY  T Yes n=  2 sh=     54 px=0.900 usd=    49  [m2 1-7d before check; 107.0h before check]
+    09-28 03:47:50 SELL T No  n=  1 sh=     55 px=0.054 usd=     3  [m4 after T90; 60.2h before check]
+    09-29 10:02:50 BUY  T Yes n=  1 sh=    100 px=0.950 usd=    95  [m4 after T90; 30.0h before check]
+    ... 15 more hour-groups

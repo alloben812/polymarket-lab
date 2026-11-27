@@ -1,0 +1,39 @@
+[0xed446954680979932092e970b443e6ae61e34f76] fills 18871 in 9s
+0xed446954680979932092e970b443e6ae61e34f76  0xed446954680979932092e970b443e6ae61e34f76  window 2026-11-13 16:27 .. 2026-11-27 16:27 UTC
+summary: {"fills": 18871, "markets": 211, "resolved_complete_markets": 211, "incomplete_markets": 0, "unresolved_markets": 0, "turnover_usd": 3727188, "maker_share_usd": 0.864, "sell_share_usd": 0.161, "markets_with_both_outcomes_traded": 206, "uses_split_merge": true, "gross": 117065.68, "fees_est": 66.3, "net": 116999.39, "fee_rate_unknown_markets": 0, "net_per_market": 554.499, "t_by_market": 2.02, "win_share_markets": 0.597, "median_market_turnover": 11837.64, "max_market_turnover": 133503.25, "avg_fill_usd": 197.51}
+inventory events: {'MERGE': 1058, 'REDEEM': 6}
+API says for the same days: gross 117108, fees -66, refunded 0, rebates 5150, kept 122192, volume $3727188, fills 18871
+
+by family:
+  family  markets  resolved_complete  incomplete  turnover  taker_share  gross      fees_est  net        net_pct_turnover  net_per_market  t_by_market
+  sports  211      211                0           3727188   0.136        117065.68  66.3      116999.39  3.14              554.5           2.02       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares   usd      avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd  
+  ('M', 'BUY')   18418  6918013  3128589  0.4522  1.685          0.0           1.685         0.833  2.02  211      116546.36
+  ('M', 'SELL')  350    189622   91903    0.4847  0.071          0.0           0.071         0.052  1.36  45       134.35   
+  ('T', 'SELL')  103    548617   506696   0.9236  0.07           0.012         0.058         0.148  0.39  100      318.68   
+
+by role and price:
+  key                 fills  shares   usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd  
+  ('M', '0.00-0.05')  1086   753035   14810   0.0197  -0.987         0.0           -0.987        0.522  -1.89  155      -7429.21 
+  ('M', '0.05-0.15')  1500   918821   84609   0.0921  2.272          0.0           2.272         3.099  0.73   172      20879.77 
+  ('M', '0.15-0.30')  2120   812379   177341  0.2183  -0.419         0.0           -0.419        4.612  -0.09  176      -3404.49 
+  ('M', '0.30-0.45')  2700   946671   360226  0.3805  4.315          0.0           4.315         3.555  1.21   176      40844.48 
+  ('M', '0.45-0.55')  2152   817109   403848  0.4942  -3.031         0.0           -3.031        3.735  -0.81  154      -24763.01
+  ('M', '0.55-0.70')  4387   1146931  710503  0.6195  -0.065         0.0           -0.065        3.622  -0.02  181      -746.19  
+  ('M', '0.70-0.85')  2688   777313   595631  0.7663  6.002          0.0           6.002         3.536  1.7    179      46652.5  
+  ('M', '0.85-0.95')  1244   489773   439240  0.8968  7.353          0.0           7.353         1.022  7.2    159      36011.05 
+  ('M', '0.95-0.99')  774    353834   342606  0.9683  2.467          0.0           2.467         0.547  4.51   139      8727.58  
+  ('M', '0.99-1.00')  117    91769    91677   0.999   -0.1           0.0           -0.1          0.0    None   25       -91.77   
+  ('T', '0.00-0.05')  7      36606    266     0.0073  0.727          0.036         0.691         0.227  3.04   7        252.99   
+  ('T', '0.05-0.15')  1      5700     625     0.1097  10.967         0.488         10.479        None   None   1        597.3    
+  ('T', '0.99-1.00')  95     506311   505805  0.999   -0.1           0.005         -0.105        0.0    None   95       -531.6   
+
+by role and point in the market's life:
+  key                               fills  shares   usd      avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd  
+  ('M', 'life', 'u 6-24 h to end')  806    344702   161846   0.4695  -4.048         0.0           -4.048        6.617  -0.61  86       -13952.7 
+  ('M', 'life', 'v 1-6 h to end')   17962  6762933  3058645  0.4523  1.932          0.0           1.932         0.813  2.38   211      130633.41
+  ('T', 'life', 'v 1-6 h to end')   103    548617   506696   0.9236  0.07           0.012         0.058         0.148  0.39   100      318.68   
+
+full result written to studies/wallets/esports/iii252.json

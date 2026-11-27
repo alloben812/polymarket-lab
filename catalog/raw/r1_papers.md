@@ -459,3 +459,114 @@ Contents not inspected.
 - Bürgi-Deng-Whelan PDF and Aktug-Torul PDF: URLs found, not downloaded.
 - No replication of any paper's numbers on raw data (that is a study with a protocol, not a reading task).
 - Not searched: NBER working-paper series proper, Google Scholar, journal sites; non-English literature.
+
+---------------------------------------------------------------------------------------------------------------
+
+## Verification pass (2026-11-27, second reader)
+
+Scripts: `catalog/raw/r1_verify_scripts/` (`grepnum.py`, `ctx.py`, `ctx2.py` search the papers for each claimed
+number; `w1.py` splits wallet fills; `fav.py` is the weather check below). Nothing here is a replication of a paper.
+
+### What was checked
+
+1. Existence: all 27 arXiv ids cited in the candidates were fetched from the arXiv API again; every id exists with
+   the title, authors and date given above. I downloaded the HTML of 13 papers a second time; the files are
+   byte-identical to the local copies.
+2. Numbers: every figure quoted in candidates 1-9, 11 and 12 was searched in the paper text and found, with these
+   exceptions and nuances:
+   - Fan et al. (2.3): the sentence is "this time differs from tau by a median of two minutes". It gives no
+     direction. "The price locks in a median two minutes AFTER the first report" is the researcher's reading, not
+     the paper's statement. The 0.43 -> 0.78 series, 337 accounts, 62% posted volume, 1.4-3.8% are there.
+   - Gebele et al. (1.2): "ten most profitable addresses account for 75[%]" and "approximately 80[%]" maker-built
+     conversions are in the text with the percent sign lost, as the researcher said. The same passage says the
+     all-taker share is "at or below 40[%]" from late 2024, so 80% is an average, not a constant.
+   - Moshrefi (2.8): the parlay overpricing by leg count rests on few contracts: 140 parlays with 8 legs, 67 with
+     9, 57 with 10 and 12 with 11, out of 12,639; the median price/product ratio over all parlays is 0.996. The
+     broader statement (win rate 2-10 points below price, 0.30 wins about 24%) is in the text.
+   - Cardozo (3.2): finance longshots -72.40% is the pooled figure only; the equal-weight figure is -2.62% with an
+     interval that includes zero. Sports favorites are -0.230% equal-weight and +0.137% pooled.
+   - AlphaOpsBench (section 6): "no confirmed pass on the real cohort" is about whether LLM-written programs pass
+     the benchmark's end-to-end validity checks. It is not a finding that the 24 public strategies lose money. The
+     candidate text read it as the second.
+3. Non-arXiv sources opened directly (all HTTP 200): RePEc abstract of CEPR DP 21615 (76.5%, limit orders,
+   "modestly persistent": confirmed), Yale Insights (3%, 44%, 29% lucky winners with 69% of gains, 1.72M accounts:
+   confirmed), the NBER PDF of Bartlett & O'Hara (1.91, 0.82, -$75,754, 41.6M trades: confirmed in the local text),
+   Georgetown Law Technology Review (37 ms, 3 to 4 seconds, DRW/Jump/Susquehanna: confirmed; the article never
+   mentions Polymarket and mentions Kalshi once in passing).
+   Two PDFs the researcher had not opened are reachable and were read on the first pages:
+   - Buergi, Deng, Whelan (UCD WP25/19, version September 2025): abstract as summarised; over 300,000 contracts.
+   - Aktug & Torul (version June 2026, not April): 5-minute data, nine venues, Polymarket and Betfair "nearly 85%"
+     of information shares, "no dealer sportsbook exceeds 11%" (not "none"). They describe Ng et al. as a
+     30-minute return VAR, so the Polymarket/Kalshi lead in that paper is measured on 30-minute bars.
+   SSRN returns 403 here as well, so Ng et al. stays second-hand. The PolyWeatherData README is reachable on
+   raw.githubusercontent.com; it calls the paper an "ICDM (student paper)" and lists the ten cities (Atlanta,
+   Chicago, London, Miami, Toronto, New York, Seattle, Seoul, Shanghai, Tokyo).
+4. Wallets (`wallet_check.py --monthly`, then `pmlab.wallet` and `w1.py` to see what they trade):
+   - WrongBy1Degree 0x0a0c...a853: gross 36,176, fees -7,692, rebates 1,598, kept 30,081 (+7.59% of $396K), 5% of
+     the net is rebates, Tier 0. Net by month May-Nov: 1,312 / 225 / -108 / 1,205 / 3,164 / -2,881 / 27,154.
+     The researcher's figures stand. What it trades (last 30 days, 2,700 fills, $150K): 100% weather, 100% taker,
+     buys only (YES $78.7K, NO $69.3K), average price 0.39, 11 fills in the 0.85-0.95 band. 2,500 of the 2,700
+     fills are more than 12 hours before 12:00 UTC of the target date. The lab's weather study found 0 of its
+     1,252 resolved fills inside the station's local day. It is a day-ahead forecast-update taker. It does not
+     trade the late-favorite fade and is not evidence for it.
+   - xtxpleasecallme 0xad53...ef24: gross 256,799, fees -65,958 (5,571 refunded), rebates and rewards 190,337, kept
+     386,805 (+2.26% of $17.1M), 49% of the net is rebates/rewards (the notes above say 361,894 and 53%). Net
+     without rebates Apr-Nov: 22,675 / -9,275 / -12,808 / 2,094 / 8,736 / -2,494 / 115,400 / -12,413 (April and
+     November differ from section 9). Its last six hours: 1,471 fills, of which 95 in temperature markets; the
+     rest is Dutch second-division football, crypto price thresholds, politics and economics. It is a
+     cross-category rewards farmer that happens to top the weather board, not a weather trader.
+   - 1DVSBSTD 0xeb1d...59b0: gross 3,303, fees -1,110 (154 refunded), kept 2,356 (+0.03% of $7.57M), no rebates.
+     Net by month Mar-Nov: 373 / 1,093 / 577 / 966 / 185 / -113 / -437 / 231 / -373. Last 10 days: 89% of
+     turnover is weather, 29% maker, average buy price 0.995-0.999, net -$239 on $322K. Taker buys at 0.99-1.00
+     lose 0.17 cents a share; taker buys at 0.95-0.99 earn 1.14 cents a share (t 4.8) but on $4.2K only.
+     The story stands. One caution on the figure: 0.03% is per dollar of turnover, and the positions last hours,
+     so it is not an annual yield on capital; the account's capital is unknown.
+
+### A check that contradicts candidate 1 (weather late-favorite fade)
+
+The lab already holds prices for 3,198 temperature markets of 13-26 Nov 2026 (48 stations, `studies/wallets/weather/
+out/px.json`, 30-minute points). I applied the paper's rule to them: YES price between 0.75 and 0.95 at a fixed
+local hour, buy NO at 1 - p, fee 0.01, hold. The rule was written in `fav.py` before the run, but I had already
+seen the neighbouring bands in the lab's `out/calib.txt`, so this is not a blind test. One script, ten cells, all
+shown:
+
+| local hour | n (events) | mean YES | NO wins | implied | return at 1-p | t | return with 2 c slippage | t |
+|---|---|---|---|---|---|---|---|---|
+| 07 | 51 | 0.863 | 13.7% | 13.7% | -0.9% | -0.03 | -13.5% | -0.45 |
+| 09 | 41 | 0.867 | 9.8% | 13.3% | -27.5% | -0.80 | -37.0% | -1.23 |
+| 11 | 61 | 0.845 | 13.1% | 15.5% | -16.5% | -0.58 | -26.0% | -1.02 |
+| 13 | 174 | 0.858 | 9.8% | 14.2% | -31.8% | -2.03 | -40.3% | -2.94 |
+| 15 | 188 | 0.891 | 10.6% | 10.9% | -3.0% | -0.15 | -18.1% | -1.09 |
+
+The paper's ten cities alone (11-47 events per cell): -100% at 09 h and 11 h (no NO win in 27 events), -24% at
+13 h, +4% at 07 h, +70% at 15 h (t 1.2). In November the favorite band won as often as priced or more often; the
+paper's July result (NO wins 20.7%) does not show up. Limits: 14 days, another season, the market set is the union
+of what seven accounts traded, 30-minute API prices are not quotes, the same events appear in several rows. It is
+enough to say the effect is not stable; it is not enough to say the paper is wrong about July.
+
+### What I changed in the candidate list
+
+- Candidate 1 (weather late-favorite fade): credibility 3 -> 2. Out-of-sample lab data has the opposite sign, and
+  neither wallet trades the rule. Wallet evidence rewritten. The paper's fee of 0.05 was the real weather rate at
+  the time (NOTES: weather was 0.05 until 20 Nov), not a conservative assumption.
+- Candidate 4 (news latency): credibility kept at 3, verification PARTIAL because of the "two minutes" reading.
+  Added the lab's own timings (headline to 0.95 in about 70 s; economic releases 98% taken within 30 s).
+- Candidate 5 (longshot fade): figures confirmed; added the finance and sports nuance and the lab's mentions result
+  (blind buying at >= 0.95 is negative after fee there).
+- Candidate 7 (crypto latency): the taker delay is 150 ms since 4 Sep 2026 (NOTES), not 50 ms.
+- Candidate 10 (cross-venue): Aktug-Torul details corrected; the only lag scale in the cited work is 30-minute bars.
+- Candidate 11 (end-of-game sports): added that 272 of 307 sports game markets carry a 1-second taker delay
+  (all but NBA), which the candidate did not mention.
+- Candidate 12 (parlays): sample sizes added.
+- Candidate 13 (model forecasting): AlphaOpsBench claim corrected.
+- Nothing dropped: every cited source exists and contains the quoted figures.
+
+### Systematic problems
+
+- Wallets taken from a category leaderboard were used as evidence about that category without looking at what
+  they trade. Two of three do not fit the story they were attached to.
+- Several "testability" lines propose work the lab has already done (`studies/wallets/weather`,
+  `studies/gaps/econ_release_lag`, `studies/wallets/mentions`). Those results bear directly on candidates 1, 4, 5
+  and 6 and were not used.
+- The summary's finding (4) puts weather favorites next to geopolitical news as one of two places with a
+  minutes-to-hours gap. After this pass only the geopolitical one remains, and it has no fill evidence.

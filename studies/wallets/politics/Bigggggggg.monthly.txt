@@ -1,0 +1,18 @@
+0x511f9c771449162349795d17becf8b37031acbe1  0x511f9c771449162349795d17becf8b37031acbe1  joined 2026-05-16  markets traded 13565  fills 176697
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        538,971
+  taker fees charged:                                   -51,852
+  rebates+rewards (taker 6,958 / maker 11,893 / rewards 28,328):     47,178
+  yield + referral income:                                    3
+  ECONOMIC PnL (the API's bottom line, trust this):     534,300   of which unrealized -71,484
+  volume $18,634,262 (49,187,921 shares): gross +2.89% of volume, fees net of refunds -0.28%, kept +2.87%
+  share of what was kept that is rebates/rewards: 9%
+  taker_tier: {"address": "0x511f9c771449162349795d17becf8b37031acbe1", "tier": 0, "tier_name": "Tier 0", "wv_30d": 143481.682417}
+  maker_tier: {"address": "0x511f9c771449162349795d17becf8b37031acbe1", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 185020.032538, "own_wv_30d": 185020.032538}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-05     106,968     -3,289         0     1,314    104,993     103,679    1,503,375    17,313
+  2026-06      22,297     -6,837         0     5,633     21,093      15,460    2,879,601    38,651
+  2026-07     111,048    -14,356         0     9,247    105,939      96,692    4,465,957    43,479
+  2026-08     104,042     -7,382         0     6,376    103,036      96,660    2,037,368    17,469
+  2026-09     220,503     -5,369         0     7,083    222,217     215,134    1,977,713    16,171
+  2026-10     101,710     -7,611         0    10,022    104,122      94,100    3,268,738    21,597
+  2026-11    -127,624     -7,007         0     7,502   -127,127    -134,629    2,500,352    21,972

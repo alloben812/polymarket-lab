@@ -1,0 +1,26 @@
+Cb94C437: 35346 fills, $1,512,014, family filter None, markets 2493, events 979
+ role/side/outcome $: {('T', 'BUY', 'No'): 515745, ('T', 'SELL', 'No'): 509134, ('T', 'BUY', 'Yes'): 245105, ('T', 'SELL', 'Yes'): 242030}
+ fill usd p10/p50/p90/p99: [0.3, 7.0, 88.5, 721.7]  neg-risk share of $: 0.77
+ $ by time to market end: {'1-7d': 218700, '30-180d': 309909, 'after end': 207626, '>180d': 380535, '<1d': 212906, '7-30d': 180717, 'no end': 1622}
+ bought $760,850; round-tripped inside window: 1,563,659 shares, cost $701,897, realised $15,216 (0.97 c/share); sells of older inventory $34,051
+ holding time of round trips ($-weighted) p10/p50/p90: ['1.2 min', '54.0 min', '939.2 min']  share of round-trip $ closed <60 s: 0.09 <1 h: 0.52
+ round trips by (entry role, exit role): shares, c/share: {('T', 'T'): (1563659, 0.97)}
+ buy $ by price: {'<0.70': 233601, '<0.30': 63310, '<0.90': 244822, '<0.95': 116377, '<0.99': 96201, '<0.05': 6540}
+ 10-second bursts: 25851 median fills 1 p90 2  bursts touching >=3 markets of one event: 179
+ fills per day: {'11-13': 728, '11-14': 2361, '11-15': 1564, '11-16': 1648, '11-17': 1749, '11-18': 1785, '11-19': 2623, '11-20': 1978, '11-21': 2938, '11-22': 3254, '11-23': 4064, '11-24': 3005, '11-25': 2998, '11-26': 2496, '11-27': 2155}
+ fills per UTC hour: [1223, 1610, 1181, 1218, 1285, 1733, 1491, 1491, 1291, 1444, 1340, 1282, 1274, 1867, 2210, 2129, 1715, 1459, 1304, 1545, 1568, 1266, 1128, 1292]
+ top events:
+   who-will-be-the-next-prime-minister-of-israel-after-the-next-election  mk   4 $  148,923
+   anthropic-ipo-closing-market-cap-higher-strikes                        mk   5 $  138,175
+   jensen-huang-rejoins-nvidia-byptptpt                                   mk   4 $   59,347
+   next-prime-minister-of-sweden                                          mk   2 $   58,406
+   next-ceo-of-nvidia                                                     mk  10 $   52,273
+   nationwide-ground-stop-lifted-byptptpt                                 mk   8 $   42,482
+   kai-cenat-finishes-gta-vi-marathon-by                                  mk   7 $   29,468
+   us-announces-end-of-iranian-blockade-byptptpt-20260713152715080        mk   6 $   28,489
+   xqc-finishes-gta-vi-by                                                 mk   6 $   28,483
+   next-senate-majority-leader-485                                        mk   3 $   26,834
+   anthropic-closes-below-ipo-price-by                                    mk   7 $   25,169
+   fourth-jensen-huang-affair-reported-by-december-31                     mk   4 $   22,790
+   next-prime-minister-of-spain-20260625005215443                         mk   2 $   21,672
+   next-leader-out-of-power-before-2027-no-starmer-or-petro-2026063019461 mk   3 $   18,571

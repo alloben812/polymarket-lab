@@ -1,0 +1,50 @@
+[superstonksbro] fills 1718 in 1s
+superstonksbro  0x969fae0a3a93778adc42178f72c612ed8c4e4d55  window 2026-11-13 16:05 .. 2026-11-27 16:05 UTC
+summary: {"fills": 1718, "markets": 304, "resolved_complete_markets": 186, "incomplete_markets": 21, "unresolved_markets": 113, "turnover_usd": 114496, "maker_share_usd": 0.721, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 35, "uses_split_merge": true, "gross": 28513.67, "fees_est": 441.67, "net": 28072.0, "fee_rate_unknown_markets": 0, "net_per_market": 150.925, "t_by_market": 2.52, "win_share_markets": 0.478, "median_market_turnover": 49.0, "max_market_turnover": 5446.95, "avg_fill_usd": 66.65}
+inventory events: {'MERGE': 98, 'REDEEM': 116}
+API says for the same days: gross 32780, fees -661, refunded 0, rebates 567, kept 32687, volume $115984, fills 1749
+
+by family:
+  family   markets  resolved_complete  incomplete  turnover  taker_share  gross     fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  finance  304      186                21          114496    0.279        28513.67  441.67    28072.0  24.52             150.92          2.52       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t     markets  net_usd 
+  ('M', 'BUY')  538    75613   32661  0.4319  17.071         0.0           17.071        7.246   2.36  134      12907.68
+  ('T', 'BUY')  272    58015   16724  0.2883  26.9           0.761         26.139        12.113  2.16  90       15164.32
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t       markets  net_usd 
+  ('M', '0.00-0.05')  13     3572    72    0.0203  -2.025         0.0           -2.025        0.029   -70.26  10       -72.34  
+  ('M', '0.05-0.15')  35     6611    697   0.1054  50.742         0.0           50.742        25.363  2.0     24       3354.31 
+  ('M', '0.15-0.30')  127    16597   3601  0.2169  -5.245         0.0           -5.245        6.006   -0.87   53       -870.45 
+  ('M', '0.30-0.45')  108    13733   5077  0.3697  38.784         0.0           38.784        12.522  3.1     27       5326.05 
+  ('M', '0.45-0.55')  87     10060   5049  0.5018  48.475         0.0           48.475        1.807   26.82   22       4876.76 
+  ('M', '0.55-0.70')  78     10718   6789  0.6335  31.51          0.0           31.51         4.395   7.17    24       3377.13 
+  ('M', '0.70-0.85')  72     10848   8154  0.7516  -26.145        0.0           -26.145       20.385  -1.28   15       -2836.23
+  ('M', '0.85-0.95')  11     1231    1073  0.8715  -27.747        0.0           -27.747       27.364  -1.01   9        -341.54 
+  ('M', '0.95-0.99')  7      2244    2150  0.9581  4.189          0.0           4.189         0.017   None    4        94.0    
+  ('T', '0.00-0.05')  5      19678   121   0.0061  -0.613         0.03          -0.643        0.002   None    2        -126.59 
+  ('T', '0.05-0.15')  15     555     62    0.1116  -5.355         0.494         -5.849        6.543   -0.89   11       -32.44  
+  ('T', '0.15-0.30')  50     5540    1404  0.2534  17.997         0.94          17.056        18.059  0.94    23       944.93  
+  ('T', '0.30-0.45')  80     20366   8071  0.3963  50.649         1.193         49.456        7.011   7.05    30       10072.26
+  ('T', '0.45-0.55')  56     4697    2345  0.4994  49.213         1.245         47.968        1.495   32.08   20       2252.83 
+  ('T', '0.55-0.70')  43     6503    4199  0.6457  35.355         1.132         34.223        2.245   15.25   20       2225.35 
+  ('T', '0.70-0.85')  15     564     423   0.7488  -25.016        0.937         -25.954       23.132  -1.12   15       -146.49 
+  ('T', '0.85-0.95')  8      113     101   0.8939  -22.209        0.472         -22.68        15.265  -1.49   6        -25.53  
+
+by role and point in the market's life:
+  key                                  fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd 
+  ('M', 'life', 's over 7 d to end')   57     7785    3560   0.4572  38.356         0.0           38.356        10.002  3.83   15       2986.21 
+  ('M', 'life', 't 1-7 d to end')      273    29023   15935  0.5491  26.326         0.0           26.326        12.457  2.11   49       7640.64 
+  ('M', 'life', 'u 6-24 h to end')     70     16480   6497   0.3942  28.657         0.0           28.657        15.297  1.87   33       4722.72 
+  ('M', 'life', 'v 1-6 h to end')      75     11482   3447   0.3002  -17.52         0.0           -17.52        10.213  -1.72  32       -2011.72
+  ('M', 'life', 'w 10-60 min to end')  24     2772    659    0.2376  -17.025        0.0           -17.025       7.294   -2.33  8        -471.89 
+  ('M', 'life', 'x 1-10 min to end')   39     8070    2564   0.3177  0.517          0.0           0.517         13.342  0.04   16       41.73   
+  ('T', 'life', 's over 7 d to end')   40     16617   7224   0.4347  56.306         1.192         55.114        3.579   15.4   13       9158.23 
+  ('T', 'life', 't 1-7 d to end')      112    31576   6408   0.2029  16.719         0.46          16.259        11.543  1.41   43       5133.82 
+  ('T', 'life', 'u 6-24 h to end')     49     2388    836    0.3503  -27.119        1.001         -28.12        7.015   -4.01  18       -671.43 
+  ('T', 'life', 'v 1-6 h to end')      62     6622    1982   0.2993  18.962         0.991         17.971        15.849  1.13   21       1189.98 
+  ('T', 'life', 'x 1-10 min to end')   9      812     275    0.3382  44.636         1.092         43.544        18.64   2.34   6        353.72  
+
+full result written to studies/wallets/finance/superstonksbro.json

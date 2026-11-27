@@ -1,0 +1,39 @@
+26NOV26 instruments with traded candles: 32
+25NOV26 instruments with traded candles: 33
+24NOV26 instruments with traded candles: 34
+23NOV26 instruments with traded candles: 31
+22NOV26 instruments with traded candles: 36
+21NOV26 instruments with traded candles: 40
+20NOV26 instruments with traded candles: 29
+19NOV26 instruments with traded candles: 29
+18NOV26 instruments with traded candles: 29
+17NOV26 instruments with traded candles: 28
+traded hourly candles: 3109 over 10 expiries (['17NOV26', '18NOV26', '19NOV26', '20NOV26', '21NOV26', '22NOV26', '23NOV26', '24NOV26', '25NOV26', '26NOV26']), instruments 321
+near-ATM IV (|ln K/S|<=1.5%, 2-24h to expiry): n 1002, IV median 0.540, DVOL median 0.505, ratio IV/DVOL quartiles 0.959 / 1.096 / 1.271, mean 1.134
+ratio by expiry:
+          size  median
+exp_code              
+17NOV26    101   1.114
+18NOV26     98   1.020
+19NOV26    122   1.148
+20NOV26    110   1.128
+21NOV26     85   1.244
+22NOV26     77   1.024
+23NOV26     88   1.120
+24NOV26    110   1.105
+25NOV26     94   1.042
+26NOV26    117   1.055
+               size  median
+tb                         
+(2.0, 6.0]      173   1.081
+(6.0, 12.0]     233   1.051
+(12.0, 24.01]   558   1.109
+
+spread digitals: n 2425 (1170 call spreads, 1255 put spreads); model(a) - option digital: mean +0.0022 median +0.0057 mean abs 0.0767 sd 0.1417; share of raw spreads outside [0,1]: 0.055
+           n   model  option  mean_diff  median_diff     mae
+mb                                                          
+0-0.1    563  0.0306  0.0469    -0.0163       0.0000  0.0308
+0.1-0.3  341  0.1890  0.2044    -0.0155       0.0072  0.0795
+0.3-0.7  557  0.4988  0.5243    -0.0255      -0.0280  0.1520
+0.7-0.9  294  0.8054  0.7696     0.0358       0.0098  0.1006
+0.9-1    670  0.9785  0.9435     0.0350       0.0196  0.0406

@@ -1,0 +1,24 @@
+[Hauchn] fills 160 in 0s
+Hauchn  0xf0ca28d5b0141f0a8e7b251dea80fd881cb166ed  window 2026-11-13 16:05 .. 2026-11-27 16:05 UTC
+summary: {"fills": 160, "markets": 21, "resolved_complete_markets": 1, "incomplete_markets": 7, "unresolved_markets": 20, "turnover_usd": 49890, "maker_share_usd": 0.309, "sell_share_usd": 0.299, "markets_with_both_outcomes_traded": 3, "uses_split_merge": true, "gross": 227.36, "fees_est": 7.76, "net": 219.6, "fee_rate_unknown_markets": 0, "net_per_market": 219.602, "t_by_market": null, "win_share_markets": 1.0, "median_market_turnover": 457.93, "max_market_turnover": 21496.66, "avg_fill_usd": 311.81}
+inventory events: {'REDEEM': 1, 'MERGE': 9}
+API says for the same days: gross 16288, fees -456, refunded 0, rebates 44, kept 15875, volume $52904, fills 163
+
+by family:
+  family     markets  resolved_complete  incomplete  turnover  taker_share  gross   fees_est  net    net_pct_turnover  net_per_market  t_by_market
+  economics  15       0                  7           40597     0.626        0.0     0.0       0.0    0.0               None            None       
+  finance    6        1                  0           9293      0.978        227.36  7.76      219.6  2.36              219.6           None       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', 'BUY')  1      716     489  0.6825  31.754         1.084         30.671        None  None  1        219.6  
+
+by role and price:
+  key                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', '0.55-0.70')  1      716     489  0.6825  31.754         1.084         30.671        None  None  1        219.6  
+
+by role and point in the market's life:
+  key                                 fills  shares  usd  avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c  t     markets  net_usd
+  ('T', 'life', 's over 7 d to end')  1      716     489  0.6825  31.754         1.084         30.671        None  None  1        219.6  
+
+full result written to studies/wallets/finance/Hauchn.json

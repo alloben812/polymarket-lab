@@ -1,0 +1,58 @@
+[0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1] fills 445 in 1s
+0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1  0x44c1dfe43260c94ed4f1d00de2e1f80fb113ebc1  window 2026-11-13 16:06 .. 2026-11-27 16:06 UTC
+summary: {"fills": 445, "markets": 43, "resolved_complete_markets": 30, "incomplete_markets": 2, "unresolved_markets": 11, "turnover_usd": 890122, "maker_share_usd": 0.468, "sell_share_usd": 0.267, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": -82280.35, "fees_est": 1186.55, "net": -83466.91, "fee_rate_unknown_markets": 0, "net_per_market": -2782.23, "t_by_market": -0.59, "win_share_markets": 0.567, "median_market_turnover": 1082.13, "max_market_turnover": 385690.43, "avg_fill_usd": 2000.27}
+inventory events: {'REDEEM': 29}
+API says for the same days: gross -106425, fees -1717, refunded 0, rebates 1291, kept -106851, volume $894348, fills 454
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross      fees_est  net         net_pct_turnover  net_per_market  t_by_market
+  politics  23       12                 2           526308    0.517        304.37     11.79     292.59      0.06              24.38           1.58       
+  tech      5        3                  0           159630    0.054        -142169.1  42.43     -142211.52  -89.09            -47403.84       -1.13      
+  sports    3        3                  0           148778    0.973        18078.7    790.68    17288.02    11.62             5762.67         1.62       
+  finance   9        9                  0           54794     0.874        42108.44   341.66    41766.78    76.23             4640.75         0.98       
+  culture   3        3                  0           613       0.013        -602.77    0.0       -602.77     -98.37            -200.92         -1.0       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd   
+  ('M', 'BUY')   263    212099  156962  0.74    -67.051        0.0           -67.051       11.152  -6.01  11       -142213.96
+  ('M', 'SELL')  28     124156  4356    0.0351  3.508          0.0           3.508         None    None   1        4355.56   
+  ('T', 'BUY')   27     332947  222713  0.6689  18.078         0.313         17.765        11.637  1.53   16       59147.68  
+  ('T', 'SELL')  4      78133   12587   0.1611  -5.905         0.183         -6.087        10.867  None   3        -4756.19  
+
+by role and price:
+  key                 fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd  
+  ('M', '0.00-0.05')  28     124156  4356    0.0351  3.508          0.0           3.508         None   None   1        4355.56  
+  ('M', '0.05-0.15')  3      8219    603     0.0733  -7.335         0.0           -7.335        None   None   1        -602.87  
+  ('M', '0.15-0.30')  21     18791   5281    0.281   -26.507        0.0           -26.507       2.458  None   3        -4980.77 
+  ('M', '0.30-0.45')  3      1110    456     0.411   -41.1          0.0           -41.1         None   None   1        -456.34  
+  ('M', '0.45-0.55')  163    8634    4060    0.4702  3.394          0.0           3.394         0.782  None   2        293.05   
+  ('M', '0.55-0.70')  1      10000   6800    0.68    32.0           0.0           32.0          None   None   1        3200.0   
+  ('M', '0.70-0.85')  18     103202  83596   0.81    -81.002        0.0           -81.002       None   None   1        -83595.5 
+  ('M', '0.85-0.95')  52     62056   56083   0.9037  -90.357        0.0           -90.357       0.222  None   4        -56072.37
+  ('M', '0.99-1.00')  2      85      84      0.9902  0.984          0.0           0.984         0.032  None   2        0.84     
+  ('T', '0.00-0.05')  1      60932   1961    0.0322  3.218          0.031         3.187         None   None   1        1941.77  
+  ('T', '0.05-0.15')  2      35993   5113    0.1421  -14.206        0.122         -14.328       None   None   1        -5157.13 
+  ('T', '0.15-0.30')  6      49925   11967   0.2397  47.89          0.182         47.708        30.54  None   4        23818.45 
+  ('T', '0.30-0.45')  1      34194   14141   0.4136  58.644         0.243         58.402        None   None   1        19969.8  
+  ('T', '0.45-0.55')  1      7201    3668    0.5094  -49.058        0.25          -49.308       None   None   1        -3550.72 
+  ('T', '0.55-0.70')  2      10000   6958    0.6959  -30.415        1.058         -31.473       None   None   1        -3147.24 
+  ('T', '0.70-0.85')  2      12409   9190    0.7406  25.94          0.192         25.748        None   None   1        3195.07  
+  ('T', '0.85-0.95')  7      162565  144744  0.8904  10.962         0.486         10.476        0.019  None   2        17029.64 
+  ('T', '0.95-0.99')  5      9469    9235    0.9753  2.473          0.118         2.355         0.029  80.14  5        222.98   
+  ('T', '0.99-1.00')  4      28392   28322   0.9976  0.245          0.002         0.243         0.015  None   4        68.87    
+
+by role and point in the market's life:
+  key                                            fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t       markets  net_usd   
+  ('M', 'life', 's over 7 d to end')             129    327679  157282  0.48    -42.15         0.0           -42.15        3.632   -11.61  7        -138116.79
+  ('M', 'life', 't 1-7 d to end')                158    8563    4025    0.47    3.0            0.0           3.0           None    None    1        256.9     
+  ('M', 'life', 'v 1-6 h to end')                2      8       7       0.85    15.0           0.0           15.0          None    None    1        1.15      
+  ('M', 'life', 'z after end (pre-resolution)')  2      5       4       0.9254  7.457          0.0           7.457         6.118   None    2        0.34      
+  ('T', 'life', 's over 7 d to end')             16     207236  81652   0.394   20.818         0.169         20.65         16.405  1.26    9        42793.57  
+  ('T', 'life', 't 1-7 d to end')                5      38904   6531    0.1679  -13.849        0.119         -13.968       0.725   None    3        -5434.19  
+  ('T', 'life', 'u 6-24 h to end')               1      8       8       0.988   1.2            0.012         1.188         None    None    1        0.1       
+  ('T', 'life', 'v 1-6 h to end')                2      4978    4231    0.85    15.0           0.638         14.363        None    None    1        714.98    
+  ('T', 'life', 'w 10-60 min to end')            3      80624   71356   0.8851  11.495         0.507         10.988        None    None    1        8858.77   
+  ('T', 'life', 'x 1-10 min to end')             2      76963   69156   0.8986  10.143         0.455         9.688         0.94    None    2        7455.89   
+  ('T', 'life', 'z after end (pre-resolution)')  2      2367    2365    0.999   0.101          0.001         0.1           0.0     None    2        2.37      
+
+full result written to studies/wallets/politics/aenews2.json

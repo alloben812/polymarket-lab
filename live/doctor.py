@@ -61,14 +61,28 @@ async def run():
                     }
                 )
             )
-            while counts.get("book", 0) == 0 or not (set(counts) - {"book"}):
+            while counts.get("book", 0) == 0 or not (
+                set(counts) & {"price_change", "last_trade_price"}
+            ):
                 frame = await ws.recv()
                 if frame in ("PONG", "PING"):
                     continue
                 packet = json.loads(frame)
                 for item in packet if isinstance(packet, list) else [packet]:
                     name = item.get("event_type", "other")
-                    counts[name] = counts.get(name, 0) + 1
+                    relevant = (
+                        (
+                            all(
+                                c.get("asset_id") in ids
+                                for c in item.get("price_changes", [])
+                            )
+                            and bool(item.get("price_changes"))
+                        )
+                        if name == "price_change"
+                        else item.get("asset_id") in ids
+                    )
+                    if relevant:
+                        counts[name] = counts.get(name, 0) + 1
     result["websocket_events"] = counts
     result["ntp"] = {
         host: ntp(host) for host in ("time.apple.com", "time.cloudflare.com")

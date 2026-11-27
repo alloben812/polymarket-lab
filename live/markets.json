@@ -1,0 +1,10 @@
+{
+    "btc_windows_minutes": [5, 15],
+    "weather_cities": {
+        "london": "Europe/London",
+        "paris": "Europe/Paris",
+        "nyc": "America/New_York"
+    },
+    "tennis_limit": 10,
+    "slug_overrides": []
+}

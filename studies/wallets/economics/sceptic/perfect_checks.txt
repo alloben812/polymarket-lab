@@ -1,0 +1,48 @@
+(a) months 32, positive 28, sum 181890, t of monthly kept 4.56; without the 3 best months sum 124096, t 4.53; kept/volume by year: 2024: 5438/83083=6.5%, 2025: 60999/806037=7.6%, 2026: 115453/1153729=10.0%
+    last 12 months: positive 11, t 4.17; worst month -6878, best 30890 (17% of all)
+fills Mar-Nov: 12655
+(b) Mar-May: economics markets 86 net 28899; events 35, positive 27, t by event 2.64; top3 events 14925; rest 13974 (t 1.78)
+      best: [('march-inflation-us-annual-higher-b', 5354), ('april-inflation-us-annual', 4979), ('ecb-interest-rates-june-2026', 4592)] worst: [('bank-of-england-decision-in-march-', -761), ('may-inflation-us-annual', -764), ('ecb-interest-rates-april-2026', -4127)]
+(b) Jun-Aug: economics markets 79 net 4952; events 31, positive 25, t by event 0.60; top3 events 6411; rest -1459 (t -0.20)
+      best: [('bank-of-england-decision-in-septem', 2749), ('ecb-interest-rates-september-2026-', 2070), ('july-inflation-us-annual-202607141', 1592)] worst: [('bank-of-england-decision-in-novemb', -1643), ('fed-decision-in-july-181', -2289), ('june-inflation-us-annual-202606101', -5999)]
+(b) Sep-Nov: economics markets 84 net 17992; events 34, positive 23, t by event 2.51; top3 events 10870; rest 7122 (t 1.82)
+      best: [('ecb-interest-rates-october-2026-20', 5187), ('august-inflation-us-annual-1786474', 2951), ('bank-of-england-decision-in-novemb', 2732)] worst: [('october-inflation-uk-annual-2026', -664), ('core-cpi-mom-october-2026', -804), ('core-pce-mom-august-2026-202608261', -1580)]
+
+(c) raw fills + raw tape per market (prices are for the outcome it bought)
+  will-the-ecb-announce-no-change-at-the-october-2026-meeting-2026072322 [Yes] release 10-29 13:15 final 1
+     buys 66 (7 taker, $28281) 08-14 16:14 .. 10-15 06:41: 43542 sh, $37925, VWAP 0.871; everyone else in the same span VWAP 0.807 (1962 tape fills)
+     tape price before release: 30d 0.770, 7d 0.967, 1d 0.990, 1h 0.999, 1min 0.999; first buy 75.9 d before, last buy 342.6 h before
+     sold 0 sh for $0 (avg 0.000); fills at or after the release: 0 (0 taker); P&L before fees 5618
+  will-annual-inflation-be-3pt4-in-august-1786474663059 [Yes] release 09-11 12:30 final 1
+     buys 194 (6 taker, $1388) 08-13 12:22 .. 09-10 12:12: 11130 sh, $4991, VWAP 0.448; everyone else in the same span VWAP 0.436 (686 tape fills)
+     tape price before release: 30d n/a, 7d 0.430, 1d 0.470, 1h 0.490, 1min 0.550; first buy 29.0 d before, last buy 24.3 h before
+     sold 0 sh for $0 (avg 0.000); fills at or after the release: 0 (0 taker); P&L before fees 6138
+  will-annual-inflation-be-3pt7-in-september-2026 [Yes] release 10-14 12:30 final 1
+     buys 153 (16 taker, $2059) 09-30 21:45 .. 10-13 21:42: 9014 sh, $3612, VWAP 0.401; everyone else in the same span VWAP 0.397 (467 tape fills)
+     tape price before release: 30d 0.060, 7d 0.220, 1d 0.380, 1h 0.410, 1min 0.310; first buy 13.6 d before, last buy 14.8 h before
+     sold 0 sh for $0 (avg 0.000); fills at or after the release: 0 (0 taker); P&L before fees 4316
+  will-annual-inflation-be-3pt6-in-september-2026 [Yes] release 10-14 12:30 final 0
+     buys 135 (14 taker, $1195) 09-15 21:30 .. 10-13 21:39: 7583 sh, $3233, VWAP 0.426; everyone else in the same span VWAP 0.444 (760 tape fills)
+     tape price before release: 30d 0.340, 7d 0.440, 1d 0.440, 1h 0.430, 1min 0.554; first buy 28.6 d before, last buy 14.8 h before
+     sold 0 sh for $0 (avg 0.000); fills at or after the release: 0 (0 taker); P&L before fees -3233
+  will-core-cpi-mom-be-0pt2-in-september-2026 [Yes] release 10-14 12:30 final 0
+     buys 104 (12 taker, $1015) 09-18 23:44 .. 10-12 20:14: 5174 sh, $2449, VWAP 0.473; everyone else in the same span VWAP 0.467 (461 tape fills)
+     tape price before release: 30d 0.320, 7d 0.410, 1d 0.500, 1h 0.500, 1min 0.490; first buy 25.5 d before, last buy 40.3 h before
+     sold 0 sh for $0 (avg 0.000); fills at or after the release: 0 (0 taker); P&L before fees -2436
+  bank-of-england-increases-interest-rates-by-25-bps-after-november-2026 [Yes] release 11-05 12:00 final 1
+     buys 13 (5 taker, $3746) 09-11 00:06 .. 10-14 15:17: 7624 sh, $4749, VWAP 0.623; everyone else in the same span VWAP 0.732 (586 tape fills)
+     tape price before release: 30d 0.830, 7d 0.982, 1d 0.984, 1h 0.992, 1min 0.970; first buy 55.5 d before, last buy 524.7 h before
+     sold 7623 sh for $7494 (avg 0.983); fills at or after the release: 0 (0 taker); P&L before fees 2745
+  will-there-be-no-change-in-fed-interest-rates-after-the-october-2026-m [Yes] release 10-28 18:00 final 1
+     buys 4 (4 taker, $8525) 09-21 20:54 .. 10-21 18:33: 13396 sh, $8525, VWAP 0.636; everyone else in the same span VWAP nan (0 tape fills)
+     tape price before release: 30d n/a, 7d n/a, 1d 0.931, 1h 0.952, 1min 0.974; first buy 36.9 d before, last buy 167.4 h before
+     sold 9896 sh for $7286 (avg 0.736); fills at or after the release: 0 (0 taker); P&L before fees 2261
+
+(d) its pre-release buys in release-event markets vs a blind buyer of every same-priced token (+-0.10) in the same event at the same moment
+   events 29, fills 1419 (skipped 455 with no same-priced comparator): bought $84155; its edge 13017; blind same-price edge 5519; difference 7498, t by event 1.53, positive in 19/29 events; its own edge t by event 1.83
+     price 0.30-0.55  bought $  21561 its edge    9905 blind    3983
+     price 0.55-0.80  bought $  12276 its edge   -6018 blind   -6566
+     price <0.30      bought $   2086 its edge    1959 blind    1407
+     price >=0.80     bought $  48232 its edge    7171 blind    6695
+   largest differences: [('august-inflation-us-annual-178', 3269, -32), ('august-inflation-us-monthly-17', 1840, -159), ('september-inflation-us-monthly', 1858, 162), ('reserve-bank-of-australia-deci', -590, -1721)] smallest: [('us-gdp-growth-in-q3-2026-20260', -616, -46), ('core-cpi-mom-october-2026', -749, 78), ('core-cpi-mom-september-2026', -1580, 285)]
+   difference without its three best events: 503, t 0.18

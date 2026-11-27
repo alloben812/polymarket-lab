@@ -1,0 +1,21 @@
+09-03 12:30:18 BUY  No      2222 @ 0.500 $   1111 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-03 12:30:21 BUY  No      2222 @ 0.500 $   1111 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-03 12:30:34 BUY  No      2222 @ 0.500 $   1111 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-04 12:30:10 BUY  Yes     1493 @ 0.440 $    657 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-04 12:30:10 BUY  Yes    25850 @ 0.431 $  11152 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-04 12:30:13 BUY  No     15954 @ 0.460 $   7337 will-there-be-no-change-in-fed-interest-rates-after- tape does not cover
+09-04 12:30:52 SELL Yes      727 @ 0.540 $    393 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-11 12:30:10 BUY  Yes    38629 @ 0.670 $  25881 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-11 12:30:43 SELL Yes      653 @ 0.830 $    542 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+09-16 18:00:34 BUY  Yes     1048 @ 0.314 $    329 will-the-fed-increase-interest-rates-by-25-bps-after tape does not cover
+10-02 12:30:11 BUY  Yes    17463 @ 0.803 $  14020 will-there-be-no-change-in-fed-interest-rates-after- tape does not cover
+10-02 12:30:14 BUY  Yes     1182 @ 0.810 $    957 will-there-be-no-change-in-fed-interest-rates-after- tape does not cover
+10-13 18:00:12 BUY  Yes        5 @ 0.485 $      2 will-the-upper-bound-of-the-target-federal-funds-rat no cached tape
+10-14 12:30:14 BUY  No     37972 @ 0.293 $  11113 will-there-be-no-change-in-fed-interest-rates-after- tape does not cover
+10-19 12:30:48 BUY  Yes       85 @ 0.702 $     60 will-the-bank-of-canada-make-no-change-to-the-target pre 0.628 +5min 0.706 +1h 0.664 pnl@1h      -4
+11-06 13:30:19 BUY  Yes    21806 @ 0.778 $  16973 will-the-fed-increase-interest-rates-by-25-bps-after pre 0.710 +5min 0.770 +1h 0.780 pnl@1h    -115
+11-06 13:30:39 SELL Yes    25315 @ 0.790 $  19999 will-the-fed-increase-interest-rates-by-25-bps-after pre 0.710 +5min 0.770 +1h 0.780 pnl@1h      85
+11-13 13:30:34 SELL Yes      117 @ 0.590 $     69 will-the-fed-increase-interest-rates-by-25-bps-after no cached tape
+11-18 19:00:34 BUY  No    139751 @ 0.080 $  11180 will-the-fed-increase-interest-rates-by-25-bps-after pre 0.080 +5min 0.100 +1h 0.080 pnl@1h    -411
+
+fast taker fills 19; marked 4, $48212: P&L after fee at +5 min 2389, at +1 h -445; positive at +1 h 1/4; without a tape $75785

@@ -47,3 +47,23 @@ for lo, hi in [(0.10, 0.20), (0.20, 0.30), (0.30, 0.45), (0.45, 0.55), (0.55, 0.
 
 # 5. source mix and Up/Down symmetry
 print("\nsource B share of prints %.3f; Up share of prints %.3f" % (df.src.mean(), df.side.mean()))
+
+# 6. Binance proxy vs official outcome (alignment of the price series with the windows)
+from pmlab import px as _px
+npz = np.load(DATA / "px_dense.npz")
+dense = npz["p"]
+okm = ~np.isnan(dense)
+P = _px.Px(int(npz["t_min"]) + np.nonzero(okm)[0], dense[okm])
+agree = n = nan = 0
+basis = []
+for r in mk.itertuples():
+    a, b = P.twap(r.t0 + 300, 60), P.twap(r.t0, 60)
+    if a != a or b != b:
+        nan += 1
+        continue
+    n += 1
+    agree += (a >= b) == bool(r.up_won)
+    if r.ptb == r.ptb and r.ptb:
+        basis.append(b / r.ptb - 1)
+print("\nBinance 60 s TWAP proxy agrees with the official outcome in %d of %d markets (%.1f%%); no price data: %d" % (agree, n, 100 * agree / n, nan))
+print("Binance TWAP at t0 / official price_to_beat - 1: median %.2f bp, p5 %.2f, p95 %.2f" % tuple(1e4 * x for x in np.quantile(basis, [0.5, 0.05, 0.95])))

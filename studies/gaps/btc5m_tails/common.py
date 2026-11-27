@@ -84,13 +84,22 @@ def cell_stats(df: pd.DataFrame) -> dict:
     lo, hi = stats.wilson(k, n)
     be = float(((u["stake"] + u["fee"]) / u["z"]).mean())  # equal-weight break-even probability of the units
     zb = (k - n * be) / np.sqrt(n * be * (1 - be)) if n and 0 < be < 1 else float("nan")
+    pb = binom_tail(k, n, be) if n and 0 < be < 1 else float("nan")
     shares, stake = float(df["z"].sum()), float(df["stake"].sum())
     return {
         "prints": len(df), "markets": int(g.shape[0]), "units": n, "hits": k, "hit_rate": k / n, "wil_lo": lo, "wil_hi": hi,
-        "breakeven": be, "z_binom": float(zb), "shares": shares, "dollars": stake, "avg_price": stake / shares,
+        "breakeven": be, "z_binom": float(zb), "p_binom": pb, "shares": shares, "dollars": stake, "avg_price": stake / shares,
         "sw_hit": float((df["z"] * df["hit"]).sum() / shares), "net_ps": nps, "net_ps_se": nps_se, "t": nps_t,
         "ros": ros, "ros_t": ros_t, "net_dollars": float(df["net"].sum()),
     }
+
+
+def binom_tail(k: int, n: int, p: float) -> float:
+    """Exact one-sided binomial tail in the direction of the deviation: P(X >= k) if k > n p else P(X <= k)."""
+    import math
+    logs = [math.lgamma(n + 1) - math.lgamma(i + 1) - math.lgamma(n - i + 1) + i * math.log(p) + (n - i) * math.log(1 - p) for i in range(n + 1)]
+    pm = [math.exp(x) for x in logs]
+    return float(sum(pm[k:]) if k > n * p else sum(pm[: k + 1]))
 
 
 def load_status() -> dict:

@@ -1,0 +1,46 @@
+== (1) shift of the Binance 60 s average that best matches the official Chainlink values, by UTC day (sd of window drift in bp at shift 0 / best)
+eth-5m   11-21: 4.1s (1.22/0.60) | 11-22: 4.2s (0.89/0.40) | 11-23: 4.7s (1.27/0.38) | 11-24: 4.6s (0.93/0.38) | 11-25: 4.0s (0.91/0.34) | 11-26: 4.5s (0.69/0.28)
+sol-15m  11-21: 4.3s (1.68/1.09) | 11-22: 5.5s (1.16/0.67) | 11-23: 4.8s (1.53/0.64) | 11-24: 5.0s (1.21/0.68) | 11-25: 5.1s (1.04/0.57) | 11-26: 4.1s (0.69/0.47)
+xrp-15m  11-21: 3.7s (1.34/1.00) | 11-22: 4.6s (1.00/0.69) | 11-23: 3.9s (1.13/0.68) | 11-24: 4.3s (0.97/0.62) | 11-25: 3.7s (0.94/0.67) | 11-26: 4.4s (0.75/0.48)
+btc-15m  11-21: 3.3s (1.22/1.01) | 11-22: 4.9s (1.04/0.68) | 11-23: 4.8s (1.23/0.48) | 11-24: 4.5s (1.00/0.68) | 11-25: 4.3s (0.86/0.59) | 11-26: 5.4s (0.75/0.53)
+
+== (2) M1 spot check and rows before the fee change (20 Nov 23:59 UTC)
+eth-5m   $/day 578582 | median $/market 1766 | wallets 3255 | top-5 share 0.201 | seconds with a fill 0.303 | fills <5 sh 0.201 | rows before fee change 2 (0.00% of $)
+eth-15m  $/day 251327 | median $/market 2442 | wallets 1690 | top-5 share 0.319 | seconds with a fill 0.148 | fills <5 sh 0.172 | rows before fee change 5 (0.00% of $)
+sol-15m  $/day 58714 | median $/market 517 | wallets 978 | top-5 share 0.457 | seconds with a fill 0.064 | fills <5 sh 0.191 | rows before fee change 3 (0.00% of $)
+xrp-15m  $/day 41243 | median $/market 325 | wallets 686 | top-5 share 0.443 | seconds with a fill 0.040 | fills <5 sh 0.150 | rows before fee change 1 (0.00% of $)
+btc-15m  $/day 1235583 | median $/market 11591 | wallets 5081 | top-5 share 0.153 | seconds with a fill 0.295 | fills <5 sh 0.174 | rows before fee change 10 (0.00% of $)
+btc-5m   $/day 6607679 | median $/market 21372 | wallets 11129 | top-5 share 0.128 | seconds with a fill 0.543 | fills <5 sh 0.224 | rows before fee change 17 (0.00% of $)
+
+== (3) M2 buckets rebuilt: net c/sh (t) by time bucket (match = block - 3) and by equivalent-buy price
+eth-5m   Q1 -0.36(-0.7)  Q2 -0.43(-1.0)  Q3 -1.32(-3.7)  Q4 -0.60(-3.3)  post -0.21(-3.8)  pre +1.14(+1.4)  [0.0, 0.1) -0.60(-2.1)  [0.1, 0.3) -2.45(-2.7)  [0.3, 0.5) -0.36(-0.5)  [0.5, 0.7) -0.40(-0.6)  [0.7, 0.9) +0.29(+0.3)  [0.9, 1.0) +0.24(+0.6)  BUY -0.52(-3.1)  SELL -0.88(-2.0)
+eth-15m  Q1 -1.28(-1.6)  Q2 -1.38(-1.4)  Q3 +0.15(+0.3)  Q4 -0.49(-1.5)  post -0.16(-4.8)  pre +1.32(+0.8)  [0.0, 0.1) -0.13(-0.1)  [0.1, 0.3) +0.40(+0.2)  [0.3, 0.5) -1.95(-1.5)  [0.5, 0.7) -0.84(-0.8)  [0.7, 0.9) -0.24(-0.1)  [0.9, 1.0) -0.37(-0.4)  BUY -0.65(-2.3)  SELL -0.22(-0.3)
+sol-15m  Q1 -1.23(-1.2)  Q2 +0.97(+0.7)  Q3 -0.17(-0.2)  Q4 -0.99(-1.8)  post +0.24(+0.5)  pre -1.36(-0.7)  [0.0, 0.1) +1.56(+0.9)  [0.1, 0.3) -1.11(-0.7)  [0.3, 0.5) -0.98(-0.7)  [0.5, 0.7) -2.09(-1.8)  [0.7, 0.9) +0.64(+0.4)  [0.9, 1.0) -0.39(-0.3)  BUY -0.54(-1.0)  SELL -0.41(-0.9)
+xrp-15m  Q1 -0.37(-0.3)  Q2 -0.61(-0.6)  Q3 -0.95(-1.0)  Q4 -0.92(-1.8)  post -0.34(-1.1)  pre -1.74(-0.6)  [0.0, 0.1) -0.60(-0.5)  [0.1, 0.3) -1.49(-0.8)  [0.3, 0.5) -2.19(-1.0)  [0.5, 0.7) -1.81(-0.9)  [0.7, 0.9) +0.80(+0.4)  [0.9, 1.0) +0.54(+0.4)  BUY -0.50(-0.9)  SELL -3.68(-2.2)
+btc-15m  Q1 -0.50(-0.6)  Q2 -2.16(-3.7)  Q3 -1.62(-4.2)  Q4 -0.18(-0.5)  post +2.24(+0.9)  pre -0.45(-0.4)  [0.0, 0.1) -0.57(-1.0)  [0.1, 0.3) +1.02(+0.6)  [0.3, 0.5) -1.41(-1.0)  [0.5, 0.7) -1.54(-1.1)  [0.7, 0.9) -3.94(-2.1)  [0.9, 1.0) +0.48(+0.8)  BUY -0.87(-3.0)  SELL -0.97(-1.5)
+btc-5m   Q1 -2.52(-3.0)  Q2 -1.15(-2.5)  Q3 -0.88(-2.6)  Q4 -0.75(-2.4)  post -0.73(-4.8)  pre +0.02(+0.0)  [0.0, 0.1) -0.37(-0.6)  [0.1, 0.3) -1.27(-0.6)  [0.3, 0.5) +0.20(+0.1)  [0.5, 0.7) -2.40(-2.0)  [0.7, 0.9) -2.87(-1.3)  [0.9, 1.0) -0.94(-0.9)  BUY -0.97(-3.4)  SELL -2.67(-4.3)
+largest t over all 84 cells: [(np.float64(1.45), 'eth-5m', 'pre', np.float64(1.14)), (np.float64(0.94), 'btc-15m', 'post', np.float64(2.24)), (np.float64(0.86), 'sol-15m', '[0.0, 0.1)', np.float64(1.56)), (np.float64(0.85), 'btc-15m', '[0.9, 1.0)', np.float64(0.48))]
+
+== (4) dependence: per-market net $ of the selected M4 variants (block lag 3), reporting and all days
+eth-15m  lag-1 autocorr of market net -0.042 | report net c/sh 0.59: t by 1-hour block 0.75 (n=48), by 3-hour block 0.66 (n=16)
+sol-15m  lag-1 autocorr of market net -0.008 | report net c/sh 2.29: t by 1-hour block 1.36 (n=48), by 3-hour block 1.40 (n=16)
+xrp-15m  lag-1 autocorr of market net 0.025 | report net c/sh -5.47: t by 1-hour block -2.86 (n=48), by 3-hour block -3.58 (n=16)
+btc-15m  lag-1 autocorr of market net 0.011 | report net c/sh -2.31: t by 1-hour block -1.74 (n=48), by 3-hour block -1.90 (n=16)
+eth-5m   lag-1 autocorr of market net -0.047 | report net c/sh -0.82: t by 1-hour block -1.35 (n=48), by 3-hour block -1.49 (n=16)
+correlation of per-window net $ between the four 15m series (same windows, n=552):
+         eth-15m  sol-15m  xrp-15m  btc-15m
+eth-15m     1.00     0.21     0.03     0.33
+sol-15m     0.21     1.00     0.17     0.11
+xrp-15m     0.03     0.17     1.00     0.04
+btc-15m     0.33     0.11     0.04     1.00
+eth-5m (summed to 15m) vs eth-15m: 0.14
+
+== (5) selected variants in the reporting period under block lag 3 / 2 / 1
+eth-5m   M4 D0_thr0.02   BL=3: -0.82 c/sh t -1.3 mkts 574 $-987/day | BL=2: -0.99 c/sh t -1.4 mkts 573 $-1150/day | BL=1: -0.09 c/sh t -0.1 mkts 573 $-103/day
+eth-15m  M4 D0_thr0.01   BL=3: +0.59 c/sh t +0.6 mkts 192 $+266/day | BL=2: +0.59 c/sh t +0.6 mkts 192 $+261/day | BL=1: +0.82 c/sh t +0.7 mkts 192 $+361/day
+sol-15m  M4 D0_thr0.02   BL=3: +2.29 c/sh t +1.4 mkts 192 $+666/day | BL=2: +2.26 c/sh t +1.3 mkts 192 $+651/day | BL=1: +3.02 c/sh t +1.8 mkts 192 $+876/day
+xrp-15m  M4 D2_thr0.01   BL=3: -5.47 c/sh t -3.1 mkts 191 $-980/day | BL=2: -4.38 c/sh t -2.5 mkts 191 $-813/day | BL=1: -4.11 c/sh t -2.3 mkts 192 $-760/day
+btc-15m  M4 D0_thr0.04   BL=3: -2.31 c/sh t -1.6 mkts 189 $-812/day | BL=2: -2.05 c/sh t -1.2 mkts 182 $-636/day | BL=1: -1.05 c/sh t -0.6 mkts 182 $-320/day
+eth-5m   M5 mrg0.08      BL=3: -24.36 c/sh t -2.0 mkts 10 $-179/day | BL=2: -14.99 c/sh t -1.3 mkts 12 $-123/day | BL=1: -4.06 c/sh t -0.4 mkts 13 $-35/day
+eth-5m   M5 mrg0.03_2bp  BL=3: -23.72 c/sh t -1.3 mkts 13 $-132/day | BL=2: -32.63 c/sh t -1.9 mkts 10 $-151/day | BL=1: -13.76 c/sh t -0.9 mkts 13 $-62/day
+btc-15m  M5 mrg0.03      BL=3: -35.29 c/sh t -1.0 mkts 4 $-129/day | BL=2: -33.24 c/sh t -1.0 mkts 5 $-127/day | BL=1: -12.49 c/sh t -0.6 mkts 5 $-77/day

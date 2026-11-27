@@ -1,0 +1,111 @@
+== oidocrop 0x23c46463c281deb26a041fdcc24ae9c5d7629c42 [10-13 15:40:00 -> 11-27 15:40:00] tag=A truncated=False fills=660 usd=58037 | mention fills=501 markets=293 usd=47228 (81% of turnover)
+resolved mention markets=292 unresolved=1 (net cost $-13, marked at last print +13) | turnover $47196 | NET after 0.01 fee $2708 | market wins 289/292 | t by market 3.12 | events 64 positive 62 | t by event 2.91
+  bootstrap 95% CI of the sum, resampling events: [1106, 4689]
+  weeks: {'2026-W42': 359, '2026-W43': 439, '2026-W44': 673, '2026-W45': 47, '2026-W46': 949, '2026-W47': 170, '2026-W48': 72}
+  maker share: 32% of fills, 23% of dollars; shares sold/bought 0.14; median $/market 98
+by phase:
+  ('JUMP',)                          fills=  161 mk= 120 usd=    17696 pnl=    876.5 (   5.0%) mk_win=120/120
+  ('LIVE',)                          fills=   46 mk=  19 usd=     4209 pnl=   1081.0 (  25.7%) mk_win=18/19
+  ('NODET',)                         fills=    2 mk=   2 usd=      269 pnl=     70.9 (  26.4%) mk_win=2/2
+  ('NOSTART',)                       fills=   15 mk=   5 usd=      684 pnl=    428.6 (  62.6%) mk_win=5/5
+  ('POST',)                          fills=  269 mk= 169 usd=    24235 pnl=    244.2 (   1.0%) mk_win=158/169
+  ('PRE',)                           fills=    6 mk=   4 usd=      104 pnl=      7.3 (   7.0%) mk_win=2/4
+by phase, role, direction:
+  ('JUMP', 'M', 'longYes')           fills=   35 mk=  24 usd=     1768 pnl=    148.2 (   8.4%) mk_win=24/24
+  ('JUMP', 'T', 'longYes')           fills=  126 mk= 113 usd=    15928 pnl=    728.3 (   4.6%) mk_win=113/113
+  ('LIVE', 'M', 'longNo')            fills=    6 mk=   5 usd=       53 pnl=     17.8 (  33.3%) mk_win=3/5
+  ('LIVE', 'M', 'longYes')           fills=   11 mk=   6 usd=      347 pnl=    275.1 (  79.3%) mk_win=5/6
+  ('LIVE', 'T', 'longNo')            fills=   17 mk=  14 usd=     1286 pnl=    218.1 (  17.0%) mk_win=11/14
+  ('LIVE', 'T', 'longYes')           fills=   12 mk=   7 usd=     2523 pnl=    570.0 (  22.6%) mk_win=6/7
+  ('NODET', 'T', 'longYes')          fills=    2 mk=   2 usd=      269 pnl=     70.9 (  26.4%) mk_win=2/2
+  ('NOSTART', 'M', 'longYes')        fills=    2 mk=   2 usd=      115 pnl=      1.2 (   1.0%) mk_win=2/2
+  ('NOSTART', 'T', 'longNo')         fills=    1 mk=   1 usd=       22 pnl=     19.1 (  84.7%) mk_win=1/1
+  ('NOSTART', 'T', 'longYes')        fills=   12 mk=   4 usd=      546 pnl=    408.3 (  74.7%) mk_win=4/4
+  ('POST', 'M', 'longNo')            fills=   34 mk=  21 usd=     3548 pnl=    -90.4 (  -2.5%) mk_win=10/21
+  ('POST', 'M', 'longYes')           fills=   69 mk=  43 usd=     4809 pnl=    163.0 (   3.4%) mk_win=41/43
+  ('POST', 'T', 'longNo')            fills=   96 mk=  85 usd=     9183 pnl=     33.0 (   0.4%) mk_win=70/85
+  ('POST', 'T', 'longYes')           fills=   70 mk=  62 usd=     6695 pnl=    138.6 (   2.1%) mk_win=61/62
+  ('PRE', 'M', 'longNo')             fills=    2 mk=   2 usd=       29 pnl=    -28.7 (-100.0%) mk_win=0/2
+  ('PRE', 'M', 'longYes')            fills=    1 mk=   1 usd=       30 pnl=     20.0 (  66.7%) mk_win=1/1
+  ('PRE', 'T', 'longNo')             fills=    1 mk=   1 usd=        8 pnl=     -8.1 (-100.4%) mk_win=0/1
+  ('PRE', 'T', 'longYes')            fills=    2 mk=   2 usd=       37 pnl=     24.1 (  64.5%) mk_win=2/2
+BUYS by price band (all buys, winners and losers together):
+  ('0.50-0.80',)                     fills=   24 mk=  15 usd=     3041 pnl=   1248.4 (  41.1%) mk_win=14/15
+  ('0.80-0.95',)                     fills=   35 mk=  23 usd=     4341 pnl=    633.8 (  14.6%) mk_win=23/23
+  ('<0.50',)                         fills=   18 mk=   7 usd=      245 pnl=    811.6 ( 331.6%) mk_win=7/7
+  ('>=0.95',)                        fills=  372 mk= 265 usd=    33580 pnl=    214.0 (   0.6%) mk_win=264/265
+buys below 0.95 by phase and role:
+  ('JUMP', 'M')                      fills=    3 mk=   2 usd=      238 pnl=    132.8 (  55.7%) mk_win=2/2
+  ('JUMP', 'T')                      fills=   11 mk=  10 usd=     2297 pnl=    466.8 (  20.3%) mk_win=10/10
+  ('LIVE', 'M')                      fills=   11 mk=   5 usd=       67 pnl=    303.3 ( 452.7%) mk_win=5/5
+  ('LIVE', 'T')                      fills=   15 mk=  10 usd=     2309 pnl=   1046.4 (  45.3%) mk_win=10/10
+  ('NODET', 'T')                     fills=    2 mk=   2 usd=      269 pnl=     70.9 (  26.4%) mk_win=2/2
+  ('NOSTART', 'T')                   fills=    9 mk=   3 usd=      349 pnl=    424.1 ( 121.7%) mk_win=3/3
+  ('POST', 'M')                      fills=   11 mk=   3 usd=     1237 pnl=    139.9 (  11.3%) mk_win=3/3
+  ('POST', 'T')                      fills=   10 mk=   8 usd=      781 pnl=     77.3 (   9.9%) mk_win=8/8
+  ('PRE', 'M')                       fills=    2 mk=   2 usd=       34 pnl=     16.3 (  48.3%) mk_win=1/2
+  ('PRE', 'T')                       fills=    3 mk=   3 usd=       45 pnl=     16.0 (  35.1%) mk_win=2/3
+buys at >= 0.95 by phase and role:
+  ('JUMP', 'M')                      fills=   32 mk=  22 usd=     1530 pnl=     15.4 (   1.0%) mk_win=22/22
+  ('JUMP', 'T')                      fills=  115 mk= 105 usd=    13632 pnl=    261.5 (   1.9%) mk_win=105/105
+  ('LIVE', 'M')                      fills=    3 mk=   3 usd=      286 pnl=      2.9 (   1.0%) mk_win=3/3
+  ('LIVE', 'T')                      fills=   10 mk=   9 usd=     1329 pnl=   -280.4 ( -21.1%) mk_win=7/9
+  ('NOSTART', 'M')                   fills=    2 mk=   2 usd=      115 pnl=      1.2 (   1.0%) mk_win=2/2
+  ('NOSTART', 'T')                   fills=    4 mk=   3 usd=      220 pnl=      3.3 (   1.5%) mk_win=3/3
+  ('POST', 'M')                      fills=   69 mk=  47 usd=     4025 pnl=     40.7 (   1.0%) mk_win=47/47
+  ('POST', 'T')                      fills=  137 mk= 124 usd=    12443 pnl=    169.6 (   1.4%) mk_win=124/124
+buys at >=0.95: usd by phase {'POST': 16468, 'JUMP': 15161, 'NOSTART': 336, 'LIVE': 1615} -> JUMP/POST share 94% | markets 265, wrong side 2 | pnl +214 on $33580 (+0.64%)
+    wrong: Will Target say "Guest" 70+ times during earnings call? pnl 5.26
+    wrong: Will Robinhood say "Weekend" during earnings call? pnl -183.11
+taker long-Yes fills in jump windows: 126 fills in 113 markets; first fill lag vs first print>=0.60: <=2s 41, 3-10s 18, 11-60s 15, >60s 39; first on tape (rank 0) 36; median yes px 0.982; below 0.90 in 6 markets; pnl +728 on $15928; of that at lag<=10s +542
+CONCENTRATION: top 3 markets: [('Will Trump say "Two Percent" during his Midterm Rally in Lub', 600), ('Will Caedrel say "Dive" 7+ times on stream?', 473), ('Will Trump say "Biden" or "Kamala" or "Obama" 7+ times durin', 293)] -> rest +1342 on 289 markets, t 4.18
+  best event what-will-trump-say-during-his-midterm-rally-in-lubbock-texa +609 -> rest +2099; best 3 events +1546 -> rest +1163; worst 3 markets [('Will Trump say "Osama Bin Laden" during his Midter', -5), ('Will Trump say "Swim" or "Swimming" this week?', -12), ('Will Robinhood say "Weekend" during earnings call?', -183)]
+NON-mention markets in the same window: resolved 75 (unresolved 6), turnover $10411, pnl BEFORE fee -6, t by market -0.04
+API over the window (all categories): trade_pnl +2739, fees -51.8, refunded +0.0, rebates+rewards +1.3, economic +2688 | implied taker rate = 0.0215 (fees / sum s*p*(1-p) of taker fills = 2412)
+inventory operations in window: {'MERGE': 4} {'MERGE': 117}
+RAW timelines, five largest |pnl| markets (fresh tape):
+ * Will Trump say "Two Percent" during his Midterm Rally in Lubbock, Texas? | vol 308287 | final Yes=1.0 | start 10-27 23:00:00 last<0.60 10-28 09:35:32 first>=0.60 10-28 09:41:11 first>=0.90 held 10-28 09:49:14 closed 11-01 00:42:40 | pnl +600 | tape rows fresh 399 cached 399
+     10-28 00:42:47 T BUY No 50@0.710 ph=LIVE from_start=6167 from_first60=-32304 pnl -36 | on tape as taker: yes | yes px 10 min before [0.37, 0.379, 0.37] after [0.29, 0.29, 0.29]
+     10-28 01:15:35 T SELL No 10@0.310 ph=LIVE from_start=8135 from_first60=-30336 pnl +3 | on tape as taker: yes | yes px 10 min before [0.28, 0.29, 0.32] after [0.69, 0.66, 0.66]
+     10-28 01:17:27 T SELL No 40@0.340 ph=LIVE from_start=8247 from_first60=-30224 pnl +14 | on tape as taker: yes | yes px 10 min before [0.32, 0.69, 0.69] after [0.66, 0.32, 0.304]
+     10-28 01:33:27 M BUY Yes 2@0.130 ph=LIVE from_start=9207 from_first60=-29264 pnl +2 | on tape as taker: no | yes px 10 min before [0.16, 0.16, 0.15] after [0.26, 0.27, 0.29]
+     10-28 01:42:33 M BUY Yes 60@0.160 ph=LIVE from_start=9753 from_first60=-28718 pnl +50 | on tape as taker: no | yes px 10 min before [0.26, 0.27, 0.29] after [0.12, 0.25, 0.25]
+     10-28 01:48:17 T BUY Yes 50@0.250 ph=LIVE from_start=10097 from_first60=-28374 pnl +37 | on tape as taker: yes | yes px 10 min before [0.12, 0.149, 0.12] after [0.25]
+     10-28 02:27:14 T BUY Yes 2000@0.712 ph=LIVE from_start=12434 from_first60=-26037 pnl +572 | on tape as taker: yes | yes px 10 min before [0.46, 0.455] after [0.72, 0.72, 0.75]
+     10-28 02:27:20 T BUY Yes 265@0.720 ph=LIVE from_start=12440 from_first60=-26031 pnl +74 | on tape as taker: yes | yes px 10 min before [0.455, 0.712, 0.72] after [0.75, 0.85, 0.91]
+     10-28 02:30:32 T BUY Yes 212@0.750 ph=LIVE from_start=12632 from_first60=-25839 pnl +53 | on tape as taker: yes | yes px 10 min before [0.712, 0.72, 0.72] after [0.85, 0.91, 0.53]
+     10-28 21:05:13 T SELL Yes 721@0.900 ph=POST from_start=79513 from_first60=41042 pnl -73 | on tape as taker: yes | yes px 10 min before [0.9, 0.9, 0.9] after [0.87, 0.948, 0.818]
+     ... 3 more fills
+ * Will Caedrel say "Dive" 7+ times on stream? | vol 4734 | final Yes=1.0 | start 11-14 19:00:00 last<0.60 11-15 20:05:22 first>=0.60 11-16 06:41:02 first>=0.90 held 11-16 14:32:41 closed 11-16 21:05:11 | pnl +473 | tape rows fresh 68 cached 68
+     11-15 11:55:34 M BUY Yes 40@0.090 ph=LIVE from_start=60934 from_first60=-67528 pnl +36 | on tape as taker: no | yes px 10 min before [] after [0.078]
+     11-15 11:57:49 M BUY Yes 50@0.070 ph=LIVE from_start=61069 from_first60=-67393 pnl +46 | on tape as taker: no | yes px 10 min before [0.096] after []
+     11-15 11:57:49 M BUY Yes 90@0.080 ph=LIVE from_start=61069 from_first60=-67393 pnl +83 | on tape as taker: no | yes px 10 min before [0.096] after []
+     11-15 11:57:49 M BUY Yes 60@0.090 ph=LIVE from_start=61069 from_first60=-67393 pnl +55 | on tape as taker: no | yes px 10 min before [0.096] after []
+     11-15 15:56:16 T BUY Yes 120@0.390 ph=LIVE from_start=75376 from_first60=-53086 pnl +73 | on tape as taker: yes | yes px 10 min before [] after [0.42, 0.4]
+     11-15 15:56:17 M BUY No 7@0.580 ph=LIVE from_start=75377 from_first60=-53085 pnl -4 | on tape as taker: no | yes px 10 min before [0.41, 0.39] after [0.4]
+     11-15 15:56:19 M BUY Yes 8@0.400 ph=LIVE from_start=75379 from_first60=-53083 pnl +5 | on tape as taker: no | yes px 10 min before [0.41, 0.39, 0.42] after []
+     11-15 17:55:41 M SELL Yes 6@0.450 ph=LIVE from_start=82541 from_first60=-45921 pnl -3 | on tape as taker: no | yes px 10 min before [] after []
+     11-16 06:41:02 M BUY Yes 151@0.550 ph=JUMP from_start=128462 from_first60=0 pnl +68 | on tape as taker: no | yes px 10 min before [] after []
+     11-16 06:41:02 M BUY Yes 200@0.710 ph=JUMP from_start=128462 from_first60=0 pnl +58 | on tape as taker: no | yes px 10 min before [] after []
+     ... 1 more fills
+ * Will Trump say "Biden" or "Kamala" or "Obama" 7+ times during "60 Minutes" extended interview? | vol 4766 | final Yes=1.0 | start - last<0.60 11-09 04:41:46 first>=0.60 11-09 05:42:25 first>=0.90 held 11-09 05:42:25 closed 11-09 05:43:02 | pnl +293 | tape rows fresh 176 cached 176
+     11-09 00:14:18 T BUY Yes 100@0.121 ph=NOSTART from_start=None from_first60=-19687 pnl +88 | on tape as taker: yes | yes px 10 min before [0.03, 0.1] after [0.157, 0.368, 0.48]
+     11-09 00:14:21 T BUY Yes 100@0.157 ph=NOSTART from_start=None from_first60=-19684 pnl +84 | on tape as taker: yes | yes px 10 min before [0.03, 0.1, 0.121] after [0.368, 0.48, 0.447]
+     11-09 00:14:49 T BUY Yes 100@0.368 ph=NOSTART from_start=None from_first60=-19656 pnl +63 | on tape as taker: yes | yes px 10 min before [0.1, 0.121, 0.157] after [0.48, 0.447, 0.51]
+     11-09 00:14:52 T BUY Yes 100@0.447 ph=NOSTART from_start=None from_first60=-19653 pnl +55 | on tape as taker: yes | yes px 10 min before [0.121, 0.157, 0.368] after [0.51, 0.98, 0.99]
+     11-09 00:24:40 T BUY Yes 100@0.980 ph=NOSTART from_start=None from_first60=-19065 pnl +2 | on tape as taker: yes | yes px 10 min before [0.48, 0.447, 0.51] after [0.99, 0.99, 0.999]
+     11-09 00:24:45 T BUY Yes 40@0.990 ph=NOSTART from_start=None from_first60=-19060 pnl +0 | on tape as taker: yes | yes px 10 min before [0.51, 0.98, 0.99] after [0.999]
+     11-09 04:24:45 M BUY Yes 60@0.990 ph=NOSTART from_start=None from_first60=-4660 pnl +1 | on tape as taker: no | yes px 10 min before [] after [0.552, 0.552, 0.552]
+ * Will Robinhood say "Weekend" during earnings call? | vol 1310 | final Yes=0.0 | start 10-27 21:00:00 last<0.60 - first>=0.60 - first>=0.90 held 10-27 22:30:14 closed 10-28 00:31:54 | pnl -183 | tape rows fresh 32 cached 32
+     10-27 22:26:23 T BUY Yes 300@0.985 ph=LIVE from_start=5183 from_first60=None pnl -296 | on tape as taker: yes | yes px 10 min before [0.768] after [0.99, 0.99, 0.99]
+     10-27 22:28:23 T BUY No 7@0.390 ph=LIVE from_start=5303 from_first60=None pnl +5 | on tape as taker: yes | yes px 10 min before [0.99, 0.99, 0.99] after [0.491, 0.6, 0.49]
+     10-27 22:28:36 T BUY No 200@0.509 ph=LIVE from_start=5316 from_first60=None pnl +98 | on tape as taker: yes | yes px 10 min before [0.99, 0.99, 0.61] after [0.49, 0.251, 0.021]
+     10-27 22:28:36 M BUY No 5@0.400 ph=LIVE from_start=5316 from_first60=None pnl +3 | on tape as taker: yes | yes px 10 min before [0.99, 0.99, 0.61] after [0.49, 0.251, 0.021]
+     10-27 22:29:54 T SELL Yes 23@0.251 ph=LIVE from_start=5394 from_first60=None pnl +6 | on tape as taker: yes | yes px 10 min before [0.491, 0.6, 0.49] after [0.021, 0.01, 0.01]
+     10-27 22:30:14 T BUY No 66@0.979 ph=POST from_start=5414 from_first60=None pnl +1 | on tape as taker: yes | yes px 10 min before [0.6, 0.49, 0.251] after [0.01, 0.01, 0.01]
+     10-27 22:30:53 T SELL Yes 6@0.010 ph=POST from_start=5453 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [0.021, 0.01, 0.01] after [0.19, 0.01]
+     10-27 22:50:47 T SELL Yes 50@0.001 ph=POST from_start=6647 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [0.01] after []
+     10-28 00:05:57 M SELL Yes 13@0.001 ph=POST from_start=11157 from_first60=None pnl +0 | on tape as taker: no | yes px 10 min before [] after []
+ * Will Bank of America say "Inflation" 3+ times during earnings call? | vol 1063 | final Yes=1.0 | start 10-14 12:30:00 last<0.60 10-14 05:12:17 first>=0.60 10-14 13:55:42 first>=0.90 held 10-14 13:55:42 closed 10-14 15:56:55 | pnl +117 | tape rows fresh 10 cached 10
+     10-14 13:55:42 T BUY Yes 284@0.961 ph=JUMP from_start=5142 from_first60=0 pnl +11 | on tape as taker: yes | yes px 10 min before [] after []
+     10-14 13:55:42 T BUY Yes 666@0.839 ph=JUMP from_start=5142 from_first60=0 pnl +106 | on tape as taker: yes | yes px 10 min before [] after []

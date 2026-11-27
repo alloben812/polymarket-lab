@@ -226,3 +226,117 @@ Could not check:
 - The mentions fee before 2026-11-20 (0.01 is used throughout).
 - QuantDeLaFugazi's leaderboard month figure against my fill-based figure.
 - The post-timestamp gap on "Will Elon/Trump post X" markets (55 such markets are in the universe).
+
+## Sceptic's check
+
+Added 2026-11-27 by a second reader whose job was to break the three highest-confidence write-ups: oidocrop (4),
+QuantDeLaFugazi and Faston (3; five accounts tie at 3, taken in table order, so 0xtrador and BipBop are NOT
+re-tested). Rules were written first in `sceptic/protocol.md`. Code and outputs are in `sceptic/`
+(`sceptic.py`, `post.py`, `bench.py`, `out_<account>_<window>.txt`, `w1_*.txt`, `monthly_*.txt`). Read-only.
+
+Windows: A = the analyst's 45 days (13 Oct - 27 Nov); W0 = the 45 days before it (29 Aug - 13 Oct); Wm1 = the
+45 days before that (15 Jul - 29 Aug). Wm1 was NOT in my protocol: I added it after seeing W0, because W0
+overlaps the months the selection rule looked at (September, October). Same definitions as `deep.py`, fee 0.01.
+Run on window A, my script returns the analyst's figures exactly (2,708 / -975 / 1,218; 2 of 265, 4 of 119, 1 of
+53 wrong confirmations; blind Yes -17.9% on 550 siblings), so every difference below is data, not rules.
+
+| mentions only, after 0.01 fee | Wm1 | W0 | A (analyst) | 135 days pooled |
+|---|---|---|---|---|
+| oidocrop net / t by event | +1,103 / 2.4 | +333 / 0.9 | +2,708 / 2.9 | +4,144 / 3.7 (169 events) |
+| - buys at >= 0.95 | +447 on $26.6K, 1 wrong of 164 | +304 on $23.7K, 1 of 234 | +214 on $33.6K, 2 of 265 | +965 on $83.9K (1.15%), 4 of 663 |
+| - buys below 0.95, winners and losers together | +543 on $4.5K | +5 on $4.6K | +2,694 on $7.6K | +3,242 on $16.7K |
+| - without its 3 best markets | +413 | +94 | +1,342 | +2,726 |
+| QuantDeLaFugazi net / t by event | +5,254 / 1.3 | +4,569 / 1.6 | -975 / -0.6 | +8,674 / 1.6 (152 events) |
+| - without its 3 best markets | +110 | +789 | -2,140 | +718 without the 5 best events (t 0.2) |
+| - clean-jump taker fills within 10 s | +159 | +293 | +295 | |
+| Faston net / t by event | +1,451 / 2.7 | +1,997 / 2.1 | +1,218 / 2.2 | +4,719 / 3.8 (248 events) |
+| - PRE fills | +962 | +1,551 | +835 | |
+| - without its 3 best markets | +1,117 | +1,631 | +821 | +3,226 without the 5 best events (t 3.1) |
+| - events positive | 45 of 73 | 71 of 118 | 43 of 68 | 62% |
+
+The suggested command (`pmlab.wallet --days 14 --end 2026-11-06`) lies inside window A and only checks the tool:
+oidocrop +757 (API 733), QuantDeLaFugazi +6,281 (API 5,997), Faston +1,366 (API 1,309), all categories.
+
+### Problems that affect the whole study
+1. The fee was not 0.01. Measured on oidocrop's own activity rows (`usdc_size` minus shares x price, mention
+   markets only): 0.0400 from September to 19 October and 1-20 November, zero on 20-31 October, 0.0100 from
+   21 November. The three accounts' blended charges agree (implied 0.033-0.042 in W0). Every "after fee" figure
+   of the study before 21 November is slightly too high (W0: oidocrop -$30, Faston -$198, QuantDeLaFugazi -$348),
+   and the zero-fee fortnight sits inside window A. For us today's 0.01 is the right number.
+2. The JUMP phase is defined only in markets that resolved Yes, so "jump-phase taker buys won 100 of 100" is true
+   by construction. A buy at 0.92 after a spike that later collapsed is booked under LIVE (oidocrop "Job 20+
+   times" -$280 and "Ukraine" -$93 in W0, QuantDeLaFugazi "Rural" -$416 in A). Read the price-band tables, which
+   do not condition on the outcome, not the phase table, when judging the confirm-and-buy leg.
+3. For weekly and monthly "period" events the gamma start is the END of the period, so "PRE" fills there were
+   placed while the count was running. That is 22%, 54% and 21% of Faston's PRE profit in the three windows
+   (W0: +$833 of +$1,551).
+4. Selection: the accounts come from a winners' board (141 screened, 5 passed) and the rule required positive
+   recent months. W0 overlaps those months; Wm1 does not, but "positive all-time" still does. The only clean test
+   is forward.
+5. Leaderboard category figures are not usable: QuantDeLaFugazi's "all-time mentions" volume ($1.34M) is larger
+   than the account's lifetime volume ($1.28M).
+
+### oidocrop - WEAK (profit is real, the explanation of where it comes from is not)
+- Reproduces: buys the decided side and holds (94-98% of its >= 0.95 buy dollars are after the determination in
+  all three windows), 76-83% of turnover in mentions, 4 wrong confirmations in 663 markets, positive in every
+  window, 13 of 13 months, 0% rebates, no splits, no fee group shared with the other eight wallets.
+- Does not reproduce: "more than 90% of the profit is from buys below 0.95" and "'profit is that carry' fails".
+  Below-0.95 buys made +$543, +$5 and +$2,694. In W0 the account lost on them outside the jump (LIVE and PRE
+  taker buys -$672) and the whole window was +$333 (t 0.8 by market, bootstrap interval -426..+978), which fails the bar I
+  set in advance. The 0.97-0.99 buys are the leg that is positive in all three windows: +1.7%, +1.3%, +0.6% of
+  dollars, $965 in 135 days on about $2.7K of capital.
+- Raw re-derivation (ten markets, fresh tapes; fresh and cached row counts equal, its taker fills are on the tape
+  at the same second): the analyst's stories are accurate. Two Percent 2,000 Yes at 0.712 at start+3h27m, price
+  0.46 just before, so its own order walked the book; one bet is 22% of the window. BoA "Inflation 3+" 666 at
+  0.839 and 284 at 0.961 are the first prints. "60 Minutes" 100-lots at 0.121, 0.157, 0.368, 0.447 in 34 s from a
+  0.03-0.10 market: it was first to act on a published text. Robinhood 300 Yes at 0.985, -$183 after a hedge.
+  W0: "Million/Billion/Trillion 25+" 900 at 0.889-0.890, also the first prints.
+- On speed: in W0 and A it is the first print in 6 of 29 and 10 of 29 clean jumps it traded, and within 10 s in
+  about half, but its fills inside 10 s earned +$64, +$169, +$66 in the three windows. The analyst's "speed pays little" holds; "no gap measurable in
+  seconds" is too strong for a trader who is often first.
+- Corrected mechanism: a verifying carry trade (about 1.2% per turn, error rate 0.6% against roughly 1.5-2% at
+  break-even and 4.2% for blind followers) plus an irregular discretionary leg on disputed and counted markets
+  that made nothing in one window of three and two thirds of everything in another.
+
+### QuantDeLaFugazi - WEAK (behaviour reproduces, profit is a few large bets)
+- Net in mentions +5,254, +4,569, -975; t by event never above 1.6; bootstrap intervals include zero in every
+  window. Without the three best markets of each window: +110, +789, -2,140. The winners are large pre-event Yes
+  buys at 0.12-0.45 ("Transgender" +2,073, "Ammunition" +1,749, "Supreme Court" +1,622, "Drone" +1,449, "Epic
+  Fury" +1,163, "Ass" +867). The analyst's reading (fast taker plus directional bets, not a rule) stands.
+- Speed: clean-jump fills within 10 s earned +159, +293, +295. The analyst's $295 reproduces out of sample.
+- Confirm-and-buy is about zero: buys at >= 0.80 made +977, +1,340, -1,573; 7 wrong of 410 at >= 0.95 (1.7%).
+- The lifetime record is not a mentions record. Mentions were 76%, 42%, 32% of turnover in the three windows and
+  non-mention markets made +11.8K, +3.4K, +8.3K before fees (Iran ceasefire +4.9K, "Trump renames AI", "White
+  House full lid"); November's +$17.9K is outside mentions. It also splits and merges $61-76K per window (the ten largest in W0 and in A are all
+  2028-election markets), so "capital in use about $2.3K" describes mentions only.
+- Monthly: 19 of 25 active months positive (the write-up says 18 of 23), losing months of -8.1K, -6.9K, -5.6K.
+
+### Faston - SUPPORTED, with corrections (and a declared departure from my protocol)
+- Profit reproduces in all three windows (t by event 2.7, 2.1, 2.2; every bootstrap interval above zero), is not
+  concentrated (best event of 248 is under 10%), PRE fills carry 66-78% of it each time, positive every month
+  since March, rebates 2%, 11 unresolved markets in A are marked +$337.
+- Selection against a blind baseline reproduces out of sample for Yes: in W0 its pre-event Yes picks (live and
+  earnings events) returned +6.4% on $8.0K where buying Yes on all 840 sibling markets returned -17.0% +-4.1.
+  For No it does not: +6.5% on $3.0K against -0.3% +-7.0 blind (window A: +23.7% against +13.6% +-9.0).
+- Two of my four advance criteria fail and I report them rather than hide them: events positive 60-63% in every
+  window (the analyst's own 2/3 bar), and shares sold/bought 0.21, 0.08, 0.01. I read both as errors of
+  description, not of mechanism, and keep SUPPORTED.
+- Corrections: it is mainly a Yes picker (69-85% of pre-event dollars), not one of the "No a day ahead"
+  accounts of the summary. Median lead was 100 hours in W0 and 30 in A. It does not "never sell": it bought both
+  outcomes in 83 of 545 markets in W0 and merged $4.1K, $6.1K, $5.3K. The maker edge is not stable (pre-event
+  maker buys +2.9% in W0 against +24% in A). Part of "PRE" is in-period trading (point 3 above); pre-event fills in live
+  and earnings events alone made +$746, +$719, +$659.
+- Limits for copying: its taker orders walk the book at about 50 shares per cent (NVIDIA "AI 40+" 50 shares each
+  at 0.82, 0.83, 0.84, 0.85), many of its markets have $200-$900 of total volume, and what produces the picks is
+  still unknown. It also earns outside mentions (+$0.6K, +$1.8K, +$4.0K before fees in the three windows).
+
+### Alternatives considered
+Luck on a few bets: decisive for QuantDeLaFugazi, partial for oidocrop's below-0.95 leg, not for Faston.
+One operator, several wallets: the nine wallets have nine different `wv_30d` values, taker and maker. Rebates and
+rewards: 0%, 1%, 2% of what was kept. Hedges elsewhere: none visible on Polymarket; other venues cannot be seen.
+Inside information: cannot be tested; oidocrop's "60 Minutes" sweep is the only case that looks like being first
+to a source. Survivorship: not removable here (point 4).
+
+Count of variants: `sceptic.py` 9 runs (3 accounts x 3 windows, one window added after the fact), `post.py` 1,
+`bench.py` 1, `pmlab.wallet` 3, `wallet_check.py --monthly` 3, one tier query, one fee measurement. No rule was
+changed and rerun.

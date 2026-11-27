@@ -604,3 +604,49 @@ Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / dat
   markets whose inventory predates the window (merges/redeems without a matching buy) are left out. For an account
   that merges and holds month-long markets (grasstoucher69: 1,115 merges in 21 days, 339 unresolved markets) the tool
   net is far below the API figure (25.8K vs 64.7K over 14 days); mark open positions before comparing.
+
+## Added 2026-11-27 by the sceptic's check of the mentions wallet study (details: "Sceptic's check" in `studies/wallets/mentions/README.md`, code in `studies/wallets/mentions/sceptic/`)
+
+- Mentions taker fee from real charges (oidocrop's activity rows, `usdc_size` minus shares x price, mention markets
+  only): 0.0400 in September - 19 October and 1-20 November, zero on 20-31 October, 0.0100 from 21 November. The
+  mentions study assumed 0.01 throughout; mentions was a 0.04 category before the 20 November change.
+- Three 45-day windows (15 Jul - 27 Nov), mentions only, fee 0.01: oidocrop +1,103 / +333 / +2,708 (pooled t 3.7 by
+  event); Faston +1,451 / +1,997 / +1,218 (pooled t 3.8); QuantDeLaFugazi +5,254 / +4,569 / -975 (pooled t 1.6,
+  +718 without its five best events). Verdicts: Faston supported with corrections, oidocrop and QuantDeLaFugazi weak.
+- oidocrop's steady leg is the 0.97-0.99 buy after it has checked the outcome itself: +1.7%, +1.3%, +0.6% of dollars
+  in the three windows, 4 wrong of 663 markets. Its buys below 0.95 made +543, +5, +2,694: the "90% of profit from
+  disputed markets" finding belongs to one window.
+- Faston is mainly a pre-event YES picker (69-85% of pre-event dollars). Out of sample its Yes picks returned +6.4%
+  where buying Yes on all 840 sibling markets returned -17.0% +-4.1; its No picks did not beat blind No (+6.5% vs
+  -0.3% +-7.0). Blind No was +13.6% in the later window and -0.3% in the earlier one: not a stable edge.
+- In `deep.py`-style phase tables the JUMP phase exists only in markets that resolved Yes, so "jump buys won 100 of
+  100" is true by construction; a buy after a spike that collapsed is booked under LIVE. Use price bands that do
+  not condition on the outcome.
+- For weekly/monthly mention events "before the gamma start" means inside the counting period (the start is the
+  period's end): 21-54% of Faston's "pre-event" profit is of that kind.
+- A leaderboard category figure can exceed the account: QuantDeLaFugazi's all-time mentions volume on the board is
+  $1.34M, its lifetime volume in `user-stats` is $1.28M. More than half of what it kept since July came from
+  non-mention politics markets.
+- None of the nine wallets of the mentions study share a `wv_30d` value (taker or maker tiers): no fee group.
+
+## Added 2026-11-27 by the sceptic's check of the economics wallet study (details: "Sceptic's check" in `studies/wallets/economics/README.md`, scripts in `studies/wallets/economics/sceptic/`)
+
+- Verdicts: TheElement115 SUPPORTED, Ahpo SUPPORTED (lighter check), perfectnostalgia WEAK, jozeslemsek WEAK.
+- Release sniping holds outside the study's sample: TheElement115, whole life, 111 resolved markets, none lost more
+  than $5, +$8,483 on $78.4K at a 0.04 fee; 86 of 96 real fills are 0-40 s after a quarter hour, the rest follow
+  announcements with no fixed second (SARB, Japan GDP 23:50 UTC, Copom). Half its profit comes from $8.1K bought under
+  0.80; 3-8 other takers share its block in 7 of 9 tapes.
+- Block order is not match order: in one block the same token printed at 0.118 and at 0.99. Do not rank snipers by
+  block-time lag.
+- perfectnostalgia: 28 of 32 months positive (t 4.56), but its taker-buy edge is +12.4c / -3.4c / -0.7c a share in
+  Sep-Nov / Jun-Aug / Mar-May, and its excess over a blind same-price buyer in Sep-Nov is $7.5K (t 1.53 by event),
+  $0.5K without three events. The stable part is favourites bought at 0.70+ and held: 57 of 62 markets, 8.9% on $324K.
+- jozeslemsek: net cash +$4,478 in eight months and $2,260 of inventory; three events are 49% of the result and the
+  656 resolved markets earned +$740 (t 1.52). In the Fed tails the gain is the tail repricing 3-4x while it was long.
+- Ahpo takes Fed-decision markets 10-20 s after CPI and jobs in size (19 taker fills, $124K, in the first 60 s after
+  release times in Sep-Nov); its profit is in taker entries closed by resting offers. A 20-second taker round trip
+  of 1.2c at 0.78 lost money at the 0.04 fee.
+- Tool notes: `trades?condition=` tapes of the large Fed markets cached in `data/econ_tapes/` are truncated and do not
+  reach back to September; a timing table keyed to a market's own release misses fills made after other releases.
+- A reference built from other traders' prints around a maker's fills is biased (prints near its buys are bid-side):
+  a spread / price-move split made that way overstates the move.

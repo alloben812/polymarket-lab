@@ -1,5 +1,10 @@
 """Step 1: pull Houroux/polymarket-l2-history for the study dates, keep temperature markets only, delete raw files.
 
+FINDING (2026-11-27): the `events` / `book_levels` tables of this dataset contain NO order-book rows for temperature
+markets (checked: all 107 market_ws files of 2026-10-02 and six files of 10-06, 10-09, 10-11: 0 rows). Only the
+`markets` discovery table (reward universe: rate, minimum size, band) covers them. The `events` mode below is kept
+for the record; the books come from the PendulumFlow V3.1 mirror instead (s1b_fetch_pflow.py).
+
 usage: python3 -I s1_fetch.py markets            (discovery snapshots -> markets_<date>.parquet)
        python3 -I s1_fetch.py events <date>...   (market_ws events + book levels -> events_<date>.parquet, levels_<date>.parquet)
 Downloaded files are untrusted data: they are only read with pyarrow, in their own directory, and removed.
@@ -55,11 +60,11 @@ def fetch(path_in_repo):
 
 def do_markets():
     for date in DATES:
-        out = f"{OUT}/markets_{date}.parquet"
+        out = f"{OUT}/marketsfull_{date}.parquet"
         if os.path.exists(out):
             continue
         files = sorted(x["path"] for x in listing("markets", date) if "__discovery__" in x["path"] and x["size"] > 100_000)
-        pick = sorted(set(files[::4] + files[-1:]))
+        pick = files  # every discovery snapshot (reward rate and minimum size change inside the day)
         parts = []
         for p in pick:
             f = fetch(p)
@@ -77,7 +82,7 @@ def do_markets():
 def cond_set():
     s = set()
     for date in DATES:
-        t = pq.read_table(f"{OUT}/markets_{date}.parquet", columns=["condition_id"])
+        t = pq.read_table(f"{OUT}/marketsfull_{date}.parquet", columns=["condition_id"])
         s |= set(t["condition_id"].to_pylist())
     return pa.array(sorted(s))
 

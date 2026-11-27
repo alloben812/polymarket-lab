@@ -1,0 +1,51 @@
+life cash: buys 24772 sells 28580 redeems 230 rewards 405 maker rebates 228 yield 0.48; taker fee (API all-time) 193 net of refund
+net cash out of the account's whole life: 4478; open positions: 206 rows, cost 2600, API current value 2260; cash + value = 6738 (API economic_pnl 6,714)
+
+RESOLVED markets (whole life, complete by construction): 656, P&L 740, positive 280, t 1.52; top3 548, rest 191 (t 0.55); worst3 -350
+    will-openai-have-the-best-ai-model-at-the-end-of-october-2026-20260811      281
+    will-moonshot-have-the-best-chinese-ai-model-at-the-end-of-october-202      174
+    will-aleksandar-repic-win-the-2026-ljubljana-mayoral-election                94
+    will-the-tesla-roadster-fly-for-1s                                           68
+    will-openai-have-the-best-ai-model-at-the-end-of-september-2026-202607       65
+OPEN markets: 361: cash so far 3298, API value of what is left 2260 (cost 2597); P&L if marked at API price 5558, if the rest expires worthless 3298
+   top3 open markets at API mark 2113; rest 3445
+    will-the-fed-decrease-interest-rates-by-25-bps-after-the-january-2 pnl@mark    1254 cash    1254 value_left      0
+    will-the-fed-increase-interest-rates-by-50-bps-after-the-december- pnl@mark     496 cash     496 value_left      0
+    will-the-fed-decrease-interest-rates-by-25-bps-after-the-december- pnl@mark     364 cash     364 value_left      0
+    will-gabriel-attal-win-the-2027-french-presidential-election       pnl@mark     326 cash     326 value_left      0
+    will-there-be-no-change-in-fed-interest-rates-after-the-december-2 pnl@mark     245 cash     245 value_left      0
+    will-zoran-jankovic-win-the-2026-ljubljana-mayoral-election        pnl@mark     213 cash     213 value_left      0
+    will-alphabet-be-the-largest-company-in-the-world-by-market-cap-on pnl@mark     185 cash      61 value_left    124
+    will-the-fed-increase-interest-rates-by-25-bps-after-the-april-202 pnl@mark     147 cash    -437 value_left    584
+
+BY EVENT (resolved at final, open at API mark): 554 events, total 6298; top3 3066; top10 4500; positive 308
+    fed-decision-in-january-20260729233815502                                 1368
+    fed-decision-in-december-20260729232808632                                1244
+    next-french-presidential-election                                          454
+    which-company-has-the-best-ai-model-end-of-october                         340
+    largest-company-end-of-december-2026                                       296
+    best-chinese-ai-company-end-of-october                                     189
+    will-the-us-confirm-that-aliens-exist-before-2027                          168
+    which-company-has-best-ai-model-end-of-2026                                153
+    fed-decision-in-april-2027                                                 147
+    bank-of-canada-decision-in-december-20260908230600011                      141
+    ... worst: [('khamenei-of-tweets-june-9-june-16-2026', -77), ('next-press-secretary-announced-byptptpt', -85), ('scotus-accepts-sports-event-contract-cas', -85), ('french-senate-election-2nd-most-seats', -100)]
+   events with 'fed' in the slug: 2876 of 6298
+
+OPEN INVENTORY by current price:
+   price 0-0.01: 122 positions, cost 1043, API value 774, shares 406425
+   price 0.01-0.05: 59 positions, cost 605, API value 379, shares 18464
+   price 0.05-0.2: 22 positions, cost 947, API value 1100, shares 9274
+   price 0.2-1.01: 3 positions, cost 5, API value 7, shares 13
+    will-the-fed-increase-interest-rates-by-25-bps-after-the-april-2 sh     4029 avg 0.1097 now 0.1450 cost    442 value    584
+    will-china-invade-taiwan-by-december-31-2027                     sh     2000 avg 0.0800 now 0.0850 cost    160 value    170
+    scotus-accepts-sports-event-contract-case-by-december-31-2026    sh      702 avg 0.1459 now 0.0235 cost    103 value     17
+    will-alphabet-be-the-largest-company-in-the-world-by-market-cap- sh    35378 avg 0.0027 now 0.0035 cost     97 value    124
+    will-deepseek-have-the-best-ai-model-at-the-end-of-december-2026 sh    25067 avg 0.0037 now 0.0015 cost     95 value     38
+    will-meta-have-a-1-ai-model-by-december-31-2026                  sh      832 avg 0.0921 now 0.0650 cost     77 value     54
+    will-moonshot-have-the-best-ai-model-at-the-end-of-december-2026 sh    36207 avg 0.0020 now 0.0015 cost     76 value     54
+    us-iran-hormuz-agreement-by-december-31                          sh      300 avg 0.2200 now 0.1150 cost     66 value     34
+    will-openai-launch-a-new-consumer-hardware-product-by-december-3 sh      579 avg 0.1100 now 0.1450 cost     64 value     84
+    will-xai-have-the-best-ai-model-at-the-end-of-december-2026      sh     5864 avg 0.0097 now 0.0060 cost     57 value     35
+buy dollars by price (life, $24772): {'0-0.01': 30, '0.01-0.03': 21, '0.03-0.1': 15, '0.1-0.3': 19, '0.3-1.01': 15}; maker share of buy $ 85%
+buy dollars by price (Nov, $8841): {'0-0.01': 35, '0.01-0.03': 20, '0.03-0.1': 12, '0.1-0.3': 19, '0.3-1.01': 14}; maker share of buy $ 89%

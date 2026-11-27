@@ -279,3 +279,133 @@ run each. Nothing was tuned on one period and reported on another: this is a des
 `release_analysis_v2.py/.txt`, `release_results_v2.json`, `release_snipers_v2.json`, `timing.py/txt/json`,
 `fed_reaction.py/txt`, `checks.py/txt`, `checks2.py/txt`, `fee_calibration.txt`. Tapes and cached fills:
 `data/econ_tapes/`.
+
+## Sceptic's check
+
+Done 2026-11-27 by a second reader whose job was to break the account explanations above. Scripts and outputs are in
+`sceptic/`. No protocol file was written before these runs (the checks were fixed by the review brief: another window,
+concentration, raw re-derivation, alternatives); every run is listed and nothing was tuned. Accounts checked: the two
+with confidence 4 (perfectnostalgia, TheElement115) and both accounts tied at 3 (jozeslemsek in full, Ahpo lighter).
+
+| account | verdict | one line |
+|---|---|---|
+| TheElement115 | SUPPORTED | Reproduces in Jul-Aug and on raw tapes outside the 53 events; 111 markets, none lost |
+| perfectnostalgia | WEAK | The account is a real long-run winner; the stated source of the edge does not reproduce |
+| jozeslemsek | WEAK | Real cash, but half of it is three events and the finished markets earned almost nothing |
+| Ahpo | SUPPORTED (lighter check) | Reproduces in Jun-Aug; faster than described; the 11-06 showcase lost money after fees |
+
+### TheElement115: SUPPORTED
+
+- Other window (`element_jul_aug.txt`, 2026-07-17..08-31, before the analyst's sample): 37 resolved markets, net
+  +$1,818 on $12.1K (15%), t by market 3.23; API kept $1,769 after $55 of fees. Same behaviour, smaller size.
+- Concentration (`element_life.txt`, whole life from raw fills): 111 resolved markets, +$8,483 on $78.4K at a 0.04
+  fee (API kept $8,491); 99 positive, no market lost more than $5; t 5.81, and 7.06 without the three best markets
+  ($6,429 left). By release day: 46 of 48 days positive; without the three best days t 5.17.
+- Timing re-derived without the analyst's schedule table: seconds past the nearest quarter hour for each fill. Of
+  96 fills of $20 or more, 86 land 0-40 s after :00/:15/:30/:45 (84 of them within 20 s). The other 10 follow
+  announcements with no quarter-hour second (South African Reserve Bank 13:05:30, Japan GDP 23:50:02, Copom
+  21:31:40, RBI 04:32:20, Bank of Korea 00:50:06).
+- Raw tapes fetched fresh for 9 markets outside the 53 events (`element_tapes.txt`): its fill is 5-8 s after the
+  quarter hour (RBNZ +8, July jobs +6 and +7, July CPI +6, Bank of Russia +5 and +7, FOMC July +6); the last print
+  before was 0.003-0.87 for the outcome that won. No buying of the winner in the ten minutes before, except normal
+  two-way flow in the Fed market: nothing that looks like a leak. federalreserve.gov confirms the 2026 meeting dates
+  (July 28-29, Sep 15-16, Oct 27-28); bls.gov is blocked from the sandbox.
+- Corrections to the write-up:
+  - "Every fill is 2-40 s after a release" holds for the real fills. The account also has 57 fills under $20
+    ($175 in total, including $1 buy/sell probes in an unrelated market) and 17 sells.
+  - It is never alone. In 7 of the 9 tapes 3-8 other takers are in the same block (road2million, makeit99,
+    ClickKlackClick, balthazar, mildwindow27, 0x67babdb5, vivonzulull). Prices inside one block differ widely
+    (0.118 and 0.99 for the same token), so block order is not match order and the lag cannot rank the bots.
+  - Half the profit is a few deep-stale fills: bought under 0.80, $8.1K earned $4,478; bought at 0.95 or more,
+    $39.5K earned $761. In the one large market checked (FOMC July) 17 fills worth $107K were ahead of it and it paid
+    0.840 against 0.811 before the statement.
+  - October is 47% of the profit by fill date (58% by the API's booking date).
+- Alternatives: rebates $10 in total. Not luck (no losing market in 111). No fee group with road2million or makeit99
+  (different `wv_30d`). road2million existed since 2025-10 and lost $779 on $1 fills until June 2026, then began
+  sniping in July 2026, the month TheElement115 was created: 38 of its 107 fills in shared markets are in the same
+  block. One operator is possible and unproven; if so the "four wallets" are three operators.
+- Still open: depth beyond what traded, how the number is obtained, and what happens at the 0.01 fee.
+
+### perfectnostalgia: WEAK (the account wins; the explanation is thin)
+
+- Behaviour reproduces in two more quarters (`perfectnosta_mar_may.txt`, `perfectnosta_jun_aug.txt`): buys days to
+  weeks ahead, sells 10-23% of dollars, no post-release takes. In 7 markets re-derived from raw fills and tapes
+  (`perfect_checks.txt` part c) the first buy is 14-76 days before the release, the last 15 hours to 22 days before,
+  and there are zero fills at or after the release.
+- Profit reproduces at the account level: API kept $28.1K (Mar-May), $11.2K (Jun-Aug), $35.0K (Sep-Nov). Monthly
+  record: 28 of 32 positive, t of monthly kept 4.56, and 4.53 without the three best months.
+- What does not hold:
+  - "The taker fills carry the edge" (+12.4c, t 2.34 in Sep-Nov): taker buys earned -0.7c a share in Mar-May
+    (t -0.11, 89 markets) and -3.4c in Jun-Aug (t -0.38, 61 markets). In Mar-May the money came from maker buys and
+    maker sells.
+  - Concentration. Sep-Nov economics: three markets are $13.8K of $18.0K; the rest is +$4.1K, t 0.48. Jun-Aug:
+    +$5.0K in total, three markets +$28.2K, the rest -$23.2K. By event (adjacent buckets netted): t 2.64 / 0.60 /
+    2.51 in the three quarters; without the three best events t 1.78 / -0.20 / 1.82.
+  - The falsification used the wrong price range. It tested blind buying at 0.70-0.90; the account's bucket bets are
+    at 0.30-0.55, where the analyst's own table shows blind buyers earning +3 to +12c. Against a blind buyer of every
+    same-priced token (within 0.10) in the same event at the same moment (`perfect_checks.txt` part d, 29 events,
+    $84K): its edge $13.0K, blind $5.5K, difference $7.5K, t by event 1.53; without its three best events the
+    difference is $503 (t 0.18). Selection is not shown in this quarter.
+  - Execution is not an edge: its VWAP equals everyone else's over the same span (0.448 vs 0.436, 0.401 vs 0.397,
+    0.426 vs 0.444, 0.473 vs 0.467).
+  - Story error: the last fill in August CPI "3.4%" is 09-10 12:12:33, 18 minutes before the PPI release and
+    24 hours before CPI. The ECB October position started 08-14, not 09-01 ($37.9K in all).
+- Corrected mechanism (`perfect_bands.txt`): two books. (1) Favourites bought at an average of 0.70 or more and
+  held: 62 markets in three quarters, 57 positive, +$28.9K on $324K (8.9%), positive in every quarter. This is
+  carry that pays while nothing surprising happens; 5 of the 62 lost, and one miss can cost a stake of up to $34K
+  (which losing event belongs to this book was not traced). It sits uneasily with "buying the favourite is not an
+  edge": that calibration cell has 71-74 bets from one quarter and cannot exclude a few cents. (2) Bucket bets at 0.30-0.70: 74 markets, 42 positive, +$25.7K
+  on $210K, t 0.4 / 0.4 / 1.2 by quarter: positive but indistinguishable from variance inside any one quarter.
+  Buys under 0.30 lost $2.9K on 112 markets.
+- Alternatives: rebates and rewards 3%; no fee group (`own_wv_30d` equals `wv_30d`); nothing suggests inside
+  information (it loses single markets outright); hedges on other venues are not visible. Survivorship: picked from a
+  leaderboard, but 32 months of record make a pure-luck reading unlikely.
+- Confidence should be 3, not 4: a skilled account whose skill cannot be located in the fills.
+
+### jozeslemsek: WEAK
+
+- Other window (`jozes_jun_aug.txt`): same behaviour (maker buys at an average 0.0086, maker sells at 0.0135), API
+  kept $675 on $7.3K. Tool net on 249 resolved markets +$136 (t 0.71), -$34 without the three best.
+- Whole-life cash rebuilt from all 26,345 fills and the activity feed (`jozes_life.txt`): buys $24,772, sells
+  $28,580, redeems $230, rewards $405, maker rebates $228, fees $193: net cash +$4,478; 206 open positions cost
+  $2,600 and are marked $2,260. Cash plus marks $6,738 against the API's $6,714: the profit is real and mostly cash.
+- Concentration: 554 events; the three best are $3,066 of $6,298 (49%), the ten best 71%. "Fed decision in January"
+  and "Fed decision in December" alone are $2,612. The 656 markets that have resolved earned +$740 in eight months
+  (t 1.52; +$191 and t 0.55 without the three best). Nearly all the profit is in markets still open, and November is
+  56% of the lifetime figure.
+- Spread or price move (`jozes_tapes.txt`, `jozes_sample.txt`; reference = everyone else's VWAP within 2 hours of
+  each fill): on the seven best markets $715 of $3,179 realised is spread and $2,463 is the price being higher when
+  it sold; on a random 30 markets (seed fixed first) $436 of $1,597. The split overstates the move in thin markets
+  (prints around its buys are bid-side), so read it as an upper bound. In the Fed tails the move is real: January
+  "cut 25 bps" bought at 0.0060 and sold at 0.0174 while the weekly VWAP went 0.0070 -> 0.0217; December
+  "hike 50 bps" bought at 0.0077, sold at 0.0233, $505 of it as taker sells in the week the tail traded at 0.076.
+- Corrected mechanism: a buyer of cheap tails that sells when a tail reprices, more than a dealer earning a spread.
+  It was long Fed tails in October-November when they moved 3-4x. Half of its buy dollars are not sub-3c tails
+  (19% at 0.10-0.30, 15% above 0.30); the median buy price of 0.003 is by count.
+- Alternatives: rewards and rebates $633 (9% of kept, 14% of net cash); no fee group. Luck is not excluded: one
+  quarter of tail volatility explains most of the money.
+- For us: it stays the only mechanism at our scale, but the evidence is a few hundred dollars outside two Fed events.
+
+### Ahpo: SUPPORTED (lighter check: no per-market tape re-derivation)
+
+- Other window (`ahpo_check.txt`, Jun-Aug fetched fresh): economics round trips +$7,021 on $312K of cost, 25 of 28
+  events positive, t by event 2.50, and 2.41 without the three best. Sep-Nov: +$26,218, 18 of 23 positive, t 2.14,
+  but three events are $20.5K and the rest has t 1.31. Positive 16 months of 16.
+- Faster than described. Taker fills in the first 60 s after 12:30/13:30/18:00/19:00 UTC: 19 for $124K in Sep-Nov
+  and 12 for $43K in Jun-Aug. The write-up counted three for $37K because fills in Fed-decision markets were timed
+  only against the FOMC, not against CPI and jobs: 09-11 12:30:10 $25.9K, 09-04 12:30:10 $11.2K, 10-02 12:30:11
+  $14.0K, 10-14 12:30:14 $11.1K. So "no leaderboard account took in the 60 s after a release" is true only for a
+  market's own release.
+- Where the money is (`ahpo_roles.txt`): lots opened as taker and closed by resting offers, +$5.3K (4.3% of cost) in
+  Jun-Aug and +$15.7K (7.3%) in Sep-Nov after an estimated fee. Maker-opened lots +$0.6K and +$2.5K. Taker in and
+  taker out: -$1.3K and +$2.4K. Lots opened within ten minutes after a release time earn 4.0% and 8.1% of cost
+  against 1.0% and 3.8% otherwise.
+- The 11-06 showcase (bought $17.0K at 0.778, sold at 0.790 twenty seconds later) grossed $262 on the matched shares
+  and paid about $295 in taker fees at the 0.04 rate then measured: slightly negative. Only 4 of the 19 fast fills
+  could be marked to a tape (`ahpo_fast.txt`); the cached tapes of the September and October Fed markets are cut.
+
+### Runs
+
+`pmlab.wallet` on four other windows; `conc.py`; `fetch_life.py` (3 wallets); `jozes_life.py`; `jozes_tapes.py`;
+`jozes_sample.py` (one seed, one draw); `element_life.py`; `element_tapes.py`; `perfect_checks.py` (one comparator
+band, 0.10); `perfect_bands.py`; `ahpo_check.py`; `ahpo_fast.py`; `ahpo_roles.py`. One variant each, all reported.

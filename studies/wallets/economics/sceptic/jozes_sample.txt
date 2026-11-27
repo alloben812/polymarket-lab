@@ -1,0 +1,34 @@
+markets 1017, with >= 10 fills 395 (they hold 24227 of 26345 fills); sampled 30
+sample of 30: bought $1464; realised on matched shares 1597; spread part 436; market-move part 1161; unsold cost 51 worth 19 (final price if resolved, last print if open)
+   total P&L of the sample 1565; markets with positive total 23/30; resolved 15
+   spread part: positive in 24 markets, t 1.24; move part: positive in 24, t 1.30
+   will-the-fed-decrease-interest-rates-by-25-bps-after-the-j real 1253.9 spread  352.0 move  901.9 left cost   0.0 val   0.0 open
+   will-meta-have-the-best-ai-model-at-the-end-of-december-20 real   72.3 spread   24.6 move   47.8 left cost   0.0 val   0.0 open
+   nato-x-russia-military-clash-by-december-31-2026-244-538-5 real   57.7 spread   15.5 move   42.2 left cost   0.0 val   0.0 open
+   will-alibaba-be-the-third-best-ai-lab-at-the-end-of-octobe real   47.3 spread   -7.1 move   54.4 left cost   0.0 val   0.0 R
+   will-elisabeth-thand-ringqvist-be-the-next-prime-minister- real   34.3 spread   19.1 move   15.2 left cost   2.3 val   3.4 open
+   will-zptai-have-the-best-chinese-ai-model-at-the-end-of-no real   22.0 spread    8.6 move   13.4 left cost   0.0 val   0.0 open
+   china-x-japan-military-clash-before-2027                   real   20.0 spread   11.4 move    8.6 left cost   0.0 val   0.0 open
+   will-zai-have-the-best-ai-model-at-the-end-of-december-202 real   14.8 spread    2.3 move   12.5 left cost   2.4 val   1.2 open
+   will-trump-and-putin-meet-next-in-united-states            real   13.7 spread    2.8 move   10.9 left cost   0.6 val   0.0 R
+   will-meta-have-the-best-ai-model-at-the-end-of-august-2026 real   10.7 spread   -2.1 move   12.7 left cost   0.0 val   0.0 R
+   will-spacex-be-the-third-largest-company-in-the-world-by-m real   10.6 spread   -0.8 move   11.4 left cost   0.0 val   0.0 open
+   elon-musk-of-tweets-march-27-april-3-260-279               real    8.3 spread   -2.3 move   10.6 left cost   0.0 val   0.0 R
+   will-the-central-bank-of-colombia-decrease-the-monetary-po real    6.2 spread   -0.2 move    6.4 left cost   0.0 val   0.0 R
+   will-microsoft-be-the-third-largest-company-in-the-world-b real    5.7 spread    0.5 move    5.2 left cost   4.0 val   0.0 R
+   will-julian-assange-win-the-nobel-peace-prize-in-2026-899  real    4.4 spread    3.2 move    1.2 left cost   0.0 val   0.0 R
+   will-south-african-inflation-be-between-4pt1-and-4pt4-in-2 real    4.0 spread    0.9 move    3.1 left cost   1.9 val   0.6 open
+   bank-of-japan-decreases-interest-rates-by-25-bps-after-the real    3.9 spread    1.4 move    2.5 left cost   5.3 val   6.1 open
+   will-the-us-tariff-rate-on-china-be-between-25-and-35-on-m real    1.7 spread    1.4 move    0.3 left cost   0.0 val   0.0 R
+   will-deepseek-be-the-third-best-chinese-ai-company-at-the- real    1.5 spread   -2.0 move    3.4 left cost   4.9 val   0.0 R
+   will-openai-have-the-3-ai-model-at-the-end-of-may-2026-sty real    0.9 spread    0.9 move   -0.0 left cost   2.8 val   0.0 R
+   will-the-central-bank-of-colombia-decrease-the-monetary-po real    0.8 spread    0.1 move    0.7 left cost   0.4 val   0.8 open
+   reserve-bank-of-australia-increases-interest-rates-by-50-b real    0.7 spread    1.2 move   -0.6 left cost   4.1 val   4.1 open
+   will-zao-un-zemnieku-savienba-zzs-win-the-most-seats-in-th real    0.6 spread    0.0 move    0.5 left cost   2.1 val   0.0 R
+   will-ro-khanna-win-the-2028-us-presidential-election       real    0.5 spread    0.4 move    0.1 left cost   0.0 val   0.0 open
+   will-brazils-annual-inflation-in-2026-be-between-3pt00-and real    0.4 spread    0.3 move    0.1 left cost   0.0 val   0.0 open
+   will-deepseek-have-the-best-ai-model-at-the-end-of-july-20 real    0.3 spread    0.3 move    0.0 left cost   1.0 val   0.0 R
+   will-rupert-lowe-be-the-next-prime-minister-of-the-united- real    0.3 spread    0.4 move   -0.1 left cost   0.0 val   0.0 R
+   will-claude-fable-5pt1-max-be-the-best-ai-model-on-october real    0.0 spread    2.7 move   -2.7 left cost  14.5 val   0.0 R
+   will-zohran-mamdani-win-the-2028-democratic-presidential-n real    0.0 spread    0.0 move   -0.0 left cost   4.5 val   2.6 open
+   will-the-fed-decrease-interest-rates-by-50-bps-after-the-s real   -0.0 spread    0.6 move   -0.6 left cost   0.0 val   0.0 R

@@ -71,3 +71,38 @@ def espn_plays(lg, eid):
                         "home": p.get("homeScore"), "period": (p.get("period") or {}).get("number"),
                         "clock": (p.get("clock") or {}).get("displayValue"), "type": (p.get("type") or {}).get("text")})
     return out, s
+
+
+def norm(s):
+    return "".join(ch for ch in (s or "").lower() if ch.isalnum())
+
+_boards = {}
+def board2(lg, d):
+    if (lg, d) not in _boards:
+        extra = {"groups": 50} if lg == "cbb" else ({"groups": 80} if lg == "cfb" else {})
+        try:
+            _boards[(lg, d)] = http.get_json(f"{ESPN}/{LEAGUES[lg]}/scoreboard", {"dates": d, "limit": 500, **extra}, cache=True).get("events", [])
+        except Exception:
+            _boards[(lg, d)] = []
+    return _boards[(lg, d)]
+
+def espn_match(event_slug, game_start, outcomes=()):
+    """ESPN event id for a Polymarket game event (slug '<lg>-<away>-<home>-<date>'), matched on start time and teams."""
+    parts = event_slug.split("-"); lg = parts[0]
+    if lg not in LEAGUES or len(parts) < 3:
+        return None
+    for off in (0, -1, 1):
+        d = (dt.datetime.fromtimestamp(game_start, dt.timezone.utc) + dt.timedelta(days=off)).strftime("%Y%m%d")
+        for e in board2(lg, d):
+            if abs((ts(e.get("date")) or 0) - game_start) > 5400:
+                continue
+            comp = e["competitions"][0]["competitors"]
+            abbr = {norm(c["team"].get("abbreviation")) for c in comp}
+            names = set()
+            for c in comp:
+                for k in ("name", "shortDisplayName", "displayName", "location", "abbreviation"):
+                    names.add(norm(c["team"].get(k)))
+            outs = {norm(o) for o in outcomes if norm(o) not in ("over", "under", "yes", "no", "draw")}
+            if (norm(parts[1]) in abbr and norm(parts[2]) in abbr) or (outs and outs <= names):
+                return e["id"]
+    return None

@@ -1,0 +1,96 @@
+
+===== eth-5m: markets 1726, found 1726, rows 415563
+rates {0.01: 1726} | fee_type {'crypto_fees_v2': 1726} | lookback {60: 1726} | closed 1726 | slug_ok 1726 | t1_ok 1726 | cond unique 1726
+official: up share 0.503 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 782 | exact dup rows 21499 (5.17%) | gamma volume present 1417, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 2
+     rows per file that are multiples of 500/1000: 0 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 356738, 'SELL': 58825} | outcomes {'Up': 209902, 'Down': 205661}
+     block time rel. to window: before t0 0.098, inside 0.901, after t1 0.001 | earliest 11.5 h before t0, latest 152 s after t1 | last in-window row median 28 s before t1
+M2 all    mkts 1726 shares      7087956 usd     3471491 gross -0.405 fee 0.147 net -0.551 c/sh se 0.144 t -3.82 | net % turnover -1.126 | wallets 3255
+M2 tune   mkts 1152 shares      4633032 usd     2210643 gross -0.393 fee 0.141 net -0.534 c/sh se 0.173 t -3.09 | net % turnover -1.119 | wallets 2507
+M2 report mkts  574 shares      2454924 usd     1260848 gross -0.427 fee 0.157 net -0.584 c/sh se 0.259 t -2.25 | net % turnover -1.137 | wallets 2036
+   hand: BUY Down 2.0000 sh at 0.5000, up_won=True -> token won=False, gross/sh -0.5000, fee/sh 0.002500 (rate 0.01), net $ -1.0050
+   hand: BUY Down 5.0000 sh at 0.0200, up_won=True -> token won=False, gross/sh -0.0200, fee/sh 0.000196 (rate 0.01), net $ -0.1010
+   hand: SELL Down 12.1900 sh at 0.9900, up_won=False -> token won=True, gross/sh -0.0100, fee/sh 0.000099 (rate 0.01), net $ -0.1231
+proxy: n 1726 sd 1.01 bp, wrong 31 (1.80%), max official move in misses 3.10 bp, median basis 13.5 bp
+fair grid: max |mine - analyst| = 1.11e-16, NaN mine 0 analyst 0
+analyst fills rows 415563 | sum z equal: True | rate values {0.01: 415563}
+
+===== eth-15m: markets 576, found 576, rows 149438
+rates {0.01: 576} | fee_type {'crypto_fees_v2': 576} | lookback {60: 576} | closed 576 | slug_ok 576 | t1_ok 576 | cond unique 576
+official: up share 0.512 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 932 | exact dup rows 3178 (2.13%) | gamma volume present 576, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 0
+     rows per file that are multiples of 500/1000: 1 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 125286, 'SELL': 24152} | outcomes {'Up': 80099, 'Down': 69339}
+     block time rel. to window: before t0 0.049, inside 0.951, after t1 0.001 | earliest 23.8 h before t0, latest 76 s after t1 | last in-window row median 46 s before t1
+M2 all    mkts  576 shares      2868992 usd     1507965 gross -0.437 fee 0.157 net -0.594 c/sh se 0.245 t -2.42 | net % turnover -1.130 | wallets 1690
+M2 tune   mkts  384 shares      1842272 usd      985045 gross -0.614 fee 0.153 net -0.767 c/sh se 0.316 t -2.43 | net % turnover -1.434 | wallets 1346
+M2 report mkts  192 shares      1026720 usd      522920 gross -0.117 fee 0.166 net -0.284 c/sh se 0.382 t -0.74 | net % turnover -0.557 | wallets 1051
+   hand: BUY Up 10.1961 sh at 0.5100, up_won=True -> token won=True, gross/sh 0.4900, fee/sh 0.002499 (rate 0.01), net $ 4.9706
+   hand: BUY Down 6.0556 sh at 0.5400, up_won=False -> token won=True, gross/sh 0.4600, fee/sh 0.002484 (rate 0.01), net $ 2.7705
+   hand: SELL Up 8.0000 sh at 0.9990, up_won=True -> token won=True, gross/sh -0.0010, fee/sh 0.000010 (rate 0.01), net $ -0.0081
+proxy: n 575 sd 1.11 bp, wrong 8 (1.39%), max official move in misses 1.59 bp, median basis 13.5 bp
+fair grid: max |mine - analyst| = 1.11e-16, NaN mine 0 analyst 0
+analyst fills rows 149438 | sum z equal: True | rate values {0.01: 149438}
+
+===== sol-15m: markets 576, found 576, rows 47963
+rates {0.01: 576} | fee_type {'crypto_fees_v2': 576} | lookback {60: 576} | closed 576 | slug_ok 576 | t1_ok 576 | cond unique 576
+official: up share 0.510 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 291 | exact dup rows 657 (1.37%) | gamma volume present 576, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 0
+     rows per file that are multiples of 500/1000: 0 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 34983, 'SELL': 12980} | outcomes {'Up': 24003, 'Down': 23960}
+     block time rel. to window: before t0 0.067, inside 0.932, after t1 0.001 | earliest 23.9 h before t0, latest 45 s after t1 | last in-window row median 59 s before t1
+M2 all    mkts  576 shares       692892 usd      352286 gross -0.357 fee 0.153 net -0.510 c/sh se 0.447 t -1.14 | net % turnover -1.004 | wallets 978
+M2 tune   mkts  384 shares       469871 usd      247553 gross -1.171 fee 0.151 net -1.322 c/sh se 0.493 t -2.68 | net % turnover -2.509 | wallets 817
+M2 report mkts  192 shares       223021 usd      104733 gross 1.357 fee 0.158 net 1.199 c/sh se 0.900 t 1.33 | net % turnover 2.553 | wallets 491
+   hand: BUY Up 10.1961 sh at 0.5100, up_won=False -> token won=False, gross/sh -0.5100, fee/sh 0.002499 (rate 0.01), net $ -5.2255
+   hand: BUY Down 5.0000 sh at 0.5700, up_won=False -> token won=True, gross/sh 0.4300, fee/sh 0.002451 (rate 0.01), net $ 2.1377
+   hand: BUY Down 100.0000 sh at 0.0100, up_won=True -> token won=False, gross/sh -0.0100, fee/sh 0.000099 (rate 0.01), net $ -1.0099
+proxy: n 575 sd 1.27 bp, wrong 11 (1.91%), max official move in misses 3.00 bp, median basis 13.6 bp
+fair grid: max |mine - analyst| = 1.11e-16, NaN mine 0 analyst 0
+analyst fills rows 47963 | sum z equal: True | rate values {0.01: 47963}
+
+===== xrp-15m: markets 576, found 576, rows 29071
+rates {0.01: 576} | fee_type {'crypto_fees_v2': 576} | lookback {60: 576} | closed 576 | slug_ok 576 | t1_ok 576 | cond unique 576
+official: up share 0.495 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 206 | exact dup rows 407 (1.40%) | gamma volume present 572, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 0
+     rows per file that are multiples of 500/1000: 0 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 25617, 'SELL': 3454} | outcomes {'Up': 15251, 'Down': 13820}
+     block time rel. to window: before t0 0.051, inside 0.947, after t1 0.002 | earliest 23.9 h before t0, latest 56 s after t1 | last in-window row median 58 s before t1
+M2 all    mkts  576 shares       459380 usd      247459 gross -0.613 fee 0.147 net -0.759 c/sh se 0.496 t -1.53 | net % turnover -1.409 | wallets 686
+M2 tune   mkts  384 shares       308888 usd      167071 gross -0.639 fee 0.139 net -0.777 c/sh se 0.631 t -1.23 | net % turnover -1.437 | wallets 553
+M2 report mkts  192 shares       150491 usd       80388 gross -0.559 fee 0.163 net -0.722 c/sh se 0.789 t -0.91 | net % turnover -1.351 | wallets 357
+   hand: BUY Up 10.1961 sh at 0.5100, up_won=False -> token won=False, gross/sh -0.5100, fee/sh 0.002499 (rate 0.01), net $ -5.2255
+   hand: BUY Up 1.2500 sh at 0.8000, up_won=True -> token won=True, gross/sh 0.2000, fee/sh 0.001600 (rate 0.01), net $ 0.2480
+   hand: SELL Up 56.6000 sh at 0.9990, up_won=True -> token won=True, gross/sh -0.0010, fee/sh 0.000010 (rate 0.01), net $ -0.0572
+proxy: n 575 sd 1.04 bp, wrong 8 (1.39%), max official move in misses 0.88 bp, median basis 13.5 bp
+fair grid: max |mine - analyst| = 2.22e-16, NaN mine 0 analyst 0
+analyst fills rows 29071 | sum z equal: True | rate values {0.01: 29071}
+
+===== btc-15m: markets 576, found 576, rows 411812
+rates {0.05: 576} | fee_type {'crypto_btc_5m_15m_fees': 576} | lookback {60: 576} | closed 576 | slug_ok 576 | t1_ok 576 | cond unique 576
+official: up share 0.483 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 3983 | exact dup rows 15539 (3.77%) | gamma volume present 576, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 0
+     rows per file that are multiples of 500/1000: 3 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 359870, 'SELL': 51942} | outcomes {'Up': 212187, 'Down': 199625}
+     block time rel. to window: before t0 0.042, inside 0.957, after t1 0.001 | earliest 23.9 h before t0, latest 83 s after t1 | last in-window row median 9 s before t1
+M2 all    mkts  576 shares     14888626 usd     7413500 gross -0.205 fee 0.676 net -0.881 c/sh se 0.242 t -3.63 | net % turnover -1.768 | wallets 5081
+M2 tune   mkts  384 shares     10032369 usd     4936471 gross -0.369 fee 0.663 net -1.031 c/sh se 0.266 t -3.87 | net % turnover -2.096 | wallets 4064
+M2 report mkts  192 shares      4856257 usd     2477030 gross 0.133 fee 0.702 net -0.569 c/sh se 0.495 t -1.15 | net % turnover -1.115 | wallets 2952
+   hand: BUY Up 10.1961 sh at 0.5100, up_won=True -> token won=True, gross/sh 0.4900, fee/sh 0.012495 (rate 0.05), net $ 4.8687
+   hand: BUY Up 504.8611 sh at 0.3565, up_won=True -> token won=True, gross/sh 0.6435, fee/sh 0.011471 (rate 0.05), net $ 319.0699
+   hand: SELL Up 523.0800 sh at 0.9990, up_won=True -> token won=True, gross/sh -0.0010, fee/sh 0.000050 (rate 0.05), net $ -0.5492
+proxy: n 575 sd 1.04 bp, wrong 5 (0.87%), max official move in misses 1.09 bp, median basis 13.7 bp
+fair grid: max |mine - analyst| = 1.11e-16, NaN mine 0 analyst 0
+analyst fills rows 411812 | sum z equal: True | rate values {0.05: 411812}
+
+===== btc-5m: markets 300, found 300, rows 458394
+rates {0.05: 300} | fee_type {'crypto_btc_5m_15m_fees': 300} | lookback {60: 300} | closed 300 | slug_ok 300 | t1_ok 300 | cond unique 300
+official: up share 0.483 | (final>=ptb)!=up_won: 0 | final==ptb ties: 0 | missing ptb/final: 0
+tape: unsorted files 0 | markets with 0 rows 0 | max rows 4278 | exact dup rows 16385 (3.57%) | gamma volume present 266, tape shares / gamma volume: median 1.0000, <0.98: 0, >1.02: 0
+     rows per file that are multiples of 500/1000: 0 | p<=0 or >=1: 0 | z<=0: 0 | sides {'BUY': 389481, 'SELL': 68913} | outcomes {'Down': 230698, 'Up': 227696}
+     block time rel. to window: before t0 0.054, inside 0.945, after t1 0.002 | earliest 21.4 h before t0, latest 94 s after t1 | last in-window row median 0 s before t1
+M2 all    mkts  300 shares     13883489 usd     6890974 gross -0.542 fee 0.645 net -1.187 c/sh se 0.238 t -4.98 | net % turnover -2.391 | wallets 11129
+M2 tune   mkts  200 shares      8830442 usd     4393696 gross -0.699 fee 0.640 net -1.339 c/sh se 0.316 t -4.24 | net % turnover -2.691 | wallets 8820
+M2 report mkts  100 shares      5053047 usd     2497278 gross -0.266 fee 0.654 net -0.920 c/sh se 0.352 t -2.61 | net % turnover -1.862 | wallets 6428
+   hand: BUY Up 1.9608 sh at 0.5100, up_won=True -> token won=True, gross/sh 0.4900, fee/sh 0.012495 (rate 0.05), net $ 0.9363
+   hand: BUY Down 5.0000 sh at 0.5000, up_won=False -> token won=True, gross/sh 0.5000, fee/sh 0.012500 (rate 0.05), net $ 2.4375
+   hand: SELL Up 10.3400 sh at 0.9900, up_won=True -> token won=True, gross/sh -0.0100, fee/sh 0.000495 (rate 0.05), net $ -0.1085
+proxy: n 300 sd 0.99 bp, wrong 3 (1.00%), max official move in misses 1.65 bp, median basis 13.6 bp
+fair grid: max |mine - analyst| = 1.11e-16, NaN mine 0 analyst 0
+analyst fills rows 458394 | sum z equal: True | rate values {0.05: 458394}

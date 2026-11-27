@@ -1,0 +1,54 @@
+perfectnosta 88d economics markets=  84 net=    17992 t_mkt=1.55 top3=   13846 rest=    4146 t_rest=0.48 worst3=   -7355 pos=37/84
+      top: will-the-ecb-announce-no-change-at-the-october-2026-meeting- net=    5187 turnover=   34430
+      top: will-annual-inflation-be-3pt4-in-august-1786474663059        net=    4356 turnover=    3679
+      top: will-annual-inflation-be-3pt7-in-september-2026              net=    4303 turnover=    4698
+      by event: events=34 t_event=2.51 top3=10870 rest=7122 t_rest=1.82 pos=23/34
+perfectnosta 88d all       markets= 102 net=    23879 t_mkt=2.04 top3=   13846 rest=   10033 t_rest=1.14 worst3=   -7355 pos=52/102
+      top: will-the-ecb-announce-no-change-at-the-october-2026-meeting- net=    5187 turnover=   34430
+      top: will-annual-inflation-be-3pt4-in-august-1786474663059        net=    4356 turnover=    3679
+      top: will-annual-inflation-be-3pt7-in-september-2026              net=    4303 turnover=    4698
+      by event: events=51 t_event=3.25 top3=10870 rest=13009 t_rest=3.07 pos=38/51
+perfectnosta JunAug economics markets=  79 net=     4952 t_mkt=0.22 top3=   28181 rest=  -23229 t_rest=-1.53 worst3=  -20373 pos=33/79
+      top: will-annual-inflation-be-3pt6-or-less-in-june-20260610151731 net=   10853 turnover=     311
+      top: will-annual-inflation-be-3pt4-in-july-20260714150613271      net=    9309 turnover=    6371
+      top: will-monthly-inflation-increase-by-0pt1-or-more-in-july-2026 net=    8019 turnover=   17569
+perfectnosta JunAug all       markets=  82 net=     4119 t_mkt=0.18 top3=   28181 rest=  -24062 t_rest=-1.58 worst3=  -20373 pos=34/82
+      top: will-annual-inflation-be-3pt6-or-less-in-june-20260610151731 net=   10853 turnover=     311
+      top: will-annual-inflation-be-3pt4-in-july-20260714150613271      net=    9309 turnover=    6371
+      top: will-monthly-inflation-increase-by-0pt1-or-more-in-july-2026 net=    8019 turnover=   17569
+jozes 88d      economics markets=  27 net=       43 t_mkt=1.0 top3=      44 rest=      -1 t_rest=-0.03 worst3=     -35 pos=15/27
+      top: will-the-bank-of-israel-increase-the-bank-of-israel-interest net=      23 turnover=      32
+      top: will-the-bank-of-brazil-decrease-the-target-for-the-selic-ra net=      13 turnover=      30
+      top: bank-of-japan-decreases-interest-rates-by-25-bps-after-the-o net=       8 turnover=      18
+      by event: events=17 t_event=0.92 top3=51 rest=-8 t_rest=-0.22 pos=10/17
+jozes 88d      all       markets= 168 net=     -256 t_mkt=-0.76 top3=     336 rest=    -592 t_rest=-2.29 worst3=    -351 pos=63/168
+      top: will-moonshot-have-the-best-chinese-ai-model-at-the-end-of-o net=     174 turnover=     314
+      top: will-aleksandar-repic-win-the-2026-ljubljana-mayoral-electio net=      94 turnover=     324
+      top: will-the-tesla-roadster-fly-for-1s                           net=      68 turnover=     391
+      by event: events=112 t_event=-0.81 top3=287 rest=-543 t_rest=-2.24 pos=43/112
+jozes JunAug   economics markets=  30 net=       42 t_mkt=0.76 top3=      83 rest=     -41 t_rest=-1.7 worst3=     -32 pos=14/30
+      top: will-alphabet-be-the-largest-company-in-the-world-by-market- net=      37 turnover=     146
+      top: will-microsoft-be-the-third-largest-company-in-the-world-by- net=      24 turnover=      48
+      top: will-the-bank-of-russia-increase-the-key-rate-after-the-july net=      22 turnover=      97
+jozes JunAug   all       markets= 249 net=      136 t_mkt=0.71 top3=     170 rest=     -34 t_rest=-0.21 worst3=    -153 pos=93/249
+      top: will-alibaba-be-the-third-best-math-ai-lab-at-the-end-of-oct net=      82 turnover=      19
+      top: khamenei-of-tweets-june-26-july-3-2026-0-4                   net=      45 turnover=     299
+      top: will-jair-bolsonaro-win-the-2026-brazilian-presidential-elec net=      44 turnover=     225
+Element JulAug economics markets=  37 net=     1818 t_mkt=3.23 top3=     955 rest=     862 t_rest=3.42 worst3=      -4 pos=25/37
+      top: will-there-be-no-change-in-fed-interest-rates-after-the-july net=     378 turnover=    2000
+      top: will-the-us-lose-jobs-in-july-20260702221826043              net=     335 turnover=     707
+      top: will-the-south-african-reserve-bank-hold-at-the-july-2026-me net=     243 turnover=     500
+Element JulAug all       markets=  37 net=     1818 t_mkt=3.23 top3=     955 rest=     862 t_rest=3.42 worst3=      -4 pos=25/37
+      top: will-there-be-no-change-in-fed-interest-rates-after-the-july net=     378 turnover=    2000
+      top: will-the-us-lose-jobs-in-july-20260702221826043              net=     335 turnover=     707
+      top: will-the-south-african-reserve-bank-hold-at-the-july-2026-me net=     243 turnover=     500
+Ahpo 88d       economics markets=  15 net=     2112 t_mkt=0.95 top3=    2358 rest=    -247 t_rest=-0.99 worst3=    -292 pos=11/15
+      top: will-the-fed-increase-interest-rates-by-25-bps-after-the-oct net=    2203 turnover=   74587
+      top: fed-rate-cut-by-september-2026-meeting-264-382               net=     119 turnover=   39229
+      top: will-the-ecb-announce-a-25-bps-increase-at-the-october-2026- net=      37 turnover=     458
+      by event: events=14 t_event=0.95 top3=2358 rest=-247 t_rest=-0.99 pos=11/14
+Ahpo 88d       all       markets= 199 net=    17894 t_mkt=3.1 top3=    9295 rest=    8599 t_rest=4.12 worst3=   -1306 pos=187/199
+      top: us-x-iran-ceasefire-continues-through-november-15            net=    3690 turnover=    9722
+      top: saudi-oil-pipeline-east-west-restarts-by-september-30        net=    3402 turnover=    9235
+      top: will-the-fed-increase-interest-rates-by-25-bps-after-the-oct net=    2203 turnover=   74587
+      by event: events=110 t_event=2.48 top3=11792 rest=6102 t_rest=3.34 pos=103/110

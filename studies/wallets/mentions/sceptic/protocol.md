@@ -32,3 +32,17 @@ charges); (g) survivorship - stated, cannot be removed here.
 Verdicts: SUPPORTED = S1 passes, S2 rest positive in both windows, S3 shows no contradiction. REFUTED = the profit
 is absent in both windows or comes from somewhere other than the stated mechanism. WEAK = anything in between.
 Variants are counted in NOTES.md.
+
+## Addendum (written after W0 and A had been run and read)
+
+- Wm1 (2026-07-15 15:40 -> 2026-08-29 15:40 UTC) was added after seeing W0. Reason: W0 overlaps September and
+  October, which the analyst's selection rule ("2 of the last 3 months positive") looked at. Same script, no rule
+  changed, run for all three accounts. Treat it as a post-hoc addition.
+- `post.py` (clean-jump speed, below-0.95 buys by phase, sides, fee base, non-mention pnl, splits) and `bench.py`
+  (Faston's pre-event picks vs blind buying of every sibling market, rules copied from `../pre_event.py`) were
+  written after the first runs. The fee measurement from activity rows was also added then.
+- Verdicts by the literal rule above: all three accounts fail at least one S1 criterion in W0 (oidocrop: t 0.78
+  and below-0.95 share of profit 2%; QuantDeLaFugazi: passes S1, fails S2 concentration; Faston: events positive
+  60% and sold/bought 0.08). Faston is reported as SUPPORTED all the same, because profit, its source (PRE fills)
+  and the selection against the blind Yes baseline reproduce in every window and the two failed criteria concern
+  the description. This is a departure from the rule and is stated as one in the README.

@@ -1,0 +1,18 @@
+Jun-Aug
+   open M                                 all      cost   152242 gross     684 est. taker fee     59 net     626 (0.41% of cost)
+   open M                                 close M  cost   139785 gross     572 est. taker fee      0 net     572 (0.41% of cost)
+   open M                                 close T  cost    12457 gross     113 est. taker fee     59 net      54 (0.43% of cost)
+   open T                                 all      cost   159622 gross    6337 est. taker fee   2395 net    3942 (2.47% of cost)
+   open T                                 close M  cost   123629 gross    6774 est. taker fee   1501 net    5273 (4.27% of cost)
+   open T                                 close T  cost    35993 gross    -437 est. taker fee    894 net   -1331 (-3.70% of cost)
+   opened <=10 min after a release time   all      cost    51186 gross    2437 est. taker fee    398 net    2039 (3.98% of cost)
+   opened at other times                  all      cost   260678 gross    4585 est. taker fee   2056 net    2528 (0.97% of cost)
+Sep-Nov
+   open M                                 all      cost   108039 gross    2592 est. taker fee     46 net    2546 (2.36% of cost)
+   open M                                 close M  cost    72449 gross    2767 est. taker fee      0 net    2767 (3.82% of cost)
+   open M                                 close T  cost    35590 gross    -175 est. taker fee     46 net    -221 (-0.62% of cost)
+   open T                                 all      cost   282711 gross   23627 est. taker fee   5527 net   18100 (6.40% of cost)
+   open T                                 close M  cost   216579 gross   19178 est. taker fee   3439 net   15739 (7.27% of cost)
+   open T                                 close T  cost    66131 gross    4449 est. taker fee   2087 net    2361 (3.57% of cost)
+   opened <=10 min after a release time   all      cost   136378 gross   13832 est. taker fee   2852 net   10979 (8.05% of cost)
+   opened at other times                  all      cost   254372 gross   12386 est. taker fee   2720 net    9666 (3.80% of cost)

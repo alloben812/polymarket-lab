@@ -1,0 +1,37 @@
+
+will-the-fed-decrease-interest-rates-by-25-bps-after-the-january-2027-meeting- [Yes] tape rows 2257 from 07-30 14:42; its fills 132 (132 inside the tape span), whole-life cash 1254
+   inside the span: bought 110014 sh at 0.0060, sold 110014 sh at 0.0174; realised on matched shares 1254; left 0 sh; peak inventory 75951 sh; $ by role/side {'TB': 0, 'MB': 656, 'MS': 1910}
+   everyone else's price around its buys 0.0075, around its sells 0.0157  ->  spread part 352, market-move part 902 (132 fills with a reference)
+   market weekly VWAP: 10-01 0.0228, 10-08 0.0177, 10-15 0.0120, 10-22 0.0110, 10-29 0.0168, 11-05 0.0070, 11-12 0.0079, 11-19 0.0169, 11-26 0.0217
+
+will-the-fed-increase-interest-rates-by-50-bps-after-the-december-2026-meeting [Yes] tape rows 12928 from 07-30 05:40; its fills 98 (98 inside the tape span), whole-life cash 496
+   inside the span: bought 31895 sh at 0.0077, sold 31895 sh at 0.0233; realised on matched shares 496; left 0 sh; peak inventory 20349 sh; $ by role/side {'MB': 225, 'MS': 238, 'TB': 22, 'TS': 505}
+   everyone else's price around its buys 0.0115, around its sells 0.0294  ->  spread part -73, market-move part 569 (98 fills with a reference)
+   market weekly VWAP: 10-01 0.0273, 10-08 0.0273, 10-15 0.0265, 10-22 0.0238, 10-29 0.0195, 11-05 0.0761, 11-12 0.0725, 11-19 0.0284, 11-26 0.0208
+
+will-the-fed-decrease-interest-rates-by-25-bps-after-the-december-2026-meeting [Yes] tape rows 10115 from 07-30 05:40; its fills 429 (429 inside the tape span), whole-life cash 364
+   inside the span: bought 175218 sh at 0.0070, sold 175218 sh at 0.0090; realised on matched shares 364; left 0 sh; peak inventory 60000 sh; $ by role/side {'MB': 1170, 'TS': 32, 'MS': 1550, 'TB': 48}
+   everyone else's price around its buys 0.0078, around its sells 0.0096  ->  spread part 48, market-move part 315 (429 fills with a reference)
+   market weekly VWAP: 10-01 0.0168, 10-08 0.0090, 10-15 0.0065, 10-22 0.0058, 10-29 0.0051, 11-05 0.0050, 11-12 0.0045, 11-19 0.0036, 11-26 0.0025
+
+will-gabriel-attal-win-the-2027-french-presidential-election [Yes] tape rows 27892 from 11-14 02:17; its fills 151 (151 inside the tape span), whole-life cash 326
+   inside the span: bought 90244 sh at 0.0048, sold 90244 sh at 0.0084; realised on matched shares 326; left 0 sh; peak inventory 30000 sh; $ by role/side {'MB': 384, 'MS': 632, 'TS': 128, 'TB': 49}
+   everyone else's price around its buys 0.0051, around its sells 0.0072  ->  spread part 45, market-move part 282 (150 fills with a reference)
+   market weekly VWAP: 10-01 0.0228, 10-08 0.0168, 10-15 0.0129, 10-22 0.0080, 10-29 0.0072, 11-05 0.0046, 11-12 0.0038, 11-19 0.0045, 11-26 0.0063
+
+will-openai-have-the-best-ai-model-at-the-end-of-october-2026-2026081119484112 [Yes] tape rows 2655 from 08-13 03:43; its fills 284 (284 inside the tape span), whole-life cash 281
+   inside the span: bought 41288 sh at 0.0078, sold 41288 sh at 0.0146; realised on matched shares 281; left 0 sh; peak inventory 28165 sh; $ by role/side {'MB': 322, 'MS': 587, 'TS': 16}
+   everyone else's price around its buys 0.0083, around its sells 0.0143  ->  spread part 33, market-move part 248 (284 fills with a reference)
+   market weekly VWAP: 09-03 0.1506, 09-10 0.0879, 09-17 0.0224, 09-24 0.0116, 10-01 0.0100, 10-08 0.0084, 10-15 0.0068, 10-22 0.0077, 10-29 0.0034
+
+will-there-be-no-change-in-fed-interest-rates-after-the-december-2026-meeting- [Yes] tape rows 20038 from 07-30 01:35; its fills 62 (62 inside the tape span), whole-life cash 245
+   inside the span: bought 24292 sh at 0.0224, sold 24292 sh at 0.0325; realised on matched shares 245; left 0 sh; peak inventory 11757 sh; $ by role/side {'MB': 545, 'MS': 679, 'TS': 111}
+   everyone else's price around its buys 0.0273, around its sells 0.0312  ->  spread part 153, market-move part 93 (62 fills with a reference)
+   market weekly VWAP: 10-01 0.2507, 10-08 0.2174, 10-15 0.2024, 10-22 0.1837, 10-29 0.2333, 11-05 0.1157, 11-12 0.0309, 11-19 0.0425, 11-26 0.0356
+
+will-zoran-jankovic-win-the-2026-ljubljana-mayoral-election [Yes] tape rows 2679 from 10-08 02:53; its fills 29 (29 inside the tape span), whole-life cash 213
+   inside the span: bought 1782 sh at 0.6081, sold 1782 sh at 0.7275; realised on matched shares 213; left 0 sh; peak inventory 1562 sh; $ by role/side {'TB': 937, 'MS': 672, 'MB': 146, 'TS': 625}
+   everyone else's price around its buys 0.6735, around its sells 0.7043  ->  spread part 158, market-move part 55 (29 fills with a reference)
+   market weekly VWAP: 10-08 0.7208, 10-15 0.6788, 10-22 0.6780, 10-29 0.6430, 11-05 0.6193, 11-12 0.7087, 11-19 0.6418, 11-26 0.6929
+
+TOTAL over these markets: realised 3179, spread part 715, market-move part 2463

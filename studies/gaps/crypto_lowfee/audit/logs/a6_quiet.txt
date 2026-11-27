@@ -1,0 +1,39 @@
+== (1) real takers' fills (full size, equivalent-buy form), prints in [t0+15, t1-5] by match = block - 3; f up to m;
+   'with' = the bought side's fair value rose >= 0.03 over the previous 10 s, 'against' = fell >= 0.03; quiet = no print in that market for >= 15 s before
+ series                cell  fills  mkts  shares  avg_q  gross_c  net_c    se     t  net_usd_day
+ eth-5m    all prints, with 142299  1726 1993451  0.674    -0.51  -0.65  0.41 -1.59        -2165
+ eth-5m all prints, against 102347  1725 1957322  0.342    -0.41  -0.57  0.49 -1.16        -1855
+ eth-5m    quiet>=15s, with    234   137    2611  0.551    -0.28  -0.45  6.27 -0.07           -2
+ eth-5m quiet>=15s, against    159   105   12285  0.077    -1.99  -2.02  1.19 -1.70          -41
+ eth-5m     quiet>=15s, any   2178   994  183524  0.078    -0.56  -0.58  0.19 -2.99         -178
+eth-15m    all prints, with  43813   576  797411  0.630    -1.89  -2.05  0.73 -2.81        -2729
+eth-15m all prints, against  33658   576  632470  0.399     1.00   0.83  0.71  1.17          880
+eth-15m    quiet>=15s, with   2012   515   32940  0.555    -1.36  -1.55  2.17 -0.71          -85
+eth-15m quiet>=15s, against   1493   476   25537  0.421     3.81   3.62  3.03  1.19          154
+eth-15m     quiet>=15s, any  11260   576  232141  0.427     0.43   0.30  0.73  0.41          117
+eth-15m    quiet>=30s, with    466   258    7692  0.556     0.51   0.31  3.31  0.09            4
+sol-15m    all prints, with  12865   575  178199  0.627    -0.05  -0.20  0.92 -0.22          -61
+sol-15m all prints, against   9431   572  148863  0.361    -0.87  -1.03  1.19 -0.86         -255
+sol-15m    quiet>=15s, with   2450   559   31568  0.616    -1.96  -2.12  1.27 -1.67         -111
+sol-15m quiet>=15s, against   1763   523   25317  0.393    -2.16  -2.33  2.04 -1.14          -98
+sol-15m     quiet>=15s, any  11143   576  175090  0.465    -0.52  -0.65  0.57 -1.13         -189
+sol-15m    quiet>=30s, with   1104   462   14410  0.599    -3.19  -3.35  1.78 -1.88          -80
+xrp-15m    all prints, with   7883   569  115334  0.651    -1.26  -1.41  1.34 -1.06         -271
+xrp-15m all prints, against   5942   560   91664  0.395     0.98   0.82  1.31  0.62          125
+xrp-15m    quiet>=15s, with   2372   541   32596  0.632    -2.98  -3.14  1.77 -1.78         -171
+xrp-15m quiet>=15s, against   1635   510   21192  0.418     1.66   1.48  1.89  0.78           52
+xrp-15m     quiet>=15s, any   9672   576  148927  0.525    -0.81  -0.94  0.60 -1.57         -232
+xrp-15m    quiet>=30s, with   1271   484   16554  0.638    -2.12  -2.29  2.52 -0.91          -63
+btc-15m    all prints, with 119500   576 3438646  0.644     0.26  -0.53  0.82 -0.64        -3020
+btc-15m all prints, against  84050   576 2994037  0.370    -0.81  -1.61  0.73 -2.22        -8040
+btc-15m    quiet>=15s, with    417   174    8107  0.585     3.56   2.59  4.83  0.54           35
+btc-15m quiet>=15s, against    241   159   14593  0.382   -19.99 -21.05  7.88 -2.67         -512
+btc-15m     quiet>=15s, any   4063   552  606731  0.165    -0.70  -0.83  0.44 -1.89         -836
+btc-15m    quiet>=30s, with     15     8     380  0.438    13.08  12.41 11.61  1.07            8
+ btc-5m    all prints, with 156958   300 3699124  0.709     0.04  -0.62  0.55 -1.13       -21921
+ btc-5m all prints, against 115453   300 3764735  0.315    -1.98  -2.67  0.76 -3.50       -96423
+ btc-5m     quiet>=15s, any    250   128  145232  0.002    -0.20  -0.21  0.06 -3.74         -286
+
+== (2) one selected M4 trade by hand (sol-15m D0_thr0.02, reporting period), straight from the raw files
+tape row(s) at block time 1795613261 : [{'t': 1795613261, 's': 'SELL', 'o': 'Up', 'z': 0.43, 'p': 0.79, 'w': '0x07ee0f4571eb8e0bdf7588b729e6cd5245ca8720'}] | official: 67.76800121531063 -> 67.89952173883287 up_won True fee 0.01
+m - t0 = 758 s | Binance close at m 67.9100, strike (Binance 60 s mean at t0) 67.8513, sigma/s 2.29e-04 -> P(Up) 0.6451 | side Down f 0.3549, q 0.2100, fee/sh 0.00166, edge 0.1433 >= 0.02 | shares 0.43 of print 0.43 | won 0 -> net $ -0.0910 (script -0.0910)

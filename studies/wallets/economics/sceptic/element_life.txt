@@ -1,0 +1,35 @@
+fills 153 roles Counter({'T': 153}) sides Counter({'BUY': 136, 'SELL': 17})
+  fills >= $20: n=96 usd=78183 seconds past :00/:15/:30/:45 -> {'>120': 9, '0-5': 26, '6-20': 58, '21-40': 2, '41-120': 1}
+  fills < $20: n=57 usd=175 seconds past :00/:15/:30/:45 -> {'>120': 45, '21-40': 1, '41-120': 1, '6-20': 3, '0-5': 7}
+  Jul-Aug (outside the analyst's window) >= $20: n=30 usd=12026 seconds past :00/:15/:30/:45 -> {'>120': 4, '0-5': 7, '6-20': 17, '21-40': 2}
+  Sep-Nov >= $20: n=66 usd=66157 seconds past :00/:15/:30/:45 -> {'0-5': 19, '6-20': 41, '>120': 5, '41-120': 1}
+  fills >= $20 more than 40 s past a quarter hour:
+     07-23 13:05:30 q= 330s BUY No px=0.920 usd=    500 final=1.0 will-the-south-african-reserve-bank-hike-by-50-bps-or-more-a
+     07-23 13:05:31 q= 331s BUY No px=0.804 usd=    500 final=1.0 will-the-south-african-reserve-bank-hike-by-25-bps-at-the-ju
+     07-23 13:05:31 q= 331s BUY Yes px=0.672 usd=    500 final=1.0 will-the-south-african-reserve-bank-hold-at-the-july-2026-me
+     08-27 00:50:06 q= 306s BUY No px=0.990 usd=    140 final=1.0 will-the-bank-of-korea-hold-at-the-august-2026-meeting
+     10-07 04:32:20 q= 140s BUY Yes px=0.953 usd=    201 final=1.0 will-the-reserve-bank-of-india-increase-the-policy-repo-rate
+     11-04 21:31:40 q= 100s BUY No px=0.965 usd=   2000 final=1.0 will-the-bank-of-brazil-decrease-the-target-for-the-selic-ra
+     11-15 23:50:02 q= 302s BUY Yes px=0.630 usd=     28 final=1.0 will-japan-q3-gdp-growth-annualized-be-between-0pt8-and-0pt0
+     11-15 23:50:04 q= 304s BUY No px=0.703 usd=    100 final=1.0 will-japan-q3-gdp-growth-annualized-be-between-0pt0-and-0pt8
+     11-15 23:50:04 q= 304s BUY Yes px=0.613 usd=    100 final=1.0 will-japan-q3-gdp-growth-annualized-be-between-0pt8-and-0pt0
+     11-19 13:06:08 q= 368s BUY Yes px=0.958 usd=    536 final=1.0 will-the-south-african-reserve-bank-make-no-change-to-the-re
+  small fills sample: [('07-24 06:21:51', 'BUY', 0.016, 1.0, 'will-dwayne-the-rock-john'), ('07-24 06:42:27', 'SELL', 0.015, 0.9, 'will-dwayne-the-rock-john'), ('07-24 08:33:07', 'BUY', 0.016, 1.0, 'will-dwayne-the-rock-john'), ('07-24 08:48:28', 'SELL', 0.015, 0.9, 'will-dwayne-the-rock-john'), ('07-29 09:45:32', 'BUY', 0.016, 1.0, 'will-dwayne-the-rock-john'), ('07-29 10:17:00', 'SELL', 0.015, 0.9, 'will-dwayne-the-rock-john')]
+
+per market at final, fee 0.04 before 11-21: markets 111, P&L 8483 on $78351, positive 99, t 5.81; top3 2054; rest 6429 (t 7.06); losers 0 worth 0
+    top 10-28 01:00:08 reserve-bank-of-new-zealand-increases-interest-rates-by-25-bps     997 on    500
+    top 09-30 12:30:09 will-core-pce-mom-be-0pt3-in-august-20260826182127                 568 on    659
+    top 10-14 12:30:17 will-core-cpi-yoy-be-2pt6-in-september-2026                        489 on   1000
+    top 11-02 15:00:03 will-ism-manufacturing-pmi-be-between-55pt0-and-55pt9-in-octob     405 on   2000
+    top 07-29 18:00:06 will-there-be-no-change-in-fed-interest-rates-after-the-july-2     368 on   2000
+    worst 07-29 15:29:33 will-the-fed-increase-interest-rates-by-50-bps-after-the-jul      -1 on      2
+    worst 07-30 10:59:06 will-us-gdp-growth-in-q2-2026-be-between-2pt0-and-2pt5            -1 on      3
+    worst 07-30 11:00:18 will-us-gdp-growth-in-q2-2026-be-between-1pt5-and-2pt0            -1 on      3
+    worst 07-30 10:59:39 will-core-pce-mom-be-0pt2-in-june-20260705183628151               -2 on      2
+    worst 08-03 12:24:36 will-ism-manufacturing-pmi-be-between-52pt0-and-52pt9-in-jul      -2 on      2
+by release day: 48 days, positive 46, top3 days 3744 of 8483, t by day 3.88, t without top3 5.17
+by month: {'07': (914, 6949, 18), '08': (860, 5122, 19), '09': (1618, 15203, 19), '10': (3955, 38186, 32), '11': (1137, 12890, 23)}
+buys by price paid (usd, edge before fee): {'0.80-0.95': (30563, 3489), '<0.80': (8096, 4478), '>=0.95': (39523, 761)}
+
+road2million since 07-13: fills 344 (>= $20: 105); in markets TheElement115 also traded: 107; time difference s: {'same block': 38, '1-3 s': 14, '4-15 s': 5, 'more': 50}
+   seconds past quarter hour, road2million >= $20: {'0-20': 82, '>40': 21, '21-40': 2}

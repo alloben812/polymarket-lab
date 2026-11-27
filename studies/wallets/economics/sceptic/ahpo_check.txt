@@ -1,0 +1,20 @@
+Jun-Aug: fills 8327, economics fills 3004 $709170, maker share of econ $ 63%
+   FIFO round trips: cost 311864, realised 7021 (2.25% of cost); sells of older inventory $0; unsold cost 78421; dollar-weighted median hold 3.5 h
+   by event: 28 events, positive 25, t 2.50; top3 4887; rest 2134 (t 2.41)
+      best: [('fed-decision-in-september-762', 1968), ('fed-rate-hike-by', 1848), ('fed-decision-in-july-181', 1071), ('fed-decisions-apr-jul', 864)] worst: [('central-bank-of-colombia-decision-in', -19), ('fed-decisions-jun-sep', -43), ('iran-successfully-targets-shipping-o', -50)]
+   taker fills in the first 60 s after 12:30/13:30/18:00/19:00 UTC: 12, $43321
+      07-29 18:00:15 BUY No 22222 @ 0.999 $22199 will-the-fed-increase-interest-rates-by-25-bps-after-th
+      07-14 12:30:20 BUY Yes 13765 @ 0.790 $10881 will-there-be-no-change-in-fed-interest-rates-after-the
+      08-26 12:30:48 BUY Yes 13252 @ 0.300 $3975 will-the-fed-increase-interest-rates-by-25-bps-after-th
+      06-25 19:00:50 BUY No 3882 @ 0.999 $3878 will-the-bank-of-mexico-announce-an-increase-at-the-jun
+      07-14 12:30:56 BUY Yes 1057 @ 0.801 $846 will-the-fed-pausepausepause-in-the-next-three-decision
+Sep-Nov: fills 46851, economics fills 2356 $886387, maker share of econ $ 53%
+   FIFO round trips: cost 390750, realised 26218 (6.71% of cost); sells of older inventory $15326; unsold cost 63343; dollar-weighted median hold 0.9 h
+   by event: 23 events, positive 18, t 2.14; top3 20523; rest 5695 (t 1.31)
+      best: [('fed-decision-in-september-762', 9759), ('what-will-the-fed-rate-be-at-the-end', 5563), ('fed-decision-in-october-202606171903', 5201), ('fed-decision-in-december-20260729232', 3626)] worst: [('fed-decisions-sepdec', -98), ('what-will-fed-rate-hit-before-2027', -458), ('another-fed-rate-hike-in-2026', -1102)]
+   taker fills in the first 60 s after 12:30/13:30/18:00/19:00 UTC: 19, $123998
+      09-11 12:30:10 BUY Yes 38629 @ 0.670 $25881 will-the-fed-increase-interest-rates-by-25-bps-after-th
+      11-06 13:30:39 SELL Yes 25315 @ 0.790 $19999 will-the-fed-increase-interest-rates-by-25-bps-after-th
+      11-06 13:30:19 BUY Yes 21806 @ 0.778 $16973 will-the-fed-increase-interest-rates-by-25-bps-after-th
+      10-02 12:30:11 BUY Yes 17463 @ 0.803 $14020 will-there-be-no-change-in-fed-interest-rates-after-the
+      11-18 19:00:34 BUY No 139751 @ 0.080 $11180 will-the-fed-increase-interest-rates-by-25-bps-after-th

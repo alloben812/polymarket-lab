@@ -1,0 +1,62 @@
+== cat-dog 0x7056f248c5098cce2fb0a062cdd2ab0f8318c95c W1 07-30 Thu 00:00 .. 09-28 Mon 00:00  fills 756 truncated=False  activity rows 856
+activity by type (n, usdc): {'TRADE': (756, 185670), 'REDEEM': (41, 70314), 'MAKER_REBATE': (14, 80), 'TAKER_REBATE': (24, 138), 'REWARD': (19, 70), 'MERGE': (2, 2351)}
+fills joined to an activity TRADE row: 756 of 756
+  fee charged on matching taker fills, to 19 Oct   : n   219 zero-fee fills     0 charged   1672.00 implied rate 0.0500
+fills matching the regex: 725; not matching: 31 (usd 18674)
+  largest non-matching event stems: [('nato-x-russia-military-clash-in-#', 7691), ('russia-x-ukraine-ceasefire-agreement-by', 5941), ('which-cities-will-russia-enter-by-december-#', 2942), ('will-the-us-invade-iran-before-#', 2100)]
+markets 82 resolved 79 unresolved 3; in events with a CONVERSION by this wallet: 0; negRisk 82
+T1/T2 resolved markets, pnl to final after fee:
+  all                                mkts   79 win   63 events  28 win  25 usd    153795 pnl     28328 ( 18.4%) fee    1320 t_event  3.85 t_mkt  3.12 worst ev     -59 best ev    5285
+   top 3 markets: [('4th-weekend-box-office-be-between-38m-and-41m', 5308), ('rs-opening-weekend-box-office-be-less-than-8m', 3782), ('-at-least-900m-by-august-31-20260717232947960', 3519)]
+  without top 3 markets              mkts   76 win   60 events  28 win  23 usd    128970 pnl     15719 ( 12.2%) fee     911 t_event  3.71 t_mkt  2.69 worst ev     -97 best ev    3276
+   top 3 events: [('ider-man-brand-new-day-4th-weekend-box-office', 5285), ('the-dog-stars-opening-weekend-box-office', 3685), ('domestic-gross-by-august-31-20260716181307512', 3651)]
+  without top 3 events               mkts   71 win   57 events  25 win  22 usd    126251 pnl     15707 ( 12.4%) fee     885 t_event  3.81 t_mkt  2.70 worst ev     -59 best ev    3276
+  markets without own conversions    mkts   79 win   63 events  28 win  25 usd    153795 pnl     28328 ( 18.4%) fee    1320 t_event  3.85 t_mkt  3.12 worst ev     -59 best ev    5285
+  first half (by first fill)         mkts   28 win   23 events  11 win  10 usd     41138 pnl     14650 ( 35.6%) fee     664 t_event  2.29 t_mkt  2.06 worst ev     -59 best ev    5285
+  second half                        mkts   51 win   40 events  19 win  16 usd    112657 pnl     13678 ( 12.1%) fee     656 t_event  3.41 t_mkt  2.41 worst ev     -97 best ev    3276
+by role/side:
+  T BUY                                  fills   158 mkts   69 losing mkts  22 usd     89030 pnl     25144 (  28.2%) usd on winning side  89% t_mkt  2.51
+  T SELL                                 fills    56 mkts   32 losing mkts  15 usd     19410 pnl      -879 (  -4.5%) usd on winning side  25% t_mkt -0.23
+  M BUY                                  fills   210 mkts   40 losing mkts  12 usd     19304 pnl      4373 (  22.7%) usd on winning side  86% t_mkt  1.53
+  M SELL                                 fills   294 mkts   27 losing mkts  15 usd     26052 pnl      -310 (  -1.2%) usd on winning side  11% t_mkt -0.18
+BUY fills by token and price paid (b):
+  buy Yes at 0.00-0.100                  fills   110 mkts   10 losing mkts   7 usd       234 pnl       554 ( 236.8%) usd on winning side  10% t_mkt  0.97
+  buy Yes at 0.10-0.300                  fills    62 mkts   28 losing mkts  16 usd      4925 pnl      9734 ( 197.6%) usd on winning side  61% t_mkt  2.27
+  buy Yes at 0.30-0.600                  fills    75 mkts   19 losing mkts   9 usd     18066 pnl      5999 (  33.2%) usd on winning side  62% t_mkt  0.91
+  buy Yes at 0.60-0.900                  fills    18 mkts    9 losing mkts   2 usd     12049 pnl        -8 (  -0.1%) usd on winning side  84% t_mkt -0.00
+  buy Yes at 0.90-0.995                  fills     1 mkts    1 losing mkts   0 usd       900 pnl       100 (  11.1%) usd on winning side 100% t_mkt   nan
+  buy Yes at 0.99-1.010                  -
+  buy No at 0.00-0.100                   -
+  buy No at 0.10-0.300                   fills     4 mkts    3 losing mkts   3 usd       313 pnl      -323 (-103.4%) usd on winning side   0% t_mkt -2.73
+  buy No at 0.30-0.600                   fills    16 mkts   13 losing mkts   4 usd      9576 pnl      9149 (  95.5%) usd on winning side  87% t_mkt  1.51
+  buy No at 0.60-0.900                   fills    37 mkts   20 losing mkts   0 usd     11414 pnl      3305 (  29.0%) usd on winning side 100% t_mkt  3.16
+  buy No at 0.90-0.995                   fills    43 mkts   19 losing mkts   0 usd     50700 pnl      1005 (   2.0%) usd on winning side 100% t_mkt  4.22
+  buy No at 0.99-1.010                   fills     2 mkts    1 losing mkts   0 usd       156 pnl         1 (   0.4%) usd on winning side 100% t_mkt   nan
+SELL fills by price:
+  sell at 0.00-0.100                     fills    10 mkts    7 losing mkts   1 usd       104 pnl        87 (  83.7%) usd on winning side  99% t_mkt  1.13
+  sell at 0.10-0.900                     fills   116 mkts   32 losing mkts  17 usd     23847 pnl     -1476 (  -6.2%) usd on winning side  30% t_mkt -0.29
+  sell at 0.90-0.995                     fills    29 mkts    8 losing mkts   7 usd      4733 pnl       223 (   4.7%) usd on winning side   8% t_mkt  0.58
+  sell at 0.99-1.010                     fills   195 mkts    3 losing mkts   3 usd     16777 pnl       -23 (  -0.1%) usd on winning side   0% t_mkt -4.67
+time to gamma endDate:
+  to end >7d                             fills   241 mkts   10 losing mkts   1 usd     54584 pnl      7151 (  13.1%) usd on winning side  49% t_mkt  2.02
+  to end 2-7d                            fills   135 mkts   47 losing mkts  10 usd     33944 pnl     10386 (  30.6%) usd on winning side  85% t_mkt  2.09
+  to end 1-2d                            fills   125 mkts   42 losing mkts  12 usd     29805 pnl      8062 (  27.0%) usd on winning side  69% t_mkt  1.39
+  to end 6-24h                           fills   163 mkts   29 losing mkts  15 usd     29191 pnl      1751 (   6.0%) usd on winning side  84% t_mkt  1.08
+  to end 0-6h                            fills     6 mkts    3 losing mkts   1 usd       763 pnl       376 (  49.3%) usd on winning side  36% t_mkt  0.34
+  to end after end                       fills    48 mkts   12 losing mkts   5 usd      5508 pnl       602 (  10.9%) usd on winning side  42% t_mkt  0.24
+weekend phases (markets ending Sunday 12:00 UTC; fills priced 0.03-0.97):
+  A before Fri 14 UTC                    fills    84 mkts   32 losing mkts   7 usd     22201 pnl     11240 (  50.6%) usd on winning side  85% t_mkt  2.19
+  B Fri 14 - Sat 14                      fills    51 mkts   27 losing mkts   9 usd     10979 pnl       385 (   3.5%) usd on winning side  55% t_mkt  0.18
+  C Sat 14 - Sun 15                      fills    46 mkts   19 losing mkts   8 usd      6976 pnl      2544 (  36.5%) usd on winning side  68% t_mkt  1.15
+  D Sun 15 - Mon 20                      fills    43 mkts   11 losing mkts   5 usd      5493 pnl       588 (  10.7%) usd on winning side  42% t_mkt  0.24
+  E after Mon 20                         -
+T90 split (tape):
+  before T90                             fills   453 mkts   67 losing mkts  15 usd     86184 pnl     27522 (  31.9%) usd on winning side  64% t_mkt  3.05
+  after T90                              fills   265 mkts   30 losing mkts   6 usd     67611 pnl       806 (   1.2%) usd on winning side  72% t_mkt  3.12
+T3a taker BUY fills priced 0.03-0.97, independent price move over the prior 2 h, signed its way:
+  FOLLOW (>= +10 c)                      fills     7 mkts    5 losing mkts   1 usd      2226 pnl      1937 (  87.0%) usd on winning side  84% t_mkt  1.31
+  FADE (<= -10 c)                        fills    20 mkts   17 losing mkts   6 usd      3766 pnl      3902 ( 103.6%) usd on winning side  83% t_mkt  2.47
+  QUIET (|move| < 10 c)                  fills   109 mkts   56 losing mkts  21 usd     45513 pnl     18695 (  41.1%) usd on winning side  81% t_mkt  2.01
+  no independent print 2 h before        fills     2 mkts    2 losing mkts   1 usd       209 pnl       -11 (  -5.3%) usd on winning side  83% t_mkt   nan
+  independent price 10 min after taker buys minus price paid: 4.12 c/share over 121 fills; no independent print in 10 min: 17
+API over the window: {'trade_pnl': 27518, 'fees': -1672, 'taker_rebate': 138, 'maker_rebate': 80, 'reward_income': 70, 'economic_pnl': 26135, 'volume_usdc': 184876}

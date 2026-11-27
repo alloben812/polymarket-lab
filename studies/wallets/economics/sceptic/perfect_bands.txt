@@ -1,0 +1,46 @@
+Mar-May: economics net 28899
+    all           0.30-0.70 markets  20 turnover    69266 net     7678 (  11.1%) positive  10 t 0.37
+    all           <0.30     markets  32 turnover    21682 net     2148 (   9.9%) positive   7 t 0.18
+    all           >=0.70    markets  33 turnover   221310 net    18993 (   8.6%) positive  32 t 1.88
+    all           no buys   markets   1 turnover      720 net       80 (  11.1%) positive   1 t nan
+    central bank  0.30-0.70 markets   4 turnover     9137 net     -477 (  -5.2%) positive   3 t -0.29
+    central bank  <0.30     markets   3 turnover     1559 net    -1163 ( -74.6%) positive   1 t -1.30
+    central bank  >=0.70    markets  14 turnover   107165 net     6578 (   6.1%) positive  13 t 0.82
+    central bank  all       markets  21 turnover   117862 net     4938 (   4.2%) positive  17 t 0.60
+    data release  0.30-0.70 markets  16 turnover    60129 net     8155 (  13.6%) positive   7 t 0.39
+    data release  <0.30     markets  29 turnover    20123 net     3311 (  16.5%) positive   6 t 0.27
+    data release  >=0.70    markets  19 turnover   114144 net    12415 (  10.9%) positive  19 t 1.93
+    data release  all       markets  65 turnover   195116 net    23961 (  12.3%) positive  33 t 0.98
+    data release  no buys   markets   1 turnover      720 net       80 (  11.1%) positive   1 t nan
+Jun-Aug: economics net 4952
+    all           0.30-0.70 markets  19 turnover    72327 net     6379 (   8.8%) positive  14 t 0.37
+    all           <0.30     markets  43 turnover    23097 net    -5743 ( -24.9%) positive   5 t -0.40
+    all           >=0.70    markets  17 turnover    54404 net     4316 (   7.9%) positive  14 t 1.12
+    central bank  0.30-0.70 markets   2 turnover    18481 net     1224 (   6.6%) positive   2 t nan
+    central bank  <0.30     markets   2 turnover     7208 net    -2289 ( -31.8%) positive   0 t nan
+    central bank  >=0.70    markets   7 turnover    36829 net     3837 (  10.4%) positive   6 t 1.00
+    central bank  all       markets  11 turnover    62518 net     2772 (   4.4%) positive   8 t 0.59
+    data release  0.30-0.70 markets  17 turnover    53846 net     5155 (   9.6%) positive  12 t 0.30
+    data release  <0.30     markets  41 turnover    15889 net    -3454 ( -21.7%) positive   5 t -0.24
+    data release  >=0.70    markets  10 turnover    17575 net      478 (   2.7%) positive   8 t 0.79
+    data release  all       markets  68 turnover    87310 net     2180 (   2.5%) positive  25 t 0.10
+Sep-Nov: economics net 17992
+    all           0.30-0.70 markets  35 turnover    68089 net    11687 (  17.2%) positive  18 t 1.15
+    all           <0.30     markets  37 turnover     2658 net      715 (  26.9%) positive   8 t 0.38
+    all           >=0.70    markets  12 turnover    48169 net     5590 (  11.6%) positive  11 t 1.03
+    central bank  0.30-0.70 markets   5 turnover    30996 net     7111 (  22.9%) positive   5 t 3.02
+    central bank  <0.30     markets   1 turnover      200 net     -202 (-101.0%) positive   0 t nan
+    central bank  >=0.70    markets   4 turnover    43100 net     4798 (  11.1%) positive   3 t 0.85
+    central bank  all       markets  10 turnover    74296 net    11707 (  15.8%) positive   8 t 2.01
+    data release  0.30-0.70 markets  30 turnover    37093 net     4576 (  12.3%) positive  13 t 0.48
+    data release  <0.30     markets  36 turnover     2458 net      917 (  37.3%) positive   8 t 0.49
+    data release  >=0.70    markets   8 turnover     5069 net      792 (  15.6%) positive   8 t 2.93
+    data release  all       markets  74 turnover    44620 net     6285 (  14.1%) positive  29 t 0.65
+
+August CPI 3.4%: last six fills (CPI release 09-11 12:30 UTC; PPI release 09-10 12:30 UTC):
+    09-10 07:40:09 M BUY Yes 0 @ 0.470
+    09-10 08:09:39 T BUY Yes 800 @ 0.487
+    09-10 11:33:49 M BUY Yes 15 @ 0.470
+    09-10 11:54:49 M BUY Yes 18 @ 0.470
+    09-10 12:12:33 M BUY Yes 6 @ 0.470
+    09-10 12:12:33 M BUY Yes 10 @ 0.470

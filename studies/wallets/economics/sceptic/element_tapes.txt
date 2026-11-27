@@ -1,0 +1,136 @@
+fills >= $100 outside the analyst's sample: 39 in 33 markets
+
+reserve-bank-of-new-zealand-increases-interest-rates-by-25-bps-at-the-october-20  winner=No  tape rows=917  T=10-28 01:00:00
+   last price before T (winner-equivalent) 0.01; last trade before T at 10-28 00:25:15; 10 min before T: buys of the winner 0 fills $0, sells of it $0
+   +  6s BUY  No  px=0.991 winner-eq=0.991 sh=     131 long-winner  xtxpleasecallme
+   +  6s BUY  No  px=0.989 winner-eq=0.989 sh=     253 long-winner  road2million
+   +  8s BUY  No  px=0.995 winner-eq=0.995 sh=      12 long-winner  upgu49106
+   +  8s BUY  No  px=0.781 winner-eq=0.781 sh=     486 long-winner  <== TheElement115
+   +  8s BUY  No  px=0.994 winner-eq=0.994 sh=     201 long-winner  _test_i075_CAND_11b7
+   +  8s BUY  No  px=0.924 winner-eq=0.924 sh=    1327 long-winner  makeit99
+   +  8s BUY  No  px=0.118 winner-eq=0.118 sh=    1019 long-winner  <== TheElement115
+   +  8s BUY  No  px=0.456 winner-eq=0.456 sh=       5 long-winner  0xeB68675C06E0bB9F08ba510550912d77289Ce362-1778811892036
+   +  9s BUY  No  px=0.989 winner-eq=0.989 sh=      16 long-winner  big-bird1
+   +  9s BUY  Yes px=0.010 winner-eq=0.990 sh=      10 short-winner  0x2284869e
+   +  9s BUY  No  px=0.774 winner-eq=0.774 sh=       3 long-winner  fabiozzer8989
+   +  9s BUY  No  px=0.995 winner-eq=0.995 sh=      15 long-winner  0x50ab40b1
+   +  9s BUY  No  px=0.774 winner-eq=0.774 sh=      10 long-winner  szy10010
+   + 11s BUY  Yes px=0.076 winner-eq=0.924 sh=      10 short-winner  xtxpleasecallme
+   first print >= 0.95 at +6s; takers long the winner before it in the window: 2 fills $380; in its block: 4 fills $1440; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-the-us-lose-jobs-in-july-20260702221826043  winner=Yes  tape rows=120  T=08-07 12:30:00
+   last price before T (winner-equivalent) 0.0026049875000000444; last trade before T at 08-07 11:59:22; 10 min before T: buys of the winner 0 fills $0, sells of it $0
+   +  6s BUY  Yes px=0.677 winner-eq=0.677 sh=    1044 long-winner  <== TheElement115
+   +  7s BUY  Yes px=0.999 winner-eq=0.999 sh=     124 long-winner  ClickKlackClick
+   first print >= 0.95 at +7s; takers long the winner before it in the window: 0 fills $0; in its block: 0 fills $0; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-the-south-african-reserve-bank-hold-at-the-july-2026-meeting  winner=Yes  tape rows=303  T=07-23 13:05:01 (not a quarter hour: fill-30s)
+   last price before T (winner-equivalent) 0.0301639178; last trade before T at 07-23 12:49:51; 10 min before T: buys of the winner 0 fills $0, sells of it $0
+   + 30s BUY  Yes px=0.904 winner-eq=0.904 sh=    1205 long-winner  vivonzulull
+   + 30s BUY  Yes px=0.672 winner-eq=0.672 sh=     745 long-winner  <== TheElement115
+   + 30s BUY  Yes px=0.810 winner-eq=0.810 sh=    1500 long-winner  ClickKlackClick
+   + 30s BUY  Yes px=0.284 winner-eq=0.284 sh=     352 long-winner  road2million
+   + 33s BUY  No  px=0.899 winner-eq=0.101 sh=       5 short-winner  0xc141a2f3
+   + 36s BUY  Yes px=0.851 winner-eq=0.851 sh=      47 long-winner  25689768903
+   + 45s BUY  Yes px=0.929 winner-eq=0.929 sh=      32 long-winner  DanKnowsBest
+   first print >= 0.95 at +62s; takers long the winner before it in the window: 0 fills $0; in its block: 3 fills $2404; stale buys (<0.95) later than +45 s: 2 fills $467
+
+will-the-bank-of-russia-make-no-change-to-the-key-rate-after-the-october-meeting  winner=Yes  tape rows=2094  T=10-23 10:30:00
+   last price before T (winner-equivalent) 0.79; last trade before T at 10-23 10:26:09; 10 min before T: buys of the winner 1 fills $15, sells of it $1383
+   +  3s BUY  Yes px=0.943 winner-eq=0.943 sh=     179 long-winner  0x67babdb5
+   +  3s BUY  Yes px=0.936 winner-eq=0.936 sh=      81 long-winner  0x67babdb5
+   +  3s BUY  Yes px=0.925 winner-eq=0.925 sh=    1027 long-winner  road2million
+   +  5s BUY  Yes px=0.984 winner-eq=0.984 sh=    2134 long-winner  ClickKlackClick
+   +  5s BUY  Yes px=0.908 winner-eq=0.908 sh=    1282 long-winner  makeit99
+   +  5s BUY  Yes px=0.946 winner-eq=0.946 sh=    4229 long-winner  <== TheElement115
+   +  5s BUY  Yes px=0.910 winner-eq=0.910 sh=      11 long-winner  fresh
+   +  5s BUY  Yes px=0.910 winner-eq=0.910 sh=      94 long-winner  0x67babdb5
+   +  6s SELL Yes px=0.990 winner-eq=0.990 sh=       6 short-winner  traderquantclub
+   + 32s SELL Yes px=0.990 winner-eq=0.990 sh=       5 short-winner  88888801
+   + 33s BUY  No  px=0.010 winner-eq=0.990 sh=    2000 short-winner  kinderSman
+   + 38s BUY  No  px=0.010 winner-eq=0.990 sh=      92 short-winner  UniLB
+   + 41s SELL Yes px=0.990 winner-eq=0.990 sh=      74 short-winner  Rsdl09
+   first print >= 0.95 at +5s; takers long the winner before it in the window: 3 fills $1195; in its block: 4 fills $3359; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-there-be-no-change-in-fed-interest-rates-after-the-july-2026-meeting  winner=Yes  tape rows=40000  T=07-29 18:00:00
+   last price before T (winner-equivalent) 0.811; last trade before T at 07-29 17:59:56; 10 min before T: buys of the winner 178 fills $113052, sells of it $102825
+   +  3s BUY  Yes px=0.840 winner-eq=0.840 sh=     464 long-winner  0xeB68675C06E0bB9F08ba510550912d77289Ce362-1778811892036
+   +  3s SELL Yes px=0.779 winner-eq=0.779 sh=     500 short-winner  XAE12Archangel
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=       6 long-winner  just-for-w
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=      58 long-winner  0x4E72c22CD76f9973a48aedfd79FeEAaCC8B7FFb9-1778811541343
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=    1000 long-winner  itsjustcheddar
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=     200 long-winner  0x43cb4Ae1f4dDC9E671486C79c9F40A6fd98B84Df-1761656284271
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=     464 long-winner  0x16c7337106A0B3a06fF863A1c06D8e2cbf7322cd-1778811943243
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=     500 long-winner  0x43cb4Ae1f4dDC9E671486C79c9F40A6fd98B84Df-1761656284271
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=     464 long-winner  0x005ED998fCb786679Eb8Bfd0d20c15C0903D6D8E-1778811773658
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=    5833 long-winner  Thanks4TheMoney
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=   11904 long-winner  test123123123155523
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=     464 long-winner  0x16c7337106A0B3a06fF863A1c06D8e2cbf7322cd-1778811943243
+   +  5s BUY  Yes px=0.840 winner-eq=0.840 sh=   20000 long-winner  munkiballz1
+   +  5s BUY  Yes px=0.833 winner-eq=0.833 sh=   50000 long-winner  ClickKlackClick
+   first print >= 0.95 at +8s; takers long the winner before it in the window: 17 fills $107362; in its block: 12 fills $27078; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-the-bank-of-russia-make-no-change-to-the-key-rate-after-the-september-meeti  winner=Yes  tape rows=1871  T=09-11 10:30:00
+   last price before T (winner-equivalent) 0.8699999837; last trade before T at 09-11 10:29:33; 10 min before T: buys of the winner 7 fills $177, sells of it $137
+   +  6s BUY  Yes px=0.930 winner-eq=0.930 sh=       5 long-winner  0x69f0C154a3412F2b3Fa7eB22c6d08E6B5B32FB27-1778811502354
+   +  7s BUY  Yes px=0.960 winner-eq=0.960 sh=     312 long-winner  fresh
+   +  7s BUY  Yes px=0.950 winner-eq=0.950 sh=      47 long-winner  0x67babdb5
+   +  7s BUY  Yes px=0.950 winner-eq=0.950 sh=       0 long-winner  0x67babdb5
+   +  7s BUY  Yes px=0.930 winner-eq=0.930 sh=      30 long-winner  0x67babdb5
+   +  7s BUY  Yes px=0.927 winner-eq=0.927 sh=     323 long-winner  road2million
+   +  7s BUY  Yes px=0.916 winner-eq=0.916 sh=    2184 long-winner  <== TheElement115
+   +  9s BUY  Yes px=0.987 winner-eq=0.987 sh=      22 long-winner  wAiq-A.S
+   +  9s BUY  Yes px=0.969 winner-eq=0.969 sh=    1024 long-winner  makeit99
+   + 34s SELL Yes px=0.990 winner-eq=0.990 sh=       6 short-winner  CybertronCapital
+   + 40s SELL Yes px=0.990 winner-eq=0.990 sh=       3 short-winner  lxmlt
+   first print >= 0.95 at +7s; takers long the winner before it in the window: 1 fills $5; in its block: 5 fills $673; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-the-us-add-between-50k-and-100k-jobs-in-july-20260702221826045  winner=No  tape rows=316  T=08-07 12:30:00
+   last price before T (winner-equivalent) 0.37; last trade before T at 08-07 12:23:19; 10 min before T: buys of the winner 0 fills $0, sells of it $21
+   +  6s BUY  No  px=0.596 winner-eq=0.596 sh=     126 long-winner  road2million
+   +  7s SELL No  px=0.990 winner-eq=0.990 sh=       7 short-winner  Hypnoman007
+   +  7s BUY  No  px=0.803 winner-eq=0.803 sh=     782 long-winner  <== TheElement115
+   +  7s BUY  Yes px=0.010 winner-eq=0.990 sh=     400 short-winner  Hugin-og-Munin
+   +  9s SELL No  px=0.990 winner-eq=0.990 sh=      29 short-winner  mamofaker24
+   first print >= 0.95 at +7s; takers long the winner before it in the window: 1 fills $75; in its block: 0 fills $0; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-annual-inflation-be-3pt3-in-july-20260714150613270  winner=No  tape rows=1859  T=08-12 12:30:00
+   last price before T (winner-equivalent) 0.4945376707; last trade before T at 08-12 12:29:30; 10 min before T: buys of the winner 1 fills $10, sells of it $96
+   +  6s BUY  No  px=0.990 winner-eq=0.990 sh=     505 long-winner  <== TheElement115
+   +  6s BUY  No  px=0.700 winner-eq=0.700 sh=      18 long-winner  0xeB68675C06E0bB9F08ba510550912d77289Ce362-1778811892036
+   +  6s BUY  No  px=0.990 winner-eq=0.990 sh=      99 long-winner  balthazar
+   +  6s BUY  No  px=0.591 winner-eq=0.591 sh=      99 long-winner  balthazar
+   +  6s BUY  No  px=0.710 winner-eq=0.710 sh=      65 long-winner  0x1F85EB9C455c5BDEF5D96C2739076678c7157B02-1778811447702
+   +  6s BUY  No  px=0.678 winner-eq=0.678 sh=     485 long-winner  mildwindow27
+   +  6s BUY  No  px=0.554 winner-eq=0.554 sh=     180 long-winner  road2million
+   +  7s BUY  No  px=0.990 winner-eq=0.990 sh=     425 long-winner  ClickKlackClick
+   +  7s BUY  No  px=0.766 winner-eq=0.766 sh=     653 long-winner  <== TheElement115
+   + 27s SELL No  px=0.990 winner-eq=0.990 sh=      30 short-winner  neutralwave23
+   first print >= 0.95 at +6s; takers long the winner before it in the window: 0 fills $0; in its block: 6 fills $644; stale buys (<0.95) later than +45 s: 0 fills $0
+
+will-the-south-african-reserve-bank-hike-by-25-bps-at-the-july-2026-meeting  winner=No  tape rows=386  T=07-23 13:05:01 (not a quarter hour: fill-30s)
+   last price before T (winner-equivalent) 0.07899999999999996; last trade before T at 07-23 12:56:00; 10 min before T: buys of the winner 0 fills $0, sells of it $1
+   + 30s BUY  No  px=0.883 winner-eq=0.883 sh=    1500 long-winner  ClickKlackClick
+   + 30s BUY  No  px=0.531 winner-eq=0.531 sh=     188 long-winner  road2million
+   + 30s BUY  No  px=0.804 winner-eq=0.804 sh=     622 long-winner  <== TheElement115
+   + 30s BUY  No  px=0.932 winner-eq=0.932 sh=     743 long-winner  vivonzulull
+   + 30s BUY  No  px=0.476 winner-eq=0.476 sh=     100 long-winner  balthazar
+   + 30s BUY  No  px=0.337 winner-eq=0.337 sh=     125 long-winner  mildwindow27
+   + 30s BUY  No  px=0.886 winner-eq=0.886 sh=      40 long-winner  cigarettes
+   + 30s BUY  No  px=0.671 winner-eq=0.671 sh=     125 long-winner  mildwindow27
+   + 30s BUY  No  px=0.886 winner-eq=0.886 sh=     500 long-winner  mildwindow27
+   + 32s BUY  Yes px=0.431 winner-eq=0.569 sh=      20 short-winner  0xf6104820
+   + 35s BUY  Yes px=0.325 winner-eq=0.675 sh=       3 short-winner  0x67066d10
+   + 35s BUY  Yes px=0.325 winner-eq=0.675 sh=       3 short-winner  5ps
+   first print >= 0.95 at +47s; takers long the winner before it in the window: 0 fills $0; in its block: 8 fills $2770; stale buys (<0.95) later than +45 s: 1 fills $9
+
+SUMMARY
+  10-28 01:00:00 pre=0.01 lag=8s paid=0.118 first95=+6s ahead=2 lead_buys_10min=$0  reserve-bank-of-new-zealand-increases-interest-rat
+  08-07 12:30:00 pre=0.0026049875000000444 lag=6s paid=0.677 first95=+7s ahead=0 lead_buys_10min=$0  will-the-us-lose-jobs-in-july-20260702221826043
+  07-23 13:05:01 pre=0.0301639178 lag=30s paid=0.672 first95=+62s ahead=0 lead_buys_10min=$0  will-the-south-african-reserve-bank-hold-at-the-ju
+  10-23 10:30:00 pre=0.79 lag=5s paid=0.946 first95=+5s ahead=3 lead_buys_10min=$15  will-the-bank-of-russia-make-no-change-to-the-key-
+  07-29 18:00:00 pre=0.811 lag=6s paid=0.840 first95=+8s ahead=17 lead_buys_10min=$113052  will-there-be-no-change-in-fed-interest-rates-afte
+  09-11 10:30:00 pre=0.8699999837 lag=7s paid=0.916 first95=+7s ahead=1 lead_buys_10min=$177  will-the-bank-of-russia-make-no-change-to-the-key-
+  08-07 12:30:00 pre=0.37 lag=7s paid=0.803 first95=+7s ahead=1 lead_buys_10min=$0  will-the-us-add-between-50k-and-100k-jobs-in-july-
+  08-12 12:30:00 pre=0.4945376707 lag=6s paid=0.766 first95=+6s ahead=0 lead_buys_10min=$10  will-annual-inflation-be-3pt3-in-july-202607141506
+  07-23 13:05:01 pre=0.07899999999999996 lag=30s paid=0.804 first95=+47s ahead=0 lead_buys_10min=$0  will-the-south-african-reserve-bank-hike-by-25-bps

@@ -1,6 +1,6 @@
 """Step 5: the four rule variants (delays) on class A (hindsight t_first; all markets and moneyline only), class B,
 the causal follower on class A + sampled controls, the C-pin look-alikes, capacity, and (if out/public_times.json
-exists) the rule from t_public. Prints tables; writes out/rule_events.json."""
+exists) the rule from t_public. Prints tables; writes data/gaps_tennis_wo/rule_events.json."""
 import collections, datetime as dt, json, math, os, statistics, sys
 from pmlab import updown
 from pmlab.stats import mean_se, ratio_cluster, split_by_time
@@ -290,7 +290,7 @@ def main():
         sl = set(pub)
         for d in DELAYS:
             print(line(f"d={d}s", [e for e in RA[d] if e["slug"] in sl]))
-    json.dump(out, open(OUT / "rule_events.json", "w"))
+    json.dump(out, open(DATA / "rule_events.json", "w"))  # >1 MB: kept in data/, not in out/
 
 
 if __name__ == "__main__":

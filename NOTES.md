@@ -650,3 +650,16 @@ Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / dat
   reach back to September; a timing table keyed to a market's own release misses fills made after other releases.
 - A reference built from other traders' prints around a maker's fills is biased (prints near its buys are bid-side):
   a spread / price-move split made that way overstates the move.
+
+## Update 2026-11-27 evening (official docs read 2026-11-27; sources in pilot/README.md)
+
+- Accounts created on or after 2026-05-04 use a Deposit Wallet; older types are Proxy (email/Google) and Safe
+  (external wallet). Collateral is pUSD on Polygon (6 decimals, backed 1:1 by USDC).
+- Session Keys exist: a separate key that the Deposit Wallet owner authorises to trade for 180 days; it cannot
+  withdraw. Preferred for an always-on bot.
+- Minimum order size is per market (`min_order_size` in the book, 5 in the docs example); the docs disagree on the
+  unit (shares on one page, USDC on another). Treat "5 shares" above as an example, not a rule.
+- The SDK fee formula has an `exponent` on p(1-p); it is 1 in the docs example, which matches the formula above.
+- The WebSocket handshake to the public market channel worked from this sandbox through the proxy on 2026-11-27
+  evening (9 messages in 15 s), contrary to the earlier note. Order placement from here stays impossible (US IP).
+- polymarket-client 0.20.1 needs Python 3.11+.

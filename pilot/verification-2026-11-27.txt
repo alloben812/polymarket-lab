@@ -1,0 +1,136 @@
+Sandbox verification, 2026-11-27 (US IP, no account). Throwaway random key in a 0600 file outside the repo.
+SDK: polymarket-client==0.20.1 installed with --require-hashes -r requirements.txt
+
+$ python3 -I conn_check.py
+Polymarket connection check  2026-11-27 17:53:41 UTC
+[1] Geoblock check (official endpoint https://polymarket.com/api/geoblock)
+    blocked = True
+    country = US
+    ip      = IPv4 ***.*** (masked)
+[2] Public CLOB REST latency (10 x GET https://clob.polymarket.com/book)
+    market : Will the Fed decrease interest rates by 25 bps after the December 2026 meeting?
+    slug   : will-the-fed-decrease-interest-rates-by-25-bps-after-the-december-2026-meeting-20260729232808634
+    token  : Yes = 77367448845023382525249480243608609306658725883285195065573683809293972009019
+    token  : No = 23677896678650147625251750117853328843601853501710889530409633595389256242910
+    ok 10/10   min 157 ms   median 169 ms   max 311 ms
+    best bid 0.002 / best ask 0.003   tick 0.001   min_order_size 5
+[3] WebSocket market channel wss://ws-subscriptions-clob.polymarket.com/ws/market (15 s)
+    handshake ok in 368 ms
+    messages in 15 s: 9   by type: {'book': 1, 'price_change': 8}
+
+RESULT: BLOCKED - orders from this IP will be rejected (exit 2)
+[exit 2]
+
+$ .venv/bin/python -I smoke.py selftest
+=== smoke.py selftest dry-run 2026-11-27 17:54:02 UTC
+selftest: throwaway key generated in memory; written to a temp file only for the checks
+  [PASS] key file mode 0644 refused: refused: key file /tmp/pm-selftest-rb8sch2q/key has mode 0o644: readable/writable by group or others. Run: chmod 600 '/tmp/pm-selftest-rb8sch2q/key'
+  [PASS] key file mode 0640 refused: refused: key file /tmp/pm-selftest-rb8sch2q/key has mode 0o640: readable/writable by group or others. Run: chmod 600 '/tmp/pm-selftest-rb8sch2q/key'
+  [PASS] missing key file refused: refused: key file not found: /tmp/pm-selftest-rb8sch2q/missing  (set PM_KEY_FILE or create it, see README)
+  [PASS] malformed key refused (content not shown): refused: key file /tmp/pm-selftest-rb8sch2q/bad must hold exactly one 32-byte hex private key (content not shown)
+  [PASS] key file mode 0600 accepted: returned loaded (not shown)
+  [PASS] place plan, bid 0.40 tick 0.01 min 5: returned (Decimal('0.20'), Decimal('5'))
+  [PASS] place plan, bid 0.90 -> price capped by 1 USD: returned (Decimal('0.20'), Decimal('5'))
+  [PASS] place plan, min size 100 -> price <= 0.01: returned (Decimal('0.01'), Decimal('100'))
+  [PASS] place plan, bid 0.05 refused (not far enough): refused: best bid 0.05 is too low to place 5 shares at <= 50% of the bid and >= 5 ticks below it; choose an outcome priced 0.10-0.90
+  [PASS] place plan, min size 200 refused (1 USD cap): refused: minimum size 200 even at one tick (0.01) exceeds the 1 USD cap
+  [PASS] place plan, empty bid side refused: refused: the book has no bids; cannot price an order 'far below the best bid'
+  [PASS] roundtrip plan, ask 0.30: returned (Decimal('1.8'), Decimal('0.30'), Decimal('6.00'), Decimal('0.063000'))
+  [PASS] roundtrip plan, ask 0.40 refused (> 2 USD): refused: 6.00 shares at best ask 0.40 cost 2.4 + fee ~0.0720 = 2.4720 pUSD > cap 2.00; pick an outcome with ask <= ~0.30
+  [PASS] roundtrip plan, thin ask refused: refused: only 2 shares at the best ask 0.20; need 6.00
+  [PASS] roundtrip without --live refused: refused: roundtrip spends real money: it needs both --live and --yes-this-costs-money
+  [PASS] roundtrip --live without --yes-this-costs-money refused: refused: roundtrip spends real money: it needs both --live and --yes-this-costs-money
+  [PASS] bad --market refused: refused: --market must be an outcome token id / asset id (digits), e.g. from conn_check.py
+  signer address : 0x573bda23933dd1630b41998dD758345C6d833804
+  account wallet : 0xa7de8430846e9CC6c91f46405Ef1d972f92dB9Af
+  wallet type    : DEPOSIT_WALLET   signer role: OWNER
+  signed order: side=BUY maker=0xa7de8430846e9CC6c91f46405Ef1d972f92dB9Af signer=0xa7de8430846e9CC6c91f46405Ef1d972f92dB9Af
+    token=71321045679252212594626385532706912750332728571942532289631379312455583992563
+    maker_amount=1000000 taker_amount=5000000 (base units, 1e6) sig_type=3 expiration=1795803302 post_only=True
+    signature: present, 636 hex chars (not printed)
+  [PASS] signed passive BUY within 1 USD: returned 1
+  [PASS] signed BUY 5 @ 0.30 = 1.5 USD blocked by final guard: refused: signed order would spend 1.5 pUSD > cap 1.00; not posted
+  [PASS] EIP-712 order signature recovers to the signer: returned 0x573bda23933dd1630b41998dD758345C6d833804
+  [PASS] private key absent from the log file: returned absent
+selftest: ALL PASS
+[exit 0]
+
+$ .venv/bin/python -I smoke.py auth
+=== smoke.py auth dry-run 2026-11-27 17:54:03 UTC
+REFUSED: key file <scratch>/key has mode 0o644: readable/writable by group or others. Run: chmod 600 '<scratch>/key'
+[exit 2]
+
+$ .venv/bin/python -I smoke.py auth
+=== smoke.py auth dry-run 2026-11-27 17:54:03 UTC
+DRY-RUN auth: no request sent. Offline identity from the key:
+  signer address : 0x1db2b1A4ed3B479335239A198Cefbe6849BBDc45
+  account wallet : 0x57d1b03DF4FAeab895Ac4b1f76d5d569f70f1528
+  wallet type    : DEPOSIT_WALLET   signer role: OWNER
+Re-run with --live to derive/create CLOB credentials and read balance and allowances.
+[exit 0]
+
+$ .venv/bin/python -I smoke.py place --market 23677896678650147625251750117853328843601853501710889530409633595389256242910
+=== smoke.py place dry-run 2026-11-27 17:54:04 UTC
+  signer address : 0x1db2b1A4ed3B479335239A198Cefbe6849BBDc45
+  account wallet : 0x57d1b03DF4FAeab895Ac4b1f76d5d569f70f1528
+  wallet type    : DEPOSIT_WALLET   signer role: OWNER
+  book: best bid 0.997 / best ask 0.998  tick 0.001  min size 5 neg_risk True
+  plan: BUY 5 @ 0.20 = 1.00 pUSD (cap 1.00), post-only, GTD ~20 min
+  signed order: side=BUY maker=0x57d1b03DF4FAeab895Ac4b1f76d5d569f70f1528 signer=0x57d1b03DF4FAeab895Ac4b1f76d5d569f70f1528
+    token=23677896678650147625251750117853328843601853501710889530409633595389256242910
+    maker_amount=1000000 taker_amount=5000000 (base units, 1e6) sig_type=3 expiration=1795803305 post_only=True
+    signature: present, 636 hex chars (not printed)
+DRY-RUN: order built and signed, NOT posted. Re-run with --live to post it.
+[exit 0]
+
+$ .venv/bin/python -I smoke.py place --market 77367448845023382525249480243608609306658725883285195065573683809293972009019
+=== smoke.py place dry-run 2026-11-27 17:54:05 UTC
+  signer address : 0x1db2b1A4ed3B479335239A198Cefbe6849BBDc45
+  account wallet : 0x57d1b03DF4FAeab895Ac4b1f76d5d569f70f1528
+  wallet type    : DEPOSIT_WALLET   signer role: OWNER
+  book: best bid 0.002 / best ask 0.003  tick 0.001  min size 5 neg_risk True
+REFUSED: best bid 0.002 is too low to place 5 shares at <= 50% of the bid and >= 5 ticks below it; choose an outcome priced 0.10-0.90
+[exit 2]
+
+$ .venv/bin/python -I smoke.py place --market 1; rm -rf ~
+=== smoke.py place dry-run 2026-11-27 17:54:06 UTC
+REFUSED: --market must be an outcome token id / asset id (digits), e.g. from conn_check.py
+[exit 2]
+
+$ .venv/bin/python -I smoke.py status
+=== smoke.py status dry-run 2026-11-27 17:54:06 UTC
+DRY-RUN status: would list open orders. Orders recorded by this script: none
+[exit 0]
+
+$ .venv/bin/python -I smoke.py cancel
+=== smoke.py cancel dry-run 2026-11-27 17:54:07 UTC
+Nothing to cancel: no order placed by smoke.py is recorded in out/placed_orders.json
+[exit 0]
+
+$ .venv/bin/python -I smoke.py roundtrip --market 23677896678650147625251750117853328843601853501710889530409633595389256242910
+=== smoke.py roundtrip dry-run 2026-11-27 17:54:07 UTC
+REFUSED: roundtrip spends real money: it needs both --live and --yes-this-costs-money
+[exit 2]
+
+$ .venv/bin/python -I smoke.py roundtrip --market 23677896678650147625251750117853328843601853501710889530409633595389256242910 --live
+=== smoke.py roundtrip LIVE 2026-11-27 17:54:07 UTC
+REFUSED: roundtrip spends real money: it needs both --live and --yes-this-costs-money
+[exit 2]
+
+$ .venv/bin/python -I smoke.py place --market 23677896678650147625251750117853328843601853501710889530409633595389256242910 --live
+=== smoke.py place LIVE 2026-11-27 17:54:07 UTC
+  geoblock: blocked=True country=US (IP not shown)
+REFUSED: this IP is geoblocked for order placement; nothing was sent
+[exit 2]
+
+$ .venv/bin/python -I smoke.py roundtrip --market 23677896678650147625251750117853328843601853501710889530409633595389256242910 --live --yes-this-costs-money
+=== smoke.py roundtrip LIVE 2026-11-27 17:54:07 UTC
+  geoblock: blocked=True country=US (IP not shown)
+REFUSED: this IP is geoblocked for order placement; nothing was sent
+[exit 2]
+
+$ .venv/bin/python -I smoke.py place --market 23677896678650147625251750117853328843601853501710889530409633595389256242910 --max-usd 100
+usage: smoke.py [-h] [--market MARKET] [--live] [--yes-this-costs-money]
+                {auth,place,status,cancel,roundtrip,selftest}
+smoke.py: error: unrecognized arguments: --max-usd 100
+[exit 2]

@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import gzip
 import hashlib
+import zlib
 import json
 import os
 import random
@@ -60,8 +61,11 @@ ESPN_LEAGUES = ["eng.1", "eng.2", "eng.3", "eng.4", "esp.1", "esp.2", "ger.1", "
                 "gre.1", "uefa.champions", "uefa.europa", "uefa.europa.conf", "usa.1", "mex.1", "bra.1", "arg.1",
                 "jpn.1", "aus.1", "esp.copa_del_rey", "eng.fa", "eng.league_cup", "ger.dfb_pokal", "ita.coppa_italia",
                 "fra.coupe_de_france", "ksa.1", "nor.1", "swe.1", "pol.1", "cze.1", "rou.1", "chn.1", "kor.1"]
-MORE_TYPES = {"totals": {1.5, 2.5, 3.5}, "both_teams_to_score": None}
+MORE_TYPES = {"totals": {2.5}, "both_teams_to_score": None}
+DISK_MONEYLINE_ONLY = 6e9      # free bytes below which only moneyline tokens are subscribed
+DISK_STOP = 3e9                # free bytes below which nothing is subscribed
 STOP = threading.Event()
+PROC_START = int(time.time())
 
 
 def now_ms() -> int:
@@ -97,7 +101,11 @@ class Writer:
         self.files: dict[str, tuple[str, object]] = {}
         self.counts: dict[str, int] = {}
 
+    ALIAS_SCORES = {"meta": "meta2", "polls": "polls2"}  # the two processes never append to the same file
+
     def write(self, stream: str, obj: dict, hourly: bool = True) -> None:
+        if getattr(self, "part", "all") == "scores":
+            stream = self.ALIAS_SCORES.get(stream, stream)
         t = obj.get("r") or now_ms()
         d = utc(t / 1000)
         name = f"{d:%Y-%m-%d}/{stream}-{d:%H}.jsonl" if hourly else f"{stream}.jsonl"
@@ -114,13 +122,57 @@ class Writer:
             cur[1].write(line)
             self.counts[stream] = self.counts.get(stream, 0) + 1
 
+    def write_raw(self, stream: str, r: int, prefix: str, raw: str, gz: bool = False) -> None:
+        """Append {"r":..,<prefix>"d":<raw JSON text>} without parsing (hot path of the WebSocket threads).
+
+        gz=True: the hourly file is a gzip stream written on the fly (zlib, sync-flushed every second, so a reader
+        can decode everything up to the last flush; a restart appends a new gzip member to the same file)."""
+        d = utc(r / 1000)
+        # gzip streams: one file per process and hour (".g<process start epoch>"), never appended to by a later process
+        name = f"{d:%Y-%m-%d}/{stream}-{d:%H}" + (f".g{PROC_START}.jsonl.gz" if gz else ".jsonl")
+        line = '{"r":%d,%s"d":%s}\n' % (r, prefix, raw.replace("\n", " "))
+        with self.lock:
+            cur = self.files.get(stream)
+            if cur is None or cur[0] != name:
+                if cur is not None:
+                    self._close(cur)
+                p = DATA / name
+                p.parent.mkdir(parents=True, exist_ok=True)
+                if gz:
+                    cur = (name, open(p, "ab"), zlib.compressobj(6, zlib.DEFLATED, 31))
+                else:
+                    cur = (name, open(p, "a", encoding="utf-8"))
+                self.files[stream] = cur
+            if len(cur) == 3:
+                cur[1].write(cur[2].compress(line.encode("utf-8")))
+            else:
+                cur[1].write(line)
+            self.counts[stream] = self.counts.get(stream, 0) + 1
+
+    @staticmethod
+    def _close(cur) -> None:
+        if len(cur) == 3:
+            cur[1].write(cur[2].flush(zlib.Z_FINISH))
+        cur[1].close()
+
     def flush(self) -> None:
         with self.lock:
-            for _, f in self.files.values():
+            for cur in self.files.values():
                 try:
-                    f.flush()
+                    if len(cur) == 3:
+                        cur[1].write(cur[2].flush(zlib.Z_SYNC_FLUSH))
+                    cur[1].flush()
                 except Exception:  # noqa: BLE001
                     pass
+
+    def close_all(self) -> None:
+        with self.lock:
+            for cur in self.files.values():
+                try:
+                    self._close(cur)
+                except Exception:  # noqa: BLE001
+                    pass
+            self.files = {}
 
 
 W = Writer()
@@ -310,11 +362,20 @@ class Discovery:
     def live_tokens(self) -> set[str]:
         t = time.time()
         out = set()
+        free = shutil.disk_usage(DATA).free
+        if free < DISK_STOP:
+            meta("disk_guard", free=free, action="nothing subscribed")
+            return out
+        ml_only = free < DISK_MONEYLINE_ONLY
+        if ml_only:
+            meta("disk_guard", free=free, action="moneyline only")
         with self.lock:
             for m in self.matches.values():
                 if m.get("t0") and m["t0"] - WINDOW_BEFORE <= t <= m["t0"] + WINDOW_AFTER:
                     for mk in m["markets"]:
-                        if mk.get("closed"):
+                        if mk.get("closed") or (ml_only and mk.get("role") not in ("home", "away", "draw")):
+                            continue
+                        if mk.get("type") == "totals" and mk.get("line") not in MORE_TYPES["totals"]:
                             continue
                         for tok in mk.get("tokens") or []:
                             out.add(str(tok))
@@ -370,16 +431,15 @@ class Shard(threading.Thread):
                     if m is None:
                         continue
                     r = now_ms()
-                    if m.strip() in ("PONG", "pong"):
+                    ms = m.strip()
+                    if ms in ("PONG", "pong"):
                         continue
-                    try:
-                        d = json.loads(m)
-                    except ValueError:
+                    if not ms or ms[0] not in "[{":
                         W.write("ws_market", {"r": r, "k": self.sid, "raw": m[:500]})
                         continue
                     self.msgs += 1
                     self.last_msg = r
-                    W.write("ws_market", {"r": r, "k": self.sid, "d": d})
+                    W.write_raw("ws_market", r, '"k":%d,' % self.sid, ms, gz=True)
             except Exception as e:  # noqa: BLE001
                 fails += 1
                 wait = min(60, 2 ** min(fails, 6)) * (0.8 + 0.4 * random.random())
@@ -447,15 +507,14 @@ def sports_ws() -> None:
                 if m is None:
                     continue
                 r = now_ms()
-                if m.strip() == "ping":
+                ms = m.strip()
+                if ms == "ping":
                     ws.send("pong")
                     continue
-                try:
-                    d = json.loads(m)
-                except ValueError:
+                if not ms or ms[0] not in "[{":
                     W.write("pm_sports", {"r": r, "raw": m[:500]})
                     continue
-                W.write("pm_sports", {"r": r, "d": d})
+                W.write_raw("pm_sports", r, "", ms)
         except Exception as e:  # noqa: BLE001
             fails += 1
             wait = min(60, 2 ** min(fails, 6)) * (0.8 + 0.4 * random.random())
@@ -771,7 +830,7 @@ def housekeeping(sm: ShardManager) -> None:
     while not STOP.is_set():
         W.flush()
         t = time.time()
-        if t - last_status > 60:
+        if t - last_status > 60 and getattr(W, "part", "all") != "scores":
             last_status = t
             st = {"r": now_ms(), "kind": "status", "counts": dict(W.counts),
                   "shards": {sid: {"n": len(s.tokens), "msgs": s.msgs, "alive": s.is_alive()}
@@ -779,31 +838,43 @@ def housekeeping(sm: ShardManager) -> None:
             W.write("meta", st)
             (DATA / "status.json").write_text(json.dumps({**st, "utc": f"{utc():%Y-%m-%d %H:%M:%S}"}))
         # gzip hourly files that are at least two hours old
-        if int(t) % 600 < 2:
+        if int(t) % 600 < 2 and getattr(W, "part", "all") != "scores":
             cutoff = utc(t - 2 * 3600).strftime("%Y-%m-%d/%H")
             for p in DATA.glob("20*/*-[0-2][0-9].jsonl"):
                 key = p.parent.name + "/" + p.stem[-2:]
                 if key < cutoff:
-                    with open(p, "rb") as f, gzip.open(str(p) + ".gz.tmp", "wb", 6) as g:
+                    target = str(p) + ".gz"
+                    if os.path.exists(target):  # live gzip stream of the same hour exists: keep both, older first
+                        target = str(p)[: -len(".jsonl")] + ".0.jsonl.gz"
+                    with open(p, "rb") as f, gzip.open(target + ".tmp", "wb", 6) as g:
                         shutil.copyfileobj(f, g)
-                    os.replace(str(p) + ".gz.tmp", str(p) + ".gz")
+                    os.replace(target + ".tmp", target)
                     p.unlink()
         STOP.wait(1.0)
 
 
 def main() -> None:
+    """--part ws: gamma discovery + market WebSocket shards + clock + gzip housekeeping.
+    --part scores: Polymarket sports WebSocket + score pollers. Two processes, so JSON work of the pollers
+    never delays the receive timestamps of the market stream (one GIL per process)."""
+    part = sys.argv[sys.argv.index("--part") + 1] if "--part" in sys.argv else "all"
+    W.part = part
     DATA.mkdir(parents=True, exist_ok=True)
-    log(f"recorder start, data in {DATA}")
-    meta("start", pid=os.getpid())
+    log(f"recorder start part={part}, data in {DATA}")
+    meta("start", pid=os.getpid(), part=part)
     disc = Discovery()
-    try:
-        disc.refresh()
-    except Exception as e:  # noqa: BLE001
-        log(f"first discovery failed: {e!r}")
     sm = ShardManager(disc)
     espn = EspnPoller()
-    targets = [disc.run, sm.run, sports_ws, espn.schedule_loop, espn.league_loop, espn.summary_loop,
-               livescore_loop, s365_loop, bbc_loop, clock_loop]
+    targets = []
+    if part in ("ws", "all"):
+        try:
+            disc.refresh()
+        except Exception as e:  # noqa: BLE001
+            log(f"first discovery failed: {e!r}")
+        targets += [disc.run, sm.run, clock_loop]
+    if part in ("scores", "all"):
+        targets += [sports_ws, espn.schedule_loop, espn.league_loop, espn.summary_loop, livescore_loop, s365_loop,
+                    bbc_loop]
     threads = []
     for f in targets:
         th = threading.Thread(target=_guard, args=(f,), daemon=True, name=getattr(f, "__name__", "t"))
@@ -814,6 +885,7 @@ def main() -> None:
     except KeyboardInterrupt:
         STOP.set()
     W.flush()
+    W.close_all()
 
 
 def _guard(f) -> None:

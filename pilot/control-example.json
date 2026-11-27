@@ -1,0 +1,12 @@
+{
+  "seq": 1,
+  "issued_utc": "2026-11-28T09:00:00Z",
+  "note": "Example: read the balance, lower the daily limit for the first day, one cheap live exp_bids session (3 windows of late-tail), then its report.",
+  "actions": [
+    {"id": "balance", "program": "smoke", "cmd": "auth"},
+    {"id": "first-day-limit", "program": "operator", "cmd": "set_limits", "params": {"max_daily_loss_usd": 10}},
+    {"id": "late-tail-3", "program": "exp_bids", "cmd": "run",
+     "params": {"config": "late-tail", "windows": 3, "live": true}, "max_age_min": 30},
+    {"id": "report", "program": "exp_bids", "cmd": "report", "max_age_min": 90}
+  ]
+}

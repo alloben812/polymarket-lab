@@ -47,14 +47,15 @@ stop_one() {
 
 case "${1:-status}" in
   start)
-    start_one recorder python3 -u "$HERE/recorder.py"
+    start_one recorder python3 -u "$HERE/recorder.py" --part ws
+    start_one scores python3 -u "$HERE/recorder.py" --part scores
     [ "${2:-}" = "--with-paper" ] && start_one paper python3 -u "$HERE/paper.py" --follow
     ;;
   start-paper) start_one paper python3 -u "$HERE/paper.py" --follow ;;
-  stop) stop_one recorder; stop_one paper ;;
+  stop) stop_one recorder; stop_one scores; stop_one paper ;;
   stop-paper) stop_one paper ;;
   status)
-    for n in recorder paper; do
+    for n in recorder scores paper; do
       if [ -f "$DATA/$n.pid" ] && kill -0 "$(cat "$DATA/$n.pid")" 2>/dev/null; then
         echo "$n: running (loop pid $(cat "$DATA/$n.pid"))"
       else

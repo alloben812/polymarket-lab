@@ -1,0 +1,38 @@
+== AiBird 0xa58d4f278d7953cd38eeb929f7e242bfc7c0b9b8 window 45d truncated=False fills=20813 usd=672071 | mention fills=391 markets=13 usd=10918 (2% of turnover)
+resolved mention markets=13 unresolved=0 | net after fee $838 | market win rate 7/13 | t(by market)=0.69 | events=2 positive events=2
+sizing: median $313/market, p90 $3362, max $3415; max markets touched in one day 12; days active 4; shares bought 19416 sold 10096 (sell/buy 0.52)
+by phase:
+  ('LIVE',)                                  fills=  128 mk=   9 usd=     1836 pnl=    899.5 (  49.0% of usd) mk_win=7/9
+  ('POST',)                                  fills=   35 mk=   5 usd=     3824 pnl=   -513.5 ( -13.4% of usd) mk_win=0/5
+  ('PRE',)                                   fills=  228 mk=  12 usd=     5258 pnl=    452.4 (   8.6% of usd) mk_win=7/12
+by phase, role, direction:
+  ('LIVE', 'M', 'longNo')                    fills=   80 mk=   7 usd=      552 pnl=   -355.9 ( -64.5% of usd) mk_win=4/7
+  ('LIVE', 'M', 'longYes')                   fills=   41 mk=   7 usd=     1148 pnl=   1341.0 ( 116.8% of usd) mk_win=3/7
+  ('LIVE', 'T', 'longNo')                    fills=    5 mk=   4 usd=       99 pnl=    -91.0 ( -91.8% of usd) mk_win=1/4
+  ('LIVE', 'T', 'longYes')                   fills=    2 mk=   2 usd=       38 pnl=      5.4 (  14.4% of usd) mk_win=1/2
+  ('POST', 'M', 'longNo')                    fills=   13 mk=   3 usd=      519 pnl=     41.2 (   7.9% of usd) mk_win=1/3
+  ('POST', 'M', 'longYes')                   fills=   14 mk=   2 usd=      294 pnl=   -294.3 (-100.0% of usd) mk_win=0/2
+  ('POST', 'T', 'longNo')                    fills=    3 mk=   3 usd=     2791 pnl=    -38.2 (  -1.4% of usd) mk_win=0/3
+  ('POST', 'T', 'longYes')                   fills=    5 mk=   2 usd=      220 pnl=   -222.2 (-100.9% of usd) mk_win=0/2
+  ('PRE', 'M', 'longNo')                     fills=  108 mk=   9 usd=     1567 pnl=   -994.2 ( -63.5% of usd) mk_win=6/9
+  ('PRE', 'M', 'longYes')                    fills=   97 mk=  12 usd=     2474 pnl=   1178.1 (  47.6% of usd) mk_win=3/12
+  ('PRE', 'T', 'longNo')                     fills=    8 mk=   7 usd=      490 pnl=    -65.2 ( -13.3% of usd) mk_win=4/7
+  ('PRE', 'T', 'longYes')                    fills=   15 mk=   9 usd=      728 pnl=    333.7 (  45.9% of usd) mk_win=3/9
+by role, side:
+  ('M', 'BUY')                               fills=  160 mk=  13 usd=     4074 pnl=   2260.7 (  55.5% of usd) mk_win=4/13
+  ('M', 'SELL')                              fills=  193 mk=  10 usd=     2479 pnl=  -1344.7 ( -54.3% of usd) mk_win=7/10
+  ('T', 'BUY')                               fills=   23 mk=   9 usd=     1216 pnl=    151.0 (  12.4% of usd) mk_win=4/9
+  ('T', 'SELL')                              fills=   15 mk=   7 usd=     3149 pnl=   -228.6 (  -7.3% of usd) mk_win=4/7
+by price of the eventual winner at fill time:
+  ('onLoser', '.2-.5')                       fills=  103 mk=   3 usd=      832 pnl=  -1193.7 (-143.5% of usd) mk_win=0/3
+  ('onLoser', '.5-.8')                       fills=   44 mk=   6 usd=     1165 pnl=   -931.1 ( -79.9% of usd) mk_win=0/6
+  ('onLoser', '.8-.95')                      fills=   70 mk=   9 usd=     1381 pnl=  -1384.2 (-100.3% of usd) mk_win=0/9
+  ('onLoser', '.95-.99')                     fills=    5 mk=   3 usd=     1507 pnl=    -31.2 (  -2.1% of usd) mk_win=0/3
+  ('onLoser', '.99-1')                       fills=    4 mk=   2 usd=     1760 pnl=    -17.9 (  -1.0% of usd) mk_win=0/2
+  ('onWinner', '.2-.5')                      fills=   77 mk=   3 usd=     2107 pnl=   2921.3 ( 138.6% of usd) mk_win=3/3
+  ('onWinner', '.5-.8')                      fills=   39 mk=   6 usd=     1552 pnl=   1057.5 (  68.2% of usd) mk_win=6/6
+  ('onWinner', '.8-.95')                     fills=   48 mk=   6 usd=      614 pnl=    417.6 (  68.0% of usd) mk_win=6/6
+  ('onWinner', '.95-.99')                    fills=    1 mk=   1 usd=        0 pnl=      0.2 (  16.8% of usd) mk_win=1/1
+buys at price>=0.95 by phase (usd): {} -> share in JUMP/POST = 0%
+Yes-resolved markets traded=3; with a TAKER long-Yes fill inside the jump window at yes_px<0.90: 0 (0%)
+largest events by |pnl|: [('what-will-trump-say-during-his-trilateral-meetin', 838), ('what-will-trump-or-melania-say-during-the-thanks', 0)]

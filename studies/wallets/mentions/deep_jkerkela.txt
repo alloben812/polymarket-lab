@@ -1,0 +1,32 @@
+== jkerkela 0xde18162d38cd41fd8c27872584d9451120427ca8 window 45d truncated=False fills=1193 usd=95534 | mention fills=110 markets=64 usd=9773 (10% of turnover)
+resolved mention markets=59 unresolved=5 | net after fee $1885 | market win rate 41/59 | t(by market)=2.67 | events=18 positive events=14
+sizing: median $36/market, p90 $364, max $1783; max markets touched in one day 8; days active 21; shares bought 12933 sold 509 (sell/buy 0.04)
+by phase:
+  ('JUMP',)                                  fills=    1 mk=   1 usd=       26 pnl=    -26.2 (-100.7% of usd) mk_win=0/1
+  ('LIVE',)                                  fills=    5 mk=   1 usd=       13 pnl=     13.1 (  99.1% of usd) mk_win=1/1
+  ('NOSTART',)                               fills=    2 mk=   2 usd=      137 pnl=    100.6 (  73.6% of usd) mk_win=2/2
+  ('POST',)                                  fills=    9 mk=   5 usd=     2201 pnl=    272.1 (  12.4% of usd) mk_win=4/5
+  ('PRE',)                                   fills=   85 mk=  54 usd=     6660 pnl=   1525.3 (  22.9% of usd) mk_win=37/54
+by phase, role, direction:
+  ('JUMP', 'T', 'longNo')                    fills=    1 mk=   1 usd=       26 pnl=    -26.2 (-100.7% of usd) mk_win=0/1
+  ('LIVE', 'T', 'longNo')                    fills=    5 mk=   1 usd=       13 pnl=     13.1 (  99.1% of usd) mk_win=1/1
+  ('NOSTART', 'T', 'longYes')                fills=    2 mk=   2 usd=      137 pnl=    100.6 (  73.6% of usd) mk_win=2/2
+  ('POST', 'T', 'longNo')                    fills=    7 mk=   4 usd=     2177 pnl=    266.8 (  12.3% of usd) mk_win=3/4
+  ('POST', 'T', 'longYes')                   fills=    2 mk=   1 usd=       24 pnl=      5.3 (  22.2% of usd) mk_win=1/1
+  ('PRE', 'T', 'longNo')                     fills=   67 mk=  39 usd=     5931 pnl=   1620.3 (  27.3% of usd) mk_win=30/39
+  ('PRE', 'T', 'longYes')                    fills=   18 mk=  16 usd=      729 pnl=    -95.0 ( -13.0% of usd) mk_win=7/16
+by role, side:
+  ('T', 'BUY')                               fills=   95 mk=  59 usd=     8734 pnl=   1894.7 (  21.7% of usd) mk_win=41/59
+  ('T', 'SELL')                              fills=    7 mk=   3 usd=      304 pnl=     -9.6 (  -3.2% of usd) mk_win=1/3
+by price of the eventual winner at fill time:
+  ('onLoser', '.2-.5')                       fills=    4 mk=   4 usd=       73 pnl=    -73.8 (-100.4% of usd) mk_win=0/4
+  ('onLoser', '.5-.8')                       fills=   13 mk=  11 usd=      699 pnl=   -703.0 (-100.6% of usd) mk_win=0/11
+  ('onLoser', '.8-.95')                      fills=    5 mk=   5 usd=      158 pnl=    -91.5 ( -57.9% of usd) mk_win=0/5
+  ('onLoser', '.99-1')                       fills=    1 mk=   1 usd=      201 pnl=     -0.2 (  -0.1% of usd) mk_win=0/1
+  ('onWinner', '.05-.2')                     fills=    1 mk=   1 usd=        5 pnl=     45.0 ( 899.1% of usd) mk_win=1/1
+  ('onWinner', '.2-.5')                      fills=   17 mk=  12 usd=      713 pnl=    913.2 ( 128.0% of usd) mk_win=12/12
+  ('onWinner', '.5-.8')                      fills=   36 mk=  22 usd=     2542 pnl=   1015.5 (  40.0% of usd) mk_win=22/22
+  ('onWinner', '.8-.95')                     fills=   25 mk=   8 usd=     4646 pnl=    779.9 (  16.8% of usd) mk_win=8/8
+buys at price>=0.95 by phase (usd): {} -> share in JUMP/POST = 0%
+Yes-resolved markets traded=20; with a TAKER long-Yes fill inside the jump window at yes_px<0.90: 0 (0%)
+largest events by |pnl|: [('what-will-trump-say-during-his-trilateral-meetin', 654), ('what-will-trump-say-during-his-midterm-rally-in-', 539), ('what-will-trump-say-during-his-midterm-rally-in-', 231), ('what-will-trump-say-during-his-midterm-rally-in-', 146), ('what-will-trump-say-during-his-midterm-rally-in-', 140), ('what-will-trump-say-during-his-midterm-rally-in-', 106), ('what-will-trump-say-at-cape-canaveral-november-6', 92), ('what-will-andy-burnham-say-at-the-next-prime-min', -85), ('what-will-trump-say-during-his-midterm-rally-in-', 73), ('what-will-trump-say-during-his-midterm-rally-in-', -68), ('what-will-trump-say-during-his-midterm-rally-in-', 62), ('what-will-trump-say-during-his-midterm-rally-in-', -56)]

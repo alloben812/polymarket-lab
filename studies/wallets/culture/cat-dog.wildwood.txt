@@ -1,0 +1,68 @@
+tape row keys: ['bio', 'condition_id', 'event_slug', 'icon', 'name', 'outcome', 'outcome_index', 'price', 'profile_image', 'profile_image_optimized', 'proxy_wallet', 'pseudonym', 'side', 'size', 'slug', 'timestamp', 'title', 'token_id', 'transaction_hash']
+
+## will-wildwood-opening-weekend-box-office-be-between-10m-and-12m
+   final 0.0 vol 26859.183616999995 end Sun 10-25 12:00 closed Mon 10-26 18:55 T90 Mon 10-26 15:01 tape rows 396 (own taker rows 4) pnl -166
+
+## will-wildwood-opening-weekend-box-office-be-between-8m-and-10m
+   final 0.0 vol 11910.493158999998 end Sun 10-25 12:00 closed Mon 10-26 18:55 T90 Sat 10-24 03:58 tape rows 309 (own taker rows 1) pnl 223
+
+## will-wildwood-opening-weekend-box-office-be-between-12m-and-14m
+   final 1.0 vol 36752.679541 end Sun 10-25 12:00 closed Mon 10-26 21:24 T90 Mon 10-26 15:11 tape rows 429 (own taker rows 3) pnl 2299
+
+## will-wildwood-opening-weekend-box-office-be-less-than-8m
+   final 0.0 vol 15531.217861000001 end Sun 10-25 12:00 closed Mon 10-26 19:24 T90 Fri 10-23 03:48 tape rows 175 (own taker rows 1) pnl 7
+
+  jump Sat 10-17 14:30 wildwood-between-8m-and-10m                  0.49 -> 0.27 (1 trades)
+  jump Sun 10-18 14:30 wildwood-between-8m-and-10m                  0.38 -> 0.10 (4 trades)
+  FILL Sun 10-18 14:58 wildwood-between-8m-and-10m                  M SHORTyes      5 @ 0.390 | others: before 0.37 +10m 0.10 +1h 0.10 +6h 0.10 +24h 0.28
+  jump Mon 10-19 04:00 wildwood-between-8m-and-10m                  0.10 -> 0.29 (2 trades)
+  FILL Mon 10-19 19:52 wildwood-between-8m-and-10m                  M SHORTyes     33 @ 0.390 | others: before 0.33 +10m 0.27 +1h 0.26 +6h 0.32 +24h 0.19
+  jump Tue 10-20 07:30 wildwood-between-8m-and-10m                  0.32 -> 0.20 (5 trades)
+  FILL Tue 10-20 07:54 wildwood-between-8m-and-10m                  T SHORTyes    750 @ 0.282 | others: before 0.32 +10m 0.20 +1h 0.20 +6h 0.11 +24h 0.16
+  FILL Tue 10-20 21:24 wildwood-less-than-8m                        M SHORTyes     50 @ 0.150 | others: before 0.14 +10m 0.14 +1h 0.14 +6h 0.10 +24h 0.04
+  jump Thu 10-22 02:00 wildwood-between-10m-and-12m                 0.25 -> 0.11 (2 trades)
+  jump Thu 10-22 05:30 wildwood-between-12m-and-14m                 0.34 -> 0.21 (2 trades)
+  jump Fri 10-23 00:00 wildwood-less-than-8m                        0.01 -> 0.14 (1 trades)
+  jump Fri 10-23 13:30 wildwood-between-10m-and-12m                 0.14 -> 0.32 (1 trades)
+  FILL Fri 10-23 19:23 wildwood-between-12m-and-14m                 M LONG yes     27 @ 0.351 | others: before 0.35 +10m 0.41 +1h 0.41 +6h 0.45 +24h 0.38
+  jump Fri 10-23 23:30 wildwood-between-10m-and-12m                 0.21 -> 0.38 (2 trades)
+  jump Sat 10-24 14:30 wildwood-between-10m-and-12m                 0.37 -> 0.59 (10 trades)
+  jump Sat 10-24 14:30 wildwood-between-12m-and-14m                 0.55 -> 0.27 (22 trades)
+  FILL Sat 10-24 14:53 wildwood-between-8m-and-10m                  M LONG yes    652 @ 0.004 | others: before 0.03 +10m 0.03 +1h 0.02 +6h 0.00 +24h 0.01
+  FILL Sat 10-24 14:53 wildwood-between-10m-and-12m                 T LONG yes    455 @ 0.587 | others: before 0.58 +10m 0.73 +1h 0.73 +6h 0.67 +24h 0.37
+  jump Sat 10-24 15:00 wildwood-between-10m-and-12m                 0.59 -> 0.73 (3 trades)
+  jump Sat 10-24 15:00 wildwood-between-12m-and-14m                 0.27 -> 0.11 (7 trades)
+  jump Sat 10-24 16:00 wildwood-between-12m-and-14m                 0.11 -> 0.33 (14 trades)
+  FILL Sat 10-24 16:02 wildwood-between-12m-and-14m                 T LONG yes   1404 @ 0.299 | others: before 0.11 +10m 0.40 +1h 0.33 +6h 0.26 +24h 0.27
+  FILL Sat 10-24 16:02 wildwood-between-8m-and-10m                  M LONG yes    137 @ 0.004 | others: before 0.02 +10m 0.02 +1h 0.00 +6h 0.00 +24h 0.03
+  FILL Sat 10-24 16:02 wildwood-less-than-8m                        T LONG yes     50 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  FILL Sat 10-24 19:37 wildwood-between-10m-and-12m                 T LONG yes    416 @ 0.660 | others: before 0.60 +10m 0.69 +1h 0.68 +6h 0.80 +24h 0.75
+  FILL Sat 10-24 21:38 wildwood-between-10m-and-12m                 T LONG yes    370 @ 0.661 | others: before 0.66 +10m 0.72 +1h 0.76 +6h 0.70 +24h 0.70
+  jump Sun 10-25 03:30 wildwood-between-10m-and-12m                 0.70 -> 0.84 (2 trades)
+  jump Sun 10-25 05:30 wildwood-between-10m-and-12m                 0.84 -> 0.72 (8 trades)
+  jump Sun 10-25 05:30 wildwood-between-12m-and-14m                 0.17 -> 0.33 (14 trades)
+  jump Sun 10-25 06:30 wildwood-between-10m-and-12m                 0.72 -> 0.89 (2 trades)
+  jump Sun 10-25 06:30 wildwood-between-12m-and-14m                 0.33 -> 0.08 (6 trades)
+  jump Sun 10-25 09:30 wildwood-between-10m-and-12m                 0.95 -> 0.54 (26 trades)
+  jump Sun 10-25 09:30 wildwood-between-12m-and-14m                 0.08 -> 0.39 (8 trades)
+  FILL Sun 10-25 09:43 wildwood-between-12m-and-14m                 T LONG yes   1027 @ 0.122 | others: before 0.08 +10m 0.38 +1h 0.30 +6h 0.32 +24h 0.77
+  FILL Sun 10-25 09:45 wildwood-between-10m-and-12m                 M SHORTyes     29 @ 0.650 | others: before 0.90 +10m 0.59 +1h 0.64 +6h 0.64 +24h 0.33
+  FILL Sun 10-25 09:45 wildwood-between-10m-and-12m                 T SHORTyes    925 @ 0.651 | others: before 0.90 +10m 0.59 +1h 0.64 +6h 0.64 +24h 0.33
+  FILL Sun 10-25 10:30 wildwood-between-12m-and-14m                 M LONG yes    101 @ 0.201 | others: before 0.20 +10m 0.30 +1h 0.30 +6h 0.22 +24h 0.77
+  jump Sun 10-25 12:30 wildwood-between-10m-and-12m                 0.69 -> 0.37 (3 trades)
+  jump Sun 10-25 15:00 wildwood-between-10m-and-12m                 0.37 -> 0.57 (11 trades)
+  jump Sun 10-25 15:30 wildwood-between-10m-and-12m                 0.57 -> 0.72 (3 trades)
+  jump Sun 10-25 15:30 wildwood-between-12m-and-14m                 0.40 -> 0.27 (7 trades)
+  FILL Sun 10-25 23:18 wildwood-between-12m-and-14m                 T LONG yes    478 @ 0.342 | others: before 0.30 +10m 0.40 +1h 0.40 +6h 0.88 +24h 1.00
+  jump Mon 10-26 01:00 wildwood-between-10m-and-12m                 0.70 -> 0.51 (1 trades)
+  jump Mon 10-26 03:00 wildwood-between-12m-and-14m                 0.43 -> 0.70 (3 trades)
+  jump Mon 10-26 03:30 wildwood-between-10m-and-12m                 0.43 -> 0.25 (7 trades)
+  jump Mon 10-26 04:00 wildwood-between-12m-and-14m                 0.67 -> 0.90 (2 trades)
+  jump Mon 10-26 05:30 wildwood-between-10m-and-12m                 0.34 -> 0.13 (4 trades)
+  jump Mon 10-26 06:00 wildwood-between-10m-and-12m                 0.13 -> 0.26 (4 trades)
+  jump Mon 10-26 06:30 wildwood-between-12m-and-14m                 0.87 -> 0.70 (4 trades)
+  jump Mon 10-26 07:00 wildwood-between-10m-and-12m                 0.29 -> 0.47 (2 trades)
+  jump Mon 10-26 09:00 wildwood-between-10m-and-12m                 0.47 -> 0.33 (1 trades)
+  jump Mon 10-26 14:30 wildwood-between-10m-and-12m                 0.30 -> 0.14 (4 trades)
+  jump Mon 10-26 14:30 wildwood-between-12m-and-14m                 0.69 -> 0.88 (13 trades)
+  jump Mon 10-26 15:00 wildwood-between-10m-and-12m                 0.14 -> 0.01 (9 trades)

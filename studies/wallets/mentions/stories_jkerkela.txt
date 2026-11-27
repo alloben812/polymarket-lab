@@ -1,0 +1,68 @@
+
+# Will Trump say "Transgender" 7+ times during his Midterm Rally in Kansas?  [what-will-trump-say-during-his-midterm-rally-in-kansas-novem]  vol $4154 tape 47 rows
+  sched start 11-02 01:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-02 04:16:24 | resolved 11-02 05:52:07 | outcome NO | account pnl $338.45 on $319.9
+    10-31 21:16:55 start-27h43m05s det-30h59m29s PRE     T BUY  No  @0.440 x   70.0 pnl    39.03
+    11-01 08:29:33 start-16h30m27s det-19h46m51s PRE     T BUY  No  @0.490 x  590.0 pnl   299.43
+
+# Will Trump say "Ukraine" during his trilateral meeting with Xi and Putin?  [what-will-trump-say-during-his-trilateral-meeting-with-xi-an]  vol $34161 tape 604 rows
+  sched start 11-18 18:00:00 | last print<0.60 11-19 08:33:13 | first print>=0.60 11-19 08:38:44 | determined(tape) 11-19 08:38:44 | resolved 11-19 11:13:13 | outcome YES | account pnl $-310.16 on $308.6
+    11-17 03:24:34 start-38h35m26s det-53h14m10s PRE     T BUY  No  @0.495 x  624.0 pnl  -310.16
+
+# Will Trump say "Diesel" during his trilateral meeting with Xi and Putin?  [what-will-trump-say-during-his-trilateral-meeting-with-xi-an]  vol $8937 tape 103 rows
+  sched start 11-18 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-17 12:29:41 | resolved 11-19 12:37:59 | outcome NO | account pnl $286.11 on $1782.6
+    11-17 05:36:58 start-36h23m02s det-6h52m43s PRE     T BUY  No  @0.807 x  639.9 pnl   122.49
+    11-17 08:46:40 start-33h13m20s det-3h43m01s PRE     T BUY  No  @0.885 x  273.2 pnl    31.00
+    11-17 11:55:50 start-30h04m10s det-0h33m51s PRE     T BUY  No  @0.880 x   50.0 pnl     5.95
+    11-17 16:27:14 start-25h32m46s det+3h57m33s POST    T BUY  No  @0.885 x 1108.0 pnl   126.67
+
+# Will Trump say "Nobel" during his trilateral meeting with Xi and Putin?  [what-will-trump-say-during-his-trilateral-meeting-with-xi-an]  vol $11501 tape 92 rows
+  sched start 11-18 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-17 11:27:32 | resolved 11-19 12:37:59 | outcome NO | account pnl $268.7 on $1610.0
+    11-17 05:36:56 start-36h23m04s det-5h50m36s PRE     T BUY  No  @0.840 x  789.0 pnl   125.49
+    11-17 08:46:40 start-33h13m20s det-2h40m52s PRE     T BUY  No  @0.880 x  358.0 pnl    42.68
+    11-17 13:16:41 start-28h43m19s det+1h49m09s POST    T BUY  No  @0.880 x   40.0 pnl     4.76
+    11-17 19:36:11 start-22h23m49s det+8h08m39s POST    T BUY  No  @0.846 x  239.0 pnl    36.58
+    11-17 20:31:17 start-21h28m43s det+9h03m45s POST    T BUY  No  @0.869 x  455.0 pnl    59.19
+
+# Will Trump say "Zelensky" during his trilateral meeting with Xi and Putin?  [what-will-trump-say-during-his-trilateral-meeting-with-xi-an]  vol $8589 tape 161 rows
+  sched start 11-18 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-19 09:54:11 | resolved 11-19 12:37:59 | outcome NO | account pnl $193.74 on $838.1
+    11-17 03:24:32 start-38h35m28s det-54h29m39s PRE     T BUY  No  @0.800 x   29.1 pnl     5.77
+    11-17 05:36:58 start-36h23m02s det-52h17m13s PRE     T BUY  No  @0.788 x  398.3 pnl    83.60
+    11-17 08:46:40 start-33h13m20s det-49h07m31s PRE     T BUY  No  @0.812 x  315.0 pnl    58.63
+    11-17 11:55:49 start-30h04m11s det-45h58m22s PRE     T BUY  No  @0.842 x  291.0 pnl    45.75
+
+# Will Trump say "AI" or "Artificial Intelligence" during his Midterm Rally in Michigan?  [what-will-trump-say-during-his-midterm-rally-in-michigan-oct]  vol $6695 tape 120 rows
+  sched start 10-25 19:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-25 21:35:48 | resolved 10-26 07:11:13 | outcome NO | account pnl $-19.15 on $19.0
+    10-25 08:10:05 start-10h49m55s det-13h25m43s PRE     T BUY  Yes @0.190 x  100.0 pnl   -19.15
+
+# Will Trump say "Hormuz" or "Blockade" during his Midterm Rally in South Carolina?  [what-will-trump-say-during-his-midterm-rally-in-south-caroli]  vol $2079 tape 39 rows
+  sched start 10-29 16:30:00 | last print<0.60 10-28 19:05:26 | first print>=0.60 10-29 01:35:37 | determined(tape) 10-29 19:00:34 | resolved 10-29 22:40:08 | outcome YES | account pnl $-26.19 on $26.0
+    10-29 05:55:14 start-10h34m46s det-13h05m20s JUMP    T BUY  No  @0.260 x  100.0 pnl   -26.19
+
+# Will Trump say "Massie" or "Rand" during his Midterm Rally in Kentucky?  [what-will-trump-say-during-his-midterm-rally-in-kentucky-oct]  vol $1102 tape 23 rows
+  sched start 10-17 18:00:00 | last print<0.60 - | first print>=0.60 10-16 02:39:30 | determined(tape) 10-16 10:39:03 | resolved 10-17 21:52:47 | outcome YES | account pnl $5.26 on $23.7
+    10-17 08:39:33 start-9h20m27s det+22h00m30s POST    T BUY  Yes @0.810 x    9.0 pnl     1.70
+    10-17 09:52:59 start-8h07m01s det+23h13m56s POST    T BUY  Yes @0.820 x   20.0 pnl     3.57
+
+# Will Trump say "Russia" or "Ukraine" during his Midterm Rally in Georgia?  [what-will-trump-say-during-his-midterm-rally-in-georgia-octo]  vol $8590 tape 127 rows
+  sched start 10-24 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-25 00:47:23 | resolved 10-25 02:59:18 | outcome NO | account pnl $44.95 on $5.0
+    10-24 06:44:39 start-16h15m21s det-18h02m44s PRE     T BUY  No  @0.100 x   50.0 pnl    44.95
+
+# Will Trump say "Data Center" during his Midterm Rally in Florida?  [what-will-trump-say-during-his-midterm-rally-in-florida-octo]  vol $1133 tape 63 rows
+  sched start 10-30 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-31 01:29:25 | resolved 10-31 03:35:26 | outcome NO | account pnl $-5.44 on $5.4
+    10-30 19:44:33 start-3h15m27s det-5h44m52s PRE     T BUY  Yes @0.180 x   30.0 pnl    -5.44
+
+# Will Trump say "Million" or "Billion" or "Trillion" 30+ times during his Midterm Rally in South Carolina?  [what-will-trump-say-during-his-midterm-rally-in-south-caroli]  vol $1872 tape 41 rows
+  sched start 10-29 16:30:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-29 19:55:51 | resolved 10-30 01:14:09 | outcome NO | account pnl $32.39 on $17.5
+    10-29 09:57:44 start-6h32m16s det-9h58m07s PRE     T BUY  No  @0.350 x   50.0 pnl    32.39
+
+# Will Trump say "Brazil" during his Midterm Rally in Florida?  [what-will-trump-say-during-his-midterm-rally-in-florida-octo]  vol $365 tape 13 rows
+  sched start 10-30 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-31 02:55:06 | resolved 10-31 03:35:26 | outcome NO | account pnl $9.13 on $30.8
+    10-30 19:44:31 start-3h15m29s det-7h10m35s PRE     T BUY  No  @0.770 x   40.0 pnl     9.13
+
+# Will Trump say "Osama Bin Laden" during his Midterm Rally in Michigan?  [what-will-trump-say-during-his-midterm-rally-in-michigan-oct]  vol $2170 tape 64 rows
+  sched start 10-25 19:00:00 | last print<0.60 10-25 19:32:39 | first print>=0.60 10-25 19:35:15 | determined(tape) 10-25 19:35:15 | resolved 10-25 23:50:15 | outcome YES | account pnl $-33.15 on $33.0
+    10-25 16:14:57 start-2h45m03s det-3h20m18s PRE     T BUY  No  @0.550 x   60.0 pnl   -33.15
+
+# Will Trump say "Hell" 15+ times during his Midterm Rally in Florida?  [what-will-trump-say-during-his-midterm-rally-in-florida-octo]  vol $3627 tape 40 rows
+  sched start 10-23 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-23 20:10:57 | resolved 10-23 22:41:09 | outcome NO | account pnl $11.15 on $8.8
+    10-23 08:44:23 start-9h15m37s det-11h26m34s PRE     T BUY  No  @0.440 x   20.0 pnl    11.15

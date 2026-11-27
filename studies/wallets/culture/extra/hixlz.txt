@@ -1,0 +1,36 @@
+[hixlz] fills 2828 in 2s
+hixlz  0xcfa9f86fa970296835711d9513c346343a2ba5d3  window 2026-10-28 15:53 .. 2026-11-27 15:53 UTC
+summary: {"fills": 2828, "markets": 134, "resolved_complete_markets": 112, "incomplete_markets": 0, "unresolved_markets": 22, "turnover_usd": 18304, "maker_share_usd": 0.914, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": 33650.54, "fees_est": 12.42, "net": 33638.12, "fee_rate_unknown_markets": 0, "net_per_market": 300.34, "t_by_market": 1.54, "win_share_markets": 0.071, "median_market_turnover": 23.05, "max_market_turnover": 2258.68, "avg_fill_usd": 6.47}
+inventory events: {'REDEEM': 8}
+API says for the same days: gross 36812, fees -47, refunded 0, rebates 254, kept 37019, volume $18606, fills 2970
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross     fees_est  net       net_pct_turnover  net_per_market  t_by_market
+  politics  134      112                0           18304     0.086        33650.54  12.42     33638.12  183.77            300.34          1.54       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd 
+  ('M', 'BUY')  2255   475711  16334  0.0343  6.519          0.0           6.519         4.183  1.56  110      31009.78
+  ('T', 'BUY')  365    146137  1516   0.0104  1.807          0.008         1.799         1.82   0.99  80       2628.34 
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd 
+  ('M', '0.00-0.05')  1781   369445  4808  0.013   -0.279         0.0           -0.279        0.829   -0.34  94       -1029.71
+  ('M', '0.05-0.15')  361    93030   9093  0.0977  32.053         0.0           32.053        16.503  1.94   22       29818.88
+  ('M', '0.15-0.30')  113    13235   2432  0.1838  16.778         0.0           16.778        26.604  0.63   6        2220.61 
+  ('T', '0.00-0.05')  314    139639  737   0.0053  0.175          0.005         0.171         0.631   0.27   73       238.28  
+  ('T', '0.05-0.15')  38     4578    425   0.0928  56.212         0.071         56.141        21.979  2.55   9        2569.98 
+  ('T', '0.15-0.30')  13     1921    354   0.184   -9.216         0.15          -9.366        13.596  None   3        -179.92 
+
+by role and point in the market's life:
+  key                                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd 
+  ('M', 'life', 's over 7 d to end')  143    22336   155    0.0069  -0.693         0.0           -0.693        0.107  -6.45  31       -154.79 
+  ('M', 'life', 't 1-7 d to end')     1177   203282  4497   0.0221  2.013          0.0           2.013         2.734  0.74   83       4091.16 
+  ('M', 'life', 'u 6-24 h to end')    912    244119  11607  0.0475  11.118         0.0           11.118        7.75   1.43   24       27141.94
+  ('M', 'life', 'v 1-6 h to end')     23     5974    75     0.0126  -1.147         0.0           -1.147        0.913  -1.26  9        -68.53  
+  ('T', 'life', 's over 7 d to end')  35     14709   78     0.0053  -0.531         0.005         -0.536        0.09   -5.93  14       -78.87  
+  ('T', 'life', 't 1-7 d to end')     244    74408   631    0.0085  1.006          0.007         0.998         1.83   0.55   57       742.85  
+  ('T', 'life', 'u 6-24 h to end')    80     53558   795    0.0148  3.54           0.011         3.528         4.443  0.79   20       1889.58 
+  ('T', 'life', 'v 1-6 h to end')     6      3462    12     0.0034  2.16           0.0           2.16          3.946  None   3        74.78   
+
+full result written to studies/wallets/culture/extra/hixlz.json

@@ -1,0 +1,57 @@
+### (1) jozeslemsek: FIFO round trips per token, all markets, 88 days
+  round trips: 12283 lots, cost 15329, pnl 6422 (42% of cost); sells of older inventory 489; unsold cost 4022
+   sell/buy ratio 0-1.5: lots= 5287 cost=  10984 pnl=    433
+   sell/buy ratio 1.5-3: lots= 5180 cost=   3693 pnl=   3451
+   sell/buy ratio 3-10: lots= 1610 cost=    615 pnl=   1906
+   sell/buy ratio 10-1000000000.0: lots=  206 cost=     37 pnl=    632
+   losing lots: 1408 pnl=-1058
+   holding time: median 104.9 h, p90 24.5 d; buy price median 0.0030; maker share of buys 0.90, of sells 0.88
+   markets with round trips: 373, positive 302; top-10 markets pnl 3466 of 6422
+   fills by month: {'08': 51, '09': 2899, '10': 8218, '11': 7361}
+
+### (2) release snipers: every fill in release-event markets, lag to the scheduled release
+  TheElement115: 51 fills in 33 events; lag s: min 2, median 7, p90 17, max 18; price median 0.94; usd/fill median 401, max 5000; takers 51/51
+     per release day: 09-01 14:00 ism-manufactur n=2 lag=3-3s $18; 09-03 14:00 ism-services-p n=2 lag=3-4s $575; 09-04 12:30 how-many-jobs- n=2 lag=18-18s $944; 09-16 18:00 fed-decision-i n=2 lag=6-6s $6677; 09-29 12:30 canada-gdp-jul n=1 lag=3-3s $18; 09-30 12:30 core-pce-mom-a n=2 lag=9-9s $1659; 09-30 12:30 core-pce-yoy-a n=1 lag=9-9s $54; 10-02 12:30 how-many-jobs- n=2 lag=15-17s $824; 10-02 12:30 september-unem n=1 lag=17-17s $609; 10-14 12:30 core-cpi-mom-s n=2 lag=9-18s $2000; 10-14 12:30 core-cpi-yoy-s n=2 lag=8-17s $1793; 10-14 12:30 september-infl n=2 lag=8-17s $2712; 10-14 12:30 september-infl n=2 lag=9-9s $1710; 10-15 12:30 ppi-yoy-septem n=2 lag=17-17s $361
+     release days covered: 25 of 37 scheduled times in the sample
+  road2million: 45 fills in 36 events; lag s: min 3, median 7, p90 17, max 19; price median 0.97; usd/fill median 250, max 1500; takers 45/45
+     per release day: 09-01 14:00 ism-manufactur n=1 lag=3-3s $15; 09-03 14:00 ism-services-p n=1 lag=3-3s $300; 09-04 12:30 august-unemplo n=1 lag=16-16s $12; 09-04 12:30 how-many-jobs- n=1 lag=7-7s $250; 09-16 18:00 fed-decision-i n=1 lag=6-6s $500; 09-29 12:30 canada-gdp-jul n=1 lag=3-3s $15; 09-30 12:30 core-pce-mom-a n=2 lag=9-9s $500; 09-30 12:30 core-pce-yoy-a n=1 lag=9-9s $114; 10-02 12:30 how-many-jobs- n=1 lag=17-17s $400; 10-02 12:30 september-unem n=1 lag=17-17s $129; 10-14 12:30 core-cpi-mom-s n=2 lag=17-17s $350; 10-14 12:30 core-cpi-yoy-s n=2 lag=8-8s $350; 10-14 12:30 september-infl n=2 lag=6-8s $276; 10-14 12:30 september-infl n=1 lag=17-17s $250
+     release days covered: 26 of 37 scheduled times in the sample
+  makeit99: 33 fills in 20 events; lag s: min 2, median 6, p90 12, max 18; price median 0.90; usd/fill median 192, max 3430; takers 33/33
+     per release day: 09-01 14:00 ism-manufactur n=2 lag=3-3s $75; 09-04 12:30 august-unemplo n=1 lag=18-18s $388; 09-04 12:30 how-many-jobs- n=2 lag=18-18s $212; 09-10 12:30 ppi-yoy-august n=1 lag=6-6s $324; 09-11 12:30 august-inflati n=3 lag=6-7s $679; 09-11 12:30 core-cpi-mom-a n=1 lag=6-6s $183; 09-17 11:00 bank-of-englan n=1 lag=4-4s $239; 09-29 12:30 canada-gdp-jul n=2 lag=3-3s $222; 10-05 14:00 ism-services-p n=4 lag=2-2s $1530; 10-14 12:30 core-cpi-mom-s n=2 lag=9-12s $535; 10-14 12:30 core-cpi-yoy-s n=1 lag=11-11s $395; 10-14 12:30 september-infl n=1 lag=12-12s $144; 10-14 12:30 september-infl n=1 lag=12-12s $192; 10-28 13:45 bank-of-canada n=1 lag=2-2s $3430
+     release days covered: 14 of 37 scheduled times in the sample
+
+### (3) Ahpo / ATCapital / GoldmanSachs: taker fills in OTHER econ markets within 120 s after a US release
+  Ahpo         09-30 12:31:24 lag= 84s SELL Yes px=0.250 usd=     213 will-the-fed-hikehikehike-in-the-next-three-decisions-sepoctde
+  Ahpo         11-06 13:30:19 lag= 19s BUY  Yes px=0.778 usd=   16973 will-the-fed-increase-interest-rates-by-25-bps-after-the-decem
+  Ahpo         11-06 13:30:39 lag= 39s SELL Yes px=0.790 usd=   19999 will-the-fed-increase-interest-rates-by-25-bps-after-the-decem
+  Ahpo         11-13 13:30:34 lag= 34s SELL Yes px=0.590 usd=      69 will-the-fed-increase-interest-rates-by-25-bps-after-the-janua
+  Ahpo: 4 such taker fills
+  ATCapital    10-28 18:00:19 lag= 19s SELL Yes px=0.171 usd=     326 will-there-be-no-change-in-fed-interest-rates-after-the-decemb
+  ATCapital    10-28 18:00:19 lag= 19s SELL No  px=0.210 usd=     138 will-the-fed-increase-interest-rates-by-25-bps-after-the-decem
+  ATCapital    10-28 18:00:35 lag= 35s BUY  No  px=0.380 usd=      22 will-there-be-no-change-in-fed-interest-rates-after-the-januar
+  ATCapital    10-28 18:00:41 lag= 41s BUY  No  px=0.380 usd=      25 will-there-be-no-change-in-fed-interest-rates-after-the-januar
+  ATCapital    10-28 18:00:41 lag= 41s BUY  No  px=0.380 usd=      11 will-there-be-no-change-in-fed-interest-rates-after-the-januar
+  ATCapital    10-28 18:00:53 lag= 53s SELL No  px=0.976 usd=     439 will-the-fed-increase-interest-rates-by-50-bps-after-the-decem
+  ATCapital    10-28 18:01:04 lag= 64s BUY  No  px=0.380 usd=      40 will-there-be-no-change-in-fed-interest-rates-after-the-januar
+  ATCapital: 23 such taker fills
+  GoldmanSachs 09-30 12:30:48 lag= 48s BUY  Yes px=0.604 usd=     300 will-2-fed-rate-hikes-happen-in-2026-20260623190852891
+  GoldmanSachs 11-10 13:31:04 lag= 64s SELL Yes px=0.690 usd=     221 will-there-be-no-change-in-fed-interest-rates-after-the-januar
+  GoldmanSachs: 2 such taker fills
+  perfectnosta: 0 such taker fills
+
+### (4) carry after the release: taker-long-winner fills at 0.95 <= pw < 0.999, later than 60 s after the release, until resolution
+  october-inflation-us-annual              fills= 131 usd=    16866 profit=    442 (2.62%) usd-weighted hours to close= 164.5
+  core-cpi-yoy-october-2026                fills=  64 usd=     8789 profit=    233 (2.65%) usd-weighted hours to close= 117.0
+  germany-gdp-growth-in-q3-2026            fills=  18 usd=     1823 profit=     25 (1.35%) usd-weighted hours to close=   2.0
+  core-cpi-yoy-september-2026              fills=   9 usd=     3416 profit=     10 (0.29%) usd-weighted hours to close=   2.0
+  bank-of-mexico-decision-in-november      fills=  12 usd=      530 profit=      3 (0.64%) usd-weighted hours to close=   1.9
+  core-pce-yoy-august-2026-20260826182127  fills=   5 usd=     2079 profit=      2 (0.12%) usd-weighted hours to close=   1.9
+  ism-services-pmi-september-2026          fills=  21 usd=      938 profit=      2 (0.21%) usd-weighted hours to close=   2.1
+  us-gdp-growth-in-q3-2026-202607301445397 fills=   1 usd=      128 profit=      0 (0.12%) usd-weighted hours to close=   2.0
+  august-inflation-us-monthly-178647466295 fills=   2 usd=       95 profit=      0 (0.16%) usd-weighted hours to close=   1.9
+  core-cpi-yoy-august-2026-1786474662954   fills=   1 usd=       55 profit=      0 (0.13%) usd-weighted hours to close=   2.0
+  reserve-bank-of-australia-decision-in-no fills=   1 usd=       50 profit=      0 (0.10%) usd-weighted hours to close=   2.0
+  how-many-jobs-added-in-august-1786116586 fills=   1 usd=        5 profit=      0 (0.40%) usd-weighted hours to close=   2.0
+  ism-services-pmi-august-2026             fills=   1 usd=        5 profit=      0 (0.40%) usd-weighted hours to close=   2.1
+  core-cpi-mom-october-2026                fills=   1 usd=        2 profit=      0 (0.10%) usd-weighted hours to close=   1.6
+  TOTAL 14 events: fills=268 usd=34779 profit after fee=718 (2.07% of capital)

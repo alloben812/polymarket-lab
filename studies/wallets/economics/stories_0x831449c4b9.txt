@@ -1,0 +1,152 @@
+##### 0x831449c4b9: 2789 fills, 75 economics markets
+  shares bought 143313, sold 27334 (sold/bought 0.19); position cost per market: median 321, p90 2355, max 25000
+  first buy to scheduled end, days: median 72.5, p10 14.7, p90 119.9
+  econ markets touched per ISO week: 43:19 44:20 45:18 46:23 47:34 48:25
+  buy $ by price: <0.05 0.00 | .05-.3 0.05 | .3-.7 0.25 | .7-.9 0.17 | .9-.97 0.53 | >=.97 0.00
+
+- will-inflation-reach-more-than-5-in-2026-282-763  end=01-01 04:59 closed=open final=["0.032", "0.968"] vol=398902
+    rules: This market will resolve to “Yes” if the Consumer Price Index (CPI) increased by greater than the listed percent over the 12 month period ending with any month in 2026 according to the monthly Bureau of Labor Statistics (BLS) repo
+    11-20 01:29-01:29 BUY  T No   n=   1 sh=    25511 px=0.970 usd=   24739
+    11-20 02:07-14:28 BUY  M No   n=   4 sh=      271 px=0.964 usd=     261
+    net shares now {'No': 25783}; cash -25000; net n/a (open or incomplete)
+
+- will-inflation-reach-more-than-4pt5-in-2026  end=01-01 04:59 closed=open final=["0.036", "0.964"] vol=316396
+    rules: This market will resolve to “Yes” if the Consumer Price Index (CPI) increased by greater than the listed percent over the 12 month period ending with any month in 2026 according to the monthly Bureau of Labor Statistics (BLS) repo
+    11-20 01:21-01:21 BUY  T No   n=   1 sh=    21867 px=0.926 usd=   20247
+    net shares now {'No': 21867}; cash -20247; net n/a (open or incomplete)
+
+- will-japans-core-cpi-increase-by-less-than-or-equal-to-1pt9-in-2026-202606172241  end=01-22 23:59 closed=open final=["0.9065", "0.0935"] vol=53244
+    rules: This market will resolve to the percentage change in the Japanese Consumer Price Index excluding fresh food (All items less fresh food, change from the previous year (%)) between 2025 and 2026 according to the Consumer Price Index
+    11-07 21:34-21:34 BUY  T Yes  n=   1 sh=     2086 px=0.642 usd=    1339
+    11-07 21:54-22:36 SELL M Yes  n=   4 sh=       56 px=0.720 usd=      40
+    11-09 13:28-13:28 SELL T Yes  n=   1 sh=      534 px=0.891 usd=     476
+    11-13 23:32-23:32 BUY  M Yes  n=   2 sh=       14 px=0.588 usd=       8
+    11-14 06:05-06:11 BUY  M Yes  n=   2 sh=       34 px=0.588 usd=      20
+    ... 2 more day-groups ...
+    11-19 23:52-23:58 BUY  M No   n=   2 sh=       40 px=0.212 usd=       9
+    11-20 00:02-08:38 BUY  M No   n=   4 sh=       60 px=0.207 usd=      12
+    11-22 07:51-09:28 BUY  M Yes  n=   2 sh=       17 px=0.799 usd=      14
+    net shares now {'Yes': 4639, 'No': 60}; cash -3079; net n/a (open or incomplete)
+
+- will-chinas-monthly-inflation-increase-by-0pt3-in-november-20261209  end=12-09 01:30 closed=open final=["0.0035", "0.9965"] vol=5662
+    rules: This is a market about the monthly variation of consumer prices in China as reported by the National Bureau of Statistics (NBS) of China.  This market will resolve according to the number the Consumer Price Index (CPI) increased b
+    11-18 16:18-16:18 BUY  T No   n=   1 sh=     2600 px=0.931 usd=    2420
+    11-18 16:18-17:21 SELL M No   n=   4 sh=      120 px=0.998 usd=     120
+    11-18 16:19-16:19 SELL T No   n=   1 sh=      507 px=0.997 usd=     505
+    11-19 08:58-08:58 SELL M No   n=   1 sh=        4 px=0.998 usd=       4
+    11-20 16:18-17:21 SELL M No   n=   2 sh=      333 px=0.998 usd=     332
+    11-26 19:38-19:38 SELL M No   n=   1 sh=       27 px=0.998 usd=      27
+    11-27 11:56-11:56 SELL M No   n=   1 sh=       20 px=0.998 usd=      20
+    net shares now {'No': 1589}; cash -1411; net n/a (open or incomplete)
+
+- section-232-rate-on-canadian-aluminum-end-of-2027-above-20-to-40  end=12-31 05:01 closed=open final=["0.275", "0.725"] vol=28198
+    rules: This market will resolve according to the Section 232 duty rate applicable to Canadian unwrought aluminum as of 12:01 AM ET on December 31, 2027.  “Canadian unwrought aluminum” refers to unwrought aluminum not alloyed (HTSUS subhe
+    11-18 15:47-15:47 BUY  T Yes  n=   1 sh=     2776 px=0.198 usd=     551
+    11-18 17:04-17:04 SELL M Yes  n=   3 sh=       81 px=0.380 usd=      31
+    11-19 00:17-00:17 BUY  T No   n=   1 sh=     2278 px=0.674 usd=    1535
+    11-19 00:17-00:17 BUY  M Yes  n=   4 sh=      151 px=0.282 usd=      43
+    11-20 10:38-10:38 BUY  T Yes  n=   1 sh=     1748 px=0.239 usd=     417
+    11-20 11:19-11:19 BUY  M Yes  n=   1 sh=       60 px=0.280 usd=      17
+    11-20 13:46-23:07 SELL M Yes  n=   4 sh=        9 px=0.280 usd=       3
+    11-26 11:04-11:04 SELL T Yes  n=   1 sh=     2366 px=0.270 usd=     639
+    11-26 12:38-12:54 BUY  T Yes  n=   2 sh=     1053 px=0.167 usd=     175
+    net shares now {'Yes': 1053}; cash 213; net n/a (open or incomplete)
+
+- will-mexico-gdp-growth-in-q4-2026-be-between-3pt0-and-3pt5  end=01-29 12:00 closed=open final=["0.1725", "0.8275"] vol=5568
+    rules: This market will resolve according to Mexico's Y/Y Growth Rate of Gross Domestic Product (GDP) in the "Timely Estimate of Quarterly GDP" release for Q4 of 2026, scheduled for release on January 29, 2027.  If the reported value fal
+    11-18 08:28-08:28 BUY  T No   n=   1 sh=     2175 px=0.857 usd=    1865
+    11-18 12:28-12:28 SELL M No   n=   1 sh=       20 px=0.990 usd=      20
+    11-18 14:44-14:44 SELL T No   n=   1 sh=      194 px=0.989 usd=     192
+    11-19 02:21-02:21 SELL M No   n=   1 sh=      535 px=0.990 usd=     529
+    11-23 12:01-12:15 SELL T No   n=   3 sh=      387 px=0.967 usd=     375
+    11-23 12:32-16:54 SELL M No   n=   3 sh=       70 px=0.940 usd=      66
+    11-26 13:13-13:13 BUY  T Yes  n=   1 sh=      590 px=0.093 usd=      55
+    net shares now {'No': 379}; cash -148; net n/a (open or incomplete)
+
+- will-the-uks-2026-inflation-be-between-3pt5-and-3pt9  end=01-21 04:59 closed=open final=["0.708", "0.292"] vol=80874
+    rules: This is a market about the variation of consumer prices in the U.K. over the 12-month period ending December 2026, before seasonal adjustment, as reported by the Office for National Statistics (ONS).  This market will resolve acco
+    10-20 09:54-09:55 BUY  T No   n=   2 sh=     1391 px=0.449 usd=     624
+    10-20 09:55-21:58 BUY  M No   n=   2 sh=       61 px=0.616 usd=      38
+    10-20 09:57-18:54 SELL T No   n=   2 sh=      361 px=0.593 usd=     214
+    10-20 10:06-10:54 SELL M No   n=   2 sh=       25 px=0.547 usd=      14
+    10-21 00:05-00:05 BUY  M No   n=   2 sh=       53 px=0.500 usd=      27
+    ... 2 more day-groups ...
+    11-07 21:23-21:23 BUY  T Yes  n=   3 sh=      910 px=0.440 usd=     401
+    11-09 00:48-00:48 BUY  T Yes  n=   2 sh=      570 px=0.512 usd=     292
+    11-18 00:09-14:49 SELL T Yes  n=   2 sh=     1480 px=0.608 usd=     899
+    net shares now {}; cash 301; net n/a (open or incomplete)
+
+- will-south-african-inflation-be-greater-than-5pt0-in-2026  end=01-21 04:59 closed=open final=["0.3185", "0.6815"] vol=52525
+    rules: This is a market about the variation of consumer prices in South Africa over the 12-month period ending December 2026 (Y/Y, % change), as reported by Statistics South Africa.  This market will resolve according to the percentage c
+    11-09 10:37-16:07 BUY  T No   n=   2 sh=     1148 px=0.397 usd=     456
+    11-19 21:18-21:18 BUY  T No   n=   1 sh=      689 px=0.631 usd=     435
+    11-20 01:20-10:42 BUY  M No   n=   5 sh=      263 px=0.668 usd=     176
+    11-20 10:41-10:43 BUY  T No   n=   2 sh=     2742 px=0.644 usd=    1765
+    11-21 10:26-11:36 SELL M No   n=   4 sh=       44 px=0.739 usd=      32
+    11-22 16:38-16:38 SELL M No   n=   1 sh=      104 px=0.739 usd=      77
+    11-23 07:38-07:38 SELL M No   n=   1 sh=       20 px=0.739 usd=      15
+    net shares now {'No': 4674}; cash -2708; net n/a (open or incomplete)
+
+- will-the-us-economy-be-overheating-at-the-end-of-2026  end=02-01 04:59 closed=open final=["0.4205", "0.5795"] vol=59804
+    rules: The unemployment rate is defined as the seasonally adjusted unemployment rate (total unemployed as a percent of the civilian labor force, denoted as U-3) reported by the Bureau of Labor Statistics in the Employment Situation relea
+    10-24 02:39-02:39 BUY  T Yes  n=   1 sh=     2895 px=0.821 usd=    2376
+    11-10 13:30-13:31 BUY  T Yes  n=   2 sh=      644 px=0.679 usd=     437
+    11-10 13:31-13:31 BUY  M Yes  n=   2 sh=       30 px=0.745 usd=      22
+    11-11 09:37-15:52 BUY  M Yes  n=   2 sh=       40 px=0.730 usd=      29
+    net shares now {'Yes': 3608}; cash -2865; net n/a (open or incomplete)
+
+- will-world-gdp-growth-be-3pt1-in-2026  end=01-15 00:00 closed=open final=["0.3595", "0.6405"] vol=33799
+    rules: This Market will resolve according to the estimate of the World GDP growth rate (Real GDP, annual percent change) reported by the International Monetary Fund in the World Economic Outlook Update released between the October 2026 a
+    10-21 22:21-22:22 BUY  T Yes  n=   2 sh=     2496 px=0.323 usd=     806
+    10-21 23:21-23:31 SELL M Yes  n=   7 sh=      468 px=0.520 usd=     243
+    10-22 03:34-17:39 SELL M Yes  n=   4 sh=       99 px=0.596 usd=      59
+    10-23 06:40-06:40 SELL M Yes  n=   1 sh=       21 px=0.596 usd=      13
+    10-23 21:03-21:03 SELL T Yes  n=   1 sh=      850 px=0.583 usd=     495
+    ... 3 more day-groups ...
+    10-30 23:32-23:32 BUY  M Yes  n=   1 sh=       38 px=0.540 usd=      20
+    11-04 22:14-22:14 BUY  T No   n=   1 sh=     1500 px=0.563 usd=     845
+    11-04 22:16-22:16 BUY  T Yes  n=   1 sh=      671 px=0.300 usd=     201
+    net shares now {'Yes': 305}; cash 421; net n/a (open or incomplete)
+
+- will-eurozone-annual-gdp-growth-in-2026-be-between-1pt0-and-2pt0  end=02-01 04:59 closed=open final=["0.735", "0.265"] vol=37606
+    rules: This market will resolve according to the estimation of Euro Area (Eurozone) annual GDP growth for the full year of 2026 (% change), based on seasonally and calendar adjusted quarterly data, as reported in the "GDP and employment 
+    10-30 10:00-11:54 BUY  T Yes  n=   3 sh=     1911 px=0.531 usd=    1015
+    11-07 22:09-22:09 BUY  T Yes  n=   1 sh=     1554 px=0.712 usd=    1106
+    11-09 12:49-22:09 SELL M Yes  n=   5 sh=      204 px=0.870 usd=     177
+    11-10 23:55-23:55 SELL M Yes  n=   1 sh=      200 px=0.870 usd=     174
+    11-12 15:11-15:11 SELL M Yes  n=   1 sh=       20 px=0.870 usd=      17
+    11-16 03:25-03:25 SELL M Yes  n=   3 sh=       25 px=0.870 usd=      22
+    11-18 22:13-22:48 SELL M Yes  n=   2 sh=      160 px=0.870 usd=     139
+    net shares now {'Yes': 2855}; cash -1591; net n/a (open or incomplete)
+
+- will-the-reserve-bank-of-australia-make-no-change-to-the-cash-rate-target-at-the  end=02-09 23:59 closed=open final=["0.805", "0.195"] vol=28388
+    rules: This market will resolve according to the change in basis points in the cash rate target resulting from the February 2027 meeting of the Reserve Bank of Australia (RBA) Monetary Policy Board, relative to the level it was prior to 
+    11-21 10:44-10:48 BUY  T Yes  n=   5 sh=     1645 px=0.713 usd=    1172
+    11-21 10:45-19:08 BUY  M Yes  n=   7 sh=     1410 px=0.711 usd=    1002
+    11-22 03:12-03:12 BUY  M Yes  n=   1 sh=       65 px=0.810 usd=      53
+    11-23 08:00-18:29 BUY  M Yes  n=   8 sh=      169 px=0.760 usd=     128
+    11-24 21:55-21:55 SELL M Yes  n=   2 sh=       52 px=0.850 usd=      44
+    11-25 00:54-00:54 SELL M Yes  n=   1 sh=       20 px=0.850 usd=      17
+    11-26 11:25-11:25 SELL M Yes  n=   1 sh=        1 px=0.850 usd=       1
+    net shares now {'Yes': 3215}; cash -2293; net n/a (open or incomplete)
+
+- will-brazils-annual-inflation-in-2026-be-between-5pt50-and-5pt99  end=01-13 04:59 closed=open final=["0.09", "0.91"] vol=49907
+    rules: This is a market about the variation of consumer prices in Brazil over the 12-month period ending December 2026, as reported by the Brazilian Institute of Geography and Statistics (IBGE).  This market will resolve according to the
+    10-28 20:54-20:54 BUY  T No   n=   1 sh=     1136 px=0.617 usd=     701
+    10-28 20:55-20:55 BUY  M No   n=   1 sh=      100 px=0.650 usd=      65
+    11-11 11:06-11:06 SELL T No   n=   1 sh=      526 px=0.768 usd=     404
+    11-11 18:32-18:32 BUY  M No   n=   1 sh=       20 px=0.620 usd=      12
+    11-12 12:01-12:01 BUY  T No   n=   1 sh=      498 px=0.641 usd=     319
+    11-21 20:57-20:57 SELL T No   n=   1 sh=      418 px=0.872 usd=     365
+    11-23 22:22-22:22 SELL M No   n=   1 sh=      405 px=0.882 usd=     357
+    11-26 12:46-12:46 SELL M No   n=   1 sh=        9 px=0.897 usd=       8
+    11-26 19:41-19:41 BUY  T No   n=   1 sh=       89 px=0.884 usd=      79
+    net shares now {'No': 485}; cash -42; net n/a (open or incomplete)
+
+- will-the-south-african-reserve-bank-increase-the-repo-rate-by-50-bps-at-the-marc  end=03-18 23:59 closed=open final=["0.0365", "0.9635"] vol=5582
+    rules: This market will resolve according to the change in basis points in the repo rate resulting from the March 2027 meeting of the South African Reserve Bank's Monetary Policy Committee, relative to the level it was prior to this meet
+    11-22 21:03-21:03 BUY  T No   n=   1 sh=     2095 px=0.802 usd=    1681
+    11-22 21:04-21:13 BUY  M No   n=   3 sh=      100 px=0.920 usd=      92
+    11-24 21:03-21:03 SELL M No   n=   1 sh=      125 px=0.980 usd=     122
+    11-26 12:57-12:57 SELL T No   n=   1 sh=      358 px=0.978 usd=     350
+    net shares now {'No': 1712}; cash -1300; net n/a (open or incomplete)

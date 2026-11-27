@@ -1,0 +1,30 @@
+ayosussybenny 0xad7fe966ec683f63666069950848b6075ca9c31f window 08-29 15:45..11-27 15:45 truncated=False matching fills 831 markets 353 (using 150)
+
+RESOLVED markets only, pnl to final after est. taker fees:
+all                                    fills   473 mkts  143 usd     51166 pnl      9723 (  19.0% of usd) drift1h   1.77c/sh
+before T90                             fills   434 mkts  139 usd     43602 pnl      9777 (  22.4% of usd) drift1h   2.00c/sh
+after T90, before T99                  fills    36 mkts   18 usd      5992 pnl       -57 (  -0.9% of usd) drift1h  -0.11c/sh
+after T99                              fills     3 mkts    3 usd      1573 pnl         2 (   0.1% of usd) drift1h  -0.31c/sh
+role M BUY                             fills    25 mkts   10 usd       948 pnl       -19 (  -2.0% of usd) drift1h  -2.21c/sh
+role M SELL                            fills    22 mkts    9 usd       781 pnl      -252 ( -32.2% of usd) drift1h   3.07c/sh
+role T BUY                             fills   319 mkts  142 usd     38073 pnl     16798 (  44.1% of usd) drift1h   2.11c/sh
+role T SELL                            fills   107 mkts   38 usd     11364 pnl     -6804 ( -59.9% of usd) drift1h   1.13c/sh
+fill price 0.00-0.05                   fills    23 mkts    8 usd       366 pnl      -968 (-264.4% of usd) drift1h   1.00c/sh
+fill price 0.05-0.20                   fills    58 mkts   13 usd      1711 pnl      6707 ( 392.0% of usd) drift1h   1.22c/sh
+fill price 0.20-0.40                   fills    55 mkts   23 usd      4063 pnl       575 (  14.1% of usd) drift1h   6.65c/sh
+fill price 0.40-0.60                   fills   174 mkts   98 usd     22724 pnl      2710 (  11.9% of usd) drift1h   1.60c/sh
+fill price 0.60-0.80                   fills    90 mkts   36 usd      9985 pnl       911 (   9.1% of usd) drift1h   1.28c/sh
+fill price 0.80-0.95                   fills    53 mkts   23 usd      5522 pnl      -184 (  -3.3% of usd) drift1h  -1.61c/sh
+fill price 0.95-0.99                   fills    14 mkts    9 usd      2987 pnl       -26 (  -0.9% of usd) drift1h  -0.17c/sh
+fill price 0.99-1.01                   fills     6 mkts    5 usd      3808 pnl        -2 (  -0.0% of usd) drift1h   0.58c/sh
+time to end >7d to end                 fills   156 mkts   31 usd     14454 pnl      1633 (  11.3% of usd) drift1h   1.71c/sh
+time to end 2-7d                       fills   109 mkts   30 usd     13343 pnl      6543 (  49.0% of usd) drift1h   1.92c/sh
+time to end 1-2d                       fills    29 mkts   10 usd      1878 pnl      2301 ( 122.5% of usd) drift1h  13.18c/sh
+time to end 6-24h                      fills    53 mkts   24 usd      6282 pnl     -1321 ( -21.0% of usd) drift1h   1.81c/sh
+time to end 0-6h                       fills    89 mkts   57 usd     12826 pnl       618 (   4.8% of usd) drift1h  -0.67c/sh
+time to end after end                  fills    27 mkts    7 usd      1766 pnl      -118 (  -6.7% of usd) drift1h  -3.16c/sh
+markets resolved 143 winners 86 total pnl 9723; unresolved 7 mark-to-tape pnl -170
+sell/buy usd ratio (exit vs hold): 0.31; median market buy usd 210
+fills by weekday+hour UTC (top 14): Thu 21:33, Thu 22:24, Fri 00:21, Fri 02:19, Wed 16:18, Fri 16:12, Sat 00:12, Wed 03:11, Sat 08:11, Wed 20:11, Tue 00:11, Wed 22:11, Sat 19:10, Wed 15:9
+active days 66; markets traded per active day median 3 max 12
+markets table -> ayosussybenny.story.txt

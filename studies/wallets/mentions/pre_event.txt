@@ -1,0 +1,24 @@
+markets with a pre-event price: 878 in 64 events; mean pre yes_px 0.501 vs resolved Yes 0.469
+  TUNE live     single    px .05-.50: n=133 ev=23 mean px 0.28 Yes rate 0.23 | No    5.0%+-7.1 | Yes  -29.6%+-17.0
+  TUNE live     single    px .50-.95: n=105 ev=22 mean px 0.67 Yes rate 0.54 | No   51.6%+-26.4 | Yes  -22.4%+-8.7
+  TUNE live     N+ times  px .05-.50: n= 27 ev=16 mean px 0.36 Yes rate 0.44 | No  -14.7%+-11.3 | Yes   40.1%+-29.2
+  TUNE live     N+ times  px .50-.95: n= 66 ev=20 mean px 0.66 Yes rate 0.68 | No  -12.0%+-25.4 | Yes   -1.8%+-10.1
+  TUNE earnings single    px .05-.50: n= 31 ev=10 mean px 0.27 Yes rate 0.19 | No    8.0%+-7.7 | Yes  -44.3%+-16.3
+  TUNE earnings single    px .50-.95: n= 49 ev= 9 mean px 0.80 Yes rate 0.76 | No   14.9%+-28.9 | Yes   -8.0%+-6.0
+  TUNE earnings N+ times  px .50-.95: n= 17 ev= 8 mean px 0.81 Yes rate 0.82 | No  -39.3%+-36.7 | Yes   -1.1%+-10.8
+  TEST live     single    px .05-.50: n= 81 ev=13 mean px 0.28 Yes rate 0.21 | No    5.1%+-5.9 | Yes  -46.8%+-13.7
+  TEST live     single    px .50-.95: n= 42 ev=12 mean px 0.66 Yes rate 0.62 | No   22.9%+-20.6 | Yes   -7.3%+-8.8
+  TEST live     N+ times  px .05-.50: n= 30 ev=11 mean px 0.34 Yes rate 0.33 | No   -4.4%+-13.9 | Yes  -19.3%+-22.1
+  TEST live     N+ times  px .50-.95: n= 21 ev= 8 mean px 0.75 Yes rate 0.81 | No  -50.5%+-32.8 | Yes    3.1%+-16.7
+  TEST earnings single    px .05-.50: n= 57 ev=16 mean px 0.27 Yes rate 0.23 | No    1.4%+-8.6 | Yes  -37.7%+-19.5
+  TEST earnings single    px .50-.95: n= 39 ev=16 mean px 0.76 Yes rate 0.85 | No  -60.0%+-14.0 | Yes    8.9%+-7.5
+  TEST earnings N+ times  px .50-.95: n= 17 ev=11 mean px 0.71 Yes rate 0.76 | No  -30.4%+-28.7 | Yes    4.1%+-12.1
+== jkerkela: PRE buys; median hours before scheduled start 14.6
+   picks buy No: usd 5931 pnl 1620 (27.3%), events 14 positive 12 | blind buy-No on all 234 siblings of those events at pre price: 7.8% +-4.4
+   picks buy Yes: usd 640 pnl -72 (-11.3%), events 9 positive 4 | blind buy-Yes on all 147 siblings of those events at pre price: -37.3% +-5.5
+== Faston: PRE buys; median hours before scheduled start 30.1
+   picks buy No: usd 760 pnl 234 (30.8%), events 22 positive 13 | blind buy-No on all 217 siblings of those events at pre price: 13.6% +-9.0
+   picks buy Yes: usd 4207 pnl 530 (12.6%), events 52 positive 31 | blind buy-Yes on all 550 siblings of those events at pre price: -17.9% +-5.8
+== 0xtrador: PRE buys; median hours before scheduled start 15.4
+   picks buy No: usd 2840 pnl 739 (26.0%), events 29 positive 20 | blind buy-No on all 304 siblings of those events at pre price: 12.8% +-5.9
+   picks buy Yes: usd 1231 pnl -104 (-8.4%), events 17 positive 9 | blind buy-Yes on all 214 siblings of those events at pre price: -29.2% +-7.0

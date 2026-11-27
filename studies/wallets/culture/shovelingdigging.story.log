@@ -1,0 +1,30 @@
+shovelingdigging 0xe904443b4084bbda216e344353a44cd4324a2d9f window 09-28 15:45..11-27 15:45 truncated=False matching fills 1244 markets 337 (using 150)
+
+RESOLVED markets only, pnl to final after est. taker fees:
+all                                    fills   573 mkts  110 usd    144753 pnl     26127 (  18.0% of usd) drift1h   3.78c/sh
+before T90                             fills   433 mkts   97 usd     91269 pnl     24567 (  26.9% of usd) drift1h   4.65c/sh
+after T90, before T99                  fills   118 mkts   37 usd     36811 pnl      1536 (   4.2% of usd) drift1h   1.94c/sh
+after T99                              fills    22 mkts   11 usd     16673 pnl        24 (   0.1% of usd) drift1h   0.30c/sh
+role M BUY                             fills   194 mkts   45 usd     11722 pnl       499 (   4.3% of usd) drift1h  -0.86c/sh
+role M SELL                            fills   128 mkts   28 usd     27803 pnl        38 (   0.1% of usd) drift1h  -0.89c/sh
+role T BUY                             fills   220 mkts  100 usd     94482 pnl     28169 (  29.8% of usd) drift1h   5.42c/sh
+role T SELL                            fills    31 mkts   23 usd     10746 pnl     -2579 ( -24.0% of usd) drift1h   4.25c/sh
+fill price 0.00-0.05                   fills    21 mkts    8 usd       141 pnl       140 (  99.6% of usd) drift1h   0.04c/sh
+fill price 0.05-0.20                   fills    46 mkts   16 usd      4434 pnl      9947 ( 224.3% of usd) drift1h   4.41c/sh
+fill price 0.20-0.40                   fills    97 mkts   28 usd      8710 pnl      7543 (  86.6% of usd) drift1h   4.67c/sh
+fill price 0.40-0.60                   fills    91 mkts   40 usd     12886 pnl      -110 (  -0.9% of usd) drift1h   4.81c/sh
+fill price 0.60-0.80                   fills   105 mkts   48 usd     32934 pnl      6560 (  19.9% of usd) drift1h   4.44c/sh
+fill price 0.80-0.95                   fills   127 mkts   51 usd     49505 pnl      1984 (   4.0% of usd) drift1h   4.79c/sh
+fill price 0.95-0.99                   fills    30 mkts   11 usd      9546 pnl       169 (   1.8% of usd) drift1h   0.69c/sh
+fill price 0.99-1.01                   fills    56 mkts   18 usd     26598 pnl      -107 (  -0.4% of usd) drift1h  -0.04c/sh
+time to end >7d to end                 fills   287 mkts   41 usd     65250 pnl     19748 (  30.3% of usd) drift1h   3.25c/sh
+time to end 2-7d                       fills   189 mkts   60 usd     54623 pnl      6337 (  11.6% of usd) drift1h   5.03c/sh
+time to end 1-2d                       fills    40 mkts   14 usd      9461 pnl      3569 (  37.7% of usd) drift1h   7.72c/sh
+time to end 6-24h                      fills    23 mkts   14 usd      8688 pnl     -3246 ( -37.4% of usd) drift1h  -0.87c/sh
+time to end 0-6h                       fills    14 mkts    7 usd      2552 pnl       940 (  36.8% of usd) drift1h  -4.30c/sh
+time to end after end                  fills    20 mkts    9 usd      4180 pnl     -1221 ( -29.2% of usd) drift1h   5.48c/sh
+markets resolved 110 winners 80 total pnl 26127; unresolved 40 mark-to-tape pnl 11163
+sell/buy usd ratio (exit vs hold): 0.29; median market buy usd 603
+fills by weekday+hour UTC (top 14): Tue 21:33, Tue 14:32, Mon 08:28, Mon 16:28, Mon 15:24, Thu 14:23, Mon 17:19, Thu 08:16, Mon 14:16, Mon 07:16, Tue 08:15, Wed 20:15, Tue 09:14, Thu 17:13
+active days 60; markets traded per active day median 6 max 17
+markets table -> shovelingdigging.story.txt

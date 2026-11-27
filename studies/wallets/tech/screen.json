@@ -1,0 +1,712 @@
+[
+ {
+  "name": "0x9112edc7d8a99ce2d688b8e1c6ab889f30d1642",
+  "wallet": "0xdf17f4a8dd01a4cfa6fc3da323a2baee5f8697d1",
+  "fills30": 4000,
+  "span_days": 16.43784722222222,
+  "usd": 1721518.8283613315,
+  "tech_usd": 775092.5358850021,
+  "markets": 152,
+  "tech_markets_top80": 33
+ },
+ {
+  "name": "dromedaryy",
+  "wallet": "0x6575759174ad221bba9947bc3f18750ec769b198",
+  "fills30": 1127,
+  "span_days": 29.081481481481482,
+  "usd": 1563053.4052283207,
+  "tech_usd": 427143.3501454428,
+  "markets": 78,
+  "tech_markets_top80": 11
+ },
+ {
+  "name": "Dragontree",
+  "wallet": "0x2c3928af89565c352afe8e2a1b25deed77a056dc",
+  "fills30": 1028,
+  "span_days": 29.88158564814815,
+  "usd": 618474.1425201298,
+  "tech_usd": 342602.2979835993,
+  "markets": 109,
+  "tech_markets_top80": 39
+ },
+ {
+  "name": "AllByMyseIf",
+  "wallet": "0x5188fa0e8a77e87bc6a58e6781fdfc4e165cc804",
+  "fills30": 3154,
+  "span_days": 29.928032407407407,
+  "usd": 961064.8325069392,
+  "tech_usd": 322486.1308433972,
+  "markets": 64,
+  "tech_markets_top80": 24
+ },
+ {
+  "name": "1nvoker1",
+  "wallet": "0x748ac19f73c96312e98227f49f65699542943c56",
+  "fills30": 4000,
+  "span_days": 27.92880787037037,
+  "usd": 744435.4514862887,
+  "tech_usd": 264855.3383203736,
+  "markets": 156,
+  "tech_markets_top80": 39
+ },
+ {
+  "name": "aviato",
+  "wallet": "0x2a019dc0089ea8c6edbbafc8a7cc9ba77b4b6397",
+  "fills30": 2666,
+  "span_days": 29.99337962962963,
+  "usd": 1507027.990670924,
+  "tech_usd": 236701.23738190098,
+  "markets": 342,
+  "tech_markets_top80": 18
+ },
+ {
+  "name": "Contentious-Dinnerdate",
+  "wallet": "0x736539924a5602b37a03a54fc12c1cc8f98964da",
+  "fills30": 1915,
+  "span_days": 29.986863425925925,
+  "usd": 279522.3652080086,
+  "tech_usd": 227422.57059315298,
+  "markets": 228,
+  "tech_markets_top80": 67
+ },
+ {
+  "name": "melonmanm",
+  "wallet": "0x0787a58e205a70320db638113fe8da18c8800ca3",
+  "fills30": 2592,
+  "span_days": 29.998078703703705,
+  "usd": 429329.8951746585,
+  "tech_usd": 227346.46092927834,
+  "markets": 367,
+  "tech_markets_top80": 38
+ },
+ {
+  "name": "WarriorPooh",
+  "wallet": "0x853c37a959a5791b849e3f3225c7f5963746bd03",
+  "fills30": 1250,
+  "span_days": 29.99681712962963,
+  "usd": 465027.14912228973,
+  "tech_usd": 221885.84565815298,
+  "markets": 112,
+  "tech_markets_top80": 19
+ },
+ {
+  "name": "ifyouloveme",
+  "wallet": "0x5a0d0c6eee71b96db16e5e271e0fa724be8dfa97",
+  "fills30": 2421,
+  "span_days": 29.94105324074074,
+  "usd": 478525.3752548699,
+  "tech_usd": 216086.86699197066,
+  "markets": 418,
+  "tech_markets_top80": 34
+ },
+ {
+  "name": "iutwpfal",
+  "wallet": "0xb89f5425341719d298dc2f5b9a92374f5fde1c44",
+  "fills30": 1392,
+  "span_days": 29.713981481481483,
+  "usd": 238599.9921538977,
+  "tech_usd": 213777.48255009696,
+  "markets": 204,
+  "tech_markets_top80": 76
+ },
+ {
+  "name": "0x2b670A311561DcAF741D8155451774D3Fa7fb814-1778467735876",
+  "wallet": "0x2b670a311561dcaf741d8155451774d3fa7fb814",
+  "fills30": 1008,
+  "span_days": 29.94008101851852,
+  "usd": 193531.57443799957,
+  "tech_usd": 162177.3152747483,
+  "markets": 123,
+  "tech_markets_top80": 64
+ },
+ {
+  "name": "0xc7D02944A76B9F83B199e9090ECC92C82d241F8a-1776944395495",
+  "wallet": "0xc7d02944a76b9f83b199e9090ecc92c82d241f8a",
+  "fills30": 4000,
+  "span_days": 7.833622685185185,
+  "usd": 494510.27846522996,
+  "tech_usd": 160882.08113811468,
+  "markets": 624,
+  "tech_markets_top80": 35
+ },
+ {
+  "name": "GollumGekko",
+  "wallet": "0x08458f7e9d2858027de579e4c3ca305475496b6f",
+  "fills30": 1475,
+  "span_days": 29.991886574074073,
+  "usd": 580541.8968409484,
+  "tech_usd": 153239.231307327,
+  "markets": 190,
+  "tech_markets_top80": 18
+ },
+ {
+  "name": "troim",
+  "wallet": "0x4a2be7a7e6e3b41dc2de00706b4c09660ca9af20",
+  "fills30": 2196,
+  "span_days": 29.967280092592592,
+  "usd": 384267.65508380736,
+  "tech_usd": 143023.0493931321,
+  "markets": 163,
+  "tech_markets_top80": 28
+ },
+ {
+  "name": "noreasapa",
+  "wallet": "0x4ad6cadefae3c28f5b2caa32a99ebba3a614464c",
+  "fills30": 698,
+  "span_days": 29.998761574074074,
+  "usd": 1248548.6988557314,
+  "tech_usd": 138877.63002986525,
+  "markets": 195,
+  "tech_markets_top80": 21
+ },
+ {
+  "name": "JokerTheClown",
+  "wallet": "0x819dfea4ffa9c4d3ef27f00e2dbac7e9e93507f1",
+  "fills30": 2065,
+  "span_days": 29.78855324074074,
+  "usd": 1237814.7846205125,
+  "tech_usd": 135447.3786580479,
+  "markets": 708,
+  "tech_markets_top80": 10
+ },
+ {
+  "name": "rewardbots",
+  "wallet": "0x876bb030ddd424ef505ae02914024cf18c6a1703",
+  "fills30": 842,
+  "span_days": 29.992094907407406,
+  "usd": 236785.815534531,
+  "tech_usd": 126399.46105352149,
+  "markets": 124,
+  "tech_markets_top80": 39
+ },
+ {
+  "name": "seal7",
+  "wallet": "0x2b9dbf4b6e0e11309a9d6d2a09b72f65f652adc0",
+  "fills30": 834,
+  "span_days": 29.884143518518517,
+  "usd": 439226.89313405805,
+  "tech_usd": 114504.65005429648,
+  "markets": 91,
+  "tech_markets_top80": 17
+ },
+ {
+  "name": "Optimus-",
+  "wallet": "0xd5b97d08ec6098407bfbf66c2786ccc9967fe44e",
+  "fills30": 692,
+  "span_days": 29.77074074074074,
+  "usd": 231082.25473043136,
+  "tech_usd": 108592.35502838185,
+  "markets": 145,
+  "tech_markets_top80": 40
+ },
+ {
+  "name": "TableDataFormat",
+  "wallet": "0xb1ca909e848cc24ec4e220ce1c453bc290c51705",
+  "fills30": 4000,
+  "span_days": 24.647106481481483,
+  "usd": 197465.86819938634,
+  "tech_usd": 108301.9809489421,
+  "markets": 218,
+  "tech_markets_top80": 33
+ },
+ {
+  "name": "lamyk",
+  "wallet": "0xc004b035b67be284e0d1db56c39e865df6cac095",
+  "fills30": 326,
+  "span_days": 29.95346064814815,
+  "usd": 96678.53276179089,
+  "tech_usd": 83830.70457800184,
+  "markets": 95,
+  "tech_markets_top80": 61
+ },
+ {
+  "name": "KimchiCapital",
+  "wallet": "0x9578af80708f271f705e27867dcf6ec653acf066",
+  "fills30": 845,
+  "span_days": 29.956122685185186,
+  "usd": 147298.96055482517,
+  "tech_usd": 66898.31881420378,
+  "markets": 352,
+  "tech_markets_top80": 56
+ },
+ {
+  "name": "NoTeacher",
+  "wallet": "0xcb48f490d8579832e56954cb31dfee630d59be6d",
+  "fills30": 1598,
+  "span_days": 29.995462962962964,
+  "usd": 80673.16426811901,
+  "tech_usd": 59493.7783559925,
+  "markets": 301,
+  "tech_markets_top80": 79
+ },
+ {
+  "name": "0xe639e41094bbeae18g3e6d1790c17299183f082a",
+  "wallet": "0xe639e41094bbeae18f3e6d1790c17299183f082a",
+  "fills30": 1425,
+  "span_days": 29.795578703703704,
+  "usd": 1207658.3409171489,
+  "tech_usd": 49289.929681931855,
+  "markets": 8,
+  "tech_markets_top80": 2
+ },
+ {
+  "name": "0xAee8611B76c7e8114",
+  "wallet": "0xaee811b7c7e5d961b545ac0e3f62f5f1cb181154",
+  "fills30": 4000,
+  "span_days": 11.066446759259259,
+  "usd": 58888.91703193239,
+  "tech_usd": 47973.534535963336,
+  "markets": 511,
+  "tech_markets_top80": 79
+ },
+ {
+  "name": "hell0pia",
+  "wallet": "0xbf93328f8b69273453228a82c913207731822fd7",
+  "fills30": 214,
+  "span_days": 27.607118055555556,
+  "usd": 74672.44342228919,
+  "tech_usd": 47076.69066091375,
+  "markets": 16,
+  "tech_markets_top80": 11
+ },
+ {
+  "name": "0xAD96914D7762DAC84EbBABAfE366AE8ff24Dd49",
+  "wallet": "0xad96914d7762dac84ebbabafe366ae8ff24dd498",
+  "fills30": 119,
+  "span_days": 29.726516203703703,
+  "usd": 506836.73696097295,
+  "tech_usd": 43861.62636398,
+  "markets": 11,
+  "tech_markets_top80": 3
+ },
+ {
+  "name": "eCash",
+  "wallet": "0x62cf46cd4c3af254dccfc37a7f93de265b4b5826",
+  "fills30": 662,
+  "span_days": 29.958252314814814,
+  "usd": 278848.0514552437,
+  "tech_usd": 42870.387605679825,
+  "markets": 84,
+  "tech_markets_top80": 29
+ },
+ {
+  "name": "K7fhp9vXm2Rtw4LbN8cGy3Ds6AoE",
+  "wallet": "0xa68b7c78dbedd4185d498685671639db0e7bc4b4",
+  "fills30": 504,
+  "span_days": 29.96355324074074,
+  "usd": 37296.69227883444,
+  "tech_usd": 34194.01940177897,
+  "markets": 143,
+  "tech_markets_top80": 72
+ },
+ {
+  "name": "balthazar",
+  "wallet": "0x5a218c7ad04135830a45c41aaed7294df7809318",
+  "fills30": 4000,
+  "span_days": 2.121446759259259,
+  "usd": 233488.51674221805,
+  "tech_usd": 30362.006026049916,
+  "markets": 1479,
+  "tech_markets_top80": 24
+ },
+ {
+  "name": "Rumpelstiltskin",
+  "wallet": "0xfb1b4e2db61efb47bfb1ac92807c76d4f367a11d",
+  "fills30": 81,
+  "span_days": 29.940949074074073,
+  "usd": 30292.02596009585,
+  "tech_usd": 30292.025960095852,
+  "markets": 11,
+  "tech_markets_top80": 11
+ },
+ {
+  "name": "0Xb1ca909e848cc24ec4e220ce1c453bc290c51705",
+  "wallet": "0x637e7d6e17f789f3d78837815681becfce2f8cea",
+  "fills30": 231,
+  "span_days": 29.37335648148148,
+  "usd": 27038.1829480473,
+  "tech_usd": 27018.182948046815,
+  "markets": 18,
+  "tech_markets_top80": 17
+ },
+ {
+  "name": "smellyEllie",
+  "wallet": "0x38f50488b14a87769e0c5cd6c514b6c2e8ec6824",
+  "fills30": 2365,
+  "span_days": 29.97508101851852,
+  "usd": 403133.38279998966,
+  "tech_usd": 26313.253064780038,
+  "markets": 412,
+  "tech_markets_top80": 9
+ },
+ {
+  "name": "0x652bFf901f401Fdhsk342kdjfnfk029abks13",
+  "wallet": "0x652bff901f401f22b2da47ad1c5c4b5870b3f5c2",
+  "fills30": 535,
+  "span_days": 29.973553240740742,
+  "usd": 26252.756207916107,
+  "tech_usd": 22689.558633960787,
+  "markets": 110,
+  "tech_markets_top80": 63
+ },
+ {
+  "name": "TradeDeficitArchitect",
+  "wallet": "0x477f156a229f1a174fdf945c778b7362dd2b19aa",
+  "fills30": 943,
+  "span_days": 29.728391203703705,
+  "usd": 100122.7523430582,
+  "tech_usd": 20372.156112056262,
+  "markets": 64,
+  "tech_markets_top80": 15
+ },
+ {
+  "name": "mousetrap301",
+  "wallet": "0xad529df14c293d77984a0137990a1441b25211ac",
+  "fills30": 1891,
+  "span_days": 29.928032407407407,
+  "usd": 84597.0943355881,
+  "tech_usd": 19104.138851014886,
+  "markets": 314,
+  "tech_markets_top80": 32
+ },
+ {
+  "name": "BigMackyG",
+  "wallet": "0x524db836890e08aceb3abcdee98d44240e324495",
+  "fills30": 206,
+  "span_days": 28.108125,
+  "usd": 229381.147019146,
+  "tech_usd": 18832.512281999592,
+  "markets": 51,
+  "tech_markets_top80": 2
+ },
+ {
+  "name": "0x7021b75c27835935a40308779b5656c09ab40f2",
+  "wallet": "0xa510249c44a60591cbe1747eb0fd97267d431f80",
+  "fills30": 482,
+  "span_days": 29.22341435185185,
+  "usd": 20915.23426629954,
+  "tech_usd": 14037.925222518743,
+  "markets": 37,
+  "tech_markets_top80": 11
+ },
+ {
+  "name": "8396239287",
+  "wallet": "0x5d83c3963c790b9760e6ac0e55878320cafa0bb9",
+  "fills30": 64,
+  "span_days": 29.964537037037037,
+  "usd": 18654.91595909681,
+  "tech_usd": 13904.915959096807,
+  "markets": 17,
+  "tech_markets_top80": 16
+ },
+ {
+  "name": "0xA2770432A5E6Bd24c347c976b0D815db1f2C1182-1760945846787",
+  "wallet": "0xa2770432a5e6bd24c347c976b0d815db1f2c1182",
+  "fills30": 87,
+  "span_days": 29.972997685185184,
+  "usd": 12973.709831819584,
+  "tech_usd": 12969.710031819637,
+  "markets": 42,
+  "tech_markets_top80": 41
+ },
+ {
+  "name": "Mr.Frog\ud83d\udc38",
+  "wallet": "0xb1fea3922a1998248cf2ae51f740b9be2bb7423a",
+  "fills30": 748,
+  "span_days": 29.834606481481483,
+  "usd": 50356.76116995267,
+  "tech_usd": 12767.128968958483,
+  "markets": 199,
+  "tech_markets_top80": 26
+ },
+ {
+  "name": "fountaim",
+  "wallet": "0x4b72b21f7e9999d568d9b93f0be110257d9938d5",
+  "fills30": 88,
+  "span_days": 29.954502314814814,
+  "usd": 14377.31640399241,
+  "tech_usd": 12012.389558009829,
+  "markets": 67,
+  "tech_markets_top80": 43
+ },
+ {
+  "name": "0x8g68hBa8tyH1946Bhjb674g3fuyUIGYUi4uhflks",
+  "wallet": "0x126266f57f9812c42daaf69767f622ad36ce056f",
+  "fills30": 4000,
+  "span_days": 12.961331018518518,
+  "usd": 139561.17783710215,
+  "tech_usd": 11133.583472044209,
+  "markets": 1722,
+  "tech_markets_top80": 5
+ },
+ {
+  "name": "0x43cb4Ae1f4dDC9E671486C79c9F40A6fd98B84Df-1761656284271",
+  "wallet": "0x43cb4ae1f4ddc9e671486c79c9f40a6fd98b84df",
+  "fills30": 4000,
+  "span_days": 2.697719907407407,
+  "usd": 29970.564080027507,
+  "tech_usd": 10847.966891010234,
+  "markets": 1013,
+  "tech_markets_top80": 26
+ },
+ {
+  "name": "bananabreakfast",
+  "wallet": "0xe33825c663c81ad37d7e2f57ebff26799a0064ad",
+  "fills30": 4000,
+  "span_days": 12.714363425925926,
+  "usd": 111378.9566538239,
+  "tech_usd": 9489.371775974274,
+  "markets": 568,
+  "tech_markets_top80": 13
+ },
+ {
+  "name": "Cb94C437EA5e6f088c6c0C143c592ab8EFBed",
+  "wallet": "0x122cb94c437ea5e6f088c6c0c143c592ab8efbed",
+  "fills30": 4000,
+  "span_days": 1.4399189814814815,
+  "usd": 170723.98726997717,
+  "tech_usd": 8306.6141,
+  "markets": 428,
+  "tech_markets_top80": 12
+ },
+ {
+  "name": "neymarjr.santos",
+  "wallet": "0x27e320c9ca9b9476d24038eb5792047009d07233",
+  "fills30": 207,
+  "span_days": 29.97400462962963,
+  "usd": 13231.760474195851,
+  "tech_usd": 7593.676769195135,
+  "markets": 47,
+  "tech_markets_top80": 22
+ },
+ {
+  "name": "glpgb",
+  "wallet": "0x1f5f9fa318fbda8350ac143b4df657287df850fa",
+  "fills30": 4000,
+  "span_days": 2.6500578703703703,
+  "usd": 59950.4947349741,
+  "tech_usd": 5659.091849995892,
+  "markets": 1232,
+  "tech_markets_top80": 18
+ },
+ {
+  "name": "anothercoin",
+  "wallet": "0xc22b72b0fec23b797589ef6778bb6589e325deab",
+  "fills30": 4000,
+  "span_days": 12.716724537037036,
+  "usd": 39602.37369000233,
+  "tech_usd": 5564.2553209786765,
+  "markets": 2701,
+  "tech_markets_top80": 25
+ },
+ {
+  "name": "Wojtek",
+  "wallet": "0x07d4245464dc4fa05d0b3f084d82482462dc8991",
+  "fills30": 4000,
+  "span_days": 26.999363425925925,
+  "usd": 7909.9114422126095,
+  "tech_usd": 4582.328188192943,
+  "markets": 129,
+  "tech_markets_top80": 38
+ },
+ {
+  "name": "taerv534",
+  "wallet": "0x30f91b6df5a62ab2e504045e25fd449a23affbfc",
+  "fills30": 757,
+  "span_days": 29.76103009259259,
+  "usd": 6520.817304966685,
+  "tech_usd": 4529.8618349635135,
+  "markets": 85,
+  "tech_markets_top80": 42
+ },
+ {
+  "name": "planktonXD",
+  "wallet": "0x4ffe49ba2a4cae123536a8af4fda48faeb609f71",
+  "fills30": 4000,
+  "span_days": 4.083657407407407,
+  "usd": 24510.014277114464,
+  "tech_usd": 4488.498542037877,
+  "markets": 1028,
+  "tech_markets_top80": 28
+ },
+ {
+  "name": "tescat",
+  "wallet": "0xbe7c0363ec2f0d12630fd48ac4c87ce84f418356",
+  "fills30": 469,
+  "span_days": 29.98241898148148,
+  "usd": 11359.611334056683,
+  "tech_usd": 3146.357498032745,
+  "markets": 123,
+  "tech_markets_top80": 20
+ },
+ {
+  "name": "AnimalEater",
+  "wallet": "0xa445c59c0531d28a13550f29d734b33520530286",
+  "fills30": 3657,
+  "span_days": 29.964537037037037,
+  "usd": 3034.609423019457,
+  "tech_usd": 2983.494842019608,
+  "markets": 39,
+  "tech_markets_top80": 31
+ },
+ {
+  "name": "shiifoo",
+  "wallet": "0x30f67d821c57a54e25e5e521dbd3b5b18309004f",
+  "fills30": 4000,
+  "span_days": 15.058680555555556,
+  "usd": 114584.41574893409,
+  "tech_usd": 2944.1095120501873,
+  "markets": 1525,
+  "tech_markets_top80": 5
+ },
+ {
+  "name": "garbagecollect2",
+  "wallet": "0xee6712ea09d6a9c86793bb6dde10ea59040e67a6",
+  "fills30": 4000,
+  "span_days": 7.766886574074074,
+  "usd": 13976.281364107112,
+  "tech_usd": 2942.1447070845907,
+  "markets": 463,
+  "tech_markets_top80": 22
+ },
+ {
+  "name": "fiter",
+  "wallet": "0xf5e814660a5a5ac071390a36122e7bc7c1309fbd",
+  "fills30": 4000,
+  "span_days": 4.085810185185185,
+  "usd": 5538.324939039688,
+  "tech_usd": 2655.690106021304,
+  "markets": 175,
+  "tech_markets_top80": 33
+ },
+ {
+  "name": "pleaseletmealone",
+  "wallet": "0xcb8deb73fbdd20b366d51c91e6e2c80365368d08",
+  "fills30": 4000,
+  "span_days": 0.9696064814814814,
+  "usd": 47245.46041006679,
+  "tech_usd": 2355.4505100003785,
+  "markets": 238,
+  "tech_markets_top80": 16
+ },
+ {
+  "name": "ChileCongo",
+  "wallet": "0x6e1cff963c1947552e597a52beb572d543eb4707",
+  "fills30": 683,
+  "span_days": 29.90369212962963,
+  "usd": 50721.561008204895,
+  "tech_usd": 2288.736778026988,
+  "markets": 175,
+  "tech_markets_top80": 9
+ },
+ {
+  "name": "jozeslemsek",
+  "wallet": "0xd0bf186c69a936395c84d6b45bbd39eadfcf9f9f",
+  "fills30": 4000,
+  "span_days": 16.01965277777778,
+  "usd": 13944.084505050107,
+  "tech_usd": 2110.229440880014,
+  "markets": 242,
+  "tech_markets_top80": 30
+ },
+ {
+  "name": "kovolsky",
+  "wallet": "0x2e4136fcb9692ff74a519008f4d489201ed683cc",
+  "fills30": 1590,
+  "span_days": 11.49837962962963,
+  "usd": 32244.213445041292,
+  "tech_usd": 1813.2276110000103,
+  "markets": 175,
+  "tech_markets_top80": 3
+ },
+ {
+  "name": "0x45e606f7849330AdAd37875f835FBdD1B7868FCa-1775496679263",
+  "wallet": "0x45e606f7849330adad37875f835fbdd1b7868fca",
+  "fills30": 211,
+  "span_days": 29.938136574074075,
+  "usd": 3172.831671079066,
+  "tech_usd": 1784.9732380758223,
+  "markets": 157,
+  "tech_markets_top80": 44
+ },
+ {
+  "name": "0x66E7ce01C6831B8A2503D09eDD6167152Ee68BcD-1771870353938",
+  "wallet": "0x66e7ce01c6831b8a2503d09edd6167152ee68bcd",
+  "fills30": 4000,
+  "span_days": 1.4314120370370371,
+  "usd": 92485.21928900386,
+  "tech_usd": 1680.949194981479,
+  "markets": 729,
+  "tech_markets_top80": 5
+ },
+ {
+  "name": "0x3653235d75A0d5969C42f7514d4Df8eA5F8CEF74-1778811817579",
+  "wallet": "0x3653235d75a0d5969c42f7514d4df8ea5f8cef74",
+  "fills30": 4000,
+  "span_days": 5.4872453703703705,
+  "usd": 31314.57951402454,
+  "tech_usd": 1187.473310005376,
+  "markets": 1241,
+  "tech_markets_top80": 8
+ },
+ {
+  "name": "cat6767",
+  "wallet": "0x124a73f09f38910fe1f7638f22a0f223c3723741",
+  "fills30": 114,
+  "span_days": 29.94304398148148,
+  "usd": 2966.8922450541168,
+  "tech_usd": 949.6881600021952,
+  "markets": 15,
+  "tech_markets_top80": 6
+ },
+ {
+  "name": "0x1F85EB9C455c5BDEF5D96C2739076678c7157B02-1778811447702",
+  "wallet": "0x1f85eb9c455c5bdef5d96c2739076678c7157b02",
+  "fills30": 4000,
+  "span_days": 5.504664351851852,
+  "usd": 30284.87581401588,
+  "tech_usd": 682.3162500000001,
+  "markets": 1216,
+  "tech_markets_top80": 5
+ },
+ {
+  "name": "Crypto-Well",
+  "wallet": "0x4e39fdfc230f9312d93db03ab48c10fccf2d8cbf",
+  "fills30": 3812,
+  "span_days": 29.97980324074074,
+  "usd": 1596.6747720071905,
+  "tech_usd": 417.39237900000023,
+  "markets": 165,
+  "tech_markets_top80": 26
+ },
+ {
+  "name": "Huye168",
+  "wallet": "0x4ae7e6a1cf587e586bec8870a708d7fb7b38561f",
+  "fills30": 4000,
+  "span_days": 12.657800925925926,
+  "usd": 1322.3027520120613,
+  "tech_usd": 231.31400800500003,
+  "markets": 504,
+  "tech_markets_top80": 26
+ },
+ {
+  "name": "BabyGroot",
+  "wallet": "0xbefa95c276ee8ef6ff3ef43d1c1c454f52bc300d",
+  "fills30": 4000,
+  "span_days": 2.1511342592592593,
+  "usd": 2998.4771530501303,
+  "tech_usd": 174.14857000158125,
+  "markets": 82,
+  "tech_markets_top80": 8
+ },
+ {
+  "name": "0x355e829bcC14f70f0671e6Ff5D-35795445256",
+  "wallet": "0x75cbe506ceec7bb80331954e9a47212ea62f1556",
+  "fills30": 4000,
+  "span_days": 2.1619907407407406,
+  "usd": 115.10100499976095,
+  "tech_usd": 18.521932000000003,
+  "markets": 635,
+  "tech_markets_top80": 27
+ }
+]

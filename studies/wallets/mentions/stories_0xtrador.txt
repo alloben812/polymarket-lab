@@ -1,0 +1,100 @@
+
+# Will Trump say "Hell" 15+ times during his Midterm Rally in Kansas?  [what-will-trump-say-during-his-midterm-rally-in-kansas-octob]  vol $3851 tape 53 rows
+  sched start 10-19 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-20 01:27:56 | resolved 10-20 03:42:07 | outcome NO | account pnl $-147.91 on $174.5
+    10-18 23:32:59 start-23h27m01s det-25h54m57s PRE     T BUY  Yes @0.550 x  100.0 pnl   -55.25
+    10-19 09:28:42 start-13h31m18s det-15h59m14s PRE     M BUY  Yes @0.530 x    2.1 pnl    -1.13
+    10-19 22:16:15 start-0h43m45s det-3h11m41s PRE     M BUY  Yes @0.530 x  197.9 pnl  -104.87
+    10-20 01:25:42 start+2h25m42s det-0h02m14s LIVE    T SELL Yes @0.160 x   20.1 pnl     3.19
+    10-20 01:27:56 start+2h27m56s det+0h00m00s POST    T SELL Yes @0.081 x  104.9 pnl     8.41
+    10-20 01:37:17 start+2h37m17s det+0h09m21s POST    T SELL Yes @0.010 x  175.0 pnl     1.73
+
+# Will Trump say "Two Percent" or "2%" during his Midterm Rally in North Carolina?  [what-will-trump-say-during-his-midterm-rally-in-north-caroli]  vol $3063 tape 71 rows
+  sched start 10-20 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-21 01:27:24 | resolved 10-21 03:32:04 | outcome NO | account pnl $113.48 on $188.7
+    10-20 21:22:09 start-1h37m51s det-4h05m15s PRE     M BUY  No  @0.310 x    0.6 pnl     0.39
+    10-20 21:22:11 start-1h37m49s det-4h05m13s PRE     M BUY  No  @0.310 x    7.8 pnl     5.37
+    10-20 21:22:11 start-1h37m49s det-4h05m13s PRE     M BUY  No  @0.310 x    4.3 pnl     3.00
+    10-20 21:22:11 start-1h37m49s det-4h05m13s PRE     M BUY  No  @0.310 x    1.4 pnl     1.00
+    10-20 21:22:12 start-1h37m48s det-4h05m12s PRE     M BUY  No  @0.310 x    5.0 pnl     3.45
+    10-20 21:22:14 start-1h37m46s det-4h05m10s PRE     M BUY  No  @0.310 x    7.2 pnl     5.00
+    10-20 21:22:21 start-1h37m39s det-4h05m03s PRE     M BUY  No  @0.310 x   22.0 pnl    15.18
+    ... 6 more fills ...
+    10-21 01:31:36 start+2h31m36s det+0h04m12s POST    M SELL No  @0.990 x   10.1 pnl    -0.10
+    10-21 01:33:47 start+2h33m47s det+0h06m23s POST    M SELL No  @0.990 x  123.1 pnl    -1.23
+
+# Will Trump say "Christmas" this week?  [what-will-trump-say-this-week-november-2-november-8-20261108]  vol $788 tape 20 rows
+  sched start 11-08 23:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-09 10:54:27 | resolved 11-09 12:52:04 | outcome NO | account pnl $110.84 on $388.4
+    11-02 20:05:34 start-146h54m26s det-158h48m53s PRE     M BUY  No  @0.560 x   50.0 pnl    22.00
+    11-02 22:03:24 start-144h56m36s det-156h51m03s PRE     M BUY  No  @0.560 x    2.3 pnl     1.00
+    11-04 11:51:46 start-107h08m14s det-119h02m41s PRE     M BUY  No  @0.560 x    2.3 pnl     1.00
+    11-04 22:07:45 start-96h52m15s det-108h46m42s PRE     M BUY  No  @0.510 x   24.5 pnl    12.00
+    11-04 22:54:51 start-96h05m09s det-107h59m36s PRE     M BUY  No  @0.510 x    2.0 pnl     1.00
+    11-07 16:09:19 start-30h50m41s det-42h45m08s PRE     M BUY  No  @0.770 x   43.0 pnl     9.89
+    11-08 17:27:24 start-5h32m36s det-17h27m03s PRE     M BUY  No  @0.550 x  100.0 pnl    45.00
+    ... 3 more fills ...
+    11-09 06:55:10 start+7h55m10s det-3h59m17s LIVE    M SELL No  @0.990 x   50.0 pnl    -0.50
+    11-09 09:20:54 start+10h20m54s det-1h33m33s LIVE    M BUY  No  @0.500 x   12.0 pnl     6.00
+
+# Will Trump say "Discord" in October?  [what-companies-will-trump-mention-in-october]  vol $368 tape 9 rows
+  sched start 10-31 22:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-27 04:25:47 | resolved 11-01 06:23:50 | outcome NO | account pnl $105.0 on $95.0
+    10-21 18:53:08 start-243h06m52s det-129h32m39s PRE     M BUY  No  @0.270 x  100.0 pnl    73.00
+    10-21 18:53:08 start-243h06m52s det-129h32m39s PRE     M BUY  No  @0.680 x  100.0 pnl    32.00
+
+# Will Trump say "Maduro" during his Midterm Rally in Iowa?  [what-will-trump-say-during-his-midterm-rally-in-iowa-novembe]  vol $2894 tape 56 rows
+  sched start 11-01 21:00:00 | last print<0.60 11-01 22:58:36 | first print>=0.60 11-01 23:04:16 | determined(tape) 11-01 23:04:21 | resolved 11-02 01:06:36 | outcome YES | account pnl $101.2 on $6.1
+    10-31 19:09:37 start-25h50m23s det-27h54m44s PRE     M BUY  Yes @0.560 x    2.3 pnl     1.00
+    10-31 19:11:31 start-25h48m29s det-27h52m50s PRE     M BUY  Yes @0.560 x    5.0 pnl     2.20
+    11-01 22:58:36 start+1h58m36s det-0h05m45s LIVE    M BUY  Yes @0.020 x  100.0 pnl    98.00
+
+# Will Trump say "Two Percent" during his Midterm Rally in Lubbock, Texas?  [what-will-trump-say-during-his-midterm-rally-in-lubbock-texa]  vol $308287 tape 399 rows
+  sched start 10-27 23:00:00 | last print<0.60 10-28 09:35:32 | first print>=0.60 10-28 09:41:11 | determined(tape) 10-28 09:49:14 | resolved 11-01 00:42:40 | outcome YES | account pnl $-32.1 on $230.7
+    10-27 01:51:45 start-21h08m15s det-31h57m29s PRE     M BUY  No  @0.040 x    1.0 pnl    -0.04
+    10-27 01:54:53 start-21h05m07s det-31h54m21s PRE     M BUY  No  @0.040 x    1.0 pnl    -0.04
+    10-27 23:50:47 start+0h50m47s det-9h58m27s LIVE    T BUY  No  @0.450 x   21.0 pnl    -9.52
+    10-28 02:27:14 start+3h27m14s det-7h22m00s LIVE    M BUY  No  @0.290 x  100.0 pnl   -29.00
+    10-28 02:40:00 start+3h40m00s det-7h09m14s LIVE    T SELL No  @0.071 x  123.1 pnl     8.61
+    10-28 03:11:56 start+4h11m56s det-6h37m18s LIVE    T BUY  Yes @0.786 x  117.9 pnl    24.99
+    10-28 04:54:10 start+5h54m10s det-4h55m04s LIVE    M SELL Yes @0.770 x  117.9 pnl   -27.11
+
+# Will Trump say "Biden" or "Kamala" or "Obama" 10+ times during his Midterm Rally in Kansas?  [what-will-trump-say-during-his-midterm-rally-in-kansas-octob]  vol $3894 tape 51 rows
+  sched start 10-19 23:00:00 | last print<0.60 - | first print>=0.60 10-18 17:08:50 | determined(tape) 10-20 00:29:44 | resolved 10-20 03:05:16 | outcome YES | account pnl $7.9 on $103.9
+    10-20 00:29:36 start+1h29m36s det-0h00m08s JUMP    T BUY  Yes @0.857 x   56.0 pnl     7.95
+    10-20 00:31:42 start+1h31m42s det+0h01m58s POST    M SELL Yes @0.999 x   56.0 pnl    -0.06
+
+# Will Trump say "TikTok" or "ByteDance" in October?  [what-companies-will-trump-mention-in-october]  vol $497 tape 21 rows
+  sched start 10-31 22:00:00 | last print<0.60 10-09 21:59:41 | first print>=0.60 10-14 21:16:03 | determined(tape) 10-14 21:16:03 | resolved 10-14 23:17:55 | outcome YES | account pnl $-5.0 on $5.0
+    10-14 21:16:04 start-408h43m56s det+0h00m01s JUMP    M BUY  No  @0.050 x   50.0 pnl    -2.50
+    10-14 21:16:04 start-408h43m56s det+0h00m01s JUMP    M BUY  No  @0.050 x   50.0 pnl    -2.50
+
+# Will Trump say "Crazy" 7+ times during his Midterm Rally in Iowa?  [what-will-trump-say-during-his-midterm-rally-in-iowa-novembe]  vol $2282 tape 31 rows
+  sched start 11-01 21:00:00 | last print<0.60 10-31 17:57:40 | first print>=0.60 11-01 12:21:45 | determined(tape) 11-01 22:52:24 | resolved 11-02 00:54:28 | outcome YES | account pnl $6.9 on $50.7
+    11-01 21:18:43 start+0h18m43s det-1h33m41s JUMP    M BUY  Yes @0.730 x   30.0 pnl     8.10
+    11-01 22:52:24 start+1h52m24s det+0h00m00s JUMP    M SELL Yes @0.960 x   30.0 pnl    -1.20
+
+# Will Trump say "School Choice" during his Midterm Rally in Arizona?  [what-will-trump-say-during-his-midterm-rally-in-arizona-octo]  vol $3215 tape 44 rows
+  sched start 10-14 19:45:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-14 21:55:01 | resolved 10-15 00:31:26 | outcome NO | account pnl $27.31 on $361.3
+    10-14 21:06:03 start+1h21m03s det-0h48m58s LIVE    T BUY  No  @0.770 x  100.0 pnl    22.82
+    10-14 21:59:16 start+2h14m16s det+0h04m15s POST    T BUY  No  @0.950 x   94.6 pnl     4.69
+    10-14 22:04:51 start+2h19m51s det+0h09m50s POST    M SELL No  @0.999 x  194.6 pnl    -0.19
+
+# Will Trump say "Six Seven" this week?  [what-will-trump-say-this-week-november-2-november-8-20261108]  vol $790 tape 7 rows
+  sched start 11-08 23:00:00 | last print<0.60 11-02 19:36:16 | first print>=0.60 11-02 19:36:24 | determined(tape) 11-02 19:36:24 | resolved 11-02 23:32:10 | outcome YES | account pnl $13.96 on $93.6
+    11-02 19:35:28 start-147h24m32s det-0h00m56s PRE     T BUY  Yes @0.959 x   55.0 pnl     2.23
+    11-02 22:56:33 start-144h03m27s det+3h20m09s POST    M BUY  Yes @0.777 x    7.8 pnl     1.73
+    11-02 22:57:04 start-144h02m56s det+3h20m40s POST    M BUY  Yes @0.777 x   44.8 pnl    10.00
+
+# Will Trump say "Radical Left Lunatic" this week?  [what-will-trump-say-this-week-october-26-november-1-20261101]  vol $588 tape 13 rows
+  sched start 11-01 23:00:00 | last print<0.60 10-29 01:43:47 | first print>=0.60 10-29 17:20:55 | determined(tape) 10-29 21:28:54 | resolved 10-29 21:29:10 | outcome YES | account pnl $47.5 on $149.5
+    10-27 00:04:24 start-142h55m36s det-69h24m30s PRE     M BUY  Yes @0.510 x   50.0 pnl    24.50
+    10-29 01:43:47 start-93h16m13s det-19h45m07s PRE     M BUY  Yes @0.510 x   50.0 pnl    24.50
+    10-29 17:21:01 start-77h38m59s det-4h07m53s JUMP    M SELL Yes @0.990 x   20.0 pnl    -0.20
+    10-29 17:21:01 start-77h38m59s det-4h07m53s JUMP    M SELL Yes @0.990 x   30.0 pnl    -0.30
+    10-29 17:21:01 start-77h38m59s det-4h07m53s JUMP    M SELL Yes @0.980 x   50.0 pnl    -1.00
+
+# Will Trump say "Brazil" during his Midterm Rally in Iowa?  [what-will-trump-say-during-his-midterm-rally-in-iowa-novembe]  vol $91 tape 6 rows
+  sched start 11-01 21:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-02 01:33:57 | resolved 11-02 01:41:26 | outcome NO | account pnl $5.25 on $16.6
+    11-01 23:10:00 start+2h10m00s det-2h23m57s LIVE    M BUY  No  @0.760 x    9.4 pnl     2.25
+    11-01 23:11:39 start+2h11m39s det-2h22m18s LIVE    M BUY  No  @0.760 x   12.5 pnl     3.00
+
+# Will Trump say "Filibuster" during his Midterm Rally in Florida?  [what-will-trump-say-during-his-midterm-rally-in-florida-octo]  vol $1003 tape 18 rows
+  sched start 10-23 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-23 20:21:27 | resolved 10-23 22:29:52 | outcome NO | account pnl $0.19 on $1.4
+    10-23 20:12:59 start+2h12m59s det-0h08m28s LIVE    T BUY  No  @0.880 x    1.6 pnl     0.19

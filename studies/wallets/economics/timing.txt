@@ -1,0 +1,103 @@
+
+== perfectnosta: all fills 2960, turnover 276609; release-event markets touched 82
+   own-release before >1d      T fills=  149 usd=    65451 edge_to_final=   16603
+   own-release before >1d      M fills= 1567 usd=    48348 edge_to_final=   -1841
+   own-release before 1h-1d    T fills=   20 usd=     1527 edge_to_final=      93
+   own-release before 1h-1d    M fills=  192 usd=     2998 edge_to_final=     -92
+   own-release before <1h      M fills=    7 usd=      549 edge_to_final=    -166
+   own-release after 0-60s     M fills=    9 usd=     1587 edge_to_final=   -1587
+   own-release after >6h       T fills=    1 usd=        1 edge_to_final=       1
+   other econ markets (Fed decisions etc.): usd 91426; within 6h after any of 20 US releases: 12689 = 13.9% (uniform-time baseline 5.7%)
+      30min-6h  T fills=    6 usd=    11838
+      30min-6h  M fills=   12 usd=      851
+
+== GoldmanSachs: all fills 246, turnover 267776; release-event markets touched 2
+   own-release before >1d      T fills=    8 usd=    31530 edge_to_final=     970
+   own-release before >1d      M fills=   32 usd=    34059 edge_to_final=    6563
+   own-release before 1h-1d    M fills=    4 usd=     4664 edge_to_final=    -636
+   own-release before <1h      T fills=    1 usd=       59 edge_to_final=      -2
+   own-release before <1h      M fills=    2 usd=    15477 edge_to_final=    -462
+   other econ markets (Fed decisions etc.): usd 174268; within 6h after any of 20 US releases: 58453 = 33.5% (uniform-time baseline 5.7%)
+      0-60s     T fills=    1 usd=      300
+      1-30min   T fills=   10 usd=    28499
+      1-30min   M fills=   26 usd=     4159
+      30min-6h  T fills=    8 usd=    14281
+      30min-6h  M fills=   48 usd=    11215
+
+== ATCapital: all fills 3468, turnover 2122021; release-event markets touched 4
+   own-release before 1h-1d    T fills=    6 usd=      538 edge_to_final=     -57
+   own-release before 1h-1d    M fills=   99 usd=    22512 edge_to_final=      36
+   own-release before <1h      T fills=    4 usd=     1149 edge_to_final=      -7
+   own-release before <1h      M fills=   13 usd=     1087 edge_to_final=     -25
+   other econ markets (Fed decisions etc.): usd 2095504; within 6h after any of 20 US releases: 373021 = 17.8% (uniform-time baseline 5.7%)
+      0-60s     T fills=   13 usd=     8532
+      0-60s     M fills=   14 usd=     4860
+      1-30min   T fills=   34 usd=    11596
+      1-30min   M fills=  125 usd=    49945
+      30min-6h  T fills=  168 usd=    72543
+      30min-6h  M fills=  460 usd=   225546
+
+== Ahpo: all fills 46851, turnover 2003237; release-event markets touched 10
+   own-release before >1d      T fills=   53 usd=   119246 edge_to_final=   -5247
+   own-release before >1d      M fills=  303 usd=   172381 edge_to_final=   20169
+   own-release after 30min-6h  M fills=    1 usd=      403 edge_to_final=       0
+   other econ markets (Fed decisions etc.): usd 594357; within 6h after any of 20 US releases: 179862 = 30.3% (uniform-time baseline 5.7%)
+      0-60s     T fills=    3 usd=    37041
+      0-60s     M fills=   29 usd=     5207
+      1-30min   T fills=    8 usd=    22775
+      1-30min   M fills=   51 usd=    26929
+      30min-6h  T fills=   49 usd=    55086
+      30min-6h  M fills=   98 usd=    32824
+
+== 0x831449c4b9: all fills 2789, turnover 556058; release-event markets touched 5
+   own-release before >1d      T fills=    6 usd=     2235 edge_to_final=     -60
+   own-release before >1d      M fills=   20 usd=      980 edge_to_final=     767
+   own-release before 1h-1d    T fills=    1 usd=       77 edge_to_final=    -193
+   own-release before 1h-1d    M fills=    6 usd=      142 edge_to_final=     -16
+   own-release before <1h      M fills=    1 usd=        1 edge_to_final=       1
+   own-release after 0-60s     M fills=    5 usd=      388 edge_to_final=    -343
+   other econ markets (Fed decisions etc.): usd 120861; within 6h after any of 20 US releases: 3242 = 2.7% (uniform-time baseline 5.7%)
+      0-60s     T fills=    1 usd=      401
+      1-30min   T fills=    1 usd=       36
+      1-30min   M fills=    3 usd=       23
+      30min-6h  T fills=    7 usd=     2406
+      30min-6h  M fills=   24 usd=      376
+
+== Stonktrader: all fills 456, turnover 395362; release-event markets touched 4
+   own-release before >1d      T fills=    5 usd=    12910 edge_to_final=    3164
+   own-release before 1h-1d    T fills=    4 usd=     3372 edge_to_final=     166
+   own-release after 1-30min   T fills=    3 usd=     2771 edge_to_final=     113
+   own-release after >6h       T fills=    5 usd=     6394 edge_to_final=      50
+   own-release after >6h       M fills=    2 usd=       11 edge_to_final=       0
+   other econ markets (Fed decisions etc.): usd 8119; within 6h after any of 20 US releases: 0 = 0.0% (uniform-time baseline 5.7%)
+
+== jozeslemsek: all fills 18529, turnover 41591; release-event markets touched 15
+   own-release before >1d      T fills=    6 usd=      324 edge_to_final=     154
+   own-release before >1d      M fills=  973 usd=     1037 edge_to_final=    -102
+   own-release before 1h-1d    M fills=   11 usd=       13 edge_to_final=      13
+   own-release before <1h      M fills=    1 usd=        1 edge_to_final=       1
+   other econ markets (Fed decisions etc.): usd 11775; within 6h after any of 20 US releases: 2025 = 17.2% (uniform-time baseline 5.7%)
+      0-60s     M fills=   20 usd=       15
+      1-30min   T fills=    2 usd=       85
+      1-30min   M fills=   90 usd=      491
+      30min-6h  T fills=    6 usd=      552
+      30min-6h  M fills=  321 usd=      882
+
+== TheElement115: all fills 76, turnover 66280; release-event markets touched 51
+   own-release after 0-60s     T fills=   51 usd=    47683 edge_to_final=    4618
+   other econ markets (Fed decisions etc.): usd 16851; within 6h after any of 20 US releases: 0 = 0.0% (uniform-time baseline 5.7%)
+
+== road2million: all fills 87, turnover 23471; release-event markets touched 45
+   own-release after 0-60s     T fills=   45 usd=    17095 edge_to_final=    3010
+   other econ markets (Fed decisions etc.): usd 5805; within 6h after any of 20 US releases: 0 = 0.0% (uniform-time baseline 5.7%)
+
+== makeit99: all fills 667, turnover 246180; release-event markets touched 38
+   own-release before >1d      T fills=   28 usd=   111203 edge_to_final=   13006
+   own-release before >1d      M fills=   83 usd=    15640 edge_to_final=   -5685
+   own-release before 1h-1d    T fills=    2 usd=      158 edge_to_final=     158
+   own-release after 0-60s     T fills=   33 usd=    11894 edge_to_final=    2082
+   own-release after >6h       T fills=    1 usd=      192 edge_to_final=       8
+   other econ markets (Fed decisions etc.): usd 19244; within 6h after any of 20 US releases: 8241 = 42.8% (uniform-time baseline 5.7%)
+      0-60s     T fills=    2 usd=     8186
+      30min-6h  T fills=    1 usd=       19
+      30min-6h  M fills=    1 usd=       36

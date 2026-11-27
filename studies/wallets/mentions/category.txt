@@ -1,0 +1,87 @@
+events 95 resolved markets 1385
+markets with tape 1382; events 95; by type Counter({'live': 806, 'earnings': 351, 'period': 225}); share resolved Yes 0.493; total volume $2,419,448
+split date: 2026-10-27 window 2026-09-29 .. 2026-11-23
+
+R1/R2 pre-event calibration (last print <=48h before scheduled start; live+earnings events). Returns per $1 staked, fee in, fill = print + 0.02; se clustered by event
+ TUNE:
+   yes_px 0-.10    n=  54 events= 29 mean px 0.028 resolved Yes 0.000 | buy No:    1.6% +-0.3 | buy Yes: -101.0% +-0.0
+   yes_px .10-.25  n=  54 events= 26 mean px 0.180 resolved Yes 0.204 | buy No:   -5.0% +-5.6 | buy Yes:    7.8% +-27.9
+   yes_px .25-.40  n=  76 events= 28 mean px 0.312 resolved Yes 0.197 | buy No:   13.0% +-7.0 | buy Yes:  -43.1% +-15.0
+   yes_px .40-.60  n= 117 events= 31 mean px 0.502 resolved Yes 0.436 | buy No:   10.0% +-7.6 | buy Yes:  -15.8% +-7.4
+   yes_px .60-.75  n=  81 events= 28 mean px 0.672 resolved Yes 0.630 | buy No:    5.4% +-17.0 | buy Yes:   -9.5% +-8.6
+   yes_px .75-.90  n=  61 events= 27 mean px 0.820 resolved Yes 0.820 | buy No:   -8.1% +-26.8 | buy Yes:   -2.6% +-6.2
+   yes_px .90-1    n=  66 events= 21 mean px 0.955 resolved Yes 0.894 | buy No:   21.7% +-43.4 | buy Yes:   -8.2% +-3.5
+ TEST:
+   yes_px 0-.10    n=  47 events= 22 mean px 0.032 resolved Yes 0.000 | buy No:    1.9% +-0.4 | buy Yes: -100.9% +-0.0
+   yes_px .10-.25  n=  54 events= 23 mean px 0.178 resolved Yes 0.074 | buy No:    9.9% +-5.2 | buy Yes:  -64.2% +-20.8
+   yes_px .25-.40  n=  57 events= 24 mean px 0.314 resolved Yes 0.246 | buy No:    5.7% +-7.5 | buy Yes:  -31.6% +-14.9
+   yes_px .40-.60  n=  75 events= 26 mean px 0.480 resolved Yes 0.533 | buy No:  -12.4% +-12.0 | buy Yes:    8.1% +-12.5
+   yes_px .60-.75  n=  39 events= 21 mean px 0.665 resolved Yes 0.692 | buy No:  -17.7% +-21.9 | buy Yes:    0.0% +-11.7
+   yes_px .75-.90  n=  38 events= 23 mean px 0.819 resolved Yes 0.868 | buy No:  -40.5% +-23.2 | buy Yes:    3.3% +-6.0
+   yes_px .90-1    n=  59 events= 23 mean px 0.965 resolved Yes 0.966 | buy No:  -51.6% +-36.9 | buy Yes:   -1.5% +-2.5
+
+R3 follow-the-confirmation (first in-event print with bought-outcome price >= 0.95, then first same-outcome print >= L s later at 0.90..0.99; fill +0.005; fee in)
+   TEST buy No  L=   0s markets= 257 events= 45 mean ret  -1.40% +-1.12 win 250/257 median hours to resolution 2.1 median print usd 32
+   TEST buy No  L=   5s markets=  98 events= 33 mean ret  -2.75% +-2.08 win 94/98 median hours to resolution 2.4 median print usd 25
+   TEST buy No  L=  30s markets=  83 events= 31 mean ret  -3.55% +-2.43 win 79/83 median hours to resolution 2.6 median print usd 25
+   TEST buy No  L= 120s markets=  74 events= 27 mean ret  -4.04% +-2.73 win 70/74 median hours to resolution 2.6 median print usd 29
+   TEST buy No  L= 600s markets=  51 events= 23 mean ret  -4.42% +-3.35 win 48/51 median hours to resolution 3.2 median print usd 25
+   TEST buy Yes L=   0s markets= 258 events= 47 mean ret  -1.77% +-1.16 win 249/258 median hours to resolution 2.0 median print usd 43
+   TEST buy Yes L=   5s markets= 109 events= 36 mean ret  -0.20% +-1.23 win 107/109 median hours to resolution 2.1 median print usd 35
+   TEST buy Yes L=  30s markets=  71 events= 28 mean ret  -0.94% +-1.86 win 69/71 median hours to resolution 2.4 median print usd 41
+   TEST buy Yes L= 120s markets=  57 events= 24 mean ret  -1.58% +-2.31 win 55/57 median hours to resolution 2.3 median print usd 30
+   TEST buy Yes L= 600s markets=  44 events= 22 mean ret  -0.18% +-2.06 win 43/44 median hours to resolution 2.1 median print usd 31
+   TUNE buy No  L=   0s markets= 287 events= 48 mean ret   0.32% +-0.79 win 284/287 median hours to resolution 2.3 median print usd 28
+   TUNE buy No  L=   5s markets= 155 events= 44 mean ret   1.23% +-0.15 win 155/155 median hours to resolution 2.3 median print usd 25
+   TUNE buy No  L=  30s markets= 139 events= 39 mean ret   1.13% +-0.14 win 139/139 median hours to resolution 2.3 median print usd 23
+   TUNE buy No  L= 120s markets= 122 events= 35 mean ret   1.09% +-0.14 win 122/122 median hours to resolution 2.3 median print usd 22
+   TUNE buy No  L= 600s markets=  93 events= 30 mean ret   1.14% +-0.18 win 93/93 median hours to resolution 2.4 median print usd 19
+   TUNE buy Yes L=   0s markets= 359 events= 48 mean ret  -3.71% +-1.12 win 339/359 median hours to resolution 2.1 median print usd 37
+   TUNE buy Yes L=   5s markets= 183 events= 42 mean ret   1.19% +-0.58 win 182/183 median hours to resolution 2.1 median print usd 50
+   TUNE buy Yes L=  30s markets= 110 events= 37 mean ret   0.60% +-0.95 win 109/110 median hours to resolution 2.1 median print usd 49
+   TUNE buy Yes L= 120s markets=  86 events= 35 mean ret   0.25% +-1.20 win 85/86 median hours to resolution 2.1 median print usd 50
+   TUNE buy Yes L= 600s markets=  62 events= 30 mean ret  -0.07% +-1.67 win 61/62 median hours to resolution 2.4 median print usd 38
+R4 false confirmations: {'yes_conf': 695, 'yes_conf_wrong': 29, 'no_conf': 670, 'no_conf_wrong': 11}
+    wrong: ('Yes', 'Will Trump say "Visa" in October?', 0.954, 'period')
+    wrong: ('Yes', 'Will Trump say "Burger" in October?', 0.988, 'period')
+    wrong: ('Yes', 'Will Airbnb say "Code / Coding" during earnings call?', 0.965, 'earnings')
+    wrong: ('Yes', 'Will AMD say "China" during earnings call?', 0.98, 'earnings')
+    wrong: ('No', 'Will Andy Burnham say "Trump" during the next PMQ?', 0.989, 'live')
+    wrong: ('No', 'Will Caedrel say "Dive" 7+ times on stream?', 0.99, 'live')
+    wrong: ('Yes', 'Will Elon post "India" on X this week?', 0.99, 'period')
+    wrong: ('Yes', 'Will Elon post "Rocket" on X this week?', 0.99, 'period')
+    wrong: ('Yes', 'Will Netflix say "Tiktok" / "Youtube" during earnings call?', 0.982, 'earnings')
+    wrong: ('Yes', 'Will NVIDIA say "Spy / Affair" during earnings call?', 0.96, 'earnings')
+    wrong: ('Yes', 'Will Robinhood say "Weekend" during earnings call?', 0.985, 'earnings')
+    wrong: ('No', 'Will Target say "Guest" 70+ times during earnings call?', 0.97, 'earnings')
+    wrong: ('No', 'Will the announcers say "No Good" during the Seahawks vs Broncos game?', 0.99, 'live')
+    wrong: ('No', 'Will the announcers say "Offside" or "Offsides" during the Seahawks vs', 0.99, 'live')
+    wrong: ('Yes', 'Will "Trump" be in the headlines on Sunday?', 0.96, 'period')
+    wrong: ('No', 'Will "Iran / Iranian" be in the headlines on Sunday?', 0.999, 'period')
+    wrong: ('No', 'Will "Claude / Anthropic" be in the headlines on Sunday?', 0.981, 'period')
+    wrong: ('Yes', 'Will Trump or Melania say "Joe" or "Biden" during the Thanksgiving Tur', 0.99, 'live')
+    wrong: ('Yes', 'Will Trump post "Nidal Hasan" on Truth Social this week?', 0.981, 'period')
+    wrong: ('No', 'Will Trump say "Biden" or "Kamala" or "Obama" 7+ times during "60 Minu', 0.961, 'live')
+    wrong: ('No', 'Will Trump say "Hormuz" during "60 Minutes" extended interview?', 0.962, 'live')
+    wrong: ('Yes', 'Will Trump say "Fish" or "Fishing" or "Fisherman" during his Midterm R', 0.98, 'live')
+    wrong: ('Yes', 'Will Trump say "Spoiler" during his Midterm Rally in Alaska?', 0.98, 'live')
+    wrong: ('Yes', 'Will Trump say "Fish" or "Fisher" or "Fishing" during his Midterm Rall', 0.98, 'live')
+    wrong: ('Yes', 'Will Trump say "Laken Riley Act" during his Midterm Rally in Georgia?', 0.961, 'live')
+
+R5 jump anatomy (Yes-resolved, last print <0.60 within 30 min before the first print >=0.60, in-event)
+  clean jumps: 131 markets in 51 events; median pre px 0.46; median first-print px 0.925; share where the FIRST print is already >=0.90: 0.57
+  seconds from first print>=0.60 to first print>=0.95: p25 0 median 2 p75 232 p90 5373; distinct wallets in first 10 s: median 1
+  long-Yes taker prints at 0.50<=px<0.9 at lag>=  0s after first move: $    19395 bought, locked-in profit $    4765 (TEST half $   2928; largest single market $1216) in 59/131 markets
+  long-Yes taker prints at 0.50<=px<0.9 at lag>=  3s after first move: $    12486 bought, locked-in profit $    2805 (TEST half $   1883; largest single market $864) in 28/131 markets
+  long-Yes taker prints at 0.50<=px<0.9 at lag>= 10s after first move: $     9647 bought, locked-in profit $    2155 (TEST half $   1473; largest single market $477) in 27/131 markets
+  long-Yes taker prints at 0.50<=px<0.9 at lag>= 30s after first move: $     6369 bought, locked-in profit $    1348 (TEST half $   1160; largest single market $364) in 27/131 markets
+  long-Yes taker prints at 0.50<=px<0.9 at lag>= 60s after first move: $     4962 bought, locked-in profit $    1164 (TEST half $   1008; largest single market $364) in 24/131 markets
+  long-Yes taker prints at 0.50<=px<0.9 at lag>=300s after first move: $     4157 bought, locked-in profit $    1044 (TEST half $    939; largest single market $363) in 19/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>=  0s after first move: $    30164 bought, locked-in profit $    5485 (TEST half $   3455; largest single market $1523) in 90/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>=  3s after first move: $    20935 bought, locked-in profit $    3358 (TEST half $   2355; largest single market $1171) in 39/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>= 10s after first move: $    18033 bought, locked-in profit $    2702 (TEST half $   1945; largest single market $783) in 37/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>= 30s after first move: $    14620 bought, locked-in profit $    1885 (TEST half $   1622; largest single market $476) in 35/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>= 60s after first move: $    12849 bought, locked-in profit $    1678 (TEST half $   1455; largest single market $393) in 33/131 markets
+  long-Yes taker prints at 0.50<=px<0.95 at lag>=300s after first move: $    11356 bought, locked-in profit $    1510 (TEST half $   1379; largest single market $391) in 25/131 markets
+  first long-Yes printer per jump (wallet: markets): [('QuantDeLaFugazi', 11), ('0xCc97Bbe4AEc6a9797100211Eb206F62F443e79b7-1785264269150', 10), ('oidocrop', 9), ('BipBop', 6), ('alsdkfjasd', 6), ('ENORMOUZ', 4), ('BlondBeast', 4), ('Trufa-Negra', 3), ('lakemichigan', 3), ('0x7290e4e7', 2), ('t4lk13', 2), ('-Dominus-', 2)]
+  long-Yes within 10 s of first move (wallet: markets): [('QuantDeLaFugazi', 26), ('oidocrop', 18), ('BipBop', 13), ('big-bird1', 12), ('alsdkfjasd', 12), ('ENORMOUZ', 10), ('0xCc97Bbe4AEc6a9797100211Eb206F62F443e79b7-1785264269150', 10), ('Trufa-Negra', 8), ('lakemichigan', 6), ('BlondBeast', 6), ('0x8A62D1e12E7Ea015fB2896577d7e41b11C0669b2-1783087467932', 6), ('random-random123', 5)]

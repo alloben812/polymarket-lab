@@ -1,0 +1,131 @@
+tape row keys: ['bio', 'condition_id', 'event_slug', 'icon', 'name', 'outcome', 'outcome_index', 'price', 'profile_image', 'profile_image_optimized', 'proxy_wallet', 'pseudonym', 'side', 'size', 'slug', 'timestamp', 'title', 'token_id', 'transaction_hash']
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-november-28
+   final 1.0 vol 98140.998067 end Sun 11-29 04:59 closed Sat 11-21 13:33 T90 Sat 11-21 09:06 tape rows 543 (own taker rows 6) pnl 275
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-11
+   final 1.0 vol 196328.10485300003 end Thu 11-12 04:59 closed Wed 11-11 08:59 T90 Tue 11-10 08:45 tape rows 1132 (own taker rows 6) pnl -293
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-november-26
+   final 1.0 vol 105031.023075 end Fri 11-27 04:59 closed Sat 11-21 13:54 T90 Sat 11-21 09:08 tape rows 766 (own taker rows 5) pnl 117
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-november-22
+   final 1.0 vol 143166.19501599998 end Mon 11-23 04:59 closed Sat 11-21 13:25 T90 Sat 11-21 09:24 tape rows 948 (own taker rows 20) pnl 2032
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-november-24
+   final 1.0 vol 114397.069877 end Wed 11-25 04:59 closed Sat 11-21 13:55 T90 Sat 11-21 09:12 tape rows 803 (own taker rows 10) pnl 279
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-10-20261105
+   final 0.0 vol 1377443.976169 end Wed 11-11 04:59 closed Wed 11-11 07:01 T90 Tue 11-10 16:05 tape rows 2616 (own taker rows 4) pnl 5
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-december-1
+   final 1.0 vol 83146.89030900001 end Wed 12-02 04:59 closed Sat 11-21 13:20 T90 Sat 11-21 09:00 tape rows 412 (own taker rows 5) pnl -10
+
+## will-kai-cenat-finish-his-gta-vi-marathon-by-november-23
+   final 1.0 vol 46950.263934999995 end Tue 11-24 04:59 closed Sat 11-21 13:55 T90 Sat 11-21 09:19 tape rows 413 (own taker rows 13) pnl 2371
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-11-259-pm-et
+   final 1.0 vol 193606.44909100002 end Wed 11-11 04:59 closed Wed 11-11 09:02 T90 Tue 11-10 22:21 tape rows 1129 (own taker rows 1) pnl 287
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-11-759-am-et
+   final 1.0 vol 289847.565218 end Wed 11-11 04:59 closed Wed 11-11 09:02 T90 Wed 11-11 02:19 tape rows 1088 (own taker rows 3) pnl 753
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-14-20261105
+   final 1.0 vol 48256.820243999995 end Sun 11-15 04:59 closed Wed 11-11 09:02 T90 Sat 11-07 16:38 tape rows 393 (own taker rows 2) pnl 161
+
+## will-kai-cenat-finish-his-gta-marathon-by-november-9-20261105
+   final 0.0 vol 84637.26215299999 end Tue 11-10 04:59 closed Tue 11-10 07:01 T90 Sat 11-07 08:14 tape rows 305 (own taker rows 1) pnl 15
+
+  FILL Thu 11-05 20:30 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes     10 @ 0.390 | others: before 0.75 +10m 0.78 +1h 0.74 +6h 0.65 +24h 0.74
+  jump Thu 11-05 21:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.74 -> 0.42 (2 trades)
+  FILL Thu 11-05 21:45 kai-cenat-finish-his-gta-marathon-by-novembe T SHORTyes    222 @ 0.070 | others: before 0.06 +10m 0.06 +1h 0.05 +6h 0.07 +24h 0.03
+  jump Thu 11-05 22:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.42 -> 0.76 (2 trades)
+  jump Thu 11-05 23:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.76 -> 0.52 (1 trades)
+  jump Fri 11-06 01:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.22 -> 0.53 (5 trades)
+  jump Fri 11-06 01:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.53 -> 0.29 (11 trades)
+  FILL Fri 11-06 03:43 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    428 @ 0.635 | others: before 0.65 +10m 0.65 +1h 0.69 +6h 0.78 +24h 0.88
+  jump Fri 11-06 16:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.48 -> 0.24 (6 trades)
+  jump Fri 11-06 17:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.20 -> 0.42 (4 trades)
+  FILL Fri 11-06 21:44 kai-cenat-finish-his-gta-marathon-by-novembe T SHORTyes    666 @ 0.304 | others: before 0.32 +10m 0.23 +1h 0.25 +6h 0.55 +24h 0.59
+  jump Sat 11-07 03:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.38 -> 0.55 (1 trades)
+  FILL Sat 11-07 03:47 kai-cenat-finish-his-gta-marathon-by-novembe T SHORTyes    275 @ 0.500 | others: before 0.55 +10m 0.48 +1h 0.48 +6h 0.54 +24h 0.55
+  FILL Sat 11-07 03:48 kai-cenat-finish-his-gta-marathon-by-novembe T SHORTyes    413 @ 0.210 | others: before 0.24 +10m 0.20 +1h 0.23 +6h 0.24 +24h 0.19
+  jump Sat 11-07 06:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.22 -> 0.45 (13 trades)
+  jump Sat 11-07 06:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.52 -> 0.67 (4 trades)
+  jump Sat 11-07 14:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.34 -> 0.50 (6 trades)
+  jump Sat 11-07 17:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.46 -> 0.62 (8 trades)
+  jump Sat 11-07 18:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.28 -> 0.50 (1 trades)
+  FILL Sat 11-07 19:44 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    941 @ 0.704 | others: before 0.70 +10m 0.71 +1h 0.58 +6h 0.60 +24h 0.81
+  FILL Sat 11-07 19:53 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    413 @ 0.210 | others: before 0.19 +10m 0.19 +1h 0.18 +6h 0.15 +24h 0.26
+  jump Sun 11-08 07:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.31 -> 0.47 (4 trades)
+  jump Mon 11-09 05:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.58 -> 0.25 (20 trades)
+  jump Mon 11-09 05:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.62 -> 0.08 (5 trades)
+  jump Mon 11-09 15:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.30 -> 0.50 (5 trades)
+  jump Mon 11-09 15:30 kai-cenat-finish-his-gta-marathon-by-novembe 0.48 -> 0.64 (16 trades)
+  FILL Tue 11-10 02:20 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes   1014 @ 0.038 | others: before 0.03 +10m 0.05 +1h 0.04 +6h 0.13 +24h 0.01
+  FILL Tue 11-10 02:23 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    260 @ 0.270 | others: before 0.27 +10m 0.27 +1h 0.36 +6h 0.52 +24h 0.90
+  FILL Tue 11-10 02:32 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    600 @ 0.520 | others: before 0.49 +10m 0.53 +1h 0.58 +6h 0.71 +24h 0.98
+  FILL Tue 11-10 02:33 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    200 @ 0.830 | others: before 0.83 +10m 0.84 +1h 0.88 +6h 0.87 +24h 0.98
+  FILL Tue 11-10 02:37 kai-cenat-finish-his-gta-marathon-by-novembe T LONG yes    797 @ 0.291 | others: before 0.27 +10m 0.31 +1h 0.28 +6h 0.54 +24h 0.96
+  FILL Tue 11-10 04:32 kai-cenat-finish-his-gta-marathon-by-novembe T SHORTyes   1014 @ 0.045 | others: before 0.05 +10m 0.04 +1h 0.04 +6h 0.16 +24h 0.00
+  jump Tue 11-10 16:00 kai-cenat-finish-his-gta-marathon-by-novembe 0.76 -> 0.60 (28 trades)
+  jump Wed 11-18 02:00 kai-cenat-finish-his-gta-vi-marathon-by-dece 0.57 -> 0.75 (2 trades)
+  jump Wed 11-18 03:30 kai-cenat-finish-his-gta-vi-marathon-by-dece 0.75 -> 0.92 (8 trades)
+  jump Wed 11-18 03:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.41 -> 0.92 (1 trades)
+  FILL Wed 11-18 03:44 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes   3715 @ 0.092 | others: before 0.06 +10m 0.10 +1h 0.10 +6h 0.08 +24h 0.05
+  FILL Wed 11-18 03:44 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes   1227 @ 0.308 | others: before 0.24 +10m 0.34 +1h 0.34 +6h 0.26 +24h 0.17
+  FILL Wed 11-18 03:48 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     20 @ 0.690 | others: before 0.62 +10m 0.62 +1h 0.80 +6h 0.48 +24h 0.52
+  FILL Wed 11-18 03:48 kai-cenat-finish-his-gta-vi-marathon-by-dece T LONG yes     27 @ 0.900 | others: before 0.90 +10m 0.92 +1h 0.92 +6h 0.89 +24h 0.88
+  FILL Wed 11-18 03:48 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     50 @ 0.900 | others: before 0.41 +10m 0.92 +1h 0.92 +6h 0.78 +24h 0.77
+  jump Wed 11-18 04:00 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.62 -> 0.80 (2 trades)
+  FILL Wed 11-18 04:02 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     85 @ 0.750 | others: before 0.62 +10m 0.80 +1h 0.80 +6h 0.48 +24h 0.50
+  FILL Wed 11-18 04:32 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    340 @ 0.100 | others: before 0.12 +10m 0.11 +1h 0.10 +6h 0.08 +24h 0.04
+  jump Wed 11-18 09:00 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.67 -> 0.48 (13 trades)
+  FILL Wed 11-18 15:42 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes   2910 @ 0.031 | others: before 0.05 +10m 0.02 +1h 0.01 +6h 0.03 +24h 0.05
+  FILL Wed 11-18 15:43 kai-cenat-finish-his-gta-vi-marathon-by-nove M SHORTyes     10 @ 0.040 | others: before 0.05 +10m 0.06 +1h 0.01 +6h 0.02 +24h 0.06
+  FILL Wed 11-18 15:50 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    705 @ 0.490 | others: before 0.48 +10m 0.50 +1h 0.19 +6h 0.41 +24h 0.60
+  FILL Wed 11-18 15:53 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    800 @ 0.680 | others: before 0.67 +10m 0.68 +1h 0.53 +6h 0.71 +24h 0.81
+  jump Wed 11-18 16:00 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.26 -> 0.07 (19 trades)
+  FILL Wed 11-18 16:01 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes   1003 @ 0.210 | others: before 0.26 +10m 0.14 +1h 0.09 +6h 0.11 +24h 0.29
+  FILL Wed 11-18 16:05 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    180 @ 0.021 | others: before 0.02 +10m 0.02 +1h 0.01 +6h 0.03 +24h 0.06
+  FILL Wed 11-18 16:09 kai-cenat-finish-his-gta-vi-marathon-by-dece T LONG yes    297 @ 0.770 | others: before 0.79 +10m 0.80 +1h 0.83 +6h 0.87 +24h 0.89
+  jump Wed 11-18 16:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.39 -> 0.19 (3 trades)
+  FILL Wed 11-18 16:33 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    383 @ 0.343 | others: before 0.35 +10m 0.19 +1h 0.30 +6h 0.43 +24h 0.52
+  FILL Wed 11-18 16:37 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    116 @ 0.620 | others: before 0.60 +10m 0.63 +1h 0.56 +6h 0.73 +24h 0.81
+  FILL Wed 11-18 16:38 kai-cenat-finish-his-gta-vi-marathon-by-dece T LONG yes     37 @ 0.770 | others: before 0.78 +10m 0.78 +1h 0.86 +6h 0.86 +24h 0.90
+  FILL Wed 11-18 17:32 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     50 @ 0.550 | others: before 0.62 +10m 0.56 +1h 0.62 +6h 0.73 +24h 0.80
+  FILL Wed 11-18 18:39 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    787 @ 0.630 | others: before 0.62 +10m 0.63 +1h 0.64 +6h 0.77 +24h 0.79
+  FILL Wed 11-18 18:49 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    274 @ 0.020 | others: before 0.03 +10m 0.03 +1h 0.02 +6h 0.03 +24h 0.15
+  FILL Wed 11-18 18:49 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    224 @ 0.109 | others: before 0.13 +10m 0.13 +1h 0.10 +6h 0.14 +24h 0.35
+  jump Thu 11-19 17:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.57 -> 0.74 (8 trades)
+  FILL Fri 11-20 04:15 kai-cenat-finish-his-gta-vi-marathon-by-nove M LONG yes      6 @ 0.100 | others: before 0.11 +10m 0.11 +1h 0.11 +6h 0.14 +24h 0.14
+  FILL Fri 11-20 04:31 kai-cenat-finish-his-gta-vi-marathon-by-nove M LONG yes    100 @ 0.100 | others: before 0.11 +10m 0.12 +1h 0.11 +6h 0.14 +24h 0.22
+  FILL Fri 11-20 04:41 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    638 @ 0.123 | others: before 0.12 +10m 0.11 +1h 0.11 +6h 0.14 +24h 0.19
+  FILL Fri 11-20 16:18 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    278 @ 0.120 | others: before 0.12 +10m 0.11 +1h 0.12 +6h 0.15 +24h 1.00
+  FILL Fri 11-20 16:37 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     49 @ 0.110 | others: before 0.11 +10m 0.11 +1h 0.13 +6h 0.13 +24h 1.00
+  FILL Fri 11-20 23:52 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    655 @ 0.110 | others: before 0.11 +10m 0.11 +1h 0.15 +6h 0.27 +24h 1.00
+  FILL Sat 11-21 00:22 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    452 @ 0.095 | others: before 0.09 +10m 0.11 +1h 0.17 +6h 0.27 +24h 1.00
+  FILL Sat 11-21 00:22 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    500 @ 0.220 | others: before 0.22 +10m 0.23 +1h 0.30 +6h 0.42 +24h 1.00
+  FILL Sat 11-21 00:28 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    360 @ 0.052 | others: before 0.04 +10m 0.07 +1h 0.11 +6h 0.18 +24h 1.00
+  FILL Sat 11-21 00:36 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    250 @ 0.138 | others: before 0.11 +10m 0.15 +1h 0.13 +6h 0.27 +24h 1.00
+  FILL Sat 11-21 00:38 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes   1012 @ 0.071 | others: before 0.07 +10m 0.07 +1h 0.09 +6h 0.20 +24h 1.00
+  FILL Sat 11-21 01:32 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    100 @ 0.086 | others: before 0.08 +10m 0.08 +1h 0.09 +6h 0.20 +24h 1.00
+  FILL Sat 11-21 01:46 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     17 @ 0.130 | others: before 0.13 +10m 0.15 +1h 0.16 +6h 0.29 +24h 1.00
+  FILL Sat 11-21 07:13 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes   1803 @ 0.813 | others: before 0.84 +10m 0.80 +1h 0.88 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 07:13 kai-cenat-finish-his-gta-vi-marathon-by-dece T SHORTyes    361 @ 0.883 | others: before 0.91 +10m 0.91 +1h 0.96 +6h 1.00 +24h 1.00
+  jump Sat 11-21 07:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.56 -> 0.71 (12 trades)
+  FILL Sat 11-21 08:26 kai-cenat-finish-his-gta-vi-marathon-by-nove M LONG yes     90 @ 0.222 | others: before 0.21 +10m 0.22 +1h 0.95 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 08:26 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    872 @ 0.314 | others: before 0.21 +10m 0.30 +1h 0.97 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 08:26 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     77 @ 0.511 | others: before 0.48 +10m 0.60 +1h 0.97 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 08:29 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    290 @ 0.448 | others: before 0.39 +10m 0.26 +1h 0.97 +6h 1.00 +24h 1.00
+  jump Sat 11-21 08:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.36 -> 0.73 (126 trades)
+  jump Sat 11-21 08:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.44 -> 0.81 (42 trades)
+  jump Sat 11-21 08:30 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.60 -> 0.88 (36 trades)
+  FILL Sat 11-21 08:38 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes    288 @ 0.296 | others: before 0.29 +10m 0.43 +1h 0.92 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 08:39 kai-cenat-finish-his-gta-vi-marathon-by-nove M LONG yes      5 @ 0.308 | others: before 0.32 +10m 0.43 +1h 0.92 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 08:40 kai-cenat-finish-his-gta-vi-marathon-by-nove T LONG yes     80 @ 0.394 | others: before 0.33 +10m 0.77 +1h 0.94 +6h 1.00 +24h 1.00
+  jump Sat 11-21 09:00 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.73 -> 0.97 (39 trades)
+  jump Sat 11-21 09:00 kai-cenat-finish-his-gta-vi-marathon-by-nove 0.81 -> 0.97 (19 trades)
+  FILL Sat 11-21 09:08 kai-cenat-finish-his-gta-vi-marathon-by-dece M SHORTyes   1800 @ 0.980 | others: before 0.97 +10m 0.99 +1h 1.00 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 09:24 kai-cenat-finish-his-gta-vi-marathon-by-nove T SHORTyes    428 @ 0.963 | others: before 0.98 +10m 0.97 +1h 1.00 +6h 1.00 +24h 1.00
+  FILL Sat 11-21 09:31 kai-cenat-finish-his-gta-vi-marathon-by-dece T SHORTyes   1000 @ 0.990 | others: before 0.99 +10m 1.00 +1h 1.00 +6h 1.00 +24h 1.00

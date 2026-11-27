@@ -403,3 +403,100 @@ read site, plus the list of distinct outbound hostnames per repo. Result: no exf
 For x-MoneyForWhiskas the identity holds (NOTES.md). Both failing wallets have large fees in Jan-Apr 2026, so
 the suspect is fee accounting for that period (fees taken in shares and already inside trade_pnl?). Until that is
 resolved, "net" for any wallet active before ~May 2026 is uncertain by the size of its fee line.
+
+## Verification pass
+
+Sceptic's check of this catalog, 2026-11-27 (about 15:30-16:10 UTC). Nothing was executed from any clone. Scripts
+I wrote are in `catalog/raw/w2_verify_scripts/` (`scan.py`, `scan2.py`, `hf_vs_routine.py`); each has its rule in
+the header, written before the run. Variants run: negRisk scan 2 (the second only changes how "fully quoted" is
+counted), weather feed-vs-settlement 1.
+
+### What I checked
+- Sources. Fetched seven files from `raw.githubusercontent.com/<owner>/<repo>/HEAD/...` and compared them byte for
+  byte with the clones: poly-maker `TIPS.md`, abrownfox `README.md`, doge-8 `strategies/d1.ts`, polybot
+  `research/backtest/backtest_report.json`, PolyWeather `docs/DATA_SOURCES_ZH.md`, matthewnyc2
+  `arbitrage/engine/opportunity.py`, humanplane `README.md`. All identical, so the clones are what is public today.
+  Every quoted number I grepped for is at the stated place (TIPS.md lines 30, 68, 76-77, 85; strategy.toml lines 4,
+  46-47; backtest_report.json lines 68-70; d1.ts lines 10-12 and 34; abrownfox README lines 18, 42, 45, 129-130,
+  162-163; opportunity.py lines 48-49; suislanchez README line 261; meloner3 `rust-backend/src/core/calculator.rs`
+  lines 14, 33, 67 — note the path has a `rust-backend/` prefix; realfishsam README lines 163, 165; PolyKiller
+  README line 3; humanplane README lines 23, 27, 37, 39, 69, 73).
+- sfmm: PyPI JSON API confirms v0.1.0 uploaded 2026-04-05, the pool table, "3x", mid ± 1 tick, 1 s live polling,
+  10 s cooldown. Its GitHub repo returns 404.
+- "Not obtainable" list: re-tested 5 of the 25 names (spfunctions/polymarket-sports-mm,
+  dev-protocol/polymarket-copytrading-bot-sport, Xeron2000/wedge, vladmeer/polymarket-copy-trading-bot,
+  hu553in/polybot): raw README 404 and `git ls-remote` asks for credentials, while the control (warproxxx/poly-maker)
+  answers. Confirmed for those five.
+- dev.to: opened through the dev.to API. `michaelmustopo/...-36cf` (published 2026-07-08, outside the three-month
+  window) does say "870 cross-venue price gaps in one 24-hour window, median time open about 9 seconds, 96 percent
+  closed inside 30", and also "barely any sizable arbitrage" and "$439 net of fees across the whole match against
+  $20.8 million" for one football match. `abrownfox001/what-actually-changed-for-bots-63l` exists (2026-09-10) and
+  links the repo, Telegram and the profile; it states the taker delay went 50 ms -> 150 ms on Sep 4.
+- Wallets: re-ran `python3 -I tools/wallet_check.py <w> --monthly` on both (the tool now prints refunds).
+  Gamma resolves profile `abrownfox001` (pseudonym Wretched-Notice) to 0x12b7…1b0b, same as the README.
+- X: `xread.py timeline` works (appledog_xyz is posting on 2026-11-27) but returns 404 for `x_188888_x` (doge-8) and
+  `warproxxx`, so neither author's recent statements could be read.
+- Own data checks: negRisk snapshot re-run; current reward terms from gamma for politics, sports and weather; the
+  text of a live weather market's resolution rule; MADIS and aviationweather reachability; 87 days of KLGA
+  observations from the Iowa Mesonet archive (5-minute feed vs routine METAR).
+
+### What I changed, and why
+1. **Both wallet readings in sections 3.3 and 3.5 are wrong and the "tool caveat" in section 5 is resolved.**
+   The fee line is the gross charge; 97% of gabagool22's and 77% of abrownfox001's fees were refunded
+   (`fees_refunded`), all of it in January-April 2026.
+   - gabagool22: gross 867,687; fees charged −1,674,493, refunded +1,619,798; maker rebates 50,511; yield and
+     referral 1,805; kept 865,310 = +1.21% of $71.4M; rebates are 6% of what was kept. NET kept by month:
+     2025-10 5,224; 11 134,488; 12 299,558; 2026-01 270,156; 02 154,079; then 287-641 a month of yield until
+     June and zero fills from March on. The figures "−526,623" and "−668,941" must not be quoted. The wallet
+     did not stop because fees ate it: it stopped at the end of February 2026 while its fees were still being
+     refunded. It never traded under fees that stuck, so it says nothing about today's rules either way.
+   - abrownfox001: gross 19,353; fees charged −78,291, refunded +60,639 (none after April); rebates 5,784
+     (taker 760, maker 5,024); kept 7,617 = +0.49% of $1.56M; 76% of what was kept is rebates. NET kept by
+     month Jan..Nov 2026: 517, 111, 1,540, 459, 1,274, 1,601, 836, 463, 522, 62, 236. Without rebates the eleven
+     months sum to +1,838 (0.12% of volume). From May, when refunds ended, fees are about equal to gross (May
+     3,419 gross vs 3,263 fees; Jul 3,637 vs 3,975). Volume fell from $250K (May) to $13K (November). The
+     series "−4,372, −18,076, −26,963, −8,601" must not be quoted. Verdict unchanged (the +24.5% ROI story is
+     not in the wallet), numbers replaced.
+2. **Weather candidate: the mechanism as written does not match how the markets settle.** The live NYC market
+   (highest-temperature-in-nyc-on-november-27-2026) says the qualifying value is the highest temperature in the
+   hourly T-group remark of any ROUTINE METAR (SPECI excluded), in tenths of a degree C, converted with
+   F = C*9/5+32 and rounded half-up, source `aviationweather.gov/api/data/metar`; Weather Underground is only the
+   fallback. So about 24 readings a day count, and a 5-minute or 1-minute feed's running maximum is not the
+   settlement value. Test (rule first, one variant): KLGA, 87 local days 2026-09-01..11-26, IEM archive, routine
+   reports (2,087) vs MADIS HFMETAR (24,907 five-minute reports): the feed's daily maximum gives a different
+   whole-degree F than the routine maximum on 64 of 87 days (74%) and a different 2 F bucket on 45 days (52%);
+   it is higher on 57 days; median gap +0.72 F, largest +3.24 F. A bucket is therefore certain only when a routine
+   METAR prints it. The useful version of the idea: the fast feed nowcasts the next routine print to a few tenths
+   and shows when the afternoon peak has passed. I rewrote the candidate that way and lowered credibility 3 -> 2
+   (data product, no trading results, premise half wrong). Still the best time-gap lead in this file.
+   MADIS is reachable from this sandbox (hourly `.gz` files rewritten every few minutes), and the IEM `asos.py`
+   endpoint serves the same 5-minute reports as `report_type=1`, so the backtest can be built here.
+3. **Reward terms re-measured (gamma, 2026-11-27).** Newsom 2028 nomination leg: 0.093/0.094, minimum 200
+   shares (was 100 in July), band 5.5c, $67/day, fee rate 0.05. Both Romania events are closed. A two-sided quote
+   at minimum size there is 200 YES at ~0.09 ($19) plus 200 NO at ~0.90 ($181): one market takes the whole
+   stake, not "2-4 markets". EPL match today: minimum 1,000 shares, band 2.5c, $100/day per moneyline leg, $200
+   on the main total and spread; the 40 largest open sports events carry $839/day in total over 31 markets. I
+   could not find anything like sfmm's "$10,000 per EPL game" in these fields. Sports variant dropped (repo gone,
+   pool figures not confirmed, 1,000-share minimum is beyond the lab's stake, 1 s REST polling in play).
+   Credibility of the remaining politics variant 4 -> 3: the only live evidence is a loss and reward income was
+   never measured.
+4. **negRisk snapshot replicated.** 174 negRisk events with >= 2 open legs in the top 400 by 24h volume; all 174
+   have every ask, median sum of asks 1.031; 13 below 1 before fees, 12 of them augmented, the one left is the
+   same Jensen Huang event at 0.996 + 0.0051 = 1.0011. Short side: only 45 events have every bid, median 0.98,
+   none above 1 (the researcher saw 6 before fees). 0 executable. Unchanged.
+5. **Cross-venue credibility 2 -> 1.** The one practitioner measurement cited (and now opened) concludes there is
+   no sizable arbitrage; fees on both venues exceed the usual gap; Kalshi access from Serbia is still unverified
+   (Kalshi publishes no list of supported countries; third-party pages list 55 restricted jurisdictions and I could
+   not see whether Serbia is one).
+6. **gabagool22 candidate credibility 3 -> 2.** The wallet is real and kept 1.2% of volume, but under refunded
+   fees, it has been idle for nine months, and the repo's own replica loses.
+7. Taker delay corrected in the BTC 5m candidates: 50 ms from 2026-08-17, 150 ms since 2026-09-04 (NOTES.md).
+
+### Missed by the first pass
+- Weather markets carry liquidity rewards: 630 of 2,880 open weather markets have a daily rate, $14.7K/day in
+  total, median $10/day per market, minimum 20 shares, band 4.5c, median book liquidity of a rewarded market
+  $471, taker fee 0.01. This is the only reward programme whose minimum size fits a couple hundred euros. The
+  HF dataset `Houroux/polymarket-l2-history` has temperature markets with L2 and trades, so reward share and
+  adverse selection around each routine METAR print can be measured.
+- The settlement rule of the weather markets (above) was not read; neither was any current reward term.
+- Capital for two-sided quoting was understated (the NO bid on a 9-cent market costs 90 cents a share).

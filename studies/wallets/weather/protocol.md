@@ -16,3 +16,22 @@ numbers by time bucket are per fill but confidence statements are per market/day
 (shorter if truncated). Every script variant run is counted in README.md.
 Selection rule for accounts: >= 1000 lifetime markets, average fill < ~$50, rebates < 25% of kept, at least 2 of last
 3 months positive, plus one larger-ticket account as a contrast.
+
+## Addendum 2 (written before fetching any price history, 2026-11-27)
+H4 "pre-day mispricing": WrongBy1Degree's profit is concentrated in buying NO at ~0.65 before the local day starts.
+If that is a market-wide bias and not this account's model, then for ALL temperature markets in our set (the union of
+markets touched by the 7 accounts, ~3.7K), the YES price at the station's local midnight (est) in the band 0.20-0.60
+should exceed the realised YES frequency by more than 3 cents. Test: YES price = last 30-min prices-history point at or
+before est-24h, est, est+9h, est+13h; calibration table by price band; cluster by event; report first half (event dates
+<= Nov 19) and second half (>= Nov 20) separately. Naive rule to cost: buy NO at (1 - YES mid) + 2c slippage, fee
+0.01*p*(1-p) (current rate), hold to settlement. One variant only; anything else is reported as exploratory.
+Known bias: the set contains only markets that at least one of the 7 accounts traded (far-tail buckets are missing).
+
+## Addendum 3 (written before pulling any market tape, 2026-11-27)
+H5 "latency niche size and what is left for the official feed". Unit: a kill = (market, first routine report whose value
+is above the bucket top), local days from Nov 22 on (AWC receipt times available). From the full market tape take every
+taker fill that is long NO (BUY No or SELL Yes) at an effective NO price < 0.985 in three windows:
+  A [report time - 5 min, AWC receipt), B [AWC receipt, receipt + 60 s), C [receipt + 60 s, receipt + 15 min).
+Profit of a fill = shares * (1 - NO price) - fee(0.01). Report $ and profit per window, number of kills with any fill,
+top wallets. Prediction if a slow copier (polling the official source) has a chance: window C holds a material share
+(> 20%) of the profit. Prediction if it is a pure speed race: > 80% in window A. One variant.

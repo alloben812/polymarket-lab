@@ -1,0 +1,10 @@
+TheElement115  before 11-21 taker fills=  74 base=      4818 fees charged=   -176.2 implied rate=0.0366
+TheElement115  after 11-21  taker fills=   2 base=         4 fees charged=     -3.4 implied rate=0.8679
+road2million   before 11-21 taker fills=  67 base=      2503 fees charged=    -89.7 implied rate=0.0359
+road2million   after 11-21  taker fills=   1 base=         4 fees charged=     -1.4 implied rate=0.3794
+GoldmanSachs   before 11-21 taker fills=  54 base=     53612 fees charged=  -2561.1 implied rate=0.0478
+GoldmanSachs   after 11-21  taker fills=   5 base=      2343 fees charged=    -23.4 implied rate=0.0100
+perfectnosta   before 11-21 taker fills= 305 base=     40416 fees charged=  -1700.1 implied rate=0.0421
+perfectnosta   after 11-21  taker fills=   8 base=      1492 fees charged=    -31.0 implied rate=0.0208
+ATCapital      before 11-21 taker fills= 722 base=    138909 fees charged=  -5123.5 implied rate=0.0369
+ATCapital      after 11-21  taker fills= 122 base=     33156 fees charged=   -338.8 implied rate=0.0102

@@ -1,0 +1,15 @@
+universe volume per market: median $482, p75 $1275, p90 $3011, max $308287; markets 1382; clean jumps 131
+  QuantDeLaFugazi        0x66c1a6fe836ff555ca32848646acedbbe93bfa3f jumps<=10s  26 (<=60s  27) first-printer  11 events 17 types {'live': 29, 'period': 1} usd    3744 median px 0.972 locked profit $295
+  oidocrop               0x23c46463c281deb26a041fdcc24ae9c5d7629c42 jumps<=10s  18 (<=60s  23) first-printer   9 events 13 types {'live': 17, 'earnings': 1, 'period': 1} usd    2880 median px 0.987 locked profit $66
+  BipBop                 0x9ba43501360dcacaca09caa523401c7447d8f8c2 jumps<=10s  13 (<=60s  13) first-printer   6 events  8 types {'live': 13} usd    1193 median px 0.940 locked profit $105
+  big-bird1              0xa58f84122535fbe42cec75d70e24ba0dd7e7cec8 jumps<=10s  12 (<=60s  14) first-printer   0 events 11 types {'live': 12} usd      43 median px 0.985 locked profit $1
+  alsdkfjasd             0xc6cb9289841eace1219abc274c4c6c6d07167926 jumps<=10s  12 (<=60s  13) first-printer   6 events  6 types {'live': 36} usd    1310 median px 0.980 locked profit $49
+  ENORMOUZ               0x34dabb463594b4de13cc583c33d83d5a46bdc155 jumps<=10s  10 (<=60s  20) first-printer   4 events  9 types {'earnings': 2, 'live': 6, 'period': 2} usd    2096 median px 0.981 locked profit $90
+  0xCc97Bbe4AEc6a9797100 0xcc97bbe4aec6a9797100211eb206f62f443e79b7 jumps<=10s  10 (<=60s  10) first-printer  10 events  8 types {'live': 10} usd     302 median px 0.897 locked profit $51
+  Trufa-Negra            0xd7b699d42ca107b8272067d08a396856c6e22ccd jumps<=10s   8 (<=60s   8) first-printer   3 events  7 types {'earnings': 1, 'live': 6, 'period': 1} usd       9 median px 0.960 locked profit $0
+  lakemichigan           0xcb59c3db857bae4b9dd41385b152c5d607aee21d jumps<=10s   6 (<=60s   6) first-printer   3 events  5 types {'live': 6} usd     534 median px 0.743 locked profit $152
+  BlondBeast             0x852a61deac7872fff2c6a80ee82c059d6a8d3188 jumps<=10s   6 (<=60s   6) first-printer   4 events  3 types {'live': 7} usd     780 median px 0.943 locked profit $35
+  0x8A62D1e12E7Ea015fB28 0x8a62d1e12e7ea015fb2896577d7e41b11c0669b2 jumps<=10s   6 (<=60s   7) first-printer   1 events  3 types {'live': 10} usd      30 median px 0.980 locked profit $1
+  0xed347c34             0xed347c348f03d58409978c4ebf04c31cdb458780 jumps<=10s   5 (<=60s   5) first-printer   1 events  3 types {'live': 5} usd      51 median px 0.970 locked profit $2
+  random-random123       0xa1ccbdf50b8674fe41e9cccd8af208dc44b5fa62 jumps<=10s   5 (<=60s   5) first-printer   0 events  5 types {'live': 5} usd      13 median px 0.980 locked profit $0
+  doctorno99             0x4e2de27450ab8222b3cad8353731779c6f304936 jumps<=10s   5 (<=60s   5) first-printer   0 events  5 types {'live': 5} usd      29 median px 0.990 locked profit $0

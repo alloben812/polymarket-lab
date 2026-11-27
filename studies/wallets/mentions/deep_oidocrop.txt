@@ -1,0 +1,53 @@
+== oidocrop 0x23c46463c281deb26a041fdcc24ae9c5d7629c42 window 45d truncated=False fills=660 usd=58037 | mention fills=501 markets=293 usd=47228 (81% of turnover)
+resolved mention markets=292 unresolved=1 | net after fee $2708 | market win rate 289/292 | t(by market)=3.12 | events=64 positive events=62
+sizing: median $98/market, p90 $364, max $4268; max markets touched in one day 26; days active 35; shares bought 44514 sold 6351 (sell/buy 0.14)
+by phase:
+  ('JUMP',)                                  fills=  161 mk= 120 usd=    17696 pnl=    876.5 (   5.0% of usd) mk_win=120/120
+  ('LIVE',)                                  fills=   46 mk=  19 usd=     4209 pnl=   1081.0 (  25.7% of usd) mk_win=18/19
+  ('NODET',)                                 fills=    2 mk=   2 usd=      269 pnl=     70.9 (  26.4% of usd) mk_win=2/2
+  ('NOSTART',)                               fills=   15 mk=   5 usd=      684 pnl=    428.6 (  62.6% of usd) mk_win=5/5
+  ('POST',)                                  fills=  269 mk= 169 usd=    24235 pnl=    244.2 (   1.0% of usd) mk_win=158/169
+  ('PRE',)                                   fills=    6 mk=   4 usd=      104 pnl=      7.3 (   7.0% of usd) mk_win=2/4
+by phase, role, direction:
+  ('JUMP', 'M', 'longYes')                   fills=   35 mk=  24 usd=     1768 pnl=    148.2 (   8.4% of usd) mk_win=24/24
+  ('JUMP', 'T', 'longYes')                   fills=  126 mk= 113 usd=    15928 pnl=    728.3 (   4.6% of usd) mk_win=113/113
+  ('LIVE', 'M', 'longNo')                    fills=    6 mk=   5 usd=       53 pnl=     17.8 (  33.3% of usd) mk_win=3/5
+  ('LIVE', 'M', 'longYes')                   fills=   11 mk=   6 usd=      347 pnl=    275.1 (  79.3% of usd) mk_win=5/6
+  ('LIVE', 'T', 'longNo')                    fills=   17 mk=  14 usd=     1286 pnl=    218.1 (  17.0% of usd) mk_win=11/14
+  ('LIVE', 'T', 'longYes')                   fills=   12 mk=   7 usd=     2523 pnl=    570.0 (  22.6% of usd) mk_win=6/7
+  ('NODET', 'T', 'longYes')                  fills=    2 mk=   2 usd=      269 pnl=     70.9 (  26.4% of usd) mk_win=2/2
+  ('NOSTART', 'M', 'longYes')                fills=    2 mk=   2 usd=      115 pnl=      1.2 (   1.0% of usd) mk_win=2/2
+  ('NOSTART', 'T', 'longNo')                 fills=    1 mk=   1 usd=       22 pnl=     19.1 (  84.7% of usd) mk_win=1/1
+  ('NOSTART', 'T', 'longYes')                fills=   12 mk=   4 usd=      546 pnl=    408.3 (  74.7% of usd) mk_win=4/4
+  ('POST', 'M', 'longNo')                    fills=   34 mk=  21 usd=     3548 pnl=    -90.4 (  -2.5% of usd) mk_win=10/21
+  ('POST', 'M', 'longYes')                   fills=   69 mk=  43 usd=     4809 pnl=    163.0 (   3.4% of usd) mk_win=41/43
+  ('POST', 'T', 'longNo')                    fills=   96 mk=  85 usd=     9183 pnl=     33.0 (   0.4% of usd) mk_win=70/85
+  ('POST', 'T', 'longYes')                   fills=   70 mk=  62 usd=     6695 pnl=    138.6 (   2.1% of usd) mk_win=61/62
+  ('PRE', 'M', 'longNo')                     fills=    2 mk=   2 usd=       29 pnl=    -28.7 (-100.0% of usd) mk_win=0/2
+  ('PRE', 'M', 'longYes')                    fills=    1 mk=   1 usd=       30 pnl=     20.0 (  66.7% of usd) mk_win=1/1
+  ('PRE', 'T', 'longNo')                     fills=    1 mk=   1 usd=        8 pnl=     -8.1 (-100.4% of usd) mk_win=0/1
+  ('PRE', 'T', 'longYes')                    fills=    2 mk=   2 usd=       37 pnl=     24.1 (  64.5% of usd) mk_win=2/2
+by role, side:
+  ('M', 'BUY')                               fills=  133 mk=  81 usd=     7533 pnl=    652.5 (   8.7% of usd) mk_win=80/81
+  ('M', 'SELL')                              fills=   27 mk=  17 usd=     3166 pnl=   -146.2 (  -4.6% of usd) mk_win=1/17
+  ('T', 'BUY')                               fills=  316 mk= 266 usd=    33674 pnl=   2255.3 (   6.7% of usd) mk_win=264/266
+  ('T', 'SELL')                              fills=   23 mk=  19 usd=     2825 pnl=    -53.1 (  -1.9% of usd) mk_win=2/19
+by price of the eventual winner at fill time:
+  ('onLoser', '.2-.5')                       fills=    5 mk=   3 usd=       54 pnl=    -54.8 (-101.4% of usd) mk_win=0/3
+  ('onLoser', '.5-.8')                       fills=    1 mk=   1 usd=       25 pnl=    -25.0 (-100.0% of usd) mk_win=0/1
+  ('onLoser', '.8-.95')                      fills=    4 mk=   3 usd=     1083 pnl=   -112.2 ( -10.4% of usd) mk_win=0/3
+  ('onLoser', '.95-.99')                     fills=    2 mk=   1 usd=     1467 pnl=    -77.2 (  -5.3% of usd) mk_win=0/1
+  ('onLoser', '.99-1')                       fills=   35 mk=  20 usd=     3390 pnl=     -4.1 (  -0.1% of usd) mk_win=0/20
+  ('onLoser', '0-.05')                       fills=    2 mk=   2 usd=      300 pnl=   -300.4 (-100.0% of usd) mk_win=0/2
+  ('onWinner', '.05-.2')                     fills=    9 mk=   4 usd=       69 pnl=    532.9 ( 775.9% of usd) mk_win=4/4
+  ('onWinner', '.2-.5')                      fills=    8 mk=   5 usd=      176 pnl=    273.7 ( 155.5% of usd) mk_win=5/5
+  ('onWinner', '.5-.8')                      fills=   23 mk=  14 usd=     3012 pnl=   1322.1 (  43.9% of usd) mk_win=14/14
+  ('onWinner', '.8-.95')                     fills=   35 mk=  23 usd=     4341 pnl=    633.8 (  14.6% of usd) mk_win=23/23
+  ('onWinner', '.95-.99')                    fills=  162 mk= 159 usd=    19797 pnl=    384.9 (   1.9% of usd) mk_win=159/159
+  ('onWinner', '.99-1')                      fills=  212 mk= 143 usd=    13484 pnl=    129.7 (   1.0% of usd) mk_win=143/143
+  ('onWinner', '0-.05')                      fills=    1 mk=   1 usd=        0 pnl=      5.0 ( 500.0% of usd) mk_win=1/1
+buys at price>=0.95 by phase (usd): {'POST': 16468, 'JUMP': 15161, 'NOSTART': 336, 'LIVE': 1615} -> share in JUMP/POST = 94%
+Yes-resolved markets traded=208; with a TAKER long-Yes fill inside the jump window at yes_px<0.90: 6 (3%)
+  taker long-Yes jump fills n=126 lag vs first print>=0.60: median 9s p25 0s p75 16025s; median yes_px 0.982; median tape rank 1; pnl $728
+  maker fills inside jump windows n=35 longYes=35 longNo(picked off)=0 pnl $148
+largest events by |pnl|: [('what-will-trump-say-during-his-midterm-rally-in-', 609), ('what-will-caedrel-say-during-his-worlds-2026-fin', 502), ('what-will-trump-say-during-60-minutes-extended-i', 435), ('what-will-bank-of-america-say-during-their-next-', 215), ('what-will-be-said-during-the-michigan-us-senate-', 194), ('what-will-robinhood-say-during-their-next-earnin', -173), ('what-will-tesla-say-during-their-next-earnings-c', 134), ('what-will-nvidia-say-during-their-next-earnings-', 105), ('what-will-google-say-during-their-next-earnings-', 93), ('what-will-trump-say-during-his-midterm-rally-in-', 87), ('what-will-trump-say-during-his-midterm-rally-in-', 30), ('what-will-dell-say-during-their-next-earnings-ca', 30)]

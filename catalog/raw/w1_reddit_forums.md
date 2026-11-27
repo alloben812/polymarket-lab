@@ -274,3 +274,97 @@ monthly volume. Jan–Apr gross sums to 4,961 vs his claimed 4,973: the blog is 
    job ad).
 5. On a headline news market the measured repricing took about a minute — slow enough for a watcher with a news feed,
    but it is one case.
+
+## Verification pass (2026-11-27, second reader)
+
+Scope: all 13 candidates. I re-downloaded every cited page that is reachable (both BlockJuice articles, four
+kacho.io posts, the Huang investigation, Action Network, two PredictPnL articles, Wired, five dev.to posts,
+chudi.dev, seven HN items, two arXiv abstracts), re-ran `wallet_check --monthly` on RN1, b00k13, WarriorPooh,
+slip-me, Dava1414, abrownfox001, ljhggk, and pulled the full tape of BOTH Huang markets myself. Not reachable:
+the Reddit thread (WebSearch returns only the Action Network summary), Bloomberg. About 22 tool calls.
+
+### What held up
+
+- RN1 / BlockJuice: every figure I looked for is in the article text (911,860 fills, 222.5M spent, +1.6M = 0.71%,
+  935K payments, 2.53M total, pairs +2.1M, leftovers -486K, in-game quoting +1.13M, pre-game quoting -283K of which
+  227K from fills an hour or more before start, takes +1.36% / +7.36% = +497K / +243K, 42,885 wallets, top 50 takers
+  -504K, busiest 37,654 fills +169K, ITF -331K, 39 losing days of 92, drawdown 323K). Wallet tool matches section 2.
+- Kacho / b00k13: blog numbers confirmed (3,858 bets, $95,830, +$4,973, +$8.3K arb, -$3,184 directional, 2,555
+  matches, fill rate 37% -> 15% -> 5% -> 1%, -$509 in other sports, 5-minute odds at ~$3/day, "you'll mostly donate
+  to faster bots"). Wallet: kept 6,058; Sep 285, Oct 192, Nov 91 (to the 27th). No newer posts on kacho.io after
+  2026-08-13.
+- slip-me, Dava1414: wallet figures in section 4 are right. The blog's "+$111K" is the profile number before fees
+  (trade_pnl was +131.6K by end of April); after fees net of refunds March-April were -14.6K.
+- Action Network (published 2026-09-03, updated 09-04), PredictPnL x2, Wired, the HN comments and both arXiv
+  abstracts say what the notes say.
+
+### What I corrected
+
+1. **Huang: the release was public at about 13:55 UTC, not 13:30.** The article says 14:30 CET, but a comment in the
+   same HN thread (id 50627566) lists NVDA stock and S&P futures minute bars: flat on light volume at 08:30 and 08:54
+   EST, +11% on heavy volume at 08:55 EST. That matches the tape: first aggressive prints 13:55:53-13:56:01 UTC. So
+   the "market ignored the release for 25 minutes" reading is wrong; the Polymarket book moved in the same minute as
+   the stock.
+2. **WarriorPooh was not simply the first to react.** It bought 17,432 YES at 0.115 at 13:30:59 and another 16,247 at
+   0.123 at 13:31:11 (the notes list only the first), and Pulser bought 13,292 at 0.13 at 13:31:47-55: 47K shares
+   about 24 minutes BEFORE the news was public. WarriorPooh then bought 51,689 more at 13:55:55-56, plus 46,396 YES
+   at 0.04 in the "by November 30" market. Its profit on the event is about 118K of the 170K it kept in November,
+   and November is 49% of everything it has ever kept. It stays positive in all 12 months, but it is not a clean
+   example of public-news reaction; treat the early buys as possibly informed.
+3. **The first print at 13:55 was not WarriorPooh**: `nimble-mellow-comet` bought 50,980 YES at 0.124 at 13:55:53
+   (account opened 2026-10-13, 69 markets, 511 fills, kept 194,892, of which 195,409 in November), then WarriorPooh
+   at :55-:56, then `brohop` 18,517 at 0.20 at 13:56:01 (98 markets, 375 fills, kept 29,331 on $51.8K volume;
+   Sep +4,522, Nov +21,582). A profile named `Tree.news` is in the tape at 13:55:55 (527 shares).
+4. **How much was left for a slower reader.** Counting taker buys of YES from 13:55:50: Dec-31 market 103.5K shares
+   under 0.30 in the first 10 s; 18.5K under 0.30 and 3.8K at 0.30-0.70 in seconds 10-20; 3.8K at 0.30-0.70 in
+   seconds 20-40; 3.8K at 0.30-0.70 and 18.0K at 0.70-0.90 in seconds 40-70; everything after 70 s at 0.90+.
+   Nov-30 market: 67.1K under 0.30 in 10 s; 54.6K at 0.30-0.70 in seconds 20-40 (29.2K of it one wallet at 0.50);
+   6.9K at 0.70-0.90 in seconds 40-70. So someone 20-70 s behind the first print bought at 0.50-0.85, and the whole
+   crowd got about 26K shares that way in one market, not "tens of thousands" for one buyer. Time from first print
+   to 0.90: 74 s (Dec 31) and 66 s (Nov 30). Both markets are the same event: still one sample.
+5. **The "bought at 0.99" prints were a stop-out.** `Tigerofthehood` SOLD 68,991 NO at 0.003-0.010 (Dec 31) and 66,465
+   NO at 0.032 (Nov 30) at 13:57. It had bought NO at 0.90 and 0.958 as a taker on 16-17 November (15,620 and 35,000
+   shares visible; the rest of the position came from fills the taker tape does not show). Loss on the visible part
+   about 46K, about 120K if the rest cost the same. Wallet: $38.9M volume, kept 270,051 = 0.69% of volume, three
+   losing months (Feb -26,930, Jul -44,006, Nov -52,140). This is a named wallet for the "bond" candidate and the
+   clearest picture of its tail.
+6. **The sister market did not "stay at 0.02-0.03 the whole time"**: it did until 13:55 and then resolved YES with
+   more volume ($5.78M) than the Dec-31 market. The article's "jumped instantly from 0.065 to 0.14 after Trump" is
+   not in the tape either (0.078 -> 0.11 over an hour), and 43K shares traded at 0.073 at 03:00-03:30 UTC, before
+   the 03:57 post.
+7. **ljhggk** (0xdf8616e1...06bb): joined 2026-11-18, 8 markets, 79 fills, kept 119,838 on $44K volume, total taker
+   fees $2: its 71,518 shares at 0.065 were resting bids that got filled, as the article says ("ordres limites").
+8. **abrownfox001**: the notes omit 60,639 of refunded fees. Jan-Apr was not "58K down": month by month the account
+   kept +517, +111, +1,540, +459. All months: May 1,274, Jun 1,601, Jul 836, Aug 463, Sep 522, Oct 62, Nov 236.
+   Without rebates it kept 1,838 on $1.56M (0.12% of volume); 76% of what it kept is rebates. Conclusion unchanged:
+   the author of the "45-second edge" post does not show that edge.
+9. **Maker tier 4 starts at $10M** of 30-day maker weighted volume (docs, `data/pm_docs/programs_maker-rebates.md`),
+   not 19M; 19.1M is RN1's own figure. RN1's taker tier today is Platinum (25% under the 20-Nov table); the "half of
+   own taker fees" in the article is the Aug-Nov period (tool: 620K taker rebate against 1.36M charged since May).
+10. "4,374 fills over 1,984 markets" for RN1's pre-game takes: not found in the text of either article (may sit in a
+    chart). The +7.36% / +243K and "all its profit inside the last hour" are there, as the author's guess about why.
+11. **Weather was checkable.** The dev.to "$88K weather bot" post (ABROWNFOX001, 2026-06-12) names
+    `automatedAItradingbot`, 0xd8f8c13644ea84d62e1ec88c5d1215e436eb0f11. Wallet: shown 88,933, kept 88,375 on $365K
+    volume (24%; the post's "$3.3M volume" is the share count), rebates 0%. Monthly kept: Nov-25 21,213; Dec 10,625;
+    Jan 10,191; Feb 8,424; Mar 6,227; Apr 8,169; May 777; Jun -73; Jul 75; no trading since August. The headline is
+    true. Earnings stop in May 2026, the first month without fee refunds; volume fell from $61K to $3.5K in the same
+    month, so it mostly stopped trading (edge gone or moved to another wallet: unknown). The category is not dead: this month's weather
+    leaderboard (before fees) has 15 accounts between 6.4K and 53.4K, the top one on $195K volume.
+
+### Credibility changes
+
+- In-play score-feed latency taking: 3 -> 2. The only source that names the strategy and a wallet is an advert whose
+  author keeps 0.12% of volume before rebates; the solid source says only that 50 takers beat RN1 "but fills only
+  show that they win, not why".
+- Weather temperature buckets: 2 -> 3. One wallet verified at +88K with no rebates over seven months, then flat from
+  May 2026; live winners on the category board. Current viability is open, not shown.
+- All others unchanged. Nothing dropped: every cited source that could be opened exists and says what is claimed.
+
+### Systematic problems
+
+- Only 5 of 13 candidates rest on anything dated Sep-Nov 2026; the sports and crypto first-person numbers are from
+  before the August and November rule changes.
+- The two time-gap candidates in sports are inferred from the losing side; no winner is identified.
+- Reddit, the assignment's main target, is still one second-hand thread; its URL could not be confirmed.
+- Not followed up and worth a look: dev.to manja316 "84% of Polymarket traders lose money: I backtested 6,225
+  trades" and chumba_24 "I spent weeks analyzing profitable Polymarket wallets" (both surfaced in search, unread).

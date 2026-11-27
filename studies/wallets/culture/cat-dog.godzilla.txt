@@ -1,0 +1,119 @@
+tape row keys: ['bio', 'condition_id', 'event_slug', 'icon', 'name', 'outcome', 'outcome_index', 'price', 'profile_image', 'profile_image_optimized', 'proxy_wallet', 'pseudonym', 'side', 'size', 'slug', 'timestamp', 'title', 'token_id', 'transaction_hash']
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-less-than-28m
+   final 0.0 vol 60937.07218999999 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Sat 11-07 15:35 tape rows 848 (own taker rows 4) pnl 873
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-between-31m-and-34m
+   final 0.0 vol 57160.908974000005 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Mon 11-09 15:47 tape rows 754 (own taker rows 6) pnl 548
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-between-28m-and-31m
+   final 1.0 vol 38795.105497 end Sun 11-08 12:00 closed Mon 11-09 18:47 T90 Mon 11-09 16:05 tape rows 677 (own taker rows 7) pnl 1674
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-at-least-43m
+   final 0.0 vol 22483.218216 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Mon 11-02 04:14 tape rows 422 (own taker rows 1) pnl 60
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-between-40m-and-43m
+   final 0.0 vol 21731.148015000002 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Fri 11-06 09:30 tape rows 392 (own taker rows 1) pnl 86
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-between-37m-and-40m
+   final 0.0 vol 19205.281801 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Sat 11-07 01:01 tape rows 365 (own taker rows 2) pnl 131
+
+## will-godzilla-minus-zero-opening-weekend-box-office-be-between-34m-and-37m
+   final 0.0 vol 49897.301760999995 end Sun 11-08 12:00 closed Mon 11-09 18:37 T90 Sun 11-08 03:16 tape rows 585 (own taker rows 3) pnl -312
+
+  jump Wed 10-28 09:30 godzilla-minus-zero-between-34m-and-37m      0.63 -> 0.44 (5 trades)
+  jump Wed 10-28 14:00 godzilla-minus-zero-less-than-28m            0.12 -> 0.33 (4 trades)
+  jump Wed 10-28 18:00 godzilla-minus-zero-less-than-28m            0.33 -> 0.17 (1 trades)
+  jump Fri 10-30 23:00 godzilla-minus-zero-between-28m-and-31m      0.16 -> 0.37 (4 trades)
+  jump Sat 10-31 00:30 godzilla-minus-zero-between-28m-and-31m      0.37 -> 0.22 (1 trades)
+  jump Sun 11-01 08:30 godzilla-minus-zero-between-37m-and-40m      0.15 -> 0.37 (6 trades)
+  jump Sun 11-01 20:30 godzilla-minus-zero-between-37m-and-40m      0.37 -> 0.16 (1 trades)
+  FILL Mon 11-02 07:18 godzilla-minus-zero-at-least-43m             T SHORTyes   1000 @ 0.062 | others: before 0.09 +10m 0.05 +1h 0.05 +6h 0.06 +24h 0.01
+  FILL Mon 11-02 07:19 godzilla-minus-zero-between-40m-and-43m      T SHORTyes   1000 @ 0.088 | others: before 0.09 +10m 0.05 +1h 0.07 +6h 0.07 +24h 0.06
+  FILL Mon 11-02 07:19 godzilla-minus-zero-between-37m-and-40m      T SHORTyes   1000 @ 0.135 | others: before 0.18 +10m 0.06 +1h 0.08 +6h 0.08 +24h 0.11
+  FILL Mon 11-02 15:32 godzilla-minus-zero-between-31m-and-34m      M LONG yes    182 @ 0.110 | others: before 0.13 +10m 0.20 +1h 0.13 +6h 0.13 +24h 0.12
+  FILL Wed 11-04 08:42 godzilla-minus-zero-between-31m-and-34m      T LONG yes    119 @ 0.160 | others: before 0.13 +10m 0.20 +1h 0.20 +6h 0.20 +24h 0.19
+  FILL Wed 11-04 19:09 godzilla-minus-zero-less-than-28m            T SHORTyes    555 @ 0.361 | others: before 0.37 +10m 0.32 +1h 0.28 +6h 0.34 +24h 0.25
+  FILL Thu 11-05 08:54 godzilla-minus-zero-less-than-28m            T SHORTyes    545 @ 0.382 | others: before 0.37 +10m 0.36 +1h 0.35 +6h 0.33 +24h 0.11
+  FILL Fri 11-06 07:12 godzilla-minus-zero-between-34m-and-37m      T LONG yes    123 @ 0.102 | others: before 0.12 +10m 0.13 +1h 0.13 +6h 0.18 +24h 0.02
+  FILL Fri 11-06 08:31 godzilla-minus-zero-less-than-28m            T SHORTyes    481 @ 0.125 | others: before 0.17 +10m 0.07 +1h 0.11 +6h 0.17 +24h 0.02
+  FILL Fri 11-06 08:31 godzilla-minus-zero-between-28m-and-31m      T SHORTyes    318 @ 0.360 | others: before 0.36 +10m 0.28 +1h 0.28 +6h 0.35 +24h 0.62
+  FILL Fri 11-06 08:31 godzilla-minus-zero-between-34m-and-37m      T LONG yes    526 @ 0.170 | others: before 0.13 +10m 0.27 +1h 0.20 +6h 0.10 +24h 0.02
+  FILL Fri 11-06 09:11 godzilla-minus-zero-between-34m-and-37m      M LONG yes    424 @ 0.170 | others: before 0.27 +10m 0.20 +1h 0.20 +6h 0.10 +24h 0.03
+  FILL Fri 11-06 09:30 godzilla-minus-zero-less-than-28m            T SHORTyes    380 @ 0.130 | others: before 0.13 +10m 0.13 +1h 0.13 +6h 0.10 +24h 0.06
+  FILL Fri 11-06 09:30 godzilla-minus-zero-between-31m-and-34m      T LONG yes     75 @ 0.347 | others: before 0.29 +10m 0.41 +1h 0.35 +6h 0.46 +24h 0.29
+  FILL Fri 11-06 11:04 godzilla-minus-zero-between-34m-and-37m      M LONG yes    130 @ 0.170 | others: before 0.18 +10m 0.20 +1h 0.20 +6h 0.23 +24h 0.03
+  FILL Fri 11-06 12:56 godzilla-minus-zero-less-than-28m            M SHORTyes   1500 @ 0.190 | others: before 0.10 +10m 0.18 +1h 0.11 +6h 0.10 +24h 0.06
+  FILL Fri 11-06 15:21 godzilla-minus-zero-between-34m-and-37m      T LONG yes    245 @ 0.141 | others: before 0.10 +10m 0.16 +1h 0.14 +6h 0.13 +24h 0.03
+  FILL Fri 11-06 15:22 godzilla-minus-zero-between-31m-and-34m      T LONG yes    511 @ 0.396 | others: before 0.38 +10m 0.46 +1h 0.47 +6h 0.47 +24h 0.17
+  FILL Fri 11-06 15:24 godzilla-minus-zero-between-34m-and-37m      M LONG yes     28 @ 0.110 | others: before 0.14 +10m 0.16 +1h 0.14 +6h 0.13 +24h 0.03
+  FILL Fri 11-06 15:33 godzilla-minus-zero-between-28m-and-31m      T SHORTyes    802 @ 0.304 | others: before 0.31 +10m 0.24 +1h 0.19 +6h 0.31 +24h 0.69
+  jump Fri 11-06 16:30 godzilla-minus-zero-between-31m-and-34m      0.47 -> 0.64 (1 trades)
+  FILL Fri 11-06 16:41 godzilla-minus-zero-between-37m-and-40m      T LONG yes    243 @ 0.004 | others: before 0.00 +10m 0.03 +1h 0.01 +6h 0.03 +24h 0.00
+  FILL Fri 11-06 17:12 godzilla-minus-zero-between-34m-and-37m      M LONG yes    427 @ 0.110 | others: before 0.12 +10m 0.12 +1h 0.17 +6h 0.10 +24h 0.00
+  jump Fri 11-06 17:30 godzilla-minus-zero-between-31m-and-34m      0.64 -> 0.49 (1 trades)
+  FILL Fri 11-06 18:19 godzilla-minus-zero-between-34m-and-37m      M LONG yes    227 @ 0.110 | others: before 0.17 +10m 0.13 +1h 0.16 +6h 0.10 +24h 0.01
+  FILL Fri 11-06 18:20 godzilla-minus-zero-between-37m-and-40m      M LONG yes    312 @ 0.003 | others: before 0.01 +10m 0.01 +1h 0.03 +6h 0.11 +24h 0.00
+  FILL Fri 11-06 19:12 godzilla-minus-zero-between-34m-and-37m      M LONG yes    818 @ 0.110 | others: before 0.14 +10m 0.12 +1h 0.13 +6h 0.03 +24h 0.06
+  FILL Fri 11-06 19:12 godzilla-minus-zero-between-37m-and-40m      M LONG yes    125 @ 0.003 | others: before 0.03 +10m 0.03 +1h 0.02 +6h 0.01 +24h 0.00
+  FILL Fri 11-06 19:23 godzilla-minus-zero-less-than-28m            M SHORTyes    539 @ 0.150 | others: before 0.10 +10m 0.10 +1h 0.10 +6h 0.10 +24h 0.03
+  FILL Fri 11-06 19:51 godzilla-minus-zero-between-28m-and-31m      T SHORTyes    280 @ 0.336 | others: before 0.32 +10m 0.31 +1h 0.31 +6h 0.55 +24h 0.53
+  FILL Fri 11-06 20:35 godzilla-minus-zero-between-31m-and-34m      M LONG yes    281 @ 0.380 | others: before 0.41 +10m 0.46 +1h 0.47 +6h 0.21 +24h 0.46
+  FILL Fri 11-06 20:47 godzilla-minus-zero-between-37m-and-40m      M LONG yes    320 @ 0.003 | others: before 0.02 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  FILL Fri 11-06 23:16 godzilla-minus-zero-between-31m-and-34m      T LONG yes    663 @ 0.416 | others: before 0.38 +10m 0.42 +1h 0.43 +6h 0.18 +24h 0.53
+  FILL Fri 11-06 23:17 godzilla-minus-zero-between-28m-and-31m      M LONG yes     36 @ 0.400 | others: before 0.37 +10m 0.47 +1h 0.54 +6h 0.68 +24h 0.37
+  FILL Fri 11-06 23:17 godzilla-minus-zero-between-28m-and-31m      T LONG yes    344 @ 0.393 | others: before 0.37 +10m 0.47 +1h 0.54 +6h 0.68 +24h 0.37
+  FILL Fri 11-06 23:39 godzilla-minus-zero-at-least-43m             M LONG yes     90 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.02 +6h 0.01 +24h 0.01
+  FILL Fri 11-06 23:40 godzilla-minus-zero-between-31m-and-34m      M LONG yes     30 @ 0.310 | others: before 0.38 +10m 0.34 +1h 0.45 +6h 0.18 +24h 0.53
+  FILL Sat 11-07 00:30 godzilla-minus-zero-between-31m-and-34m      T LONG yes    609 @ 0.400 | others: before 0.43 +10m 0.45 +1h 0.34 +6h 0.31 +24h 0.52
+  FILL Sat 11-07 01:26 godzilla-minus-zero-between-31m-and-34m      M LONG yes   1000 @ 0.330 | others: before 0.33 +10m 0.34 +1h 0.21 +6h 0.34 +24h 0.52
+  FILL Sat 11-07 01:49 godzilla-minus-zero-at-least-43m             M LONG yes    416 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 03:45 godzilla-minus-zero-at-least-43m             M LONG yes     13 @ 0.001 | others: before 0.00 +10m 0.01 +1h 0.01 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 05:55 godzilla-minus-zero-at-least-43m             M LONG yes    341 @ 0.001 | others: before 0.01 +10m 0.01 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 05:55 godzilla-minus-zero-between-40m-and-43m      M LONG yes    149 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 06:20 godzilla-minus-zero-between-40m-and-43m      M LONG yes     95 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 06:31 godzilla-minus-zero-at-least-43m             M LONG yes    110 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 06:31 godzilla-minus-zero-between-40m-and-43m      M LONG yes    232 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 07:02 godzilla-minus-zero-between-40m-and-43m      M LONG yes     79 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.01
+  FILL Sat 11-07 09:14 godzilla-minus-zero-between-31m-and-34m      M SHORTyes    643 @ 0.350 | others: before 0.35 +10m 0.29 +1h 0.29 +6h 0.17 +24h 0.40
+  FILL Sat 11-07 14:00 godzilla-minus-zero-between-40m-and-43m      M LONG yes     30 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.01 +24h 0.01
+  FILL Sat 11-07 15:46 godzilla-minus-zero-at-least-43m             M LONG yes     10 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.01 +24h 0.01
+  FILL Sat 11-07 15:46 godzilla-minus-zero-between-40m-and-43m      M LONG yes     10 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.01 +24h 0.01
+  jump Sat 11-07 16:00 godzilla-minus-zero-between-31m-and-34m      0.18 -> 0.33 (6 trades)
+  jump Sat 11-07 16:30 godzilla-minus-zero-between-28m-and-31m      0.75 -> 0.48 (4 trades)
+  jump Sat 11-07 17:00 godzilla-minus-zero-between-31m-and-34m      0.42 -> 0.61 (3 trades)
+  FILL Sat 11-07 17:08 godzilla-minus-zero-less-than-28m            M LONG yes   2000 @ 0.003 | others: before 0.04 +10m 0.03 +1h 0.03 +6h 0.00 +24h 0.00
+  FILL Sat 11-07 17:08 godzilla-minus-zero-at-least-43m             M LONG yes     21 @ 0.001 | others: before 0.00 +10m 0.01 +1h 0.00 +6h 0.01 +24h 0.01
+  FILL Sat 11-07 17:08 godzilla-minus-zero-between-40m-and-43m      M LONG yes     69 @ 0.001 | others: before 0.00 +10m 0.01 +1h 0.01 +6h 0.01 +24h 0.01
+  jump Sat 11-07 18:00 godzilla-minus-zero-between-31m-and-34m      0.61 -> 0.42 (3 trades)
+  FILL Sat 11-07 18:19 godzilla-minus-zero-between-34m-and-37m      M SHORTyes   2948 @ 0.029 | others: before 0.01 +10m 0.06 +1h 0.06 +6h 0.12 +24h 0.00
+  FILL Sat 11-07 18:27 godzilla-minus-zero-between-40m-and-43m      M LONG yes     75 @ 0.001 | others: before 0.01 +10m 0.01 +1h 0.01 +6h 0.01 +24h 0.01
+  FILL Sat 11-07 18:55 godzilla-minus-zero-between-28m-and-31m      M LONG yes    801 @ 0.410 | others: before 0.44 +10m 0.53 +1h 0.53 +6h 0.34 +24h 0.54
+  FILL Sat 11-07 20:13 godzilla-minus-zero-between-40m-and-43m      M LONG yes    261 @ 0.001 | others: before 0.01 +10m 0.01 +1h 0.01 +6h 0.01 +24h 0.01
+  FILL Sat 11-07 20:23 godzilla-minus-zero-between-31m-and-34m      M SHORTyes     36 @ 0.530 | others: before 0.52 +10m 0.46 +1h 0.45 +6h 0.63 +24h 0.47
+  FILL Sat 11-07 21:00 godzilla-minus-zero-between-28m-and-31m      M LONG yes    219 @ 0.410 | others: before 0.42 +10m 0.48 +1h 0.37 +6h 0.43 +24h 0.46
+  FILL Sat 11-07 21:02 godzilla-minus-zero-less-than-28m            M LONG yes    557 @ 0.001 | others: before 0.00 +10m 0.01 +1h 0.00 +6h 0.00 +24h 0.00
+  FILL Sat 11-07 21:04 godzilla-minus-zero-between-31m-and-34m      M SHORTyes   1192 @ 0.538 | others: before 0.46 +10m 0.51 +1h 0.53 +6h 0.56 +24h 0.54
+  FILL Sat 11-07 22:19 godzilla-minus-zero-between-31m-and-34m      M SHORTyes    874 @ 0.540 | others: before 0.47 +10m 0.45 +1h 0.53 +6h 0.51 +24h 0.50
+  FILL Sun 11-08 00:07 godzilla-minus-zero-between-31m-and-34m      M SHORTyes    510 @ 0.640 | others: before 0.51 +10m 0.60 +1h 0.52 +6h 0.55 +24h 0.49
+  FILL Sun 11-08 00:20 godzilla-minus-zero-between-28m-and-31m      T LONG yes    211 @ 0.370 | others: before 0.33 +10m 0.38 +1h 0.33 +6h 0.30 +24h 0.54
+  FILL Sun 11-08 05:29 godzilla-minus-zero-less-than-28m            M LONG yes    266 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  jump Sun 11-08 05:30 godzilla-minus-zero-between-28m-and-31m      0.51 -> 0.30 (3 trades)
+  jump Sun 11-08 05:30 godzilla-minus-zero-between-31m-and-34m      0.50 -> 0.66 (5 trades)
+  FILL Sun 11-08 05:39 godzilla-minus-zero-less-than-28m            M LONG yes      5 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  jump Sun 11-08 06:30 godzilla-minus-zero-between-31m-and-34m      0.55 -> 0.37 (1 trades)
+  jump Sun 11-08 08:00 godzilla-minus-zero-between-28m-and-31m      0.30 -> 0.54 (13 trades)
+  FILL Sun 11-08 08:00 godzilla-minus-zero-less-than-28m            M LONG yes     30 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  FILL Sun 11-08 08:27 godzilla-minus-zero-between-28m-and-31m      M LONG yes   1000 @ 0.340 | others: before 0.30 +10m 0.54 +1h 0.61 +6h 0.58 +24h 0.93
+  FILL Sun 11-08 08:27 godzilla-minus-zero-between-31m-and-34m      M SHORTyes    216 @ 0.590 | others: before 0.37 +10m 0.44 +1h 0.37 +6h 0.46 +24h 0.02
+  jump Sun 11-08 10:30 godzilla-minus-zero-between-28m-and-31m      0.52 -> 0.36 (1 trades)
+  FILL Sun 11-08 11:31 godzilla-minus-zero-less-than-28m            M LONG yes    361 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  jump Sun 11-08 15:30 godzilla-minus-zero-between-28m-and-31m      0.46 -> 0.16 (42 trades)
+  jump Sun 11-08 15:30 godzilla-minus-zero-between-31m-and-34m      0.51 -> 0.85 (17 trades)
+  FILL Sun 11-08 15:49 godzilla-minus-zero-less-than-28m            M LONG yes    781 @ 0.001 | others: before 0.00 +10m 0.00 +1h 0.00 +6h 0.00 +24h 0.00
+  FILL Sun 11-08 15:53 godzilla-minus-zero-between-28m-and-31m      T LONG yes    491 @ 0.090 | others: before 0.03 +10m 0.16 +1h 0.22 +6h 0.54 +24h 0.84
+  FILL Sun 11-08 15:55 godzilla-minus-zero-between-28m-and-31m      M LONG yes    594 @ 0.110 | others: before 0.11 +10m 0.15 +1h 0.22 +6h 0.54 +24h 0.84
+  jump Sun 11-08 16:30 godzilla-minus-zero-between-31m-and-34m      0.80 -> 0.62 (4 trades)
+  jump Sun 11-08 17:00 godzilla-minus-zero-between-28m-and-31m      0.22 -> 0.50 (18 trades)
+  FILL Sun 11-08 23:19 godzilla-minus-zero-between-28m-and-31m      T LONG yes     53 @ 0.524 | others: before 0.50 +10m 0.56 +1h 0.54 +6h 0.89 +24h 1.00
+  FILL Mon 11-09 12:40 godzilla-minus-zero-between-31m-and-34m      T LONG yes    285 @ 0.089 | others: before 0.06 +10m 0.11 +1h 0.15 +6h 0.00 +24h 0.00

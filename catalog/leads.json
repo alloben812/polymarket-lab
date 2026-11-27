@@ -1,0 +1,217 @@
+[
+ {
+  "ref": "WarriorPooh 0x853c37a959a5791b849e3f3225c7f5963746bd03",
+  "why": "First aggressive buyer in the Huang market (86,278 YES at 0.151) and profitable in each of 12 months with 2% rebate share and 9.8% of volume kept; deconstruct its 808 markets for entry timing against public news.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "condition 0x27748e74503ff93d998d1e857980c43eca77c38efd61f642dd43d41a18525250 (tape saved in data/w1/huang_tape.json)",
+  "why": "Confirm the real NVIDIA release time (article says 13:30 UTC, repricing began 13:55:55 UTC); this decides whether the gap was one minute or 25 minutes. Also identify ljhggk's wallet and the two WSJ 'clusters'.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "RN1's 50 busiest takers (not named in the article); derive from trades?user=RN1&taker_only=false",
+  "why": "They took 504K from RN1 in 92 days; they are the demonstrable winners of the sports time gap and should be wallet-checked and timed against score/odds data.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "https://www.reddit.com/r/PredictionMarkets/comments/1ubletl/i_spent_a_few_weeks_trying_to_beat_polymarket_ten/",
+  "why": "Original ten-strategy backtest and ~40 comments; I only saw a news summary. Needs someone with Reddit access.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "r/PolymarketTrading, r/Polymarket, r/Kalshi, r/algotrading, r/quant (Sep-Nov 2026)",
+  "why": "Not reached at all from this sandbox; the owner could export a few threads or give access.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "https://github.com/kachence/polymm and https://github.com/kachence/prediction-almanac",
+  "why": "polymm has five wallet-analytics scripts (arb versus directional split, favourite versus underdog) to read, not run; the almanac lists datasets: archive.pmxt.dev hourly books from Feb 2026, HF TimeSeventeen/Polymarket-v1, HF vpcapitano/polymarket-genesis-liquidity, Marketlens.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "https://kacho.io/polymarket-5min-crypto-dataset",
+  "why": "Free 1-second top-of-book for 89K five-minute markets (Mar-May 2026); download link not followed.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "https://predictpnl.com (skill ranking) and the 2026-11-10 article 'Mostly below 25'",
+  "why": "A list of wallets with thousands of trades and small steady edge, better deconstruction targets than the profit leaderboard; article not opened.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "arXiv 2607.14430 and 2604.24366",
+  "why": "Kalshi sports calibration breaks in the final ten minutes; inferring trade direction from the public book is only 59% accurate (matters for any tape-based test). Abstracts not read by me.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "Bloomberg 2026-10-07 'Longshots Losing 98% of Time Dominate Kalshi, Polymarket Trading'",
+  "why": "Blocked by a robot wall; relevant to the longshot candidate.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "tools/wallet_check.py",
+  "why": "Does not print fees_refunded, so 'after fees' and monthly NET are understated for wallets with refunds; I added a caveat to NOTES.md but did not change the tool.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "HN user peikail (id 50347191)",
+  "why": "Claims $3-4K a day from cross-venue hedged market making on Kalshi and Polymarket US; unverifiable without a wallet.",
+  "channel": "w1_reddit_forums"
+ },
+ {
+  "ref": "tools/wallet_check.py: 'ECONOMIC PnL' vs monthly NET mismatch (gabagool22: 865,310 vs −756,295; 0x12b712029efeee7efc4066e98e4e1b6beb8b1b0b: 7,617 vs −53,154)",
+  "why": "The identity holds for x-MoneyForWhiskas but fails for wallets with large fees in Jan-Apr 2026. Until resolved, every 'net' figure for wallets active before about May 2026 is uncertain by the size of the fee line.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "NOAA MADIS HFMETAR public archive: madis-data.ncep.noaa.gov/madisPublic1/data/LDAD/hfmetar/ (5-minute, 11 US airports); api.data.gov.sg station S24 (1-minute)",
+  "why": "Best concrete time-gap lead from this pass: minute-level settlement-station temperature vs weather markets at the 0.01 fee. Reachability from the sandbox and the lag against prices-history are untested.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "https://polyweather.top and yangyuan-zhen/PolyWeather docs/TAF_SIGNAL_ZH.md, docs/MODEL_STACK_AND_DEB_ZH.md (table at line 227 with MAE and settlement-bucket hit rate per model version)",
+  "why": "I read the data-source doc but not the accuracy table or the per-city settlement-station registry in src/; both are needed to build the weather test.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "Polymarket rewards endpoints via Polymarket/py-sdk src/polymarket/_internal/actions/rewards.py (current rewards, reward markets, order scoring, current rebates)",
+  "why": "Needed to measure today's reward pools per market and whether a minimum-size quote on a quiet political market pays more than its adverse selection; which calls work without auth was not checked.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "https://s3.jbecker.dev/data.tar.zst (Jon-Becker/prediction-market-analysis, 36 GiB compressed)",
+  "why": "Largest public Polymarket+Kalshi trade dataset with ready calibration and maker/taker analyses; not downloaded (size vs 60 GB disk, reachability untested).",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "spfunctions/polymarket-sports-mm (PyPI sfmm 0.1.0) and the April 2026 sports reward pools it quotes",
+  "why": "Repo did not resolve; current per-game sports reward pools and whether in-play makers survive score events should be checked on the tape of a few games.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "hu553in/polybot; Xeron2000/wedge; joicodev/polymarket-bot; txbabaxyz/polyrec",
+  "why": "Looked like genuine individual projects (Chainlink-aligned 5m bot, GFS weather bot, Black-Scholes 5m model, 15m recorder) but did not resolve on 2026-11-27; names may be misspelled in search snippets or the repos were removed.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "dev.to/lkto1m: 'My Polymarket trading bot strategy across 11,717 trades' and 'Why my Polymarket bot watches Chainlink not Binance'; hashnode thread 'How I used Python asyncio to trade a 55 second oracle lag on Polymarket'",
+  "why": "Post-TWAP write-ups in the lab's window that claim trade counts; found in search, not opened. Check for a named wallet.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "dev.to/mateosoul: 'How I built a Polymarket trading bot that exploits post-resolution inefficiencies'",
+  "why": "Resolution-bond family (event known, market not yet settled) is the owner's core time-gap idea; no code-level source for it was found in this pass.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "dev.to/michaelmustopo 'Built a prediction market arbitrage, no sizable arbitrage found' and dev.to/hbdb 'HFT-lite prediction market arbitrage engine'",
+  "why": "Negative practitioner results on cross-venue gaps (870 gaps in 24 h, median life ~9 s per search snippet); worth opening for numbers.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "abrownfox001 / 0x12b712029efeee7efc4066e98e4e1b6beb8b1b0b, Abrownfox001.exe sha256 b8e0dff7af7ffe19a0592f1f4a7735b5fa9e6fdd6980aedf70d4f9614809f4d4",
+  "why": "Probable drainer distribution tied to a dev.to promotion network (nevosaynevo, abrownfox001, benjamin_cup, benjamin_martin_749c1d57f, soulcrancerdev, xniiinx post identical articles). Other researchers should discount anything from these handles.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "negRisk scan script: /tmp/claude-0/-home-user/05556429-066d-541b-b886-b8da26bcc648/scratchpad/negrisk_scan.py",
+  "why": "One-snapshot result (0 of 176 after fees). Worth turning into a polling study, restricted to non-augmented events and the zero-fee geopolitics category, with book depth.",
+  "channel": "w2_github"
+ },
+ {
+  "ref": "BeefSlayer 0x331bf91c132af9d921e1908ca0979363fc47193f",
+  "why": "The only weather wallet from the popular lists that still kept money in Sep-Oct 2026 (+7.7K, +6.2K on $40-54K monthly volume, 62% taker). Not done: PnL per market, entry time against station observations, which cities and which hours pay.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "ColdMath 0x594edb9112f526fa6a80b8f858a6379c8a2c1c11",
+  "why": "Lost 30,372 in October 2026 on $1.21M volume after earning 137K in Dec-Apr. Finding what broke (cities, price buckets, counterparties) would show what the weather edge was and who took it.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "russell110320 0x118689b24aead1d6e9507b8068d056b2ec4f051b",
+  "why": "Slow climate trades ('hottest year on record', monthly global temperature) with +16.9K in October; 31K is unrealized. Check which data series the markets resolve on and whether it is predictable from earlier public data.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://github.com/Tanuj-07/polymarket-market-making (data/daily.csv, versions.csv, series.csv)",
+  "why": "Full daily record of a Kalshi-anchored weather maker, Sep 5-Oct 18, 2026. I read only the README. The CSVs give trading PnL by city and version, useful for sizing adverse selection on weather brackets.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "Kalshi versus Polymarket international weather brackets",
+  "why": "Tanuj used Kalshi's mid as fair value on the US venue. Nobody has measured whether Kalshi leads the international Polymarket weather books; both are reachable by REST from this sandbox.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://thedatascientist.com/polymarket-efficiency-study-766-million-trades-machine-learning-microstructure/",
+  "why": "Companion full study to the Nov 3 backtest article (not opened): category-level calibration tables and the maker capacity curve; its flat 2% fee should be replaced by the real schedule.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://github.com/telonex/research (notebooks top_15m_crypto_traders, liquidity_rewards_jesus)",
+  "why": "Full wallet addresses for the 100%-maker bots and 'snipers' that the article truncates (0x7163…a9e5, 0xf49a…f9ba, 0x5e2b…f439, 0x7780…03ed, 0x63ce…, 0x1979…); needed to run wallet_check on them.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://leolabs.me/blog (other posts), @runes_leo, YouTube @leolabsme",
+  "why": "Author says weather, crypto up/down and 'social media' markets survived but withholds details; later posts or his X timeline since September may name wallets or numbers. Paid course, so read as promotion.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://github.com/Hiberius/polymarket-bot-graveyard (docs/AUTOPSY.md, journey/)",
+  "why": "Only the README was read; the autopsy has the forward-measurement method (Brier by category, BTC against Deribit) that could be reused as a gate.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "Holding Rewards: eligible markets and current rate",
+  "why": "Official docs copy says 4.00% annualized, a page updated 2026-11-21 says 3.25%. If long-dated near-certain markets are eligible, this changes the arithmetic of the resolution-bond trade. Needs the docs page and a check of which markets qualify.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "Per-market taker matching delay on sports (Premier League 1 s, NBA none, checked by a third party on 2026-10-27)",
+  "why": "Decides whether in-play latency is open at all, league by league. Verify from the market objects or docs (trading_matching-engine.md) and list which leagues have no delay.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://www.ccn.com/news/crypto/polymarket-cuts-crypto-fees-ends-small-trader-rebates/",
+  "why": "Dated 2026-11-18, the only news piece on the Nov 20 change; blocked (403) here. Might contain market-maker reactions and the old rates.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://dune.com/blog/polymarket-fast-markets",
+  "why": "Dune's write-up on 5- and 15-minute markets with dashboards (blocked). Could give bot share and wallet-level profitability over months rather than one week.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "SSRN 6624899, Jackson Wang, 'Smart Money on Polymarket: A Behavioral Anatomy of 273 Top Prediction-market Traders'",
+  "why": "Snippet says the dominant winning behaviour is holding to resolution with staggered entries and that pure bots have the lowest median PnL; SSRN is blocked.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://depthy.io/blog/wallet-intelligence",
+  "why": "Vendor post on 38,000 wallets (unreachable): claims 1-3% position sizing and a top wallet that systematically buys No. A systematic No buyer would be a candidate if named.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "https://www.mexc.com/news/1083045",
+  "why": "Source of the '$106K in a month buying Elon tweet ranges at 1-10 cents, 25.51% win rate' anecdote; blocked. If it names the account, run wallet_check.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "Medium: @0xicaruss '5 Polymarket Strategies That Are Actually Working in 2026 (With Real Wallet Data)'; Coinmonks 'Polymarket Just Changed Its Fees — Here's What Bot Traders Need to Know'",
+  "why": "Both surfaced in search and claim wallet data or fee analysis; Medium is blocked and search returned no content for them.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "swisstony 0x204f72f35326db932158cba6adff0b9a1da95e14",
+  "why": "$1.0B of sports volume, kept 2.1%, and zero volume since September 2026. Its fills through August are the best public sample of systematic sports trading; also worth checking whether a new wallet took over the same flow.",
+  "channel": "w3_longform"
+ },
+ {
+  "ref": "polymarkets.co.il 'Polymarket bot tutorial' (32 chapters, chapter 15 on sports microstructure)",
+  "why": "Unreachable from here (connection refused, 503). Search snippet suggests it carries the same dated delay check; probably the same publisher as startpolymarket.com.",
+  "channel": "w3_longform"
+ }
+]

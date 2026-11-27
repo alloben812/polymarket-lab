@@ -1,0 +1,30 @@
+Elonurmom 0x0f7f9903f46c24ba66900ceb4a427873129c6450 window 09-28 15:45..11-27 15:45 truncated=False matching fills 1053 markets 190 (using 120)
+
+RESOLVED markets only, pnl to final after est. taker fees:
+all                                    fills   725 mkts  105 usd    132879 pnl      2605 (   2.0% of usd) drift1h   0.12c/sh
+before T90                             fills   478 mkts   87 usd    103880 pnl      2802 (   2.7% of usd) drift1h   0.45c/sh
+after T90, before T99                  fills   239 mkts   39 usd     22633 pnl      -242 (  -1.1% of usd) drift1h  -0.57c/sh
+after T99                              fills     8 mkts    7 usd      6366 pnl        45 (   0.7% of usd) drift1h  -0.01c/sh
+role M BUY                             fills   309 mkts   25 usd      6120 pnl      -398 (  -6.5% of usd) drift1h   0.10c/sh
+role M SELL                            fills    52 mkts    1 usd        40 pnl        40 ( 100.0% of usd) drift1h  -0.60c/sh
+role T BUY                             fills   306 mkts   99 usd    112352 pnl        73 (   0.1% of usd) drift1h   0.46c/sh
+role T SELL                            fills    58 mkts   37 usd     14368 pnl      2890 (  20.1% of usd) drift1h  -0.50c/sh
+fill price 0.00-0.05                   fills   226 mkts   44 usd      3718 pnl      2859 (  76.9% of usd) drift1h  -0.59c/sh
+fill price 0.05-0.20                   fills   299 mkts   64 usd     19016 pnl     -1121 (  -5.9% of usd) drift1h  -1.03c/sh
+fill price 0.20-0.40                   fills   128 mkts   28 usd     19896 pnl     -3824 ( -19.2% of usd) drift1h   2.90c/sh
+fill price 0.40-0.60                   fills    15 mkts    7 usd      7890 pnl      -587 (  -7.4% of usd) drift1h   3.04c/sh
+fill price 0.60-0.80                   fills     2 mkts    2 usd      3000 pnl       869 (  29.0% of usd) drift1h   0.08c/sh
+fill price 0.80-0.95                   fills    42 mkts   24 usd     55344 pnl      3796 (   6.9% of usd) drift1h   1.61c/sh
+fill price 0.95-0.99                   fills     9 mkts    6 usd     16000 pnl       613 (   3.8% of usd) drift1h   0.33c/sh
+fill price 0.99-1.01                   fills     4 mkts    4 usd      8016 pnl        -1 (  -0.0% of usd) drift1h   0.02c/sh
+time to end >7d to end                 fills     2 mkts    2 usd        18 pnl       399 (2222.8% of usd) drift1h   0.47c/sh
+time to end 2-7d                       fills   319 mkts   91 usd     88727 pnl     12525 (  14.1% of usd) drift1h  -0.11c/sh
+time to end 1-2d                       fills   171 mkts   39 usd     22208 pnl     -5068 ( -22.8% of usd) drift1h  -0.78c/sh
+time to end 6-24h                      fills   162 mkts   16 usd      7273 pnl      2348 (  32.3% of usd) drift1h   0.20c/sh
+time to end 0-6h                       fills    70 mkts   13 usd     10036 pnl     -7595 ( -75.7% of usd) drift1h   4.95c/sh
+time to end after end                  fills     1 mkts    1 usd      4617 pnl        -5 (  -0.1% of usd) drift1h   0.00c/sh
+markets resolved 105 winners 41 total pnl 2605; unresolved 15 mark-to-tape pnl 5874
+sell/buy usd ratio (exit vs hold): 0.08; median market buy usd 400
+fills by weekday+hour UTC (top 14): Thu 13:51, Tue 07:31, Tue 06:28, Tue 14:28, Tue 05:27, Wed 17:25, Tue 22:24, Sat 22:21, Fri 04:21, Tue 16:20, Sat 15:17, Tue 00:16, Mon 16:15, Sun 22:14
+active days 45; markets traded per active day median 5 max 16
+markets table -> Elonurmom.story.txt

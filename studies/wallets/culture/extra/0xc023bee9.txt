@@ -1,0 +1,32 @@
+[0xc023bee917480fed315d186a7b223f33c09a0fe8] fills 416 in 1s
+0xc023bee917480fed315d186a7b223f33c09a0fe8  0xc023bee917480fed315d186a7b223f33c09a0fe8  window 2026-10-28 15:53 .. 2026-11-27 15:53 UTC
+summary: {"fills": 416, "markets": 892, "resolved_complete_markets": 3, "incomplete_markets": 888, "unresolved_markets": 593, "turnover_usd": 1595, "maker_share_usd": 0.642, "sell_share_usd": 1.0, "markets_with_both_outcomes_traded": 1, "uses_split_merge": true, "gross": 0.0, "fees_est": 0.0, "net": 0.0, "fee_rate_unknown_markets": 0, "net_per_market": 0.0, "t_by_market": null, "win_share_markets": 0.0, "median_market_turnover": 0.0, "max_market_turnover": 570.59, "avg_fill_usd": 3.84}
+inventory events: {'MERGE': 1497, 'CONVERSION': 137, 'REDEEM': 3}
+API says for the same days: gross 23012, fees 0, refunded 0, rebates 0, kept 23012, volume $1588, fills 413
+
+by family:
+  family         markets  resolved_complete  incomplete  turnover  taker_share  gross  fees_est  net  net_pct_turnover  net_per_market  t_by_market
+  politics       431      3                  428         1019      0.56         0.0    0.0       0.0  0.0               0.0             None       
+  tech           74       0                  74          254       0.0          0.0    0.0       0.0  0.0               None            None       
+  economics      85       0                  85          167       0.0          0.0    0.0       0.0  0.0               None            None       
+  culture        75       0                  74          153       0.0          0.0    0.0       0.0  0.0               None            None       
+  weather        36       0                  36          2         0.0          0.0    0.0       0.0  0.0               None            None       
+  finance        60       0                  60          0         None         0.0    0.0       0.0  None              None            None       
+  crypto         17       0                  17          0         None         0.0    0.0       0.0  None              None            None       
+  other          2        0                  2           0         None         0.0    0.0       0.0  None              None            None       
+  unknown        74       0                  74          0         None         0.0    0.0       0.0  None              None            None       
+  sports         34       0                  34          0         None         0.0    0.0       0.0  None              None            None       
+  xrp-updown-5m  1        0                  1           0         None         0.0    0.0       0.0  None              None            None       
+  btc-updown-5m  2        0                  2           0         None         0.0    0.0       0.0  None              None            None       
+  eth-updown-5m  1        0                  1           0         None         0.0    0.0       0.0  None              None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  (none)
+
+by role and price:
+  (none)
+
+by role and point in the market's life:
+  (none)
+
+full result written to studies/wallets/culture/extra/0xc023bee9.json

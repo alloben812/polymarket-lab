@@ -1,0 +1,58 @@
+##### Stonktrader: 456 fills, 16 economics markets
+  shares bought 51725, sold 1113 (sold/bought 0.02); position cost per market: median 688, p90 8608, max 12000
+  first buy to scheduled end, days: median 23.2, p10 2.4, p90 75.0
+  econ markets touched per ISO week: 38:1 42:7 43:3 46:2 47:2 48:5
+  buy $ by price: <0.05 0.00 | .05-.3 0.09 | .3-.7 0.00 | .7-.9 0.45 | .9-.97 0.28 | >=.97 0.17
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-september-2026-meeting-6  end=09-16 00:00 closed=09-16 20:02 final={'Yes': 0.0, 'No': 1.0} vol=56435145
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-14 00:13-04:00 BUY  T No   n=   2 sh=    15000 px=0.800 usd=   12000
+    net shares now {'No': 15000}; cash -12000; net 2976.0
+
+- will-annual-inflation-be-3pt7-in-october-2026  end=11-11 04:59 closed=11-20 22:41 final={'Yes': 1.0, 'No': 0.0} vol=54910
+    rules: This is a market about inflation over the 12-month period ending October 2026, before seasonal adjustment, as reported by the Bureau of Labor Statistics.  This market will resolve to the percentage change in the Consumer Price Ind
+    10-19 00:12-00:12 BUY  T Yes  n=   1 sh=      103 px=0.786 usd=      81
+    11-10 02:17-13:57 BUY  T Yes  n=   4 sh=     5074 px=0.959 usd=    4866
+    11-12 15:55-15:55 BUY  T Yes  n=   1 sh=      148 px=0.960 usd=     142
+    11-20 20:22-20:31 BUY  M Yes  n=   2 sh=       12 px=0.970 usd=      11
+    11-20 20:39-20:39 BUY  T Yes  n=   2 sh=     3519 px=0.997 usd=    3507
+    net shares now {'Yes': 8856}; cash -8608; net 246.29828918455857
+
+- will-core-cpi-yoy-be-2pt6-in-october-2026  end=11-11 04:59 closed=11-21 01:16 final={'Yes': 1.0, 'No': 0.0} vol=36613
+    rules: This is a market about core inflation (excluding food and energy) over the 12-month period ending October 2026, before seasonal adjustment, as reported by the Bureau of Labor Statistics.  This market will resolve to the percentage
+    10-19 00:10-00:10 BUY  T Yes  n=   1 sh=      212 px=0.687 usd=     145
+    11-10 02:14-02:17 BUY  T Yes  n=   3 sh=     1348 px=0.947 usd=    1277
+    11-20 20:41-20:42 BUY  T Yes  n=   2 sh=     2777 px=0.989 usd=    2745
+    net shares now {'Yes': 4336}; cash -4167; net 167.56246771387845
+
+- will-the-median-home-value-in-austin-metro-be-between-427000-and-437000-on-decem  end=01-11 04:59 closed=open final=["0.0045", "0.9955"] vol=8851
+    rules: This market will resolve according to the median home value for all property types in the Austin, Texas Metro area on December 31, 2026.  If the reported value falls exactly between two brackets, then this market will resolve to t
+    10-13 19:31-19:31 BUY  T No   n=   1 sh=     2288 px=0.866 usd=    1981
+    10-13 19:32-19:32 SELL T No   n=   1 sh=      580 px=0.929 usd=     539
+    10-14 08:43-19:31 SELL M No   n=   2 sh=      123 px=0.960 usd=     118
+    10-17 00:14-00:14 SELL T No   n=   1 sh=      246 px=0.990 usd=     244
+    10-17 04:51-20:30 SELL M No   n=   4 sh=      164 px=0.990 usd=     162
+    net shares now {'No': 1174}; cash -918; net n/a (open or incomplete)
+
+- will-canadas-monthly-inflation-increase-by-0pt0-in-november-20261214  end=12-15 04:59 closed=open final=["0.9775", "0.0225"] vol=12813
+    rules: This is a market about the monthly variation of consumer prices in Canada, before seasonal adjustment, as reported by Statistics Canada.  This market will resolve according to the month-over-month percentage change in the Consumer
+    11-23 22:37-22:37 BUY  T Yes  n=   1 sh=     1561 px=0.910 usd=    1420
+    11-24 17:55-17:55 BUY  T Yes  n=   1 sh=     1401 px=0.937 usd=    1312
+    net shares now {'Yes': 2962}; cash -2733; net n/a (open or incomplete)
+
+- will-the-5-year-treasury-yield-dip-below-4pt50-before-2027  end=12-31 00:00 closed=open final=["0.415", "0.585"] vol=40286
+    rules: This market will resolve to "Yes" if the Treasury 5-year yield is lower than the listed value for any date between September 3, 2026 and December 31, 2026. Otherwise this market will resolve to "No".  This market will resolve as s
+    10-17 15:31-15:31 BUY  T Yes  n=   1 sh=     1472 px=0.259 usd=     382
+    10-18 00:51-00:51 BUY  T Yes  n=   1 sh=     1588 px=0.259 usd=     412
+    net shares now {'Yes': 3060}; cash -794; net n/a (open or incomplete)
+
+- will-the-5-year-treasury-yield-hit-5pt10-before-2027  end=12-31 00:00 closed=open final=["0.0845", "0.9155"] vol=104917
+    rules: This market will resolve to "Yes" if the Treasury 5-year yield reaches or is higher than the listed value for any date between September 3, 2026 and December 31, 2026. Otherwise this market will resolve to "No".  This market will 
+    10-17 00:37-00:37 BUY  T No   n=   1 sh=     2998 px=0.251 usd=     753
+    10-17 03:06-03:06 BUY  M Yes  n=   1 sh=       50 px=0.522 usd=      26
+    net shares now {'No': 2948}; cash -729; net n/a (open or incomplete)
+
+- will-gas-hit-3pt65-high-by-november-30-2026  end=11-30 15:00 closed=open final=["0.0495", "0.9505"] vol=2073
+    rules: This market will resolve to "Yes" if the US national average price of regular gasoline published by AAA is equal to or above the specified price for any date from the creation of this market through November 30, 2026. Otherwise, t
+    11-24 00:49-00:49 BUY  T No   n=   1 sh=      809 px=0.856 usd=     693
+    net shares now {'No': 809}; cash -693; net n/a (open or incomplete)

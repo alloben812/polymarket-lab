@@ -1,0 +1,29 @@
+== alsdkfjasd 0xc6cb9289841eace1219abc274c4c6c6d07167926 window 45d truncated=False fills=99 usd=4002 | mention fills=99 markets=36 usd=4002 (100% of turnover)
+resolved mention markets=36 unresolved=0 | net after fee $79 | market win rate 35/36 | t(by market)=1.86 | events=8 positive events=7
+sizing: median $53/market, p90 $349, max $424; max markets touched in one day 10; days active 8; shares bought 3227 sold 936 (sell/buy 0.29)
+by phase:
+  ('JUMP',)                                  fills=   67 mk=  26 usd=     2439 pnl=     95.9 (   3.9% of usd) mk_win=26/26
+  ('LIVE',)                                  fills=   10 mk=   5 usd=      329 pnl=    -27.9 (  -8.5% of usd) mk_win=4/5
+  ('POST',)                                  fills=   22 mk=  11 usd=     1234 pnl=     11.1 (   0.9% of usd) mk_win=6/11
+by phase, role, direction:
+  ('JUMP', 'T', 'longYes')                   fills=   67 mk=  26 usd=     2439 pnl=     95.9 (   3.9% of usd) mk_win=26/26
+  ('LIVE', 'T', 'longNo')                    fills=    1 mk=   1 usd=        8 pnl=      1.2 (  14.8% of usd) mk_win=1/1
+  ('LIVE', 'T', 'longYes')                   fills=    9 mk=   4 usd=      321 pnl=    -29.1 (  -9.1% of usd) mk_win=3/4
+  ('POST', 'M', 'longNo')                    fills=    6 mk=   3 usd=      499 pnl=     -0.5 (  -0.1% of usd) mk_win=0/3
+  ('POST', 'T', 'longNo')                    fills=    8 mk=   6 usd=      477 pnl=      5.3 (   1.1% of usd) mk_win=3/6
+  ('POST', 'T', 'longYes')                   fills=    8 mk=   3 usd=      258 pnl=      6.3 (   2.4% of usd) mk_win=3/3
+by role, side:
+  ('M', 'SELL')                              fills=    6 mk=   3 usd=      499 pnl=     -0.5 (  -0.1% of usd) mk_win=0/3
+  ('T', 'BUY')                               fills=   87 mk=  36 usd=     3106 pnl=     75.9 (   2.4% of usd) mk_win=35/36
+  ('T', 'SELL')                              fills=    6 mk=   4 usd=      397 pnl=      3.7 (   0.9% of usd) mk_win=1/4
+by price of the eventual winner at fill time:
+  ('onLoser', '.05-.2')                      fills=    1 mk=   1 usd=       40 pnl=    -40.0 (-100.1% of usd) mk_win=0/1
+  ('onLoser', '.99-1')                       fills=    9 mk=   6 usd=      892 pnl=     -0.9 (  -0.1% of usd) mk_win=0/6
+  ('onWinner', '.5-.8')                      fills=    4 mk=   4 usd=       57 pnl=     22.8 (  40.3% of usd) mk_win=4/4
+  ('onWinner', '.8-.95')                     fills=   10 mk=   9 usd=      346 pnl=     27.4 (   7.9% of usd) mk_win=9/9
+  ('onWinner', '.95-.99')                    fills=   74 mk=  32 usd=     2662 pnl=     69.9 (   2.6% of usd) mk_win=32/32
+  ('onWinner', '.99-1')                      fills=    1 mk=   1 usd=        5 pnl=      0.1 (   1.0% of usd) mk_win=1/1
+buys at price>=0.95 by phase (usd): {'JUMP': 2048, 'LIVE': 281, 'POST': 338} -> share in JUMP/POST = 89%
+Yes-resolved markets traded=32; with a TAKER long-Yes fill inside the jump window at yes_px<0.90: 3 (9%)
+  taker long-Yes jump fills n=67 lag vs first print>=0.60: median 3s p25 0s p75 6s; median yes_px 0.980; median tape rank 3; pnl $96
+largest events by |pnl|: [('what-will-trump-say-during-his-midterm-rally-in-', 27), ('what-will-trump-say-during-his-midterm-rally-in-', 24), ('what-will-trump-say-during-his-midterm-rally-in-', 15), ('what-will-trump-say-during-his-midterm-rally-in-', 13), ('what-will-trump-say-during-his-midterm-rally-in-', -9), ('what-will-trump-say-during-his-midterm-rally-in-', 8), ('what-will-trump-say-during-his-midterm-rally-in-', 0), ('what-will-trump-say-this-week-october-12-october', 0)]

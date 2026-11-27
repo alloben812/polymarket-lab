@@ -1,0 +1,21 @@
+0x580845f990155aacc66eac14a3852a4fa38be67f  0x580845f990155aacc66eac14a3852a4fa38be67f  joined ?  markets traded 26017  fills 430807
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         20,329
+  taker fees charged:                                   -22,457
+  fees refunded:                                          9,511
+  rebates+rewards (taker 713 / maker 3,358 / rewards 0):      4,071
+  ECONOMIC PnL (the API's bottom line, trust this):      11,453   of which unrealized -2
+  volume $1,621,575 (2,937,477 shares): gross +1.25% of volume, fees net of refunds -0.80%, kept +0.71%
+  share of what was kept that is rebates/rewards: 36%
+  taker_tier: {"address": "0x580845f990155aacc66eac14a3852a4fa38be67f", "tier": 0, "tier_name": "Tier 0", "wv_30d": 1303.511695}
+  maker_tier: {"address": "0x580845f990155aacc66eac14a3852a4fa38be67f", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 1399.29862, "own_wv_30d": 1399.29862}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-02        -669       -142       112         0       -698        -698       31,628    10,148
+  2026-03        -592     -5,946     4,686         0     -1,852      -1,852      161,714    29,135
+  2026-04       2,640     -5,895     4,712       368      1,826       1,458      137,093    53,718
+  2026-05       2,839     -1,358         0       707      2,188       1,481      225,282    90,189
+  2026-06       2,857     -1,646         0       319      1,530       1,211      161,631    40,617
+  2026-07       7,138     -1,752         0       558      5,944       5,386      206,972    54,586
+  2026-08       4,193     -2,826         0       999      2,366       1,367      331,891    72,457
+  2026-09         691     -2,036         0       775       -570      -1,345      248,942    54,742
+  2026-10       1,028       -849         0       337        517         180      109,291    23,394
+  2026-11         202         -7         0         8        203         195        7,133     1,821

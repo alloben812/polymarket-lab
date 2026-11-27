@@ -1,0 +1,110 @@
+hqb.prediction         n=  274 span= 11.3h usd=   48,836 mk=    9 medp=0.076 buy=0.0 kept=    628,624 reb=   0% [09:-24K 10:-5K 11:+664K] | btc-hit 71%, eth-hit 29%
+Tokor                  n=  617 span= 71.9h usd=  144,894 mk=  155 medp=0.74 buy=1.0 kept=  1,342,022 reb=   2% [09:+76K 10:+713K 11:+454K] | btc-hit 68%, ?-hit 16%, eth-hit 8%, btc-ud-daily 2%, btc-above 2%
+0xf705fa045201391d9632 n=  538 span= 71.9h usd=  406,515 mk=   87 medp=0.491 buy=0.57 kept=  2,956,181 reb=   2% [09:+18K 10:+289K 11:+435K] | btc-hit 38%, eth-above 21%, eth-hit 19%, btc-above 17%, sol-hit 5%
+LlamaLoco0000          n=   22 span= 69.6h usd=   27,607 mk=    8 medp=0.032 buy=1.0 kept=    -39,618 reb= nan% [09:-55K 10:-95K 11:+22K] | non-crypto 100%
+getbipped              n=  160 span= 70.8h usd=   91,674 mk=   35 medp=0.702 buy=1.0 kept=    467,628 reb=  10% [09:-62K 10:+458K 11:+34K] | eth-hit 100%
+floatingraft           n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=     30,582 reb=  20% [09:-68K 10:+163K 11:+91K] | 
+Bonereaper             n= 4000 span=  6.5h usd=  191,397 mk=   78 medp=0.56 buy=1.0 kept=    530,523 reb= 128% [09:+55K 10:+37K 11:+46K] | btc-ud-5m 100%, eth-ud-5m 0%, btc-ud-15m 0%
+0x8edb6bc0E3bD8455B952 n= 1701 span= 71.8h usd=   30,539 mk=  652 medp=0.54 buy=0.0 kept=       -540 reb= nan% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x9E6963176a6C1f57e364 n= 1576 span= 71.9h usd=   29,725 mk=  648 medp=0.54 buy=0.0 kept=     10,063 reb=  16% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+Eager47259             n= 4000 span= 23.9h usd=  114,380 mk=  269 medp=0.036 buy=0.7 kept=    124,994 reb=   7% [09:-1K 10:+19K 11:+104K] | btc-hit 43%, btc-above 19%, ?-hit 18%, eth-above 10%, eth-hit 7%
+0xF2D5B971B315cDf45E1f n= 1514 span= 71.9h usd=   29,786 mk=  633 medp=0.56 buy=0.0 kept=      8,405 reb=  15% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xBCc817Fa03D1C1dDa413 n= 1417 span= 71.9h usd=   28,717 mk=  629 medp=0.59 buy=0.0 kept=      4,228 reb=  30% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xB01126aFfC7191607479 n= 1507 span= 72.0h usd=   28,705 mk=  616 medp=0.6 buy=0.0 kept=        877 reb= 145% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xa07576c5a1f8EDf693d8 n= 1434 span= 71.9h usd=   26,714 mk=  628 medp=0.59 buy=0.0 kept=      3,547 reb=  42% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+e46m3                  n=    7 span= 18.2h usd=       31 mk=    7 medp=0.71 buy=1.0 kept=    353,438 reb=   5% [09:+831K 10:-188K 11:-553K] | non-crypto 100%
+033033033              n=   81 span= 69.3h usd=1,697,058 mk=   13 medp=0.999 buy=1.0 kept=    328,400 reb=   0% [09:+16K 10:+11K 11:+14K] | non-crypto 88%, btc-hit 6%, xrp-hit 3%, eth-hit 2%, sol-hit 1%
+dangerously-skip-permi n= 4000 span=  2.5h usd=   34,918 mk=   29 medp=0.5 buy=1.0 kept=    336,731 reb=  60% [09:+90K 10:+122K 11:+65K] | btc-ud-5m 100%
+0x72d15794cef9DD317144 n= 1419 span= 72.0h usd=   26,339 mk=  604 medp=0.57 buy=0.0 kept=      4,330 reb=  32% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x82aad706e75a6cd9dac8 n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    111,341 reb=   1% [11:+111K] | 
+Berkaja                n=   82 span= 28.2h usd=   15,642 mk=    5 medp=0.125 buy=1.0 kept=     63,105 reb=   2% [09:-1K 10:-1K 11:+114K] | btc-hit 100%
+AllByMyseIf            n=  925 span= 70.5h usd=  154,947 mk=   20 medp=0.73 buy=0.84 kept=    750,423 reb=   5% [09:+23K 10:+62K 11:+106K] | non-crypto 97%, ?-above 3%, sol-other 0%
+0x20e5e881c81fE92370d5 n= 1406 span= 71.9h usd=   23,585 mk=  615 medp=0.58 buy=0.0 kept=     -2,059 reb= nan% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xA0657D2B591E35eE216c n= 1413 span= 71.7h usd=   24,234 mk=  592 medp=0.58 buy=0.0 kept=      1,111 reb= 136% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x7328630eCf36cD83fFdC n= 1563 span= 71.9h usd=   28,339 mk=  622 medp=0.55 buy=0.0 kept=      3,422 reb=  43% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+borderlocket           n=  264 span= 59.2h usd=   95,959 mk=   43 medp=0.563 buy=1.0 kept=     48,619 reb=  32% [10:-34K 11:+83K] | btc-ud-5m 69%, eth-ud-5m 30%, btc-ud-15m 1%
+mo-money               n= 4000 span= 20.3h usd=  130,825 mk=  404 medp=0.68 buy=1.0 kept=    643,341 reb=  12% [09:+110K 10:+88K 11:+102K] | btc-ud-5m 74%, btc-ud-15m 22%, btc-ud-1h 1%, eth-ud-5m 1%, btc-ud-daily 0%
+almach                 n= 4000 span= 21.5h usd=  130,993 mk=  432 medp=0.69 buy=1.0 kept=    549,620 reb=  14% [09:+107K 10:+78K 11:+98K] | btc-ud-5m 75%, btc-ud-15m 21%, btc-ud-1h 1%, btc-ud-daily 1%, btc-ud-4h 0%
+0x711466DcB84970B44538 n= 1584 span= 72.0h usd=   22,772 mk=  590 medp=0.56 buy=0.0 kept=         -3 reb= nan% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x0dD4F75eA2A3bc3BDcf0 n= 1450 span= 71.9h usd=   24,015 mk=  599 medp=0.55 buy=0.0 kept=      4,263 reb=  33% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+Rhabarberbarbarbar     n=   11 span= 33.9h usd=   35,711 mk=    6 medp=0.39 buy=0.89 kept=    165,155 reb=   1% [09:-10K 10:+9K 11:+99K] | btc-hit 94%, non-crypto 6%
+0xE528676bc13DbB685E90 n= 1379 span= 71.9h usd=   21,984 mk=  570 medp=0.53 buy=0.0 kept=      5,999 reb=  23% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x6Ccbd48BC12227b952b2 n= 1454 span= 71.9h usd=   23,969 mk=  551 medp=0.54 buy=0.0 kept=      1,821 reb=  74% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x091E5Bb3B1e8239d734D n= 1222 span= 71.9h usd=   21,405 mk=  544 medp=0.57 buy=0.0 kept=      2,811 reb=  47% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x7Ca02326c99bdf7D6d24 n= 1217 span= 71.9h usd=   19,248 mk=  526 medp=0.56 buy=0.0 kept=      1,334 reb=  94% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xC84e712F3C47A7532BE1 n= 1360 span= 71.9h usd=   22,965 mk=  567 medp=0.58 buy=0.0 kept=      4,279 reb=  30% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x898ca742482eab3A4a01 n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    287,069 reb=   7% [09:-1K 10:+0K 11:+0K] | 
+0x6BE68b475d7B0f038291 n= 1230 span= 72.0h usd=   20,268 mk=  520 medp=0.63 buy=0.0 kept=      4,125 reb=  29% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xf7098e5bF060edE0F074 n= 1202 span= 71.7h usd=   19,692 mk=  547 medp=0.55 buy=0.0 kept=      2,604 reb=  46% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x0dbd0e1d5999a401263d n= 4000 span= 25.3h usd=  101,458 mk= 1396 medp=0.46 buy=0.97 kept=     66,885 reb=   6% [11:+67K] | btc-ud-15m 26%, eth-ud-15m 17%, btc-ud-5m 16%, eth-ud-5m 10%, xrp-ud-15m 7%
+bosona                 n= 4000 span= 21.4h usd=  136,936 mk=  422 medp=0.68 buy=1.0 kept=    541,013 reb=  14% [09:+102K 10:+96K 11:+70K] | btc-ud-5m 78%, btc-ud-15m 17%, btc-ud-1h 2%, btc-ud-daily 1%, btc-ud-4h 0%
+0x3F7e03e23520fA94488a n= 1173 span= 71.8h usd=   18,134 mk=  492 medp=0.54 buy=0.0 kept=      2,397 reb=  47% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x619937c3b3bEEcE287d6 n= 1102 span= 71.9h usd=   16,699 mk=  500 medp=0.53 buy=0.0 kept=      3,216 reb=  36% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+GoodFallen             n= 4000 span=  5.4h usd=   35,955 mk=   64 medp=0.5 buy=1.0 kept=    202,980 reb=  53% [09:+62K 10:+67K 11:+41K] | btc-ud-5m 100%
+blue.birds             n= 4000 span=  5.5h usd=   55,503 mk=  141 medp=0.47 buy=1.0 kept=     45,669 reb=  79% [10:+21K 11:+25K] | btc-ud-5m 78%, eth-ud-5m 21%, btc-ud-15m 1%
+0x5E3d5AEbFEd18c0DDd51 n= 1131 span= 71.2h usd=   16,212 mk=  480 medp=0.55 buy=0.0 kept=      2,789 reb=  38% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+Lolakis                n=  275 span= 71.9h usd=  473,169 mk=   63 medp=0.58 buy=0.57 kept=    195,925 reb=  37% [09:+22K 10:+49K 11:+52K] | ?-above 85%, non-crypto 15%
+Egozic86               n=  168 span= 70.2h usd=   33,555 mk=   24 medp=0.471 buy=0.69 kept=     46,512 reb=  19% [09:-1K 10:-6K 11:+48K] | btc-hit 86%, ?-hit 5%, non-crypto 5%, btc-above 3%, hype-other 1%
+0x28fD630E038059de74b0 n= 1106 span= 71.8h usd=   16,086 mk=  457 medp=0.55 buy=0.0 kept=       -178 reb= nan% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+The Spirit of Ukraine> n= 1029 span= 71.1h usd=  130,600 mk=   10 medp=0.002 buy=0.66 kept=  2,052,353 reb=   1% [09:-70K 10:+29K 11:+228K] | non-crypto 100%
+0x21d02104355B57AD1CAB n= 1082 span= 71.8h usd=   16,739 mk=  451 medp=0.51 buy=0.0 kept=      1,448 reb=  70% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x18C18e0c8c3154360B4F n= 4000 span=  2.5h usd=   22,581 mk=   41 medp=0.54 buy=0.29 kept=    119,236 reb=  37% [09:+10K 10:+34K 11:+69K] | btc-ud-5m 81%, btc-ud-15m 19%
+CrouchPredictions      n= 4000 span=  5.0h usd=   28,879 mk=   73 medp=0.39 buy=1.0 kept=    285,870 reb=  74% [09:+76K 10:+89K 11:+74K] | btc-ud-5m 75%, btc-ud-15m 25%
+0x110218dbA29f8A26B83e n= 1043 span= 71.9h usd=   17,121 mk=  437 medp=0.61 buy=0.0 kept=       -374 reb= nan% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+Synthesizerchan        n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=        186 reb=  48% [09:-0K 10:-0K 11:+0K] | 
+Sharky6999             n=  726 span= 71.5h usd=  263,460 mk=  130 medp=0.987 buy=0.85 kept=  1,038,730 reb=   3% [09:+43K 10:-35K 11:+56K] | btc-hit 36%, btc-ud-5m 23%, eth-hit 21%, btc-above 10%, non-crypto 4%
+tmsd-test              n= 4000 span=  4.9h usd=   61,415 mk=   92 medp=0.49 buy=0.81 kept=    287,653 reb= 180% [09:+72K 10:-45K 11:+8K] | btc-ud-5m 74%, btc-ud-15m 18%, eth-ud-15m 7%, eth-ud-1h 1%, btc-ud-1h 0%
+ponzisniper            n=   61 span= 69.2h usd=   10,345 mk=   18 medp=0.028 buy=0.84 kept=     99,856 reb=   0% [09:+0K 10:-2K 11:+33K] | btc-hit 85%, btc-above 15%
+minusalpha1            n= 4000 span= 35.8h usd=  100,952 mk=  744 medp=0.643 buy=1.0 kept=   -158,426 reb= nan% [09:-4K 10:-96K 11:-59K] | btc-ud-15m 40%, eth-ud-15m 22%, bnb-ud-15m 11%, doge-ud-15m 10%, sol-ud-15m 6%
+0x3cdE8864B83064B6C3Fe n=  978 span= 71.9h usd=   15,075 mk=  411 medp=0.54 buy=0.0 kept=      5,601 reb=  16% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0xCC480e2d20EC24442516 n=  904 span= 71.9h usd=   14,927 mk=  400 medp=0.57 buy=0.0 kept=      2,532 reb=  37% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+wzbbb                  n= 4000 span= 23.3h usd=   96,390 mk=  276 medp=0.5 buy=1.0 kept=    101,665 reb=  43% [09:+11K 10:+31K 11:+23K] | btc-ud-5m 100%, eth-ud-5m 0%, btc-ud-15m 0%
+0x97Fcc4569D9a129893C0 n=  930 span= 71.7h usd=   13,259 mk=  356 medp=0.605 buy=0.0 kept=       -423 reb= nan% [09:-0K 10:+0K 11:+0K] | btc-ud-5m 100%
+penguinx               n=  614 span= 65.5h usd=   55,870 mk=   12 medp=0.5 buy=1.0 kept=   -649,565 reb= nan% [09:-295K 10:-164K 11:-52K] | btc-ud-15m 88%, non-crypto 10%, doge-ud-5m 1%, btc-hit 1%
+0x10e7c26bf07aD2417db0 n=  820 span= 71.9h usd=   12,808 mk=  351 medp=0.58 buy=0.0 kept=        302 reb= 276% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+0x8A8C167B136D956ECdfE n=  765 span= 71.7h usd=   12,766 mk=  330 medp=0.56 buy=0.0 kept=        127 reb= 630% [09:+0K 10:+0K 11:+0K] | btc-ud-5m 100%
+ComTruise              n= 4000 span= 25.1h usd=  279,742 mk=  117 medp=0.77 buy=0.61 kept=    252,912 reb=  40% [09:-47K 10:+12K 11:+49K] | btc-hit 62%, btc-above 33%, eth-hit 4%
+bubble-bobble          n= 1847 span= 26.0h usd=    7,200 mk=  121 medp=0.72 buy=0.8 kept=     11,453 reb=  36% [09:-1K 10:+1K 11:+0K] | sol-ud-1h 31%, eth-ud-1h 27%, doge-ud-1h 15%, bnb-ud-1h 14%, xrp-ud-1h 13%
+0x06dc51826bc524d9a837 n= 4000 span= 48.6h usd=  817,078 mk=  315 medp=0.771 buy=1.0 kept=    998,119 reb=  38% [09:+172K 10:+104K 11:-119K] | btc-hit 42%, btc-above 26%, eth-hit 14%, eth-above 7%, btc-range 5%
+0xb55fa1296E6ec55D0cE5 n= 4000 span=  6.6h usd=   67,961 mk=  294 medp=0.48 buy=1.0 kept=    565,138 reb= 107% [09:+81K 10:+51K 11:-8K] | btc-ud-daily 35%, btc-ud-1h 13%, btc-ud-15m 10%, btc-ud-4h 8%, eth-ud-daily 7%
+uninformedfloww        n= 4000 span= 21.4h usd=   64,044 mk=  889 medp=0.62 buy=1.0 kept=        907 reb=20831% [09:+20K 10:+1K 11:-159K] | btc-ud-15m 33%, eth-ud-15m 27%, xrp-ud-5m 11%, sol-ud-5m 5%, xrp-ud-15m 5%
+coinfilippe            n= 4000 span= 25.0h usd=  134,371 mk=  120 medp=0.54 buy=0.53 kept=    173,415 reb=  51% [09:+11K 10:+14K 11:+15K] | btc-above 48%, eth-above 26%, btc-range 17%, btc-hit 5%, eth-hit 2%
+x6916Cc00AA1c3e75ECf40 n= 1961 span= 72.0h usd=1,124,451 mk=  108 medp=0.852 buy=0.51 kept=    550,474 reb=  11% [09:+35K 10:+19K 11:+27K] | btc-hit 87%, eth-hit 9%, sol-hit 4%, xrp-hit 1%
+0x50f7                 n= 2426 span= 61.4h usd=  676,533 mk=  395 medp=0.99 buy=1.0 kept=    602,037 reb=   3% [09:+55K 10:+48K 11:+18K] | btc-ud-5m 81%, eth-ud-5m 11%, btc-ud-15m 7%, eth-ud-15m 1%
+Polkadot-Frog          n= 4000 span=  4.3h usd=   23,905 mk=  134 medp=0.5 buy=0.27 kept=    121,615 reb= 198% [09:+34K 10:+31K 11:+20K] | btc-ud-5m 55%, eth-ud-5m 17%, btc-ud-1h 13%, btc-ud-15m 11%, eth-ud-15m 2%
+hdueilqhsdn            n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    178,109 reb= 109% [09:+51K 10:+21K 11:+12K] | 
+THG.                   n= 1884 span= 70.1h usd=  415,600 mk=  185 medp=0.99 buy=1.0 kept=     21,991 reb=  41% [09:+4K 10:+19K 11:-6K] | btc-ud-5m 100%
+arcsine-barrister      n= 4000 span= 11.3h usd=   33,100 mk=  132 medp=0.9 buy=0.0 kept=     97,531 reb=  24% [09:+3K 10:+57K 11:+38K] | btc-ud-5m 100%
+ply-pm0                n= 4000 span= 11.2h usd=   38,297 mk=  126 medp=0.39 buy=1.0 kept=     86,321 reb=  44% [10:+48K 11:+38K] | btc-ud-5m 100%
+hoodquant              n= 4000 span= 27.7h usd=   16,684 mk= 1538 medp=0.13 buy=1.0 kept=     31,411 reb=  11% [09:-1K 10:+36K 11:-4K] | btc-ud-15m 26%, btc-ud-5m 21%, eth-ud-5m 11%, sol-ud-5m 10%, eth-ud-15m 6%
+CleanCoinFlip          n= 4000 span= 46.2h usd=  102,240 mk=  138 medp=0.099 buy=0.64 kept=     36,117 reb=  11% [10:+5K 11:+32K] | btc-hit 84%, eth-hit 13%, sol-hit 1%, xrp-hit 1%, ?-hit 0%
+stepahead              n= 4000 span=  9.4h usd=   21,084 mk=  149 medp=0.46 buy=1.0 kept=    120,378 reb=  67% [09:+8K 10:+57K 11:+37K] | btc-ud-5m 69%, btc-ud-15m 31%
+lkojihfafaf            n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=     18,852 reb= 137% [09:+0K 10:+8K 11:+11K] | 
+justdance              n=  377 span= 71.1h usd=  217,850 mk=   50 medp=0.632 buy=1.0 kept=  2,106,281 reb=   5% [09:+64K 10:+48K 11:-21K] | btc-hit 100%, sol-ud-4h 0%, btc-ud-4h 0%, eth-ud-4h 0%
+machine-earning        n= 4000 span=  3.5h usd=   19,233 mk=   42 medp=0.54 buy=0.0 kept=     34,338 reb=  31% [10:+0K 11:+34K] | btc-ud-5m 100%
+0x29efa7c259a89cc77b36 n= 4000 span= 66.7h usd=   59,054 mk=  609 medp=0.52 buy=0.0 kept=     30,913 reb=  45% [10:+5K 11:+26K] | btc-ud-5m 100%
+tiredofwinning2much    n= 4000 span= 14.8h usd=   28,966 mk=  297 medp=0.44 buy=1.0 kept=     69,876 reb=  30% [09:+27K 10:+12K 11:+18K] | eth-ud-15m 38%, btc-ud-5m 32%, btc-ud-15m 30%
+0x9e3ed7b661a903fc97af n= 4000 span= 13.0h usd=  223,368 mk= 1100 medp=0.46 buy=0.68 kept= -4,154,035 reb= nan% [09:-1113K 10:-740K 11:-466K] | non-crypto 91%, btc-ud-5m 4%, eth-ud-5m 1%, btc-ud-1h 1%, eth-ud-15m 1%
+0x502b532F55778c098584 n= 4000 span= 18.9h usd=   97,331 mk=  507 medp=0.47 buy=1.0 kept=    177,318 reb=  21% [09:+13K 10:+67K 11:+39K] | btc-ud-5m 72%, btc-ud-15m 13%, eth-ud-5m 8%, sol-ud-5m 5%, eth-ud-15m 1%
+machinelearned         n= 4000 span= 53.3h usd=  149,728 mk=  571 medp=0.44 buy=1.0 kept=     90,802 reb=  29% [09:+28K 10:+27K 11:+35K] | btc-ud-5m 100%, non-crypto 0%
+suntori                n= 4000 span= 17.9h usd=  256,948 mk= 1028 medp=0.47 buy=0.65 kept=-11,499,745 reb= nan% [09:-740K 10:-362K 11:-106K] | non-crypto 84%, btc-ud-5m 5%, btc-ud-daily 4%, btc-hit 3%, btc-ud-1h 1%
+Hcrystallash           n= 4000 span= 16.2h usd=   84,336 mk=  349 medp=0.5 buy=1.0 kept=    259,769 reb=  24% [09:+3K 10:+47K 11:+21K] | btc-ud-15m 47%, btc-ud-5m 30%, eth-ud-5m 23%
+newbeginning2          n= 2336 span= 71.9h usd=  457,533 mk=  489 medp=0.99 buy=1.0 kept=      6,704 reb=   4% [10:-3K 11:+9K] | btc-ud-5m 66%, btc-ud-15m 13%, non-crypto 9%, sol-ud-5m 3%, eth-ud-5m 2%
+0xDB5                  n= 2864 span= 71.9h usd=  239,252 mk=  156 medp=0.687 buy=0.62 kept=    208,593 reb=  14% [09:+10K 10:+9K 11:+31K] | btc-above 42%, btc-hit 37%, btc-range 11%, eth-above 5%, btc-ud-daily 3%
+EZTRADENL2             n= 4000 span=  6.4h usd=   25,810 mk=  101 medp=0.47 buy=1.0 kept=     39,747 reb=  71% [09:+11K 10:+14K 11:+4K] | btc-ud-5m 95%, btc-ud-15m 5%
+asdcaxz                n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=     30,629 reb=  65% [10:+7K 11:+24K] | 
+0x765e6a480ae3f05c3f2e n= 2787 span= 71.9h usd=  143,487 mk= 1241 medp=0.5 buy=0.83 kept=   -112,572 reb= nan% [09:-0K 10:-8K 11:-105K] | non-crypto 45%, btc-ud-5m 37%, btc-ud-15m 16%, btc-ud-4h 1%, btc-ud-1h 0%
+snoopdoge              n= 4000 span= 40.9h usd=   89,290 mk=   47 medp=0.43 buy=0.78 kept=    168,790 reb=  70% [09:+10K 10:-5K 11:-3K] | btc-hit 100%
+EVPLUS.AI              n= 4000 span= 49.8h usd=  425,589 mk=  981 medp=0.99 buy=1.0 kept=    -11,842 reb= nan% [09:+2K 10:+3K 11:+7K] | btc-ud-5m 53%, non-crypto 27%, btc-ud-15m 5%, eth-ud-5m 4%, ?-range 2%
+0x1bc32be106439240f59a n= 4000 span= 20.5h usd=   83,843 mk=  505 medp=0.52 buy=1.0 kept=    169,452 reb=  11% [10:-31K 11:+200K] | non-crypto 42%, btc-ud-15m 28%, eth-ud-15m 17%, xrp-ud-15m 4%, sol-ud-15m 4%
+1000monkeys            n=    0 span=    0h usd=        0 mk=    0 medp=None buy=None kept=    131,820 reb=  35% [09:+37K 10:+14K 11:+27K] | 
+the.prod.dt            n= 2497 span= 71.8h usd=  135,170 mk=  234 medp=0.59 buy=0.98 kept=    -54,625 reb= nan% [09:-2K 10:-17K 11:-35K] | btc-ud-15m 100%
+neutralwave23          n= 4000 span= 35.1h usd=  298,216 mk= 1436 medp=0.47 buy=0.81 kept= -3,443,775 reb= nan% [09:-370K 10:-427K 11:-411K] | non-crypto 88%, btc-ud-15m 6%, btc-ud-5m 2%, btc-hit 2%, sol-ud-5m 2%
+0x6205f86Ec4fE07cD55ab n= 4000 span= 39.2h usd=    4,829 mk=  554 medp=0.01 buy=0.6 kept=      1,764 reb=  55% [09:-0K 10:+2K 11:+2K] | btc-ud-5m 79%, non-crypto 21%
+mykr0ph0ne             n= 4000 span= 17.2h usd=   22,179 mk=  411 medp=0.39 buy=1.0 kept=     28,977 reb=  47% [09:+3K 10:+13K 11:+14K] | btc-ud-5m 57%, eth-ud-5m 43%
+BoneOhio               n= 3467 span= 71.9h usd=  213,135 mk= 1283 medp=0.68 buy=1.0 kept=    387,641 reb=  26% [09:+30K 10:+32K 11:+25K] | btc-ud-5m 67%, btc-ud-15m 9%, eth-ud-5m 7%, sol-ud-5m 3%, btc-ud-1h 3%
+thesidehustle          n= 4000 span= 15.7h usd=   31,150 mk=  250 medp=0.43 buy=1.0 kept=     64,894 reb=  37% [09:+16K 10:+17K 11:+23K] | btc-ud-15m 57%, eth-ud-5m 43%
+0x3ffda9af081465eD3820 n= 4000 span=  5.1h usd=   41,801 mk=  504 medp=0.39 buy=1.0 kept=      5,838 reb= 120% [09:-0K 10:-1K 11:+9K] | btc-ud-5m 28%, eth-ud-5m 18%, sol-ud-5m 13%, xrp-ud-5m 10%, eth-ud-15m 7%
+pnyz                   n= 4000 span=  6.6h usd=   17,105 mk=  101 medp=0.39 buy=1.0 kept=     44,760 reb=  48% [09:+8K 10:+14K 11:+6K] | btc-ud-5m 95%, btc-ud-15m 5%
+mia1111                n=  230 span= 15.8h usd=   16,075 mk=   98 medp=0.99 buy=0.91 kept=     10,244 reb=  13% [09:+1K 10:+3K 11:+3K] | btc-ud-5m 100%
+adadmadmsadmsadmskadms n= 2702 span= 71.8h usd=  201,417 mk=  330 medp=0.85 buy=0.9 kept=   -223,570 reb= nan% [09:-57K 10:-65K 11:-49K] | btc-ud-5m 75%, btc-ud-15m 14%, btc-ud-1h 3%, non-crypto 3%, eth-ud-5m 2%

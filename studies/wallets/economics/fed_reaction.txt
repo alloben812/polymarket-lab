@@ -1,0 +1,28 @@
+
+### will-there-be-no-change-in-fed-interest-rates-after-the-december-2026- vol=17533399 rows since 11-01: 14302
+  jobs Oct T=11-06 13:30:00 yes: pre=0.290 +5s=0.263 +30s=0.210 +5m=0.220 +1h=0.210 +6h=0.210 first fill lag=4s | 0-8s: n=3 usd=4017 pnl@1h=265 8-33s: n=47 usd=16899 pnl@1h=36 33s-5m: n=30 usd=8286 pnl@1h=-53 5m-1h: n=68 usd=20810 pnl@1h=-133
+           first-33s takers: johnxina1 +271; Poligarch +50; conherence -11; rspa -8
+  CPI Oct  T=11-10 13:30:00 yes: pre=0.070 +5s=0.070 +30s=0.060 +5m=0.035 +1h=0.025 +6h=0.047 first fill lag=4s | 0-8s: n=5 usd=477 pnl@1h=23 8-33s: n=30 usd=7304 pnl@1h=183 33s-5m: n=48 usd=144340 pnl@1h=2275 5m-1h: n=250 usd=411684 pnl@1h=520
+           first-33s takers: ATCapital +178; hippoka -83; cigarettes +23; 0xb0c85813a7a4 +18
+  PPI Oct  T=11-13 13:30:00 yes: pre=0.024 +5s=0.024 +30s=0.029 +5m=0.026 +1h=0.028 +6h=0.025 first fill lag=10s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=1 usd=633 pnl@1h=-38 33s-5m: n=10 usd=21099 pnl@1h=-186 5m-1h: n=47 usd=4567 pnl@1h=12
+           first-33s takers: me4haiko2 -38
+  PCE Oct  T=11-25 13:30:00 yes: pre=0.043 +5s=0.043 +30s=0.041 +5m=0.031 +1h=0.028 +6h=0.042 first fill lag=29s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=4 usd=287 pnl@1h=4 33s-5m: n=20 usd=45256 pnl@1h=-86 5m-1h: n=68 usd=41318 pnl@1h=-204
+           first-33s takers: liikujyfh +2; Lucerys +1; 0xFcceF06DC482 +1; quietparcel +0
+  ISM mfg  T=11-02 15:00:00 yes: pre=0.270 +5s=0.260 +30s=0.260 +5m=0.260 +1h=0.260 +6h=0.260 first fill lag=6s | 0-8s: n=1 usd=9 pnl@1h=-0 8-33s: n=0 usd=0 pnl@1h=0 33s-5m: n=0 usd=0 pnl@1h=0 5m-1h: n=4 usd=447 pnl@1h=-1
+           first-33s takers: pwb1983 -0
+  ISM svc  T=11-04 15:00:00 yes: pre=0.200 +5s=0.200 +30s=0.200 +5m=0.200 +1h=0.190 +6h=0.210 first fill lag=229s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=0 usd=0 pnl@1h=0 33s-5m: n=2 usd=98 pnl@1h=-0 5m-1h: n=30 usd=4344 pnl@1h=-51
+           first-33s takers: 
+
+### will-the-fed-increase-interest-rates-by-25-bps-after-the-december-2026 vol=13999290 rows since 11-01: 10962
+  jobs Oct T=11-06 13:30:00 yes: pre=0.710 +5s=0.740 +30s=0.790 +5m=0.780 +1h=0.770 +6h=0.780 first fill lag=4s | 0-8s: n=5 usd=7739 pnl@1h=628 8-33s: n=71 usd=73180 pnl@1h=15 33s-5m: n=118 usd=37182 pnl@1h=1699 5m-1h: n=85 usd=47209 pnl@1h=-1007
+           first-33s takers: 6742 +728; PantheraUncia -618; johnxina1 +422; Ahpo -220
+  CPI Oct  T=11-10 13:30:00 yes: pre=0.870 +5s=0.895 +30s=0.870 +5m=0.860 +1h=0.840 +6h=0.830 first fill lag=6s | 0-8s: n=1 usd=702 pnl@1h=-44 8-33s: n=15 usd=3025 pnl@1h=-176 33s-5m: n=122 usd=120384 pnl@1h=-2163 5m-1h: n=95 usd=153642 pnl@1h=-982
+           first-33s takers: hippoka -197; me4haiko2 -44; pbeats -9; cigarettes +7
+  PPI Oct  T=11-13 13:30:00 yes: pre=0.880 +5s=0.880 +30s=0.880 +5m=0.900 +1h=0.910 +6h=0.870 first fill lag=10s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=4 usd=3019 pnl@1h=98 33s-5m: n=19 usd=31897 pnl@1h=704 5m-1h: n=54 usd=24174 pnl@1h=-150
+           first-33s takers: MsTKyB1 +66; MR.K-473 +33; me4haiko2 -1; 0xa3bc94 +1
+  PCE Oct  T=11-25 13:30:00 yes: pre=0.940 +5s=0.940 +30s=0.930 +5m=0.940 +1h=0.930 +6h=0.940 first fill lag=22s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=7 usd=4035 pnl@1h=-45 33s-5m: n=4 usd=332 pnl@1h=-4 5m-1h: n=33 usd=28159 pnl@1h=-316
+           first-33s takers: MR.K-473 -45; 0xa3bc94 -0; 0x07e76c -0; Lucerys -0
+  ISM mfg  T=11-02 15:00:00 yes: pre=0.710 +5s=0.710 +30s=0.710 +5m=0.710 +1h=0.730 +6h=0.730 first fill lag=6s | 0-8s: n=1 usd=9 pnl@1h=0 8-33s: n=0 usd=0 pnl@1h=0 33s-5m: n=0 usd=0 pnl@1h=0 5m-1h: n=18 usd=30070 pnl@1h=519
+           first-33s takers: pwb1983 +0
+  ISM svc  T=11-04 15:00:00 yes: pre=0.810 +5s=0.810 +30s=0.810 +5m=0.810 +1h=0.810 +6h=0.780 first fill lag=100s | 0-8s: n=0 usd=0 pnl@1h=0 8-33s: n=0 usd=0 pnl@1h=0 33s-5m: n=1 usd=2 pnl@1h=-0 5m-1h: n=27 usd=18843 pnl@1h=-322
+           first-33s takers: 

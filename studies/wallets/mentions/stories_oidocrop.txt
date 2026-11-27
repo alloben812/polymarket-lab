@@ -1,0 +1,97 @@
+
+# Will Trump say "Two Percent" during his Midterm Rally in Lubbock, Texas?  [what-will-trump-say-during-his-midterm-rally-in-lubbock-texa]  vol $308287 tape 399 rows
+  sched start 10-27 23:00:00 | last print<0.60 10-28 09:35:32 | first print>=0.60 10-28 09:41:11 | determined(tape) 10-28 09:49:14 | resolved 11-01 00:42:40 | outcome YES | account pnl $599.53 on $4268.1
+    10-28 00:42:47 start+1h42m47s det-9h06m27s LIVE    T BUY  No  @0.710 x   50.0 pnl   -35.60
+    10-28 01:15:35 start+2h15m35s det-8h33m39s LIVE    T SELL No  @0.310 x   10.0 pnl     3.08
+    10-28 01:17:27 start+2h17m27s det-8h31m47s LIVE    T SELL No  @0.340 x   40.0 pnl    13.51
+    10-28 01:33:27 start+2h33m27s det-8h15m47s LIVE    M BUY  Yes @0.130 x    1.9 pnl     1.66
+    10-28 01:42:33 start+2h42m33s det-8h06m41s LIVE    M BUY  Yes @0.160 x   60.0 pnl    50.40
+    10-28 01:48:17 start+2h48m17s det-8h00m57s LIVE    T BUY  Yes @0.250 x   50.0 pnl    37.41
+    10-28 02:27:14 start+3h27m14s det-7h22m00s LIVE    T BUY  Yes @0.712 x 2000.0 pnl   572.20
+    ... 4 more fills ...
+    10-28 21:05:23 start+22h05m23s det+11h16m09s POST    M SELL Yes @0.940 x  323.6 pnl   -19.42
+    10-28 21:06:13 start+22h06m13s det+11h16m59s POST    M SELL Yes @0.950 x  249.6 pnl   -12.48
+
+# Will Caedrel say "Dive" 7+ times on stream?  [what-will-caedrel-say-during-his-worlds-2026-final-stream]  vol $4734 tape 68 rows
+  sched start 11-14 19:00:00 | last print<0.60 11-15 20:05:22 | first print>=0.60 11-16 06:41:02 | determined(tape) 11-16 14:32:41 | resolved 11-16 21:05:11 | outcome YES | account pnl $473.43 on $716.3
+    11-15 11:55:34 start+16h55m34s det-26h37m07s LIVE    M BUY  Yes @0.090 x   39.7 pnl    36.14
+    11-15 11:57:49 start+16h57m49s det-26h34m52s LIVE    M BUY  Yes @0.070 x   50.0 pnl    46.50
+    11-15 11:57:49 start+16h57m49s det-26h34m52s LIVE    M BUY  Yes @0.080 x   90.0 pnl    82.80
+    11-15 11:57:49 start+16h57m49s det-26h34m52s LIVE    M BUY  Yes @0.090 x   60.3 pnl    54.85
+    11-15 15:56:16 start+20h56m16s det-22h36m25s LIVE    T BUY  Yes @0.390 x  120.0 pnl    72.91
+    11-15 15:56:17 start+20h56m17s det-22h36m24s LIVE    M BUY  No  @0.580 x    6.9 pnl    -4.02
+    11-15 15:56:19 start+20h56m19s det-22h36m22s LIVE    M BUY  Yes @0.400 x    8.3 pnl     5.00
+    ... 2 more fills ...
+    11-16 06:41:02 start+35h41m02s det-7h51m39s JUMP    M BUY  Yes @0.710 x  200.0 pnl    58.00
+    11-16 14:58:34 start+43h58m34s det+0h25m53s POST    M BUY  Yes @0.880 x  471.2 pnl    56.54
+
+# Will Trump say "Biden" or "Kamala" or "Obama" 7+ times during "60 Minutes" extended interview?  [what-will-trump-say-during-60-minutes-extended-interview]  vol $4766 tape 176 rows
+  sched start - | last print<0.60 11-09 04:41:46 | first print>=0.60 11-09 05:42:25 | determined(tape) 11-09 05:42:25 | resolved 11-09 05:43:02 | outcome YES | account pnl $292.99 on $306.3
+    11-09 00:14:18 start   n/a det-5h28m07s NOSTART T BUY  Yes @0.121 x  100.0 pnl    87.79
+    11-09 00:14:21 start   n/a det-5h28m04s NOSTART T BUY  Yes @0.157 x  100.0 pnl    84.17
+    11-09 00:14:49 start   n/a det-5h27m36s NOSTART T BUY  Yes @0.368 x  100.0 pnl    63.00
+    11-09 00:14:52 start   n/a det-5h27m33s NOSTART T BUY  Yes @0.447 x  100.0 pnl    55.06
+    11-09 00:24:40 start   n/a det-5h17m45s NOSTART T BUY  Yes @0.980 x  100.0 pnl     1.98
+    11-09 00:24:45 start   n/a det-5h17m40s NOSTART T BUY  Yes @0.990 x   39.8 pnl     0.39
+    11-09 04:24:45 start   n/a det-1h17m40s NOSTART M BUY  Yes @0.990 x   60.2 pnl     0.60
+
+# Will Robinhood say "Weekend" during earnings call?  [what-will-robinhood-say-during-their-next-earnings-call-octo]  vol $1310 tape 32 rows
+  sched start 10-27 21:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-27 22:30:14 | resolved 10-28 00:31:54 | outcome NO | account pnl $-183.11 on $472.3
+    10-27 22:26:23 start+1h26m23s det-0h03m51s LIVE    T BUY  Yes @0.985 x  300.0 pnl  -295.54
+    10-27 22:28:23 start+1h28m23s det-0h01m51s LIVE    T BUY  No  @0.390 x    7.4 pnl     4.51
+    10-27 22:28:36 start+1h28m36s det-0h01m38s LIVE    T BUY  No  @0.509 x  200.0 pnl    97.70
+    10-27 22:28:36 start+1h28m36s det-0h01m38s LIVE    M BUY  No  @0.400 x    5.0 pnl     3.00
+    10-27 22:29:54 start+1h29m54s det-0h00m20s LIVE    T SELL Yes @0.251 x   23.0 pnl     5.74
+    10-27 22:30:14 start+1h30m14s det+0h00m00s POST    T BUY  No  @0.979 x   65.6 pnl     1.36
+    10-27 22:30:53 start+1h30m53s det+0h00m39s POST    T SELL Yes @0.010 x    5.8 pnl     0.06
+    10-27 22:50:47 start+1h50m47s det+0h20m33s POST    T SELL Yes @0.001 x   50.0 pnl     0.05
+    10-28 00:05:57 start+3h05m57s det+1h35m43s POST    M SELL Yes @0.001 x   13.0 pnl     0.01
+
+# Will Bank of America say "Inflation" 3+ times during earnings call?  [what-will-bank-of-america-say-during-their-next-earnings-cal]  vol $1063 tape 10 rows
+  sched start 10-14 12:30:00 | last print<0.60 10-14 05:12:17 | first print>=0.60 10-14 13:55:42 | determined(tape) 10-14 13:55:42 | resolved 10-14 15:56:55 | outcome YES | account pnl $117.37 on $832.0
+    10-14 13:55:42 start+1h25m42s det+0h00m00s JUMP    T BUY  Yes @0.961 x  284.4 pnl    10.87
+    10-14 13:55:42 start+1h25m42s det+0h00m00s JUMP    T BUY  Yes @0.839 x  666.0 pnl   106.50
+
+# Will Andy Burnham say "Million" or "Billion" or "Trillion" 5+ times during the next PMQ?  [what-will-andy-burnham-say-at-the-next-prime-ministers-quest]  vol $167 tape 10 rows
+  sched start 10-21 11:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 10-21 11:48:03 | resolved 10-21 15:58:32 | outcome NO | account pnl $0.41 on $35.4
+    10-21 11:48:18 start+0h48m18s det+0h00m15s POST    T BUY  No  @0.988 x   35.8 pnl     0.41
+
+# Will Trump say "China" or "Russia" 15+ times during his trilateral meeting with Xi and Putin?  [what-will-trump-say-during-his-trilateral-meeting-with-xi-an]  vol $8045 tape 122 rows
+  sched start 11-18 18:00:00 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-19 09:58:44 | resolved 11-19 12:37:59 | outcome NO | account pnl $3.48 on $337.8
+    11-19 10:35:08 start+16h35m08s det+0h36m24s POST    T BUY  No  @0.989 x  142.5 pnl     1.51
+    11-19 10:36:43 start+16h36m43s det+0h37m59s POST    T BUY  No  @0.990 x  100.0 pnl     0.99
+    11-19 10:36:44 start+16h36m44s det+0h38m00s POST    T BUY  No  @0.990 x   98.8 pnl     0.98
+
+# Will Trump say "Drone" at Cape Canaveral?  [what-will-trump-say-at-cape-canaveral-november-6]  vol $1040 tape 30 rows
+  sched start - | last print<0.60 11-06 23:23:54 | first print>=0.60 11-06 23:25:36 | determined(tape) 11-06 23:25:36 | resolved 11-07 01:27:05 | outcome YES | account pnl $4.16 on $195.8
+    11-06 23:25:39 start   n/a det+0h00m03s JUMP    T BUY  Yes @0.979 x  200.0 pnl     4.16
+
+# Will Tesla say "Robotaxi" 5+ times during earnings call?  [what-will-tesla-say-during-their-next-earnings-call-october-]  vol $900 tape 8 rows
+  sched start 10-21 21:30:00 | last print<0.60 - | first print>=0.60 10-18 10:59:57 | determined(tape) 10-18 19:18:56 | resolved 10-22 00:00:00 | outcome YES | account pnl $6.3 on $678.4
+    10-21 21:58:15 start+0h28m15s det+74h39m19s POST    T BUY  Yes @0.980 x  342.7 pnl     6.65
+    10-21 23:27:39 start+1h57m39s det+76h08m43s POST    T SELL Yes @0.999 x  150.0 pnl    -0.15
+    10-21 23:27:42 start+1h57m42s det+76h08m46s POST    M SELL Yes @0.999 x    4.3 pnl    -0.00
+    10-21 23:57:26 start+2h27m26s det+76h38m30s POST    M SELL Yes @0.999 x  188.5 pnl    -0.19
+
+# Will Procter & Gamble say "Competition" during earnings call?  [what-will-procter-gamble-say-during-their-next-earnings-call]  vol $642 tape 23 rows
+  sched start 10-22 12:30:00 | last print<0.60 10-22 00:04:27 | first print>=0.60 10-22 12:52:12 | determined(tape) 10-22 13:04:47 | resolved 10-22 15:06:01 | outcome YES | account pnl $1.43 on $76.6
+    10-22 13:04:47 start+0h34m47s det+0h00m00s JUMP    T BUY  Yes @0.982 x   78.0 pnl     1.43
+
+# Will anyone say "AI" or "Artificial Intelligence" during South Park E3 S29?  [what-will-be-said-during-the-third-episode-of-south-park-sea]  vol $247 tape 5 rows
+  sched start 10-14 22:00:00 | last print<0.60 10-11 19:13:31 | first print>=0.60 10-15 04:40:08 | determined(tape) 10-15 04:40:08 | resolved 10-15 11:02:57 | outcome YES | account pnl $1.98 on $198.0
+    10-15 09:01:32 start+11h01m32s det+4h21m24s POST    T BUY  Yes @0.990 x  200.0 pnl     1.98
+
+# Will Trump say "China" on November 4?  [what-will-trump-say-on-november-4]  vol $1616 tape 19 rows
+  sched start - | last print<0.60 - | first print>=0.60 11-04 16:16:46 | determined(tape) 11-04 16:17:49 | resolved 11-04 20:59:52 | outcome YES | account pnl $0.84 on $660.8
+    11-04 18:58:19 start   n/a det+2h40m30s POST    T BUY  Yes @0.990 x   21.0 pnl     0.21
+    11-04 18:58:25 start   n/a det+2h40m36s POST    T BUY  Yes @0.999 x  625.7 pnl     0.62
+    11-04 20:41:15 start   n/a det+4h23m26s POST    T BUY  Yes @0.999 x   15.0 pnl     0.01
+
+# Will Trump say "Animal" during his Protecting American Families remarks?  [what-will-trump-say-during-his-protecting-american-families-]  vol $107 tape 3 rows
+  sched start 11-23 16:40:12 | last print<0.60 - | first print>=0.60 - | determined(tape) 11-23 22:17:47 | resolved 11-24 00:19:07 | outcome NO | account pnl $0.37 on $37.0
+    11-23 22:17:47 start+5h37m35s det+0h00m00s POST    T BUY  No  @0.990 x   37.0 pnl     0.37
+    11-23 22:17:53 start+5h37m41s det+0h00m06s POST    T BUY  No  @0.990 x    0.4 pnl     0.00
+
+# Will "Trump" be said 10+ times during the next episode of the Lemonade Stand Podcast?  [what-will-be-said-on-the-next-lemonade-stand-podcast-october]  vol $436 tape 7 rows
+  sched start 10-28 20:00:00 | last print<0.60 - | first print>=0.60 10-26 06:09:24 | determined(tape) 10-28 19:03:13 | resolved 10-28 21:10:09 | outcome YES | account pnl $1.73 on $9.9
+    10-28 19:01:22 start-0h58m38s det-0h01m51s PRE     T BUY  Yes @0.850 x   11.6 pnl     1.73

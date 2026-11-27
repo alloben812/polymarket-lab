@@ -1,0 +1,33 @@
+### (5) FIFO round trips, economics markets only
+  perfectnosta  buys $   166478: sold before resolution $    39606 ( 24%) pnl     3166, usd-weighted median hold   190.6 h | held to resolution $   91097 pnl   12876 | still open $   35775
+  GoldmanSachs  buys $   135935: sold before resolution $    98534 ( 72%) pnl    14434, usd-weighted median hold    45.3 h | held to resolution $     874 pnl     232 | still open $   36527
+  Ahpo          buys $   454093: sold before resolution $   390750 ( 86%) pnl    26218, usd-weighted median hold     0.9 h | held to resolution $   21552 pnl     121 | still open $   41791
+  0x831449c4b9  buys $   106480: sold before resolution $    13963 ( 13%) pnl     4242, usd-weighted median hold    48.0 h | held to resolution $    2588 pnl     709 | still open $   89928
+  Stonktrader   buys $    33577: sold before resolution $        0 (  0%) pnl        0, usd-weighted median hold     0.0 h | held to resolution $   25849 pnl    3502 | still open $    7728
+  ATCapital     buys $  1559217: sold before resolution $   542905 ( 35%) pnl    15521, usd-weighted median hold    45.5 h | held to resolution $    9963 pnl    -102 | still open $ 1006349
+
+### (6) calibration: Yes-price before the release vs outcome, all release-event markets with tapes (Fed tapes start T-4d)
+  7 days before:
+     price 0.00-0.10: bets= 221 events=48 avg price=0.022 win rate=0.014 edge per $1 share=-0.009 (after 1% fee -0.009)
+     price 0.10-0.30: bets=  74 events=36 avg price=0.196 win rate=0.216 edge per $1 share=+0.020 (after 1% fee +0.018)
+     price 0.30-0.50: bets=  44 events=33 avg price=0.381 win rate=0.432 edge per $1 share=+0.051 (after 1% fee +0.049)
+     price 0.50-0.70: bets=  45 events=33 avg price=0.612 win rate=0.578 edge per $1 share=-0.034 (after 1% fee -0.037)
+     price 0.70-0.90: bets=  74 events=35 avg price=0.801 win rate=0.770 edge per $1 share=-0.031 (after 1% fee -0.032)
+     price 0.90-0.97: bets=  59 events=33 avg price=0.934 win rate=0.966 edge per $1 share=+0.033 (after 1% fee +0.032)
+     price 0.97-1.01: bets= 163 events=45 avg price=0.993 win rate=0.994 edge per $1 share=+0.000 (after 1% fee +0.000)
+  1 day before:
+     price 0.00-0.10: bets= 248 events=52 avg price=0.018 win rate=0.016 edge per $1 share=-0.002 (after 1% fee -0.002)
+     price 0.10-0.30: bets=  73 events=35 avg price=0.193 win rate=0.178 edge per $1 share=-0.015 (after 1% fee -0.016)
+     price 0.30-0.50: bets=  47 events=30 avg price=0.369 win rate=0.489 edge per $1 share=+0.120 (after 1% fee +0.118)
+     price 0.50-0.70: bets=  50 events=31 avg price=0.619 win rate=0.520 edge per $1 share=-0.099 (after 1% fee -0.101)
+     price 0.70-0.90: bets=  71 events=34 avg price=0.802 win rate=0.803 edge per $1 share=+0.001 (after 1% fee -0.001)
+     price 0.90-0.97: bets=  58 events=34 avg price=0.938 win rate=0.931 edge per $1 share=-0.007 (after 1% fee -0.008)
+     price 0.97-1.01: bets= 193 events=49 avg price=0.994 win rate=1.000 edge per $1 share=+0.006 (after 1% fee +0.006)
+  1 hour before:
+     price 0.00-0.10: bets= 262 events=53 avg price=0.016 win rate=0.011 edge per $1 share=-0.005 (after 1% fee -0.005)
+     price 0.10-0.30: bets=  67 events=36 avg price=0.179 win rate=0.194 edge per $1 share=+0.015 (after 1% fee +0.014)
+     price 0.30-0.50: bets=  56 events=36 avg price=0.394 win rate=0.429 edge per $1 share=+0.034 (after 1% fee +0.032)
+     price 0.50-0.70: bets=  54 events=33 avg price=0.595 win rate=0.574 edge per $1 share=-0.021 (after 1% fee -0.023)
+     price 0.70-0.90: bets=  71 events=36 avg price=0.814 win rate=0.789 edge per $1 share=-0.026 (after 1% fee -0.027)
+     price 0.90-0.97: bets=  51 events=33 avg price=0.937 win rate=0.941 edge per $1 share=+0.004 (after 1% fee +0.004)
+     price 0.97-1.01: bets= 211 events=51 avg price=0.995 win rate=1.000 edge per $1 share=+0.005 (after 1% fee +0.005)

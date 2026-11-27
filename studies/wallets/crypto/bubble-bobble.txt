@@ -1,0 +1,55 @@
+[0x580845f990155aacc66eac14a3852a4fa38be67f] fills 1847 in 2s
+0x580845f990155aacc66eac14a3852a4fa38be67f  0x580845f990155aacc66eac14a3852a4fa38be67f  window 2026-11-13 15:56 .. 2026-11-27 15:56 UTC
+summary: {"fills": 1847, "markets": 655, "resolved_complete_markets": 649, "incomplete_markets": 0, "unresolved_markets": 6, "turnover_usd": 7200, "maker_share_usd": 0.519, "sell_share_usd": 0.205, "markets_with_both_outcomes_traded": 104, "uses_split_merge": true, "gross": 212.44, "fees_est": 6.85, "net": 205.58, "fee_rate_unknown_markets": 0, "net_per_market": 0.317, "t_by_market": 0.5, "win_share_markets": 0.111, "median_market_turnover": 0.0, "max_market_turnover": 233.32, "avg_fill_usd": 3.9}
+inventory events: {'SPLIT': 197, 'REDEEM': 932}
+API says for the same days: gross 202, fees -7, refunded 0, rebates 0, kept 195, volume $7133, fills 1821
+
+by family:
+  family          markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  sol-updown-1h   27       26                 0           2230      0.553        174.55   1.86      172.69   7.74              6.64            0.72       
+  eth-updown-1h   27       26                 0           1971      0.406        183.03   1.52      181.52   9.21              6.98            0.9        
+  doge-updown-1h  27       26                 0           1085      0.688        -116.88  1.38      -118.25  -10.9             -4.55           -0.6       
+  bnb-updown-1h   27       26                 0           984       0.443        43.0     1.14      41.85    4.25              1.61            0.33       
+  xrp-updown-1h   27       26                 0           930       0.268        -71.26   0.96      -72.22   -7.76             -2.78           -0.58      
+  crypto          493      493                0           0         None         0.0      0.0       0.0      None              0.0             None       
+  btc-updown-1h   27       26                 0           0         None         0.0      0.0       0.0      None              0.0             None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'BUY')   439    3776    2245  0.5946  3.495          0.0           3.495         3.778  0.93  102      131.98 
+  ('M', 'SELL')  402    3506    1448  0.4129  0.856          0.0           0.856         3.711  0.23  101      30.02  
+  ('T', 'BUY')   980    5588    3440  0.6156  0.903          0.123         0.78          2.867  0.27  110      43.58  
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', '0.00-0.05')  7      55      2     0.0388  2.396          0.0           2.396         1.449   1.65   6        1.32   
+  ('M', '0.05-0.15')  115    957     96    0.1007  0.961          0.0           0.961         2.342   0.41   52       9.19   
+  ('M', '0.15-0.30')  174    1512    330   0.218   2.974          0.0           2.974         5.293   0.56   72       44.98  
+  ('M', '0.30-0.45')  112    988     353   0.3575  0.115          0.0           0.115         9.562   0.01   43       1.14   
+  ('M', '0.55-0.70')  123    1106    704   0.6367  4.709          0.0           4.709         8.68    0.54   49       52.07  
+  ('M', '0.70-0.85')  170    1487    1152  0.7746  3.324          0.0           3.324         4.473   0.74   71       49.43  
+  ('M', '0.85-0.95')  130    1082    965   0.8915  0.259          0.0           0.259         2.691   0.1    55       2.8    
+  ('M', '0.95-0.99')  10     95      91    0.9559  1.126          0.0           1.126         1.496   0.75   9        1.07   
+  ('T', '0.00-0.05')  5      110     4     0.0369  -3.691         0.036         -3.726        0.248   None   3        -4.1   
+  ('T', '0.05-0.15')  87     1011    87    0.0863  -4.569         0.078         -4.647        2.439   -1.91  21       -46.96 
+  ('T', '0.15-0.30')  88     485     104   0.2146  -0.388         0.167         -0.554        10.615  -0.05  19       -2.69  
+  ('T', '0.30-0.45')  27     135     45    0.3311  -10.889        0.221         -11.11        10.235  -1.09  18       -15.0  
+  ('T', '0.45-0.55')  5      25      13    0.5301  -32.717        0.249         -32.966       23.656  None   3        -8.27  
+  ('T', '0.55-0.70')  116    577     366   0.6339  -10.244        0.231         -10.474       14.592  -0.72  35       -60.42 
+  ('T', '0.70-0.85')  213    1063    832   0.7825  5.766          0.168         5.597         4.675   1.2    56       59.51  
+  ('T', '0.85-0.95')  357    1780    1605  0.9014  5.923          0.088         5.835         1.768   3.3    73       103.89 
+  ('T', '0.95-0.99')  82     402     384   0.9557  4.431          0.042         4.388         0.09    48.5   33       17.62  
+
+by role and point in the market's life:
+  key                                   fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', 'life', 'b first quarter')      210    1750    882   0.504   -6.675         0.0           -6.675        5.135   -1.3   46       -116.82
+  ('M', 'life', 'c second quarter')     158    1324    649   0.49    3.243          0.0           3.243         8.338   0.39   39       42.96  
+  ('M', 'life', 'd third quarter')      241    2233    1144  0.5123  8.164          0.0           8.164         5.53    1.48   56       182.32 
+  ('M', 'life', 'e 75-95% of window')   232    1975    1018  0.5154  2.712          0.0           2.712         4.893   0.55   49       53.55  
+  ('T', 'life', 'b first quarter')      242    1806    556   0.3079  -6.883         0.122         -7.005        3.075   -2.28  49       -126.49
+  ('T', 'life', 'c second quarter')     239    1253    862   0.6876  2.673          0.134         2.538         6.351   0.4    45       31.81  
+  ('T', 'life', 'd third quarter')      310    1570    1257  0.8002  4.735          0.122         4.613         4.262   1.08   63       72.44  
+  ('T', 'life', 'e 75-95% of window')   180    913     729   0.7977  7.508          0.109         7.399         3.885   1.9    54       67.58  
+  ('T', 'life', 'f last 5% of window')  9      45      37    0.813   -3.754         0.131         -3.885        12.224  -0.32  7        -1.76  
+
+full result written to studies/wallets/crypto/bubble-bobble.json

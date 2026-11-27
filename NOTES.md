@@ -175,3 +175,169 @@ gross charge and `economic_pnl` already includes the refund (RN1: 3.85M refunded
 - `stats`: `mean_se`, `ratio_cluster` (edge per share with errors clustered by market), `bootstrap_sum_ci`, `wilson`.
 - Tools: `tools/wallet_check.py` (gross vs kept, by month), `tools/leaders.py <category>` (who wins a category and
   whether they look systematic), `tools/xread.py` (X posts and timelines).
+
+## Corrections and additions from the X practitioner sweep (2026-11-27, details in `catalog/raw/x2_practitioners.md`)
+
+- Crypto taker delay is 150 ms since 2026-09-04 14:00 UTC (docs changelog + @PolymarketDevs), not 50 ms. The
+  order-lifecycle docs page says 250 ms on "selected crypto and finance up/down markets": measure before relying on it.
+- Before 2026-11-20 every maker got a flat 25% of the taker fee its fills generated (20% crypto, 15% sports), no
+  minimum (per traders' posts); since then 0% below $200K of 30-day maker weighted volume. Elections/finance/tech
+  went 0.04 -> 0.05. Zero fees on NBA, politics, economics, weather, finance, culture, mentions, tech 2026-10-20..31.
+- New exchange "Nex" goes live mid-December 2026 (place/cancel p99 from ~1.4 s / ~0.7 s to under 10 ms). Today's
+  slow tail on cancels is why resting orders get run over on news; expect that window to shrink.
+- Protocol V2 rollout: Nov 23 (alt-crypto, weather), Nov 24, Dec 1; integrations must handle V1 and V2.
+- 1-hour and daily crypto Up/Down resolve on Chainlink TWAP-60s since 2026-11-18 (were Binance).
+- Affiliates earn 20%+ of referred fees since 2026-10-23: nearly every "wallet made $X" post carries a referral link.
+- Measured by others on the tape: headline -> first big buy 3-5 s, -> midpoint ~25 s, -> 95c ~70 s (Huang events,
+  Nov 12 and 23); CPI/jobs release -> first trades ~7 s (block time), >90c at 9 s, 99c at 27 s (33 releases).
+
+## Added 2026-11-27 by the long-form pass (details in `catalog/raw/w3_longform.md`)
+
+- Holding Rewards exist: the official docs copy (`data/pm_docs/concepts_positions-tokens.md`) says 4.00% annualized
+  on position value in "eligible markets", sampled hourly, paid daily; a third-party page updated 2026-11-21 says
+  3.25%. The rate is variable. Eligibility is the per-market gamma flag `holdingRewardsEnabled` (see the w3
+  verification section below).
+- Some sports markets carry a per-market taker matching delay: a third-party check on 2026-10-27 found 1 second on
+  Premier League markets and none on NBA. Verified against gamma `secondsDelay` (see the w3 verification section).
+- Weather wallets named in "top weather traders" posts (ColdMath, HondaCivic, VibeTrader, HenryTheAtmoPhD) made
+  their money between Dec 2025 and Apr 2026. CORRECTED by the w3 verification pass: ColdMath's -30.4K in Oct 2026
+  is a SOCCER loss, not a weather loss (over 99% of its Sep-Nov notional is soccer totals and spreads).
+  BeefSlayer (0x331b…193f) still kept +7.7K in Sep and +6.2K in Oct on $40-54K monthly volume, 62% taker.
+- swisstony (largest systematic sports account, $1.0B volume, kept 2.1%) has had zero volume since September 2026.
+  CORRECTED: the operator moved to the wallet Flaznorp (same fee group), which is active; see below.
+- The CLOB `/book` endpoint returns asks in DESCENDING price order and bids in ASCENDING order: the best ask and the
+  best bid are the LAST elements (source: dev.to/anton41; confirmed on a live book 2026-11-27).
+- Operator clusters (x1, 2026-11-27): gamma `/tiers` and `/v1/maker-tier/tiers` return the SAME `wv_30d` for wallets that
+  belong to one fee group, so identical values reveal common ownership. Verified groups: x-MoneyForWhiskas +
+  dangerously-skip-permissions + GoodFallen + FairValueMachine (Diamond, 4,471,870); Bonereaper + wzbbb; 0xb55fa129 +
+  0xcE25E214; BoneOhio + PBot-6 + antsaslyku; ply-pm0 + ply-pm2. almach / bosona / mo-money are not tier-linked but
+  behave as one bot (97% maker, same monthly curve). Table of 72 advertised wallets after fees and without rebates:
+  `catalog/raw/x1_wallets.md`; sources and mechanics: `catalog/raw/x1_bot_posts.md`.
+
+## Added 2026-11-27 by the economics wallet study (details in `studies/wallets/economics/README.md`)
+
+- Economics taker fee from real charges (fees / sum of shares*p*(1-p) over taker fills, five accounts): 0.036-0.048
+  before 2026-11-21, 0.0100-0.0102 after. Some Fed markets charged nothing in October (ATCapital: $0 on $237K).
+- `gamma.iter_events(...)` fails with 406 gzip_required at its default page size; pass `limit=50`.
+- `gamma.resolve_profile("GoldmanSachs")` and `wallet_check.py GoldmanSachs` crash (search returns a null profile
+  entry); use the address 0x71dd2d539a793687451d4af8c43169369b47d61c.
+- Scheduled-release bucket markets (CPI, jobs, PCE, PPI, ISM, GDP, central banks), 53 events Sep-Nov 2026: stale
+  prices after the release last 2-20 s (block time); 98.8% of the $20.8K taken was taken within 60 s. Markets resolve
+  about 2 h after the number. Whole-market tapes for these events are cached in `data/econ_tapes/`.
+
+## Added 2026-11-27 by the verification pass on the GitHub catalog (details at the end of `catalog/raw/w2_github.md`)
+
+- The wallet_check "unexplained difference" on wallets active in Jan-Apr 2026 is `fees_refunded`: fees charged in
+  those months were almost entirely refunded (gabagool22 1.62M of 1.67M; 0x12b7…1b0b 60.6K of 78.3K, nothing after
+  April). Net figures computed as gross + fees + rebates for that period are wrong; use the tool's "NET kept".
+  gabagool22 kept 865,310 (+1.21% of volume) and stopped at the end of Feb 2026, before any fee stuck.
+- Temperature markets settle on the highest value in the hourly T-group of ROUTINE METAR reports (SPECI excluded),
+  tenths of a degree C -> F, rounded half-up, source `aviationweather.gov/api/data/metar?ids=<ICAO>&format=raw`
+  (read from the live NYC market text). A faster feed's running maximum is NOT the settlement value: at KLGA,
+  Sep 1 - Nov 26, the 5-minute maximum fell in a different 2 F bucket than the routine maximum on 45 of 87 days.
+- 5-minute airport reports: MADIS `madis-data.ncep.noaa.gov/madisPublic1/data/LDAD/hfmetar/netCDF/` is reachable
+  (hourly `.gz`, rewritten every few minutes); the Iowa Mesonet `cgi-bin/request/asos.py` serves the same reports
+  as `report_type=1` and routine METARs as `report_type=3` (raw text included with `data=metar`).
+- Liquidity rewards by category (gamma `clobRewards[].rewardsDailyRate`, `rewardsMinSize`, `rewardsMaxSpread`):
+  weather 630 rewarded markets, $14.7K/day in total, median $10/day, minimum 20 shares, band 4.5c; EPL match
+  markets minimum 1,000 shares, band 2.5c, $100-200/day; Newsom 2028 nomination minimum 200 shares, 5.5c, $67/day.
+- Gamma `bestBid` is missing on many negRisk legs (only 45 of 174 events had every bid), `bestAsk` on none.
+
+## Added 2026-11-27 by the verification pass on the long-form catalog (details at the end of `catalog/raw/w3_longform.md`)
+
+Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / data API / CLOB on 2026-11-27.
+
+- Weather taker fee from real charges (BeefSlayer, fees / sum of shares*p*(1-p) over taker fills): 0.0500 in
+  September, 0.0496 on Oct 1-18, 0.0500 on Nov 1-19, 0.0100 on Nov 22-27. Weather was a 0.05 category until the
+  Nov 20 change. Any weather result earned before Nov 21 was earned under five times today's fee.
+- Maker rebates for small accounts really are zero now: the daily `maker_rebate` of ColdMath and BeefSlayer is 0.0
+  on every day from Nov 22 (it was 1-6 dollars a day before).
+- Matching delay is in gamma as `secondsDelay`. Of the 307 sports game markets among the 1,000 most traded active
+  markets, 272 have `secondsDelay = 1` (EPL, La Liga, Bundesliga, NFL, college football and basketball, NHL, tennis,
+  CS2, Dota 2, Valorant, minor football leagues) and 35 have 0, all of them NBA. Non-sports markets have no value.
+- `holdingRewardsEnabled` is true on 171 of those 1,000 markets: 99 with fee type `zero_fees`, 42 election markets,
+  19 long-dated crypto price markets, 4 tech. It is false on every sports, weather and tweet-count market sampled,
+  so the holding reward does not pay for waiting in short "bond" trades there.
+- Wallet names in posts go stale in two ways. (1) Wallet moves: swisstony (zero volume since September) shares its
+  30-day tier volumes with Flaznorp 0x821dab0565ebf5b327f51db06223fdcfe01acf16 (taker 20,722,259.26, maker
+  15,273,968.34, all of it Flaznorp's own). Flaznorp joined 2026-08-11, is first in sports by volume this month
+  ($280M) and kept +1.26M / +1.02M / +1.84M in Sep / Oct / Nov (+0.74M / +0.45M / +1.22M without rebates).
+  (2) Category moves: ColdMath, described everywhere as a weather bot, put $777K / $1,265K / $339K into soccer and
+  $1.5K / $2.0K / $0.5K into weather in Sep / Oct / Nov. Check what a wallet trades in the window before using its
+  PnL as evidence about a category.
+- Tweet-count markets: fee type `culture_fees`, rate 0.01, tick 0.001, 30 buckets of 20 posts per event, reward band
+  4.5c with a 20-50 share minimum; the Nov 20-27 weekly event has $1.84M volume. The traders named in news stories
+  are gone: sb911 (the "$106K in a month" story) is at -31.2K all-time and inactive since August; Annica kept 701K
+  (peak Feb 2026) and is inactive since August; Prexpect kept 136K and is flat since September.
+
+## Added 2026-11-27 by the mentions wallet study (details in `studies/wallets/mentions/README.md`)
+
+- Mentions markets carry the gamma tag `mention-markets`, not `mentions`: `pmlab.gamma.family()` files them under
+  politics/tech/sports/economics and `pmlab.wallet` never shows a "mentions" family (checked on 8 accounts). Identify
+  them by tag slug containing "mention" or a whole-word say/said/mention in the slug.
+- The gamma EVENT object of a mentions event has `startTime` (scheduled start); it is sometimes wrong (after the
+  market closed) and for weekly "this week" events it is the end of the period.
+- Mentions universe measured: 1,382 resolved markets in 95 events (29 Sep - 23 Nov) had $2.42M volume, median market
+  $482, p90 $3.0K. Resolution comes a median ~2.1-2.4 h after the price confirms the outcome.
+- Blindly buying the first print >= 0.95 in mentions is negative after fee on the later half of the sample: 4.2% of
+  Yes confirmations (29/695) and 1.6% of No confirmations (11/670) resolved the other way.
+- In 131 clean live jumps the first print after the word is already >= 0.90 in 57%; all takers together locked in
+  $5,485 below 0.95 in 8 weeks. Speed alone is not a business there.
+
+## Added 2026-11-27 by the weather wallet study (details in `studies/wallets/weather/README.md`)
+
+- Daily temperature markets: gamma `endDate` is 12:00 UTC of the target date for all 48 stations, NOT the end of the
+  local day. `eventStartTime` is the station's local midnight in UTC; the day that counts is [eventStartTime, +24 h).
+  The "time left to end" buckets of `pmlab.wallet` are misleading for weather; use the local day.
+- Rules (read from the market text): highest value of any ROUTINE METAR (SPECI excluded) on the local day as shown by
+  `aviationweather.gov/api/data/metar?ids=ICAO`; T-group tenths of a degree C if present, else the whole degree in
+  the body; rounded half up; F = C*9/5+32 then rounded. Buckets 1 C or 2 F. Rebuilding the maximum from Iowa Mesonet
+  routine reports + the AWC JSON feed matches the official result in 3,170 of 3,198 markets.
+- `aviationweather.gov/api/data/metar?format=json` gives `receiptTime` per report and returns at most 400 rows per
+  station. Median receipt lag after the report time: 4-8 min for most international stations (UUWW 369 s, RJTT 480 s,
+  WMKK 499 s, CYYZ 490 s, ZBAA 328 s, EGLC 304 s), under 100 s for OEJN/WSSS/OPKC; US stations about 3.5 min after the
+  :53 observation. `tgftp.nws.noaa.gov/data/observations/metar/stations/ICAO.TXT` (reachable from the sandbox) has the
+  same times within 30 s (one snapshot, 10 stations).
+- The seconds-long time gap in weather is taken: 268 bucket-killing reports of Nov 22-27, full tapes: all $3,037 of
+  stale-NO profit was taken BEFORE the official source had received the report, zero after. HighTempTation
+  (0x6011655c...) buys 5-40 s after the report time and resells at 0.99 six seconds later; 58 of 58 of its timed
+  fills precede the official receipt. A poller of the official feed gets nothing.
+- Weather fee confirmed on three more wallets: 0.04-0.06 implied on Nov 14-20, about 0.01 on Nov 23-27.
+- Prices at the station's local midnight are well calibrated (3,198 markets): blanket "buy NO on 0.20-0.60 buckets"
+  loses 3.2% after 2 c slippage (t -2.7 by event). Pre-registered, one variant, negative.
+- Weather books: top of book 5-500 shares, but favourite buckets carry very large resting YES bids 2-3 c under the
+  best bid inside the 4.5 c rewards band (seen: 50,066 shares). Snapshot only.
+
+## Added 2026-11-27 by the verification of the X practitioner sweep (details: "Verification pass" in `catalog/raw/x2_practitioners.md`)
+
+- Tennis walkover rule is live: match markets (and their set/handicap/total side markets) resolve 50-50 when a
+  player withdraws before the start (rule text read in four November markets; retirement after the start resolves
+  to the player who advances). Stavenson (0xf5fe759c…e23d) lives on it: in 30 days 2,922 of 2,933 fills were in
+  markets that resolved 0.5/0.5; he takes the underdog at 0.28-0.45 about 45-110 minutes before the scheduled start
+  and then bids 0.49 on both sides (+0.97c a share, t = 10). Kept $11-47K a month, Tier 0. The lag between the public
+  withdrawal notice and the book is not measured yet.
+- Correction to the Nex line above: on the current CLOB cancel p50 is 24 ms and p95 78 ms (same posts); only p99 is
+  0.6-0.7 s. Orders hit 5-70 s after a headline were simply not being watched, so Nex alone need not shrink that window.
+- `wallet_check.py <name>` silently uses the closest profile name when there is no exact match ("note: no exact
+  name match"). Treat such a result as unidentified unless something else ties it to the person.
+- WarriorPooh bought ~47K Huang Yes 24 minutes before the release became public; do not use it as a pure reaction
+  example. Flipadelphia = 0x448861155279dbf833d041b963e3ac854599e319 (net 842,853; November -182.5K).
+
+## Added 2026-11-27 by the culture wallet study (details in `studies/wallets/culture/README.md`)
+
+- Post-count markets resolve on `https://xtracker.polymarket.com`, which has a public JSON API (no auth, works
+  through this proxy): `/api/users` (handles and tracked windows), `/api/users/<handle>/trackings?activeOnly=false`
+  (window start/end and `marketLink` = event slug), `/api/users/<handle>/posts?startDate=..&endDate=..` (every
+  counted post with `createdAt` and `importedAt`). Checked: the count inside the window fell in the bucket that
+  resolved Yes in 21 of 21 Elon events (21 Oct - 25 Nov). Counter lag `importedAt - createdAt` over 1,294 posts:
+  median 161 s, p10 35 s, p90 296 s.
+- `pmlab.gamma.family` labels the Elon post-count markets "politics" (their tags); the leaderboard's culture board
+  includes accounts that live on them.
+- Leaderboard / `user-stats` PnL is not trustworthy for accounts that use neg-risk conversions: anothercoin shows
+  `economic_pnl` +37.2K, while 33 days of cash flows (buys 213.6K, conversions 207.9K, merges 3.2K, redeems 0.7K,
+  sells 2.4K) net +1.0K and its 3,700 positions are worth $207. 0xc023bee9.. shows +23K on $1.6K of volume.
+  Reconstruct cash before believing such a profile.
+- Box-office bucket markets resolve on The Numbers FINAL weekend figure (Monday), not the Sunday studio estimate.
+  Through this proxy the-numbers.com returns 403 and deadline.com 404; boxofficemojo.com and kworb.net work.
+- Box-office tape (125 markets, selected sample): following a 10-cent jump loses 9.7 c/share (t -2.3); copying the
+  best box-office account at the worst print within 15 minutes earns nothing (t -0.3, 47 markets). Negative results.

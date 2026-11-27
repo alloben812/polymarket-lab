@@ -1,0 +1,30 @@
+hixlz 0xcfa9f86fa970296835711d9513c346343a2ba5d3 window 10-23 15:54..11-27 15:54 truncated=False matching fills 4002 markets 149 (using 149)
+
+RESOLVED markets only, pnl to final after est. taker fees:
+all                                    fills  3794 mkts  127 usd     21449 pnl     40530 ( 189.0% of usd) drift1h   0.61c/sh
+before T90                             fills  1606 mkts   48 usd     17026 pnl     44956 ( 264.0% of usd) drift1h   1.56c/sh
+after T90, before T99                  fills  1758 mkts   70 usd      3837 pnl     -3839 (-100.1% of usd) drift1h   0.06c/sh
+after T99                              fills   430 mkts   38 usd       586 pnl      -587 (-100.2% of usd) drift1h   0.04c/sh
+role M BUY                             fills  3367 mkts  125 usd     19641 pnl     37379 ( 190.3% of usd) drift1h   0.69c/sh
+role M SELL                            -
+role T BUY                             fills   427 mkts   91 usd      1807 pnl      3151 ( 174.3% of usd) drift1h   0.31c/sh
+role T SELL                            -
+fill price 0.00-0.05                   fills  3144 mkts  110 usd      7472 pnl      1312 (  17.6% of usd) drift1h   0.43c/sh
+fill price 0.05-0.20                   fills   617 mkts   26 usd     12966 pnl     39494 ( 304.6% of usd) drift1h   1.78c/sh
+fill price 0.20-0.40                   fills    33 mkts    2 usd      1011 pnl      -276 ( -27.3% of usd) drift1h  -1.35c/sh
+fill price 0.40-0.60                   -
+fill price 0.60-0.80                   -
+fill price 0.80-0.95                   -
+fill price 0.95-0.99                   -
+fill price 0.99-1.01                   -
+time to end >7d to end                 fills   194 mkts   41 usd       240 pnl      -241 (-100.3% of usd) drift1h   0.15c/sh
+time to end 2-7d                       fills  1093 mkts   82 usd      2582 pnl      2251 (  87.2% of usd) drift1h   0.33c/sh
+time to end 1-2d                       fills   791 mkts   42 usd      3517 pnl      5642 ( 160.4% of usd) drift1h   0.45c/sh
+time to end 6-24h                      fills  1652 mkts   34 usd     14856 pnl     31494 ( 212.0% of usd) drift1h   0.79c/sh
+time to end 0-6h                       fills    64 mkts   12 usd       254 pnl      1383 ( 543.9% of usd) drift1h   2.49c/sh
+time to end after end                  -
+markets resolved 127 winners 9 total pnl 40530; unresolved 22 mark-to-tape pnl -280
+sell/buy usd ratio (exit vs hold): 0.00; median market buy usd 26
+fills by weekday+hour UTC (top 14): Fri 05:145, Sat 07:134, Fri 10:113, Sat 09:112, Thu 23:105, Fri 00:101, Fri 06:95, Fri 16:94, Mon 07:81, Tue 07:80, Sat 06:79, Fri 07:79, Fri 01:76, Fri 09:74
+active days 35; markets traded per active day median 7 max 35
+markets table -> hixlz.story.txt

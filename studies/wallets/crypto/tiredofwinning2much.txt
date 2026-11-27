@@ -1,0 +1,39 @@
+[0xcd4a4057125bceabd687c38167deeacf425b224e] fills 59998 (TRUNCATED to the most recent) in 29s
+0xcd4a4057125bceabd687c38167deeacf425b224e  0xcd4a4057125bceabd687c38167deeacf425b224e  window 2026-11-19 16:36 .. 2026-11-27 15:56 UTC  [TRUNCATED: most recent fills only]
+summary: {"fills": 59998, "markets": 3702, "resolved_complete_markets": 3698, "incomplete_markets": 1, "unresolved_markets": 3, "turnover_usd": 404792, "maker_share_usd": 1.0, "sell_share_usd": 0.0, "markets_with_both_outcomes_traded": 3592, "uses_split_merge": true, "gross": 3768.9, "fees_est": 0.0, "net": 3768.9, "fee_rate_unknown_markets": 0, "net_per_market": 1.019, "t_by_market": 3.73, "win_share_markets": 0.534, "median_market_turnover": 74.1, "max_market_turnover": 1037.91, "avg_fill_usd": 6.75}
+inventory events: {'REDEEM': 7027, 'MERGE': 324}
+API says for the same days: gross 4646, fees 0, refunded 0, rebates 894, kept 5540, volume $413640, fills 61612
+
+by family:
+  family          markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  eth-updown-15m  766      764                1           140860    0.0          1191.76  0.0       1191.76  0.85              1.56            2.22       
+  btc-updown-15m  765      764                0           133114    0.0          674.09   0.0       674.09   0.51              0.88            0.96       
+  btc-updown-5m   2171     2170               0           130818    0.0          1903.06  0.0       1903.06  1.45              0.88            3.86       
+
+by role and side (edge in cents per share, resolved markets):
+  key           fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'BUY')  59914  834382  404221  0.4845  0.452          0.0           0.452         0.121  3.74  3698     3768.9 
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd 
+  ('M', '0.00-0.05')  4853   120924  2738   0.0226  0.281          0.0           0.281         0.522  0.54   1715     340.09  
+  ('M', '0.05-0.15')  8796   105320  9263   0.088   0.668          0.0           0.668         0.756  0.88   2452     704.02  
+  ('M', '0.15-0.30')  7553   87061   19014  0.2184  0.945          0.0           0.945         1.047  0.9    2415     822.7   
+  ('M', '0.30-0.45')  7277   86222   32067  0.3719  1.276          0.0           1.276         0.953  1.34   2348     1099.82 
+  ('M', '0.45-0.55')  5151   63541   31424  0.4945  0.452          0.0           0.452         0.961  0.47   1866     286.97  
+  ('M', '0.55-0.70')  6268   79476   49237  0.6195  -0.286         0.0           -0.286        1.042  -0.27  2228     -227.04 
+  ('M', '0.70-0.85')  6470   87922   67958  0.7729  -1.162         0.0           -1.162        1.192  -0.97  2279     -1021.57
+  ('M', '0.85-0.95')  6203   88132   79411  0.901   1.816          0.0           1.816         0.769  2.36   2178     1600.27 
+  ('M', '0.95-0.99')  4789   73958   71633  0.9686  0.074          0.0           0.074         0.586  0.13   1824     55.01   
+  ('M', '0.99-1.00')  2554   41826   41476  0.9916  0.26           0.0           0.26          0.253  1.03   1006     108.63  
+
+by role and point in the market's life:
+  key                                   fills  shares  usd     avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'life', 'a before window')      42     459     211     0.4604  4.94           0.0           4.94          10.24  0.48  32       22.66  
+  ('M', 'life', 'b first quarter')      15840  190890  95744   0.5016  0.145          0.0           0.145         0.445  0.33  3388     276.95 
+  ('M', 'life', 'c second quarter')     12559  161944  81585   0.5038  0.711          0.0           0.711         0.442  1.61  3150     1152.06
+  ('M', 'life', 'd third quarter')      14485  212725  103600  0.487   0.528          0.0           0.528         0.307  1.72  3102     1122.37
+  ('M', 'life', 'e 75-95% of window')   14515  232079  107443  0.463   0.348          0.0           0.348         0.292  1.19  2272     806.75 
+  ('M', 'life', 'f last 5% of window')  2473   36284   15638   0.431   1.07           0.0           1.07          0.848  1.26  273      388.12 
+
+full result written to studies/wallets/crypto/tiredofwinning2much.json

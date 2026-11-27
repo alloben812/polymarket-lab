@@ -1,0 +1,24 @@
+0x9578af80708f271f705e27867dcf6ec653acf066  0x9578af80708f271f705e27867dcf6ec653acf066  joined 2025-12-29  markets traded 1825  fills 8610
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         61,269
+  taker fees charged:                                    -3,220
+  fees refunded:                                             57
+  rebates+rewards (taker 133 / maker 65 / rewards 1,089):      1,287
+  yield + referral income:                                  155
+  ECONOMIC PnL (the API's bottom line, trust this):      59,549   of which unrealized 3,653
+  volume $758,889 (1,099,411 shares): gross +8.07% of volume, fees net of refunds -0.42%, kept +7.85%
+  share of what was kept that is rebates/rewards: 2%
+  taker_tier: {"address": "0x9578af80708f271f705e27867dcf6ec653acf066", "tier": 0, "tier_name": "Tier 0", "wv_30d": 22416.05444}
+  maker_tier: {"address": "0x9578af80708f271f705e27867dcf6ec653acf066", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 3148.382328, "own_wv_30d": 3148.382328}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2025-12         -72          0         0         0        -72         -72        1,135        20
+  2026-01         725          0         0         4        729         725       34,223       920
+  2026-02       2,832          0         0         0      2,833       2,832       66,507       771
+  2026-03         952          0         0       168      1,120         952       54,672       986
+  2026-04       1,427        -61        57       226      1,655       1,429       58,008     1,033
+  2026-05       1,374        -91         0        75      1,369       1,294       49,530       468
+  2026-06       2,999       -206         0       102      2,900       2,798       51,990       683
+  2026-07       5,728       -312         0       148      5,584       5,436       53,194       689
+  2026-08       7,248       -521         0       137      6,898       6,761       72,859       842
+  2026-09      11,324       -550         0        75     10,876      10,801       75,207       671
+  2026-10       9,717       -590         0       175      9,328       9,154      101,491       725
+  2026-11      16,969       -888         0       177     16,283      16,106      140,092       803

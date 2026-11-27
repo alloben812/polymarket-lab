@@ -1,0 +1,156 @@
+##### Ahpo: 46851 fills, 79 economics markets
+  shares bought 963627, sold 907302 (sold/bought 0.94); position cost per market: median 836, p90 25364, max 57203
+  first buy to scheduled end, days: median 69.3, p10 16.4, p90 127.3
+  econ markets touched per ISO week: 36:13 37:18 38:14 39:11 40:13 41:11 42:11 43:13 44:23 45:17 46:22 47:16 48:23
+  buy $ by price: <0.05 0.01 | .05-.3 0.10 | .3-.7 0.37 | .7-.9 0.14 | .9-.97 0.13 | >=.97 0.26
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-december-2026-meeting-2  end=12-09 23:59 closed=open final=["0.945", "0.055"] vol=13999290
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    10-02 14:09-14:09 BUY  T Yes  n=   1 sh=      322 px=0.670 usd=     216
+    10-03 00:36-00:36 SELL T Yes  n=   1 sh=      110 px=0.740 usd=      82
+    10-03 13:41-17:34 SELL M Yes  n=   2 sh=      212 px=0.740 usd=     157
+    10-17 04:43-15:36 BUY  M Yes  n=   2 sh=      180 px=0.758 usd=     136
+    10-19 07:26-07:26 SELL M Yes  n=   1 sh=      180 px=0.760 usd=     137
+    ... 25 more day-groups ...
+    11-19 03:13-23:50 SELL M No   n= 103 sh=    33039 px=0.090 usd=    2973
+    11-20 00:01-15:40 SELL M No   n=  68 sh=    26179 px=0.080 usd=    2099
+    11-20 00:07-00:07 SELL T No   n=   1 sh=    59096 px=0.080 usd=    4728
+    net shares now {}; cash 3092; net n/a (open or incomplete)
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-september-2026-meeting-  end=09-16 00:00 closed=09-16 21:40 final={'Yes': 1.0, 'No': 0.0} vol=42158279
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-03 12:30-12:30 BUY  T No   n=   3 sh=     6666 px=0.500 usd=    3333
+    09-03 12:32-12:32 SELL M No   n=   1 sh=     6666 px=0.540 usd=    3600
+    09-04 12:30-12:30 BUY  T Yes  n=   2 sh=    27343 px=0.432 usd=   11809
+    09-04 12:30-12:30 BUY  M Yes  n=   2 sh=      163 px=0.440 usd=      72
+    09-04 12:30-12:40 SELL T Yes  n=   3 sh=      743 px=0.539 usd=     401
+    ... 4 more day-groups ...
+    09-11 12:30-12:48 SELL T Yes  n=   2 sh=      653 px=0.830 usd=     542
+    09-11 13:07-13:07 BUY  M No   n=   1 sh=    10000 px=0.170 usd=    1700
+    09-11 13:08-13:08 SELL M No   n=   6 sh=    10000 px=0.180 usd=    1800
+    net shares now {}; cash 7799; net n/a (open or incomplete)
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-october-2026-meeting-202  end=10-29 03:59 closed=10-28 20:01 final={'Yes': 1.0, 'No': 0.0} vol=31993967
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-16 19:07-19:10 BUY  M No   n=   7 sh=     3580 px=0.470 usd=    1683
+    09-16 19:07-19:07 BUY  T No   n=   1 sh=      864 px=0.470 usd=     406
+    09-16 19:08-19:12 SELL M No   n=   4 sh=     4444 px=0.480 usd=    2133
+    09-29 14:00-14:01 BUY  M Yes  n=   6 sh=      427 px=0.320 usd=     137
+    09-29 14:00-14:00 BUY  T Yes  n=   1 sh=     6380 px=0.320 usd=    2042
+    ... 16 more day-groups ...
+    10-16 03:47-03:50 BUY  M Yes  n=   6 sh=      748 px=0.769 usd=     575
+    10-16 03:49-03:49 BUY  T Yes  n=   1 sh=      200 px=0.770 usd=     154
+    10-16 03:54-03:58 SELL M Yes  n=   2 sh=      948 px=0.813 usd=     771
+    net shares now {}; cash 2945; net n/a (open or incomplete)
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-october-2026-meeting-20  end=10-29 03:59 closed=10-28 20:01 final={'Yes': 0.0, 'No': 1.0} vol=21619679
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-16 18:00-18:00 BUY  M Yes  n=   1 sh=       14 px=0.330 usd=       5
+    09-16 18:00-18:33 BUY  T Yes  n=   4 sh=    12770 px=0.347 usd=    4430
+    09-16 18:01-18:55 SELL M Yes  n=  12 sh=    10174 px=0.386 usd=    3930
+    09-16 18:39-18:44 SELL T Yes  n=   2 sh=     2610 px=0.386 usd=    1009
+    09-22 09:24-09:24 BUY  T No   n=   1 sh=      301 px=0.450 usd=     135
+    ... 5 more day-groups ...
+    09-24 08:21-10:13 SELL M Yes  n=  22 sh=    33651 px=0.683 usd=   22994
+    10-15 12:36-12:36 BUY  T No   n=   1 sh=     1021 px=0.680 usd=     694
+    10-15 12:37-12:37 SELL M No   n=   2 sh=     1021 px=0.700 usd=     715
+    net shares now {}; cash 2203; net 2202.847200012111
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-january-2027-meeting-202  end=01-28 04:59 closed=open final=["0.425", "0.575"] vol=1047878
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    11-10 15:51-16:48 BUY  T No   n=   7 sh=    31077 px=0.496 usd=   15423
+    11-10 16:27-21:00 BUY  M No   n=   4 sh=     1212 px=0.477 usd=     577
+    11-10 16:28-21:22 SELL M No   n=  20 sh=     8773 px=0.507 usd=    4448
+    11-11 02:30-07:24 BUY  M No   n=   5 sh=      616 px=0.470 usd=     290
+    11-11 08:28-18:25 SELL M No   n=  15 sh=    24131 px=0.520 usd=   12552
+    ... 5 more day-groups ...
+    11-23 23:09-23:09 BUY  T No   n=   1 sh=     8830 px=0.570 usd=    5033
+    11-24 05:33-05:33 SELL T No   n=   1 sh=     2361 px=0.560 usd=    1322
+    11-24 06:01-13:13 SELL M No   n=  14 sh=     6469 px=0.560 usd=    3623
+    net shares now {}; cash 794; net n/a (open or incomplete)
+
+- us-recession-by-end-of-2026  end=01-31 00:00 closed=open final=["0.0345", "0.9655"] vol=2556379
+    rules: This market will resolve to “Yes” if either of the following conditions is met:  1.  The seasonally adjusted annualized percent change in quarterly U.S. real GDP from the previous quarter is less than 0.0 for two consecutive quart
+    09-15 23:04-23:18 BUY  T No   n=   3 sh=     1382 px=0.830 usd=    1147
+    09-15 23:18-23:21 SELL M No   n= 218 sh=     1138 px=0.890 usd=    1013
+    09-15 23:18-23:21 BUY  M No   n= 244 sh=     1214 px=0.880 usd=    1069
+    09-16 00:13-05:53 BUY  M No   n=   4 sh=     1178 px=0.802 usd=     945
+    09-16 00:21-01:19 BUY  T No   n=   6 sh=     6656 px=0.808 usd=    5380
+    ... 17 more day-groups ...
+    11-20 23:14-23:14 BUY  T No   n=   1 sh=      484 px=0.958 usd=     463
+    11-21 05:31-05:50 BUY  T No   n=   2 sh=      447 px=0.955 usd=     427
+    11-27 01:58-01:58 BUY  T No   n=   1 sh=      516 px=0.960 usd=     496
+    net shares now {'No': 9570}; cash -7483; net n/a (open or incomplete)
+
+- will-no-fed-rate-cuts-happen-in-2026  end=01-01 04:59 closed=open final=["0.9845", "0.0155"] vol=9896999
+    rules: This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).  Emergency rate cuts outside of scheduled FOMC meetings will also count to
+    10-19 13:03-13:03 BUY  T Yes  n=   1 sh=     1356 px=0.970 usd=    1316
+    10-19 14:02-14:02 BUY  M Yes  n=   5 sh=      144 px=0.970 usd=     139
+    10-19 14:32-22:53 SELL M Yes  n=   4 sh=      243 px=0.972 usd=     236
+    10-20 00:13-01:32 SELL M Yes  n=   6 sh=      189 px=0.972 usd=     184
+    10-20 12:21-21:12 BUY  M Yes  n=   2 sh=      350 px=0.969 usd=     339
+    ... 24 more day-groups ...
+    11-06 16:01-17:35 SELL M Yes  n=   7 sh=     2136 px=0.979 usd=    2091
+    11-21 09:21-09:21 BUY  M Yes  n=   1 sh=     1000 px=0.981 usd=     981
+    11-22 02:02-02:02 BUY  M Yes  n=   1 sh=     1500 px=0.981 usd=    1472
+    net shares now {'Yes': 10167}; cash -9726; net n/a (open or incomplete)
+
+- will-the-upper-bound-of-the-target-federal-funds-rate-be-4pt25-at-the-end-of-202  end=01-01 04:59 closed=open final=["0.942", "0.058"] vol=603027
+    rules: The FED rate is defined in this market by the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.  This market will resolve a
+    09-23 14:23-14:23 SELL T No   n=   1 sh=       30 px=0.461 usd=      14
+    09-29 04:48-04:48 SELL M No   n=   1 sh=       23 px=0.686 usd=      16
+    10-12 05:58-05:58 SELL T No   n=   1 sh=       34 px=0.298 usd=      10
+    10-13 04:11-18:00 BUY  T Yes  n=  30 sh=    48985 px=0.384 usd=   18797
+    10-13 04:13-18:31 SELL T Yes  n=  29 sh=    44612 px=0.493 usd=   21993
+    10-13 04:14-17:52 SELL M Yes  n=   9 sh=     4376 px=0.532 usd=    2330
+    10-13 12:17-12:17 BUY  M Yes  n=   1 sh=        3 px=0.585 usd=       2
+    net shares now {'No': -87}; cash 5564; net n/a (open or incomplete)
+
+- fed-rate-cut-by-september-2026-meeting-264-382  end=10-08 03:59 closed=09-16 20:09 final={'Yes': 0.0, 'No': 1.0} vol=645138
+    rules: This market will resolve to “Yes” if the upper bound of the target federal funds rate is decreased at any point between December 16, 2025 and the completion of the Federal Open Market Committee (FOMC) meeting for September 2026, c
+    09-01 02:52-15:39 BUY  M No   n=  18 sh=     3351 px=0.992 usd=    3324
+    09-03 21:38-21:38 BUY  M No   n=   1 sh=      649 px=0.992 usd=     644
+    09-04 11:25-17:20 BUY  M No   n=   2 sh=     2005 px=0.992 usd=    1989
+    09-04 12:42-12:42 BUY  T No   n=   1 sh=     6023 px=0.992 usd=    5974
+    09-04 18:09-18:09 SELL M No   n=   1 sh=     6011 px=0.995 usd=    5981
+    ... 5 more day-groups ...
+    09-14 20:00-20:00 BUY  M No   n=   1 sh=      551 px=0.995 usd=     548
+    09-15 12:28-21:11 SELL M No   n=   6 sh=     6123 px=0.997 usd=    6105
+    09-15 15:22-18:29 BUY  M No   n=   4 sh=     1143 px=0.995 usd=    1137
+    net shares now {'No': 14207}; cash -14087; net 118.78133635206663
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-december-2026-meeting-20  end=12-09 23:59 closed=open final=["0.038", "0.962"] vol=17533399
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    11-05 15:26-15:50 BUY  T Yes  n=   2 sh=     9123 px=0.263 usd=    2399
+    11-05 15:30-16:10 SELL M Yes  n=   3 sh=    10231 px=0.288 usd=    2947
+    11-05 15:50-16:03 BUY  M Yes  n=   2 sh=     1478 px=0.320 usd=     473
+    11-05 16:03-16:09 SELL T Yes  n=   2 sh=      370 px=0.299 usd=     111
+    11-10 17:07-17:10 BUY  T No   n=   2 sh=      379 px=0.957 usd=     363
+    ... 11 more day-groups ...
+    11-26 02:08-02:08 BUY  M No   n=   1 sh=     1428 px=0.957 usd=    1367
+    11-27 05:46-05:46 BUY  T No   n=   1 sh=     7145 px=0.955 usd=    6823
+    11-27 05:47-09:49 SELL M No   n=   6 sh=     8573 px=0.968 usd=    8298
+    net shares now {}; cash 370; net n/a (open or incomplete)
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-january-2027-meeting-20  end=01-28 04:59 closed=open final=["0.535", "0.465"] vol=1380007
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    11-10 13:34-15:52 BUY  T Yes  n=   4 sh=     8645 px=0.432 usd=    3733
+    11-10 13:36-16:47 SELL M Yes  n=   9 sh=     8650 px=0.467 usd=    4040
+    11-10 16:28-16:28 BUY  M Yes  n=   1 sh=        5 px=0.450 usd=       2
+    11-12 18:53-18:53 BUY  M Yes  n=   1 sh=        5 px=0.620 usd=       3
+    11-12 18:53-18:53 BUY  T Yes  n=   1 sh=      112 px=0.620 usd=      69
+    ... 13 more day-groups ...
+    11-27 03:04-03:04 BUY  T Yes  n=   1 sh=     9074 px=0.540 usd=    4900
+    11-27 03:51-03:54 BUY  M Yes  n=   2 sh=     5865 px=0.540 usd=    3167
+    11-27 15:04-15:04 SELL T Yes  n=   1 sh=     6431 px=0.540 usd=    3473
+    net shares now {'Yes': 8508}; cash -3837; net n/a (open or incomplete)
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-september-2026-meeting-6  end=09-16 00:00 closed=09-16 20:02 final={'Yes': 0.0, 'No': 1.0} vol=56435145
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-03 13:44-13:45 BUY  M No   n=   3 sh=     9853 px=0.370 usd=    3646
+    09-03 13:59-14:00 SELL M No   n=   9 sh=     9853 px=0.400 usd=    3941
+    09-04 12:30-12:30 BUY  M No   n=   2 sh=      549 px=0.470 usd=     258
+    09-04 12:30-12:30 BUY  T No   n=   1 sh=    15954 px=0.460 usd=    7337
+    09-04 12:31-12:33 SELL T No   n=   2 sh=     1366 px=0.560 usd=     765
+    09-04 12:31-12:33 SELL M No   n=  18 sh=    15137 px=0.560 usd=    8477
+    net shares now {}; cash 1942; net n/a (open or incomplete)

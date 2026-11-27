@@ -1849,6 +1849,8 @@ class FakeEnv:
             return {"ok": True, "order_id": oid, "status": "matched", "making": Decimal(0), "taking": Decimal(0),
                     "trade_ids": [tid] if self.record_trades else []}
         rp = self.resp_px if self.resp_px is not None else p
+        if self.post_mode == "swapped":      # making / taking the other way round (shares, USD)
+            return {"ok": True, "order_id": oid, "status": "matched", "making": tk, "taking": tk * rp, "trade_ids": [tid]}
         return {"ok": True, "order_id": oid, "status": "matched", "making": tk * rp, "taking": tk, "trade_ids": [tid]}
 
     def order_state(self, oid):
@@ -1900,7 +1902,7 @@ def _book(token, ask, ask_size, bid, tick="0.001", min_size="5") -> Book:
 
 def cmd_selftest(a) -> int:
     import tempfile
-    global OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE
+    global OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE
     for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy", "ALL_PROXY", "all_proxy"):
         os.environ[var] = "http://127.0.0.1:9"                 # no network for this process
     os.environ.pop("NO_PROXY", None)
@@ -1930,8 +1932,10 @@ def cmd_selftest(a) -> int:
 
     tmp = Path(tempfile.mkdtemp(prefix="pm-fav-selftest-"))
     os.chmod(tmp, 0o700)
-    saved = (OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE)
+    saved = (OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE)
     OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE = tmp / "out", tmp / "STOP", tmp / "EXP_FAV_HALT", tmp / "exp_fav.lock"
+    BIDS_LOCK_FILE, WATERMARK_FILE = tmp / "exp_bids.live.lock", tmp / "exp_fav.live-records.json"
+    out.log_path = tmp / "selftest.log"                        # S9: never the real pilot/out log
     key = "0x" + Account.create().key.hex().removeprefix("0x")
     out.add_secret(key)
     out("selftest: throwaway key in memory, records in a temp folder, network disabled for this process")
@@ -2054,7 +2058,7 @@ def cmd_selftest(a) -> int:
         def new_session(live=True, ticket=t10, n_markets=1, t0=1_800_000_000.0, ask="0.97", size="200", types=None):
             for p in OUT_DIR.glob("*"):
                 p.unlink()
-            for f in (STOP_FILE, HALT_FILE):
+            for f in (STOP_FILE, HALT_FILE, WATERMARK_FILE):
                 if f.exists():
                     f.unlink()
             env = FakeEnv(client, live, t0)
@@ -2130,7 +2134,7 @@ def cmd_selftest(a) -> int:
         # the 30 USD path of the stop (pure ledger function)
         L = Ledger()
         L.trades = {"a": {"day": "2026-11-28", "state": "filled", "shares": D(10), "worst_cost": D(30), "won": False,
-                          "loss": D(30), "result_t": 1.0, "outcome": "Yes"}}
+                          "loss": D(30), "result_t": 1.0, "outcome": "Yes", "resolved": True}}
         expect("realised loss 30 USD with one losing trade -> stop", halt_reason(L) is not None, halt_reason(L))
         L.trades["a"]["loss"] = D("29.99")
         expect("realised loss 29.99 USD with one losing trade -> no stop yet", halt_reason(L) is None, halt_reason(L))
@@ -2210,6 +2214,230 @@ def cmd_selftest(a) -> int:
         env.post_mode = "live"
         s.poll()
         expect("'live' FAK -> cancel sent at once", len(env.cancelled) == 1)
+
+        # ---- REVIEW-exp_fav.md (2026-11-27): the reviewer's failing scenarios, now passing
+        def resolve(env, s, winner="Yes"):                 # we bought "No": winner "Yes" is a loss
+            for mm in env.mk:
+                env.winner[mm.key] = winner
+            for ctx in s.decided.values():
+                ctx["m"].end = env.t - 1
+            s.follow_up()
+
+        # M1: a success answer with zero amounts
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.record_trades = "matched0", False
+        s.poll()
+        o = recs("order")[-1]
+        expect("M1: 'matched' with zero amounts and no trade rows -> unknown, open exposure = the full ticket",
+               o["fill_state"] == "unknown" and ledger_now(True).open_exposure() == t10,
+               (o["fill_state"], ledger_now(True).open_exposure()))
+        expect("M1: ... and it counts toward the daily cap", ledger_now(True).filled_on(day_of(env.t)) == 1)
+        env, s = new_session(n_markets=1)
+        env.post_mode = "matched0"
+        s.poll()
+        o = recs("order")[-1]
+        expect("M1: 'matched' with zero amounts, trades list shows the fill -> filled at the trades' shares and price",
+               o["fill_state"] == "filled" and D(o["filled_shares"]) == D("10.30") and D(o["fill_price"]) == D("0.97"),
+               {k: o.get(k) for k in ("fill_state", "filled_shares", "fill_price")})
+        resolve(env, s)
+        n, usd = ledger_now(True).losses()
+        expect("M1: ... and when it loses, the loss is counted (probe gave losses() == (0, 0))",
+               n == 1 and usd == D(o["cost"]) and usd > 9, (n, usd))
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.record_trades = "delayed", False
+        env.order_state = lambda oid: {"status": "MATCHED", "size_matched": Decimal(0), "price": Decimal("0.97")}
+        s.poll()
+        o = recs("order")[-1]
+        expect("M1: 'delayed' -> MATCHED with size_matched 0 and no trade rows -> unknown (not unfilled)",
+               o["fill_state"] == "unknown", (o["status"], o["fill_state"]))
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.record_trades = "delayed", False
+        env.order_state = lambda oid: {"status": "CANCELED", "size_matched": Decimal(0), "price": Decimal("0.97")}
+        s.poll()
+        o = recs("order")[-1]
+        expect("M1: 'delayed' -> CANCELED, nothing matched, trades list read and empty -> unfilled (definite)",
+               o["fill_state"] == "unfilled" and ledger_now(True).open_exposure() == 0, (o["status"], o["fill_state"]))
+
+        # M2: a FAK reported 'live' whose cancel is not confirmed
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.cancel_ok, env.partial = "live", False, Decimal("0.5")
+        s.poll()
+        o = recs("order")[-1]
+        expect("M2: 'live' FAK, 5 shares filled, cancel not confirmed -> unknown at the full ticket, not 'filled 5'",
+               o["fill_state"] == "unknown" and o.get("resting_remainder_possible") is True
+               and ledger_now(True).open_exposure() == t10, (o["fill_state"], ledger_now(True).open_exposure()))
+        expect("M2: ... and the session stops new orders", s.stopping and any(
+            r["type"] == "stopping" and "cancel was not confirmed" in r["why"] for r in recs()))
+        resolve(env, s)
+        lc = recs("order")[-1]
+        n, usd = ledger_now(True).losses()
+        expect("S3: after resolution, trades and token balance agree (5 shares) -> late check books the real cost",
+               lc["post"] == "late-check" and lc["fill_state"] == "filled" and n == 1 and usd == D(lc["cost"])
+               and D("4.8") < usd < D("5.1"), (lc["fill_state"], n, usd))
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.partial = "live", Decimal("0.5")
+        env.cancel = lambda oid: (_ for _ in ()).throw(RuntimeError("cancel endpoint down"))
+        s.poll()
+        expect("M2: cancel raised -> unknown at the full ticket, session stops",
+               recs("order")[-1]["fill_state"] == "unknown" and s.stopping)
+        env.held[env.mk[0].tokens["No"]] = Decimal("10.30")    # the remainder filled later, outside the trades read
+        resolve(env, s)
+        n, usd = ledger_now(True).losses()
+        expect("S3: token balance shows more shares than the trades -> stays unknown, full-ticket loss",
+               recs("order")[-1]["fill_state"] == "unknown" and (n, usd) == (1, t10), (n, usd))
+
+        # S3: the token balance as the third source before an unknown order is downgraded
+        env, s = new_session(n_markets=1)
+        env.post_mode = "raise"
+        s.poll()
+        env.token_balance = lambda tok: (_ for _ in ()).throw(RuntimeError("balance endpoint down"))
+        resolve(env, s)
+        n, usd = ledger_now(True).losses()
+        expect("S3: unknown fill, trades and feed empty, token balance unreadable -> not downgraded, full-ticket loss",
+               (n, usd) == (1, t10), (n, usd))
+        env, s = new_session(n_markets=1)
+        env.post_mode = "raise"
+        s.poll()
+        env.held[env.mk[0].tokens["No"]] = Decimal("10.30")
+        resolve(env, s)
+        n, usd = ledger_now(True).losses()
+        expect("S3: unknown fill, trades and feed empty, but the account holds the shares -> full-ticket loss",
+               (n, usd) == (1, t10), (n, usd))
+
+        # M3: the fill price comes from the trades, never from get_order (which returns the limit)
+        env, s = new_session(n_markets=1)
+        env.post_mode, env.fill_px = "delayed", Decimal("0.96")
+        s.poll()
+        o = recs("order")[-1]
+        expect("M3: 'delayed' order printed at 0.96 under a 0.97 limit -> fill price 0.96, -10 ticks (probe: 0.97, 0)",
+               D(o["fill_price"]) == D("0.96") and D(o["fill_vs_ask_ticks"]) == D("-10"),
+               {k: o.get(k) for k in ("status", "fill_price", "fill_vs_ask_ticks")})
+        env, s = new_session(n_markets=1)
+        env.fill_px, env.resp_px = Decimal("0.96"), Decimal("0.97")
+        s.poll()
+        o = recs("order")[-1]
+        expect("M3: response amounts imply 0.97, trade legs 0.96 -> fill price from the legs, disagreement recorded",
+               D(o["fill_price"]) == D("0.96") and D(o["fill_price_response"]) == D("0.97")
+               and o.get("price_sources_disagree") is True, {k: o.get(k) for k in ("fill_price", "fill_price_response")})
+        env, s = new_session(n_markets=1)
+        env.post_mode = "swapped"
+        s.poll()
+        o = recs("order")[-1]
+        expect("making/taking the other way round -> swapped back, response price 0.97, no disagreement",
+               D(o["fill_price_response"]) == D("0.97") and not o.get("price_sources_disagree"), o.get("fill_price_response"))
+
+        # S8: a split result is resolved and its partial loss counted
+        env, s = new_session(n_markets=1)
+        s.poll()
+        o = recs("order")[-1]
+        env.split = True
+        resolve(env, s)
+        L = ledger_now(True)
+        tr0 = next(iter(L.trades.values()))
+        want = D(o["cost"]) - Decimal("0.5") * D(o["filled_shares"])
+        expect("S8: split -> resolved (open exposure 0), loss = cost - 0.5 x shares, counted as a losing trade",
+               L.open_exposure() == 0 and tr0["loss"] == want and L.losses() == (1, want), (L.open_exposure(), tr0["loss"]))
+
+        # S1: the live ledger cannot silently restart empty in another folder
+        env, s = new_session(n_markets=1)
+        s.poll()
+        expect("S1: a live decision raises the watermark outside the checkout to 1", read_watermark() == 1, read_watermark())
+        check("S1: live start allowed while the records hold every live decision", Session(env, True, t10, None).start_checks, False)
+        for p in OUT_DIR.glob("*"):
+            p.unlink()                                   # as in a fresh checkout: the records are not here
+        check("S1: live start refused when the records hold fewer live decisions than were written",
+              Session(env, True, t10, None).start_checks, True)
+
+        # S2: never live next to exp_bids.py on the same account
+        held_bids = acquire_lock(BIDS_LOCK_FILE)
+
+        def run_live_next_to_bids():
+            try:
+                cmd_run(argparse.Namespace(live=True, ticket="10", hours=None))
+            except Refusal as e:
+                if "exp_bids" in str(e):
+                    raise
+                return f"refused for another reason: {e}"
+            return "started"
+        check("S2: run --live refused while a live exp_bids.py holds its lock (before the key is read)",
+              run_live_next_to_bids, True)
+        held_bids.close()
+
+        # S4 / S6: the real exchange adapter with fake SDK objects (no network)
+        from polymarket.errors import RequestRejectedError
+
+        class _It(list):
+            def iter_items(self):
+                return iter(self)
+        ra = RealEnv.__new__(RealEnv)
+        ra.live, ra.pub = True, None
+
+        class _Post:
+            def __init__(self, status):
+                self.status = status
+
+            def post_order(self, signed):
+                raise RequestRejectedError("rejected", status=self.status, code="x")
+        ra.c = _Post(400)
+        expect("S6: RealEnv.post: HTTP 400 -> definite rejection (nothing bought)", ra.post(None)["ok"] is False)
+        for st_ in (408, 429, 500, 503):
+            ra.c = _Post(st_)
+            try:
+                ra.post(None)
+                how = "returned"
+            except RequestRejectedError:
+                how = "raised"
+            expect(f"S6: RealEnv.post: HTTP {st_} -> outcome unknown (raised, never booked as rejected)", how == "raised")
+
+        class _Pub:
+            def __init__(self, payouts):
+                self.payouts = payouts
+
+            def get_resolutions(self, condition_ids):
+                return [_O(status="resolved", payouts=self.payouts)]
+
+            def list_markets(self, **kw):
+                return _It()
+        ra.pub = _Pub((Decimal(0), Decimal(1)))
+        expect("S6: RealEnv.result: payouts (0, 1) -> the second outcome", ra.result(fm) == ("No", False), ra.result(fm))
+        ra.pub = _Pub((Decimal("0.5"), Decimal("0.5")))
+        expect("S6: RealEnv.result: payouts (0.5, 0.5) -> split", ra.result(fm) == ("split 0.5/0.5", True), ra.result(fm))
+        tA, tB = fm.tokens["No"], fm.tokens["Yes"]
+
+        def _trade(i, status, side="TAKER"):
+            return _O(trader_side=side, side="BUY", status=status, id=f"t{i}", taker_order_id="o1", price=D("0.966"),
+                      size=D("10"), fee_rate_bps=100, matched_at=None, transaction_hash="0x" + "cd" * 32,
+                      maker_orders=[_O(asset_id=tA, price=D("0.97"), matched_amount=D("6")),
+                                    _O(asset_id=tB, price=D("0.04"), matched_amount=D("4"))])
+
+        class _Tr:
+            def list_account_trades(self, asset_id=None, after=None):
+                return _It([_trade(1, "CONFIRMED"), _trade(2, "FAILED"), _trade(3, "MATCHED", side="MAKER")])
+        ra.c = _Tr()
+        tr = ra.trades(tA, 0)
+        expect("S4: a FAILED trade and a maker trade are not fills; S6: complement-token leg 0.04 -> 0.96",
+               len(tr) == 1 and tr[0]["legs"] == [["0.97", "6"], ["0.96", "4"]], tr and tr[0]["legs"])
+        sh, avg, fee = fill_from_trades(tr)
+        expect("fill from the legs: 10 shares at 0.966, fee per leg", sh == 10 and avg == D("0.966")
+               and fee == fee_formula(D(6), D("0.97")) + fee_formula(D(4), D("0.96")), (sh, avg, fee))
+
+        class _Bal:
+            def __init__(self, ok):
+                self.ok = ok
+
+            def get_balance_allowance(self, asset_type, asset_id=None, token_id=None):
+                if self.ok and asset_type == "CONDITIONAL" and token_id == tA:
+                    return _O(balance=5_150_000)
+                raise RuntimeError("not readable")
+        ra.c = _Bal(True)
+        expect("S3: RealEnv.token_balance reads the CONDITIONAL balance in base units", ra.token_balance(tA) == D("5.15"))
+        ra.c = _Bal(False)
+        try:
+            ra.token_balance(tA)
+            how = "returned"
+        except RuntimeError:
+            how = "raised"
+        expect("S3: RealEnv.token_balance unreadable -> raises (never reads as zero)", how == "raised")
 
         # STOP file
         env, s = new_session(n_markets=1)
@@ -2338,7 +2566,8 @@ def cmd_selftest(a) -> int:
         leaked = key[2:] in out.log_path.read_text().lower()
         expect("private key absent from the log file", not leaked)
     finally:
-        OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE = saved
+        OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE = saved
+        out.log_path = Path(os.devnull)
         for p in sorted(tmp.rglob("*"), reverse=True):
             p.unlink() if p.is_file() else p.rmdir()
         tmp.rmdir()

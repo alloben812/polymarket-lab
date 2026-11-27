@@ -727,3 +727,246 @@ Final hashes after the last doc edit (selftest duration note in OPERATOR.md, 10 
 4612e54530178557b6b867aa1afffab79f7de453998daa3034a3c53ec0497b17  operator.py
 cf0c757697f68c97e9e9dd5a69437b4cd394494d8e4f4f574dea5702f5292b19  pm_operator.py
 742a7a33c98ed58cbc5cfa33ca4b0846dc0f370611ecb8e77ae93383e1261180  OPERATOR.md
+
+================================================================================================================
+Fixes of the two findings of the read-only verification (operator 1.1.1), 2026-11-27T20:56Z, cloud sandbox
+(US IP, no account, no key, nothing authenticated sent). Files changed: pilot/pm_operator.py, pilot/OPERATOR.md.
+
+Finding 1 (money, loss limits failed open). Before, with operator 1.1.0 (scratch copy, one exp_fav record line
+whose ticket is the text "ten"; check_limits returns early there only because the scratch state is not armed):
+$ python3 -I demo.py <1.1.0 copy> <scratch pilot dir>
+1.1.0 ledger: InvalidOperation [<class 'decimal.ConversionSyntax'>]
+1.1.0 check_limits: ok 
+1.1.0 build_report: InvalidOperation [<class 'decimal.ConversionSyntax'>]
+$ python3 -I demo.py <1.1.1> <scratch pilot dir>
+1.1.1 ledger: ok {'realised_total': Decimal('0'), 'at_risk_total': Decimal('10'), 'realised_today': Decimal('0'), 'at_risk_today': Decimal('10'), 'unr
+1.1.1 check_limits: ok 
+1.1.1 build_report: ok 1
+Fix: a record line or trade that is not understood is counted at its worst case (exp_bids: its notional, else
+5.00 = one window; exp_fav: its whole ticket, or its cost when larger, else 10.00), as at risk today, and reported
+(pnl.ledger_unreadable_lines / ledger_unreadable_worst_usd, a warning event, a line in latest.md). Any other error
+while reading the records or computing profit and loss (LedgerError) is a reached limit: STOP created, a live run
+interrupted, live starts refused while the error lasts (even with STOP removed by hand) and STOP kept after it,
+until the owner removes it; event "limit"; latest.json "records_error" with the scrubbed error text. The report no
+longer depends on the ledger (and a minimal report goes out if building the full one fails for any reason).
+set_limits works without the records (limit_values). Whitelist, ranges and limits unchanged.
+
+Finding 2 (privacy). Fix: every git call of the operator runs with GIT_AUTHOR_NAME / _EMAIL and GIT_COMMITTER_NAME /
+_EMAIL set to pm-operator / pm-operator@localhost.invalid, and commit-tree also gets -c user.*, author.*, committer.*
+with the same values.
+
+New selftest cases (section 6c and the end of section 7): a malformed exp_bids line pair (a list as key: was
+TypeError; pnl "lost": was skipped) and a malformed exp_fav line (ticket "ten": was InvalidOperation), each written
+while a live exp_bids run is in progress; a record file that cannot be read during a live run; a balance in the state
+that is not a number; an unexpected exception raised inside fav_trades; a throwaway repository and HOME with
+author.* / committer.* in the repository and global config, then also GIT_AUTHOR_* / GIT_COMMITTER_* in the
+environment. One existing expectation changed with the behaviour: the torn line in the exp_bids ledger test now
+counts 5.00 at risk (at_risk 3.00 -> 8.00).
+
+$ python3 -I pilot/operator.py selftest
+selftest: throwaway directory /tmp/pm-operator-selftest-ui0wzbki (removed at the end); the real ~/.polymarket-pilot is not touched
+whitelist and parameter ranges
+  [PASS] smoke status accepted
+  [PASS] smoke place refused (not on the whitelist)
+  [PASS] smoke roundtrip refused
+  [PASS] program 'bash' refused
+  [PASS] free-form argv key refused
+  [PASS] unknown parameter refused
+  [PASS] config path '../../x' refused
+  [PASS] config 'tails.json' refused
+  [PASS] exp_bids windows=0 refused
+  [PASS] exp_bids windows=37 refused
+  [PASS] exp_bids windows='3' refused
+  [PASS] exp_bids windows=True refused
+  [PASS] exp_bids windows=3.5 refused
+  [PASS] exp_bids windows=None refused
+  [PASS] exp_bids windows=1 accepted
+  [PASS] exp_bids windows=36 accepted
+  [PASS] exp_bids live='true' (string) refused
+  [PASS] exp_bids run without windows refused
+  [PASS] exp_fav ticket=7 refused
+  [PASS] exp_fav ticket='5' refused
+  [PASS] exp_fav ticket=0 refused
+  [PASS] exp_fav ticket=True refused
+  [PASS] exp_fav hours=0 refused
+  [PASS] exp_fav hours=13 refused
+  [PASS] exp_fav hours='2' refused
+  [PASS] exp_fav ticket=10 hours=12 live accepted
+  [PASS] id with a slash refused
+  [PASS] max_age_min 1000 refused
+  [PASS] set_limits without values refused
+  [PASS] set_limits negative refused
+  [PASS] exp_bids argv is exactly the documented command line
+  [PASS] exp_fav dry argv has no --live
+  [PASS] minimal control file accepted
+  [PASS] control file with seq 0 refused
+  [PASS] control file with seq '2' refused
+  [PASS] control file with seq true refused
+  [PASS] control file with bad issued_utc refused
+  [PASS] control file with no actions refused
+  [PASS] control file with 11 actions refused
+  [PASS] control file with extra top-level key refused
+  [PASS] control file with duplicate ids refused
+  [PASS] control file over 64 KB refused
+  [PASS] control file not JSON refused
+  [PASS] control file of 30,000 nested brackets refused (was RecursionError)
+  [PASS] control file with a 5,000-digit seq refused (was ValueError)
+  [PASS] a value too large to print does not crash the refusal text
+  [PASS] seq above 1000000000 refused
+  [PASS] pilot/control-example.json is valid
+report scrubbing
+  [PASS] scrubbed text has no address, hex, path, URL, e-mail, token, user or host
+  [PASS] scrubbed text keeps ordinary words
+  [PASS] token ids of 77 digits are hidden too
+  [PASS] a user literally named 'user' does not block reports
+  [PASS] scrubbing '/homehttps://x' reaches a fixed point with no leak
+  [PASS] scrubbing '/Usershttps://a/b' reaches a fixed point with no leak
+  [PASS] scrubbing 'a@/homeb.c:d' reaches a fixed point with no leak
+  [PASS] scrubbing '/root/home/x@y.z:w' reaches a fixed point with no leak
+  [PASS] fuzz of 20,000 crafted strings: none leaks after scrubbing
+  [PASS] a repository path outside the home folder becomes <repo>
+throwaway git repositories: origin, the Mac's working copy, the coordinator's clone
+control channel and replay protection
+  [PASS] single instance: a second lock is refused
+  [PASS] no control branch yet: no error, nothing runs
+  [PASS] seq 1: smoke status done
+  [PASS] seq 1: exp_bids report done
+  [PASS] program output in the report is scrubbed (address, home path)
+  [PASS] same seq is not processed again
+  [PASS] after a restart the seq is not replayed
+  [PASS] a new file with an old seq is ignored and reported
+  [PASS] an action issued 2 h ago is skipped as stale
+  [PASS] a control file issued 1 h in the future is refused
+  [PASS] one bad action refuses the whole seq
+  [PASS] an invalid seq still carries out its stop_all
+  [PASS] a stale stop_all still runs; the stale status does not
+  [PASS] broken JSON on the branch is refused and reported
+  [PASS] state file holds the last seq
+  [PASS] control file of 30,000 nested brackets: refused, no crash, not re-read after a restart
+  [PASS] control file of a 5,000-digit seq: refused, no crash, not re-read after a restart
+  [PASS] a seq more than 100,000 ahead is refused and not consumed; its stop_all still runs
+  [PASS] a file with seq 1000000001: refused, its stop_all still runs, nothing else
+  [PASS] a file with seq 'x': refused, its stop_all still runs, nothing else
+ARMED and the limits
+  [PASS] live run without ARMED is refused
+  [PASS] dry run without ARMED runs
+  [PASS] ARMED writable by others is not armed
+  [PASS] ARMED with an unknown line is not armed
+  [PASS] ARMED total above 300 is not armed
+  [PASS] ARMED daily above total is not armed
+  [PASS] ARMED total 30, daily 12 is armed
+  [PASS] set_limits lowers the total limit to 25
+  [PASS] set_limits cannot raise the daily limit
+  [PASS] armed live run went through and finished
+  [PASS] ledger and balance both show a loss of 3.00
+  [PASS] daily limit 12 reached: STOP file created
+  [PASS] daily limit: limit event and the live run interrupted
+  [PASS] balance in state is the probe after the run, not the stale one the run printed at its start
+  [PASS] the loss stopped within one window of the limit
+  [PASS] with STOP present a live run is refused
+  [PASS] with STOP present a dry run is refused too
+  [PASS] with STOP present status still runs
+  [PASS] STOP removed but daily limit used up: live run refused
+disarm, stop_all, sleep, the exp_fav command line
+  [PASS] ledger: unknown cost and no final record count in full; dry-run rows ignored; the torn line counts as one window lost (5.00)
+  [PASS] exp_fav ledger: won +0.39, lost -10.00, unknown fill unresolved 10.00 at risk, unfilled 0
+  [PASS] removing ARMED interrupts the live run at once
+  [PASS] disarm moves ARMED aside
+  [PASS] after disarm a live run is refused
+  [PASS] a second run waits in the queue while one runs
+  [PASS] stop_all: STOP created, running program stopped, queue dropped
+  [PASS] a quick action runs while a program run is going
+  [PASS] after a sleep the queued action is dropped, not run late
+  [PASS] exp_fav with another command line is refused
+  [PASS] exp_fav with the expected command line runs (dry)
+  [PASS] a program that is not installed is refused
+review attacks: second live program, long quick actions, crashing cycles, offline reports, deposits
+  [PASS] S4: a live run is refused while an exp_fav.py session holds its lock
+  [PASS] S1: a selftest is refused while a live program runs
+  [PASS] S1: ARMED removed during a quick action: the live run is interrupted before the next action
+  [PASS] M3: cycles that raise do not end the loop (4 cycles ran, one error event, serve returned)
+  [PASS] M3: while cycles raise, removing ARMED still interrupts the live run
+  [PASS] M3: an exception that ends serve() still interrupts the live program first
+  [PASS] S5: offline, the failed report push is not retried in the next cycle
+  [PASS] S5: ... and is retried after the back-off
+  [PASS] S5: back online, the report goes out
+  [PASS] S8: a deposit of 60 is flagged and posts no milestone
+  [PASS] S8: a profit of 25 the records show posts the 20 milestone, with no deposit warning
+  [PASS] S9: a reading 10 min before midnight opens the new day (loss after midnight counts today)
+  [PASS] S9: a reading 5 h old does not: the day opens at the current balance
+records not understood or unreadable during a live run: worst case, fail closed, the report goes out
+  [PASS] finding 1, exp_bids format: two lines not understood during a live run: no crash, counted as lost (5.00 for the unknown order, its notional 2.00 for the other)
+  [PASS] finding 1, exp_bids format: the live run goes on (7.00 < daily 12) and the report shows the lines
+  [PASS] finding 1, exp_fav format: a ticket 'ten' during a live run: no crash, counted as a whole ticket (10.00) lost
+  [PASS] finding 1, exp_fav format: 17.00 counted reaches the daily limit 12: STOP, the live run interrupted, reported
+  [PASS] finding 1: a record file that cannot be read during a live run: STOP created, the live run interrupted as at a limit
+  [PASS] finding 1: ... and the report still goes out, with the error text, scrubbed
+  [PASS] finding 1: while the error lasts a live start is refused even after STOP was removed; STOP is back
+  [PASS] finding 1: records readable again: reported; STOP stays until the owner removes it
+  [PASS] finding 1: profit and loss not computable: STOP created, the report says so
+  [PASS] finding 1: an unexpected exception inside the calculation: STOP created, the report goes out with it
+reports branch, scrubbing of what was pushed, the working copy
+  [PASS] M1: symlinks on live-reports: the key file is intact, no .bashrc written, ARMED not created
+  [PASS] M2: hooks committed on live-reports never run (relative core.hooksPath)
+  [PASS] M1: the report commit replaces the attacker's tree: three regular files at the tip
+  [PASS] M1: nothing from live-reports is checked out on the Mac (no reports worktree)
+  [PASS] the shell-injection program name is refused and runs nothing
+  [PASS] report published without error
+  [PASS] live-reports holds only the three report files
+  [PASS] latest.json has limits, pnl, control and events
+  [PASS] one report commit per change (several commits pushed)
+  [PASS] pushed reports carry no address, key, path, URL, user, host or e-mail
+  [PASS] S6: the checkout's absolute path (outside the home folder here) is not in the reports
+  [PASS] report commits use the neutral identity, not the owner's
+  [PASS] the owner's git name is scrubbed from text
+  [PASS] working copy: same HEAD, same branch, same status
+  [PASS] code on the control branch was never executed or checked out
+  [PASS] report push recovers when the branch moved elsewhere
+  [PASS] finding 2: author.* / committer.* in the owner's git config do not reach a report commit
+  [PASS] finding 2: GIT_AUTHOR_* / GIT_COMMITTER_* in the environment do not reach a report commit
+  [PASS] finding 2: every operator report commit on live-reports carries the neutral identity
+  [PASS] pilot/operator.py does not break programs started without -I (acts as stdlib operator)
+  [PASS] an address injected into state is scrubbed before publishing
+selftest: 153/153 passed
+selftest: ALL PASS
+(17-18 s)
+
+Do the new cases catch the old behaviour? Mutation runs in scratch copies (operator.py, pm_operator.py,
+control-example.json), one fix undone at a time, full selftest each; FAIL lines cut at 150 characters:
+ident-as-before (user.* only, no env): rc=1 3 FAIL
+      [FAIL] finding 2: author.* / committer.* in the owner's git config do not reach a report commit: (True, 'Personal Author|personal.author@example.org
+      [FAIL] finding 2: GIT_AUTHOR_* / GIT_COMMITTER_* in the environment do not reach a report commit: (True, 'Env Author|env.author@example.org|Env Comm
+      [FAIL] finding 2: every operator report commit on live-reports carries the neutral identity: Env Author|env.author@example.org|Env Committer|env.com
+ident-env-only-removed: rc=1 2 FAIL; selftest: FAILURES
+      [FAIL] finding 2: GIT_AUTHOR_* / GIT_COMMITTER_* in the environment do not reach a report commit: (True, 'Env Author|env.author@example.org|Env Comm
+      [FAIL] finding 2: every operator report commit on live-reports carries the neutral identity: Env Author|env.author@example.org|Env Committer|env.com
+report-depends-on-ledger: rc=1 1 FAIL; selftest: FAILURES
+      [FAIL] finding 1: ... and the report still goes out, with the error text, scrubbed: {'reason': 'record file exp-broken-20261127.jsonl could not be r
+fav-trade-not-worst-case: rc=1 2 FAIL; selftest: FAILURES
+      [FAIL] finding 1, exp_fav format: a ticket 'ten' during a live run: no crash, counted as a whole ticket (10.00) lost: defaultdict(<function cmd_self
+      [FAIL] finding 1, exp_fav format: 17.00 counted reaches the daily limit 12: STOP, the live run interrupted, reported: None None
+bids-line-not-worst-case: rc=1 5 FAIL; selftest: FAILURES
+      [FAIL] ledger: unknown cost and no final record count in full; dry-run rows ignored; the torn line counts as one window lost (5.00): defaultdict(<fu
+      [FAIL] finding 1, exp_bids format: two lines not understood during a live run: no crash, counted as lost (5.00 for the unknown order, its notional 2
+      [FAIL] finding 1, exp_bids format: the live run goes on (7.00 < daily 12) and the report shows the lines: {} None
+      [FAIL] finding 1, exp_fav format: a ticket 'ten' during a live run: no crash, counted as a whole ticket (10.00) lost: defaultdict(<function cmd_self
+      [FAIL] finding 1, exp_fav format: 17.00 counted reaches the daily limit 12: STOP, the live run interrupted, reported: None None
+check_limits-swallows-ledger-error: rc=1 2 FAIL; selftest: FAILURES
+      [FAIL] finding 1: a record file that cannot be read during a live run: STOP created, the live run interrupted as at a limit: [('started', None), ('d
+      [FAIL] finding 1: profit and loss not computable: STOP created, the report says so: None
+malformed-counted-as-zero: rc=1 3 FAIL; selftest: FAILURES
+      [FAIL] ledger: unknown cost and no final record count in full; dry-run rows ignored; the torn line counts as one window lost (5.00): {'realised_tota
+      [FAIL] finding 1, exp_bids format: two lines not understood during a live run: no crash, counted as lost (5.00 for the unknown order, its notional 2
+      [FAIL] finding 1, exp_fav format: 17.00 counted reaches the daily limit 12: STOP, the live run interrupted, reported: None None
+(ident-env-only-removed leaves the -c author.* / committer.* overrides, so the config case still passes: the
+environment variables are what git takes first, and both layers are kept.)
+
+$ python3 -I pilot/operator.py check pilot/control-example.json  -> exit 0
+
+Not verified here: macOS, the real programs live, a real GitHub push. Not changed: the residual risks listed above.
+Known effect: a last record line that a program is writing at the moment of reading counts as lost for that cycle.
+
+Hashes after this pass:
+4612e54530178557b6b867aa1afffab79f7de453998daa3034a3c53ec0497b17  operator.py
+317492bbf897dadd054b7be76b46dd79a8855ef64a80c0faed1f0c5e4cafab0c  pm_operator.py
+feca0903314ee3c75fb1073eb6fc032299194fd45fc347d536afcbe00698a689  OPERATOR.md

@@ -516,3 +516,78 @@ $ .venv/bin/python -I exp_fav.py report --dry-run <scratch>/synth_dry2/exp-fav-2
 - Dry-run caps are conservative: a paper order's state is written after its twin, so later triggers of the same poll
   count it at the full ticket (seen in 4b); in a live run each order's state is known before the next decision.
 - No independent reviewer (fresh-context evaluator) has checked this program yet.
+
+=================================================================== 6. fixes after the independent review (2026-11-27 evening)
+Source of the fixes: pilot/REVIEW-exp_fav.md (reviewed sha256 be5f29d4...489d7e, 2,211 lines).
+Fixed program: exp_fav.py sha256 bc8885bad7e88e48e7f32193cf54af3fe86d6a0b11cbdbd9b3649491efe7b7a7 (2615 lines), VERSION "exp_fav 1.1"; smoke.py unchanged
+(sha256 30198080...ddeca). Rule source unchanged: docs/forward-tests.md v1.0 (file still says v1.0, read
+2026-11-27 20:50 UTC). Hard caps, the FAK-BUY-at-or-below-0.98-only rule and the CLI are unchanged.
+
+Done: M1, M2, M3 (code + selftest); M4 is an owner decision (written into EXP-FAV.md, no code change);
+S1 (live-decision watermark outside the checkout: ~/.polymarket-pilot/exp_fav.live-records.json; live start
+refused when the records folder holds fewer live decisions), S2 (live mode also holds exp_bids.live.lock),
+S3 (token balance as third source; late check upgrades an unknown order with trades to its real cost), S4
+(FAILED trades skipped, trade statuses recorded), S6 (offline adapter tests with fake SDK objects), S8 (split
+resolved; loss = cost - payout x shares; a split with a loss counts as a losing trade), S9 (selftest logs to its
+temp folder). Not done: S5, S7 (no money or accounting effect), S10 (needs a v1.1 of the rule doc: owner).
+Classification now: 'unfilled' only from a definite rejection, or from a final CANCELED/INVALID state with
+size_matched 0 AND a trades list that was read and is empty; every other unclear shape is 'unknown' (full ticket).
+'unmatched' (docs: placed on the book after the delay) is handled like 'live': cancel, and stop if not confirmed.
+
+$ cd pilot && .venv/bin/python -I exp_fav.py selftest
+selftest: 137 checks, ALL PASS (exit 0); pilot/out/exp-fav-20261127.log unchanged (227293 bytes before and after).
+New checks (all PASS):
+  [PASS] M1: 'matched' with zero amounts and no trade rows -> unknown, open exposure = the full ticket: ('unknown', Decimal('10'))
+  [PASS] M1: ... and it counts toward the daily cap
+  [PASS] M1: 'matched' with zero amounts, trades list shows the fill -> filled at the trades' shares and price: {'fill_state': 'filled', 'filled_shares': '10.30', 'fill_p
+  [PASS] M1: ... and when it loses, the loss is counted (probe gave losses() == (0, 0)): (1, Decimal('9.99400'))
+  [PASS] M1: 'delayed' -> MATCHED with size_matched 0 and no trade rows -> unknown (not unfilled): ('delayed->matched', 'unknown')
+  [PASS] M1: 'delayed' -> CANCELED, nothing matched, trades list read and empty -> unfilled (definite): ('delayed->canceled', 'unfilled')
+  [PASS] M2: 'live' FAK, 5 shares filled, cancel not confirmed -> unknown at the full ticket, not 'filled 5': ('unknown', Decimal('10'))
+  [PASS] M2: ... and the session stops new orders
+  [PASS] S3: after resolution, trades and token balance agree (5 shares) -> late check books the real cost: ('filled', 1, Decimal('4.99700'))
+  [PASS] M2: cancel raised -> unknown at the full ticket, session stops
+  [PASS] S3: token balance shows more shares than the trades -> stays unknown, full-ticket loss: (1, Decimal('10'))
+  [PASS] S3: unknown fill, trades and feed empty, token balance unreadable -> not downgraded, full-ticket loss: (1, Decimal('10'))
+  [PASS] S3: unknown fill, trades and feed empty, but the account holds the shares -> full-ticket loss: (1, Decimal('10'))
+  [PASS] M3: 'delayed' order printed at 0.96 under a 0.97 limit -> fill price 0.96, -10 ticks (probe: 0.97, 0): {'status': 'delayed->matched', 'fill_price': '0.96', 'fill
+  [PASS] M3: response amounts imply 0.97, trade legs 0.96 -> fill price from the legs, disagreement recorded: {'fill_price': '0.96', 'fill_price_response': '0.97'}
+  [PASS] making/taking the other way round -> swapped back, response price 0.97, no disagreement: 0.970
+  [PASS] S8: split -> resolved (open exposure 0), loss = cost - 0.5 x shares, counted as a losing trade: (Decimal('0'), Decimal('4.84400'))
+  [PASS] S1: a live decision raises the watermark outside the checkout to 1: 1
+  [PASS] S1: live start allowed while the records hold every live decision: returned None
+  [PASS] S1: live start refused when the records hold fewer live decisions than were written: refused: the live records in /tmp/pm-fav-selftest-xaxyssi6/out hold 0 decisi
+  [PASS] S2: run --live refused while a live exp_bids.py holds its lock (before the key is read): refused: a live exp_bids.py session is running; never run exp_bids.py an
+  [PASS] S6: RealEnv.post: HTTP 400 -> definite rejection (nothing bought)
+  [PASS] S6: RealEnv.post: HTTP 408 -> outcome unknown (raised, never booked as rejected)
+  [PASS] S6: RealEnv.post: HTTP 429 -> outcome unknown (raised, never booked as rejected)
+  [PASS] S6: RealEnv.post: HTTP 500 -> outcome unknown (raised, never booked as rejected)
+  [PASS] S6: RealEnv.post: HTTP 503 -> outcome unknown (raised, never booked as rejected)
+  [PASS] S6: RealEnv.result: payouts (0, 1) -> the second outcome: ('No', False)
+  [PASS] S6: RealEnv.result: payouts (0.5, 0.5) -> split: ('split 0.5/0.5', True)
+  [PASS] S4: a FAILED trade and a maker trade are not fills; S6: complement-token leg 0.04 -> 0.96: [['0.97', '6'], ['0.96', '4']]
+  [PASS] fill from the legs: 10 shares at 0.966, fee per leg: (Decimal('10'), Decimal('0.966'), Decimal('0.00329'))
+  [PASS] S3: RealEnv.token_balance reads the CONDITIONAL balance in base units
+  [PASS] S3: RealEnv.token_balance unreadable -> raises (never reads as zero)
+
+Mutation check (scratch copies, each re-introducing one old behaviour; the new checks must fail):
+  M1 old classification by amounts only      -> 5 FAIL (the M1 checks)
+  M2 no worst case / no stop on bad cancel   -> 5 FAIL (M2 checks and the S3 checks that depend on them)
+  M3 delayed price from get_order, response first -> 2 FAIL (the M3 checks)
+  S3 downgrade on empty trades + feed only   -> 2 FAIL (the S3 balance checks)
+  S8 split left open                         -> 1 FAIL (the S8 check)
+
+Short dry-run, byte-identical copy in the session scratch folder (nothing written into the repository):
+$ .venv/bin/python -I exp_fav.py run --hours 0.02     (2026-11-27 20:58 UTC, 13 polls, exit 0)
+  geoblock: blocked=True country=US -> "a live run would be refused here" (expected in this sandbox)
+  clock: local - server +0.04 s, round trip 170 ms
+  universe: 145 markets ending in the next 26 h, 137 accepting orders, 0 rejected; first window opens
+  2026-11-28 04:00 UTC (dip/reach), so no trigger (expected). No 40-hex address in the records or the log.
+Report on synthetic live records made by exp_fav's own Session against FakeEnv (scratch): rows for a fill at
+0.96 under a 0.97 limit (-10.0 ticks, price_sources_disagree counted 1), a 'matched' answer without amounts
+(late check: unfilled), a delayed fill at 0.965 (-5.0 ticks), a split (-4.844) and a loss (-9.994); the split
+plus the loss make 2 losing trades -> HALT, as designed.
+
+Still unverified (first seen on the owner's Mac): every authenticated call, including the token balance read
+(get_balance_allowance CONDITIONAL / CONDITIONAL-V2 with token_id), the real FAK answer shapes and the order
+statuses returned by get_order. No fresh-context evaluator has checked version 1.1 yet.

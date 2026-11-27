@@ -31,7 +31,8 @@ Subcommands
   check F   validate a control file and print what each action would run (no state, no network)
   status    print the local state, ARMED and limits (no network)
   selftest  throwaway git repositories and fake programs: whitelist, ranges, replay, ARMED, limits,
-            stale actions, sleep, STOP, report scrubbing, report branch, untouched working copy
+            stale actions, sleep, STOP, report scrubbing, report branch, untouched working copy, and the
+            attacks of the security review (REVIEW-operator.md: M1-M3, S1-S6, S8, S9)
 
 Exit codes: 0 ok, 2 refused (bad control file, second instance), 1 error.
 Only the Python standard library is used; git must be installed.

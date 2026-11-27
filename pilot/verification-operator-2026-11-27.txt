@@ -504,3 +504,226 @@ demo directory removed
   for each new file version, and its record reader mirrors exp_fav's build_ledger as of sha256 6d87afad...;
 - the shim's stdlib lookup was run on Linux Python 3.13 (sys._stdlib_dir); on macOS python.org/Homebrew builds
   the same attribute exists (3.11+); older Pythons fall back to os.__file__ and then to _operator.
+
+==============================================================================================================
+## 7. Fixes from the independent security review (pilot/REVIEW-operator.md), operator 1.1.0, 2026-11-27T20:22:47Z
+==============================================================================================================
+Reviewed version: pm_operator.py sha256 bbebf8aef743... (commit ec58227). The operator's code lives in
+pilot/pm_operator.py (pilot/operator.py is the 40-line launcher, unchanged), so the fixes are there.
+
+$ sha256sum operator.py pm_operator.py OPERATOR.md
+4612e54530178557b6b867aa1afffab79f7de453998daa3034a3c53ec0497b17  operator.py
+cf0c757697f68c97e9e9dd5a69437b4cd394494d8e4f4f574dea5702f5292b19  pm_operator.py
+ebd2cea4340241d41b5fb4e13bed5a98fda67d59b6c34d072d94f110dd9e91cc  OPERATOR.md
+
+What changed (all in pm_operator.py unless noted):
+- M1+M2: reports are built with plumbing in the main repository's object store (hash-object --no-filters,
+  mktree, commit-tree, push of the commit id); ensure_worktree / write_reports and the reports worktree are gone.
+  Every git call runs with -c core.hooksPath=/dev/null (control fetch included); push uses --no-verify. Every
+  report commit carries exactly reports/{events.jsonl,latest.json,latest.md}, mode 100644.
+- M3: parse_control catches ValueError (JSONDecodeError, int-digits limit) and RecursionError; short() survives
+  values that cannot be printed; poll_control saves last_blob before parsing; cat-file goes through the guarded
+  git call (TimeoutExpired -> GitError); serve() wraps every cycle (error event once per distinct message, then
+  monitor + check_limits are retried on their own), and a try/finally interrupts a running program on any exit.
+- S1: monitor() + check_limits() after every queued action; any selftest is refused while a live program runs.
+- S2: a seq more than 100,000 above the last is refused and not consumed; a file whose only fault is its seq
+  (invalid, out of range, too far ahead) still carries out its stop_all / disarm and nothing else.
+- S3: Scrubber repeats its passes until the text stops changing (at most 8).
+- S4: live_gate also refuses while ~/.polymarket-pilot/exp_fav.lock is held.
+- S5: git timeout 90 s -> 30 s; after a failed publish the next try waits 5 min (the final publish on exit is
+  always tried); a failed reports fetch (offline) skips the push.
+- S6: the repository path (as given, realpath, resolved) is scrubbed to <repo>.
+- S7: documented in OPERATOR.md ("Как остановить всё"): stop_all's cancel covers smoke.py orders only.
+- S8: a balance rise more than 1 USD beyond the change of the records (realised - at risk) is flagged as a
+  "warning" event (deposit or redeemed winnings); milestones use min(balance-based, records-based) profit.
+- S9: cat-file TimeoutExpired covered (M3). day_open of a new UTC day is the last reading before midnight when
+  it is at most 1 h old; the ledger's placement-day attribution is documented (at most one exp_bids window).
+- No new actions, programs or parameters. OPERATOR.md updated (reports, timings, seq rules, deposits, one-time
+  removal of the old ~/.polymarket-pilot/reports-worktree, the review section).
+
+$ python3 -I pilot/operator.py selftest   (full output; 17 s)
+selftest: throwaway directory /tmp/pm-operator-selftest-tq536qnb (removed at the end); the real ~/.polymarket-pilot is not touched
+whitelist and parameter ranges
+  [PASS] smoke status accepted
+  [PASS] smoke place refused (not on the whitelist)
+  [PASS] smoke roundtrip refused
+  [PASS] program 'bash' refused
+  [PASS] free-form argv key refused
+  [PASS] unknown parameter refused
+  [PASS] config path '../../x' refused
+  [PASS] config 'tails.json' refused
+  [PASS] exp_bids windows=0 refused
+  [PASS] exp_bids windows=37 refused
+  [PASS] exp_bids windows='3' refused
+  [PASS] exp_bids windows=True refused
+  [PASS] exp_bids windows=3.5 refused
+  [PASS] exp_bids windows=None refused
+  [PASS] exp_bids windows=1 accepted
+  [PASS] exp_bids windows=36 accepted
+  [PASS] exp_bids live='true' (string) refused
+  [PASS] exp_bids run without windows refused
+  [PASS] exp_fav ticket=7 refused
+  [PASS] exp_fav ticket='5' refused
+  [PASS] exp_fav ticket=0 refused
+  [PASS] exp_fav ticket=True refused
+  [PASS] exp_fav hours=0 refused
+  [PASS] exp_fav hours=13 refused
+  [PASS] exp_fav hours='2' refused
+  [PASS] exp_fav ticket=10 hours=12 live accepted
+  [PASS] id with a slash refused
+  [PASS] max_age_min 1000 refused
+  [PASS] set_limits without values refused
+  [PASS] set_limits negative refused
+  [PASS] exp_bids argv is exactly the documented command line
+  [PASS] exp_fav dry argv has no --live
+  [PASS] minimal control file accepted
+  [PASS] control file with seq 0 refused
+  [PASS] control file with seq '2' refused
+  [PASS] control file with seq true refused
+  [PASS] control file with bad issued_utc refused
+  [PASS] control file with no actions refused
+  [PASS] control file with 11 actions refused
+  [PASS] control file with extra top-level key refused
+  [PASS] control file with duplicate ids refused
+  [PASS] control file over 64 KB refused
+  [PASS] control file not JSON refused
+  [PASS] control file of 30,000 nested brackets refused (was RecursionError)
+  [PASS] control file with a 5,000-digit seq refused (was ValueError)
+  [PASS] a value too large to print does not crash the refusal text
+  [PASS] seq above 1000000000 refused
+  [PASS] pilot/control-example.json is valid
+report scrubbing
+  [PASS] scrubbed text has no address, hex, path, URL, e-mail, token, user or host
+  [PASS] scrubbed text keeps ordinary words
+  [PASS] token ids of 77 digits are hidden too
+  [PASS] a user literally named 'user' does not block reports
+  [PASS] scrubbing '/homehttps://x' reaches a fixed point with no leak
+  [PASS] scrubbing '/Usershttps://a/b' reaches a fixed point with no leak
+  [PASS] scrubbing 'a@/homeb.c:d' reaches a fixed point with no leak
+  [PASS] scrubbing '/root/home/x@y.z:w' reaches a fixed point with no leak
+  [PASS] fuzz of 20,000 crafted strings: none leaks after scrubbing
+  [PASS] a repository path outside the home folder becomes <repo>
+throwaway git repositories: origin, the Mac's working copy, the coordinator's clone
+control channel and replay protection
+  [PASS] single instance: a second lock is refused
+  [PASS] no control branch yet: no error, nothing runs
+  [PASS] seq 1: smoke status done
+  [PASS] seq 1: exp_bids report done
+  [PASS] program output in the report is scrubbed (address, home path)
+  [PASS] same seq is not processed again
+  [PASS] after a restart the seq is not replayed
+  [PASS] a new file with an old seq is ignored and reported
+  [PASS] an action issued 2 h ago is skipped as stale
+  [PASS] a control file issued 1 h in the future is refused
+  [PASS] one bad action refuses the whole seq
+  [PASS] an invalid seq still carries out its stop_all
+  [PASS] a stale stop_all still runs; the stale status does not
+  [PASS] broken JSON on the branch is refused and reported
+  [PASS] state file holds the last seq
+  [PASS] control file of 30,000 nested brackets: refused, no crash, not re-read after a restart
+  [PASS] control file of a 5,000-digit seq: refused, no crash, not re-read after a restart
+  [PASS] a seq more than 100,000 ahead is refused and not consumed; its stop_all still runs
+  [PASS] a file with seq 1000000001: refused, its stop_all still runs, nothing else
+  [PASS] a file with seq 'x': refused, its stop_all still runs, nothing else
+ARMED and the limits
+  [PASS] live run without ARMED is refused
+  [PASS] dry run without ARMED runs
+  [PASS] ARMED writable by others is not armed
+  [PASS] ARMED with an unknown line is not armed
+  [PASS] ARMED total above 300 is not armed
+  [PASS] ARMED daily above total is not armed
+  [PASS] ARMED total 30, daily 12 is armed
+  [PASS] set_limits lowers the total limit to 25
+  [PASS] set_limits cannot raise the daily limit
+  [PASS] armed live run went through and finished
+  [PASS] ledger and balance both show a loss of 3.00
+  [PASS] daily limit 12 reached: STOP file created
+  [PASS] daily limit: limit event and the live run interrupted
+  [PASS] balance in state is the probe after the run, not the stale one the run printed at its start
+  [PASS] the loss stopped within one window of the limit
+  [PASS] with STOP present a live run is refused
+  [PASS] with STOP present a dry run is refused too
+  [PASS] with STOP present status still runs
+  [PASS] STOP removed but daily limit used up: live run refused
+disarm, stop_all, sleep, the exp_fav command line
+  [PASS] ledger: unknown cost and no final record count in full; dry-run rows ignored
+  [PASS] exp_fav ledger: won +0.39, lost -10.00, unknown fill unresolved 10.00 at risk, unfilled 0
+  [PASS] removing ARMED interrupts the live run at once
+  [PASS] disarm moves ARMED aside
+  [PASS] after disarm a live run is refused
+  [PASS] a second run waits in the queue while one runs
+  [PASS] stop_all: STOP created, running program stopped, queue dropped
+  [PASS] a quick action runs while a program run is going
+  [PASS] after a sleep the queued action is dropped, not run late
+  [PASS] exp_fav with another command line is refused
+  [PASS] exp_fav with the expected command line runs (dry)
+  [PASS] a program that is not installed is refused
+review attacks: second live program, long quick actions, crashing cycles, offline reports, deposits
+  [PASS] S4: a live run is refused while an exp_fav.py session holds its lock
+  [PASS] S1: a selftest is refused while a live program runs
+  [PASS] S1: ARMED removed during a quick action: the live run is interrupted before the next action
+  [PASS] M3: cycles that raise do not end the loop (4 cycles ran, one error event, serve returned)
+  [PASS] M3: while cycles raise, removing ARMED still interrupts the live run
+  [PASS] M3: an exception that ends serve() still interrupts the live program first
+  [PASS] S5: offline, the failed report push is not retried in the next cycle
+  [PASS] S5: ... and is retried after the back-off
+  [PASS] S5: back online, the report goes out
+  [PASS] S8: a deposit of 60 is flagged and posts no milestone
+  [PASS] S8: a profit of 25 the records show posts the 20 milestone, with no deposit warning
+  [PASS] S9: a reading 10 min before midnight opens the new day (loss after midnight counts today)
+  [PASS] S9: a reading 5 h old does not: the day opens at the current balance
+reports branch, scrubbing of what was pushed, the working copy
+  [PASS] M1: symlinks on live-reports: the key file is intact, no .bashrc written, ARMED not created
+  [PASS] M2: hooks committed on live-reports never run (relative core.hooksPath)
+  [PASS] M1: the report commit replaces the attacker's tree: three regular files at the tip
+  [PASS] M1: nothing from live-reports is checked out on the Mac (no reports worktree)
+  [PASS] the shell-injection program name is refused and runs nothing
+  [PASS] report published without error
+  [PASS] live-reports holds only the three report files
+  [PASS] latest.json has limits, pnl, control and events
+  [PASS] one report commit per change (several commits pushed)
+  [PASS] pushed reports carry no address, key, path, URL, user, host or e-mail
+  [PASS] S6: the checkout's absolute path (outside the home folder here) is not in the reports
+  [PASS] report commits use the neutral identity, not the owner's
+  [PASS] the owner's git name is scrubbed from text
+  [PASS] working copy: same HEAD, same branch, same status
+  [PASS] code on the control branch was never executed or checked out
+  [PASS] report push recovers when the branch moved elsewhere
+  [PASS] pilot/operator.py does not break programs started without -I (acts as stdlib operator)
+  [PASS] an address injected into state is scrubbed before publishing
+selftest: 140/140 passed
+selftest: ALL PASS
+
+$ python3 -I pilot/operator.py check <file of 30,000 nested brackets>
+REFUSED: control file is not valid JSON (RecursionError)
+exit 2
+
+Do the new checks catch the attacks? Mutation run in a scratch copy (operator.py + pm_operator.py +
+control-example.json): each fix undone alone, the full selftest run, the first failing lines shown.
+M3 json errors: rc=1; ['Traceback (most recent call last):', 'RecursionError: maximum recursion depth exceeded while decoding a JSON array from a unicode string']
+M3 serve try: rc=1; ['[FAIL] M3: cycles that raise do not end the loop (4 cycles ran, one error event, serve returned): RecursionErr', "[FAIL] M3: while cycles raise, removing ARMED still interrupts the live run: [('started', None), ('interrupt',"]
+S1 monitor: rc=1; ['[FAIL] S1: ARMED removed during a quick action: the live run is interrupted before the next action: interrupt ']
+S2 jump: rc=1; ['[FAIL] a seq more than 100,000 ahead is refused and not consumed; its stop_all still runs', '[FAIL] a file with seq 1000000001: refused, its stop_all still runs, nothing else', "[FAIL] a file with seq 'x': refused, its stop_all still runs, nothing else"]
+S3 fixpoint: rc=1; ["[FAIL] scrubbing '/homehttps://x' reaches a fixed point with no leak: '~https://x': ['url']", "[FAIL] scrubbing '/Usershttps://a/b' reaches a fixed point with no leak: '~https://a/b': ['url']", "[FAIL] fuzz of 20,000 crafted strings: none leaks after scrubbing: ['/rootgit://-/Usersgit://', ':@@Z9-/root/r"]
+S4 fav lock: rc=1; ['[FAIL] S4: a live run is refused while an exp_fav.py session holds its lock']
+S5 backoff: rc=1; ['[FAIL] S5: offline, the failed report push is not retried in the next cycle: 2 tries, git fetch: and the repos', '[FAIL] S5: ... and is retried after the back-off', '[FAIL] S5: back online, the report goes out: None']
+S6 repo: rc=1; ['[FAIL] a repository path outside the home folder becomes <repo>: records in /Volumes/Data Disk/polymarket-lab/', "[FAIL] S6: the checkout's absolute path (outside the home folder here) is not in the reports"]
+S8 milestone: rc=1; ['[FAIL] S8: a deposit of 60 is flagged and posts no milestone', '[FAIL] S8: a profit of 25 the records show posts the 20 milestone, with no deposit warning: 8']
+S9 carry: rc=1; ["[FAIL] S9: a reading 10 min before midnight opens the new day (loss after midnight counts today): {'day': '202"]
+M1+M2 with the reviewed publisher put back (ensure_worktree / write_reports / old publish and old git(), the
+rest of 1.1.0 unchanged): the new checks fail as the review describes —
+  [FAIL] M1: symlinks on live-reports: the key file is intact, no .bashrc written, ARMED not created: # Отчёт оператора, ...
+  [FAIL] M2: hooks committed on live-reports never run (relative core.hooksPath): .githooks/reference-transaction
+  [FAIL] M1: the report commit replaces the attacker's tree: three regular files at the tip: ['100755', '120000'] ...
+  [FAIL] M1: nothing from live-reports is checked out on the Mac (no reports worktree)
+(the attack wrote only inside the selftest's throwaway HOME; the real ~/.polymarket-pilot was not touched).
+
+Not verified here (unchanged from section 6): macOS, real sleep, the real programs live, a real GitHub push.
+Not done: S7 as code (needs an account-wide cancel in smoke.py); the residual risks of the review stand
+(anyone with push access can do what the coordinator can; disk fill through fetched objects; a deleted
+operator-state.json replays the current file within its max_age; one step of overshoot at a limit).
+
+Final hashes after the last doc edit (selftest duration note in OPERATOR.md, 10 -> 20 s):
+4612e54530178557b6b867aa1afffab79f7de453998daa3034a3c53ec0497b17  operator.py
+cf0c757697f68c97e9e9dd5a69437b4cd394494d8e4f4f574dea5702f5292b19  pm_operator.py
+742a7a33c98ed58cbc5cfa33ca4b0846dc0f370611ecb8e77ae93383e1261180  OPERATOR.md

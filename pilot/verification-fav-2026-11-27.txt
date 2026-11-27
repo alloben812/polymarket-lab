@@ -1,0 +1,518 @@
+Verification of pilot/exp_fav.py and pilot/EXP-FAV.md, 2026-11-27 (UTC), sandbox with a US IP, no account, no key.
+Nothing authenticated was sent. Only the SDK pinned in pilot/requirements.txt (polymarket-client 0.20.1, pilot/.venv,
+Python 3.13) and official endpoints (gamma / CLOB / data API through the SDK, GET clob.polymarket.com/time,
+polymarket.com/api/geoblock) were used. No git commit or push.
+
+Rule source: docs/forward-tests.md v1.0 (2026-11-27), "Зацепка 3". The file appeared at about 19:31 UTC while waiting
+(the task allowed up to 20 minutes), so the universe and thresholds come from it, not from the audit:
+  markets: crypto, taker fee rate 0.01, one-day period: "<asset> above X on <date>" (event <asset>-above-on-<date>,
+  tag multi-strikes; the hourly '-3pm-et' ladders are excluded), "between X and Y on <date>" (event <asset>-price-on-<date>;
+  the ladder's 'less than' / 'greater than' tails are included and labelled between-tail), daily "reach / dip to X"
+  (event what-price-will-<asset>-hit-on-<date>, tag hit-price), daily Up or Down with a 24 h window
+  (<asset>-updown-1d-<epoch>; 5m/15m/1h/4h excluded); all assets that have them (doc). Window [endDate - 3600 s,
+  market close); books of both tokens every 5 s; favourite = higher mid; trigger = first poll with the favourite's
+  best ask in [0.95, 0.98) and >= 10 USD at that price; FAK BUY 10 USD, limit = that ask; hold to resolution; paper
+  twin = the doc's model, the book at t_d + 2 s (+ the market's taker delay).
+Deviations from the doc (all stricter, written in EXP-FAV.md): one order per market and no retry (doc allows retries
+while the ask stays in range); stop after 2 losses or 30 USD of losses (doc live stop: 3rd loss or -25 USD); at most
+6 filled trades per UTC day; worst-case exposure gate (realised losses + open positions + new ticket <= 30 USD + 0.05
+fees, i.e. at most 3 open positions). The computed task named BTC/ETH/SOL/XRP; the doc says all assets with such
+markets, which today adds daily Up/Down on BNB, DOGE and HYPE (labelled by asset in every record).
+
+Code: pilot/exp_fav.py, final sha256 be5f29d4c85c6d7f151391ade010170393bd0bc90c92816b9a3607dcbf489d7e (recompute with
+sha256sum). The dry-run in section 2 started at 19:47:39 with an earlier build (its session record holds that build's
+sha256). Changes after it started: paper-fill average rounded to 6 decimals, live-start refusal when trading approvals
+are incomplete, one more selftest check. None touches the dry-run path that ran here. Two bugs found while verifying
+and fixed before section 1 and 2: smoke.py's helpers printed through smoke's own global `out`, which was unset
+(NameError in the geoblock check and, in a live run, in key loading); fixed by `smoke.out = out` and covered by new
+selftest checks (session 1074ac22d6b0 in the dry-run records is that aborted first start, 10 s long); and a 2 s twin wait that would have aged later triggers of the same poll (now all orders of a poll are
+sent first, twins afterwards).
+
+=================================================================== 1. selftest (offline, throwaway key, fake exchange)
+$ cd pilot && .venv/bin/python -I exp_fav.py selftest
+exit code: 0. The [PASS]/[FAIL] lines and the final line (progress lines of the fake sessions omitted):
+=== exp_fav.py selftest  2026-11-27 19:59:38 UTC (exp_fav 1.0 (2026-11-27))
+selftest: throwaway key in memory, records in a temp folder, network disabled for this process
+  [PASS] smoke.load_private_key: key file mode 0644 refused: refused: key file /tmp/pm-fav-selftest-e5zda41m/keydir/key has mode 0o644: readable/writable by group or others. Run: chmod 600 '/tmp/pm-fav-selftest-e5zda41m/keydir/key'
+  [PASS] smoke.load_private_key: mode 0600 accepted (content not shown): returned loaded
+  [PASS] smoke.geoblock_or_refuse with no network -> refused (fails closed): refused: geoblock check failed (URLError); not sending orders
+  [PASS] live: geoblock endpoint unreachable -> no passing check, orders blocked
+  [PASS] ticket default 10 accepted: returned 10
+  [PASS] ticket lowered to 5 accepted: returned 5
+  [PASS] ticket 10.01 refused (never raised): refused: --ticket 10.01 > 10: the ticket can be lowered, never raised
+  [PASS] ticket 50 refused (never raised): refused: --ticket 50 > 10: the ticket can be lowered, never raised
+  [PASS] ticket 4 refused (below 5): refused: --ticket 4 < 5: below the smallest ticket of this test
+  [PASS] hard limit cap is 0.98 and the rule range is [0.95, 0.98)
+  [PASS] fee formula: 10.352 shares at 0.966 -> 0.00340: 0.00340
+  [PASS] universe: bitcoin-above-60k-on-november-28-2026 -> ('above', 'bitcoin'): ('above', 'bitcoin')
+  [PASS] universe: bitcoin-above-60k-on-november-27-2026-4pm-et -> None: None
+  [PASS] universe: will-the-price-of-bitcoin-be-between-60000-62000-on-november-28-2026 -> ('between', 'bitcoin'): ('between', 'bitcoin')
+  [PASS] universe: will-the-price-of-bitcoin-be-less-than-52000-on-november-28-2026 -> ('between-tail', 'bitcoin'): ('between-tail', 'bitcoin')
+  [PASS] universe: will-solana-reach-150-on-november-27-2026 -> ('reach', 'solana'): ('reach', 'solana')
+  [PASS] universe: will-xrp-dip-to-1pt8-on-november-27-2026 -> ('dip', 'xrp'): ('dip', 'xrp')
+  [PASS] universe: will-bitcoin-reach-70k-november-23-29-2026 -> None: None
+  [PASS] universe: will-bitcoin-reach-80k-in-november-2026 -> None: None
+  [PASS] universe: btc-updown-1d-1795798800 -> ('updown-daily', 'btc'): ('updown-daily', 'btc')
+  [PASS] universe: btc-updown-4h-1795798800 -> None: None
+  [PASS] universe: btc-updown-1h-1795892400 -> None: None
+  [PASS] universe: btc-updown-5m-1795805400 -> None: None
+  [PASS] universe: spx-up-or-down-on-november-27-2026 -> None: None
+  [PASS] daily Up/Down with a 24 h window and rate 0.01 accepted
+  [PASS] '1d' slug whose window is not 24 h refused: Up/Down window 14400 s is not 24 h
+  [PASS] fee rate 0.05 refused (rule: 0.01 only): fee rate 0.05 (exponent 1) is not 0.01
+  [PASS] ask 0.949 does not trigger
+  [PASS] ask 0.95 with 10.45 USD triggers
+  [PASS] ask 0.95 with 9.50 USD does not trigger (needs >= 10 USD)
+  [PASS] ask 0.979 triggers
+  [PASS] ask 0.98 does not trigger (range is [0.95, 0.98))
+  [PASS] favourite = token with the higher mid: ('No', 'mid')
+  [PASS] paper model: only 5 shares at the limit -> filled 5 (>= min 5), rest not bought: 5
+  [PASS] paper model: 4 shares < minimum 5 -> missed: fillable 4 < market minimum 5 (missed)
+  [PASS] signed FAK BUY 10 USD @ <= 0.966 passes the guard: returned (Decimal('10'), Decimal('0.9660006414244259058188014637'))
+  [PASS] guard: same order checked against a 9 USD ticket refused: refused: signed order would spend 10 pUSD > cap 9; not posted
+  [PASS] guard: wrong token refused: refused: internal: signed token differs from the favourite's token; not posted
+  [PASS] guard: signed price above the stated limit refused: refused: internal: signed price 0.966001 above the limit 0.955; not posted
+  [PASS] guard: 11 USD order refused (ticket 10): refused: signed order would spend 11 pUSD > cap 10; not posted
+  [PASS] guard: limit 0.99 refused (cap 0.98): refused: internal: limit 0.99 outside [0.95, 0.98); not posted
+  [PASS] guard: a resting (GTC) limit order refused: refused: internal: signed order type GTC is not FAK; not posted
+  [PASS] guard: a SELL refused: refused: internal: expected a BUY order
+  [PASS] guard: FOK refused (only FAK): refused: internal: signed order type FOK is not FAK; not posted
+  [PASS] live: one trigger -> one FAK posted: 1
+  [PASS] order record: filled, fill price, shares, ticks vs ask, ack time, fee formula: {'fill_price': '0.970', 'filled_shares': '10.30927', 'fill_vs_ask_ticks': '0.00', 'fee_formula': '0.00300'}
+  [PASS] decision record: ask, size, limit = ask, top-10 books of both tokens
+  [PASS] paper twin recorded 2 s after the decision
+  [PASS] same market, later polls: no second order (one per market): 1
+  [PASS] a new session on the same records: still no second order: 1
+  [PASS] fee check: charged (activity) vs formula, ok: 0E-8
+  [PASS] three markets trigger in one poll -> three orders (exposure 30 USD = cap): 3
+  [PASS] two losing trades -> halt file written (permanent stop)
+  [PASS] halt record written
+  [PASS] stopping: no new orders
+  [PASS] start refused while the halt file exists: refused: halt file present (/tmp/pm-fav-selftest-e5zda41m/EXP_FAV_HALT): permanent stop. Read the report; remove the file by hand only if you decide to continue
+  [PASS] order path refused while halted (no post): 3
+  [PASS] halt file removed by hand -> start allowed, counting restarts: returned None
+  [PASS] halt-cleared record written
+  [PASS] loss count after the reset is 0: (0, Decimal('0'))
+  [PASS] realised loss 30 USD with one losing trade -> stop: realised losses 30.00 USD (stop at 30)
+  [PASS] realised loss 29.99 USD with one losing trade -> no stop yet: None
+  [PASS] four triggers at once -> only three sent (realised 0 + open 30 + 10 > 30): 3
+  [PASS] the fourth is recorded as refused with its paper twin: worst case: realised losses 0.00 + open 30.01 + ticket 10 > 30 USD
+  [PASS] daily cap: 6 filled trades, the 7th and 8th refused: [1, 2, 3, 4, 5, 6, 6, 6]
+  [PASS] refusal reason names the daily cap
+  [PASS] post raised -> exactly one attempt, no retry (trades watched for 120 s, none seen): 1
+  [PASS] unknown outcome recorded, counted as filled at the ticket: 10
+  [PASS] error text scrubbed: no 40-hex address in the records: RuntimeError: ReadTimeout talking to <address>
+  [PASS] an unknown fill counts toward the daily cap
+  [PASS] unknown fill on the losing side, late check impossible -> full-ticket loss (worst case): (1, Decimal('10'))
+  [PASS] unknown fill, trades list and activity feed both empty after resolution -> recorded unfilled, no loss: (0, Decimal('0'))
+  [PASS] FAK not filled -> unfilled, one attempt only
+  [PASS] an unfilled order does not count toward the daily cap
+  [PASS] 'delayed' -> followed to MATCHED, fill recorded: delayed->matched
+  [PASS] 'live' FAK -> cancel sent at once
+  [PASS] STOP file -> no order
+  [PASS] STOP file -> start refused: refused: STOP file present (/tmp/pm-fav-selftest-e5zda41m/STOP); remove it to start
+  [PASS] server clock 4 s off -> no order, recorded as a technical skip
+  [PASS] clock fixed -> the same market trades on a later poll: 1
+  [PASS] wall-clock jump of 30 s -> no order on that poll: clock jump +30.0 s between polls
+  [PASS] poll 40 s late (Mac slept) -> no order on that poll
+  [PASS] book 3 s old at decision -> no order
+  [PASS] posted on a normal first poll (control) = 1
+  [PASS] live: geoblocked -> stopping, no order
+  [PASS] live: the two geoblock checks disagree -> treated as blocked
+  [PASS] geoblock check older than 60 min -> re-checked before the order; blocked -> no order
+  [PASS] live run refused at start when geoblocked: refused: geoblock check did not pass; nothing was sent
+  [PASS] live run refused at start when the balance is below one ticket: refused: balance 9.99 pUSD < one ticket 10; not starting
+  [PASS] live run refused at start when trading approvals are incomplete: refused: trading approvals are incomplete (see `smoke.py auth --live`); this program posts with post_order, which does not set approvals; not starting
+  [PASS] ticket buys fewer shares than the market minimum -> refused
+  [PASS] the account already traded this market -> skipped for good
+  [PASS] 61 min before the end (outside the window) -> no trigger
+  [PASS] market closed -> no trigger
+  [PASS] after endDate but still open (doc: window runs to the close) -> trigger
+  [PASS] dry-run: nothing posted
+  [PASS] dry-run: decisions with the signed would-be order recorded: {'implied_price': '0.970001', 'maker_amount': '10000000', 'order_type': 'FAK', 'spend': '10', 'taker_amount': '10309270'}
+  [PASS] dry-run env refuses post: refused: internal: post called in dry-run
+  [PASS] second instance refused by the lock: refused: another exp_fav.py session is running (lock /tmp/pm-fav-selftest-e5zda41m/exp_fav.lock); one session at a time
+  [PASS] lock free again after the first instance ends: returned None
+  [PASS] a corrupt live record line refuses the live ledger: refused: record file /tmp/pm-fav-selftest-e5zda41m/out/exp-fav-20270115.jsonl line 1 is not valid JSON; fix or move it before a live run (the ledger must be complete)
+  [PASS] records hold no private key
+  [PASS] records hold no wallet or signer address
+  [PASS] records hold no 40-hex address at all
+  [PASS] private key absent from the log file
+selftest: 105 checks, ALL PASS
+
+=================================================================== 2. dry-run on real current markets (public data only)
+$ cd pilot && .venv/bin/python -I -u exp_fav.py run --hours 0.67
+(dry-run is the default; nothing authenticated was sent; would-be orders signed with a throwaway in-memory key)
+=== exp_fav.py run dry-run 2026-11-27 19:47:39 UTC (exp_fav 1.0 (2026-11-27))
+  dry-run: public data only; the would-be orders are signed with a throwaway in-memory key
+  mode dry-run, ticket 10 USD, wallet type DEPOSIT_WALLET (addresses are not printed)
+  geoblock: blocked=True country=US (IP not shown)
+  geoblock: blocked=True (second check True) country=US  -> a live run would be refused here
+  clock: local - server +0.75 s (GET /time, 1 s resolution), round trip 169 ms
+  universe: 145 markets end in the next 26 h (145 new; 137 accepting orders); 0 crypto markets rejected (fee rate / window); assets {'bitcoin': 38, 'ethereum': 36, 'solana': 32, 'xrp': 33, 'bnb': 1, 'btc': 1, 'doge': 1, 'eth': 1, 'hype': 1, 'sol': 1}
+    end 2026-11-28T05:00Z  dip            25 ( 19 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T05:00Z  reach          25 ( 23 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T17:00Z  above          44 ( 44 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between        36 ( 36 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between-tail    8 (  8 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  updown-daily    7 (  7 open)   window opens 2026-11-28T16:00Z
+  clock: local - server +0.92 s (GET /time, 1 s resolution), round trip 207 ms
+  clock: local - server +0.90 s (GET /time, 1 s resolution), round trip 175 ms
+  universe: 145 markets end in the next 26 h (0 new; 137 accepting orders); 0 crypto markets rejected (fee rate / window); assets {'bitcoin': 38, 'ethereum': 36, 'solana': 32, 'xrp': 33, 'bnb': 1, 'btc': 1, 'doge': 1, 'eth': 1, 'hype': 1, 'sol': 1}
+    end 2026-11-28T05:00Z  dip            25 ( 19 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T05:00Z  reach          25 ( 23 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T17:00Z  above          44 ( 44 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between        36 ( 36 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between-tail    8 (  8 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  updown-daily    7 (  7 open)   window opens 2026-11-28T16:00Z
+  geoblock: blocked=True country=US (IP not shown)
+  geoblock: blocked=True (second check True) country=US  -> a live run would be refused here
+  clock: local - server +0.19 s (GET /time, 1 s resolution), round trip 172 ms
+  clock: local - server +0.90 s (GET /time, 1 s resolution), round trip 176 ms
+  universe: 145 markets end in the next 26 h (0 new; 137 accepting orders); 0 crypto markets rejected (fee rate / window); assets {'bitcoin': 38, 'ethereum': 36, 'solana': 32, 'xrp': 33, 'bnb': 1, 'btc': 1, 'doge': 1, 'eth': 1, 'hype': 1, 'sol': 1}
+    end 2026-11-28T05:00Z  dip            25 ( 19 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T05:00Z  reach          25 ( 23 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T17:00Z  above          44 ( 44 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between        36 ( 36 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between-tail    8 (  8 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  updown-daily    7 (  7 open)   window opens 2026-11-28T16:00Z
+  --hours reached
+  session 244b07f7d48e done after 480 polls; records in /home/user/polymarket-lab/pilot/out
+exit 0
+Fri Nov 27 20:27:53 UTC 2026
+
+--- records written by this dry-run: pilot/out/exp-fav-20261127.dryrun.jsonl, record types:
+  session 1074ac22d6b0 2026-11-27T19:46:21.290Z -> 2026-11-27T19:46:30.148Z {'session': 1, 'geoblock': 1, 'clock': 1, 'universe': 1}
+  session 244b07f7d48e 2026-11-27T19:47:40.356Z -> 2026-11-27T20:27:50.963Z {'session': 1, 'geoblock': 2, 'clock': 5, 'universe': 3}
+
+--- the universe for the next 26 h as the dry-run recorded it (every market, with end time):
+universe record of session 244b07f7d48e at 2026-11-27T19:47:49.807Z: 145 markets; rejected 0
+
+end 2026-11-28T05:00Z  dip  (25 markets, 19 accepting orders)
+    will-bitcoin-dip-to-54k-on-november-27-2026
+    will-bitcoin-dip-to-55k-on-november-27-2026
+    will-bitcoin-dip-to-56k-on-november-27-2026
+    will-bitcoin-dip-to-57k-on-november-27-2026
+    will-bitcoin-dip-to-58k-on-november-27-2026
+    will-bitcoin-dip-to-59k-on-november-27-2026   [closed: already touched / resolved early]
+    will-bitcoin-dip-to-60k-on-november-27-2026   [closed: already touched / resolved early]
+    will-bitcoin-dip-to-61k-on-november-27-2026   [closed: already touched / resolved early]
+    will-ethereum-dip-to-1400-on-november-27-2026
+    will-ethereum-dip-to-1450-on-november-27-2026
+    will-ethereum-dip-to-1500-on-november-27-2026
+    will-ethereum-dip-to-1550-on-november-27-2026
+    will-ethereum-dip-to-1600-on-november-27-2026
+    will-ethereum-dip-to-1650-on-november-27-2026   [closed: already touched / resolved early]
+    will-ethereum-dip-to-1700-on-november-27-2026   [closed: already touched / resolved early]
+    will-solana-dip-to-50-on-november-27-2026
+    will-solana-dip-to-55-on-november-27-2026
+    will-solana-dip-to-60-on-november-27-2026
+    will-solana-dip-to-65-on-november-27-2026
+    will-solana-dip-to-70-on-november-27-2026
+    will-xrp-dip-to-0pt75-on-november-27-2026
+    will-xrp-dip-to-0pt8-on-november-27-2026
+    will-xrp-dip-to-0pt85-on-november-27-2026
+    will-xrp-dip-to-0pt9-on-november-27-2026
+    will-xrp-dip-to-0pt95-on-november-27-2026   [closed: already touched / resolved early]
+
+end 2026-11-28T05:00Z  reach  (25 markets, 23 accepting orders)
+    will-bitcoin-reach-62k-on-november-27-2026   [closed: already touched / resolved early]
+    will-bitcoin-reach-63k-on-november-27-2026
+    will-bitcoin-reach-64k-on-november-27-2026
+    will-bitcoin-reach-65k-on-november-27-2026
+    will-bitcoin-reach-66k-on-november-27-2026
+    will-bitcoin-reach-67k-on-november-27-2026
+    will-bitcoin-reach-68k-on-november-27-2026
+    will-bitcoin-reach-69k-on-november-27-2026
+    will-ethereum-reach-1750-on-november-27-2026   [closed: already touched / resolved early]
+    will-ethereum-reach-1800-on-november-27-2026
+    will-ethereum-reach-1850-on-november-27-2026
+    will-ethereum-reach-1900-on-november-27-2026
+    will-ethereum-reach-1950-on-november-27-2026
+    will-ethereum-reach-2000-on-november-27-2026
+    will-ethereum-reach-2050-on-november-27-2026
+    will-solana-reach-75-on-november-27-2026
+    will-solana-reach-80-on-november-27-2026
+    will-solana-reach-85-on-november-27-2026
+    will-solana-reach-90-on-november-27-2026
+    will-solana-reach-95-on-november-27-2026
+    will-xrp-reach-1-on-november-27-2026
+    will-xrp-reach-1pt05-on-november-27-2026
+    will-xrp-reach-1pt1-on-november-27-2026
+    will-xrp-reach-1pt15-on-november-27-2026
+    will-xrp-reach-1pt2-on-november-27-2026
+
+end 2026-11-28T17:00Z  above  (44 markets, 44 accepting orders)
+    bitcoin-above-50k-on-november-28-2026
+    bitcoin-above-52k-on-november-28-2026
+    bitcoin-above-54k-on-november-28-2026
+    bitcoin-above-56k-on-november-28-2026
+    bitcoin-above-58k-on-november-28-2026
+    bitcoin-above-60k-on-november-28-2026
+    bitcoin-above-62k-on-november-28-2026
+    bitcoin-above-64k-on-november-28-2026
+    bitcoin-above-66k-on-november-28-2026
+    bitcoin-above-68k-on-november-28-2026
+    bitcoin-above-70k-on-november-28-2026
+    ethereum-above-1200-on-november-28-2026
+    ethereum-above-1300-on-november-28-2026
+    ethereum-above-1400-on-november-28-2026
+    ethereum-above-1500-on-november-28-2026
+    ethereum-above-1600-on-november-28-2026
+    ethereum-above-1700-on-november-28-2026
+    ethereum-above-1800-on-november-28-2026
+    ethereum-above-1900-on-november-28-2026
+    ethereum-above-2000-on-november-28-2026
+    ethereum-above-2100-on-november-28-2026
+    ethereum-above-2200-on-november-28-2026
+    solana-above-45-on-november-28-2026
+    solana-above-50-on-november-28-2026
+    solana-above-55-on-november-28-2026
+    solana-above-60-on-november-28-2026
+    solana-above-65-on-november-28-2026
+    solana-above-70-on-november-28-2026
+    solana-above-75-on-november-28-2026
+    solana-above-80-on-november-28-2026
+    solana-above-85-on-november-28-2026
+    solana-above-90-on-november-28-2026
+    solana-above-95-on-november-28-2026
+    xrp-above-0pt4-on-november-28-2026
+    xrp-above-0pt5-on-november-28-2026
+    xrp-above-0pt6-on-november-28-2026
+    xrp-above-0pt7-on-november-28-2026
+    xrp-above-0pt8-on-november-28-2026
+    xrp-above-0pt9-on-november-28-2026
+    xrp-above-1-on-november-28-2026
+    xrp-above-1pt1-on-november-28-2026
+    xrp-above-1pt2-on-november-28-2026
+    xrp-above-1pt3-on-november-28-2026
+    xrp-above-1pt4-on-november-28-2026
+
+end 2026-11-28T17:00Z  between  (36 markets, 36 accepting orders)
+    will-the-price-of-bitcoin-be-between-52000-54000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-54000-56000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-56000-58000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-58000-60000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-60000-62000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-62000-64000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-64000-66000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-66000-68000-on-november-28-2026
+    will-the-price-of-bitcoin-be-between-68000-70000-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1200-1300-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1300-1400-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1400-1500-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1500-1600-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1600-1700-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1700-1800-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1800-1900-on-november-28-2026
+    will-the-price-of-ethereum-be-between-1900-2000-on-november-28-2026
+    will-the-price-of-ethereum-be-between-2000-2100-on-november-28-2026
+    will-the-price-of-solana-be-between-100-110-on-november-28-2026
+    will-the-price-of-solana-be-between-110-120-on-november-28-2026
+    will-the-price-of-solana-be-between-30-40-on-november-28-2026
+    will-the-price-of-solana-be-between-40-50-on-november-28-2026
+    will-the-price-of-solana-be-between-50-60-on-november-28-2026
+    will-the-price-of-solana-be-between-60-70-on-november-28-2026
+    will-the-price-of-solana-be-between-70-80-on-november-28-2026
+    will-the-price-of-solana-be-between-80-90-on-november-28-2026
+    will-the-price-of-solana-be-between-90-100-on-november-28-2026
+    will-the-price-of-xrp-be-between-0pt50-0pt60-on-november-28-2026
+    will-the-price-of-xrp-be-between-0pt60-0pt70-on-november-28-2026
+    will-the-price-of-xrp-be-between-0pt70-0pt80-on-november-28-2026
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026
+    will-the-price-of-xrp-be-between-0pt90-1pt00-on-november-28-2026
+    will-the-price-of-xrp-be-between-1pt00-1pt10-on-november-28-2026
+    will-the-price-of-xrp-be-between-1pt10-1pt20-on-november-28-2026
+    will-the-price-of-xrp-be-between-1pt20-1pt30-on-november-28-2026
+    will-the-price-of-xrp-be-between-1pt30-1pt40-on-november-28-2026
+
+end 2026-11-28T17:00Z  between-tail  (8 markets, 8 accepting orders)
+    will-the-price-of-bitcoin-be-greater-than-70000-on-november-28-2026
+    will-the-price-of-bitcoin-be-less-than-52000-on-november-28-2026
+    will-the-price-of-ethereum-be-greater-than-2100-on-november-28-2026
+    will-the-price-of-ethereum-be-less-than-1200-on-november-28-2026
+    will-the-price-of-solana-be-greater-than-120-on-november-28-2026
+    will-the-price-of-solana-be-less-than-30-on-november-28-2026
+    will-the-price-of-xrp-be-greater-than-1pt40-on-november-28-2026
+    will-the-price-of-xrp-be-less-than-0pt50-on-november-28-2026
+
+end 2026-11-28T17:00Z  updown-daily  (7 markets, 7 accepting orders)
+    bnb-updown-1d-1795798800
+    btc-updown-1d-1795798800
+    doge-updown-1d-1795798800
+    eth-updown-1d-1795798800
+    hype-updown-1d-1795798800
+    sol-updown-1d-1795798800
+    xrp-updown-1d-1795798800
+
+$ .venv/bin/python -I exp_fav.py report --dry-run
+=== exp_fav.py report  2026-11-27 20:28:23 UTC (exp_fav 1.0 (2026-11-27))
+  report: DRY-RUN (paper stage: the 'fill' columns are the paper twin); 1 file(s), 2 session(s)
+  triggers: 0  sent: 0  refused by a cap: 0  technical skips (re-checked): 0  near-misses: 0 in 0 markets
+
+  decision UTC        type         asset    s->end    ask  askUSD  limit     fill  shares  tick  slip    feeF    feeC ack ms     twin result     pnl
+
+  Slippage (fill price - ask at decision, in ticks of that market; a limit at the ask can only fill at or below it, so the cost of a moving book shows up as 'unfilled'):
+    filled 0: none; unfilled (FAK killed) 0; outcome unknown 0
+    best ask 2 s after the decision minus the ask at decision, in ticks (0 triggers): none
+
+  Fee check (charged = activity usdc_size - shares x price; formula = 0.01 x p x (1-p) x shares):
+    no fee rows yet (dry-run: the paper fee is the formula)
+
+  Results: won 0, lost 0, filled but unresolved 0; net +0.000 USD (after fees, before redemption)
+    paper stage counts every trigger (rows marked * were refused by a cap a live run applies); net of the triggers a live run would have sent: +0.000 USD
+  Halt file absent (/root/.polymarket-pilot/EXP_FAV_HALT); STOP file absent
+
+=================================================================== 3. the trigger code on real books (verification probe, NOT the rule's universe)
+No market of the rule's universe is in its window during this session (next windows 04:00 and 16:00 UTC),
+so a scratch probe ran exp_fav's own favourite(), trigger(), paper_fill(), SDK signing and guard_signed() on real
+public books of the hourly 'above … 3pm-et' ladders and 1h/4h Up/Down markets in their last hour (these are
+EXCLUDED by the rule; used only to exercise the code). Script: scratchpad realbook_probe.py; nothing recorded in pilot/out.
+$ .venv/bin/python -I -u realbook_probe.py 8      (8 minutes, poll every 5 s)
+19:48:02 markets in their last hour (probe set, outside the rule): 43
+   eth-updown-1h-1795806000  ends 20:00Z rate 0.01
+   btc-updown-1h-1795806000  ends 20:00Z rate 0.01
+   xrp-updown-1h-1795806000  ends 20:00Z rate 0.01
+   sol-updown-1h-1795806000  ends 20:00Z rate 0.01
+   hype-updown-1h-1795806000  ends 20:00Z rate 0.01
+   doge-updown-1h-1795806000  ends 20:00Z rate 0.01
+   bnb-updown-1h-1795806000  ends 20:00Z rate 0.01
+   bitcoin-above-62000-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-61800-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-61600-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-61400-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-61200-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-61000-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-60800-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-60600-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-60400-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-60200-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-59800-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-59600-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-59400-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-59200-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-59000-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-58800-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-58600-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-58400-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-58200-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   bitcoin-above-58000-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1750-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1740-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1730-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1720-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1710-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1700-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1690-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1680-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1660-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1650-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1640-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1630-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1620-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1610-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1600-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+   ethereum-above-1590-on-november-27-2026-3pm-et  ends 20:00Z rate 0.01
+19:48:18Z TRIGGER doge-updown-1h-1795806000 fav=Up (mid) ask 0.97 x 83.11 (80.62 USD) bid 0.93 tick 0.001 min 5, 702 s to end; signed FAK 10000000/10309270 price 0.97000 guard ok; twin +2s: ask 0.97 -> fill 10.3092 @ 0.97 fee 0.00300
+19:49:02Z TRIGGER bitcoin-above-59800-on-november-27-2026-3pm-et fav=Yes (mid) ask 0.979 x 18 (17.62 USD) bid 0.954 tick 0.001 min 5, 657 s to end; signed FAK 10000000/10214500 price 0.97900 guard ok; twin +2s: ask 0.974 -> fill 10.2669 @ 0.974 fee 0.00260
+19:50:41Z TRIGGER bnb-updown-1h-1795806000 fav=Up (mid) ask 0.96 x 40 (38.40 USD) bid 0.871 tick 0.001 min 5, 559 s to end; signed FAK 10000000/10416660 price 0.96000 guard ok; twin +2s: ask 0.959 -> fill 10.4270 @ 0.9590409513762347751030977271 fee 0.00409
+19:50:48Z TRIGGER hype-updown-1h-1795806000 fav=Up (mid) ask 0.96 x 15 (14.40 USD) bid 0.87 tick 0.01 min 5, 551 s to end; signed FAK 10000000/10416600 price 0.96001 guard ok; twin +2s: ask 0.96 -> fill 10 @ 0.96 fee 0.00384
+19:55:27Z TRIGGER xrp-updown-1h-1795806000 fav=Down (mid) ask 0.96 x 19 (18.24 USD) bid 0.77 tick 0.01 min 5, 273 s to end; signed FAK 10000000/10416600 price 0.96001 guard ok; twin +2s: ask 0.81 -> fill 12.3456 @ 0.81 fee 0.01900
+19:56:06 polls 89, triggers 5 of 43 markets
+
+Second probe, 20:01 UTC, hourly 4pm-et ladders and 4h Up/Down (same script, 20 min planned). It stopped at about 20:1x when the
+sandbox proxy reset a connection (the scratch script has no error handling; exp_fav.py catches failed book reads and
+goes on with the next poll, as its dry-run did). Lines printed before that:
+20:01:38 markets in their last hour (probe set, outside the rule): 51
+20:01:38Z TRIGGER bitcoin-above-60200-on-november-27-2026-4pm-et fav=No (mid) ask 0.97 x 12 (11.64 USD) bid 0.95 tick 0.01 min 5, 3501 s to end; signed FAK 10000000/10309200 price 0.97001 guard ok; twin +2s: ask 0.97 -> fill 10.3092 @ 0.970000 fee 0.00300
+20:01:38Z TRIGGER ethereum-above-1680-on-november-27-2026-4pm-et fav=No (mid) ask 0.95 x 55 (52.25 USD) bid 0.93 tick 0.01 min 5, 3501 s to end; signed FAK 10000000/10526300 price 0.95000 guard ok; twin +2s: ask 0.95 -> fill 10.5263 @ 0.950000 fee 0.00500
+20:02:02Z TRIGGER zec-updown-4h-1795798800 fav=Down (mid) ask 0.96 x 15 (14.40 USD) bid 0.2 tick 0.01 min 5, 3478 s to end; signed FAK 10000000/10416600 price 0.96001 guard ok; twin +2s: ask 0.96 -> fill 10.4166 @ 0.960000 fee 0.00400
+20:05:31Z TRIGGER bitcoin-above-59600-on-november-27-2026-4pm-et fav=Yes (mid) ask 0.95 x 23.11 (21.95 USD) bid 0.93 tick 0.01 min 5, 3268 s to end; signed FAK 10000000/10526300 price 0.95000 guard ok; twin +2s: ask 0.95 -> fill 10.5263 @ 0.950000 fee 0.00500
+20:10:00Z TRIGGER ethereum-above-1660-on-november-27-2026-4pm-et fav=Yes (mid) ask 0.95 x 15 (14.25 USD) bid 0.94 tick 0.01 min 5, 3000 s to end; signed FAK 10000000/10526300 price 0.95000 guard ok; twin +2s: ask 0.95 -> fill 10.5263 @ 0.950000 fee 0.00500
+polymarket.errors.TransportError: [Errno 104] Connection reset by peer
+polymarket.errors.TransportError: [Errno 104] Connection reset by peer   (end of the probe)
+
+=================================================================== 4. report on synthetic files
+4a. hand-made live-mode file (7 sent + 1 refused trigger: wins, a loss, a 1-tick price improvement, a partial fill,
+    an unfilled FAK, an unknown post outcome, a fee mismatch, a halt record). Generator: scratchpad make_synth.py
+$ .venv/bin/python -I exp_fav.py report <scratch>/synth/exp-fav-20261128.jsonl
+=== exp_fav.py report  2026-11-27 20:01:04 UTC (exp_fav 1.0 (2026-11-27))
+  report: LIVE; 1 file(s), 1 session(s)
+  triggers: 8  sent: 7  refused by a cap: 1  technical skips (re-checked): 0  near-misses: 0 in 0 markets
+
+  decision UTC        type         asset    s->end    ask  askUSD  limit     fill  shares  tick  slip    feeF    feeC ack ms     twin result     pnl
+  2026-11-28T17:00:00 above        bitcoin    3600  0.966  386.40  0.966   0.9660   10.35 0.001  +0.0 0.00340 0.00340    182   0.9660    won  +0.349
+  2026-11-28T17:01:00 above        bitcoin    3540  0.975   87.75  0.975   0.9740   10.27 0.001  -1.0 0.00260 0.00260    175   0.9750    won  +0.264
+  2026-11-28T17:02:00 between      ethereum   3480   0.95   38.00   0.95   0.9500   10.53  0.01  +0.0 0.00500 0.00500    240   0.9500   LOST -10.005
+  2026-11-28T17:03:00 above        solana     3420  0.961   14.42  0.961   0.9610    5.20 0.001  +0.0 0.00195 0.00195    199   0.9610    won  +0.201
+  2026-11-28T17:04:00 above        xrp        3360   0.97   29.10   0.97 unfilled       - 0.001     -       -       -    210     miss      -       -
+  2026-11-28T17:05:00 updown-daily btc        3300   0.97  291.00   0.97  unknown       -  0.01     -       -       -  30000   0.9700    won       -
+  2026-11-28T17:06:00 reach        bitcoin    3240  0.955  191.00  0.955   0.9550   10.47 0.001  +0.0 0.00450 0.00650    166   0.9550    won  +0.467
+  2026-11-28T17:25:00 above        ethereum   1200  0.968   96.80  REFUSED (worst case: realised losses 10.00 + open 20.01 + ticket 10 >); paper twin 0.9680
+
+  Slippage (fill price - ask at decision, in ticks of that market; a limit at the ask can only fill at or below it, so the cost of a moving book shows up as 'unfilled'):
+    filled 5: -1.00 ticks: 1, 0.00 ticks: 4; unfilled (FAK killed) 1; outcome unknown 1
+    best ask 2 s after the decision minus the ask at decision, in ticks (7 triggers): 0.00: 6, 1.00: 1
+    live fill - paper twin fill: mean -0.00020 (doc limit +0.005), n 5
+    decision -> acknowledgement: median 199 ms, p90 240 ms, max 30000 ms (n 7)
+
+  Fee check (charged = activity usdc_size - shares x price; formula = 0.01 x p x (1-p) x shares):
+    charged 0.00340  formula 0.00340  diff +0.00000  ok
+    charged 0.00260  formula 0.00260  diff +0.00000  ok
+    charged 0.00500  formula 0.00500  diff +0.00000  ok
+    charged 0.00195  formula 0.00195  diff +0.00000  ok
+    charged 0.00650  formula 0.00450  diff +0.00200  MISMATCH
+
+  Results: won 4, lost 1, filled but unresolved 0; net -8.725 USD (after fees, before redemption)
+    above         trades   3  won   3  lost  0  net +0.814
+    between       trades   1  won   0  lost  1  net -10.005
+    reach         trades   1  won   1  lost  0  net +0.467
+  Triggers refused by a cap (market consumed; paper twin still recorded):
+      1  worst case: realised losses N + open N + ticket N > N USD
+  HALT 2026-11-28T19:30:00: 2 losing trades (stop at 2)
+  Halt file absent (/root/.polymarket-pilot/EXP_FAV_HALT); STOP file absent
+
+4b. paper-stage file produced by exp_fav's own Session in dry-run against its FakeEnv (5 triggers, one paper miss
+    after the ask moved 1 tick, one loss, two refused by the worst-case exposure gate). Generator: make_synth_dry.py
+$ .venv/bin/python -I exp_fav.py report --dry-run <scratch>/synth_dry2/exp-fav-20261128.dryrun.jsonl
+=== exp_fav.py report  2026-11-27 20:01:05 UTC (exp_fav 1.0 (2026-11-27))
+  report: DRY-RUN (paper stage: the 'fill' columns are the paper twin); 1 file(s), 1 session(s)
+  triggers: 5  sent: 3  refused by a cap: 2  technical skips (re-checked): 0  near-misses: 0 in 0 markets
+
+  decision UTC        type         asset    s->end    ask  askUSD  limit     fill  shares  tick  slip    feeF    feeC ack ms     twin result     pnl
+  2026-11-28T17:00:00 above        bitcoin    1800   0.97  194.00   0.97   0.9700   10.31 0.001  +0.0 0.00300       -      -   0.9700    won  +0.306
+  2026-11-28T17:00:00 between      ethereum   1860  0.955  191.00  0.955   0.9550   10.47 0.001  +0.0 0.00450       -      -   0.9550    won  +0.467
+  2026-11-28T17:00:00 above        solana     1920  0.979  195.80  0.979 unfilled       - 0.001     -       -       -      -     miss    won       -
+  2026-11-28T17:00:00*between      xrp        1980   0.96  192.00   0.96   0.9600   10.42 0.001  +0.0 0.00400       -      -   0.9600   LOST -10.004
+  2026-11-28T17:00:00*above        bitcoin    2040  0.965  193.00  0.965   0.9650   10.36 0.001  +0.0 0.00350       -      -   0.9650    won  +0.359
+
+  Slippage (fill price - ask at decision, in ticks of that market; a limit at the ask can only fill at or below it, so the cost of a moving book shows up as 'unfilled'):
+    filled 4: 0.00 ticks: 4; unfilled (FAK killed) 1; outcome unknown 0
+    best ask 2 s after the decision minus the ask at decision, in ticks (5 triggers): 0.00: 4, 1.00: 1
+
+  Fee check (charged = activity usdc_size - shares x price; formula = 0.01 x p x (1-p) x shares):
+    no fee rows yet (dry-run: the paper fee is the formula)
+
+  Results: won 3, lost 1, filled but unresolved 0; net -8.872 USD (after fees, before redemption)
+    paper stage counts every trigger (rows marked * were refused by a cap a live run applies); net of the triggers a live run would have sent: +0.773 USD
+    above         trades   2  won   2  lost  0  net +0.665
+    between       trades   2  won   1  lost  1  net -9.537
+  Triggers refused by a cap (market consumed; paper twin still recorded):
+      2  worst case: realised losses N + open N + ticket N > N USD
+  Halt file absent (/root/.polymarket-pilot/EXP_FAV_HALT); STOP file absent
+
+=================================================================== 5. what is NOT verified here (first seen on the owner's Mac)
+- Any authenticated call: key loading from the real file, SecureClient.create, balance, closed-only mode, trading
+  approvals, list_account_trades, get_order, cancel, the activity feed for this wallet. Order placement is impossible
+  from a US IP and was not attempted.
+- The exchange's answer to a real FAK BUY with max_price: status matched / delayed, making/taking fields (the code
+  assumes making = USD, taking = shares for a BUY and swaps them if the ratio is above 1), trade_ids, the trade list's
+  maker legs (complement-token legs are converted as 1 - price), and the fee read as activity usdc_size - shares x price.
+- Whether BUY orders on the neg-risk "between" markets pass with the approvals the account has.
+- Latency from Serbia (decision -> acknowledgement); here only the public book round trip was seen (120-500 ms).
+- A trigger inside the rule's own universe: no window opened during the run (first: 2026-11-28 04:00 UTC for
+  reach/dip, 16:00 UTC for above/between/daily Up/Down). The trigger code ran on real books only in the probe of
+  section 3 (markets outside the rule).
+- Dry-run caps are conservative: a paper order's state is written after its twin, so later triggers of the same poll
+  count it at the full ticket (seen in 4b); in a live run each order's state is known before the next decision.
+- No independent reviewer (fresh-context evaluator) has checked this program yet.

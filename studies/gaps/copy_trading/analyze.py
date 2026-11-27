@@ -99,7 +99,12 @@ def main():
     wtype = {}
     for s in summ:
         if s["win"] == "early":
-            sh = s["taker_buy_usd"] / s["buy_usd"] if s["buy_usd"] > 0 else None
+            # deviation 2 (results.md): both feeds are capped at 4,000 newest rows, so compare them on the common span
+            raw = load(CACHE / f"buys_early_{s['wallet']}.json.gz") or {"full": [], "taker": []}
+            t0 = max(min((r["t"] for r in raw["full"]), default=0), min((r["t"] for r in raw["taker"]), default=0))
+            fu = sum(r["z"] * r["p"] for r in raw["full"] if r["t"] >= t0)
+            tu = sum(r["z"] * r["p"] for r in raw["taker"] if r["t"] >= t0)
+            sh = min(1.0, tu / fu) if fu > 0 else None
             wtype[s["wallet"]] = "unknown" if sh is None else ("taker-style" if sh >= .6 else "maker-style" if sh <= .4 else "mixed")
             sel[s["wallet"]]["taker_share_early"] = sh
     trades = []

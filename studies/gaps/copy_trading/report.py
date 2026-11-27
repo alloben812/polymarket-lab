@@ -117,6 +117,18 @@ def main():
     import datetime as dt
     for dd in sorted(perday):
         say(f"{dt.datetime.fromtimestamp(dd*86400, dt.timezone.utc):%Y-%m-%d %a}: {perday[dd]} entries (capped wallets cover part only)")
+    unc = collections.Counter()
+    nunc = 0
+    for s in summ:
+        if s["win"] == "late" and not s["capped"]:
+            nunc += 1
+            for dd in s["entry_days"]:
+                unc[dd] += 1
+    say(f"uncapped wallets only ({nunc}): " + ", ".join(f"{dt.datetime.fromtimestamp(dd*86400, dt.timezone.utc):%a %d}: {unc[dd]}" for dd in sorted(unc)))
+    for d in (10, 60, 300):
+        for lab, days in (("weekend 21-22", {20778, 20779}), ("weekdays 23-25", {20780, 20781, 20782})):
+            a = agg([r for r in T if r["win"] == "late" and r["variant"] == f"d{d}_hold" and r["day"] in days])
+            say(f"d{d}_hold {lab}: {fmt(a)}")
     say(f"estimated entries/day over all chosen wallets (coverage-adjusted): {rate_total:.0f}; wallets capped at 4000 fills: {capped}")
     for d in (10, 60, 300):
         rs = [r for r in T if r["win"] == "late" and r["variant"] == f"d{d}_hold"]

@@ -1,0 +1,10 @@
+{
+  "name": "tails",
+  "asset": "btc",
+  "duration": "5m",
+  "note": "Both outcomes at 0.02 from the window start. Measures how often a far-away resting bid gets hit and whether the rare winner pays for the many losers.",
+  "levels": [
+    {"label": "both-0.02-start", "outcome": "both", "price": "0.02", "size": "25",
+     "place_after_start_s": 0, "expire_before_end_s": 30}
+  ]
+}

@@ -16,7 +16,10 @@ N_UNIVERSE = 36604
 N_SAMPLE = len(panel)
 DAYS = 36.0
 L = []
-P = L.append
+
+
+def P(s=""):
+    L.append(s)
 
 P("# B-c capacity and C-tape")
 P()

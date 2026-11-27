@@ -1,0 +1,10 @@
+{
+  "name": "late-tail",
+  "asset": "btc",
+  "duration": "5m",
+  "note": "The outcome trailing by the mid, at 0.02, placed 120 s before the end. Measures whether late panic sellers hit a far bid and how often the trailing side still wins.",
+  "levels": [
+    {"label": "trailing-0.02-late", "outcome": "trailing", "price": "0.02", "size": "25",
+     "place_before_end_s": 120, "expire_before_end_s": 5}
+  ]
+}

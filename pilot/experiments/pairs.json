@@ -1,0 +1,10 @@
+{
+  "name": "pairs",
+  "asset": "btc",
+  "duration": "5m",
+  "note": "Both outcomes at 0.40 from the window start. If both legs fill the pair costs 0.80 and pays 1.00; measures how often only one leg fills (adverse selection).",
+  "levels": [
+    {"label": "both-0.40-start", "outcome": "both", "price": "0.40", "size": "5",
+     "place_after_start_s": 0, "expire_before_end_s": 30}
+  ]
+}

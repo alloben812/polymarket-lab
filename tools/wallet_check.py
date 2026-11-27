@@ -6,7 +6,8 @@
 Prints the all-time PnL decomposition. The number shown on a polymarket.com profile ("Profit/Loss")
 is `trade_pnl`, i.e. BEFORE taker fees and before rebates. What the account really kept is `economic_pnl`:
 
-    economic_pnl = trade_pnl + fees (negative) + taker_rebate + maker_rebate + reward_income (+ unrealized)
+    economic_pnl ~= trade_pnl + fees (negative) + fees_refunded + taker_rebate + maker_rebate + reward_income
+                   (+ yield, referral, LP and combo PnL where present); monthly NET is the change in economic_pnl
 
 A strategy whose economic_pnl is mostly rebates only works for accounts in high volume tiers.
 """
@@ -73,10 +74,11 @@ def main():
         for m, q in last.items():
             def dlt(k):
                 return (q.get(k) or 0) - (prev.get(k) or 0)
-            gross, fees = dlt("trade_pnl"), dlt("fees")
+            gross, fees, refunds = dlt("trade_pnl"), dlt("fees"), dlt("fees_refunded")
             reb = dlt("taker_rebate") + dlt("maker_rebate") + dlt("reward_income")
-            months.append({"month": m, "gross": round(gross), "fees": round(fees), "rebates": round(reb), "net": round(gross + fees + reb),
-                           "net_no_rebates": round(gross + fees), "volume_usdc": round(dlt("volume_usdc")), "fills": round(dlt("trade_count"))})
+            net = dlt("economic_pnl")  # the API's own bottom line: includes refunds, yield, referral, LP and combo PnL
+            months.append({"month": m, "gross": round(gross), "fees": round(fees), "fees_refunded": round(refunds), "rebates": round(reb),
+                           "net": round(net), "net_no_rebates": round(net - reb), "volume_usdc": round(dlt("volume_usdc")), "fills": round(dlt("trade_count"))})
             prev = q
         out["monthly"] = months
     if a.json:
@@ -84,25 +86,32 @@ def main():
         return
     g = lambda k: p.get(k) or 0.0  # noqa: E731
     reb = g("taker_rebate") + g("maker_rebate") + g("reward_income")
+    other = g("yield_income") + g("referral_income")
+    listed = g("trade_pnl") + g("fees") + g("fees_refunded") + reb + other
     vol = g("volume_usdc")
     jd = dt.datetime.fromtimestamp(st["join_date"], dt.timezone.utc).strftime("%Y-%m-%d") if st.get("join_date") else "?"
     print(f"{name}  {wallet}  joined {jd}  markets traded {st.get('trades')}  fills {int(g('trade_count'))}")
     print(f"  profile 'Profit/Loss' (trade_pnl, BEFORE fees): {g('trade_pnl'):>14,.0f}")
-    print(f"  taker fees paid:                               {g('fees'):>14,.0f}")
-    print(f"  = after fees, before rebates:                  {g('trade_pnl') + g('fees'):>14,.0f}")
+    print(f"  taker fees charged:                            {g('fees'):>14,.0f}")
+    if abs(g("fees_refunded")) >= 0.5:
+        print(f"  fees refunded:                                 {g('fees_refunded'):>14,.0f}")
     print(f"  rebates+rewards (taker {g('taker_rebate'):,.0f} / maker {g('maker_rebate'):,.0f} / rewards {g('reward_income'):,.0f}): {reb:>10,.0f}")
-    print(f"  ECONOMIC PnL (what was really kept):           {g('economic_pnl'):>14,.0f}   unrealized {g('unrealized_pnl'):,.0f}")
+    if abs(other) >= 0.5:
+        print(f"  yield + referral income:                       {other:>14,.0f}")
+    print(f"  ECONOMIC PnL (the API's bottom line, trust this): {g('economic_pnl'):>11,.0f}   of which unrealized {g('unrealized_pnl'):,.0f}")
+    if abs(g("economic_pnl") - listed) > max(50.0, 0.02 * abs(g("economic_pnl"))):
+        print(f"  note: the lines above sum to {listed:,.0f}; the difference of {g('economic_pnl') - listed:,.0f} is LP/combo PnL or history the API books elsewhere")
     if vol:
-        print(f"  volume ${vol:,.0f} ({g('volume'):,.0f} shares): gross {g('trade_pnl') / vol * 100:+.2f}% of volume, fees {g('fees') / vol * 100:.2f}%, net {g('economic_pnl') / vol * 100:+.2f}%")
-    if g("economic_pnl"):
-        print(f"  share of net that is rebates/rewards: {reb / g('economic_pnl') * 100:.0f}%")
+        print(f"  volume ${vol:,.0f} ({g('volume'):,.0f} shares): gross {g('trade_pnl') / vol * 100:+.2f}% of volume, fees net of refunds {(g('fees') + g('fees_refunded')) / vol * 100:.2f}%, kept {g('economic_pnl') / vol * 100:+.2f}%")
+    if g("economic_pnl") > 0:
+        print(f"  share of what was kept that is rebates/rewards: {reb / g('economic_pnl') * 100:.0f}%")
     for k in ("taker_tier", "maker_tier"):
         if out.get(k):
             print(f"  {k}: {json.dumps(out[k])}")
     if months:
-        print(f"  {'month':8s} {'gross':>10s} {'fees':>10s} {'rebates':>9s} {'NET':>10s} {'net w/o reb':>11s} {'volume$':>12s} {'fills':>9s}")
+        print(f"  {'month':8s} {'gross':>10s} {'fees':>10s} {'refunded':>9s} {'rebates':>9s} {'NET kept':>10s} {'net w/o reb':>11s} {'volume$':>12s} {'fills':>9s}")
         for m in months:
-            print(f"  {m['month']:8s} {m['gross']:>10,d} {m['fees']:>10,d} {m['rebates']:>9,d} {m['net']:>10,d} {m['net_no_rebates']:>11,d} {m['volume_usdc']:>12,d} {m['fills']:>9,d}")
+            print(f"  {m['month']:8s} {m['gross']:>10,d} {m['fees']:>10,d} {m['fees_refunded']:>9,d} {m['rebates']:>9,d} {m['net']:>10,d} {m['net_no_rebates']:>11,d} {m['volume_usdc']:>12,d} {m['fills']:>9,d}")
 
 
 if __name__ == "__main__":

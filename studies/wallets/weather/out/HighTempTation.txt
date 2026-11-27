@@ -1,0 +1,41 @@
+[HighTempTation] fills 284 in 1s
+HighTempTation  0x6011655c4afb76f36dd1b08a137a1ba73466b31e  window 2026-11-13 15:37 .. 2026-11-27 15:37 UTC
+summary: {"fills": 284, "markets": 135, "resolved_complete_markets": 130, "incomplete_markets": 0, "unresolved_markets": 5, "turnover_usd": 39919, "maker_share_usd": 0.034, "sell_share_usd": 0.522, "markets_with_both_outcomes_traded": 0, "uses_split_merge": false, "gross": 1687.09, "fees_est": 16.98, "net": 1670.11, "fee_rate_unknown_markets": 0, "net_per_market": 12.847, "t_by_market": 5.65, "win_share_markets": 1.0, "median_market_turnover": 190.18, "max_market_turnover": 1478.79, "avg_fill_usd": 140.56}
+inventory events: {'REDEEM': 1}
+API says for the same days: gross 1828, fees -56, rebates 0, net 1772, volume $42064, fills 292
+
+by family:
+  family   markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  weather  135      130                0           39919     0.966        1687.09  16.98     1670.11  4.18              12.85           5.65       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t       markets  net_usd
+  ('M', 'SELL')  12     1357    1344   0.99    -1.0           0.0           -1.0          0.0    None    10       -13.57 
+  ('T', 'BUY')   133    20158   18305  0.9081  9.19           0.077         9.113         1.085  8.4     130      1837.07
+  ('T', 'SELL')  129    18797   18645  0.9919  -0.808         0.008         -0.816        0.04   -20.37  127      -153.39
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t       markets  net_usd
+  ('M', '0.95-0.99')  2      68      68     0.99    -1.0           0.0           -1.0          0.0    None    2        -0.68  
+  ('M', '0.99-1.00')  10     1289    1276   0.99    -1.0           0.0           -1.0          0.0    None    10       -12.89 
+  ('T', '0.30-0.45')  1      8       3      0.38    62.0           0.236         61.764        None   None    1        4.98   
+  ('T', '0.45-0.55')  2      125     66     0.5262  47.382         0.249         47.133        0.724  None    2        59.12  
+  ('T', '0.55-0.70')  2      158     101    0.6408  35.922         0.23          35.692        1.415  None    2        56.42  
+  ('T', '0.70-0.85')  11     3636    2825   0.7769  22.31          0.172         22.138        1.266  17.49   11       804.92 
+  ('T', '0.85-0.95')  49     7254    6634   0.9145  8.551          0.078         8.474         0.441  19.2    48       614.69 
+  ('T', '0.95-0.99')  68     8976    8677   0.9666  3.34           0.032         3.308         0.131  25.25   67       296.94 
+  ('T', '0.99-1.00')  129    18797   18645  0.9919  -0.808         0.008         -0.816        0.04   -20.37  127      -153.39
+
+by role and point in the market's life:
+  key                                            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd
+  ('M', 'life', 'u 6-24 h to end')               3      607     601    0.99    -1.0           0.0           -1.0          0.0    None  3        -6.07  
+  ('M', 'life', 'v 1-6 h to end')                4      474     469    0.99    -1.0           0.0           -1.0          0.0    None  3        -4.74  
+  ('M', 'life', 'w 10-60 min to end')            1      120     119    0.99    -1.0           0.0           -1.0          None   None  1        -1.2   
+  ('M', 'life', 'z after end (pre-resolution)')  4      156     155    0.99    -1.0           0.0           -1.0          0.0    None  3        -1.56  
+  ('T', 'life', 't 1-7 d to end')                2      108     104    0.96    3.0            0.037         2.962         None   None  1        3.2    
+  ('T', 'life', 'u 6-24 h to end')               106    15540   14746  0.9489  4.309          0.044         4.265         0.924  4.62  51       662.73 
+  ('T', 'life', 'v 1-6 h to end')                95     18157   17226  0.9487  4.367          0.043         4.324         0.884  4.89  47       785.08 
+  ('T', 'life', 'w 10-60 min to end')            3      611     577    0.9435  4.845          0.052         4.794         2.676  None  2        29.3   
+  ('T', 'life', 'z after end (pre-resolution)')  56     4538    4297   0.9469  4.524          0.043         4.481         1.053  4.26  29       203.37 
+
+full result written to studies/wallets/weather/HighTempTation.json

@@ -32,7 +32,7 @@ def monthly_kept(wallet: str) -> list[tuple[str, float]]:
         last[dt.datetime.fromtimestamp(q["timestamp"], dt.timezone.utc).strftime("%Y-%m")] = q
     out, prev = [], {}
     for m, q in last.items():
-        kept = sum((q.get(k) or 0) - (prev.get(k) or 0) for k in ("trade_pnl", "fees", "taker_rebate", "maker_rebate", "reward_income"))
+        kept = (q.get("economic_pnl") or 0) - (prev.get("economic_pnl") or 0)
         out.append((m, kept))
         prev = q
     return out

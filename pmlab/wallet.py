@@ -311,9 +311,9 @@ def api_window(wallet: str, start: int, end: int) -> dict | None:
         prior = [p for p in pts if p["timestamp"] <= ts]
         return prior[-1] if prior else {}
     a, b = at(start), at(end)
-    keys = ("trade_pnl", "fees", "taker_rebate", "maker_rebate", "reward_income", "volume_usdc", "trade_count")
+    keys = ("trade_pnl", "fees", "fees_refunded", "taker_rebate", "maker_rebate", "reward_income", "economic_pnl", "volume_usdc", "trade_count")
     d = {k: (b.get(k) or 0) - (a.get(k) or 0) for k in keys}
-    d["net"] = d["trade_pnl"] + d["fees"] + d["taker_rebate"] + d["maker_rebate"] + d["reward_income"]
+    d["net"] = d["economic_pnl"]  # the API's bottom line (includes refunds, yield, LP and combo PnL, unrealized)
     d["from"], d["to"] = a.get("timestamp"), b.get("timestamp")
     return d
 
@@ -368,7 +368,7 @@ def main(argv: list[str] | None = None) -> None:
     print("inventory events:", acc["inventory_events"])
     if out["api_window"]:
         w = out["api_window"]
-        print(f"API says for the same days: gross {w['trade_pnl']:.0f}, fees {w['fees']:.0f}, rebates {w['taker_rebate'] + w['maker_rebate'] + w['reward_income']:.0f}, net {w['net']:.0f}, volume ${w['volume_usdc']:.0f}, fills {w['trade_count']:.0f}")
+        print(f"API says for the same days: gross {w['trade_pnl']:.0f}, fees {w['fees']:.0f}, refunded {w['fees_refunded']:.0f}, rebates {w['taker_rebate'] + w['maker_rebate'] + w['reward_income']:.0f}, kept {w['net']:.0f}, volume ${w['volume_usdc']:.0f}, fills {w['trade_count']:.0f}")
     print("\nby family:")
     _print_table(out["by_family"], ["family", "markets", "resolved_complete", "incomplete", "turnover", "taker_share", "gross", "fees_est", "net", "net_pct_turnover", "net_per_market", "t_by_market"])
     for title, key in (("by role and side (edge in cents per share, resolved markets)", "by_role_side"), ("by role and price", "by_role_price"), ("by role and point in the market's life", "by_role_life")):

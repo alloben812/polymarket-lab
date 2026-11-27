@@ -74,8 +74,9 @@ enough (seconds to hours) and the fee small enough for us to catch it, plus any 
 `user-stats` -> `all_time_pnl`: `trade_pnl` is what polymarket.com shows as Profit/Loss and it is BEFORE taker fees.
 `economic_pnl = trade_pnl + fees + taker_rebate + maker_rebate + reward_income (+ unrealized)` is what was kept.
 Run `python3 -I tools/wallet_check.py <profile-or-0xaddress> --monthly` for any wallet you come across.
-Example (x-MoneyForWhiskas, 2026-11-27): shown 659K, fees -479K, rebates 247K, kept 427K; 58% of what was kept is
-rebates; net by month 14K, 75K, 107K, 129K, 83K, 20K (Jun-Nov), i.e. fading. The operator runs several wallets.
+Refunds (found 2026-11-27 on RN1, slip-me, b00k13, Dava1414): the API also returns `fees_refunded`; `fees` is the
+gross charge and `economic_pnl` already includes the refund (RN1: 3.85M refunded of 5.34M charged). Since the fix of
+2026-11-27 `wallet_check.py` prints the refund, and its monthly "NET kept" column is the change in `economic_pnl`.
 
 ## Fees and rebates (docs + calibration on real charges)
 
@@ -122,3 +123,18 @@ rebates; net by month 14K, 75K, 107K, 129K, 83K, 20K (Jun-Nov), i.e. fading. The
   absorb a Binance move (10 minutes of REST snapshots, rough).
 - Conclusion for this lab: the BTC 5m game is a speed race against co-located firms with volume rebates. Look for
   gaps measured in seconds-to-hours, markets with the 0.01 fee, and structural edges instead.
+
+## Added 2026-11-27 by the GitHub pass (details in `catalog/raw/w2_github.md`)
+
+- Gamma `/events` with `limit` above 50 returns `406 {"error":"gzip_required"}` unless the request sends
+  `Accept-Encoding: gzip` (checked with curl; `limit=50` works without it).
+- For wallets with heavy activity in Jan-Apr 2026 (gabagool22, 0x12b712…1b0b) `economic_pnl` is far from
+  trade_pnl + fees + rebates (865,310 vs -756,295): part of their result is booked in fields the tools did not sum.
+  `wallet_check.py` now takes `economic_pnl` as the bottom line and prints the unexplained difference.
+- Official SDKs to build on: `Polymarket/py-sdk` (`pip install polymarket-client`, 0.20.1), `clob-client-v2`
+  (TS), `rs-clob-client-v2` (Rust). The V1 clients (`py-clob-client`, `rs-clob-client`) are archived and dead.
+- Never run third-party "Polymarket bot" code or binaries: one cloned repo ships a closed 100 MB `.exe` that
+  asks for wallet credentials (abrownfox0/...-twap60-...), and a documented campaign hid stealers in npm
+  dependencies (`ts-bign`, `big-nunber`, `levex-refa`, `lint-builder`).
+- Snapshot check: of 176 open negRisk events (top 400 by 24h volume), 0 offered a complete-set arbitrage after
+  fees at top of book (median sum of asks 1.036, sum of bids 0.965); sums below 1 were all `negRiskAugmented`.

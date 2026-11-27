@@ -1,0 +1,79 @@
+universe 36604
+sample 5000
+resolutions 200
+resolutions 400
+resolutions 600
+resolutions 800
+resolutions 1000
+resolutions 1200
+resolutions 1400
+resolutions 1600
+resolutions 1800
+resolutions 2000
+resolutions 2200
+resolutions 2400
+resolutions 2600
+resolutions 2800
+resolutions 3000
+resolutions 3200
+resolutions 3400
+resolutions 3600
+resolutions 3800
+resolutions 4000
+resolutions 4200
+resolutions 4400
+resolutions 4600
+resolutions 4800
+resolutions 5000
+hist done 0
+hist 100 new, 35s
+hist 200 new, 71s
+hist 300 new, 112s
+hist 400 new, 147s
+hist 500 new, 189s
+hist 600 new, 231s
+hist 700 new, 268s
+hist 800 new, 306s
+hist 900 new, 345s
+hist 1000 new, 381s
+hist 1100 new, 418s
+hist 1200 new, 456s
+hist 1300 new, 500s
+hist 1400 new, 540s
+hist 1500 new, 578s
+hist 1600 new, 617s
+hist 1700 new, 654s
+hist 1800 new, 690s
+hist 1900 new, 727s
+hist 2000 new, 769s
+hist 2100 new, 807s
+hist 2200 new, 844s
+hist 2300 new, 883s
+hist 2400 new, 920s
+hist 2500 new, 957s
+hist 2600 new, 993s
+hist 2700 new, 1031s
+hist 2800 new, 1070s
+hist 2900 new, 1107s
+hist 3000 new, 1145s
+hist 3100 new, 1181s
+hist 3200 new, 1217s
+hist 3300 new, 1259s
+hist 3400 new, 1297s
+hist 3500 new, 1337s
+hist 3600 new, 1377s
+hist 3700 new, 1421s
+hist 3800 new, 1461s
+hist 3900 new, 1497s
+hist 4000 new, 1532s
+hist 4100 new, 1572s
+hist 4200 new, 1609s
+hist 4300 new, 1647s
+hist 4400 new, 1685s
+hist 4500 new, 1724s
+hist 4600 new, 1764s
+hist 4700 new, 1804s
+hist 4800 new, 1843s
+hist 4900 new, 1883s
+hist 5000 new, 1921s
+done

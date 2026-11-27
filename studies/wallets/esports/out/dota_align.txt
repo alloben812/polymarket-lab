@@ -1,0 +1,101 @@
+mapped markets with tape + kills: 124; fight events (>=3 net kills, minute 10+, price 0.12-0.88): 140
+A  t99 - (start+duration): n 124 p10 550 p25 734 median 908 p75 1029 p90 1125 s;   last print of winner < 0.90 - (start+duration): p10 87 median 692 p90 1050
+B  event study: price of the team that won the fight, cents vs 60 s before the LAST kill (raw OpenDota clock = start_time + game time):
+   -30:0.2  -15:0.3  +0:0.1  +15:0.0  +30:0.0  +45:0.3  +60:0.4  +75:1.0  +90:1.2  +105:1.3  +120:1.5  +135:0.5  +150:0.6  +180:1.1  +210:1.3  +240:1.9  +300:3.0
+D  taker buy $ by lag after the last won-fight event (same = buying the fight winner; opp = buying the fight loser), share of that group's $:
+         group     000-030     030-060     060-090     090-120     120-150     150-180     180-210     210-240     240-270     270-300  none/>=300      total$
+    crowd_same        0.5%        0.6%        0.5%        0.5%        0.6%        0.5%        0.5%        0.4%        0.4%        0.3%       17.4%   9,202,073
+     crowd_opp        0.5%        0.5%        0.5%        0.4%        0.4%        0.4%        0.4%        0.4%        0.3%        0.3%       73.8%  32,433,885
+   RITALINEWIT        0.0%        0.3%        0.6%        0.2%        0.2%        1.2%        1.0%        0.5%        0.1%        1.7%       32.1%     103,665
+   RITALINEWIT        0.4%        0.4%        0.0%        1.8%        0.3%        0.4%        0.3%        0.3%        0.3%        0.3%       57.7%     169,920
+   BLASTSLAM9W        0.7%        0.7%        0.2%        1.0%        0.6%        0.8%        0.4%        0.2%        0.4%        0.9%       19.1%     244,927
+   BLASTSLAM9W        0.4%        1.1%        0.7%        0.3%        0.3%        0.5%        0.7%        0.3%        0.2%        0.3%       70.4%     741,566
+   DamwonChamp        0.9%        1.3%        1.1%        0.6%        0.4%        0.1%        0.8%        1.0%        0.8%        1.2%       16.2%     102,540
+   DamwonChamp        0.6%        0.1%        1.1%        0.6%        1.0%        0.9%        0.0%        0.8%        0.2%        0.6%       69.3%     314,983
+C  account $ by game clock (raw: minutes since OpenDota start_time):
+   RITALINEWITH T/a before game start: 1%  T/c min 10+: 0%  T/d min 20+: 7%  T/e min 30+: 33%  T/f min 40+: 28%  T/g after end: 31%
+   BLASTSLAM9WI M/a before game start: 2%  M/b min 0+: 0%  M/c min 10+: 5%  M/d min 20+: 11%  M/e min 30+: 10%  M/f min 40+: 13%  M/g after end: 18%  T/a before game start: 0%  T/b min 0+: 1%  T/c min 10+: 5%  T/d min 20+: 9%  T/e min 30+: 7%  T/f min 40+: 5%  T/g after end: 14%
+   DamwonChampi M/c min 10+: 0%  M/d min 20+: 0%  M/e min 30+: 0%  M/f min 40+: 1%  T/a before game start: 3%  T/c min 10+: 18%  T/d min 20+: 33%  T/e min 30+: 22%  T/f min 40+: 14%  T/g after end: 8%
+   calculate10  M/a before game start: 8%  M/b min 0+: 1%  M/c min 10+: 7%  M/d min 20+: 14%  M/e min 30+: 15%  M/f min 40+: 25%  M/g after end: 30%
+E  markouts on all mapped markets, c/share, clustered by market (ratio se t n shares):
+   BLASTSLAM9WINNER_M           fee_c     0.93   0.02  46.08  n 103     2,284,493
+   BLASTSLAM9WINNER_M           final    -1.02   2.04  -0.50  n 103     2,284,493
+   BLASTSLAM9WINNER_M           mo010    -0.19   0.22  -0.85  n 103     2,284,493
+   BLASTSLAM9WINNER_M           mo060    -0.49   0.43  -1.15  n 103     2,284,493
+   BLASTSLAM9WINNER_M           pre30    -1.29   0.58  -2.22  n 103     2,284,493
+   BLASTSLAM9WINNER_T           fee_c     0.89   0.03  31.85  n 102     1,694,667
+   BLASTSLAM9WINNER_T           final     3.76   2.72   1.39  n 102     1,694,667
+   BLASTSLAM9WINNER_T           mo010     0.98   0.32   3.06  n 102     1,694,667
+   BLASTSLAM9WINNER_T           mo060     1.02   0.32   3.21  n 102     1,694,667
+   BLASTSLAM9WINNER_T           pre30     2.77   0.33   8.35  n 102     1,694,667
+   BLASTSLAM9WINNER_T_wk1       fee_c     0.89   0.04  22.75  n  63       951,859
+   BLASTSLAM9WINNER_T_wk1       final     1.33   3.78   0.35  n  63       951,859
+   BLASTSLAM9WINNER_T_wk1       mo010     1.39   0.51   2.72  n  63       951,859
+   BLASTSLAM9WINNER_T_wk2       fee_c     0.89   0.04  22.34  n  41       742,807
+   BLASTSLAM9WINNER_T_wk2       final     6.88   3.86   1.78  n  41       742,807
+   BLASTSLAM9WINNER_T_wk2       mo010     0.47   0.30   1.53  n  41       742,807
+   DamwonChampions2027_M        fee_c     1.13   0.04  27.37  n  21        15,411
+   DamwonChampions2027_M        final   -22.52   8.49  -2.65  n  21        15,411
+   DamwonChampions2027_M        mo010     0.75   0.98   0.76  n  21        15,411
+   DamwonChampions2027_M        mo060     1.93   2.72   0.71  n  21        15,411
+   DamwonChampions2027_M        pre30    -2.42   2.21  -1.10  n  21        15,411
+   DamwonChampions2027_T        fee_c     1.08   0.02  60.72  n  72       853,698
+   DamwonChampions2027_T        final    -1.47   3.26  -0.45  n  72       853,698
+   DamwonChampions2027_T        mo010     1.01   0.12   8.31  n  72       853,698
+   DamwonChampions2027_T        mo060     1.45   0.42   3.42  n  72       853,698
+   DamwonChampions2027_T        pre30     0.27   0.35   0.77  n  72       853,698
+   DamwonChampions2027_T_wk1    fee_c     1.08   0.02  43.58  n  34       268,035
+   DamwonChampions2027_T_wk1    final    -3.71   4.84  -0.77  n  34       268,035
+   DamwonChampions2027_T_wk1    mo010     0.73   0.32   2.31  n  34       268,035
+   DamwonChampions2027_T_wk2    fee_c     1.08   0.02  45.86  n  39       585,663
+   DamwonChampions2027_T_wk2    final    -0.44   4.23  -0.11  n  39       585,663
+   DamwonChampions2027_T_wk2    mo010     1.14   0.11  10.71  n  39       585,663
+   RITALINEWITHSNUS_T           fee_c     0.98   0.02  47.15  n  61       595,518
+   RITALINEWITHSNUS_T           final     4.34   1.03   4.20  n  61       595,518
+   RITALINEWITHSNUS_T           mo005     2.72   0.26  10.33  n  61       595,518
+   RITALINEWITHSNUS_T           mo010     4.02   0.46   8.78  n  61       595,518
+   RITALINEWITHSNUS_T           mo030     4.16   0.59   7.01  n  61       595,518
+   RITALINEWITHSNUS_T           mo060     4.22   0.57   7.36  n  61       595,518
+   RITALINEWITHSNUS_T           mo300     3.70   1.03   3.60  n  61       595,518
+   RITALINEWITHSNUS_T           pre30     2.15   0.40   5.43  n  61       595,518
+   RITALINEWITHSNUS_T_wk1       fee_c     1.02   0.05  20.58  n  15        14,776
+   RITALINEWITHSNUS_T_wk1       final     7.23   2.21   3.27  n  15        14,776
+   RITALINEWITHSNUS_T_wk1       mo010     5.20   1.98   2.62  n  15        14,776
+   RITALINEWITHSNUS_T_wk2       fee_c     0.98   0.02  45.79  n  46       580,743
+   RITALINEWITHSNUS_T_wk2       final     4.27   1.06   4.02  n  46       580,743
+   RITALINEWITHSNUS_T_wk2       mo010     3.99   0.47   8.51  n  46       580,743
+   calculate10_M                fee_c     0.92   0.02  39.02  n  74     1,582,475
+   calculate10_M                final    -1.29   1.02  -1.26  n  74     1,582,475
+   calculate10_M                mo010     0.14   0.15   0.95  n  74     1,582,475
+   calculate10_M                mo060    -0.57   0.45  -1.25  n  74     1,582,475
+   calculate10_M                pre30    -1.61   0.20  -8.11  n  74     1,582,475
+   crowd                        fee_c     0.91   0.01  85.40  n 124    74,297,506
+   crowd                        final     0.25   0.53   0.46  n 124    74,297,506
+   crowd                        mo005     0.07   0.05   1.49  n 124    74,297,506
+   crowd                        mo010     0.10   0.04   2.56  n 124    74,297,506
+   crowd                        mo030     0.16   0.05   3.47  n 124    74,297,506
+   crowd                        mo060     0.16   0.06   2.65  n 124    74,297,506
+   crowd                        mo300     0.34   0.17   1.97  n 124    74,297,506
+   crowd                        pre30     1.72   0.11  15.23  n 124    74,285,458
+   crowd_pre30_1to6c            fee_c     1.00   0.01  83.31  n 124    26,408,844
+   crowd_pre30_1to6c            final    -0.66   1.01  -0.65  n 124    26,408,844
+   crowd_pre30_1to6c            mo005     0.11   0.04   2.77  n 124    26,408,844
+   crowd_pre30_1to6c            mo010     0.19   0.05   3.47  n 124    26,408,844
+   crowd_pre30_1to6c            mo030     0.22   0.07   3.16  n 124    26,408,844
+   crowd_pre30_1to6c            mo060     0.24   0.08   2.86  n 124    26,408,844
+   crowd_pre30_1to6c            mo300     0.74   0.27   2.75  n 124    26,408,844
+   crowd_pre30_1to6c            pre30     2.67   0.03  84.22  n 124    26,408,844
+   crowd_pre30_1to6c_ge500usd   fee_c     1.03   0.01  79.79  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   final    -1.11   1.48  -0.75  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   mo005     0.11   0.05   2.24  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   mo010     0.17   0.07   2.52  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   mo030     0.18   0.09   2.07  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   mo060     0.23   0.10   2.33  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   mo300     0.69   0.33   2.08  n 124    17,649,740
+   crowd_pre30_1to6c_ge500usd   pre30     2.61   0.04  65.66  n 124    17,649,740
+F  RITALINE taker episodes (fills within 20 s, one outcome): 577 in 61 markets; $ per episode median 244 p90 1,265 max 3,443; fills/episode median 1
+   mo60 > 1.2 c (fee) in 343/577; mo60 < -1.2 c in 165; mean pre5 2.08 c; won at settlement 283/577
+   others' same-direction taker $ in the 12 s before the episode: median 156; zero in 97/577; in the 12 s after: median 996
+   episodes within 300 s after a won fight of the bought team: 24/577; lag median 162.0 p25 92 p75 225
+   by entry price: 0.00-0.30: n 169 mo10 2.9 fin 1.3  0.30-0.50: n 144 mo10 4.3 fin 7.5  0.50-0.70: n 140 mo10 4.8 fin -1.9  0.70-1.00: n 124 mo10 2.8 fin 13.1
+   by game minute: -999-0: n 24 $1,769  0-10: n 0 $0  10-20: n 1 $75  20-30: n 44 $18,782  30-40: n 190 $100,680  40-999: n 318 $152,279

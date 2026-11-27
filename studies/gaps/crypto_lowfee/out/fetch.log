@@ -1,0 +1,51 @@
+--- start 2026-11-27 15:45:10 slice=False
+15:45:52 eth-5m 100/288 ok=100 miss=0 fail=0 rows=21239
+15:46:35 eth-5m 200/288 ok=200 miss=0 fail=0 rows=44066
+15:47:12 DONE eth-5m n=288 ok=288 miss=0 fail=0 rows=62123
+15:48:15 DONE btc-15m n=96 ok=96 miss=0 fail=0 rows=84466
+15:48:15 eth-5m 100/1726 ok=100 miss=0 fail=0 rows=21239
+15:48:15 eth-5m 200/1726 ok=200 miss=0 fail=0 rows=44066
+15:48:22 eth-5m 300/1726 ok=300 miss=0 fail=0 rows=64610
+15:49:13 eth-5m 400/1726 ok=400 miss=0 fail=0 rows=86354
+15:50:04 eth-5m 500/1726 ok=500 miss=0 fail=0 rows=109833
+15:51:01 eth-5m 600/1726 ok=600 miss=0 fail=0 rows=130567
+15:51:57 eth-5m 700/1726 ok=700 miss=0 fail=0 rows=152779
+15:52:55 eth-5m 800/1726 ok=800 miss=0 fail=0 rows=175908
+15:53:47 eth-5m 900/1726 ok=900 miss=0 fail=0 rows=200998
+15:54:39 eth-5m 1000/1726 ok=1000 miss=0 fail=0 rows=228204
+15:55:32 eth-5m 1100/1726 ok=1100 miss=0 fail=0 rows=259442
+15:56:25 eth-5m 1200/1726 ok=1200 miss=0 fail=0 rows=284410
+15:57:09 eth-5m 1300/1726 ok=1300 miss=0 fail=0 rows=309586
+15:57:58 eth-5m 1400/1726 ok=1400 miss=0 fail=0 rows=337785
+15:58:46 eth-5m 1500/1726 ok=1500 miss=0 fail=0 rows=361087
+15:59:36 eth-5m 1600/1726 ok=1600 miss=0 fail=0 rows=385819
+16:00:33 eth-5m 1700/1726 ok=1700 miss=0 fail=0 rows=408718
+16:00:49 DONE eth-5m n=1726 ok=1726 miss=0 fail=0 rows=415563
+16:01:56 eth-15m 100/576 ok=100 miss=0 fail=0 rows=25585
+16:03:01 eth-15m 200/576 ok=200 miss=0 fail=0 rows=53026
+16:04:01 eth-15m 300/576 ok=300 miss=0 fail=0 rows=76367
+16:05:00 eth-15m 400/576 ok=400 miss=0 fail=0 rows=101582
+16:05:53 eth-15m 500/576 ok=500 miss=0 fail=0 rows=128100
+16:06:28 DONE eth-15m n=576 ok=576 miss=0 fail=0 rows=149438
+16:07:16 sol-15m 100/576 ok=100 miss=0 fail=0 rows=8334
+16:08:05 sol-15m 200/576 ok=200 miss=0 fail=0 rows=18208
+16:08:52 sol-15m 300/576 ok=300 miss=0 fail=0 rows=25055
+16:09:40 sol-15m 400/576 ok=400 miss=0 fail=0 rows=32165
+16:10:29 sol-15m 500/576 ok=500 miss=0 fail=0 rows=41243
+16:11:05 DONE sol-15m n=576 ok=576 miss=0 fail=0 rows=47963
+16:11:51 xrp-15m 100/576 ok=100 miss=0 fail=0 rows=6031
+16:12:37 xrp-15m 200/576 ok=200 miss=0 fail=0 rows=12011
+16:13:21 xrp-15m 300/576 ok=300 miss=0 fail=0 rows=15812
+16:14:06 xrp-15m 400/576 ok=400 miss=0 fail=0 rows=20151
+16:14:51 xrp-15m 500/576 ok=500 miss=0 fail=0 rows=25196
+16:15:24 DONE xrp-15m n=576 ok=576 miss=0 fail=0 rows=29071
+16:15:26 btc-15m 100/576 ok=100 miss=0 fail=0 rows=86938
+16:16:22 btc-15m 200/576 ok=200 miss=0 fail=0 rows=153469
+16:17:09 btc-15m 300/576 ok=300 miss=0 fail=0 rows=221916
+16:18:03 btc-15m 400/576 ok=400 miss=0 fail=0 rows=297771
+16:18:53 btc-15m 500/576 ok=500 miss=0 fail=0 rows=365252
+16:19:42 DONE btc-15m n=576 ok=576 miss=0 fail=0 rows=411812
+16:19:43 btc-5m 100/300 ok=100 miss=0 fail=0 rows=147344
+16:19:43 btc-5m 200/300 ok=200 miss=0 fail=0 rows=302573
+16:19:43 btc-5m 300/300 ok=300 miss=0 fail=0 rows=458394
+16:19:43 DONE btc-5m n=300 ok=300 miss=0 fail=0 rows=458394

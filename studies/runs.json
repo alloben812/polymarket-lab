@@ -1,0 +1,132 @@
+[
+ {
+  "runId": "wf_076e7057-c81",
+  "name": "поиск: X/Twitter (3 канала)",
+  "status": "завершён",
+  "agents": 6,
+  "finished_agents": 6,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 368194,
+  "fresh_in": 1527467,
+  "cache_read": 23468323
+ },
+ {
+  "runId": "wf_20ce90d9-095",
+  "name": "поиск: форумы, GitHub, статьи",
+  "status": "завершён",
+  "agents": 6,
+  "finished_agents": 6,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 336336,
+  "fresh_in": 1044474,
+  "cache_read": 24035989
+ },
+ {
+  "runId": "wf_87777e96-175",
+  "name": "поиск: работы, датасеты, правила, биржи",
+  "status": "завершён",
+  "agents": 8,
+  "finished_agents": 8,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 482364,
+  "fresh_in": 1834785,
+  "cache_read": 33071536
+ },
+ {
+  "runId": "wf_e709b0dd-aa3",
+  "name": "лидеры категорий 1",
+  "status": "остановлен",
+  "agents": 7,
+  "finished_agents": 5,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 487387,
+  "fresh_in": 1770169,
+  "cache_read": 30123613
+ },
+ {
+  "runId": "wf_3ab7be26-45b",
+  "name": "лидеры категорий 2",
+  "status": "остановлен",
+  "agents": 7,
+  "finished_agents": 5,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 548627,
+  "fresh_in": 1623618,
+  "cache_read": 31621873
+ },
+ {
+  "runId": "wf_355c8bbd-3da",
+  "name": "замеры 1: BTC lock-in, тонкая крипта, бонды",
+  "status": "остановлен",
+  "agents": 5,
+  "finished_agents": 4,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 383111,
+  "fresh_in": 1793312,
+  "cache_read": 21348760
+ },
+ {
+  "runId": "wf_33016aac-02a",
+  "name": "замеры 2: макрорелизы, уровни против опционов",
+  "status": "завершён",
+  "agents": 4,
+  "finished_agents": 4,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 304404,
+  "fresh_in": 893091,
+  "cache_read": 19487357
+ },
+ {
+  "runId": "wf_71dfc2da-765",
+  "name": "замеры 3: погода наблюдения, погода прогнозы",
+  "status": "остановлен",
+  "agents": 2,
+  "finished_agents": 0,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 124097,
+  "fresh_in": 1237675,
+  "cache_read": 10422545
+ },
+ {
+  "runId": "wf_5f720d0a-874",
+  "name": "замеры 4: награды на погоде, новости, спорт",
+  "status": "остановлен",
+  "agents": 2,
+  "finished_agents": 0,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 202134,
+  "fresh_in": 727514,
+  "cache_read": 21178774
+ },
+ {
+  "runId": "wf_1034399b-edd",
+  "name": "замеры 5: теннис, хвосты BTC",
+  "status": "остановлен",
+  "agents": 2,
+  "finished_agents": 0,
+  "models": [
+   "claude-fable-5-2"
+  ],
+  "out_tokens": 133575,
+  "fresh_in": 780772,
+  "cache_read": 13275755
+ }
+]

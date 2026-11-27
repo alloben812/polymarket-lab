@@ -1,0 +1,31 @@
+WS trade events for our BTC 5m markets: 568583 rows, 410 markets
+markets with WS coverage: 410; tape rows in window 576802, WS events 568583, one-to-one matched 324953 (56.3%)
+block time minus exchange match time, seconds, percentiles [1, 5, 25, 50, 75, 95, 99] : [1.06, 1.2, 1.69, 2.09, 2.47, 2.95, 3.33] mean 2.09
+  share with lag > 3 s: 0.034; > 4 s: 0.000; > 5 s: 0.000; > 6 s: 0.000; < 2 s: 0.440
+  last 60 s only: [1.06, 1.21, 1.7, 2.1, 2.48, 2.96, 3.35] n 34790
+
+== Traded prints of the exclusion-ON runs with a real match time ==
+
+L60_f0.99_m0.02_D1_excl: traded prints in WS-covered markets 149 (15 markets), with a one-to-one real match time 93 (14 markets, 1744 shares)
+  lag of these prints, s (min/10/25/50/75/90/max): [1.03, 1.26, 1.42, 1.99, 2.23, 2.99, 3.42]
+  real match time minus assumed match time m, s: [-0.42, 0.01, 0.77, 1.01, 1.58, 1.74, 1.97]
+  rule condition true on Binance data closed by (real match time - 0 s): 0.28 of prints, 0.36 of shares, markets with at least one such print 7 of 14; net of those prints 31.5 USD of 99.9
+  rule condition true on Binance data closed by (real match time - 1 s): 0.49 of prints, 0.45 of shares, markets with at least one such print 12 of 14; net of those prints 44.9 USD of 99.9
+  rule condition true on Binance data closed by (real match time - 2 s): 0.71 of prints, 0.64 of shares, markets with at least one such print 10 of 14; net of those prints 68.1 USD of 99.9
+  rule condition true on Binance data closed by (real match time - 3 s): 0.45 of prints, 0.48 of shares, markets with at least one such print 8 of 14; net of those prints 48.2 USD of 99.9
+
+L60_f0.97_m0.02_D1_excl: traded prints in WS-covered markets 231 (21 markets), with a one-to-one real match time 131 (20 markets, 2458 shares)
+  lag of these prints, s (min/10/25/50/75/90/max): [1.03, 1.26, 1.56, 1.92, 2.23, 2.88, 3.42]
+  real match time minus assumed match time m, s: [-0.42, 0.12, 0.77, 1.08, 1.44, 1.74, 1.97]
+  rule condition true on Binance data closed by (real match time - 0 s): 0.40 of prints, 0.46 of shares, markets with at least one such print 11 of 20; net of those prints 52.7 USD of 132.3
+  rule condition true on Binance data closed by (real match time - 1 s): 0.61 of prints, 0.58 of shares, markets with at least one such print 18 of 20; net of those prints 77.1 USD of 132.3
+  rule condition true on Binance data closed by (real match time - 2 s): 0.80 of prints, 0.79 of shares, markets with at least one such print 16 of 20; net of those prints 107.1 USD of 132.3
+  rule condition true on Binance data closed by (real match time - 3 s): 0.54 of prints, 0.60 of shares, markets with at least one such print 13 of 20; net of those prints 80.8 USD of 132.3
+
+L60_f0.97_m0.02_D2_excl: traded prints in WS-covered markets 229 (19 markets), with a one-to-one real match time 125 (17 markets, 2656 shares)
+  lag of these prints, s (min/10/25/50/75/90/max): [1.03, 1.4, 1.63, 2.02, 2.29, 2.66, 3.42]
+  real match time minus assumed match time m, s: [-0.42, 0.34, 0.71, 0.98, 1.37, 1.6, 1.97]
+  rule condition true on Binance data closed by (real match time - 0 s): 0.48 of prints, 0.52 of shares, markets with at least one such print 9 of 17; net of those prints 70.7 USD of 146.1
+  rule condition true on Binance data closed by (real match time - 1 s): 0.51 of prints, 0.50 of shares, markets with at least one such print 12 of 17; net of those prints 74.9 USD of 146.1
+  rule condition true on Binance data closed by (real match time - 2 s): 0.82 of prints, 0.82 of shares, markets with at least one such print 16 of 17; net of those prints 114.4 USD of 146.1
+  rule condition true on Binance data closed by (real match time - 3 s): 0.88 of prints, 0.87 of shares, markets with at least one such print 15 of 17; net of those prints 123.6 USD of 146.1

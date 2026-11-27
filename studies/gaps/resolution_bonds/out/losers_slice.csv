@@ -1,0 +1,9 @@
+slug,family,sub,event,outcome,payoff,pmax,n_buckets,first_rel_end_h,last_before_close_h,endDate,closedTime,volume,cid
+highest-temperature-in-warsaw-on-october-24-2026-11c,weather,,highest-temperature-in-warsaw-on-october-24-2026,No,0.0,0.998,197,-24.0,13.44,2026-10-24 12:00,2026-10-24 23:11,11768,0x0778fdc814dadd337d5efc1f66bdf05c33e96561029eef29d0816574a3231b39
+bra-san-gre-2026-11-23-exact-score-0-2,sports,sports/start,bra-san-gre-2026-11-23-exact-score,No,0.0,0.989,298,-24.0,3.08,2026-11-24 00:00,2026-11-24 04:24,13570,0x0d51f83b900d24e86d6f6842f4fa699536bc6bf20f51f70307fda8c112a951a2
+will-the-price-of-bitcoin-be-between-60000-62000-on-november-21-2026,crypto,,bitcoin-price-on-november-21-2026,No,0.0,0.983,69,-13.5,5.69,2026-11-21 17:00,2026-11-21 17:51,20843,0x0d2b9e92a84a36e53e22af11624557f1e3138c88777cb42da7a970b2ae5e5b5e
+hr1-rud-din-2026-10-31-total-1pt5,sports,sports/start,hr1-rud-din-2026-10-31-more-markets,Over,0.0,0.969,1,1.75,2.41,2026-10-31 17:00,2026-10-31 21:09,15228,0x0f052ee161dfb8f893926a8db151d743e648da20516a6128e4439cd98c24fd4d
+nhl-edm-stl-2026-11-22-total-8pt5,sports,sports/start,nhl-edm-stl-2026-11-22,Under,0.0,0.967,5,1.17,1.62,2026-11-23 00:00,2026-11-23 03:12,135902,0x0746048c37b9887ef8b9012b8b79f6ff5ca21e0d76e7fa89410f01fb902da683
+nba-nop-lac-2026-11-08-spread-home-14pt5,sports,sports/start,nba-nop-lac-2026-11-08,Pelicans,0.0,0.964,3,1.75,0.91,2026-11-09 02:00,2026-11-09 04:49,10925,0x0dc2dc5fb6e43f559de8cb469485ddb4af2899a61a82a4d9de68af51b871f854
+nba-mem-por-2026-10-29-spread-away-10pt5,sports,sports/start,nba-mem-por-2026-10-29,Trail Blazers,0.0,0.955,1,1.08,1.52,2026-10-30 02:00,2026-10-30 04:36,12621,0x0f038acf1695fc4f971ccc8882f437d624d1541dab8866c168359b21ab3de06b
+will-bitcoin-dip-to-74k-november-2-8-2026,crypto,,what-price-will-bitcoin-hit-november-2-8-2026,No,0.0,0.954,8,-13.33,5.66,2026-11-09 05:00,2026-11-08 22:09,342924,0x0a68ece0c9c22ebf43a92d0bdbb943ff6d43f0488fc49dc3f5a9885987afad4e

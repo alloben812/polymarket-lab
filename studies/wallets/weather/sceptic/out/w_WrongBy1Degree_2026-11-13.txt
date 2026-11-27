@@ -1,0 +1,35 @@
+[0x0a0c42f6b1da5a633ec1a4d45ba76eb486c1a853] fills 1172 in 1s
+0x0a0c42f6b1da5a633ec1a4d45ba76eb486c1a853  0x0a0c42f6b1da5a633ec1a4d45ba76eb486c1a853  window 2026-10-30 00:00 .. 2026-11-13 00:00 UTC
+summary: {"fills": 1172, "markets": 609, "resolved_complete_markets": 609, "incomplete_markets": 0, "unresolved_markets": 0, "turnover_usd": 47967, "maker_share_usd": 0.0, "sell_share_usd": 0.038, "markets_with_both_outcomes_traded": 18, "uses_split_merge": false, "gross": 16317.16, "fees_est": 246.65, "net": 16070.51, "fee_rate_unknown_markets": 0, "net_per_market": 26.388, "t_by_market": 4.25, "win_share_markets": 0.504, "median_market_turnover": 45.0, "max_market_turnover": 836.93, "avg_fill_usd": 40.93}
+inventory events: {'REDEEM': 262}
+API says for the same days: gross 13550, fees -1195, refunded 0, rebates 75, kept 12430, volume $48042, fills 1178
+
+by family:
+  family   markets  resolved_complete  incomplete  turnover  taker_share  gross     fees_est  net       net_pct_turnover  net_per_market  t_by_market
+  weather  609      609                0           47967     1.0          16317.16  246.65    16070.51  33.5              26.39           4.25       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t     markets  net_usd 
+  ('T', 'BUY')   1169   135185  46150  0.3414  12.072         0.182         11.889        2.695  4.41  605      16072.73
+  ('T', 'SELL')  3      1819    1816   0.9988  -0.121         0.001         -0.122        0.02   None  3        -2.22   
+
+by role and price:
+  key                 fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c   t      markets  net_usd
+  ('T', '0.00-0.05')  16     2689    82     0.0305  8.619          0.027         8.593         7.828  1.1    14       231.09 
+  ('T', '0.05-0.15')  171    23067   2454   0.1064  10.191         0.092         10.1          4.86   2.08   113      2329.65
+  ('T', '0.15-0.30')  306    38428   8619   0.2243  12.329         0.17          12.16         4.815  2.53   159      4672.82
+  ('T', '0.30-0.45')  241    36236   13241  0.3654  14.437         0.229         14.207        5.577  2.55   144      5148.12
+  ('T', '0.45-0.55')  109    10777   5357   0.4971  14.367         0.248         14.119        7.923  1.78   78       1521.62
+  ('T', '0.55-0.70')  191    13142   8152   0.6203  10.369         0.231         10.138        5.793  1.75   121      1332.34
+  ('T', '0.70-0.85')  130    10685   8108   0.7588  7.802          0.181         7.621         5.254  1.45   94       814.36 
+  ('T', '0.85-0.95')  5      161     138    0.8578  14.225         0.122         14.103        0.202  69.79  5        22.74  
+  ('T', '0.99-1.00')  3      1819    1816   0.9988  -0.121         0.001         -0.122        0.02   None   3        -2.22  
+
+by role and point in the market's life:
+  key                                            fills  shares  usd    avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('T', 'life', 't 1-7 d to end')                570    64968   23076  0.3552  11.0           0.186         10.814        2.963   3.65   403      7025.59
+  ('T', 'life', 'u 6-24 h to end')               594    69523   22834  0.3284  13.285         0.179         13.106        3.902   3.36   285      9111.69
+  ('T', 'life', 'v 1-6 h to end')                5      694     240    0.3456  -9.08          0.217         -9.297        24.254  -0.38  5        -64.56 
+  ('T', 'life', 'z after end (pre-resolution)')  3      1819    1816   0.9988  -0.121         0.001         -0.122        0.02    None   3        -2.22  
+
+full result written to out/w_WrongBy1Degree_2026-11-13.json

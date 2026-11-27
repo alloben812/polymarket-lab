@@ -1,0 +1,33 @@
+events 112; end lag with pauses and 90 s pre-game: t99 - real_end p10 428 p25 585 median 776 p75 859 p90 910 (n 124)
+1  price of the fight winner vs its price 700 s after the fight, cents (mean over events), by seconds after the fight:
+   720:0.4 750:1.1 780:1.5 810:2.2 840:2.8 870:4.2 900:7.6 930:9.4 960:10.5 990:13.5 1020:15.6 1050:17.0 1080:16.9 1110:16.7 1140:16.7 1170:17.1 1200:16.3 1230:16.2 1260:17.2 1290:16.7
+   fine, 900..1100: 900:7.6 910:8.1 920:8.5 930:9.4 940:9.6 950:10.2 960:10.5 970:11.4 980:13.3 990:13.5 1000:13.5 1010:14.0 1020:15.6 1030:16.1 1040:16.6 1050:17.0 1060:16.4 1070:16.9 1080:16.9 1090:16.8 1100:16.5
+2  net taker $ (fight winner minus fight loser) by seconds after the fight:
+   crowd        700:2,924 730:31,776 760:-27,245 790:38,238 820:49,745 850:83,900 880:83,541 910:102,107 940:126,713 970:137,682 1000:128,930 1030:98,519 1060:124,865 1090:68,564 1120:46,694 1150:8,666 1180:50,802 1210:24,966 1240:76,492 1270:28,445
+   RITALINEWITH 700:1,656 730:1,143 760:1,369 790:-570 820:1,853 850:5,634 880:3,875 910:5,139 940:6,274 970:-1,481 1000:6,866 1030:5,009 1060:-265 1090:-932 1120:-385 1150:-1,548 1180:-2,072 1210:3,986 1240:-3,302 1270:-1,684
+   BLASTSLAM9WI 700:2,674 730:-2,613 760:-3,203 790:-3,552 820:10,692 850:2,069 880:7,742 910:227 940:4,071 970:19 1000:3,938 1030:7,435 1060:3,916 1090:2,768 1120:-6 1150:2,960 1180:-3,044 1210:-756 1240:-1,938 1270:379
+   DamwonChampi 700:1,255 730:-386 760:-4,012 790:4,053 820:-1,851 850:43 880:171 910:3,947 940:624 970:-727 1000:762 1030:3,093 1060:4,894 1090:680 1120:-1,676 1150:1,225 1180:-944 1210:1,492 1240:-711 1270:-549
+   calculate10  700:0 730:0 760:0 790:0 820:0 850:0 880:0 910:0 940:0 970:0 1000:0 1030:0 1060:0 1090:0 1120:0 1150:0 1180:0 1210:0 1240:0 1270:0
+3  leak window (real end -> last print of winner < 0.90): markets 108, length median 592 s p25 420 p75 775; all taker $ at 0.10-0.90 in it: on winner 3,138,282, on loser 1,235,609, taker pnl before fees 268,641
+   wallets with >= 6 leak-window markets: 205; z = (wins - sum of prices paid) / sd.  Top 12 and bottom 4:
+   0x36d7feeebc8e4822510baa40031b18aff925c7ed               markets  11 right   9 expected   5.7 z  2.30 usd      6,967 pnl_after_fee      5,815
+   0x5137212657fba4d1793b2327bf097bc6b5ab1ab4               markets  14 right  13 expected   9.5 z  2.23 usd      3,916 pnl_after_fee      1,252
+   0xa8f16d8d3236e1c84c0c5749ceff7f1ccd45fee6               markets   7 right   7 expected   4.9 z  1.86 usd     21,603 pnl_after_fee      9,803
+   0x03e8227c26d92f69af56ef25c8ea3555ebc3f8a0               markets  21 right  20 expected  16.9 z  1.72 usd      5,671 pnl_after_fee      1,108
+   0x9fe3c1dbc9ba3cd69aa1469b35c15c7666c2ca9d               markets   8 right   8 expected   6.3 z  1.53 usd      4,228 pnl_after_fee      1,213
+   0xa6ba5c6c5290f7843aa7fd12b6d309c2851563b0               markets   9 right   9 expected   7.3 z  1.48 usd     22,109 pnl_after_fee      4,448
+   0x9a4b3de361096b3fc2487e03b1ca5a3cff93a0c7               markets   8 right   8 expected   6.5 z  1.46 usd      3,184 pnl_after_fee        638
+   0x719dd6a21f322a17d39b4d6f6093a2bcc8cad446               markets   7 right   7 expected   5.5 z  1.40 usd      9,206 pnl_after_fee      1,712
+   0x3ff3a9d9bdbd96eb2c92546d4fb42241cbc94c73               markets   7 right   6 expected   4.5 z  1.38 usd     12,787 pnl_after_fee      9,990
+   0x7f374d601020c9b1e936bf304a46329f6202b876               markets   7 right   7 expected   5.5 z  1.37 usd      1,179 pnl_after_fee        296
+   0x36d97add2672840146a62c2ad070753dab71c3ca               markets   7 right   5 expected   3.5 z  1.31 usd      2,226 pnl_after_fee        994
+   0xa220d5b65c17ae34360de2090eb65550d773ceb5               markets   6 right   6 expected   4.8 z  1.22 usd      2,230 pnl_after_fee        492
+   0x84951b52ff20ed4624c9e39dbc68406378b5550e               markets  28 right  13 expected  22.0 z -4.87 usd     13,935 pnl_after_fee          0
+   0x7ca7776aae983b7e7fd21a282161bdd389659bcf               markets  10 right   4 expected   8.7 z -5.04 usd      3,631 pnl_after_fee       -416
+   0x4a7708ba98bddc8be759c5d8a6bef54450d2e59d               markets  30 right  15 expected  24.6 z -5.43 usd     24,905 pnl_after_fee      1,275
+   0x7d67f01d3e7b7c56c3df7b2ea08a58917d7f5f14               markets  50 right  31 expected  44.0 z -7.04 usd     78,696 pnl_after_fee      4,256
+   z distribution: mean -0.57 sd 1.53; z > 2: 2; z > 3: 0; z < -2: 27
+   RITALINEWITH leak-window $: T/loser 21,641  T/winner 60,712
+   BLASTSLAM9WI leak-window $: M/loser 167,422  M/winner 120,807  T/loser 46,335  T/winner 95,825
+   DamwonChampi leak-window $: T/loser 15,117  T/winner 20,912
+   calculate10  leak-window $: M/loser 74,423  M/winner 65,997

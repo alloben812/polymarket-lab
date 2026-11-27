@@ -1,0 +1,77 @@
+== Proxy error vs shift s of the Binance TWAP end (px.twap(t + s, 60)), USD ==
+shift | all: sd, p99|err|, proxy-miss rate | tune sd | report sd
+-10 |   6.64  23.21 0.0180 |   7.19 |   5.37
+ -9 |   5.61  19.45 0.0139 |   6.08 |   4.55
+ -8 |   4.65  15.57 0.0116 |   5.03 |   3.75
+ -7 |   3.75  12.95 0.0098 |   4.06 |   3.01
+ -6 |   3.00  10.35 0.0069 |   3.26 |   2.38
+ -5 |   2.54   9.90 0.0069 |   2.78 |   1.95
+ -4 |   2.55  10.40 0.0081 |   2.82 |   1.89
+ -3 |   3.02  10.78 0.0081 |   3.35 |   2.21
+ -2 |   3.78  12.46 0.0139 |   4.18 |   2.81
+ -1 |   4.69  15.27 0.0168 |   5.17 |   3.54
+ +0 |   5.64  18.63 0.0191 |   6.18 |   4.35
+ +1 |   6.56  22.35 0.0203 |   7.16 |   5.16
+ +2 |   7.52  25.70 0.0208 |   8.18 |   5.97
+
+== Losing markets per run: when was the bet placed and how far was the Binance average from the strike ==
+
+L60_f0.99_m0.02_D1_excl: trades 449, losing trades 0, losing markets 0
+Empty DataFrame
+Columns: [trades, shares, net, q, f, dist, left, proxy_miss]
+Index: []
+
+L60_f0.99_m0.02_D1_all: trades 957, losing trades 74, losing markets 4
+                   trades  shares      net     q     f   dist   left  proxy_miss
+period t0                                                                       
+report 1795611000      21 500.000 -409.725 0.791 0.990 11.828 19.000       False
+       1795675500      19 297.105 -254.420 0.853 0.996  8.204 14.158        True
+tune   1795222200      15 500.000 -465.973 0.919 1.000  8.136 11.000        True
+       1795498500      19 500.000 -337.026 0.674 0.993  9.074 15.789        True
+
+== Anatomy of the trades in the exclusion-ON runs (percentiles are min/10/25/50/75/90/max) ==
+
+L60_f0.99_m0.02_D1_excl: trades 449, markets 39, shares 9586, wins 449
+  seconds left at the print: [22.0, 26.0, 34.0, 46.0, 55.0, 58.0, 60.0]
+  price paid: [0.73, 0.901, 0.95, 0.96, 0.97, 0.97, 0.98]  model f: [0.99, 0.991, 0.992, 0.994, 0.997, 1.0, 1.0]
+  |EA - K| USD: [18.853, 21.518, 26.994, 34.676, 44.196, 49.749, 80.317]  trades with dist < E99_tune (20.46): 25
+  signal age, s (how long the rule condition already held on Binance before the model time): [0.0, 0.0, 0.0, 1.0, 5.0, 13.0, 36.0]
+  share of shares with signal age <=1 s: 0.51; <=3 s: 0.65; >=10 s: 0.15
+  Binance move in favoured direction over the 3 s before model time, USD: [-24.84, -6.1, -0.01, 0.0, 12.92, 24.96, 56.83]  over 10 s: [-28.68, -6.91, -0.01, 6.06, 18.61, 39.74, 81.19]
+  per market: trades [1.0, 1.8, 6.0, 11.0, 16.0, 21.6, 30.0]  shares [5.0, 26.053, 94.375, 228.002, 358.319, 500.0, 500.0]  distinct seconds with fills [1.0, 1.0, 1.0, 1.0, 2.0, 2.0, 3.0]  span s [0.0, 0.0, 0.0, 0.0, 1.0, 2.2, 6.0]
+  per market: signal age at the first fill [0.0, 0.0, 0.0, 1.0, 5.0, 11.4, 36.0]  net USD [0.143, 0.744, 3.33, 7.96, 18.02, 24.345, 61.106]
+  markets filled to the 500-share cap: 8; markets with fills in >= 5 distinct seconds: 0
+  markets where the first fill came when the signal was >= 5 s old: 11 of 39
+  by day (Nov): {21: {'markets': 13, 'shares': 2597.5, 'net': 144.4}, 22: {'markets': 8, 'shares': 2001.4, 'net': 73.0}, 23: {'markets': 6, 'shares': 1380.5, 'net': 95.6}, 24: {'markets': 7, 'shares': 1942.5, 'net': 107.2}, 25: {'markets': 3, 'shares': 997.3, 'net': 36.7}, 26: {'markets': 2, 'shares': 666.4, 'net': 22.9}}
+  real takers behind these prints: 212 wallets; top 1 / 3 / 10 took 0.07 / 0.18 / 0.39 of the printed size
+  markets by side bought: Up 26, Down 13
+
+L60_f0.97_m0.02_D1_excl: trades 744, markets 59, shares 15299, wins 744
+  seconds left at the print: [25.0, 26.0, 32.0, 44.0, 55.0, 58.0, 60.0]
+  price paid: [0.73, 0.9, 0.94, 0.95, 0.96, 0.97, 0.98]  model f: [0.97, 0.974, 0.981, 0.991, 0.995, 0.999, 1.0]
+  |EA - K| USD: [18.744, 20.66, 24.898, 30.073, 41.013, 47.519, 80.317]  trades with dist < E99_tune (20.46): 56
+  signal age, s (how long the rule condition already held on Binance before the model time): [0.0, 0.0, 1.0, 5.0, 10.0, 16.0, 56.0]
+  share of shares with signal age <=1 s: 0.30; <=3 s: 0.40; >=10 s: 0.25
+  Binance move in favoured direction over the 3 s before model time, USD: [-24.84, -9.88, -1.22, 0.0, 4.0, 24.96, 62.97]  over 10 s: [-47.36, -12.95, -5.407, 2.14, 14.57, 33.58, 81.19]
+  per market: trades [1.0, 3.0, 7.0, 12.0, 17.0, 25.2, 30.0]  shares [5.0, 33.398, 125.516, 218.398, 447.568, 500.0, 500.0]  distinct seconds with fills [1.0, 1.0, 1.0, 1.0, 2.0, 3.0, 4.0]  span s [0.0, 0.0, 0.0, 0.0, 2.0, 6.0, 11.0]
+  per market: signal age at the first fill [0.0, 0.0, 1.0, 4.0, 7.5, 17.2, 55.0]  net USD [0.143, 0.9, 5.081, 11.803, 20.058, 24.961, 71.923]
+  markets filled to the 500-share cap: 10; markets with fills in >= 5 distinct seconds: 0
+  markets where the first fill came when the signal was >= 5 s old: 26 of 59
+  by day (Nov): {21: {'markets': 19, 'shares': 3993.0, 'net': 209.1}, 22: {'markets': 13, 'shares': 3497.7, 'net': 145.4}, 23: {'markets': 6, 'shares': 2356.0, 'net': 148.0}, 24: {'markets': 11, 'shares': 2662.1, 'net': 151.1}, 25: {'markets': 6, 'shares': 1718.1, 'net': 130.5}, 26: {'markets': 4, 'shares': 1071.9, 'net': 48.9}}
+  real takers behind these prints: 275 wallets; top 1 / 3 / 10 took 0.07 / 0.17 / 0.38 of the printed size
+  markets by side bought: Up 34, Down 25
+
+L60_f0.97_m0.02_D2_excl: trades 780, markets 58, shares 16303, wins 775
+  seconds left at the print: [25.0, 28.0, 34.0, 47.0, 55.0, 58.0, 59.0]
+  price paid: [0.73, 0.9, 0.94, 0.95, 0.96, 0.97, 0.977]  model f: [0.97, 0.971, 0.978, 0.989, 0.994, 0.998, 1.0]
+  |EA - K| USD: [18.859, 22.676, 26.994, 31.7, 41.132, 54.09, 80.327]  trades with dist < E99_tune (20.46): 45
+  signal age, s (how long the rule condition already held on Binance before the model time): [0.0, 0.0, 1.0, 4.0, 10.0, 17.0, 60.0]
+  share of shares with signal age <=1 s: 0.32; <=3 s: 0.48; >=10 s: 0.25
+  Binance move in favoured direction over the 3 s before model time, USD: [-24.84, -6.91, -0.01, 0.0, 2.92, 12.34, 74.34]  over 10 s: [-41.16, -11.32, -5.308, 0.01, 14.57, 35.47, 73.94]
+  per market: trades [1.0, 3.0, 8.0, 13.0, 17.75, 25.0, 30.0]  shares [5.0, 40.955, 128.508, 263.448, 496.374, 500.0, 500.0]  distinct seconds with fills [1.0, 1.0, 1.0, 1.5, 2.0, 3.0, 5.0]  span s [0.0, 0.0, 0.0, 0.5, 2.0, 6.0, 28.0]
+  per market: signal age at the first fill [0.0, 0.0, 1.0, 4.0, 11.0, 17.6, 60.0]  net USD [-114.245, 1.762, 6.509, 11.909, 22.073, 31.492, 71.923]
+  markets filled to the 500-share cap: 14; markets with fills in >= 5 distinct seconds: 1
+  markets where the first fill came when the signal was >= 5 s old: 22 of 58
+  by day (Nov): {21: {'markets': 17, 'shares': 4295.7, 'net': 220.1}, 22: {'markets': 13, 'shares': 3120.0, 'net': 138.1}, 23: {'markets': 6, 'shares': 2072.0, 'net': -41.3}, 24: {'markets': 11, 'shares': 3370.3, 'net': 209.8}, 25: {'markets': 7, 'shares': 2165.9, 'net': 169.5}, 26: {'markets': 4, 'shares': 1279.1, 'net': 72.3}}
+  real takers behind these prints: 284 wallets; top 1 / 3 / 10 took 0.06 / 0.14 / 0.33 of the printed size
+  markets by side bought: Up 34, Down 24

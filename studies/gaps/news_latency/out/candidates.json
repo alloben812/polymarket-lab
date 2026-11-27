@@ -1,0 +1,162 @@
+[
+{
+"c": "0x077cfeca5501cd1bd57af1e9caf4688d1b790e9f6465e73120a37b3456a20368",
+"slug": "saudi-oil-pipeline-east-west-restarts-by-september-15",
+"T_pre": 1789214400,
+"p_pre": 0.255,
+"T_post": 1789218000,
+"p_post": 0.615,
+"bucket": 1800,
+"last": 1789216200
+},
+{
+"c": "0x02c6dd9c6b31d315baeba4c421445f7b65a53de65266ad526cc14f1d64d6a8ca",
+"slug": "russia-elections-a-just-russia-clears-duma-threshold",
+"T_pre": 1789984800,
+"p_pre": 0.405,
+"T_post": 1789988400,
+"p_post": 0.915,
+"bucket": 1800,
+"last": 1789986600
+},
+{
+"c": "0x09166ddb37790be86667b0f561244dbb5dff2b0b1bfe424a8964501c549bbf3c",
+"slug": "will-ndp-win-the-most-seats-in-the-2026-british-columbia-general-election",
+"T_pre": 1790172000,
+"p_pre": 0.35,
+"T_post": 1790175600,
+"p_post": 0.745,
+"bucket": 1800,
+"last": 1790172000
+},
+{
+"c": "0x03d4b4b1f5ffe6fad06afda631afd5a88ac017ac665ec2abc8eab0a4d0c5d04f",
+"slug": "flavio-bolsonaro-participates-in-debate-before-first-round",
+"T_pre": 1790893200,
+"p_pre": 0.891,
+"T_post": 1790893800,
+"p_post": 0.1835,
+"bucket": 300,
+"last": 1790893500
+},
+{
+"c": "0x0c1a3eed16beeba8929f58dfc9688dd98bad8404f2b3acf0059efda69fa5d460",
+"slug": "will-mohammed-bin-abdulrahman-al-thani-attend-a-us-x-iran-diplomatic-meeting-by-december-31-2026-2",
+"T_pre": 1790911200,
+"p_pre": 0.325,
+"T_post": 1790911800,
+"p_post": 0.74,
+"bucket": 300,
+"last": 1790911200
+},
+{
+"c": "0x08f9b1643d8bd2ab639da3e90ef88f7d15d62831c80e6accbed606ab053ef74d",
+"slug": "us-x-iran-ceasefire-continues-through-october-5",
+"T_pre": 1791039300,
+"p_pre": 0.255,
+"T_post": 1791039600,
+"p_post": 0.735,
+"bucket": 300,
+"last": 1791044400
+},
+{
+"c": "0x0d9c9c308211e9008331e33be346c44c50da2d879ff6a739676ab553ea5b5297",
+"slug": "will-lula-win-the-most-votes-in-the-second-round-of-the-brazil-presidential-election-from-amapa",
+"T_pre": 1791218400,
+"p_pre": 0.13,
+"T_post": 1791219000,
+"p_post": 0.66,
+"bucket": 300,
+"last": 1791218400
+},
+{
+"c": "0x002341871854e39158ec683fd0583a3000210a5f31ce5cc4a4b3cc7aec1ed900",
+"slug": "will-yashar-win-the-second-most-seats-israel-2026",
+"T_pre": 1791225600,
+"p_pre": 0.19,
+"T_post": 1791225900,
+"p_post": 0.6,
+"bucket": 300,
+"last": 1791225600
+},
+{
+"c": "0x0cbb08c4ff96eea8aeb7932bc6b030caf52333e10a93ead776a8b9cf9ce77350",
+"slug": "lula-x-flavio-bolsonaro-debate-before-second-round",
+"T_pre": 1791283500,
+"p_pre": 0.245,
+"T_post": 1791284100,
+"p_post": 0.71,
+"bucket": 300,
+"last": 1791283800
+},
+{
+"c": "0x04fb634139d4654febf4b62c425b209806e06d9eff93ac2e7c5301ecdaf5e4ca",
+"slug": "us-x-iran-ceasefire-continues-through-october-22",
+"T_pre": 1791985200,
+"p_pre": 0.5,
+"T_post": 1791985800,
+"p_post": 0.92,
+"bucket": 300,
+"last": 1791985500
+},
+{
+"c": "0x0c5fdd1f8d8efa97620737cc3d748bb94ec1582aaba5f328fd6d8b414fecd1c4",
+"slug": "paris-curfew-by-october-24",
+"T_pre": 1792286400,
+"p_pre": 0.5,
+"T_post": 1792287000,
+"p_post": 0.045,
+"bucket": 300,
+"last": 1792291200
+},
+{
+"c": "0x0c5fdd1f8d8efa97620737cc3d748bb94ec1582aaba5f328fd6d8b414fecd1c4",
+"slug": "paris-curfew-by-october-24",
+"T_pre": 1792428600,
+"p_pre": 0.36,
+"T_post": 1792429200,
+"p_post": 0.895,
+"bucket": 300,
+"last": 1792429800
+},
+{
+"c": "0x0a9dca54cd3c0a1075cef28fe33f25717d88cceb9e085b214ebb8ae4e4c57575",
+"slug": "will-dejan-soskic-be-the-next-prime-minister-of-serbia",
+"T_pre": 1792727100,
+"p_pre": 0.495,
+"T_post": 1792727400,
+"p_post": 0.01,
+"bucket": 300,
+"last": 1792727100
+},
+{
+"c": "0x056e08babb69fb7c6ee2c5e9f436c618bad69b45c83a1d70e076eafd4e138c87",
+"slug": "will-james-fishback-win-the-2028-us-presidential-election",
+"T_pre": 1793206800,
+"p_pre": 0.475,
+"T_post": 1793207400,
+"p_post": 0.0255,
+"bucket": 300,
+"last": 1793207100
+},
+{
+"c": "0x0c9ada12c527451fbdd43c0397a8a006b8aaf2a01567ae069d37220b51937595",
+"slug": "will-karen-bass-win-the-2026-los-angeles-mayoral-election",
+"T_pre": 1793765400,
+"p_pre": 0.69,
+"T_post": 1793766000,
+"p_post": 0.085,
+"bucket": 300,
+"last": 1793765700
+},
+{
+"c": "0x03aaf0743fea4b3399b3b1f15734186b427e3ed3dbfb06b68aff49f19c8f2de5",
+"slug": "syrian-troops-enter-yemen-by-december-31-2026",
+"T_pre": 1794482100,
+"p_pre": 0.275,
+"T_post": 1794482700,
+"p_post": 0.675,
+"bucket": 300,
+"last": 1794482100
+}
+]

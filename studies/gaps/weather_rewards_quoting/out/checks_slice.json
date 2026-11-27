@@ -1,0 +1,29 @@
+{
+ "yes_fills_040_060": {
+  "n": 793,
+  "events": 99,
+  "yes_win_rate_by_fill": 0.45649432534678436,
+  "mean_price": 0.4968095838587642,
+  "yes_win_rate_by_event": 0.48484848484848486,
+  "wilson_by_event": [
+   0.3888205792655413,
+   0.5820083459942758
+  ]
+ },
+ "no_fills_040_060": {
+  "n": 829,
+  "no_win_rate_by_fill": 0.5319662243667069,
+  "mean_price": 0.4992014475271411
+ },
+ "max_reward_over_rate": 0.15104697880070417,
+ "share_range": [
+  0.0,
+  1.0
+ ],
+ "minute_range_utc": [
+  "2026-10-02 00:04:00",
+  "2026-10-02 23:59:00"
+ ],
+ "valid_quote_instants_pct": 99.03040034584446,
+ "maker_fee": 0.0
+}

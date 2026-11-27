@@ -1,0 +1,5 @@
+series,family,selected,eligible_variants,tune_markets,tune_trades,tune_net_c,tune_t,tune_usd_day,rep_markets,rep_trades,rep_net_c,rep_se_c,rep_t,rep_net_pct,rep_usd_day,rep_win
+eth-5m,M4,D5_thr0.01,12,288,12564,0.7160511116927847,0.9685815750657446,238.8761396276411,0,0,,,,,,
+eth-5m,M5,mrg0.03,0,11,151,-4.104992850142398,-0.30271519786665435,-21.5959565056023,0,0,,,,,,
+btc-15m,M4,D0_thr0.04,12,95,2141,4.84261940441881,2.0972434536834816,449.52665963875535,0,0,,,,,,
+btc-15m,M5,mrg0.03,0,4,44,41.2939987998455,1.788550112966285,95.22177936078214,0,0,,,,,,

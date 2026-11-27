@@ -1,0 +1,66 @@
+[
+ {
+  "series": "eth-5m",
+  "n": 288,
+  "ok": 288,
+  "miss": 0,
+  "fail": 0,
+  "rows": 62123
+ },
+ {
+  "series": "btc-15m",
+  "n": 96,
+  "ok": 96,
+  "miss": 0,
+  "fail": 0,
+  "rows": 84466
+ },
+ {
+  "series": "eth-5m",
+  "n": 1726,
+  "ok": 1726,
+  "miss": 0,
+  "fail": 0,
+  "rows": 415563
+ },
+ {
+  "series": "eth-15m",
+  "n": 576,
+  "ok": 576,
+  "miss": 0,
+  "fail": 0,
+  "rows": 149438
+ },
+ {
+  "series": "sol-15m",
+  "n": 576,
+  "ok": 576,
+  "miss": 0,
+  "fail": 0,
+  "rows": 47963
+ },
+ {
+  "series": "xrp-15m",
+  "n": 576,
+  "ok": 576,
+  "miss": 0,
+  "fail": 0,
+  "rows": 29071
+ },
+ {
+  "series": "btc-15m",
+  "n": 576,
+  "ok": 576,
+  "miss": 0,
+  "fail": 0,
+  "rows": 411812
+ },
+ {
+  "series": "btc-5m",
+  "n": 300,
+  "ok": 300,
+  "miss": 0,
+  "fail": 0,
+  "rows": 458394
+ }
+]

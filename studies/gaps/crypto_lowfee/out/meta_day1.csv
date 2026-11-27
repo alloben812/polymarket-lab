@@ -1,0 +1,3 @@
+series,fee_rate_meta,expected_rate,twap_lookback,g_nan_seconds,up_share,tune_markets,report_markets
+eth-5m,"{""0.01"": 288}",0.01,"{""60"": 288}",0,0.4930555555555556,288,0
+btc-15m,"{""0.05"": 96}",0.05,"{""60"": 96}",0,0.46875,96,0

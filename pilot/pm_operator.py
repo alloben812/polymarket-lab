@@ -31,8 +31,9 @@ Subcommands
   check F   validate a control file and print what each action would run (no state, no network)
   status    print the local state, ARMED and limits (no network)
   selftest  throwaway git repositories and fake programs: whitelist, ranges, replay, ARMED, limits,
-            stale actions, sleep, STOP, report scrubbing, report branch, untouched working copy, and the
-            attacks of the security review (REVIEW-operator.md: M1-M3, S1-S6, S8, S9)
+            stale actions, sleep, STOP, report scrubbing, report branch, untouched working copy, the
+            attacks of the security review (REVIEW-operator.md: M1-M3, S1-S6, S8, S9) and the two findings of
+            its verification (loss limits fail closed; neutral commit identity)
 
 Exit codes: 0 ok, 2 refused (bad control file, second instance), 1 error.
 Only the Python standard library is used; git must be installed.
@@ -59,7 +60,7 @@ from datetime import datetime, timezone
 from decimal import ROUND_FLOOR, Decimal, InvalidOperation
 from pathlib import Path
 
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 
 # ----------------------------------------------------------------------------- fixed settings
 CONTROL_BRANCH = "live-control"
@@ -2124,6 +2125,14 @@ def cmd_selftest(a) -> int:
         def events(op, **kw):
             return [e for e in op.st["events"] if all(e.get(k) == v for k, v in kw.items())]
 
+        def ledger_of(op) -> dict:
+            """op.ledger() plus the loss for the limits; an error is returned, not raised (a FAIL, not a crash)."""
+            try:
+                lg = dict(op.ledger(), loss_today=op.pnl()["loss_today_usd"])
+            except LedgerError as e:
+                return defaultdict(lambda: None, error=str(e), loss_today=Decimal(0))
+            return lg
+
         # --- 4. control channel, replay -------------------------------------------------------------------------
         print("control channel and replay protection")
         op = new_op()
@@ -2306,7 +2315,7 @@ def cmd_selftest(a) -> int:
             {"type": "order", "exp": "probe", "mode": "live", "key": "k3", "day": today, "cost": "0.50",
              "pnl": "-0.50"},
             {"type": "order", "exp": "probe", "mode": "dry-run", "key": "k4", "day": today, "pnl": "-9"})) + "\n{torn")
-        lg = op.ledger()
+        lg = ledger_of(op)
         expect("ledger: unknown cost and no final record count in full; dry-run rows ignored; the torn line counts "
                "as one window lost (5.00)",
                lg["realised_total"] == Decimal("-0.50") and lg["at_risk_total"] == Decimal("8.00")
@@ -2329,7 +2338,7 @@ def cmd_selftest(a) -> int:
         fav.append({"type": "decision", "key": "k5", "sent": False, "ticket": "10", "day": today, "mode": "live"})
         fav.append({"type": "decision", "key": "k7", "sent": True, "ticket": "10", "day": today, "mode": "dry-run"})
         ff.write_text("\n".join(json.dumps(r) for r in fav) + "\n")
-        lg = op.ledger()
+        lg = ledger_of(op)
         expect("exp_fav ledger: won +0.39, lost -10.00, unknown fill unresolved 10.00 at risk, unfilled 0",
                lg["realised_total"] == Decimal("-9.61") and lg["at_risk_total"] == Decimal("10")
                and lg["realised_today"] == Decimal("-9.61"), str(lg))
@@ -2558,7 +2567,7 @@ def cmd_selftest(a) -> int:
         for f in (pilot / "out").glob("*.jsonl"):
             f.unlink()
         if op.stop_file.exists():
-            op.stop_file.unlink()
+            op.stop_file.unlink(missing_ok=True)
         (sd / "fake-balance").write_text("200")
         (sd / "fake-pnl").write_text("0")
         arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
@@ -2583,12 +2592,12 @@ def cmd_selftest(a) -> int:
                                           "cost": "1.00", "notional": "2.00", "pnl": "lost"}) + "\n")
         op.st["dirty"] = True
         op.cycle()
-        lg = op.ledger()
+        lg = ledger_of(op)
         rep, md = published()
         expect("finding 1, exp_bids format: two lines not understood during a live run: no crash, counted as lost "
                "(5.00 for the unknown order, its notional 2.00 for the other)",
                len(events(op, outcome="error")) == n_err and lg["unreadable"] == 2
-               and lg["unreadable_usd"] == Decimal("7.00") and op.pnl()["loss_today_usd"] >= 7, str(lg))
+               and lg["unreadable_usd"] == Decimal("7.00") and lg["loss_today"] >= 7, str(lg))
         expect("finding 1, exp_bids format: the live run goes on (7.00 < daily 12) and the report shows the lines",
                op.child is not None and not op.stop_file.exists() and op.st.get("report_error") is None
                and rep["pnl"]["ledger_unreadable_lines"] == 2 and rep["pnl"]["ledger_unreadable_worst_usd"] == "7.00"
@@ -2599,7 +2608,7 @@ def cmd_selftest(a) -> int:
         fav_bad.write_text(json.dumps({"type": "decision", "key": "fbad", "sent": True, "ticket": "ten",
                                        "outcome": "Yes", "day": today, "t": time.time(), "mode": "live"}) + "\n")
         cycles(op, until=lambda o: o.child is None)
-        lg = op.ledger()
+        lg = ledger_of(op)
         rep, md = published()
         expect("finding 1, exp_fav format: a ticket 'ten' during a live run: no crash, counted as a whole ticket "
                "(10.00) lost", len(events(op, outcome="error")) == n_err and lg["unreadable"] == 3
@@ -2611,7 +2620,7 @@ def cmd_selftest(a) -> int:
         # an error while reading the records (a record file that cannot be read) during a live run
         bids_bad.unlink()
         fav_bad.unlink()
-        op.stop_file.unlink()
+        op.stop_file.unlink(missing_ok=True)
         op.st.update(limit_hit=None)
         push_control(25, [{"id": "f3live", "program": "exp_bids", "cmd": "run",
                            "params": {"config": "tails", "windows": 36, "live": True}}])
@@ -2634,7 +2643,7 @@ def cmd_selftest(a) -> int:
                and "IsADirectoryError" in rep["records_error"]["reason"] and rep["stop_file"] and rep.get("pnl") == {}
                and "Записи программ не прочитаны" in md and not op.scrub.leaks(json.dumps(rep) + md)
                and str(tmp) not in json.dumps(rep) + md, f"{rep.get('records_error')} {op.st.get('report_error')}")
-        op.stop_file.unlink()                              # the owner removes STOP, but the records are still broken
+        op.stop_file.unlink(missing_ok=True)                              # the owner removes STOP, but the records are still broken
         push_control(26, [{"id": "f3again", "program": "exp_bids", "cmd": "run",
                            "params": {"config": "tails", "windows": 2, "live": True}}])
         cycles(op, n=2)
@@ -2647,7 +2656,7 @@ def cmd_selftest(a) -> int:
                events(op, outcome="recovered") and op.st.get("ledger_error") is None and op.stop_file.exists()
                and published()[0].get("records_error") is None)
         # an error while computing profit and loss (a balance in the state that is not a number), no live run
-        op.stop_file.unlink()
+        op.stop_file.unlink(missing_ok=True)
         op.st["balance"] = {"usd": "garbage", "utc": utc(time.time()), "ts": time.time(), "ledger_net": "0"}
         op.cycle()
         rep, md = published()
@@ -2656,7 +2665,7 @@ def cmd_selftest(a) -> int:
                and "profit and loss not computed" in rep["records_error"]["reason"]
                and op.st.get("report_error") is None, str(rep.get("records_error")))
         op.st["balance"] = None
-        op.stop_file.unlink()
+        op.stop_file.unlink(missing_ok=True)
         op.cycle()
         # an unexpected exception inside the calculation itself (fav_trades raising): fail closed, report published
         real_fav_trades = globals()["fav_trades"]
@@ -2674,7 +2683,7 @@ def cmd_selftest(a) -> int:
                op.stop_file.exists() and rep.get("records_error") and "ZeroDivisionError" in rep["records_error"]["reason"]
                and op.st.get("report_error") is None, str(rep.get("records_error")))
         op.cycle()
-        op.stop_file.unlink()
+        op.stop_file.unlink(missing_ok=True)
         for f in (pilot / "out").glob("*.jsonl"):
             f.unlink()
         op.st.update(baseline=None, balance=None, day_open=None, milestones_reached=0, limit_hit=None,

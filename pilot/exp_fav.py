@@ -66,7 +66,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))   # smoke.py sits next 
 import smoke  # noqa: E402
 from smoke import Refusal  # noqa: E402
 
-VERSION = "exp_fav 1.0 (2026-11-27)"
+VERSION = "exp_fav 1.1 (2026-11-27, fixes of REVIEW-exp_fav.md M1-M3, S1-S4, S6, S8, S9)"
 RULE_SOURCE = "docs/forward-tests.md v1.0 (2026-11-27), lead 3 (Зацепка 3)"
 
 # ----------------------------------------------------------------------------- rule (forward-tests.md v1.0)
@@ -110,6 +110,8 @@ HOME_DIR = Path("~/.polymarket-pilot").expanduser()
 STOP_FILE = HOME_DIR / "STOP"                                  # shared with exp_bids.py: stops new orders
 HALT_FILE = HOME_DIR / "EXP_FAV_HALT"                          # permanent stop; only a human removes it
 LOCK_FILE = HOME_DIR / "exp_fav.lock"
+BIDS_LOCK_FILE = HOME_DIR / "exp_bids.live.lock"               # exp_bids.py's live lock: held too in live mode
+WATERMARK_FILE = HOME_DIR / "exp_fav.live-records.json"        # how many live decisions were ever written
 CLOB_TIME_URL = "https://clob.polymarket.com/time"
 ADDRESS_RE = re.compile(r"(?<![0-9a-fA-F])0x[0-9a-fA-F]{40}(?![0-9a-fA-F])")
 MONTHS = ("january|february|march|april|may|june|july|august|september|october|november|december")
@@ -152,6 +154,23 @@ def fee_formula(shares: Decimal, price: Decimal, rate: Decimal = FEE_RATE) -> De
     return (D(shares) * D(rate) * D(price) * (1 - D(price))).quantize(Decimal("0.00001"), rounding=ROUND_HALF_UP)
 
 
+def fill_from_trades(trades: list[dict], rate: Decimal = FEE_RATE) -> tuple[Decimal, Decimal | None, Decimal | None]:
+    """(shares, average fill price, fee by formula) from the exchange's own trade rows of one order.
+    The price is the share-weighted mean of the maker legs (the real levels hit); without legs, the rows' prices."""
+    shares = sum((D(t["size"]) for t in trades), Decimal(0))
+    if shares <= 0:
+        return Decimal(0), None, None
+    legs = [(D(p), D(s)) for t in trades for p, s in (t.get("legs") or [])]
+    leg_sh = sum((s for _, s in legs), Decimal(0))
+    if leg_sh > 0:
+        avg = sum((p * s for p, s in legs), Decimal(0)) / leg_sh
+        fee = sum((fee_formula(s, p, rate) for p, s in legs), Decimal(0))
+    else:
+        avg = sum((D(t["price"]) * D(t["size"]) for t in trades), Decimal(0)) / shares
+        fee = fee_formula(shares, avg, rate)
+    return shares, avg, fee
+
+
 def ticks(diff: Decimal | None, tick: Decimal | None) -> Decimal | None:
     if diff is None or not tick:
         return None
@@ -162,7 +181,7 @@ def code_sha256() -> str:
     return hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
 
 
-def acquire_lock(path: Path):
+def acquire_lock(path: Path, held_by: str = "another exp_fav.py session is running"):
     """Exclusive lock held for the life of the process (released on exit, crash or kill)."""
     path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     f = open(path, "a")
@@ -170,8 +189,30 @@ def acquire_lock(path: Path):
         fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
         f.close()
-        raise Refusal(f"another exp_fav.py session is running (lock {path}); one session at a time") from None
+        raise Refusal(f"{held_by} (lock {path}); one session at a time") from None
     return f
+
+
+def read_watermark() -> int:
+    """Live decisions ever written by this program on this Mac (kept outside the checkout, S1)."""
+    if not WATERMARK_FILE.exists():
+        return 0
+    try:
+        return int(json.loads(WATERMARK_FILE.read_text())["live_decisions"])
+    except Exception:  # noqa: BLE001
+        raise Refusal(f"{WATERMARK_FILE} is not readable; it guards the live records; fix it by hand") from None
+
+
+def write_watermark(n: int) -> None:
+    WATERMARK_FILE.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    tmp = WATERMARK_FILE.with_suffix(".tmp")
+    tmp.write_text(json.dumps({"live_decisions": n, "records_dir": str(OUT_DIR),
+                               "updated_utc": utc(time.time())}) + "\n")
+    os.replace(tmp, WATERMARK_FILE)
+
+
+def count_live_decisions() -> int:
+    return sum(1 for r in read_records(record_files(True), strict=True) if r.get("type") == "decision")
 
 
 def check_ticket(x) -> Decimal:
@@ -440,13 +481,14 @@ class Ledger:
 
     def open_exposure(self) -> Decimal:
         return sum((t["worst_cost"] for t in self.trades.values()
-                    if t["state"] in ("filled", "unknown") and t["won"] is None), Decimal(0))
+                    if t["state"] in ("filled", "unknown") and not t["resolved"]), Decimal(0))
 
     def losses(self) -> tuple[int, Decimal]:
-        """Losing trades and realised loss (USD) since the last time the halt file was removed by hand."""
+        """Losing trades and realised loss (USD) since the last time the halt file was removed by hand.
+        A split result that lost money counts as a losing trade (conservative)."""
         n, usd = 0, Decimal(0)
         for t in self.trades.values():
-            if t["won"] is False and t["state"] in ("filled", "unknown"):
+            if t["resolved"] and (t["won"] is False or t["loss"] > 0) and t["state"] in ("filled", "unknown"):
                 if self.cleared_at is not None and (t["result_t"] or 0) <= self.cleared_at:
                     continue
                 n += 1
@@ -464,7 +506,8 @@ def build_ledger(rows: list[dict]) -> Ledger:
                 L.consumed.add(r["key"])              # a decision skipped by a cap still consumes the market
                 continue
             if typ == "order" and r.get("post") == "late-check" and "order" in by[r["key"]]:
-                # two exchange reads (CLOB trades, activity feed) found no fill for an order whose post failed
+                # after resolution, three exchange reads (CLOB trades, activity feed, token balance) settled an
+                # order whose fill was unknown: unfilled, filled at the real cost, or still unknown (worst case)
                 by[r["key"]]["order"] = {**by[r["key"]]["order"], "fill_state": r["fill_state"],
                                          "filled_shares": r["filled_shares"], "cost": r["cost"]}
                 continue
@@ -491,15 +534,23 @@ def build_ledger(rows: list[dict]) -> Ledger:
         won = None
         loss = Decimal(0)
         result_t = None
+        resolved = False
         if res is not None and res.get("winner") is not None and state in ("filled", "unknown"):
             result_t = res["t"]
+            resolved = True
             won = res["winner"] == dec["outcome"]
             if res.get("winner_is_split"):
+                # S8: a split is resolved too (it leaves the open exposure); loss = cost - payout x shares
                 won = None
+                payout = D(res.get("our_payout") or "0.5")
+                if state == "filled" and shares is not None:
+                    loss = max(Decimal(0), cost - payout * shares)
+                else:
+                    loss = ticket                                     # unknown fill: worst case
             elif not won:
                 loss = cost if state == "filled" else ticket          # unknown fill: worst case
         L.trades[k] = {"day": dec["day"], "state": state, "shares": shares, "worst_cost": cost if state == "filled" else ticket,
-                       "won": won, "loss": loss, "result_t": result_t, "outcome": dec["outcome"]}
+                       "won": won, "loss": loss, "result_t": result_t, "outcome": dec["outcome"], "resolved": resolved}
     return L
 
 
@@ -702,6 +753,8 @@ class RealEnv:
         for t in self.c.list_account_trades(asset_id=token, after=after).iter_items():
             if t.trader_side != "TAKER" or t.side != "BUY":
                 continue
+            if str(t.status).upper().split(".")[-1] == "FAILED":   # S4: terminal, settlement failed: no fill
+                continue
             legs = []
             for mo in t.maker_orders:
                 p = D(mo.price) if str(mo.asset_id) == str(token) else 1 - D(mo.price)   # complement BUY maker
@@ -727,6 +780,20 @@ class RealEnv:
 
     def balance(self) -> Decimal:
         return Decimal(self.c.get_balance_allowance(asset_type="COLLATERAL").balance) / smoke.USDC_UNIT
+
+    def token_balance(self, token: str) -> Decimal:
+        """Shares of `token` the account holds (S3: the authoritative third source after an unknown outcome).
+        Raises if neither asset type could be read, so an unreadable balance never looks like zero."""
+        best, read = Decimal(0), False
+        for typ in ("CONDITIONAL", "CONDITIONAL-V2"):
+            try:
+                b = Decimal(self.c.get_balance_allowance(asset_type=typ, token_id=token).balance) / smoke.USDC_UNIT
+                best, read = max(best, b), True
+            except Exception:  # noqa: BLE001
+                continue
+        if not read:
+            raise RuntimeError("token balance not readable")
+        return best
 
     def account_traded(self, tokens: list[str]) -> bool:
         for tok in tokens:
@@ -790,6 +857,8 @@ class Session:
         t = self.env.wall()
         r = {"type": typ, "t": t, "t_utc": utc(t), "mode": self.mode, "session": self.session, **kw}
         append_record(r, self.live, t)
+        if self.live and typ == "decision":           # S1: the watermark outside the checkout follows the records
+            write_watermark(max(count_live_decisions(), read_watermark()))
         return r
 
     def ledger(self) -> Ledger:
@@ -1125,52 +1194,85 @@ class Session:
         oid = resp["order_id"]
         making, taking = D(resp["making"]), D(resp["taking"])
         extra = {}
+        resting = status in ("live", "unmatched")        # docs: 'unmatched' = placed on the book after the delay
+        final = status == "matched"
         if status == "delayed":
             st = self.follow_delayed(oid)
             extra["delayed_final"] = st
+            # M3: get_order's price is the order's own limit, never a fill price; only size_matched is used
+            making = Decimal(0)
             if st and st.get("final"):
                 taking = D(st["size_matched"])
-                making = (taking * D(st["price"])) if taking > 0 else Decimal(0)
                 status = "delayed->" + st["status"].lower()
-        elif status == "live":
+                final = True
+                resting = st["status"].upper() == "UNMATCHED"
+            elif st and str(st["status"]).upper().split(".")[-1] == "LIVE":
+                status, resting = "delayed->live", True
+        if resting:
             ok = False
             try:
-                ok = env.cancel(oid)
+                ok = bool(env.cancel(oid))
             except Exception as e:  # noqa: BLE001
                 extra["cancel_error"] = scrub(type(e).__name__)
             extra["cancelled_resting_remainder"] = ok
-            out(f"    {m.slug}: WARNING: FAK reported 'live'; cancel {'confirmed' if ok else 'NOT confirmed'}")
+            out(f"    {m.slug}: WARNING: FAK reported '{status}'; cancel {'confirmed' if ok else 'NOT confirmed'}")
+            if not ok:                                   # M2: a remainder may rest on the book and fill later
+                extra["resting_remainder_possible"] = True
+                self.begin_stop(f"a FAK was reported '{status}' and its cancel was not confirmed; check open orders "
+                                f"by hand on polymarket.com")
         if making > 0 and taking > 0 and making / taking > 1:          # defensive: BUY making = USD, taking = shares
             making, taking = taking, making
-        known = status == "matched" or (status.startswith("delayed->") and extra.get("delayed_final", {}).get("final"))
-        trades = []
+        trades, trades_ok = [], False
         try:
             trades = [t for t in env.trades(token, t_d) if t["taker_order_id"] == oid or t["id"] in resp["trade_ids"]]
+            trades_ok = True
         except Exception as e:  # noqa: BLE001
             extra["trades_error"] = scrub(type(e).__name__)
-        shares_tr = sum((D(t["size"]) for t in trades), Decimal(0))
-        if known:
-            shares = taking
-            state = "filled" if shares > 0 else "unfilled"
-        elif shares_tr > 0:
-            shares, state = shares_tr, "filled"
-        else:
+        shares_tr, avg_tr, fee_tr = fill_from_trades(trades, m.rate)
+        final_status = status.split("->")[-1].upper()
+        # M1/M2: 'unfilled' only from a definite final state with nothing matched AND an empty trades list;
+        # every other unclear shape is 'unknown' (counted at the full ticket until the late check).
+        if resting and not extra.get("cancelled_resting_remainder"):
+            shares, state = (shares_tr or None), "unknown"
+        elif shares_tr > 0 or (final and taking > 0):
+            shares, state = max(shares_tr, taking if final else Decimal(0)), "filled"
+            if shares_tr > 0 and final and taking > 0 and abs(shares_tr - taking) > Decimal("0.01"):
+                extra["shares_sources_disagree"] = True
+        elif (final and final_status.startswith(("CANCELED", "CANCELLED", "INVALID")) and taking == 0
+              and trades_ok):
+            shares, state = Decimal(0), "unfilled"
+        else:                                            # 'matched' with no amounts, 'live', unreadable trades ...
             shares, state = None, "unknown"
-        avg = (making / taking) if taking > 0 else (
-            (sum(D(t["price"]) * D(t["size"]) for t in trades) / shares_tr) if shares_tr > 0 else None)
-        legs = [lg for t in trades for lg in t["legs"]]
-        f_formula = sum((fee_formula(D(s), D(p), m.rate) for p, s in legs), Decimal(0)) if legs else (
-            fee_formula(shares, avg, m.rate) if shares and avg else None)
-        cost = (shares * avg + (f_formula or 0)) if state == "filled" and avg is not None else (Decimal(0) if state == "unfilled" else None)
+        # M3: the fill price comes from the exchange's trade legs; the response figure is kept beside it
+        avg_resp = (making / taking) if (taking > 0 and making > 0 and not status.startswith("delayed")) else None
+        avg = avg_tr if avg_tr is not None else avg_resp
+        if avg_tr is not None and avg_resp is not None and abs(avg_tr - avg_resp) > Decimal("0.0005"):
+            extra["price_sources_disagree"] = True
+        if state == "filled":
+            f_formula = fee_tr if (avg_tr is not None and shares == shares_tr) else (
+                fee_formula(shares, avg, m.rate) if avg is not None else None)
+        else:
+            f_formula = None
+        if state == "filled" and avg is not None:
+            cost = shares * avg + (f_formula or 0)
+        elif state == "filled":                          # shares known, price not: worst case, the full ticket
+            cost = None
+            state = "unknown"
+        else:
+            cost = Decimal(0) if state == "unfilled" else None
         matched_ms = None
         mts = [t["match_time"] for t in trades if t.get("match_time")]
         if mts:
             matched_ms = round((min(mts) - t_d) * 1000)
         rec = self.rec("order", **base, post="accepted", order_id=oid, status=status, making=str(making),
                        taking=str(taking), trade_ids=resp["trade_ids"], fill_state=state,
-                       filled_shares=S(shares), fill_price=S(avg), fill_vs_ask_ticks=S(ticks((avg - ask) if avg else None, tick)),
+                       filled_shares=S(shares), fill_price=S(avg), fill_price_trades=S(avg_tr),
+                       fill_price_response=S(avg_resp), shares_trades=S(shares_tr),
+                       fill_vs_ask_ticks=S(ticks((avg - ask) if avg is not None else None, tick)),
                        fill_fraction=S((shares * ask / self.ticket).quantize(Decimal("0.001")) if shares else None),
-                       fee_formula=S(f_formula), cost=S(cost), trades=trades, decision_to_match_ms=matched_ms, **extra)
+                       fee_formula=S(f_formula), cost=S(cost), trades=trades,
+                       trade_statuses=sorted({str(t.get("status")) for t in trades}),
+                       decision_to_match_ms=matched_ms, **extra)
         out(f"    {m.slug}: SENT FAK BUY {self.ticket} USD @ <= {ask}: {status}; "
             + (f"filled {shares} @ {avg:.5f} ({ticks(avg - ask, tick)} ticks vs ask)" if state == "filled" and avg else state)
             + f"; decision->ack {base['decision_to_ack_ms']} ms")
@@ -1200,10 +1302,8 @@ class Session:
                 tr = self.env.trades(token, t_d)
             except Exception:  # noqa: BLE001
                 continue
-            if tr:
-                sh = sum((D(t["size"]) for t in tr), Decimal(0))
-                avg = sum(D(t["price"]) * D(t["size"]) for t in tr) / sh
-                f = sum((fee_formula(D(s), D(p)) for t in tr for p, s in t["legs"]), Decimal(0))
+            sh, avg, f = fill_from_trades(tr)
+            if sh > 0:
                 return {"fill_state": "filled", "filled_shares": str(sh), "fill_price": str(avg), "cost": str(sh * avg + f),
                         "fee_formula": str(f), "trades": tr, "reconciled": True}
         return {"fill_state": "unknown", "filled_shares": None, "cost": None, "reconciled": False,
@@ -1231,8 +1331,13 @@ class Session:
             t = L.trades.get(k, {})
             state = t.get("state", "dry-run")
             won = (winner == dec["outcome"]) if not split else None
+            payout = Decimal(1) if won else Decimal(0)
+            if split:                                   # RealEnv.result names a split "split <p0>/<p1>"
+                ps = re.findall(r"[0-9]+(?:\.[0-9]+)?", str(winner))
+                idx = int(dec.get("outcome_index", 0))
+                payout = D(ps[idx]) if len(ps) == 2 and D(ps[idx]) <= 1 else Decimal("0.5")
             self.rec("result", key=k, slug=m.slug, winner=winner, winner_is_split=split, our_outcome=dec["outcome"],
-                     won=won, fill_state=state)
+                     won=won, fill_state=state, our_payout=str(payout))
             out(f"  {m.slug}: RESULT {winner}; we bought {dec['outcome']} -> {'WON' if won else 'LOST' if won is False else 'split'}"
                 f" ({state})")
             if state == "unknown" and self.live:
@@ -1243,16 +1348,35 @@ class Session:
             self.check_halt()
 
     def late_reconcile(self, m: Mkt, dec: dict) -> None:
+        """After resolution, an order whose fill was unknown is settled from three exchange sources (S3): the CLOB
+        trades list, the activity feed and the token balance. 'unfilled' only if all three say nothing was bought;
+        'filled' at the real cost if the trades show it and the balance does not show more; else stays worst case."""
         try:
             tr = self.env.trades(dec["token"], dec["t_decision"])
             act = self.env.activity(m, dec["token"], dec["t_decision"])
         except Exception as e:  # noqa: BLE001
             out(f"  {m.slug}: late check of an unknown order failed ({scrub(type(e).__name__)}); stays worst case")
             return
-        if not tr and not act:
-            self.rec("order", key=m.key, slug=m.slug, post="late-check", fill_state="unfilled", filled_shares="0",
-                     cost="0", note="no trade in the CLOB trades list and no TRADE row in the activity feed")
-        out(f"  {m.slug}: late check of the unknown order: {len(tr)} trade(s), {len(act)} activity row(s)")
+        held = None
+        try:
+            held = D(self.env.token_balance(dec["token"]))
+        except Exception as e:  # noqa: BLE001
+            out(f"  {m.slug}: token balance not readable ({scrub(type(e).__name__)})")
+        sh, avg, fee = fill_from_trades(tr, m.rate)
+        common = dict(key=m.key, slug=m.slug, post="late-check", trades_seen=len(tr), activity_rows=len(act),
+                      token_balance=S(held))
+        if not tr and not act and held is not None and held == 0:
+            self.rec("order", **common, fill_state="unfilled", filled_shares="0", cost="0",
+                     note="no trade in the CLOB trades list, no TRADE row in the activity feed, token balance 0")
+        elif sh > 0 and held is not None and held <= sh + Decimal("0.01"):
+            self.rec("order", **common, fill_state="filled", filled_shares=str(sh), fill_price=str(avg),
+                     fee_formula=str(fee), cost=str(sh * avg + fee), trades=tr,
+                     note="fill found after resolution in the CLOB trades list")
+        else:
+            self.rec("order", **common, fill_state="unknown", filled_shares=None, cost=None,
+                     note="sources disagree or show a holding the trades do not explain: full ticket (worst case)")
+        out(f"  {m.slug}: late check of the unknown order: {len(tr)} trade(s), {len(act)} activity row(s), "
+            f"token balance {held if held is not None else 'unreadable'}")
 
     def fee_check(self, m: Mkt, dec: dict) -> None:
         ctx = self.decided.get(m.key)
@@ -1314,6 +1438,12 @@ class Session:
             if HALT_FILE.exists():
                 raise Refusal(f"halt file present ({HALT_FILE}): permanent stop. Read the report; remove the file "
                               f"by hand only if you decide to continue")
+            have, wrote = count_live_decisions(), read_watermark()
+            if have < wrote:                         # S1: records of earlier live sessions are not in this folder
+                raise Refusal(f"the live records in {OUT_DIR} hold {have} decision(s), but live sessions of this "
+                              f"program on this Mac wrote {wrote} (see {WATERMARK_FILE}). Copy every "
+                              f"exp-fav-*.jsonl of the earlier folder into {OUT_DIR}, then start again: the loss "
+                              f"count, the open positions and the daily cap need the whole ledger")
             L = self.ledger()
             if L.halted_at is not None and (L.cleared_at or 0) < L.halted_at and halt_reason(L):
                 self.rec("halt-cleared", note="halt file was removed by hand; losses are counted again from now")
@@ -1391,11 +1521,16 @@ def cmd_run(a) -> int:
     if a.hours is not None and not (0 < a.hours <= 24 * 14):
         raise Refusal("--hours must be between 0 and 336")
     lock = acquire_lock(LOCK_FILE)
+    bids_lock = None
     try:
         if STOP_FILE.exists():
             raise Refusal(f"STOP file present ({STOP_FILE}); remove it to start")
         wallet = smoke.wallet_env()
         if a.live:
+            # S2: exp_bids.py's caps do not see this program's trades and vice versa: never both live on one
+            # account. Holding its live lock for the whole session also keeps a live exp_bids.py from starting.
+            bids_lock = acquire_lock(BIDS_LOCK_FILE, "a live exp_bids.py session is running; never run exp_bids.py "
+                                                     "and exp_fav.py live at the same time")
             if HALT_FILE.exists():
                 raise Refusal(f"halt file present ({HALT_FILE}): permanent stop")
             key = smoke.load_private_key()
@@ -1422,6 +1557,8 @@ def cmd_run(a) -> int:
         finally:
             env.close()
     finally:
+        if bids_lock is not None:
+            bids_lock.close()
         lock.close()
 
 
@@ -1450,7 +1587,9 @@ def cmd_report(a) -> int:
         if r.get("type") in ("decision", "order", "twin", "fee", "result") and r.get("key"):
             g = by[r["key"]]
             if r["type"] == "order" and "order" in g and r.get("post") == "late-check":
-                g["order"] = {**g["order"], **{k: r[k] for k in ("fill_state", "filled_shares", "cost")}, "late_check": True}
+                g["order"] = {**g["order"], **{k: r[k] for k in ("fill_state", "filled_shares", "cost")},
+                              **({"fill_price": r["fill_price"], "fee_formula": r.get("fee_formula")}
+                                 if r.get("fill_state") == "filled" else {}), "late_check": True}
             else:
                 g.setdefault(r["type"], r)
         elif r.get("type") == "near":
@@ -1471,7 +1610,7 @@ def cmd_report(a) -> int:
            f"{'twin':>8} {'result':>6} {'pnl':>7}")
     out(hdr)
     slips, moves, twin_diff, acks, fees = [], [], [], [], []
-    wins = losses = unresolved = unfilled = unknown = 0
+    wins = losses = unresolved = unfilled = unknown = splits = disagree = 0
     net = Decimal(0)
     net_sent = Decimal(0)
     per_type = defaultdict(lambda: [0, 0, 0, Decimal(0)])
@@ -1509,7 +1648,16 @@ def cmd_report(a) -> int:
             fees.append((D(fe["fee_charged"]), D(fe["fee_formula_vwap"]), bool(fe.get("mismatch"))))
         won = rs.get("won") if rs else None
         pnl = None
-        if state == "filled" and won is not None and cost is not None and shares is not None:
+        if live and o.get("price_sources_disagree"):
+            disagree += 1
+        if rs and rs.get("winner_is_split") and state in ("filled", "unknown"):
+            pay = D(rs.get("our_payout") or "0.5")
+            pnl = (pay * shares - cost) if (state == "filled" and cost is not None and shares is not None) else -D(d["ticket"])
+            net += pnl
+            if d["sent"]:
+                net_sent += pnl
+            splits += 1
+        elif state == "filled" and won is not None and cost is not None and shares is not None:
             pnl = (shares if won else Decimal(0)) - cost
             net += pnl
             if d["sent"]:
@@ -1538,13 +1686,17 @@ def cmd_report(a) -> int:
             f"{tick:>5} {(f'{slip:+.1f}' if slip is not None else '-'):>5} "
             f"{(f'{f_f:.5f}' if f_f is not None else '-'):>7} {(f'{f_c:.5f}' if f_c is not None else '-'):>7} "
             f"{(str(o.get('decision_to_ack_ms')) if live and o.get('decision_to_ack_ms') is not None else '-'):>6} "
-            f"{tw_s:>8} {('won' if won else 'LOST' if won is False else '-'):>6} {(f'{pnl:+.3f}' if pnl is not None else '-'):>7}")
+            f"{tw_s:>8} {('won' if won else 'LOST' if won is False else 'split' if rs and rs.get('winner_is_split') else '-'):>6} "
+            f"{(f'{pnl:+.3f}' if pnl is not None else '-'):>7}")
     out("")
     out("  Slippage (fill price - ask at decision, in ticks of that market; a limit at the ask can only fill at or "
         "below it, so the cost of a moving book shows up as 'unfilled'):")
     c = Counter(str(s) for s in slips)
     out(f"    filled {len(slips)}: " + (", ".join(f"{k} ticks: {v}" for k, v in sorted(c.items(), key=lambda x: D(x[0]))) or "none")
         + f"; unfilled (FAK killed) {unfilled}; outcome unknown {unknown}")
+    if live:
+        out(f"    fill price from the exchange's trade legs; orders whose response amounts disagree with the trades by "
+            f"more than 0.0005: {disagree}")
     cm = Counter(str(x) for x in moves)
     out(f"    best ask {TWIN_DELTA_S} s after the decision minus the ask at decision, in ticks ({len(moves)} triggers): "
         + (", ".join(f"{k}: {v}" for k, v in sorted(cm.items(), key=lambda x: D(x[0]))) or "none"))
@@ -1562,7 +1714,7 @@ def cmd_report(a) -> int:
     else:
         out("    no fee rows yet" + ("" if live else " (dry-run: the paper fee is the formula)"))
     out("")
-    out(f"  Results: won {wins}, lost {losses}, filled but unresolved {unresolved}; net {net:+.3f} USD "
+    out(f"  Results: won {wins}, lost {losses}, split {splits}, filled but unresolved {unresolved}; net {net:+.3f} USD "
         f"(after fees, before redemption)")
     if not live:
         out(f"    paper stage counts every trigger (rows marked * were refused by a cap a live run applies); "
@@ -1603,6 +1755,13 @@ class FakeEnv:
         self.err_text = "ConnectError: timed out"
         self.geo_calls = 0
         self.traded_before: set = set()
+        self.fill_px: Decimal | None = None   # the trade prints at this price (default: the signed limit)
+        self.resp_px: Decimal | None = None   # 'matched' response amounts imply this price (default: the fill)
+        self.record_trades = True             # False: the trades list stays empty
+        self.partial: Decimal | None = None   # fraction of the order that fills
+        self.cancel_ok = True
+        self.split = False
+        self.held: dict[str, Decimal] = {}    # token balance override; default: the shares in the trade rows
 
     def wall(self):
         return self.t
@@ -1644,6 +1803,8 @@ class FakeEnv:
 
     def result(self, m):
         w = self.winner.get(m.key)
+        if w and self.split:
+            return "split 0.5/0.5", True
         return (w, False) if w else (None, False)
 
     def register(self, m, tick):
@@ -1668,28 +1829,40 @@ class FakeEnv:
             return {"ok": False, "code": "not_enough_balance", "message": "not enough balance / allowance"}
         if self.post_mode == "fak":
             return {"ok": False, "code": "fak_not_filled", "message": "no orders found to match with FAK order"}
-        price = mk / tk
+        limit = (mk / tk).quantize(Decimal("0.001"))
+        p = self.fill_px if self.fill_px is not None else limit
+        spend = mk * (self.partial if self.partial is not None else 1)
+        tk = (spend / p).quantize(Decimal("0.01"), rounding="ROUND_DOWN")   # a better price buys more shares
         tid = uuid.uuid4().hex
-        self.trade_rows[tok].append({"id": tid, "taker_order_id": oid, "price": str(price.quantize(Decimal("0.001"))),
-                                     "size": str(tk), "status": "MATCHED", "fee_rate_bps": "100", "match_time": self.t + 0.3,
-                                     "tx": "0x" + "cd" * 32, "legs": [[str(price.quantize(Decimal("0.001"))), str(tk)]]})
-        p = price.quantize(Decimal("0.001"))
-        self.activity_rows[tok].append({"amount": str(tk * p + fee_formula(tk, p) + self.fee_bump), "shares": str(tk),
-                                        "price": str(p), "t": self.t, "tx": "0x" + "cd" * 32})
+        if self.record_trades:
+            self.trade_rows[tok].append({"id": tid, "taker_order_id": oid, "price": str(p), "size": str(tk),
+                                         "status": "MATCHED", "fee_rate_bps": "100", "match_time": self.t + 0.3,
+                                         "tx": "0x" + "cd" * 32, "legs": [[str(p), str(tk)]]})
+            self.activity_rows[tok].append({"amount": str(tk * p + fee_formula(tk, p) + self.fee_bump), "shares": str(tk),
+                                            "price": str(p), "t": self.t, "tx": "0x" + "cd" * 32})
         if self.post_mode == "delayed":
-            self._delayed = (oid, tk, p)
+            self._delayed = (oid, tk, limit)
             return {"ok": True, "order_id": oid, "status": "delayed", "making": Decimal(0), "taking": Decimal(0), "trade_ids": []}
         if self.post_mode == "live":
             return {"ok": True, "order_id": oid, "status": "live", "making": Decimal(0), "taking": Decimal(0), "trade_ids": []}
-        return {"ok": True, "order_id": oid, "status": "matched", "making": tk * p, "taking": tk, "trade_ids": [tid]}
+        if self.post_mode == "matched0":     # success answer with empty amounts (the SDK parses '' as 0)
+            return {"ok": True, "order_id": oid, "status": "matched", "making": Decimal(0), "taking": Decimal(0),
+                    "trade_ids": [tid] if self.record_trades else []}
+        rp = self.resp_px if self.resp_px is not None else p
+        return {"ok": True, "order_id": oid, "status": "matched", "making": tk * rp, "taking": tk, "trade_ids": [tid]}
 
     def order_state(self, oid):
-        o, tk, p = self._delayed
-        return {"status": "MATCHED", "size_matched": tk, "price": p}
+        o, tk, limit = self._delayed
+        return {"status": "MATCHED", "size_matched": tk, "price": limit}   # like the API: price = the order's limit
 
     def cancel(self, oid):
         self.cancelled.append(oid)
-        return True
+        return self.cancel_ok
+
+    def token_balance(self, token):
+        if token in self.held:
+            return self.held[token]
+        return sum((D(r["size"]) for r in self.trade_rows[token]), Decimal(0))
 
     def trades(self, token, since):
         return [r for r in self.trade_rows[token] if r["match_time"] >= since - 5]
@@ -2193,6 +2366,8 @@ def main(argv=None) -> int:
     out = FavOut()
     smoke.out = out                       # smoke.py's helpers (key loading, geoblock) print through the same redactor
     a = build_parser().parse_args(argv)
+    if a.command == "selftest":
+        out.log_path = Path(os.devnull)   # S9: the selftest never writes into the real log (it logs to a temp file)
     mode = "LIVE" if getattr(a, "live", False) else "dry-run"
     out(f"=== exp_fav.py {a.command} {mode if a.command == 'run' else ''} "
         f"{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC ({VERSION})")

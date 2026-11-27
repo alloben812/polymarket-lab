@@ -262,7 +262,7 @@ class Recorder:
                         continue
                     q = self.replay.quote(t)
                     exch = int(reply["timestamp"])
-                    if q.book_exchange_ms is not None and exch < q.book_exchange_ms:
+                    if exch < max(q.book_exchange_ms or 0, q.bbo_exchange_ms or 0):
                         counts["older_rest"] += 1
                         continue
 

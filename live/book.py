@@ -45,6 +45,17 @@ class BookQuote:
     last_trade: Trade | None = None
     snapshot_source: str | None = None
     reason: str | None = None
+    bbo_exchange_ms: int | None = None
+
+
+@dataclass(frozen=True)
+class _BestQuote:
+    exchange_ms: int
+    bid: Decimal | None
+    ask: Decimal | None
+
+    def matches(self, bid: Decimal | None, ask: Decimal | None) -> bool:
+        return _matches_best(self.bid, bid, 0) and _matches_best(self.ask, ask, 1)
 
 
 @dataclass
@@ -57,9 +68,18 @@ class _TokenBook:
     snapshot_recv_ns: int | None = None
     book_recv_ns: int | None = None
     exchange_ms: int | None = None
+    best_quote: _BestQuote | None = None
     last_trade: Trade | None = None
     snapshot_source: str | None = None
     reason: str | None = None
+
+    @property
+    def snapshot_floor(self) -> int | None:
+        if self.best_quote is None:
+            return self.exchange_ms
+        if self.exchange_ms is None:
+            return self.best_quote.exchange_ms
+        return max(self.exchange_ms, self.best_quote.exchange_ms)
 
     def invalidate(self, status: str, reason: str | None = None) -> None:
         self.status = status
@@ -124,7 +144,7 @@ def _crossed(bid: Decimal | None, ask: Decimal | None) -> bool:
     return bid is not None and ask is not None and bid >= ask
 
 
-def _matches_best(value: str | None, actual: Decimal | None, empty: int) -> bool:
+def _matches_best(value: str | Decimal | None, actual: Decimal | None, empty: int) -> bool:
     # The raw feed uses bid 0 / ask 1 as sentinels for an empty side.
     return value is None or _price(value) == (empty if actual is None else actual)
 
@@ -298,7 +318,8 @@ class BookReplay:
     ) -> None:
         try:
             exchange_ms = _exchange_ms(payload)
-            if state.exchange_ms is not None and exchange_ms < state.exchange_ms:
+            floor = state.snapshot_floor if changes is None else state.exchange_ms
+            if floor is not None and exchange_ms < floor:
                 if changes is None or state.status == "ok":
                     state.invalidate("out_of_order", "exchange timestamp regressed")
                 return
@@ -319,6 +340,10 @@ class BookReplay:
             bid, ask = max(state.bids, default=None), min(state.asks, default=None)
             if _crossed(bid, ask):
                 state.invalidate("book_mismatch", "crossed book")
+                return
+            best = state.best_quote
+            if best is not None and exchange_ms <= best.exchange_ms and not best.matches(bid, ask):
+                state.invalidate("book_mismatch", "depth disagrees with an equally new or newer best_bid_ask")
                 return
             if changes is not None:
                 # Hints can describe the final batch state, even on its first row.
@@ -341,24 +366,29 @@ class BookReplay:
 
     @staticmethod
     def _check_best(state: _TokenBook, payload: Record) -> bool:
-        if state.status != "ok":
-            return False
         try:
             exchange_ms = _exchange_ms(payload)
-            if exchange_ms < state.exchange_ms:
+            floor = state.snapshot_floor
+            if floor is not None and exchange_ms < floor:
                 return False
-            agrees = _matches_best(
-                payload.get("best_bid"), max(state.bids, default=None), 0
-            ) and _matches_best(
-                payload.get("best_ask"), min(state.asks, default=None), 1
+            bid, ask = payload.get("best_bid"), payload.get("best_ask")
+            if bid is None and ask is None:
+                return False
+            best = _BestQuote(
+                exchange_ms,
+                _price(bid) if bid is not None else None,
+                _price(ask) if ask is not None else None,
             )
         except (TypeError, ValueError, InvalidOperation):
             return False
-        if agrees:
+
+        # BBO has no depth, but it can rule out a snapshot after a gap or
+        # mismatch. Keep it even while there is no book to compare against.
+        state.best_quote = best
+        if state.status != "ok":
             return False
-        # A top-of-book update has no quantities or deeper levels. A full
-        # snapshot at least this recent is needed before quoting depth again.
-        state.exchange_ms = exchange_ms
+        if best.matches(max(state.bids, default=None), min(state.asks, default=None)):
+            return False
         state.invalidate("book_mismatch", "best_bid_ask disagrees with the book")
         return True
 
@@ -396,10 +426,12 @@ class BookReplay:
         state = self._books.get(token)
         if state is None:
             return BookQuote(token, self.status_for(token))
+        bbo_exchange_ms = state.best_quote.exchange_ms if state.best_quote is not None else None
         if state.status != "ok":
             return BookQuote(
                 token, state.status, state.session,
-                book_exchange_ms=state.exchange_ms, reason=state.reason,
+                book_exchange_ms=state.snapshot_floor, reason=state.reason,
+                bbo_exchange_ms=bbo_exchange_ms,
             )
         observed = max(self._observed.get(state.session, 0), state.book_recv_ns)
         return BookQuote(
@@ -408,6 +440,7 @@ class BookReplay:
             tuple(sorted(state.asks.items())[:depth]),
             state.snapshot_recv_ns, state.book_recv_ns, state.exchange_ms,
             observed, state.last_trade, state.snapshot_source,
+            bbo_exchange_ms=bbo_exchange_ms,
         )
 
 

@@ -279,8 +279,8 @@ def test_independent_run_directories_restart_ordinals(tmp_path):
     assert len(list(iter_records([first, second]))) == 2
 
 
-def best_bid_ask(ns, exchange, *, token="up", bid, ask):
-    return event("ws", ns, payload={
+def best_bid_ask(ns, exchange, *, token="up", session="s1", bid, ask):
+    return event("ws", ns, session, payload={
         "event_type": "best_bid_ask", "asset_id": token, "timestamp": str(exchange),
         "best_bid": bid, "best_ask": ask,
     })
@@ -343,10 +343,13 @@ def test_older_bbo_and_matching_bbo_leave_book_clock_and_depth_intact():
     assert now.status == "ok"
     assert (now.bids, now.asks) == (initial.bids, initial.asks)
     assert now.book_exchange_ms == 20
+    assert now.bbo_exchange_ms == 21
     assert now.book_recv_ns == 1
     assert now.observed_recv_ns == 3
 
-    replay.apply(best_bid_ask(4, 20, bid="0.45", ask="0.60"))
+    assert replay.apply(best_bid_ask(4, 20, bid="0.45", ask="0.60")) == set()
+    assert replay.status_for("up") == "ok"
+    replay.apply(best_bid_ask(5, 21, bid="0.45", ask="0.60"))
     assert replay.status_for("up") == "book_mismatch"
 
 
@@ -368,17 +371,83 @@ def test_market_resolution_is_terminal_across_sessions_and_rest(tmp_path, resolv
         snapshot(10, token="down", session="s2"),
         event("gap", 11, "s2", tokens=["up"], reason="unsubscribed"),
         event("stop", 12, tokens=[]),
+        best_bid_ask(13, 1000, token="up", bid="0.49", ask="0.5"),
+        best_bid_ask(14, 1100, token="down", session="s2", bid="0.4", ask="0.6"),
     ]
     path = recording(tmp_path / "log.jsonl.gz", records)
 
     for token in ("up", "down"):
         assert replay_as_of([path], token, 4).status == "ok"
-        for cutoff in (5, 7, 8, 10, 12):
+        for cutoff in (5, 7, 8, 10, 12, 13, 14):
             quote = replay_as_of([path], token, cutoff)
             assert quote.status == "resolved"
             assert quote.bids == quote.asks == ()
+            assert quote.bbo_exchange_ms is None
     report = coverage(iter_records([path]))
     assert report.tokens["up"].intervals == ((3, 4),)
     assert report.tokens["down"].intervals == ((4, 4),)
     assert report.tokens["up"].status_changes["resolved"] == 1
     assert report.tokens["down"].status_changes["resolved"] == 1
+
+
+@pytest.mark.parametrize("first_bbo, later_ask, old_snapshot_ts, old_snapshot_ask", [
+    ("0.60", "0.90", 107, "0.60"),
+    (None, "0.50", 105, "0.45"),
+])
+def test_latest_bbo_blocks_stale_full_book(first_bbo, later_ask, old_snapshot_ts, old_snapshot_ask):
+    replay = BookReplay()
+    replay.apply(snapshot(1, exchange=100, asks=[{"price": "0.50", "size": "12"}]))
+    if first_bbo is not None:
+        replay.apply(best_bid_ask(2, 105, bid="0.40", ask=first_bbo))
+    replay.apply(best_bid_ask(3, 110, bid="0.40", ask=later_ask))
+    replay.apply(snapshot(4, exchange=old_snapshot_ts,
+                          asks=[{"price": old_snapshot_ask, "size": "12"}]))
+    unavailable = replay.quote("up")
+    assert unavailable.status == "out_of_order"
+    assert unavailable.bids == unavailable.asks == ()
+    assert unavailable.book_exchange_ms == unavailable.bbo_exchange_ms == 110
+
+    replay.apply(snapshot(5, exchange=110, asks=[{"price": "0.55", "size": "12"}]))
+    assert replay.status_for("up") == "book_mismatch"
+    replay.apply(snapshot(6, exchange=110, asks=[{"price": later_ask, "size": "11"}]))
+    assert replay.status_for("up") == "ok"
+    assert replay.quote("up").asks == ((D(later_ask), D("11")),)
+
+    replay.apply(snapshot(7, exchange=111, asks=[{"price": "0.75", "size": "12"}]))
+    quote = replay.quote("up")
+    assert quote.status == "ok"
+    assert quote.asks == ((D("0.75"), D("12")),)
+    assert quote.book_exchange_ms == 111
+    assert quote.bbo_exchange_ms == 110
+
+
+def test_empty_book_bbo_and_missing_snapshot():
+    replay = BookReplay()
+    replay.apply(best_bid_ask(1, 110, bid="0", ask="1"))
+    unavailable = replay.quote("up")
+    assert unavailable.status == "missing_snapshot"
+    assert unavailable.bbo_exchange_ms == 110
+
+    replay.apply(snapshot(2, exchange=109, bids=[], asks=[]))
+    assert replay.status_for("up") == "out_of_order"
+    replay.apply(snapshot(3, exchange=110, bids=[], asks=[]))
+    assert replay.status_for("up") == "ok"
+    assert replay.quote("up").bids == replay.quote("up").asks == ()
+
+    replay.apply(best_bid_ask(4, 111, bid=None, ask=None))
+    assert replay.quote("up").bbo_exchange_ms == 110
+    replay.apply(best_bid_ask(5, 112, bid=None, ask="0.70"))
+    assert replay.status_for("up") == "book_mismatch"
+    replay.apply(snapshot(6, exchange=112, bids=[], asks=[{"price": "0.70", "size": "3"}]))
+    assert replay.status_for("up") == "ok"
+
+
+def test_late_depth_updates_cannot_contradict_newer_bbo():
+    replay = BookReplay()
+    replay.apply(snapshot(1, exchange=100))
+    replay.apply(best_bid_ask(2, 110, bid="0.40", ask="0.60"))
+    replay.apply(change(3, row("SELL", "0.70", "20"), exchange=105))
+    assert replay.status_for("up") == "ok"
+    assert replay.quote("up").asks[-1] == (D("0.70"), D("20"))
+    replay.apply(change(4, row("SELL", "0.50", "3"), exchange=106))
+    assert replay.status_for("up") == "book_mismatch"

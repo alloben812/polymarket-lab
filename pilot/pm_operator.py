@@ -2205,28 +2205,31 @@ def cmd_selftest(a) -> int:
         arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
         push_control(22, [{"id": "m3live", "program": "exp_bids", "cmd": "run",
                            "params": {"config": "tails", "windows": 36, "live": True}}])
-        cycles(op, until=lambda o: events(o, id="m3live", outcome="started"))
         polls = []
+        real_poll = op.poll_control
 
         def boom():
             polls.append(1)
+            if len(polls) == 1:
+                return real_poll()                     # cycle 1 starts the live run
+            if len(polls) == 2:
+                op.armed_file.unlink()                 # the owner disarms; from now on every cycle raises
             raise RecursionError("maximum recursion depth exceeded (test)")
         op.poll_control = boom
         op.interval = 1
-        op.armed_file.unlink()
         try:
-            rc = op.serve(max_cycles=3)
+            rc = op.serve(max_cycles=4)
             escaped = None
         except Exception as e:  # noqa: BLE001
             rc, escaped = None, f"{type(e).__name__}: {e}"
         del op.poll_control
-        expect("M3: cycles that raise do not end the loop (3 cycles ran, one error event, serve returned)",
-               escaped is None and rc == 0 and len(polls) == 3
+        expect("M3: cycles that raise do not end the loop (4 cycles ran, one error event, serve returned)",
+               escaped is None and rc == 0 and len(polls) == 4 and events(op, id="m3live", outcome="started")
                and len(events(op, outcome="error", what="operator cycle")) == 1, f"{escaped} polls={len(polls)}")
         expect("M3: while cycles raise, removing ARMED still interrupts the live run",
                any("disarmed" in e.get("reason", "") for e in events(op, id="m3live", outcome="interrupt"))
                and op.child is None and events(op, id="m3live", outcome="interrupted"),
-               str([(e["outcome"], e.get("reason")) for e in events(op, id="m3live")]) + " child=" + str(op.child is None) + " SAID " + " / ".join(lines_said[-12:]))
+               str([(e["outcome"], e.get("reason")) for e in events(op, id="m3live")]))
         # M3: any exit of the loop, even an exception, interrupts the running program
         arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
         push_control(23, [{"id": "m3exit", "program": "exp_bids", "cmd": "run",
@@ -2346,6 +2349,8 @@ def cmd_selftest(a) -> int:
         sh("git", "push", "-q", "origin", f"HEAD:refs/heads/{REPORT_BRANCH}", cwd=att)
         push_control(31, [{"id": "evil", "program": "$(touch PWNED_BY_SHELL)", "cmd": "run"}])
         op.st["dirty"] = True
+        op.cycle()
+        push_control(32, [{"id": "rep32", "program": "exp_bids", "cmd": "report"}])
         op.cycle()
         tip = sh("git", "ls-tree", "-r", f"refs/heads/{REPORT_BRANCH}", cwd=origin)
         modes = sorted({ln.split()[0] for ln in tip.splitlines()})

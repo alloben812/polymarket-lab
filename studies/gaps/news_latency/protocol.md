@@ -177,3 +177,18 @@ Nothing else changes.
 ## Note on bucket requests (same time)
 Requests per market: 1,800 s for 31 Aug .. 27 Sep 02:00, 300 s for 27 Sep .. 26 Nov 00:00, 60 s for
 20 Nov .. 26 Nov 12:00 (one page). The 60 s series is used in the screen and for the 2-hour price of late jumps.
+
+## Amendment 2 (2026-11-27 18:30 UTC, execution budget; written by the agent that resumed the study, before any tape of the full candidate list, any confirmed jump or any rule output was read)
+The resumed run has about 110 minutes of wall-clock. Everything above stays; only the amount of work is capped, by
+rules that do not look at prices or outcomes:
+- Prices-history: the interrupted fetch (1,664 of 2,482 markets cached) is resumed to the end. If it is not finished by
+  19:00 UTC, the screen runs on the markets cached by then and the rest are listed as not screened.
+- Tapes: `s3_tapes.py` logic unchanged (same stop rule, same 600,000-row cap), run in 3 parallel workers over the
+  candidate markets in conditionId order. Hard stop 19:35 UTC; candidates whose tape is missing then are dropped as
+  "no tape file" and counted. Tapes that hit the row cap before the stop are counted as "truncated".
+- Labels: every confirmed jump is read once (question, event, tags, date, deadline) as section 4 says; there is no
+  separate reading of news for the label.
+- News timing (section 8): the 40 clusters are drawn exactly as `s9_news_sample.py` does and worked in the order of
+  the seeded draw (not by date) for at most 20 minutes of wall-clock; the number done is reported.
+- L2 (section 9): the 30-jump seeded draw of `s7_l2.py` is kept, but only the first 10 in draw order are analysed
+  (each hour file is 8-200 MB); if downloads exceed 15 minutes in total the rest are reported as not done.

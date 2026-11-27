@@ -22,11 +22,11 @@ def get(url):
 def main():
     path = os.path.join(OUT, "m3_markets.jsonl.gz")
     rows = []
-    off = 0
+    cur = None
     while True:
-        d = get(f"https://gamma-api.polymarket.com/markets?closed=false&limit=500&offset={off}")
-        if not d:
-            break
+        u = "https://gamma-api.polymarket.com/markets/keyset?closed=false&limit=500"
+        dd = get(u + (f"&after_cursor={cur}" if cur else ""))
+        d = dd.get("markets") or []
         for m in d:
             ev = (m.get("events") or [{}])[0]
             rows.append({"cid": m.get("conditionId"), "slug": m.get("slug"), "q": m.get("question", "")[:90],
@@ -34,8 +34,8 @@ def main():
                          "sd": m.get("secondsDelay", "ABSENT"), "v24": float(m.get("volume24hr") or 0),
                          "acc": m.get("acceptingOrders"), "series": ev.get("seriesSlug") or ev.get("ticker", "")[:40],
                          "start": m.get("gameStartTime") or m.get("eventStartTime")})
-        off += 500
-        if off > 200000:
+        cur = dd.get("next_cursor")
+        if not d or not cur or len(rows) > 300000:
             break
         time.sleep(0.15)
     with gzip.open(path, "wt") as f:

@@ -44,7 +44,7 @@ def main():
     print("todo", len(todo), "done", len(done), flush=True)
     t0 = time.time()
     n = {"ok": 0, "err": 0, "stopped": 0}
-    with ThreadPoolExecutor(3) as ex:
+    with ThreadPoolExecutor(2) as ex:
         for i, st in enumerate(ex.map(one, todo)):
             n[st] += 1
             if i % 250 == 0:

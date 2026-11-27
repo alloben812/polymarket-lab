@@ -13,7 +13,7 @@ OUT = ROOT / "studies/gaps/copy_trading/out"
 CACHE = ROOT / "data/gaps_copy"
 E0, E1 = 1794009600, 1795219200
 CATS = ["crypto", "sports", "politics", "weather", "economics", "mentions", "culture", "tech", "finance", "esports"]
-ADDR = re.compile(r"0x[0-9a-fA-F]{40}")
+ADDR = re.compile(r"0x[0-9a-fA-F]{40}(?![0-9a-fA-F])")
 REB = ["maker_rebate", "taker_rebate", "reward_income", "sponsored_income", "referral_income"]
 
 
@@ -27,11 +27,18 @@ def boards():
 
 def other_sources():
     s = set(a.lower() for a in ADDR.findall((ROOT / "catalog/raw/x1_wallets.md").read_text()))
-    for f in glob.glob(str(ROOT / "studies/wallets/*/README.md")) + glob.glob(str(ROOT / "studies/wallets/*/*.json")):
+    for f in glob.glob(str(ROOT / "studies/wallets/*/README.md")):
+        s |= set(a.lower() for a in ADDR.findall(Path(f).read_text(errors="ignore")))
+    # deviation 1 (results.md): only the SUBJECT wallet of each per-wallet json, not every address inside it
+    for f in glob.glob(str(ROOT / "studies/wallets/*/*.json")):
         try:
-            s |= set(a.lower() for a in ADDR.findall(Path(f).read_text(errors="ignore")))
+            d = json.load(open(f))
         except Exception:
-            pass
+            continue
+        if isinstance(d, dict):
+            for v in (d.get("wallet"), (d.get("account") or {}).get("wallet") if isinstance(d.get("account"), dict) else None):
+                if isinstance(v, str) and ADDR.fullmatch(v):
+                    s.add(v.lower())
     return s
 
 

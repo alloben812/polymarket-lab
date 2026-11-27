@@ -73,8 +73,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))   # smoke.py sits next 
 import smoke  # noqa: E402
 from smoke import Refusal  # noqa: E402
 
-VERSION = ("exp_fav 1.2 (2026-11-27, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, "
-           "balance floor)")
+VERSION = ("exp_fav 1.2.1 (2026-11-28, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, "
+           "balance floor; 1.2.1: a failed market discovery is retried after 60 s)")
 RULE_SOURCE = ("docs/forward-tests.md v1.0 (2026-11-27), lead 3 (Зацепка 3), plus the narrow-book condition "
                "(best bid >= best ask - 0.03) of the coordinator's decision 2026-11-27 22:15 (HANDOFF.md)")
 
@@ -109,6 +109,7 @@ GEO_EVERY_S = 1800                         # geoblock check every 30 min ...
 GEO_MAX_AGE_S = 3600                       # ... and an order needs one younger than 60 min
 SERVER_TIME_EVERY_S = 600
 UNIVERSE_EVERY_S = 1200
+UNIVERSE_RETRY_S = 60                      # after a failed discovery the next attempt comes this soon (1.2.1)
 STATE_EVERY_S = 60                         # refresh accepting/closed of markets in the window
 RESULT_EVERY_S = 120
 FEE_CHECK_AFTER_S = 45                     # read the charged fee from the activity feed this long after a fill
@@ -998,7 +999,12 @@ class Session:
         try:
             found, rejected = self.env.discover(now)
         except Exception as e:  # noqa: BLE001
-            out(f"  universe refresh failed ({scrub(type(e).__name__ + ': ' + str(e))[:200]}); keeping the old list")
+            # 1.2.1: a failure must not count as a refresh, or the next attempt would wait UNIVERSE_EVERY_S
+            # (a failed start-up discovery could then miss the start of a window). Rewind the mark so that
+            # due() fires again UNIVERSE_RETRY_S after this failure.
+            self.last["universe"] = self.env.mono() - UNIVERSE_EVERY_S + UNIVERSE_RETRY_S
+            out(f"  universe refresh failed ({scrub(type(e).__name__ + ': ' + str(e))[:200]}); keeping the old list; "
+                f"retry in {UNIVERSE_RETRY_S} s")
             return
         new = 0
         for m in found:
@@ -2861,6 +2867,43 @@ def cmd_selftest(a) -> int:
         s.markets[env.mk[0].key].closed = False
         s.poll()
         expect("after endDate but still open (doc: window runs to the close) -> trigger", len(env.posted) == 1)
+
+        # 1.2.1: a failed market discovery is retried after UNIVERSE_RETRY_S, not after UNIVERSE_EVERY_S
+        env_u, s_u = new_session(n_markets=1)
+        u_calls, u_fail = [0], [True]
+        u_real = env_u.discover
+
+        def u_discover(now):
+            u_calls[0] += 1
+            if u_fail[0]:
+                raise RuntimeError("The read operation timed out")
+            return u_real(now)
+
+        env_u.discover = u_discover
+        s_u.markets.clear()                                   # as at a start-up whose first discovery fails
+        s_u.refresh_universe(force=True)
+        expect("1.2.1 universe: the forced discovery that fails is tried once, the list stays empty",
+               u_calls[0] == 1 and not s_u.markets, (u_calls[0], len(s_u.markets)))
+        env_u.sleep(UNIVERSE_RETRY_S - 1)
+        s_u.refresh_universe()
+        expect("1.2.1 universe: no new attempt earlier than UNIVERSE_RETRY_S after a failure", u_calls[0] == 1, u_calls[0])
+        env_u.sleep(1)
+        s_u.refresh_universe()
+        expect("1.2.1 universe: new attempt UNIVERSE_RETRY_S after a failure (not UNIVERSE_EVERY_S)", u_calls[0] == 2,
+               u_calls[0])
+        u_fail[0] = False
+        env_u.sleep(UNIVERSE_RETRY_S)
+        s_u.refresh_universe()
+        expect("1.2.1 universe: the retry that succeeds restores the market list",
+               u_calls[0] == 3 and len(s_u.markets) == 1, (u_calls[0], len(s_u.markets)))
+        env_u.sleep(UNIVERSE_RETRY_S)
+        s_u.refresh_universe()
+        expect("1.2.1 universe: after a success the next refresh waits UNIVERSE_EVERY_S again", u_calls[0] == 3,
+               u_calls[0])
+        env_u.sleep(UNIVERSE_EVERY_S - UNIVERSE_RETRY_S)
+        s_u.refresh_universe()
+        expect("1.2.1 universe: regular refresh UNIVERSE_EVERY_S after the last success", u_calls[0] == 4, u_calls[0])
+        expect("1.2.1 universe: no order was posted by these refreshes", len(env_u.posted) == 0, len(env_u.posted))
 
         # dry-run never posts and records the would-be order
         env, s = new_session(live=False, n_markets=2)

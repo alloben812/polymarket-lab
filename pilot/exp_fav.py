@@ -5,8 +5,11 @@ Rule: daily crypto strike markets (above X / between X and Y (and the ladder's t
 dip to X on one date / daily Up or Down with a 24-hour window), taker fee rate 0.01, any asset that has
 them. In the window [endDate - 3600 s, market close) the order books of both tokens are read every 5 s.
 The favourite is the token with the higher mid. The first poll at which the favourite's best ask is in
-[0.95, 0.98) with at least 10 USD on offer at that price triggers ONE fill-and-kill (FAK) BUY of 10 USD
-with the price limit = that ask. The position is held to resolution. One order per market, never again.
+[0.95, 0.98) with at least 10 USD on offer at that price AND whose best bid is no further than 0.03 below that
+ask (narrow book; coordinator's decision of 2026-11-27 22:15, HANDOFF.md) triggers ONE fill-and-kill (FAK) BUY
+of 10 USD with the price limit = that ask. The position is held to resolution. One order per market, never again.
+A poll where only the narrow-book condition fails is not a trigger: it is recorded as 'wide-book' and the
+market stays eligible on later polls.
 
 The program exists to measure execution: for every order the ask and its size at decision time, the limit
 sent, the fill price and size obtained, the fee charged against the formula, the time from decision to the
@@ -26,12 +29,16 @@ Hard-coded safety (constants below; no flag or file changes them):
   only FAK BUY orders with a price limit, limit in [0.95, 0.98) and never above 0.98; never a sell, never an
   order without a limit, never a resting order; ticket 10 USD (--ticket may lower it to 5, never raise it);
   one order per market and no retry after any outcome; at most 6 filled trades per UTC day (an order whose
-  outcome is unknown counts as filled); worst-case open exposure: realised losses + open positions + the new
-  ticket <= 30 USD; permanent stop once realised losses reach 30 USD or after 2 losing trades (a halt file
-  that only a human removes); STOP file checked before every order; one running instance (lock file);
-  geoblock check at start and at least hourly (live refuses if blocked); clock checks before every order
-  (server time offset, clock jumps, stale book, late poll after sleep); live start refused if the pUSD
-  balance is below one ticket; a final guard on the signed order (side, type, token, spend, price).
+  outcome is unknown counts as filled); at most 2 open tickets at once (an order whose outcome is unknown is
+  open); worst-case open exposure: realised losses + open positions + the new ticket <= 30 USD (stop S of the
+  protocol); permanent stop once realised losses reach 20 USD or after 2 losing trades, whichever comes first
+  (a halt file that only a human removes); live only: a balance floor read from ~/.polymarket-pilot/FLOOR
+  (one plain non-negative USD number; missing or malformed -> no live orders) checked at start and before
+  every order (free pUSD - orders of the last 5 min - the ticket >= floor); STOP file checked before every
+  order; one running instance (lock file); geoblock check at start and at least hourly (live refuses if
+  blocked); clock checks before every order (server time offset, clock jumps, stale book, late poll after
+  sleep); live start refused if the pUSD balance is below one ticket; a final guard on the signed order
+  (side, type, token, spend, price).
 
 Records: out/exp-fav-<YYYYMMDD>.jsonl (live) or out/exp-fav-<YYYYMMDD>.dryrun.jsonl (dry-run), one JSON line
 per event. They hold market slugs, token ids, order ids, prices, sizes and times; never a key, an API secret
@@ -66,13 +73,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))   # smoke.py sits next 
 import smoke  # noqa: E402
 from smoke import Refusal  # noqa: E402
 
-VERSION = "exp_fav 1.1 (2026-11-27, fixes of REVIEW-exp_fav.md M1-M3, S1-S4, S6, S8, S9)"
-RULE_SOURCE = "docs/forward-tests.md v1.0 (2026-11-27), lead 3 (Зацепка 3)"
+VERSION = ("exp_fav 1.2 (2026-11-27, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, "
+           "balance floor)")
+RULE_SOURCE = ("docs/forward-tests.md v1.0 (2026-11-27), lead 3 (Зацепка 3), plus the narrow-book condition "
+               "(best bid >= best ask - 0.03) of the coordinator's decision 2026-11-27 22:15 (HANDOFF.md)")
 
 # ----------------------------------------------------------------------------- rule (forward-tests.md v1.0)
 ASK_MIN = Decimal("0.95")                  # favourite's best ask must be in [ASK_MIN, ASK_MAX)
 ASK_MAX = Decimal("0.98")
 MIN_LEVEL_USD = Decimal("10")              # at least 10 USD on offer at that ask (doc); also >= the ticket
+MAX_SPREAD = Decimal("0.03")               # narrow book: favourite's best bid >= best ask - 0.03 (HANDOFF 22:15)
 FEE_RATE = Decimal("0.01")                 # only markets with this taker fee rate
 WINDOW_S = 3600                            # window [endDate - 3600 s, market close)
 POLL_S = 5                                 # books of every market in the window every 5 s
@@ -85,9 +95,12 @@ TICKET_MIN = Decimal("5")                  # --ticket may lower it to 5 ...
 TICKET_MAX = Decimal("10")                 # ... and never raise it
 HARD_MAX_LIMIT = Decimal("0.98")           # no order is ever signed with a limit above this
 MAX_FILLED_PER_DAY = 6                     # filled (or unknown) trades per UTC day
-STOP_LOSS_USD = Decimal("30")              # permanent stop once realised losses reach this ...
-STOP_LOSING_TRADES = 2                     # ... or after this many losing trades
+MAX_OPEN_TICKETS = 2                       # open (filled or unknown, unresolved) tickets at once (protocol)
+STOP_LOSS_USD = Decimal("20")              # permanent stop once realised losses reach this ...
+STOP_LOSING_TRADES = 2                     # ... or after this many losing trades, whichever comes first
+EXPOSURE_CAP_USD = Decimal("30")           # stop S of the protocol: realised losses + open + new ticket <= this
 FEE_ALLOWANCE_USD = Decimal("0.05")        # exposure gate: 30 USD + taker fees (<= 0.005 USD per ticket here)
+IN_FLIGHT_S = 300                          # floor check: orders sent this recently are subtracted from the balance
 MAX_BOOK_AGE_S = 1.5                       # the book behind a decision must be this fresh when signing
 MAX_POLL_LATE_S = 3.0                      # a poll this late after its slot (sleep, stall): no orders from it
 CLOCK_JUMP_S = 1.0                         # wall clock vs monotonic clock disagree by more: no orders
@@ -112,6 +125,8 @@ HALT_FILE = HOME_DIR / "EXP_FAV_HALT"                          # permanent stop;
 LOCK_FILE = HOME_DIR / "exp_fav.lock"
 BIDS_LOCK_FILE = HOME_DIR / "exp_bids.live.lock"               # exp_bids.py's live lock: held too in live mode
 WATERMARK_FILE = HOME_DIR / "exp_fav.live-records.json"        # how many live decisions were ever written
+FLOOR_FILE = HOME_DIR / "FLOOR"                                # balance floor in USD (deposit - 64); live only
+FLOOR_RE = re.compile(r"[0-9]+(?:\.[0-9]+)?")
 CLOB_TIME_URL = "https://clob.polymarket.com/time"
 ADDRESS_RE = re.compile(r"(?<![0-9a-fA-F])0x[0-9a-fA-F]{40}(?![0-9a-fA-F])")
 MONTHS = ("january|february|march|april|may|june|july|august|september|october|november|december")
@@ -224,6 +239,37 @@ def check_ticket(x) -> Decimal:
     if t < TICKET_MIN:
         raise Refusal(f"--ticket {t} < {TICKET_MIN}: below the smallest ticket of this test")
     return t
+
+
+def read_floor() -> Decimal:
+    """The balance floor in USD from FLOOR_FILE: one plain non-negative number (e.g. '36' or '36.50'), nothing
+    else on the line. Missing, unreadable or anything else -> Refusal (no live orders)."""
+    how = (f"write it with one number, the deposit minus 64 USD, e.g. "
+           f"`mkdir -p {FLOOR_FILE.parent} && echo 36 > {FLOOR_FILE}`")
+    try:
+        if not FLOOR_FILE.exists():
+            raise Refusal(f"balance floor file {FLOOR_FILE} is missing; no live orders without it; {how}")
+        if not FLOOR_FILE.is_file():
+            raise Refusal(f"balance floor file {FLOOR_FILE} is not a regular file; no live orders; {how}")
+        text = FLOOR_FILE.read_text(encoding="ascii")
+    except Refusal:
+        raise
+    except Exception as e:  # noqa: BLE001  (permissions, not ASCII, a directory ...)
+        raise Refusal(f"balance floor file {FLOOR_FILE} is not readable ({type(e).__name__}); no live orders; "
+                      f"{how}") from None
+    s = text.strip()
+    if not FLOOR_RE.fullmatch(s):
+        raise Refusal(f"balance floor file {FLOOR_FILE} must hold one plain non-negative number of USD, got "
+                      f"{scrub(s[:40])!r}; no live orders; {how}")
+    return Decimal(s)
+
+
+def check_floor(balance: Decimal, in_flight: Decimal, ticket: Decimal, floor: Decimal) -> None:
+    """Refusal if the free pUSD balance minus orders still in flight minus this ticket would fall below the floor."""
+    after = D(balance) - D(in_flight) - D(ticket)
+    if after < D(floor):
+        raise Refusal(f"balance floor: free {D(balance):.2f} - in flight {D(in_flight):.2f} - ticket {ticket} = "
+                      f"{after:.2f} USD < floor {D(floor)} USD ({FLOOR_FILE})")
 
 
 # ----------------------------------------------------------------------------- universe (which markets)
@@ -374,8 +420,19 @@ def favourite(m: Mkt, books: dict) -> tuple[str | None, str]:
     return (one if mids[one] > Decimal("0.5") else other), "mid of one token (other book one-sided)"
 
 
+WIDE_BOOK = "wide book"                    # prefix of trigger()'s reason when only the narrow-book condition fails
+
+
+def spread_of(book: Book) -> Decimal | None:
+    """best ask - best bid of one token's book, or None if a side is empty."""
+    if book is None or book.best_ask is None or book.best_bid is None:
+        return None
+    return book.best_ask - book.best_bid
+
+
 def trigger(book: Book, ticket: Decimal) -> tuple[bool, str]:
-    """The doc's trigger on the favourite's book: best ask in [0.95, 0.98) and >= 10 USD (and >= ticket) there."""
+    """The doc's trigger on the favourite's book: best ask in [0.95, 0.98) and >= 10 USD (and >= ticket) there,
+    plus the narrow-book condition: best bid no further than MAX_SPREAD (0.03) below that ask."""
     a = book.best_ask
     if a is None:
         return False, "no ask"
@@ -384,6 +441,11 @@ def trigger(book: Book, ticket: Decimal) -> tuple[bool, str]:
     usd = a * book.ask_size
     if usd < max(MIN_LEVEL_USD, ticket):
         return False, f"only {usd:.2f} USD at the ask {a}"
+    b = book.best_bid
+    if b is None:
+        return False, f"{WIDE_BOOK}: no bid under the ask {a} (needs bid >= ask - {MAX_SPREAD})"
+    if a - b > MAX_SPREAD:
+        return False, f"{WIDE_BOOK}: bid {b} is {a - b} below the ask {a} (max {MAX_SPREAD})"
     return True, ""
 
 
@@ -407,6 +469,7 @@ def paper_fill(book: Book, limit: Decimal, usd: Decimal, rate: Decimal = FEE_RAT
             "avg_price": S((cost / shares).quantize(Decimal("0.000001")) if filled else None),
             "notional": str(cost if filled else 0), "fee": str(fee if filled else 0), "levels": levels,
             "best_ask": S(book.best_ask), "ask_size": str(book.ask_size), "min_size": str(book.min_size),
+            "best_bid": S(book.best_bid), "spread": S(spread_of(book)),
             "reason": "" if filled else f"fillable {shares} < market minimum {book.min_size} (missed)"}
 
 
@@ -479,6 +542,15 @@ class Ledger:
     def filled_on(self, day: str) -> int:
         return sum(1 for t in self.trades.values() if t["day"] == day and t["state"] in ("filled", "unknown"))
 
+    def open_count(self) -> int:
+        """Open tickets: filled or unknown (a decision without an outcome counts) and not resolved yet."""
+        return sum(1 for t in self.trades.values() if t["state"] in ("filled", "unknown") and not t["resolved"])
+
+    def in_flight(self, now: float, within: float = IN_FLIGHT_S) -> Decimal:
+        """Tickets of orders sent in the last `within` seconds (the balance may not show them yet)."""
+        return sum((t["ticket"] for t in self.trades.values()
+                    if t.get("t_decision") is not None and now - t["t_decision"] <= within), Decimal(0))
+
     def open_exposure(self) -> Decimal:
         return sum((t["worst_cost"] for t in self.trades.values()
                     if t["state"] in ("filled", "unknown") and not t["resolved"]), Decimal(0))
@@ -550,7 +622,8 @@ def build_ledger(rows: list[dict]) -> Ledger:
             elif not won:
                 loss = cost if state == "filled" else ticket          # unknown fill: worst case
         L.trades[k] = {"day": dec["day"], "state": state, "shares": shares, "worst_cost": cost if state == "filled" else ticket,
-                       "won": won, "loss": loss, "result_t": result_t, "outcome": dec["outcome"], "resolved": resolved}
+                       "won": won, "loss": loss, "result_t": result_t, "outcome": dec["outcome"], "resolved": resolved,
+                       "ticket": ticket, "t_decision": dec.get("t_decision")}
     return L
 
 
@@ -581,11 +654,14 @@ def check_caps(L: Ledger, key: str, day: str, ticket: Decimal, exchange_filled_t
     n = max(L.filled_on(day), exchange_filled_today)
     if n >= MAX_FILLED_PER_DAY:
         raise Refusal(f"{n} filled (or unknown) trades today (UTC); cap {MAX_FILLED_PER_DAY}")
+    n_open = L.open_count()
+    if n_open >= MAX_OPEN_TICKETS:
+        raise Refusal(f"{n_open} open tickets (filled or unknown, not resolved); cap {MAX_OPEN_TICKETS} open at once")
     _, lost = L.losses()
     exposure = L.open_exposure()
-    if lost + exposure + ticket > STOP_LOSS_USD + FEE_ALLOWANCE_USD:
+    if lost + exposure + ticket > EXPOSURE_CAP_USD + FEE_ALLOWANCE_USD:
         raise Refusal(f"worst case: realised losses {lost:.2f} + open {exposure:.2f} + ticket {ticket} > "
-                      f"{STOP_LOSS_USD} USD")
+                      f"{EXPOSURE_CAP_USD} USD")
 
 
 # ----------------------------------------------------------------------------- exchange adapter (real)
@@ -847,6 +923,8 @@ class Session:
         self.prev_wall = self.prev_mono = None
         self.next_poll = None
         self.near_seen: dict[str, float] = {}
+        self.wide_seen: dict[str, float] = {}         # key -> mono time of the last 'wide-book' record
+        self.wide_polls: dict[str, int] = {}          # key -> wide-book polls since that record
         self.tech_seen: dict[str, float] = {}
         self.polls = 0
         self.in_window_seen: set = set()
@@ -1009,6 +1087,8 @@ class Session:
             ok, why = trigger(bk, self.ticket)
             if ok:
                 hits.append((m, fav, how, bk, books))
+            elif why.startswith(WIDE_BOOK):
+                self.wide(m, fav, bk, why)
             else:
                 self.near(m, fav, bk, why)
         twins = []
@@ -1048,8 +1128,26 @@ class Session:
             return
         self.near_seen[m.key] = now
         self.rec("near", key=m.key, slug=m.slug, market_type=m.type, asset=m.asset, outcome=fav, token=m.tokens[fav],
-                 best_ask=str(a), ask_size=str(bk.ask_size), best_bid=S(bk.best_bid), why=why,
+                 best_ask=str(a), ask_size=str(bk.ask_size), best_bid=S(bk.best_bid), spread=S(spread_of(bk)), why=why,
                  seconds_to_end=round(m.end - self.env.wall()))
+
+    def wide(self, m: Mkt, fav: str, bk: Book, why: str) -> None:
+        """Every condition of the trigger held except the narrow book (bid >= ask - 0.03). Not a trigger: the market
+        is NOT consumed and later polls check it again. Recorded with its own reason ('wide-book'), at most once a
+        minute per market, with the number of such polls since the last record."""
+        self.wide_polls[m.key] = self.wide_polls.get(m.key, 0) + 1
+        now = self.env.mono()
+        if now - self.wide_seen.get(m.key, -1e18) < 60:
+            return
+        self.wide_seen[m.key] = now
+        n, self.wide_polls[m.key] = self.wide_polls[m.key], 0
+        a = bk.best_ask
+        self.rec("wide-book", key=m.key, slug=m.slug, market_type=m.type, asset=m.asset, outcome=fav,
+                 token=m.tokens[fav], best_ask=str(a), ask_size=str(bk.ask_size),
+                 ask_usd=str((a * bk.ask_size).quantize(Decimal("0.01"))), best_bid=S(bk.best_bid),
+                 spread=S(spread_of(bk)), max_spread=str(MAX_SPREAD), why=why, polls_since_last=n,
+                 seconds_to_end=round(m.end - self.env.wall()), book=bk.top(10))
+        out(f"    {m.slug}: ask {a} x {bk.ask_size} in range but NOT a trigger: {why} (re-checked next poll)")
 
     def decide(self, m: Mkt, fav: str, how: str, bk: Book, books: dict, clock_good: bool, clock_why: str) -> None:
         env = self.env
@@ -1062,7 +1160,8 @@ class Session:
                     end_utc=utc(m.end), seconds_to_end=round(m.end - t_d, 1), outcome=fav, token=token,
                     outcome_index=m.index[fav], fav_method=how, decision_utc=utc(t_d), t_decision=t_d,
                     day=day_of(t_d), best_ask=str(ask), ask_size=str(size), ask_usd=str((ask * size).quantize(Decimal("0.01"))),
-                    best_bid=S(bk.best_bid), mid=S(bk.mid), tick=str(tick), min_size=str(bk.min_size),
+                    best_bid=S(bk.best_bid), mid=S(bk.mid), spread=S(spread_of(bk)), max_spread=str(MAX_SPREAD),
+                    tick=str(tick), min_size=str(bk.min_size),
                     book_server_ts=bk.server_ts, book=bk.top(10), other_book=other.top(10) if other else None,
                     limit=str(ask), ticket=str(self.ticket), fee_rate=str(m.rate), seconds_delay=m.seconds_delay,
                     rule=RULE_SOURCE)
@@ -1077,19 +1176,32 @@ class Session:
             if self.geo_ok_at is None or env.mono() - self.geo_ok_at > GEO_MAX_AGE_S:
                 tech = "no passing geoblock check in the last 60 min"
         if tech:
-            if env.mono() - self.tech_seen.get(m.key, -1e18) > 30:
-                self.tech_seen[m.key] = env.mono()
-                self.rec("tech-skip", key=m.key, slug=m.slug, why=tech, best_ask=str(ask), ask_size=str(size))
-                out(f"    {m.slug}: trigger at ask {ask} NOT acted on: {tech} (re-checked next poll)")
+            self.tech_skip(m, tech, bk)
             return
         # money caps: a refusal consumes the market (the rule's first trigger happened)
         L = self.ledger()
         sent = True
         reason = ""
+        floor_info = None
         try:
             check_caps(L, m.key, day_of(t_d), self.ticket, self.exchange_fills.get(day_of(t_d), 0))
             if self.ticket / ask < bk.min_size:
                 raise Refusal(f"{self.ticket} USD buys {self.ticket / ask:.2f} shares < market minimum {bk.min_size}")
+            if self.live:                               # balance floor (account ceiling A): live only
+                floor_info = {"floor": None, "balance": None, "in_flight": None}
+                floor = read_floor()                    # read before EVERY live order (the owner may change it)
+                floor_info["floor"] = str(floor)
+                try:
+                    bal = D(env.balance())
+                except Exception as e:  # noqa: BLE001
+                    raise Refusal(f"balance floor: free pUSD balance not readable ({scrub(type(e).__name__)}); "
+                                  f"order refused") from None
+                fl = L.in_flight(env.wall())
+                floor_info["balance"], floor_info["in_flight"] = f"{bal:.6f}", str(fl)
+                check_floor(bal, fl, self.ticket, floor)
+                if env.wall() - bk.received > MAX_BOOK_AGE_S:   # the balance read took time: book must stay fresh
+                    self.tech_skip(m, f"book {env.wall() - bk.received:.1f} s old after the balance read", bk)
+                    return
         except Refusal as e:
             sent, reason = False, str(e)
         signed = None
@@ -1102,7 +1214,7 @@ class Session:
         spend = implied = None
         if sent:
             spend, implied = guard_signed(signed, token, self.ticket, ask)   # Refusal here stops the session
-        dec = self.rec("decision", sent=sent, reason=reason, **base,
+        dec = self.rec("decision", sent=sent, reason=reason, **base, balance_floor=floor_info,
                        signed=None if signed is None else {"maker_amount": str(signed.maker_amount),
                                                           "taker_amount": str(signed.taker_amount),
                                                           "order_type": str(signed.order_type),
@@ -1112,15 +1224,24 @@ class Session:
             out(f"    {m.slug}: TRIGGER {fav} ask {ask} x {size} -> not sent: {reason}")
         order_rec = None
         if sent and not self.live:
-            out(f"    {m.slug}: DRY TRIGGER {fav} ask {ask} x {size} ({ask * size:.2f} USD), "
+            out(f"    {m.slug}: DRY TRIGGER {fav} ask {ask} x {size} ({ask * size:.2f} USD), bid {bk.best_bid} "
+                f"(spread {spread_of(bk)}), "
                 f"{m.end - t_d:+.0f} s to end: would send FAK BUY {self.ticket} USD @ <= {ask} "
                 f"(signed {signed.maker_amount}/{signed.taker_amount}, price {implied:.5f}); NOT posted")
         elif sent:
             order_rec = self.send(m, fav, token, signed, t_d, mono_d, ask, tick)
             if order_rec.get("fill_state") == "filled":
                 self.decided[m.key]["fee_due"] = env.mono() + FEE_CHECK_AFTER_S
-        return {"m": m, "token": token, "ask": ask, "tick": tick, "t_d": t_d, "sent": sent,
-                "delta": TWIN_DELTA_S + m.seconds_delay}
+        return {"m": m, "token": token, "ask": ask, "bid": bk.best_bid, "spread": spread_of(bk), "tick": tick,
+                "t_d": t_d, "sent": sent, "delta": TWIN_DELTA_S + m.seconds_delay}
+
+    def tech_skip(self, m: Mkt, why: str, bk: Book) -> None:
+        """A trigger not acted on for a technical reason: the market is NOT consumed (next poll re-checks)."""
+        if self.env.mono() - self.tech_seen.get(m.key, -1e18) > 30:
+            self.tech_seen[m.key] = self.env.mono()
+            self.rec("tech-skip", key=m.key, slug=m.slug, why=why, best_ask=str(bk.best_ask), ask_size=str(bk.ask_size),
+                     best_bid=S(bk.best_bid), spread=S(spread_of(bk)))
+            out(f"    {m.slug}: trigger at ask {bk.best_ask} NOT acted on: {why} (re-checked next poll)")
 
     def do_twins(self, jobs: list[dict]) -> None:
         """The doc's paper model for every decision of this poll (also refused ones): the book at t_d + 2 s
@@ -1138,9 +1259,10 @@ class Session:
             m, ask, tick, tb = j["m"], j["ask"], j["tick"], got.get(j["token"])
             twin = paper_fill(tb, ask, self.ticket, m.rate) if tb is not None else {"filled": None, "reason": "no book"}
             self.rec("twin", key=m.key, slug=m.slug, delta_s=j["delta"], book_t=tb.received if tb else None,
+                     decision_best_ask=S(ask), decision_best_bid=S(j["bid"]), decision_spread=S(j["spread"]),
                      after_decision_s=round(tb.received - j["t_d"], 2) if tb else None,
                      ask_move_ticks=S(ticks((tb.best_ask - ask) if tb and tb.best_ask is not None else None, tick)), **twin)
-            out(f"    {m.slug}: paper twin at +{j['delta']} s: best ask {twin.get('best_ask')}, "
+            out(f"    {m.slug}: paper twin at +{j['delta']} s: best ask {twin.get('best_ask')}, bid {twin.get('best_bid')}, "
                 + (f"fills {twin['shares']} @ {twin['avg_price']}" if twin.get("filled") else f"no fill ({twin.get('reason')})"))
             if j["sent"] and not self.live:
                 filled = bool(twin.get("filled"))
@@ -1453,13 +1575,22 @@ class Session:
                 HALT_FILE.write_text(f"exp_fav.py permanent stop {utc(self.env.wall())}: {halt_reason(L)}\n")
                 self.rec("halt", why=halt_reason(L))
                 raise Refusal(f"stop condition already reached in the records: {halt_reason(L)}")
+            floor = read_floor()                     # missing / malformed FLOOR file: no live session at all
+            out(f"  balance floor {floor} USD (from {FLOOR_FILE})")
+        else:
+            try:
+                out(f"  balance floor file: {read_floor()} USD (dry-run does not use it)")
+            except Refusal as e:
+                out(f"  balance floor file: not usable, a live run would refuse ({scrub(e)[:120]}); dry-run continues")
         if STOP_FILE.exists():
             raise Refusal(f"STOP file present ({STOP_FILE}); remove it to start")
 
     def run(self) -> int:
         self.rec("session", version=VERSION, rule=RULE_SOURCE, code_sha256=code_sha256(), ticket=str(self.ticket),
                  caps={"max_limit": str(HARD_MAX_LIMIT), "max_filled_per_day": MAX_FILLED_PER_DAY,
-                       "stop_loss_usd": str(STOP_LOSS_USD), "stop_losing_trades": STOP_LOSING_TRADES})
+                       "stop_loss_usd": str(STOP_LOSS_USD), "stop_losing_trades": STOP_LOSING_TRADES,
+                       "max_open_tickets": MAX_OPEN_TICKETS, "exposure_cap_usd": str(EXPOSURE_CAP_USD),
+                       "max_spread": str(MAX_SPREAD), "in_flight_s": IN_FLIGHT_S})
         self.start_checks()
         self.check_geoblock(force=True)
         if self.live and self.geo_blocked is not False:
@@ -1470,6 +1601,9 @@ class Session:
             out(f"  pUSD balance {bal:.2f}")
             if bal < self.ticket:
                 raise Refusal(f"balance {bal:.2f} pUSD < one ticket {self.ticket}; not starting")
+            L0 = self.ledger()
+            check_floor(bal, L0.in_flight(self.env.wall()), self.ticket, read_floor())   # Refusal: not starting
+            out(f"  balance floor ok: {bal:.2f} - one ticket {self.ticket} >= floor {read_floor()} USD")
             if self.env.closed_only():
                 raise Refusal("the account is in closed-only mode; not starting")
             ap = self.env.approvals_ok()
@@ -1533,6 +1667,7 @@ def cmd_run(a) -> int:
                                                      "and exp_fav.py live at the same time")
             if HALT_FILE.exists():
                 raise Refusal(f"halt file present ({HALT_FILE}): permanent stop")
+            read_floor()                             # FLOOR file missing or malformed: refused before the key is read
             key = smoke.load_private_key()
             client = smoke.live_client(key, wallet)
         else:
@@ -1579,6 +1714,7 @@ def cmd_report(a) -> int:
     rows = read_records(paths, strict=False)
     by = defaultdict(dict)
     near = Counter()
+    wide = Counter()                                # wide-book polls per market (narrow-book condition failed)
     tech = 0
     sessions = set()
     halts = [r for r in rows if r.get("type") in ("halt", "would-halt", "halt-cleared", "stopping")]
@@ -1596,6 +1732,8 @@ def cmd_report(a) -> int:
             near[r.get("slug")] += 1
         elif r.get("type") == "tech-skip":
             tech += 1
+        elif r.get("type") == "wide-book":
+            wide[r.get("slug")] += int(r.get("polls_since_last") or 1)
     mode = "LIVE" if live else "DRY-RUN (paper stage: the 'fill' columns are the paper twin)"
     out(f"  report: {mode}; {len(paths)} file(s), {len(sessions)} session(s)")
     decs = [g for g in by.values() if "decision" in g and g["decision"].get("best_ask") is not None]
@@ -1604,6 +1742,10 @@ def cmd_report(a) -> int:
     refused = [g for g in decs if not g["decision"]["sent"]]
     out(f"  triggers: {len(decs)}  sent: {len(sent)}  refused by a cap: {len(refused)}  "
         f"technical skips (re-checked): {tech}  near-misses: {sum(near.values())} in {len(near)} markets")
+    out(f"  wide book (ask in range with >= 10 USD, but bid more than {MAX_SPREAD} below the ask; not triggers, "
+        f"markets not consumed): {sum(wide.values())} polls in {len(wide)} markets"
+        + (f"; of these markets, {len(set(wide) & {g['decision']['slug'] for g in by.values() if 'decision' in g})} "
+           f"triggered later" if wide else ""))
     out("")
     hdr = (f"  {'decision UTC':19} {'type':12} {'asset':8} {'s->end':>6} {'ask':>6} {'askUSD':>7} {'limit':>6} "
            f"{'fill':>8} {'shares':>7} {'tick':>5} {'slip':>5} {'feeF':>7} {'feeC':>7} {'ack ms':>6} "
@@ -1902,7 +2044,7 @@ def _book(token, ask, ask_size, bid, tick="0.001", min_size="5") -> Book:
 
 def cmd_selftest(a) -> int:
     import tempfile
-    global OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE
+    global OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE, FLOOR_FILE
     for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy", "ALL_PROXY", "all_proxy"):
         os.environ[var] = "http://127.0.0.1:9"                 # no network for this process
     os.environ.pop("NO_PROXY", None)
@@ -1932,9 +2074,10 @@ def cmd_selftest(a) -> int:
 
     tmp = Path(tempfile.mkdtemp(prefix="pm-fav-selftest-"))
     os.chmod(tmp, 0o700)
-    saved = (OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE)
+    saved = (OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE, FLOOR_FILE)
     OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE = tmp / "out", tmp / "STOP", tmp / "EXP_FAV_HALT", tmp / "exp_fav.lock"
     BIDS_LOCK_FILE, WATERMARK_FILE = tmp / "exp_bids.live.lock", tmp / "exp_fav.live-records.json"
+    FLOOR_FILE = tmp / "FLOOR"
     out.log_path = tmp / "selftest.log"                        # S9: never the real pilot/out log
     key = "0x" + Account.create().key.hex().removeprefix("0x")
     out.add_secret(key)
@@ -2023,6 +2166,48 @@ def cmd_selftest(a) -> int:
         expect("ask 0.95 with 9.50 USD does not trigger (needs >= 10 USD)", not trigger(_book("a", "0.95", 10, "0.94"), t10)[0])
         expect("ask 0.979 triggers", trigger(_book("a", "0.979", 50, "0.97"), t10)[0])
         expect("ask 0.98 does not trigger (range is [0.95, 0.98))", not trigger(_book("a", "0.98", 500, "0.97"), t10)[0])
+        # narrow-book condition (v1.2): favourite's best bid >= best ask - 0.03
+        expect("v1.2: narrow book constant is 0.03", MAX_SPREAD == Decimal("0.03"))
+        expect("v1.2: ask 0.97, bid 0.94 (exactly 0.03 below) triggers", trigger(_book("a", "0.97", 50, "0.94"), t10)[0],
+               trigger(_book("a", "0.97", 50, "0.94"), t10))
+        r_ = trigger(_book("a", "0.97", 50, "0.939"), t10)
+        expect("v1.2: ask 0.97, bid 0.939 (0.031 below) -> no trigger, reason 'wide book'",
+               not r_[0] and r_[1].startswith(WIDE_BOOK), r_)
+        r_ = trigger(_book("a", "0.97", 50, "0.27"), t10)
+        expect("v1.2: the review's HYPE case, bid 0.27 / ask 0.97 -> no trigger, reason 'wide book'",
+               not r_[0] and r_[1].startswith(WIDE_BOOK), r_)
+        r_ = trigger(_book("a", "0.97", 50, None), t10)
+        expect("v1.2: no bid at all -> no trigger, reason 'wide book'", not r_[0] and r_[1].startswith(WIDE_BOOK), r_)
+        r_ = trigger(_book("a", "0.97", 5, "0.27"), t10)
+        expect("v1.2: too little at the ask AND wide -> the size reason (wide-book only when all else held)",
+               not r_[0] and "USD at the ask" in r_[1], r_)
+        pfw = paper_fill(_book("a", "0.97", 50, "0.95"), Decimal("0.97"), t10)
+        expect("v1.2: the paper twin carries bid, ask and spread", pfw["best_bid"] == "0.95" and pfw["best_ask"] == "0.97"
+               and pfw["spread"] == "0.02", {k: pfw.get(k) for k in ("best_bid", "best_ask", "spread")})
+        # balance floor file (v1.2)
+        def floor_with(text):
+            if FLOOR_FILE.is_dir():
+                FLOOR_FILE.rmdir()
+            elif FLOOR_FILE.exists():
+                FLOOR_FILE.unlink()
+            if text is not None:
+                FLOOR_FILE.write_bytes(text if isinstance(text, bytes) else text.encode())
+            return read_floor
+        check("v1.2 FLOOR: file missing -> refused", floor_with(None), True)
+        check("v1.2 FLOOR: '36' -> 36", floor_with("36"), False)
+        check("v1.2 FLOOR: '36.50' plus newline -> 36.50", floor_with("36.50\n"), False)
+        check("v1.2 FLOOR: '0' -> 0 (non-negative)", floor_with("0\n"), False)
+        for bad in ("", "-5", "1e3", "NaN", "36 USD", "36\n40", "abc", "36,5", "+36", ".5", "Infinity"):
+            check(f"v1.2 FLOOR: {bad!r} -> refused (not a plain non-negative number)", floor_with(bad), True)
+        check("v1.2 FLOOR: not ASCII text -> refused (unreadable)", floor_with(b"\xff\xfe3\x006"), True)
+        floor_with(None)
+        FLOOR_FILE.mkdir()
+        check("v1.2 FLOOR: a directory instead of a file -> refused", read_floor, True)
+        FLOOR_FILE.rmdir()
+        check("v1.2 floor: 100 free - 0 in flight - 10 ticket = 90 >= floor 90 -> allowed",
+              lambda: check_floor(D(100), D(0), t10, D(90)), False)
+        check("v1.2 floor: 100 - 0 - 10 = 90 < floor 90.01 -> refused", lambda: check_floor(D(100), D(0), t10, D("90.01")), True)
+        check("v1.2 floor: 100 - 10 in flight - 10 = 80 < floor 85 -> refused", lambda: check_floor(D(100), D(10), t10, D(85)), True)
         fm = _fake_market(1, 0)
         bks = {fm.tokens["Yes"]: _book(fm.tokens["Yes"], "0.03", 100, "0.02"),
                fm.tokens["No"]: _book(fm.tokens["No"], "0.97", 100, "0.96")}
@@ -2055,12 +2240,15 @@ def cmd_selftest(a) -> int:
         check("guard: FOK refused (only FAK)", lambda: guard_signed(fok, tokN, t10, Decimal("0.966")), True)
 
         # ---- the session against a fake exchange
-        def new_session(live=True, ticket=t10, n_markets=1, t0=1_800_000_000.0, ask="0.97", size="200", types=None):
+        def new_session(live=True, ticket=t10, n_markets=1, t0=1_800_000_000.0, ask="0.97", size="200", types=None,
+                        floor="20"):
             for p in OUT_DIR.glob("*"):
                 p.unlink()
-            for f in (STOP_FILE, HALT_FILE, WATERMARK_FILE):
+            for f in (STOP_FILE, HALT_FILE, WATERMARK_FILE, FLOOR_FILE):
                 if f.exists():
                     f.unlink()
+            if floor is not None:
+                FLOOR_FILE.write_text(floor + "\n")       # fake free balance is 100 USD
             env = FakeEnv(client, live, t0)
             for i in range(n_markets):
                 m = _fake_market(100 + i, t0 + 1800, *(types[i] if types else ()))
@@ -2106,9 +2294,13 @@ def cmd_selftest(a) -> int:
         # result -> loss -> second loss -> permanent stop
         env, s = new_session(n_markets=3)
         s.poll()
-        expect("three markets trigger in one poll -> three orders (exposure 30 USD = cap)", len(env.posted) == 3, len(env.posted))
+        expect("three markets trigger in one poll -> two orders (cap: 2 open tickets at once)", len(env.posted) == 2, len(env.posted))
+        expect("the third is refused by the open-ticket cap, with that reason",
+               [r for r in recs("decision") if r.get("sent") is False]
+               and "cap 2 open" in [r for r in recs("decision") if r.get("sent") is False][-1]["reason"],
+               [r.get("reason") for r in recs("decision") if r.get("sent") is False])
         for m in env.mk:
-            env.winner[m.key] = "Yes"                     # we bought No: all three lose
+            env.winner[m.key] = "Yes"                     # we bought No: both sent orders lose
         env.sleep(1800 + 10)
         s.follow_up()
         expect("two losing trades -> halt file written (permanent stop)", HALT_FILE.exists())
@@ -2131,21 +2323,46 @@ def cmd_selftest(a) -> int:
         expect("halt-cleared record written", any(r["type"] == "halt-cleared" for r in recs()))
         expect("loss count after the reset is 0", ledger_now(True).losses()[0] == 0, ledger_now(True).losses())
 
-        # the 30 USD path of the stop (pure ledger function)
+        # the 20 USD path of the stop (pure ledger function; a 20 USD loss on one trade cannot happen with 10 USD
+        # tickets, so this checks the threshold itself)
+        def _tr(loss, resolved=True, won=False, state="filled", t_dec=None):
+            return {"day": "2026-11-28", "state": state, "shares": D(10), "worst_cost": D(10), "won": won if resolved else None,
+                    "loss": D(loss), "result_t": 1.0 if resolved else None, "outcome": "Yes", "resolved": resolved,
+                    "ticket": D(10), "t_decision": t_dec}
         L = Ledger()
-        L.trades = {"a": {"day": "2026-11-28", "state": "filled", "shares": D(10), "worst_cost": D(30), "won": False,
-                          "loss": D(30), "result_t": 1.0, "outcome": "Yes", "resolved": True}}
-        expect("realised loss 30 USD with one losing trade -> stop", halt_reason(L) is not None, halt_reason(L))
-        L.trades["a"]["loss"] = D("29.99")
-        expect("realised loss 29.99 USD with one losing trade -> no stop yet", halt_reason(L) is None, halt_reason(L))
+        L.trades = {"a": _tr(20)}
+        expect("v1.2: realised loss 20 USD with one losing trade -> stop", halt_reason(L) is not None, halt_reason(L))
+        L.trades["a"]["loss"] = D("19.99")
+        expect("v1.2: realised loss 19.99 USD with one losing trade -> no stop yet", halt_reason(L) is None, halt_reason(L))
+        L.trades = {"a": _tr("9.99")}
+        expect("v1.2: one losing trade of 9.99 USD -> no stop", halt_reason(L) is None, halt_reason(L))
+        L.trades = {"a": _tr("9.99"), "b": _tr("0.50")}
+        expect("v1.2: two losing trades (10.49 USD in all) -> stop on the count first", halt_reason(L) is not None
+               and "2 losing trades" in halt_reason(L), halt_reason(L))
+        expect("v1.2: constants: stop 20 USD / 2 losses, 2 open tickets, exposure cap 30, 6 a day",
+               (STOP_LOSS_USD, STOP_LOSING_TRADES, MAX_OPEN_TICKETS, EXPOSURE_CAP_USD, MAX_FILLED_PER_DAY)
+               == (Decimal("20"), 2, 2, Decimal("30"), 6))
+        # open-ticket cap and the exposure gate (pure check_caps)
+        L = Ledger()
+        L.trades = {"a": _tr(0, resolved=False, state="unknown"), "b": _tr(0, resolved=False)}
+        check("v1.2: two open tickets (one of them unknown) -> a third refused", lambda: check_caps(L, "x", "2026-11-28", t10), True)
+        L.trades["a"] = _tr(0, resolved=True, won=True)
+        check("v1.2: one of them resolved (won) -> a new ticket allowed", lambda: check_caps(L, "x", "2026-11-28", t10), False)
+        L.trades = {"a": _tr("15"), "b": _tr(0, resolved=False)}
+        check("exposure gate kept: realised 15 + open 10 + ticket 10 = 35 > 30 -> refused (one open ticket only)",
+              lambda: check_caps(L, "x", "2026-11-28", t10), True)
+        L.trades["a"]["loss"] = D("9.99")
+        check("exposure gate: realised 9.99 + open 10 + ticket 10 = 29.99 -> allowed",
+              lambda: check_caps(L, "x", "2026-11-28", t10), False)
 
         # worst-case exposure gate
         env, s = new_session(n_markets=4)
         s.poll()
-        expect("four triggers at once -> only three sent (realised 0 + open 30 + 10 > 30)", len(env.posted) == 3, len(env.posted))
+        expect("four triggers at once -> only two sent (2 open tickets at once)", len(env.posted) == 2, len(env.posted))
         refused = [r for r in recs("decision") if r.get("sent") is False]
-        expect("the fourth is recorded as refused with its paper twin", refused and "worst case" in refused[-1]["reason"]
-               and len(recs("twin")) == 4, refused and refused[-1]["reason"])
+        expect("the third and fourth are recorded as refused with their paper twins", len(refused) == 2
+               and all("open tickets" in r["reason"] for r in refused) and len(recs("twin")) == 4,
+               [r["reason"] for r in refused])
 
         # daily cap 6 (positions resolve as wins in between so the exposure gate does not bind)
         env, s = new_session(n_markets=8)
@@ -2439,6 +2656,116 @@ def cmd_selftest(a) -> int:
             how = "raised"
         expect("S3: RealEnv.token_balance unreadable -> raises (never reads as zero)", how == "raised")
 
+        # ---- v1.2: narrow-book condition in the session
+        def wide_books(env, m, bid):
+            env.book_by_token[m.tokens["No"]] = _book(m.tokens["No"], "0.97", 200, bid)      # mid (0.97 + bid) / 2
+            env.book_by_token[m.tokens["Yes"]] = _book(m.tokens["Yes"], "0.40", 300, "0.03")  # mid 0.215: No is the favourite
+        for live_ in (True, False):
+            lab = "live" if live_ else "dry-run"
+            env, s = new_session(live=live_, n_markets=1)
+            m0 = env.mk[0]
+            wide_books(env, m0, "0.27")
+            s.poll()
+            wb = recs("wide-book")
+            expect(f"v1.2 {lab}: favourite bid 0.27 / ask 0.97 -> no decision, nothing signed or posted",
+                   len(env.posted) == 0 and not recs("decision") and m0.key not in ledger_now(live_).consumed)
+            expect(f"v1.2 {lab}: ... recorded as 'wide-book' with its own reason, bid, ask and spread",
+                   len(wb) == 1 and wb[0]["why"].startswith(WIDE_BOOK) and wb[0]["best_bid"] == "0.27"
+                   and wb[0]["best_ask"] == "0.97" and wb[0]["spread"] == "0.70", wb and {k: wb[0].get(k) for k in
+                                                                                        ("why", "best_bid", "spread")})
+            s.poll()
+            expect(f"v1.2 {lab}: a second wide poll within a minute adds no record", len(recs("wide-book")) == 1)
+            env.sleep(61)
+            s.prev_wall = s.prev_mono = None
+            s.poll()
+            expect(f"v1.2 {lab}: a minute later one more record, counting the polls in between",
+                   len(recs("wide-book")) == 2 and recs("wide-book")[-1]["polls_since_last"] == 2,
+                   recs("wide-book") and recs("wide-book")[-1].get("polls_since_last"))
+            wide_books(env, m0, "0.95")
+            s.poll()
+            dd = recs("decision")
+            tw = recs("twin")
+            expect(f"v1.2 {lab}: the book narrows (bid 0.95) -> the same market triggers on a later poll",
+                   len(dd) == 1 and dd[0]["sent"] is True and len(env.posted) == (1 if live_ else 0), (len(dd), len(env.posted)))
+            expect(f"v1.2 {lab}: the decision and the paper twin carry bid, ask and spread",
+                   dd and dd[0]["best_bid"] == "0.95" and dd[0]["best_ask"] == "0.97" and dd[0]["spread"] == "0.02"
+                   and dd[0]["max_spread"] == "0.03" and tw and tw[0]["decision_spread"] == "0.02"
+                   and tw[0]["decision_best_bid"] == "0.95" and tw[0]["spread"] == "0.02" and tw[0]["best_bid"] == "0.95",
+                   tw and {k: tw[0].get(k) for k in ("decision_best_bid", "decision_spread", "best_bid", "spread")})
+
+        # ---- v1.2: balance floor in the session
+        env, s = new_session(n_markets=1, floor=None)
+        s.poll()
+        d_ = recs("decision")
+        expect("v1.2 floor: live, FLOOR file missing -> order refused, recorded with the reason (market consumed)",
+               len(env.posted) == 0 and d_ and d_[-1]["sent"] is False and "floor file" in d_[-1]["reason"],
+               d_ and d_[-1]["reason"])
+        env, s = new_session(live=False, n_markets=1, floor=None)
+        s.poll()
+        d_ = recs("decision")
+        expect("v1.2 floor: dry-run, FLOOR file missing -> unaffected (decided and signed, nothing posted)",
+               d_ and d_[-1]["sent"] is True and d_[-1]["signed"] and len(env.posted) == 0, d_ and d_[-1]["reason"])
+        env, s = new_session(n_markets=2, floor="85")
+        s.poll()
+        d_ = recs("decision")
+        expect("v1.2 floor: free 100, floor 85: first order 100 - 10 = 90 >= 85 sent; second in the same poll "
+               "100 - 10 in flight - 10 = 80 < 85 refused", len(env.posted) == 1 and len(d_) == 2 and d_[1]["sent"] is False
+               and "balance floor" in d_[1]["reason"] and d_[0]["balance_floor"]["floor"] == "85"
+               and d_[1]["balance_floor"]["in_flight"] == "10", [(r["sent"], r["reason"][:60]) for r in d_])
+        env, s = new_session(n_markets=1, floor="90.01")
+        s.poll()
+        expect("v1.2 floor: free 100 - ticket 10 = 90 < floor 90.01 -> refused", len(env.posted) == 0
+               and "balance floor" in recs("decision")[-1]["reason"], recs("decision")[-1]["reason"])
+        env, s = new_session(n_markets=1)
+        env.balance = lambda: (_ for _ in ()).throw(RuntimeError("balance endpoint down"))
+        s.poll()
+        expect("v1.2 floor: free balance unreadable -> refused", len(env.posted) == 0
+               and "not readable" in recs("decision")[-1]["reason"], recs("decision")[-1]["reason"])
+        env, s = new_session(n_markets=1, floor="25")
+        FLOOR_FILE.write_text("95\n")                    # the owner raises the floor mid-session
+        s.poll()
+        expect("v1.2 floor: the file is read again before every order (raised to 95 mid-session -> refused)",
+               len(env.posted) == 0 and "floor 95" in recs("decision")[-1]["reason"], recs("decision")[-1]["reason"])
+        env, s = new_session(n_markets=1)
+        orig_bal = env.balance
+
+        def slow_balance():
+            env.sleep(2.0)                               # the balance read takes 2 s: the book is then too old
+            return orig_bal()
+        env.balance = slow_balance
+        s.poll()
+        expect("v1.2 floor: book older than 1.5 s after the balance read -> technical skip, market not consumed",
+               len(env.posted) == 0 and not recs("decision") and recs("tech-skip")
+               and "after the balance read" in recs("tech-skip")[-1]["why"], recs("tech-skip") and recs("tech-skip")[-1]["why"])
+        env, s = new_session(n_markets=1, floor=None)
+        check("v1.2 floor: live start refused when the FLOOR file is missing", Session(env, True, t10, None).start_checks, True)
+        env, s = new_session(n_markets=1, floor="abc")
+        check("v1.2 floor: live start refused when the FLOOR file is malformed", Session(env, True, t10, None).run, True)
+        env, s = new_session(n_markets=1, floor="95")
+        check("v1.2 floor: live start refused when free 100 - one ticket 10 < floor 95", Session(env, True, t10, None).run, True)
+        env, s = new_session(live=False, n_markets=1, floor=None)
+        check("v1.2 floor: dry-run start allowed without a FLOOR file", Session(env, False, t10, None).start_checks, False)
+        old_pm = os.environ.get("PM_KEY_FILE")
+        os.environ["PM_KEY_FILE"] = str(tmp / "no-such-key")
+
+        def run_live_without_floor():
+            try:
+                cmd_run(argparse.Namespace(live=True, ticket="10", hours=None))
+            except Refusal as e:
+                if "floor file" in str(e):
+                    raise
+                return f"refused for another reason: {e}"
+            return "started"
+        try:
+            env, s = new_session(n_markets=1, floor=None)
+            check("v1.2 floor: run --live refused before the key is read when the FLOOR file is missing",
+                  run_live_without_floor, True)
+        finally:
+            if old_pm is None:
+                os.environ.pop("PM_KEY_FILE", None)
+            else:
+                os.environ["PM_KEY_FILE"] = old_pm
+
         # STOP file
         env, s = new_session(n_markets=1)
         STOP_FILE.write_text("stop")
@@ -2566,7 +2893,7 @@ def cmd_selftest(a) -> int:
         leaked = key[2:] in out.log_path.read_text().lower()
         expect("private key absent from the log file", not leaked)
     finally:
-        OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE = saved
+        OUT_DIR, STOP_FILE, HALT_FILE, LOCK_FILE, BIDS_LOCK_FILE, WATERMARK_FILE, FLOOR_FILE = saved
         out.log_path = Path(os.devnull)
         for p in sorted(tmp.rglob("*"), reverse=True):
             p.unlink() if p.is_file() else p.rmdir()

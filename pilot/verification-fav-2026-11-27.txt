@@ -591,3 +591,205 @@ plus the loss make 2 losing trades -> HALT, as designed.
 Still unverified (first seen on the owner's Mac): every authenticated call, including the token balance read
 (get_balance_allowance CONDITIONAL / CONDITIONAL-V2 with token_id), the real FAK answer shapes and the order
 statuses returned by get_order. No fresh-context evaluator has checked version 1.1 yet.
+
+==========================================================================================================
+exp_fav.py 1.2 (2026-11-27, 21:20-21:45 UTC): narrow-book condition, 2 open tickets, stop 20 USD / 2 losses,
+balance floor file. Decisions: HANDOFF.md "Решения координатора по счёту" (27.11 22:15) and the 60 EUR limit.
+Sandbox: US IP, no key, no account; nothing authenticated was sent. No commit, no push.
+Files changed: pilot/exp_fav.py, pilot/EXP-FAV.md, this file.
+==========================================================================================================
+
+$ sha256sum exp_fav.py smoke.py      (before: exp_fav.py 1.1 = bc8885ba...efe7b7a7, selftest 137 checks ALL PASS)
+6d3451b84598cce231debb3550bc70a35520152f7480b7827855e961390c5c95  exp_fav.py
+3019808019df551d7333c13599b74455dbb0c19cafee82eb7048d457293ddeca  smoke.py
+
+What changed in the code
+  1. trigger(): after ask in [0.95, 0.98) and >= 10 USD at the ask, also best bid >= best ask - MAX_SPREAD
+     (constant 0.03, inclusive; no bid = wide). Only this condition failing -> reason "wide book: ...",
+     Session.wide() writes a 'wide-book' record (bid, ask, spread, max_spread, reason, polls since the last
+     record, top-10 book; at most once a minute per market); the market is NOT consumed and is re-checked on
+     later polls. decision / twin / near / tech-skip records carry best_bid, best_ask and spread; the twin
+     record carries decision_best_ask/bid/spread plus the twin book's own best_bid/spread. report counts the
+     wide-book polls.
+  2. MAX_OPEN_TICKETS = 2 (filled or unknown, unresolved; a decision without an outcome counts), checked in
+     check_caps before the exposure gate. STOP_LOSS_USD 30 -> 20, STOP_LOSING_TRADES 2 (whichever first).
+     The exposure gate keeps 30 USD (now its own constant EXPOSURE_CAP_USD = stop S of the protocol). Daily
+     cap 6, one order per market, no retry, FAK BUY limit [0.95, 0.98) <= 0.98: unchanged.
+  3. read_floor(): ~/.polymarket-pilot/FLOOR, one plain non-negative number ([0-9]+(.[0-9]+)?, whitespace
+     around it allowed); missing / not a regular file / not ASCII / anything else -> Refusal. Live only:
+     cmd_run reads it before the key is loaded; start_checks reads it; run() refuses when free pUSD - orders
+     of the last 300 s - one ticket < floor; decide() re-reads the file and the free balance before EVERY live
+     order and refuses (market consumed, reason "balance floor ...", balance / in-flight / floor in the
+     decision record) when free - in flight - ticket < floor; an unreadable balance is a refusal; if the book
+     is older than 1.5 s after the balance read, the trigger is a technical skip (not consumed). Dry-run only
+     prints whether the file is usable.
+
+$ .venv/bin/python -I exp_fav.py selftest
+selftest: 196 checks, ALL PASS        (exit 0; 0 FAIL)
+New or changed checks (as printed, cut to 200 characters):
+  [PASS] v1.2: narrow book constant is 0.03
+  [PASS] v1.2: ask 0.97, bid 0.94 (exactly 0.03 below) triggers: (True, '')
+  [PASS] v1.2: ask 0.97, bid 0.939 (0.031 below) -> no trigger, reason 'wide book': (False, 'wide book: bid 0.939 is 0.031 below the ask 0.97 (max 0.03)')
+  [PASS] v1.2: the review's HYPE case, bid 0.27 / ask 0.97 -> no trigger, reason 'wide book': (False, 'wide book: bid 0.27 is 0.70 below the ask 0.97 (max 0.03)')
+  [PASS] v1.2: no bid at all -> no trigger, reason 'wide book': (False, 'wide book: no bid under the ask 0.97 (needs bid >= ask - 0.03)')
+  [PASS] v1.2: too little at the ask AND wide -> the size reason (wide-book only when all else held): (False, 'only 4.85 USD at the ask 0.97')
+  [PASS] v1.2: the paper twin carries bid, ask and spread: {'best_bid': '0.95', 'best_ask': '0.97', 'spread': '0.02'}
+  [PASS] v1.2 FLOOR: file missing -> refused: refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is missing; no live orders without it; write it with one number, the deposit minus 64 USD, e.g
+  [PASS] v1.2 FLOOR: '36' -> 36: returned 36
+  [PASS] v1.2 FLOOR: '36.50' plus newline -> 36.50: returned 36.50
+  [PASS] v1.2 FLOOR: '0' -> 0 (non-negative): returned 0
+  [PASS] v1.2 FLOOR: '' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got ''; no live orders
+  [PASS] v1.2 FLOOR: '-5' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '-5'; no live or
+  [PASS] v1.2 FLOOR: '1e3' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '1e3'; no live 
+  [PASS] v1.2 FLOOR: 'NaN' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got 'NaN'; no live 
+  [PASS] v1.2 FLOOR: '36 USD' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '36 USD'; no
+  [PASS] v1.2 FLOOR: '36\n40' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '36\n40'; no
+  [PASS] v1.2 FLOOR: 'abc' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got 'abc'; no live 
+  [PASS] v1.2 FLOOR: '36,5' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '36,5'; no liv
+  [PASS] v1.2 FLOOR: '+36' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '+36'; no live 
+  [PASS] v1.2 FLOOR: '.5' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got '.5'; no live or
+  [PASS] v1.2 FLOOR: 'Infinity' -> refused (not a plain non-negative number): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got 'Infinity'
+  [PASS] v1.2 FLOOR: not ASCII text -> refused (unreadable): refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is not readable (UnicodeDecodeError); no live orders; write it with one number,
+  [PASS] v1.2 FLOOR: a directory instead of a file -> refused: refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is not a regular file; no live orders; write it with one number, the deposit 
+  [PASS] v1.2 floor: 100 free - 0 in flight - 10 ticket = 90 >= floor 90 -> allowed: returned None
+  [PASS] v1.2 floor: 100 - 0 - 10 = 90 < floor 90.01 -> refused: refused: balance floor: free 100.00 - in flight 0.00 - ticket 10 = 90.00 USD < floor 90.01 USD (/tmp/pm-fav-selftest-XXXX/FLOOR)
+  [PASS] v1.2 floor: 100 - 10 in flight - 10 = 80 < floor 85 -> refused: refused: balance floor: free 100.00 - in flight 10.00 - ticket 10 = 80.00 USD < floor 85 USD (/tmp/pm-fav-selftest-XXXX/FLOOR)
+  [PASS] three markets trigger in one poll -> two orders (cap: 2 open tickets at once): 2
+  [PASS] the third is refused by the open-ticket cap, with that reason: ['2 open tickets (filled or unknown, not resolved); cap 2 open at once']
+  [PASS] two losing trades -> halt file written (permanent stop)
+  [PASS] v1.2: realised loss 20 USD with one losing trade -> stop: realised losses 20.00 USD (stop at 20)
+  [PASS] v1.2: realised loss 19.99 USD with one losing trade -> no stop yet: None
+  [PASS] v1.2: one losing trade of 9.99 USD -> no stop: None
+  [PASS] v1.2: two losing trades (10.49 USD in all) -> stop on the count first: 2 losing trades (stop at 2)
+  [PASS] v1.2: constants: stop 20 USD / 2 losses, 2 open tickets, exposure cap 30, 6 a day
+  [PASS] v1.2: two open tickets (one of them unknown) -> a third refused: refused: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+  [PASS] v1.2: one of them resolved (won) -> a new ticket allowed: returned None
+  [PASS] exposure gate kept: realised 15 + open 10 + ticket 10 = 35 > 30 -> refused (one open ticket only): refused: worst case: realised losses 15.00 + open 10.00 + ticket 10 > 30 USD
+  [PASS] exposure gate: realised 9.99 + open 10 + ticket 10 = 29.99 -> allowed: returned None
+  [PASS] four triggers at once -> only two sent (2 open tickets at once): 2
+  [PASS] the third and fourth are recorded as refused with their paper twins: ['2 open tickets (filled or unknown, not resolved); cap 2 open at once', '2 open tickets (filled or unknown, not resolved)
+  [PASS] v1.2 live: favourite bid 0.27 / ask 0.97 -> no decision, nothing signed or posted
+  [PASS] v1.2 live: ... recorded as 'wide-book' with its own reason, bid, ask and spread: {'why': 'wide book: bid 0.27 is 0.70 below the ask 0.97 (max 0.03)', 'best_bid': '0.27', 'spread': '0.70'}
+  [PASS] v1.2 live: a second wide poll within a minute adds no record
+  [PASS] v1.2 live: a minute later one more record, counting the polls in between: 2
+  [PASS] v1.2 live: the book narrows (bid 0.95) -> the same market triggers on a later poll: (1, 1)
+  [PASS] v1.2 live: the decision and the paper twin carry bid, ask and spread: {'decision_best_bid': '0.95', 'decision_spread': '0.02', 'best_bid': '0.95', 'spread': '0.02'}
+  [PASS] v1.2 dry-run: favourite bid 0.27 / ask 0.97 -> no decision, nothing signed or posted
+  [PASS] v1.2 dry-run: ... recorded as 'wide-book' with its own reason, bid, ask and spread: {'why': 'wide book: bid 0.27 is 0.70 below the ask 0.97 (max 0.03)', 'best_bid': '0.27', 'spread': '0.70'}
+  [PASS] v1.2 dry-run: a second wide poll within a minute adds no record
+  [PASS] v1.2 dry-run: a minute later one more record, counting the polls in between: 2
+  [PASS] v1.2 dry-run: the book narrows (bid 0.95) -> the same market triggers on a later poll: (1, 0)
+  [PASS] v1.2 dry-run: the decision and the paper twin carry bid, ask and spread: {'decision_best_bid': '0.95', 'decision_spread': '0.02', 'best_bid': '0.95', 'spread': '0.02'}
+  [PASS] v1.2 floor: live, FLOOR file missing -> order refused, recorded with the reason (market consumed): balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is missing; no live orders without it; wr
+  [PASS] v1.2 floor: dry-run, FLOOR file missing -> unaffected (decided and signed, nothing posted)
+  [PASS] v1.2 floor: free 100, floor 85: first order 100 - 10 = 90 >= 85 sent; second in the same poll 100 - 10 in flight - 10 = 80 < 85 refused: [(True, ''), (False, 'balance floor: free 100.00 - in 
+  [PASS] v1.2 floor: free 100 - ticket 10 = 90 < floor 90.01 -> refused: balance floor: free 100.00 - in flight 0.00 - ticket 10 = 90.00 USD < floor 90.01 USD (/tmp/pm-fav-selftest-XXXX/FLOOR)
+  [PASS] v1.2 floor: free balance unreadable -> refused: balance floor: free pUSD balance not readable (RuntimeError); order refused
+  [PASS] v1.2 floor: the file is read again before every order (raised to 95 mid-session -> refused): balance floor: free 100.00 - in flight 0.00 - ticket 10 = 90.00 USD < floor 95 USD (/tmp/pm-fav-se
+  [PASS] v1.2 floor: book older than 1.5 s after the balance read -> technical skip, market not consumed: book 2.0 s old after the balance read
+  [PASS] v1.2 floor: live start refused when the FLOOR file is missing: refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is missing; no live orders without it; write it with one number, the
+  [PASS] v1.2 floor: live start refused when the FLOOR file is malformed: refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR must hold one plain non-negative number of USD, got 'abc'; no live
+  [PASS] v1.2 floor: live start refused when free 100 - one ticket 10 < floor 95: refused: balance floor: free 100.00 - in flight 0.00 - ticket 10 = 90.00 USD < floor 95 USD (/tmp/pm-fav-selftest-XXXX
+  [PASS] v1.2 floor: dry-run start allowed without a FLOOR file: returned None
+  [PASS] v1.2 floor: run --live refused before the key is read when the FLOOR file is missing: refused: balance floor file /tmp/pm-fav-selftest-XXXX/FLOOR is missing; no live orders without it; write 
+
+Mutation check (scratch copies of the final file, one check switched off each; selftest must fail):
+  mutant spread: 13 FAIL -> selftest: 196 checks, FAILURES
+  mutant open: 5 FAIL -> selftest: 196 checks, FAILURES
+  mutant stop: 1 FAIL -> selftest: 196 checks, FAILURES
+  mutant floor: 3 FAIL -> selftest: 196 checks, FAILURES
+  mutant exposure: 1 FAIL -> selftest: 196 checks, FAILURES
+  (spread: the 'a - b > MAX_SPREAD' and 'no bid' tests removed; open: cap 3 instead of 2; stop: 30 USD instead
+   of 20; floor: check_floor() not called before an order; exposure: the 30 USD gate removed)
+
+$ .venv/bin/python -I exp_fav.py run --hours 0.02          (the real file, dry-run, public data only)
+=== exp_fav.py run dry-run 2026-11-27 21:25:21 UTC (exp_fav 1.2 (2026-11-27, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, balance floor))
+  dry-run: public data only; the would-be orders are signed with a throwaway in-memory key
+  mode dry-run, ticket 10 USD, wallet type DEPOSIT_WALLET (addresses are not printed)
+  balance floor file: not usable, a live run would refuse (balance floor file /root/.polymarket-pilot/FLOOR is missing; no live orders without it; write it with one number, the de); dry-run continues
+  geoblock: blocked=True country=US (IP not shown)
+  geoblock: blocked=True (second check True) country=US  -> a live run would be refused here
+  clock: local - server +0.18 s (GET /time, 1 s resolution), round trip 175 ms
+  universe: 145 markets end in the next 26 h (145 new; 137 accepting orders); 0 crypto markets rejected (fee rate / window); assets {'bitcoin': 38, 'ethereum': 36, 'solana': 32, 'xrp': 33, 'bnb': 1, 'btc': 1, 'doge': 1, 
+    end 2026-11-28T05:00Z  dip            25 ( 19 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T05:00Z  reach          25 ( 23 open)   window opens 2026-11-28T04:00Z
+    end 2026-11-28T17:00Z  above          44 ( 44 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between        36 ( 36 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  between-tail    8 (  8 open)   window opens 2026-11-28T16:00Z
+    end 2026-11-28T17:00Z  updown-daily    7 (  7 open)   window opens 2026-11-28T16:00Z
+  --hours reached
+  session 612979c3e319 done after 13 polls; records in /home/user/polymarket-lab/pilot/out
+  -> no window open now (first opens 2026-11-28 04:00 UTC), so no trigger, as expected.
+
+Same file in a scratch folder with only WINDOW_S = 30 * 3600 (to reach real books now; diff = that line only),
+records in the scratch folder, stopped with SIGINT after 240 s:
+$ timeout -s INT 240 .venv/bin/python -I -u exp_fav.py run --hours 0.02     (lines "window open" left out)
+=== exp_fav.py run dry-run 2026-11-27 21:33:36 UTC (exp_fav 1.2 (2026-11-27, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, balance floor))
+  dry-run: public data only; the would-be orders are signed with a throwaway in-memory key
+  mode dry-run, ticket 10 USD, wallet type DEPOSIT_WALLET (addresses are not printed)
+  balance floor file: not usable, a live run would refuse (balance floor file /root/.polymarket-pilot/FLOOR is missing; no live orders without it; write it with one number, the de); dry-run continues
+  geoblock: blocked=True country=US (IP not shown)
+  geoblock: blocked=True (second check True) country=US  -> a live run would be refused here
+  clock: local - server +0.48 s (GET /time, 1 s resolution), round trip 168 ms
+  universe: 145 markets end in the next 26 h (145 new; 137 accepting orders); 0 crypto markets rejected (fee rate / window); assets {'bitcoin': 38, 'ethereum': 36, 'solana': 32, 'xrp': 33, 'bnb': 1, 'btc': 1, 'doge': 1, 
+    xrp-above-0pt9-on-november-28-2026: ask 0.979 x 259.4 in range but NOT a trigger: wide book: bid 0.93 is 0.049 below the ask 0.979 (max 0.03) (re-checked next poll)
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: ask 0.968 x 20 in range but NOT a trigger: wide book: bid 0.935 is 0.033 below the ask 0.968 (max 0.03) (re-checked next poll)
+    ethereum-above-1600-on-november-28-2026: DRY TRIGGER Yes ask 0.966 x 200 (193.20 USD), bid 0.96 (spread 0.006), +69974 s to end: would send FAK BUY 10 USD @ <= 0.966 (signed 10000000/10351960, price 0.96600); NOT pos
+    bitcoin-above-58k-on-november-28-2026: DRY TRIGGER Yes ask 0.96 x 214 (205.44 USD), bid 0.957 (spread 0.003), +69974 s to end: would send FAK BUY 10 USD @ <= 0.96 (signed 10000000/10416660, price 0.96000); NOT posted
+    bitcoin-above-62k-on-november-28-2026: TRIGGER No ask 0.967 x 940 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-bitcoin-dip-to-58k-on-november-27-2026: TRIGGER No ask 0.95 x 331.01 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-bitcoin-dip-to-57k-on-november-27-2026: TRIGGER No ask 0.977 x 426.97 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-ethereum-dip-to-1600-on-november-27-2026: TRIGGER No ask 0.968 x 93 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-the-price-of-bitcoin-be-between-56000-58000-on-november-28-2026: TRIGGER No ask 0.978 x 40 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-the-price-of-bitcoin-be-between-62000-64000-on-november-28-2026: TRIGGER No ask 0.979 x 20 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-the-price-of-ethereum-be-between-1500-1600-on-november-28-2026: TRIGGER No ask 0.978 x 26 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    ethereum-above-1600-on-november-28-2026: paper twin at +2 s: best ask 0.966, bid 0.96, fills 10.3519 @ 0.966000
+    bitcoin-above-58k-on-november-28-2026: paper twin at +2 s: best ask 0.96, bid 0.957, fills 10.4166 @ 0.960000
+    bitcoin-above-62k-on-november-28-2026: paper twin at +2 s: best ask 0.967, bid 0.965, fills 10.3412 @ 0.967000
+    will-bitcoin-dip-to-58k-on-november-27-2026: paper twin at +2 s: best ask 0.95, bid 0.949, fills 10.5263 @ 0.950000
+    will-bitcoin-dip-to-57k-on-november-27-2026: paper twin at +2 s: best ask 0.976, bid 0.975, fills 10.2459 @ 0.976000
+    will-ethereum-dip-to-1600-on-november-27-2026: paper twin at +2 s: best ask 0.968, bid 0.963, fills 10.3305 @ 0.968000
+    will-the-price-of-bitcoin-be-between-56000-58000-on-november-28-2026: paper twin at +2 s: best ask 0.978, bid 0.972, fills 10.2249 @ 0.978000
+    will-the-price-of-bitcoin-be-between-62000-64000-on-november-28-2026: paper twin at +2 s: best ask 0.979, bid 0.977, fills 10.2145 @ 0.979000
+    will-the-price-of-ethereum-be-between-1500-1600-on-november-28-2026: paper twin at +2 s: best ask 0.978, bid 0.959, fills 10.2249 @ 0.978000
+    hype-updown-1d-1795798800: ask 0.96 x 68.86 in range but NOT a trigger: wide book: bid 0.41 is 0.55 below the ask 0.96 (max 0.03) (re-checked next poll)
+    xrp-above-0pt9-on-november-28-2026: ask 0.979 x 259.4 in range but NOT a trigger: wide book: bid 0.93 is 0.049 below the ask 0.979 (max 0.03) (re-checked next poll)
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: ask 0.968 x 20 in range but NOT a trigger: wide book: bid 0.935 is 0.033 below the ask 0.968 (max 0.03) (re-checked next poll)
+    xrp-above-0pt9-on-november-28-2026: ask 0.977 x 80.4 in range but NOT a trigger: wide book: bid 0.932 is 0.045 below the ask 0.977 (max 0.03) (re-checked next poll)
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: ask 0.968 x 20 in range but NOT a trigger: wide book: bid 0.935 is 0.033 below the ask 0.968 (max 0.03) (re-checked next poll)
+    xrp-above-0pt9-on-november-28-2026: ask 0.979 x 119.6 in range but NOT a trigger: wide book: bid 0.933 is 0.046 below the ask 0.979 (max 0.03) (re-checked next poll)
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: ask 0.97 x 20 in range but NOT a trigger: wide book: bid 0.937 is 0.033 below the ask 0.97 (max 0.03) (re-checked next poll)
+    solana-above-75-on-november-28-2026: TRIGGER No ask 0.95 x 800 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    solana-above-75-on-november-28-2026: paper twin at +2 s: best ask 0.95, bid 0.93, fills 10.5263 @ 0.950000
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: TRIGGER No ask 0.97 x 20 -> not sent: 2 open tickets (filled or unknown, not resolved); cap 2 open at once
+    will-the-price-of-xrp-be-between-0pt80-0pt90-on-november-28-2026: paper twin at +2 s: best ask 0.97, bid 0.94, fills 10.3092 @ 0.970000
+  interrupted (Ctrl+C). FAK orders never rest, so nothing is left on the book. Open positions are held; run again (or `report`) to record their results.
+$ .venv/bin/python -I exp_fav.py report --dry-run     (same scratch folder)
+  report: DRY-RUN (paper stage: the 'fill' columns are the paper twin); 1 file(s), 1 session(s)
+  triggers: 11  sent: 2  refused by a cap: 9  technical skips (re-checked): 0  near-misses: 68 in 18 markets
+  wide book (ask in range with >= 10 USD, but bid more than 0.03 below the ask; not triggers, markets not consumed): 66 polls in 3 markets; of these markets, 1 triggered later
+  Slippage (fill price - ask at decision, in ticks of that market; a limit at the ask can only fill at or below it, so the cost of a moving book shows up as 'unfilled'):
+    filled 11: -1.00 ticks: 1, 0.00 ticks: 10; unfilled (FAK killed) 0; outcome unknown 0
+    best ask 2 s after the decision minus the ask at decision, in ticks (11 triggers): -1.00: 1, 0.00: 10
+
+  Fee check (charged = activity usdc_size - shares x price; formula = 0.01 x p x (1-p) x shares):
+    no fee rows yet (dry-run: the paper fee is the formula)
+
+  Results: won 0, lost 0, split 0, filled but unresolved 11; net +0.000 USD (after fees, before redemption)
+    paper stage counts every trigger (rows marked * were refused by a cap a live run applies); net of the triggers a live run would have sent: +0.000 USD
+  Triggers refused by a cap (market consumed; paper twin still recorded):
+      9  N open tickets (filled or unknown, not resolved); cap N open at once
+  Halt file absent (/root/.polymarket-pilot/EXP_FAV_HALT); STOP file absent
+Record check (scratch records): types {near 68, decision 11, twin 11, wide-book 9, order 2, session, geoblock,
+clock, universe}; a wide-book row: xrp-above-0pt9 ask 0.979 bid 0.93 spread 0.049 max 0.03; decision row:
+ethereum-above-1600 ask 0.966 bid 0.96 spread 0.006; its twin: decision_spread 0.006, twin spread 0.006;
+40-hex addresses in records + log: 0.
+Reading: on real books the condition removed the daily HYPE Up/Down (bid 0.41 / ask 0.96, the review's M4
+case) and two XRP markets (spread 0.033-0.049); will-the-price-of-xrp-be-between-0pt80-0pt90 narrowed to
+0.97 / 0.94 (exactly 0.03) three minutes later and triggered then. With 2 open tickets the 3rd-11th triggers of
+the widened run were refused by the open-ticket cap (paper twins still recorded).
+
+Still unverified (first seen on the owner's Mac): the free-balance read before every order
+(get_balance_allowance COLLATERAL) and how long it takes from Serbia; every other item listed above for 1.1.
+docs/forward-tests.md v1.2 does not yet contain the narrow-book condition (outside this change).
+No fresh-context evaluator has checked version 1.2 yet.

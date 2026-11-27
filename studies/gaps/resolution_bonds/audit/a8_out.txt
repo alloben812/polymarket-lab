@@ -1,0 +1,14 @@
+45 13
+  bitcoin-up-or-down-november-7-2026-9pm-et: 6 buys of the loser at 0.95-0.98, 79 USD, first at 0.950
+  bitcoin-up-or-down-november-4-2026-11pm-et: 7 buys of the loser at 0.95-0.98, 71 USD, first at 0.960
+  bitcoin-up-or-down-october-20-2026-9pm-et: 15 buys of the loser at 0.95-0.98, 669 USD, first at 0.950
+  bitcoin-up-or-down-october-25-2026-11pm-et: 9 buys of the loser at 0.95-0.98, 404 USD, first at 0.970
+  bitcoin-up-or-down-november-3-2026-11am-et: 12 buys of the loser at 0.95-0.98, 614 USD, first at 0.950
+  bitcoin-up-or-down-november-6-2026-6pm-et: 4 buys of the loser at 0.95-0.98, 211 USD, first at 0.960
+  bitcoin-up-or-down-october-22-2026-9pm-et: 14 buys of the loser at 0.95-0.98, 762 USD, first at 0.950
+  bitcoin-up-or-down-october-21-2026-11pm-et: 2 buys of the loser at 0.95-0.98, 350 USD, first at 0.950
+  bitcoin-up-or-down-november-3-2026-8am-et: 2 buys of the loser at 0.95-0.98, 3 USD, first at 0.950
+  bitcoin-up-or-down-november-8-2026-11pm-et: 1 buys of the loser at 0.95-0.98, 285 USD, first at 0.960
+  bitcoin-up-or-down-november-4-2026-10pm-et: 8 buys of the loser at 0.95-0.98, 85 USD, first at 0.960
+  bitcoin-up-or-down-november-17-2026-8am-et: 8 buys of the loser at 0.95-0.98, 87 USD, first at 0.950
+  ethereum-up-or-down-november-8-2026-6pm-et: 14 buys of the loser at 0.95-0.98, 604 USD, first at 0.950

@@ -1,0 +1,12 @@
+{"markets": 430, "rate 0.01": 430}
+5-min entries 203, lost 8
+subset | markets | lost | loss % (Wilson) | break-even % | net per 10 USD | t (market) | t (day)
+all btc+eth 1h | 150 | 6 | 4.00 (1.8-8.5) | 3.39 | -0.061 | -0.4 | -0.4
+btc | 74 | 4 | 5.41 (2.1-13.1) | 3.32 | -0.212 | -0.8 | -1.1
+eth | 76 | 2 | 2.63 (0.7-9.1) | 3.46 | +0.087 | +0.5 | +0.5
+volume >= 10k (the study's filter) | 58 | 4 | 6.90 (2.7-16.4) | 3.30 | -0.368 | -1.1 | -1.4
+volume < 10k | 92 | 2 | 2.17 (0.6-7.6) | 3.45 | +0.133 | +0.8 | +0.8
+weekend | 35 | 0 | 0.00 (0.0-9.9) | 3.55 | +0.368 | +23.3 | +39.8
+weekday | 115 | 6 | 5.22 (2.4-10.9) | 3.35 | -0.192 | -0.9 | -1.2
++1 tick | 150 | 6 | 4.00 (1.8-8.5) | 2.39 | -0.163 | -1.0 | -1.1
+losers: btc-updown-1h-1795039200 p=0.970 25 min before close; btc-updown-1h-1795075200 p=0.970 9 min before close; eth-updown-1h-1795467600 p=0.953 8 min before close; btc-updown-1h-1795492800 p=0.961 5 min before close; btc-updown-1h-1795615200 p=0.980 15 min before close; eth-updown-1h-1795615200 p=0.977 15 min before close

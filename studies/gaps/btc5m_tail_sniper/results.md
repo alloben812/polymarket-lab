@@ -3,13 +3,16 @@
 **Verdict: NO EDGE. Nothing here deserves a live micro-test, and a server next to the exchange would not help.**
 The Vega7-style rule fixed in advance (tail at or under 1.5 c or 5 c, seconds 225-285, model distance under 2.61 sd,
 Binance moving toward the tail over the last 30 s) loses money out of sample on real recorded order books at every
-reaction delay from 0 to 5 seconds, and it loses in-sample as well. Speed is not what is missing: about 90% of the
-cheap offers visible at the trigger are still there at the same price cap 5 s later (97-98% counting the next
-signal seconds). The price is simply not cheap. On
-2,304 BTC 5m markets of 2026-08-14..21 (8 days, books), at a 2-second reaction: at <= 1.5 c, 397 tickets, 3 won
-(0.8% against 1.03% needed), net -$392 on $1,774 of stake (-22%, 95% interval of net per $5 ticket -$5.17 to
-+$3.19); at <= 5 c, 779 tickets, 14 won (1.8% against 3.10% needed), net -$1,972 (-53%, -$3.87 to -$1.19 per
-ticket). Opportunities: about 50 (1.5 c) or 97 (5 c) tickets a day; capacity for a 200 EUR account: $0 a day.
+reaction delay from 0 to 5 seconds; at 1.5 c it also loses in its own formation period (Sep-Nov), and on a second
+out-of-sample period (Aug 22-31, tape only) it wins no more often than break-even. Speed is not what is missing:
+about 90% of the cheap offers visible at the trigger are still there at the same price cap 5 s later (97-98%
+counting the next signal seconds). The price is simply not cheap. On 2,304 BTC 5m markets of 2026-08-14..21 (8 days,
+books), at a 2-second reaction: at <= 1.5 c, 397 tickets, 3 won (0.8% against 1.03% needed), net -$392 on $1,774 of
+stake (-22%, 95% interval of net per $5 ticket -$5.17 to +$3.19); at <= 5 c, 779 tickets, 14 won (1.8% against 3.10%
+needed), net -$1,972 (-53%, -$3.87 to -$1.19 per ticket). On 2,880 markets of Aug 22-31 (tape) the 1.5 c rows show
++$305 to +$1,863 from 8-9 wins (0.8-1.1% against 1.05% needed, p 0.47-0.78): a size artefact of the tape, negative
+without the best 3 tickets at 2 and 5 s. Opportunities: about 50 (1.5 c) or 97 (5 c) tickets a day; capacity for a
+200 EUR account: $0 a day.
 
 Study run 2026-11-27, 18:29-20:20 UTC, one agent. Protocol: `protocol.md` (written 18:35, before any outcome
 statistic, not changed). Code: `common.py` (the rule), `book_build.py` (book replay), `tape_run.py` (tape fill
@@ -40,7 +43,7 @@ settlement. Fee 0.05 x p x (1 - p) per share (today's BTC rate; 0.01 for ETH/SOL
 | set | role | period | markets | source |
 |---|---|---|---|---|
 | OOS-BOOK | primary, out of sample | BTC 5m, 2026-08-14..21 (8 days, all 2,304 windows) | 2,304 (all with an outcome: 2,265 from the dataset, 39 from gamma) | HF `mileswangs/polymarket-btc-updown-5m-orderbook-tick-data` (PMData, CC BY 4.0; `l2` books and deltas recorded in AWS London, ms timestamps), Binance BTCUSDT 1 s dumps |
-| OOS-TAPE | second out-of-sample period | BTC 5m, 2026-08-22..31 | see below | Data API tapes (`pmlab.updown.tape`, read 2026-11-27), gamma outcomes |
+| OOS-TAPE | second out-of-sample period | BTC 5m, 2026-08-22..31 (10 days, all 2,880 windows) | 2,880 (62 empty tapes) | Data API tapes (`pmlab.updown.tape`, read 2026-11-27 18:35-19:04), gamma outcomes, Binance 1 s dumps |
 | FORMATION | in-sample, context only | BTC 5m grid (every 4th window) 2026-09-01..11-26 | 6,244 | cached prints of `btc5m_tails` |
 | OTHER FAMILIES | out of sample by asset / duration | 2026-11-21..26 | BTC 15m 576, ETH 5m 1,728, ETH 15m 576, SOL 5m 432, SOL 15m 576, XRP 5m 432, XRP 15m 576 | cached tapes, Binance 1 s |
 
@@ -79,8 +82,9 @@ it is 150 ms today, so d = 0 and d = 0.15 s are only reachable today by a co-loc
 | 5 c | **2 s** | **779 (97.4)** | 98% | 0.0203 | **14 (1.8%)** [1.1, 3.0] | 3.10% | 0.99 | **-1,972** | **-2.53 [-3.87, -1.19]** | **-53%** | -2,629 .. -1,370 |
 | 5 c | 5 s | 781 (97.6) | 98% | 0.0179 | 12 (1.5%) [0.9, 2.7] | 2.66% | 0.99 | -1,918 | -2.46 [-4.23, -0.69] | -50% | -2,919 .. -783 |
 
-How to read: one ticket per market, so the 95% interval of the net per ticket is by market; "kept vs d = 0" is how
-many of the trigger moments still found the offer at or under the cap after the delay; break-even is the average
+How to read: one ticket per market, so the 95% interval of the net per ticket is by market; "kept vs d = 0" is the
+number of markets with a ticket at that delay as a share of those at d = 0 (the rule retries at the next signal
+second; the same-moment share is in the next section); break-even is the average
 of (price + fee) per share; "exact p" is the probability of at least that many wins if the break-even were the true
 win rate (small = evidence of an edge; every value here is 0.60 or more). Average stake per ticket $4.30-4.88 (shown
 size limits some tickets). Of the 2,304 markets, 1,169 had a Binance signal second, 410 also had the tail offered at
@@ -123,7 +127,27 @@ information. There is no fraction of a positive result to keep: the result is ne
 
 ## OOS-TAPE, BTC 5m, 2026-08-22..31 (tape fill rule)
 
-OOS_TAPE_PLACEHOLDER
+All 2,880 windows downloaded (all four sub-grids complete; 62 tapes empty, 2.2%, they give no ticket). The tape
+fill rule takes real prints at or under the cap 1-3 s after the trigger, at the print's price and size (up to $5).
+
+| cap | delay | tickets (per day) | won (rate) | break-even | exact p | net $ | net per ticket [95%] | return on stake | day-bootstrap 95% | net w/o best 3 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 1.5 c | 1 s | 808 (80.8) | 9 (1.1%) | 1.05% | 0.47 | +1,863 | +2.31 [-0.60, +5.21] | +146% | -185 .. +4,161 | +379 |
+| 1.5 c | **2 s** | **853 (85.3)** | **8 (0.9%)** | 1.05% | 0.67 | **+1,291** | +1.51 [-1.00, +4.02] | +96% | -768 .. +3,636 | **-193** |
+| 1.5 c | 5 s | 960 (96.0) | 8 (0.8%) | 1.04% | 0.78 | +305 | +0.32 [-1.41, +2.05] | +21% | -1,159 .. +2,211 | -1,065 |
+| 5 c | 1 s | 1,154 (115.4) | 30 (2.6%) | 3.36% | 0.94 | +438 | +0.38 [-1.33, +2.09] | +14% | -1,754 .. +3,271 | -965 |
+| 5 c | **2 s** | **1,175 (117.5)** | **29 (2.5%)** | 3.29% | 0.96 | **-758** | -0.65 [-1.83, +0.54] | -24% | -2,080 .. +857 | -1,722 |
+| 5 c | 5 s | 1,205 (120.5) | 25 (2.1%) | 3.18% | 0.99 | -1,657 | -1.38 [-2.13, -0.62] | -50% | -2,341 .. -933 | -2,204 |
+
+Halves (2 s): 1.5 c Aug 22-26 +$503 (5 of 454 won), Aug 27-31 +$788 (3 of 399); 5 c -$355 (15 of 588) and -$403 (14 of 587).
+
+**Attack on the positive 1.5 c rows.** They are a size effect of the tape, not more wins: the equal-weight hit rate
+is at or below break-even in every 1.5 c row (1.1% against 1.05% at 1 s, 0.9% and 0.8% against 1.05% and 1.04% at 2
+and 5 s; p 0.47-0.78). On the tape the ticket size is the
+printed size, and the four winners that took a full $5 (500 shares) carry the result, while losing tickets average
+$1.56 (winners $3.37). At an equal $5 stake per ticket the same hit rate would return about -12% (0.9% / 1.05% - 1).
+Without the best 3 tickets the 2 s and 5 s rows are negative. Under the protocol the tape cannot rescue a failed book
+test, and here it does not even agree with itself across delays and caps (5 c is negative at 2 and 5 s).
 
 ## FORMATION (in-sample, 6,244 grid markets, Sep 1 - Nov 26, tape fill rule, fee 0.05)
 
@@ -155,7 +179,8 @@ fraction of BTC's volume. 1, 2 and 5 s rows and halves: `out/tables.md`.
 
 ## Opportunities, net per trade, capacity
 
-- Opportunities: about 50 tickets a day at 1.5 c and 97 a day at 5 c on BTC 5m (OOS-BOOK, 2 s); 77-109 a day in the
+- Opportunities: about 50 tickets a day at 1.5 c and 97 a day at 5 c on BTC 5m (OOS-BOOK, 2 s); 85 and 118 a day on
+  OOS-TAPE (the tape rule has no "offer visible" check, so it fires more often); 77-109 a day in the
   formation period (scaled from the 1-in-4 grid); BTC 15m about 18-26, ETH 5m 69-94, ETH 15m 12-20, SOL and XRP 2-12 a day.
 - Net per ticket after the 0.05 fee, OOS-BOOK at 2 s, scaled from the return on stake: 1.5 c -22% of stake = -$0.22
   per $1, -$1.10 per $5, -$4.40 per $20 ticket (95% interval of the return -116% to +71%); 5 c -53% = -$0.53,
@@ -174,7 +199,7 @@ the same overpriced tails faster. **Not worth renting for this strategy.**
 Nothing here deserves one. The rule is negative out of sample at every delay on real books, negative in its own
 formation period at 1.5 c, and not significant at 5 c. A live test with 50-100 USD would measure only the connection,
 not an edge. (For scale: telling a 3.8% hit rate from a 1.05% break-even at 1 c would need about 150 tickets with 80%
-power; this rule shows 0.8-1.0% on 400 tickets, so there is nothing to confirm.)
+power; this rule shows 0.8-1.0% on 397 book tickets and 0.9% on 853 tape tickets, so there is nothing to confirm.)
 
 ## Limitations
 
@@ -188,6 +213,10 @@ power; this rule shows 0.8-1.0% on 400 tickets, so there is nothing to confirm.)
   trigger" condition cannot be checked, and the hypothetical trader replaces the taker who really got that print.
   It flatters the rule if anything.
 - Other families: only 6 days (the cached tapes and Binance files), fee 0.01 instead of 0.05 for ETH/SOL/XRP.
+- OOS-TAPE: 62 of 2,880 tapes came back empty from the Data API (2.2%, against 13 of 6,264 in Sep-Nov); they produce no
+  ticket, which removes wins and losses alike.
+- On the tape the ticket size is the printed size, which can correlate with the outcome (see the OOS-TAPE attack);
+  the book test with a fixed $5 order is the clean one.
 - No queue or maker variant was in scope.
 - `audit.md` (independent check) does not exist yet; per AGENTS.md the result is not accepted until it does.
 

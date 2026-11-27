@@ -19,7 +19,11 @@ Hard caps (constants below, no flag or config key changes them):
   filled (plus still-open worst case) per UTC day <= 15.00 pUSD; <= 300 orders per UTC day;
   STOP file checked before every order; geoblock check before the first order of a live session;
   live start refused if the pUSD balance is below the worst-case resting notional of one window;
-  final guard on every signed order's spend; --max-windows default 12, at most 96.
+  final guard on every signed order's spend and expiration; --max-windows default 12, at most 96;
+  one live session at a time (lock file); a level is not placed later than 5 s after its second
+  (sleep, clock jump) or too close to its cancel second; a cancel counts only when the exchange
+  confirms it, every order's state is read until it is no longer live (cancelled again at the
+  window end if needed), and an order not known closed counts as fully filled.
 
 Records: out/exp-<name>-<YYYYMMDD>.jsonl (live) or .dryrun.jsonl. They hold token ids, order ids,
 prices and results; never a key, an API secret or a wallet address.
@@ -32,10 +36,12 @@ https://docs.polymarket.com/trading/positions/manage.md (redeem), https://docs.p
 from __future__ import annotations
 
 import argparse
+import fcntl
 import glob
 import heapq
 import json
 import os
+import re
 import sys
 import time
 import uuid
@@ -64,6 +70,12 @@ FINALIZE_FIRST_S = 20                     # first look for result/fills this lon
 FINALIZE_EVERY_S = 15
 FINALIZE_TIMEOUT_S = 20 * 60
 PREPARE_LEAD_S = 40
+MAX_PLACE_LAG_S = 5                       # later than this after its second (sleep, clock jump): not placed
+MAX_EXPIRY_PAST_END_S = 10                # effective GTD expiry may run at most this far past the window end
+CANCEL_RETRY_S = 5                        # an unconfirmed cancel is tried again this often ...
+CANCEL_RETRIES = 6                        # ... this many times; then again at the window end and at finalise
+CLOSE_CHECK_S = 2                         # this long after the window end: confirm none of its orders is live
+TERMINAL_STATUSES = {"MATCHED", "INVALID", "EXPIRED"}   # and every CANCELED*; anything else counts as live
 ASSETS = ("btc", "eth", "sol", "xrp", "doge", "hype")
 DURATIONS = {"5m": 300, "15m": 900}
 OUTCOME_RULES = ("both", "trailing", "leading")
@@ -74,8 +86,34 @@ CONFIG_KEYS = {"name", "asset", "duration", "levels", "note"}
 HERE = Path(__file__).resolve().parent
 OUT_DIR = HERE / "out"                                  # selftest points these to a temp dir
 STOP_FILE = Path("~/.polymarket-pilot/STOP").expanduser()
+LOCK_FILE = Path("~/.polymarket-pilot/exp_bids.live.lock").expanduser()   # outside pilot/: every checkout
+ADDRESS_RE = re.compile(r"(?<![0-9a-fA-F])0x[0-9a-fA-F]{40}(?![0-9a-fA-F])")
 
 out: smoke.Out
+
+
+def scrub(text) -> str:
+    """Text bound for a record or the log: known secrets redacted and no 40-hex address left."""
+    return ADDRESS_RE.sub("<address>", out._redact(str(text)))  # noqa: SLF001
+
+
+def order_closed(status) -> bool:
+    """True only for a terminal order status; unknown or missing statuses count as live."""
+    s = str(status or "").strip().upper().split(".")[-1]
+    return s in TERMINAL_STATUSES or s.startswith("CANCELED") or s.startswith("CANCELLED")
+
+
+def acquire_live_lock(path: Path):
+    """Exclusive lock held for the life of the process (released on exit, crash or kill)."""
+    path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    f = open(path, "a")
+    try:
+        fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        f.close()
+        raise Refusal(f"another live exp_bids.py session is running (lock {path}); "
+                      f"one live session at a time") from None
+    return f
 
 
 class ExpOut(smoke.Out):
@@ -195,6 +233,10 @@ def parse_config(obj: dict) -> Config:
             raise Refusal(f"config: level {i}: placement and expiry must fall inside the window")
         if cancel - place < MIN_RESTING_S:
             raise Refusal(f"config: level {i}: the order would rest {cancel - place} s (< {MIN_RESTING_S} s)")
+        if place + SDK_MIN_EXPIRATION_S + EXPIRATION_MARGIN_S - GTD_SECURITY_S > dur_s + MAX_EXPIRY_PAST_END_S:
+            raise Refusal(f"config: level {i}: placed too late; the minimum expiry (now + "
+                          f"{SDK_MIN_EXPIRATION_S} s) would let the order outlive the window by more than "
+                          f"{MAX_EXPIRY_PAST_END_S} s")
         if price * size > MAX_ORDER_NOTIONAL:
             raise Refusal(f"config: level {i}: {size} x {price} = {price * size} pUSD > per-order cap "
                           f"{MAX_ORDER_NOTIONAL}")
@@ -285,8 +327,8 @@ def check_order_caps(notional: Decimal, window_resting: Decimal, day_counts: tup
         raise Refusal(f"today filled {filled} + still open {open_} + {add} > daily cap {MAX_DAY_FILLED}")
 
 
-def guard_signed(signed, token: str, planned: Decimal, live: bool) -> Decimal:
-    """Final check on the signed order itself (same rule as smoke.py, plus shape checks)."""
+def guard_signed(signed, token: str, planned: Decimal, live: bool, window_end: int, expiration: int) -> Decimal:
+    """Final check on the signed order itself (same rule as smoke.py, plus shape and expiry checks)."""
     spend = smoke.guard_signed_buy(signed, min(MAX_ORDER_NOTIONAL, planned))
     if not signed.post_only:
         raise Refusal("internal: signed order is not post-only; not posted")
@@ -294,6 +336,10 @@ def guard_signed(signed, token: str, planned: Decimal, live: bool) -> Decimal:
         raise Refusal("internal: signed order token differs from the planned token; not posted")
     if int(signed.expiration) <= 0 or str(signed.order_type) != "GTD":
         raise Refusal("internal: signed order is not GTD; not posted")
+    if int(signed.expiration) != int(expiration):
+        raise Refusal("internal: signed expiration differs from the planned one; not posted")
+    if int(signed.expiration) > window_end + GTD_SECURITY_S + MAX_EXPIRY_PAST_END_S:
+        raise Refusal("internal: signed expiration runs past the window end; not posted")
     return spend
 
 
@@ -335,16 +381,31 @@ class RealEnv:
     def post(self, signed) -> dict:
         if not self.live:
             raise Refusal("internal: post called in dry-run")
-        r = self.c.post_order(signed)
+        from polymarket.errors import RequestRejectedError
+        try:
+            r = self.c.post_order(signed)
+        except RequestRejectedError as e:
+            # a definite 4xx answer: the order was not placed. 408/429 and 5xx stay unknown (re-raised:
+            # the caller counts them as fully filled, worst case)
+            if 400 <= int(e.status) < 500 and int(e.status) not in (408, 429):
+                return {"ok": False, "code": str(e.code or f"HTTP {e.status}"), "message": str(e)}
+            raise
         if r.ok:
             return {"ok": True, "order_id": r.order_id, "status": str(r.status)}
         return {"ok": False, "code": str(getattr(r, "code", "")), "message": str(getattr(r, "message", ""))}
 
     def cancel(self, ids: list[str]) -> list[str]:
+        """Ids the exchange confirms as cancelled; everything else counts as not cancelled."""
         if not self.live or not ids:
             return []
         r = self.c.cancel_orders(order_ids=ids)
-        return list(r.canceled)
+        if r.not_canceled:
+            out(f"    not cancelled by the exchange: {scrub(dict(r.not_canceled))}")
+        return [str(i) for i in r.canceled]
+
+    def order_state(self, order_id: str) -> dict:
+        o = self.c.get_order(order_id=order_id)
+        return {"status": str(o.status), "size_matched": D(o.size_matched)}
 
     def fills(self, order_id: str, token: str) -> dict:
         o = self.c.get_order(order_id=order_id)
@@ -397,7 +458,10 @@ class OrderRec:
     signed_expiration: int | None = None
     placed_at: float | None = None
     cancel_at: float | None = None
-    cancelled: bool = False
+    cancelled: bool = False          # the exchange confirmed the cancel
+    closed: bool = False             # the exchange's order state is terminal (no longer live)
+    last_state: str = ""
+    cancel_tries: int = 0
     mid_up: Decimal | None = None
     bid: Decimal | None = None
     ask: Decimal | None = None
@@ -452,6 +516,7 @@ class Session:
             self.push(max(self.env.now(), s + first - PREPARE_LEAD_S), "prepare", w)
             for lv in sorted(self.cfg.levels, key=lambda x: x.place_offset):
                 self.push(s + lv.place_offset, "place", w, lv)
+            self.push(w.end + CLOSE_CHECK_S, "close", w)
             self.push(w.end + FINALIZE_FIRST_S, "finalize", w)
         out(f"  plan: {self.max_windows} windows from {utc(s0)} ({self.windows[0].slug}), "
             f"worst-case resting per window {self.cfg.window_notional} pUSD")
@@ -496,6 +561,10 @@ class Session:
             return
         if self.stopping:
             return
+        lag = self.env.now() - (w.start + lv.place_offset)
+        if lag > MAX_PLACE_LAG_S:
+            rec = OrderRec(uuid.uuid4().hex[:16], lv, lv.outcome, "", lv.price, lv.size)
+            return self.skip(w, rec, f"{lag:.0f} s after its placement second (sleep or clock jump): not placed")
         outcomes, mid_up, why = self.choose(w, lv)
         if not outcomes:
             rec = OrderRec(uuid.uuid4().hex[:16], lv, lv.outcome, "", lv.price, lv.size, mid_up=mid_up)
@@ -520,12 +589,22 @@ class Session:
 
     def place_one(self, w: Window, rec: OrderRec) -> None:
         env, lv = self.env, rec.level
-        now = env.now()
         try:
             bk = env.book(rec.token)
         except Exception as e:  # noqa: BLE001
             return self.skip(w, rec, f"book unavailable ({type(e).__name__})")
+        now = env.now()                           # after the book read: timing checks use the fresh clock
         rec.bid, rec.ask = bk["bid"], bk["ask"]
+        lag = now - (w.start + lv.place_offset)
+        if lag > MAX_PLACE_LAG_S:
+            return self.skip(w, rec, f"{lag:.0f} s after its placement second (sleep or clock jump): not placed")
+        cancel_at = w.start + lv.cancel_offset
+        if now + MIN_RESTING_S > cancel_at:
+            return self.skip(w, rec, f"too close to its cancel second ({cancel_at - now:.0f} s left)")
+        expiration = max(cancel_at + GTD_SECURITY_S, int(now) + SDK_MIN_EXPIRATION_S + EXPIRATION_MARGIN_S)
+        if expiration > w.end + GTD_SECURITY_S + MAX_EXPIRY_PAST_END_S:
+            return self.skip(w, rec, f"its minimum expiry would outlive the window end by "
+                                     f"{expiration - GTD_SECURITY_S - w.end} s: not placed")
         if rec.size < bk["min_size"]:
             return self.skip(w, rec, f"size {rec.size} < market minimum {bk['min_size']}")
         if (rec.price / bk["tick"]) % 1 != 0:
@@ -543,13 +622,12 @@ class Session:
         if self.live and not self.geo_checked:
             smoke.geoblock_or_refuse()            # raises Refusal: the whole session stops
             self.geo_checked = True
-        cancel_at = w.start + lv.cancel_offset
-        expiration = max(cancel_at + GTD_SECURITY_S, int(now) + SDK_MIN_EXPIRATION_S + EXPIRATION_MARGIN_S)
         try:
             signed = env.sign(rec.token, rec.price, rec.size, expiration)
         except Exception as e:  # noqa: BLE001  (SDK input checks: tick, size, expiration)
-            return self.skip(w, rec, f"SDK refused to build the order: {type(e).__name__}: {e}")
-        guard_signed(signed, rec.token, notional, self.live)     # Refusal here stops the whole session
+            return self.skip(w, rec, scrub(f"SDK refused to build the order: {type(e).__name__}: {e}"))
+        # Refusal here stops the whole session
+        guard_signed(signed, rec.token, notional, self.live, w.end, expiration)
         rec.signed_expiration, rec.cancel_at, rec.placed_at = expiration, cancel_at, now
         placed_line = {"type": "placed", "exp": self.cfg.name, "mode": "live" if self.live else "dry-run",
                        "session": self.session, "key": rec.key, "day": day_of(now),
@@ -565,8 +643,8 @@ class Session:
             return
         try:
             r = env.post(signed)
-        except Exception as e:  # noqa: BLE001  network error: the order may or may not rest
-            rec.status, rec.reason = "post-error", f"{type(e).__name__}: {e}"
+        except Exception as e:  # noqa: BLE001  network error / 5xx / 429: the order may or may not rest
+            rec.status, rec.reason = "post-error", scrub(f"{type(e).__name__}: {e}")
             rec.cancel_at = cancel_at
             w.orders.append(rec)
             out(f"    POST ERROR {lv.label} {rec.outcome}: {rec.reason}; counted as filled in today's caps, "
@@ -578,7 +656,7 @@ class Session:
             out(f"    POSTED {lv.label}: BUY {rec.size} {rec.outcome} @ {rec.price} id {rec.order_id} "
                 f"status {r['status']}, cancel at {utc(cancel_at)}")
         else:
-            rec.status, rec.reason = "rejected", f"{r.get('code')}: {r.get('message')}"
+            rec.status, rec.reason = "rejected", scrub(f"{r.get('code')}: {r.get('message')}")
             w.resting -= notional
             out(f"    REJECTED {lv.label} {rec.outcome}: {rec.reason}")
         w.orders.append(rec)
@@ -586,20 +664,64 @@ class Session:
             self.write_order(w, rec, None, None)          # finalize at once: cost 0
             rec.status = "rejected-recorded"
 
-    def on_cancel(self, w: Window, rec: OrderRec) -> None:
-        if rec.order_id and not rec.cancelled:
+    def close_orders(self, recs, when: str) -> list[OrderRec]:
+        """Cancel every posted order in `recs` not yet known closed, then read each one's state.
+
+        A cancel counts only for ids the exchange returns as cancelled; an order counts as closed only
+        when its state read from the exchange is terminal. Returns the orders still live or unknown."""
+        todo = [r for r in recs if r.status == "posted" and r.order_id and not r.closed]
+        if not todo or not self.live:
+            return []
+        try:
+            done = set(self.env.cancel([r.order_id for r in todo]))
+        except Exception as e:  # noqa: BLE001
+            done = set()
+            out(f"    {when}: cancel request failed: {scrub(type(e).__name__ + ': ' + str(e))}")
+        left = []
+        for r in todo:
+            if r.order_id in done:
+                r.cancelled = True
             try:
-                done = self.env.cancel([rec.order_id])
-                rec.cancelled = True
-                out(f"    cancel {rec.level.label} {rec.outcome}: {'cancelled' if done else 'nothing open (filled or expired)'}")
+                st = self.env.order_state(r.order_id)
+                r.last_state = str(st["status"])
+                r.closed = order_closed(st["status"])
+                state = f"state {r.last_state}, matched {st['size_matched']}"
             except Exception as e:  # noqa: BLE001
-                out(f"    cancel {rec.order_id} failed: {type(e).__name__}; GTD expiry still applies")
+                state = scrub(f"state read failed ({type(e).__name__})")
+            out(f"    {when}: cancel {r.level.label} {r.outcome}: "
+                f"{'confirmed' if r.order_id in done else 'NOT confirmed'}; {state}; "
+                f"{'closed' if r.closed else 'STILL LIVE or unknown: counted as fully filled until closed'}")
+            if not r.closed:
+                left.append(r)
+        return left
+
+    def on_cancel(self, w: Window, rec: OrderRec) -> None:
+        if rec.status != "posted" or rec.closed:
+            return
+        rec.cancel_tries += 1
+        if self.close_orders([rec], "planned cancel") and rec.cancel_tries < CANCEL_RETRIES:
+            self.push(self.env.now() + CANCEL_RETRY_S, "cancel", w, rec)
+
+    def on_close(self, w: Window) -> None:
+        """Window end: confirm that none of the window's orders is still live; cancel again if one is."""
+        if not any(r.status == "posted" for r in w.orders):
+            return
+        left = self.close_orders(w.orders, "window end")
+        if left:
+            out(f"  {w.slug}: {len(left)} order(s) still live or unknown after the window end; "
+                f"cancel retried every {FINALIZE_EVERY_S} s, counted as fully filled until closed")
+        else:
+            out(f"  {w.slug}: window end: no order of this window is live")
 
     def write_order(self, w: Window, rec: OrderRec, result: str | None, fill: dict | None) -> dict:
         filled = avg = cost = payout = pnl = None
         end_status = rec.status
-        if rec.status == "posted" and fill is not None:
-            filled = fill["size_matched"]
+        if rec.status == "posted" and (not rec.closed or (fill is not None and not order_closed(fill["status"]))):
+            cost = rec.price * rec.size          # still live or unknown at finalise: worst case stays counted
+            end_status = (f"{(fill or {}).get('status') or rec.last_state or 'unknown'} "
+                          f"(not confirmed closed at finalise; counted as fully filled)")
+        elif rec.status == "posted" and fill is not None:
+            filled = max(D(fill["size_matched"]), D(fill.get("trade_shares") or 0))
             avg = fill["avg_price"] if fill["avg_price"] is not None else (rec.price if filled > 0 else None)
             cost = (filled * avg) if filled > 0 else Decimal(0)
             end_status = fill["status"]
@@ -645,12 +767,17 @@ class Session:
                                                "skipped": w.skipped_reason or "no market"})
             w.done = True
             return
+        timed_out = self.env.now() >= w.end + FINALIZE_TIMEOUT_S
+        # fills are read only once every order is known to be no longer live (cancel again if one is)
+        if self.close_orders(w.orders, "finalise") and not timed_out:
+            self.push(self.env.now() + FINALIZE_EVERY_S, "finalize", w)
+            return
         result = None
         try:
             result = self.env.result(w.market["condition_id"], {v: k for k, v in w.market["index"].items()})
         except Exception as e:  # noqa: BLE001
             out(f"  {w.slug}: result lookup failed ({type(e).__name__}), will retry")
-        if result is None and self.env.now() < w.end + FINALIZE_TIMEOUT_S:
+        if result is None and not timed_out:
             self.push(self.env.now() + FINALIZE_EVERY_S, "finalize", w)
             return
         lines = []
@@ -658,11 +785,13 @@ class Session:
             if rec.status == "rejected-recorded":
                 continue
             fill = None
-            if rec.status == "posted":
+            if rec.status == "posted" and rec.closed:
                 try:
                     fill = self.env.fills(rec.order_id, rec.token)
                 except Exception as e:  # noqa: BLE001
-                    rec.reason = f"fill lookup failed: {type(e).__name__}"
+                    rec.reason = scrub(f"fill lookup failed: {type(e).__name__}")
+            elif rec.status == "posted":
+                rec.reason = "not confirmed closed by the exchange at finalise: counted as fully filled"
             lines.append(self.write_order(w, rec, result, fill))
         tot = defaultdict(Decimal)
         for ln in lines:
@@ -687,16 +816,10 @@ class Session:
         self.stopping = True
         out(f"  STOPPING: {why}. No new orders; open orders of this session are cancelled; "
             f"results of windows with orders are still recorded (Ctrl+C quits at once).")
-        ids = [r.order_id for w in self.windows for r in w.orders if r.order_id and not r.cancelled]
-        if ids and self.live:
-            try:
-                self.env.cancel(ids)
-                for w in self.windows:
-                    for r in w.orders:
-                        if r.order_id in ids:
-                            r.cancelled = True
-            except Exception as e:  # noqa: BLE001
-                out(f"  cancel on stop failed: {type(e).__name__}; GTD expiry still applies")
+        left = self.close_orders([r for w in self.windows for r in w.orders], "stop")
+        if left:
+            out(f"  {len(left)} order(s) not confirmed closed on stop; tried again at the window end and at "
+                f"finalise, counted as fully filled until closed")
         # windows without orders need no result wait
         for w in self.windows:
             if not any(r.status in ("posted", "dry-run") for r in w.orders) and not w.done:
@@ -720,13 +843,12 @@ class Session:
         return 0
 
     def interrupt(self) -> None:
-        ids = [r.order_id for w in self.windows for r in w.orders if r.order_id and not r.cancelled]
-        if ids and self.live:
-            try:
-                self.env.cancel(ids)
-                out(f"  interrupted: cancelled {len(ids)} open order(s) of this session")
-            except Exception as e:  # noqa: BLE001
-                out(f"  interrupted: cancel failed ({type(e).__name__}); orders expire by GTD")
+        recs = [r for w in self.windows for r in w.orders if r.status == "posted" and not r.closed]
+        if recs and self.live:
+            left = self.close_orders(recs, "interrupt")
+            out(f"  interrupted: {len(recs) - len(left)} of {len(recs)} open order(s) confirmed closed"
+                + (f"; {len(left)} NOT confirmed: they expire by GTD, check open orders on polymarket.com"
+                   if left else ""))
         out("  interrupted: orders without a final record count as fully filled in today's caps")
 
 
@@ -740,6 +862,15 @@ def check_balance(env, cfg: Config) -> Decimal:
 
 
 def cmd_run(a) -> int:
+    try:
+        return _cmd_run(a)
+    finally:
+        lock = getattr(a, "_lock", None)
+        if lock is not None:
+            lock.close()                         # releases the live lock (process exit does too)
+
+
+def _cmd_run(a) -> int:
     cfg = load_config(a.config)
     if a.max_windows < 1 or a.max_windows > HARD_MAX_WINDOWS:
         raise Refusal(f"--max-windows must be 1-{HARD_MAX_WINDOWS}")
@@ -752,6 +883,8 @@ def cmd_run(a) -> int:
         raise Refusal(f"STOP file present ({STOP_FILE}); remove it to start")
     wallet = smoke.wallet_env()
     if a.live:
+        # one live session at a time, across every checkout: held until the process ends
+        a._lock = acquire_live_lock(LOCK_FILE)
         key = smoke.load_private_key()
         smoke.geoblock_or_refuse()
         client = smoke.live_client(key, wallet)
@@ -877,6 +1010,7 @@ class FakeEnv:
         self.mid_up, self.ask, self.min_size = D(mid_up), D(ask), D(min_size)
         self.fill_outcome, self.res = fill_outcome, result
         self.posted, self.cancelled, self.tokens = [], [], {}
+        self.cancel_log, self.closed_ids, self.fill_reads = [], set(), []   # (time, id), ids, (time, id)
 
     def now(self):
         return self.t
@@ -901,29 +1035,44 @@ class FakeEnv:
 
     def sign(self, token, price, size, expiration):
         return self.c.create_limit_order(asset_id=token, price=price, size=size, side="BUY",
-                                         post_only=True, expiration=int(time.time()) + 600)
+                                         post_only=True, expiration=expiration)
 
     def post(self, signed):
         if not self.live:
             raise Refusal("internal: post called in dry-run")
         oid = "0x" + uuid.uuid4().hex * 2
-        self.posted.append((oid, str(signed.token_id), Decimal(signed.maker_amount), Decimal(signed.taker_amount)))
+        self.posted.append((oid, str(signed.token_id), Decimal(signed.maker_amount), Decimal(signed.taker_amount),
+                            int(signed.expiration), self.t))
         return {"ok": True, "order_id": oid, "status": "live"}
 
-    def cancel(self, ids):
+    def _order(self, order_id):
+        for p in self.posted:
+            if p[0] == order_id:
+                return p
+        raise KeyError(order_id)
+
+    def order_state(self, order_id):
+        _, tok, mk, tk, _, _ = self._order(order_id)
+        if self.tokens[tok] == self.fill_outcome:
+            return {"status": "MATCHED", "size_matched": tk / smoke.USDC_UNIT}
+        if order_id in self.closed_ids:
+            return {"status": "CANCELED", "size_matched": Decimal(0)}
+        return {"status": "LIVE", "size_matched": Decimal(0)}
+
+    def cancel(self, ids):                       # like the exchange: only a live order can be cancelled
         self.cancelled.extend(ids)
-        return list(ids)
+        self.cancel_log.extend((self.t, i) for i in ids)
+        done = [i for i in ids if self.order_state(i)["status"] == "LIVE"]
+        self.closed_ids.update(done)
+        return done
 
     def fills(self, order_id, token):
-        for oid, tok, mk, tk in self.posted:
-            if oid == order_id:
-                if self.tokens[tok] == self.fill_outcome:
-                    sz = tk / smoke.USDC_UNIT
-                    return {"status": "MATCHED", "size_matched": sz, "trade_shares": sz,
-                            "avg_price": mk / tk}
-                return {"status": "CANCELED", "size_matched": Decimal(0), "trade_shares": Decimal(0),
-                        "avg_price": None}
-        raise KeyError(order_id)
+        self.fill_reads.append((self.t, order_id))
+        _, tok, mk, tk, _, _ = self._order(order_id)
+        st = self.order_state(order_id)
+        sz = st["size_matched"]
+        return {"status": st["status"], "size_matched": sz, "trade_shares": sz,
+                "avg_price": (mk / tk) if sz > 0 else None}
 
     def balance(self):
         return Decimal("3.00")
@@ -947,7 +1096,7 @@ def cmd_selftest(a) -> int:
     import tempfile
     import urllib.request
 
-    global OUT_DIR, STOP_FILE
+    global OUT_DIR, STOP_FILE, LOCK_FILE
     for var in ("HTTPS_PROXY", "https_proxy", "HTTP_PROXY", "http_proxy", "ALL_PROXY", "all_proxy"):
         os.environ[var] = "http://127.0.0.1:9"
     os.environ.pop("NO_PROXY", None)
@@ -974,8 +1123,8 @@ def cmd_selftest(a) -> int:
 
     tmp = Path(tempfile.mkdtemp(prefix="pm-exp-selftest-"))
     os.chmod(tmp, 0o700)
-    real_out, real_stop = OUT_DIR, STOP_FILE
-    OUT_DIR, STOP_FILE = tmp / "out", tmp / "STOP"
+    real_out, real_stop, real_lock = OUT_DIR, STOP_FILE, LOCK_FILE
+    OUT_DIR, STOP_FILE, LOCK_FILE = tmp / "out", tmp / "STOP", tmp / "lockdir" / "exp_bids.live.lock"
     old_key = os.environ.get("PM_KEY_FILE")
     acct = Account.create()
     key = "0x" + acct.key.hex().removeprefix("0x")
@@ -1048,11 +1197,44 @@ def cmd_selftest(a) -> int:
               lambda: check_order_caps(Decimal("1.00"), Decimal(0), (10, Decimal("14.00"), Decimal("0.50"))), True)
         check("day: filled 14.00 + 1.00 = 15.00 accepted",
               lambda: check_order_caps(Decimal("1.00"), Decimal(0), (10, Decimal("14.00"), Decimal(0))), False)
-        STOP_FILE.write_text("")
+        expect("(no STOP file during the count-cap checks)", not STOP_FILE.exists())
         check("day: 299 sent, a 'both' level (2 legs) refused",
               lambda: check_order_caps(Decimal("0.10"), Decimal(0), (299, Decimal(0), Decimal(0)), legs=2), True)
+        check("day: 299 sent, one more single order accepted",
+              lambda: check_order_caps(Decimal("0.10"), Decimal(0), (299, Decimal(0), Decimal(0)), legs=1), False)
+        STOP_FILE.write_text("")
         check("STOP file present -> refused", lambda: check_order_caps(Decimal("0.10"), Decimal(0), day), True)
         STOP_FILE.unlink()
+
+        # ---- M3 config: a level whose minimum expiry outlives the window is refused
+        check("place_before_end_s 20 refused (minimum expiry would outlive the window)",
+              lambda: parse_config(cfg_with(place_after_start_s=None, place_before_end_s=20,
+                                            expire_before_end_s=5, price="0.02", size="25")), True)
+        check("place_before_end_s 120 (late-tail) accepted",
+              lambda: parse_config(cfg_with(place_after_start_s=None, place_before_end_s=120,
+                                            expire_before_end_s=5)).levels[0].place_offset, False)
+
+        # ---- M2: single-instance lock
+        def second_lock():
+            h1 = acquire_live_lock(LOCK_FILE)
+            try:
+                return acquire_live_lock(LOCK_FILE)
+            finally:
+                h1.close()
+        check("live lock: a second live instance is refused while the first holds the lock", second_lock, True)
+        check("live lock: free again once the first instance ends",
+              lambda: (lambda h: (h.close(), "acquired")[1])(acquire_live_lock(LOCK_FILE)), False)
+        held = acquire_live_lock(LOCK_FILE)
+        try:
+            msg = ""
+            try:
+                cmd_run(argparse.Namespace(config=str(HERE / "experiments" / "pairs.json"), live=True, max_windows=2))
+            except Refusal as e:
+                msg = str(e)
+            expect("live lock: `run --live` refused before the key is read while another session runs",
+                   "another live" in msg, msg)
+        finally:
+            held.close()
 
         # ---- ledger from files (crash-safe worst case)
         OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -1072,24 +1254,35 @@ def cmd_selftest(a) -> int:
         exp = int(time.time()) + 600
         good = client.create_limit_order(asset_id=tok, price=Decimal("0.40"), size=Decimal(5), side="BUY",
                                          post_only=True, expiration=exp)
-        check("signed BUY 5 @ 0.40 passes the final guard", lambda: guard_signed(good, tok, Decimal("2.00"), True), False)
+        wend = exp - GTD_SECURITY_S              # window end such that exp = cancel at the end + 60 s
+
+        def g(signed, token=tok, planned=Decimal("2.00"), window_end=wend, expiration=exp):
+            return guard_signed(signed, token, planned, True, window_end, expiration)
+        check("signed BUY 5 @ 0.40 passes the final guard", lambda: g(good), False)
         big = client.create_limit_order(asset_id=tok, price=Decimal("0.60"), size=Decimal(5), side="BUY",
                                         post_only=True, expiration=exp)
-        check("signed BUY 5 @ 0.60 = 3.00 blocked by the final guard",
-              lambda: guard_signed(big, tok, Decimal("3.00"), True), True)
-        check("signed order larger than planned blocked",
-              lambda: guard_signed(good, tok, Decimal("1.00"), True), True)
+        check("signed BUY 5 @ 0.60 = 3.00 blocked by the final guard", lambda: g(big, planned=Decimal("3.00")), True)
+        check("signed order larger than planned blocked", lambda: g(good, planned=Decimal("1.00")), True)
         nopo = client.create_limit_order(asset_id=tok, price=Decimal("0.40"), size=Decimal(5), side="BUY",
                                          expiration=exp)
-        check("signed order without post-only blocked", lambda: guard_signed(nopo, tok, Decimal("2.00"), True), True)
+        check("signed order without post-only blocked", lambda: g(nopo), True)
         gtc = client.create_limit_order(asset_id=tok, price=Decimal("0.40"), size=Decimal(5), side="BUY",
                                         post_only=True)
-        check("signed GTC (no expiration) blocked", lambda: guard_signed(gtc, tok, Decimal("2.00"), True), True)
-        check("signed order for another token blocked",
-              lambda: guard_signed(good, "1" + tok[1:], Decimal("2.00"), True), True)
+        check("signed GTC (no expiration) blocked", lambda: g(gtc), True)
+        check("signed order for another token blocked", lambda: g(good, token="1" + tok[1:]), True)
         sell = client.create_limit_order(asset_id=tok, price=Decimal("0.40"), size=Decimal(5), side="SELL",
                                          post_only=True, expiration=exp)
-        check("signed SELL blocked", lambda: guard_signed(sell, tok, Decimal("2.00"), True), True)
+        check("signed SELL blocked", lambda: g(sell), True)
+        # M3 probe K: an order expiring in 2033 passed the old guard
+        far = client.create_limit_order(asset_id=tok, price=Decimal("0.40"), size=Decimal(5), side="BUY",
+                                        post_only=True, expiration=2_000_000_000)
+        check("signed order expiring in 2033 blocked (expiration bounded by the window end)",
+              lambda: g(far, expiration=2_000_000_000), True)
+        check("signed expiration other than the planned one blocked", lambda: g(good, expiration=exp + 1), True)
+        check("signed expiration = window end + 60 + 10 accepted (upper bound inclusive)",
+              lambda: g(good, window_end=exp - GTD_SECURITY_S - MAX_EXPIRY_PAST_END_S), False)
+        check("signed expiration = window end + 60 + 11 blocked",
+              lambda: g(good, window_end=exp - GTD_SECURITY_S - MAX_EXPIRY_PAST_END_S - 1), True)
         addrs = [str(client.wallet).lower(), str(client.signer).lower()]
 
         # ---- live refusals before any order
@@ -1145,9 +1338,16 @@ def cmd_selftest(a) -> int:
             o = [r for r in live if r["type"] == "order"]
             downs = [r for r in o if r["outcome"] == "Down"]
             ups = [r for r in o if r["outcome"] == "Up"]
-            expect("live (fake): 4 orders posted, each cancelled at its expiry second",
-                   len(env.posted) == 4 and len(env.cancelled) == 4, f"posted {len(env.posted)} "
-                   f"cancelled {len(env.cancelled)}")
+            cancel_secs = sorted({int(t) % 300 for t, _ in env.cancel_log})   # windows start on multiples of 300
+            expect("live (fake): 4 orders posted, each cancelled at its expiry second (+270 s)",
+                   len(env.posted) == 4 and len(env.cancelled) == 4 and cancel_secs == [270],
+                   f"posted {len(env.posted)} cancelled {len(env.cancelled)} at +{cancel_secs} s")
+            expect("live (fake): signed expiration = cancel second + 60 s (+330 s), as planned",
+                   all(p[4] - (p[5] - p[5] % 300) == 330 for p in env.posted),
+                   str(sorted({p[4] - (p[5] - p[5] % 300) for p in env.posted})))
+            expect("live (fake): fills read only after each order's state was terminal (after its cancel)",
+                   all(t >= next(ct for ct, ci in env.cancel_log if ci == oid) for t, oid in env.fill_reads)
+                   and len(env.fill_reads) == 4)
             expect("live (fake): Down filled 5 @ 0.40, lost: cost 2.00 payout 0 net -2.00",
                    all(r["filled_size"] == "5" and D(r["cost"]) == 2 and D(r["pnl"]) == -2 for r in downs),
                    json.dumps([(r["filled_size"], r["cost"], r["pnl"]) for r in downs]))
@@ -1186,12 +1386,41 @@ def cmd_selftest(a) -> int:
             st = [r["status"] for r in read_records(OUT_DIR.glob("*.jsonl")) if r["type"] == "order"]
             expect("post error -> recorded as post-error, its 4.00 counted as filled today",
                    st == ["post-error", "post-error"] and f_ == Decimal("4.00"), f"{st}, filled {f_}")
-            # STOP file mid-session: no orders after it
+            # STOP file present before the session's first order: nothing posted
             STOP_FILE.write_text("")
             env = FakeEnv(client, True, t0=1_800_000_007.0)
             Session(cfg, env, True, 3).run()
-            expect("STOP file -> no order posted in the session", not env.posted)
+            expect("STOP file before the first order -> no order posted in the session", not env.posted)
             STOP_FILE.unlink()
+
+            # STOP file written mid-session, while this session's orders rest: they are cancelled at once,
+            # no later order is posted, the window with orders is still finalised
+            for f in OUT_DIR.glob("*"):
+                f.unlink()
+
+            class StopMid(FakeEnv):
+                stop_at = None
+
+                def sleep(self, s):
+                    super().sleep(s)
+                    if self.posted and self.stop_at is None and self.t >= self.posted[-1][5] + 30:
+                        STOP_FILE.write_text("")
+                        self.stop_at = self.t
+            env = StopMid(client, True, t0=1_800_000_007.0, fill_outcome="none")
+            Session(cfg, env, True, 3).run()
+            STOP_FILE.unlink()
+            ids = [p[0] for p in env.posted]
+            o = [r for r in read_records(OUT_DIR.glob("*.jsonl")) if r["type"] == "order"]
+            expect("STOP mid-session: 2 orders resting when STOP appears, no order posted after it",
+                   len(env.posted) == 2 and env.stop_at is not None and all(p[5] < env.stop_at for p in env.posted),
+                   f"posted {len(env.posted)}")
+            expect("STOP mid-session: both resting orders cancelled right after STOP, before their +270 s cancel",
+                   sorted(i for t, i in env.cancel_log if t < env.posted[0][5] + 270) == sorted(ids)
+                   and all(t - env.stop_at < 2 for t, _ in env.cancel_log),
+                   f"cancel times after STOP: {[round(t - env.stop_at, 1) for t, _ in env.cancel_log]}")
+            expect("STOP mid-session: the window with orders is finalised, both orders closed at cost 0",
+                   len(o) == 2 and all(r["end_status"] == "CANCELED" and D(r["cost"]) == 0 for r in o),
+                   json.dumps([(r["end_status"], r["cost"]) for r in o]))
             # daily filled cap stops a session: 4.00 per window, 15 per day -> 3 windows max
             for f in OUT_DIR.glob("*"):
                 f.unlink()
@@ -1226,7 +1455,7 @@ def cmd_selftest(a) -> int:
         check("report runs on the selftest records", lambda: cmd_report(argparse.Namespace(files=[], dry_run=False)),
               False)
     finally:
-        OUT_DIR, STOP_FILE = real_out, real_stop
+        OUT_DIR, STOP_FILE, LOCK_FILE = real_out, real_stop, real_lock
         if old_key is None:
             os.environ.pop("PM_KEY_FILE", None)
         else:

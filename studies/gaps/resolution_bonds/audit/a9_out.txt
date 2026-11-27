@@ -1,0 +1,3 @@
+tape-trigger rule, btc+eth 1h 18-26 Nov: 327 trades, lost 12 (3.67%, Wilson 2.1-6.3), break-even 3.94%, net per 10 USD +0.028 (t +0.3)
+  weekend: 74 trades, lost 1, net per 10 USD +0.278 (t +2.0)
+  weekday: 253 trades, lost 11, net per 10 USD -0.044 (t -0.3)

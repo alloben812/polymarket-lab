@@ -1,0 +1,127 @@
+== 1. Reproduction with my own extract/model (compare with results.md T3/T4) ==
+  judged L60 f.99 m.02 D1 excl ON  TUNE  : trades 387 mkts 34 sh 7,922 avgq 0.944 win(tr) 1.000 mkts with any losing fill 0 net +5.30c t 7.8 net$ +420 $/day +105
+  judged L60 f.99 m.02 D1 excl ON  REPORT: trades 62 mkts 5 sh 1,664 avgq 0.962 win(tr) 1.000 mkts with any losing fill 0 net +3.58c t 8.3 net$ +60 $/day +30
+  judged L60 f.99 m.02 D1 excl OFF TUNE  : trades 766 mkts 52 sh 16,306 avgq 0.920 win(tr) 0.956 mkts with any losing fill 2 net +1.55c t 0.4 net$ +252 $/day +63
+  judged L60 f.99 m.02 D1 excl OFF REPORT: trades 191 mkts 12 sh 4,400 avgq 0.917 win(tr) 0.791 mkts with any losing fill 2 net -10.20c t -0.9 net$ -449 $/day -224
+  widest L60 f.97 m.02 D1 excl ON  TUNE  : trades 626 mkts 49 sh 12,509 avgq 0.945 win(tr) 1.000 mkts with any losing fill 0 net +5.23c t 13.2 net$ +654 $/day +163
+  widest L60 f.97 m.02 D1 excl ON  REPORT: trades 118 mkts 10 sh 2,790 avgq 0.933 win(tr) 1.000 mkts with any losing fill 0 net +6.43c t 3.6 net$ +179 $/day +90
+  widest L60 f.97 m.02 D1 excl OFF TUNE  : trades 1117 mkts 73 sh 23,250 avgq 0.923 win(tr) 0.964 mkts with any losing fill 2 net +3.05c t 1.1 net$ +709 $/day +177
+  widest L60 f.97 m.02 D1 excl OFF REPORT: trades 307 mkts 21 sh 7,409 avgq 0.903 win(tr) 0.889 mkts with any losing fill 2 net -4.19c t -0.5 net$ -310 $/day -155
+  L60 f.99 m.02 D2 excl ON  TUNE  : trades 326 mkts 28 sh 6,877 avgq 0.948 win(tr) 1.000 mkts with any losing fill 0 net +4.92c t 8.8 net$ +338 $/day +85
+  L60 f.99 m.02 D2 excl ON  REPORT: trades 74 mkts 6 sh 1,896 avgq 0.955 win(tr) 1.000 mkts with any losing fill 0 net +4.29c t 5.3 net$ +81 $/day +41
+  L60 f.99 m.02 D2 excl OFF TUNE  : trades 700 mkts 46 sh 15,097 avgq 0.927 win(tr) 0.976 mkts with any losing fill 2 net +2.95c t 0.9 net$ +446 $/day +111
+  L60 f.99 m.02 D2 excl OFF REPORT: trades 173 mkts 13 sh 3,755 avgq 0.937 win(tr) 0.913 mkts with any losing fill 2 net -0.68c t -0.1 net$ -26 $/day -13
+  L60 f.97 m.02 D2 excl ON  TUNE  : trades 616 mkts 47 sh 12,858 avgq 0.945 win(tr) 0.992 mkts with any losing fill 1 net +4.10c t 3.6 net$ +527 $/day +132
+  L60 f.97 m.02 D2 excl ON  REPORT: trades 164 mkts 11 sh 3,445 avgq 0.927 win(tr) 1.000 mkts with any losing fill 0 net +7.02c t 4.7 net$ +242 $/day +121
+  L60 f.97 m.02 D2 excl OFF TUNE  : trades 1122 mkts 71 sh 23,929 avgq 0.927 win(tr) 0.963 mkts with any losing fill 3 net +2.17c t 0.8 net$ +518 $/day +130
+  L60 f.97 m.02 D2 excl OFF REPORT: trades 345 mkts 22 sh 7,893 avgq 0.903 win(tr) 0.901 mkts with any losing fill 2 net -3.34c t -0.5 net$ -263 $/day -132
+  L60 f.97 m.04 D2 excl ON  TUNE  : trades 274 mkts 27 sh 5,750 avgq 0.915 win(tr) 0.993 mkts with any losing fill 1 net +7.91c t 8.2 net$ +455 $/day +114
+  L60 f.97 m.04 D2 excl ON  REPORT: trades 88 mkts 7 sh 1,973 avgq 0.898 win(tr) 1.000 mkts with any losing fill 0 net +9.72c t 5.6 net$ +192 $/day +96
+  L60 f.97 m.04 D2 excl OFF TUNE  : trades 751 mkts 48 sh 15,756 avgq 0.900 win(tr) 0.951 mkts with any losing fill 3 net +3.17c t 0.7 net$ +499 $/day +125
+  L60 f.97 m.04 D2 excl OFF REPORT: trades 248 mkts 16 sh 5,981 avgq 0.882 win(tr) 0.867 mkts with any losing fill 2 net -5.38c t -0.6 net$ -322 $/day -161
+  L30 f.97 m.02 D1 excl ON  TUNE  : trades 125 mkts 8 sh 2,928 avgq 0.943 win(tr) 1.000 mkts with any losing fill 0 net +5.46c t 5.4 net$ +160 $/day +40
+  L30 f.97 m.02 D1 excl ON  REPORT: trades 38 mkts 3 sh 1,080 avgq 0.906 win(tr) 1.000 mkts with any losing fill 0 net +8.98c t 1.9 net$ +97 $/day +49
+  L30 f.97 m.02 D1 excl OFF TUNE  : trades 653 mkts 35 sh 13,995 avgq 0.907 win(tr) 0.939 mkts with any losing fill 2 net +1.74c t 0.4 net$ +243 $/day +61
+  L30 f.97 m.02 D1 excl OFF REPORT: trades 244 mkts 15 sh 6,112 avgq 0.895 win(tr) 0.861 mkts with any losing fill 2 net -6.28c t -0.7 net$ -384 $/day -192
+  L15 f.97 m.02 D1 excl ON  TUNE  : no trades
+  L15 f.97 m.02 D1 excl ON  REPORT: no trades
+  L15 f.97 m.02 D1 excl OFF TUNE  : trades 141 mkts 9 sh 3,244 avgq 0.845 win(tr) 0.851 mkts with any losing fill 2 net -4.01c t -0.3 net$ -130 $/day -32
+  L15 f.97 m.02 D1 excl OFF REPORT: trades 86 mkts 4 sh 1,797 avgq 0.905 win(tr) 0.779 mkts with any losing fill 1 net -7.44c t -0.4 net$ -134 $/day -67
+  distinct markets judged/widest: 39 59  judged subset of widest: True
+
+== 2. Sensitivity to the information delay D (model uses Binance closed by m-D; real match is about m+0.9) : six days, exclusion ON ==
+  judged D=-3 LOOK-AHEAD: trades 721 mkts 58 sh 16,799 avgq 0.937 win(tr) 1.000 mkts with any losing fill 0 net +6.03c t 6.5 net$ +1012 $/day +169
+  judged D=-2 LOOK-AHEAD: trades 551 mkts 41 sh 13,687 avgq 0.951 win(tr) 1.000 mkts with any losing fill 0 net +4.66c t 13.8 net$ +638 $/day +106
+  judged D=-1 ~at real match: trades 345 mkts 30 sh 8,949 avgq 0.947 win(tr) 1.000 mkts with any losing fill 0 net +5.05c t 6.4 net$ +452 $/day +75
+  judged D=+0 : trades 280 mkts 26 sh 6,755 avgq 0.946 win(tr) 1.000 mkts with any losing fill 0 net +5.12c t 5.4 net$ +346 $/day +58
+  judged D=+1 : trades 449 mkts 39 sh 9,586 avgq 0.948 win(tr) 1.000 mkts with any losing fill 0 net +5.00c t 8.5 net$ +480 $/day +80
+  judged D=+2 : trades 400 mkts 34 sh 8,773 avgq 0.950 win(tr) 1.000 mkts with any losing fill 0 net +4.78c t 10.2 net$ +420 $/day +70
+  judged D=+3 : trades 441 mkts 37 sh 10,332 avgq 0.935 win(tr) 0.993 mkts with any losing fill 1 net +4.94c t 3.5 net$ +511 $/day +85
+  judged D=+5 : trades 384 mkts 34 sh 8,799 avgq 0.932 win(tr) 0.966 mkts with any losing fill 2 net +2.10c t 0.6 net$ +185 $/day +31
+  judged D=+8 : trades 352 mkts 30 sh 7,718 avgq 0.910 win(tr) 0.935 mkts with any losing fill 3 net -0.20c t -0.0 net$ -16 $/day -3
+  judged D=+12 : trades 357 mkts 27 sh 8,171 avgq 0.897 win(tr) 0.880 mkts with any losing fill 4 net -1.50c t -0.2 net$ -122 $/day -20
+  widest D=-3 LOOK-AHEAD: trades 1303 mkts 105 sh 29,080 avgq 0.929 win(tr) 1.000 mkts with any losing fill 0 net +6.79c t 10.7 net$ +1975 $/day +329
+  widest D=-2 LOOK-AHEAD: trades 874 mkts 69 sh 20,129 avgq 0.935 win(tr) 1.000 mkts with any losing fill 0 net +6.20c t 12.3 net$ +1247 $/day +208
+  widest D=-1 ~at real match: trades 656 mkts 52 sh 15,246 avgq 0.938 win(tr) 0.991 mkts with any losing fill 1 net +5.61c t 9.1 net$ +855 $/day +143
+  widest D=+0 : trades 620 mkts 54 sh 14,115 avgq 0.941 win(tr) 0.990 mkts with any losing fill 1 net +5.29c t 8.5 net$ +747 $/day +124
+  widest D=+1 : trades 744 mkts 59 sh 15,299 avgq 0.943 win(tr) 1.000 mkts with any losing fill 0 net +5.44c t 11.8 net$ +833 $/day +139
+  widest D=+2 : trades 780 mkts 58 sh 16,303 avgq 0.941 win(tr) 0.994 mkts with any losing fill 1 net +4.71c t 4.9 net$ +769 $/day +128
+  widest D=+3 : trades 929 mkts 65 sh 19,745 avgq 0.936 win(tr) 0.984 mkts with any losing fill 2 net +3.79c t 2.0 net$ +748 $/day +125
+  widest D=+5 : trades 978 mkts 63 sh 19,597 avgq 0.927 win(tr) 0.973 mkts with any losing fill 4 net +4.05c t 2.4 net$ +794 $/day +132
+  widest D=+8 : trades 887 mkts 64 sh 17,848 avgq 0.907 win(tr) 0.948 mkts with any losing fill 6 net +1.54c t 0.5 net$ +276 $/day +46
+  widest D=+12 : trades 842 mkts 55 sh 16,947 avgq 0.907 win(tr) 0.928 mkts with any losing fill 6 net +1.13c t 0.3 net$ +191 $/day +32
+  block lag 2 instead of 3 (m = block - 2, closer to the measured 2.09 s), D=1:
+  judged lag2 TUNE  : trades 253 mkts 23 sh 5,842 avgq 0.946 win(tr) 1.000 mkts with any losing fill 0 net +5.15c t 4.7 net$ +301 $/day +75
+  judged lag2 REPORT: trades 52 mkts 5 sh 1,538 avgq 0.956 win(tr) 1.000 mkts with any losing fill 0 net +4.16c t 7.3 net$ +64 $/day +32
+  widest lag2 TUNE  : trades 575 mkts 49 sh 12,339 avgq 0.940 win(tr) 0.990 mkts with any losing fill 1 net +5.36c t 7.6 net$ +661 $/day +165
+  widest lag2 REPORT: trades 107 mkts 11 sh 3,054 avgq 0.950 win(tr) 1.000 mkts with any losing fill 0 net +4.73c t 10.5 net$ +145 $/day +72
+
+== 3. Was the signal still true at the (approximate) real match? fresh model = Binance second closing at m+1 ==
+  judged signal STILL true: trades 136 mkts 15 sh 3,515 avgq 0.959 win(tr) 1.000 mkts with any losing fill 0 net +3.94c t 8.1 net$ +139 $/day +23 | fresh model prob of bought side: mean 0.997 min 0.991; stale f 0.995; mean (fresh prob - price - fee) +3.64c; fresh dist<E99: 0.00
+  judged signal GONE     : trades 313 mkts 26 sh 6,070 avgq 0.941 win(tr) 1.000 mkts with any losing fill 0 net +5.62c t 6.6 net$ +341 $/day +57 | fresh model prob of bought side: mean 0.936 min 0.715; stale f 0.995; mean (fresh prob - price - fee) -0.74c; fresh dist<E99: 0.46
+  judged signal still true TUNE  : trades 110 mkts 12 sh 2,523 avgq 0.958 win(tr) 1.000 mkts with any losing fill 0 net +4.04c t 6.4 net$ +102 $/day +25
+  judged signal still true REPORT: trades 26 mkts 3 sh 992 avgq 0.961 win(tr) 1.000 mkts with any losing fill 0 net +3.69c t 5.4 net$ +37 $/day +18
+  widest signal STILL true: trades 263 mkts 27 sh 6,273 avgq 0.954 win(tr) 1.000 mkts with any losing fill 0 net +4.34c t 13.0 net$ +272 $/day +45 | fresh model prob of bought side: mean 0.993 min 0.978; stale f 0.990; mean (fresh prob - price - fee) +3.61c; fresh dist<E99: 0.00
+  widest signal GONE     : trades 481 mkts 44 sh 9,026 avgq 0.935 win(tr) 1.000 mkts with any losing fill 0 net +6.21c t 8.7 net$ +561 $/day +93 | fresh model prob of bought side: mean 0.927 min 0.715; stale f 0.987; mean (fresh prob - price - fee) -1.11c; fresh dist<E99: 0.53
+  widest signal still true TUNE  : trades 208 mkts 22 sh 4,638 avgq 0.954 win(tr) 1.000 mkts with any losing fill 0 net +4.42c t 10.7 net$ +205 $/day +51
+  widest signal still true REPORT: trades 55 mkts 5 sh 1,636 avgq 0.957 win(tr) 1.000 mkts with any losing fill 0 net +4.11c t 7.3 net$ +67 $/day +34
+
+== 4. Fills: bursts, later blocks, print type, takers ==
+  judged: markets with all fills in ONE block 28 of 39; shares in the first qualifying block 0.75
+  judged only prints in a LATER block than the first qualifying one: trades 119 mkts 11 sh 2,380 avgq 0.920 win(tr) 1.000 mkts with any losing fill 0 net +7.69c t 3.7 net$ +183 $/day +31
+  judged only prints >= 3 s after the first qualifying block: trades 24 mkts 4 sh 771 avgq 0.898 win(tr) 1.000 mkts with any losing fill 0 net +9.79c t 2.2 net$ +75 $/day +13
+    from taker BUY rows 0.97 of shares, from taker SELL rows of the other side 0.03; print size z: median 10.0, share of our size from prints < 20 sh 0.23; wallets 212, top10 0.39 of print size
+    full printed size of the traded prints 11,678 sh vs taken 9,586; markets at the 500 cap 8
+    SELL-derived prints with a BUY twin (same block, size, price): 3 of 19; exact duplicate traded rows: 30 of 449
+  widest: markets with all fills in ONE block 35 of 59; shares in the first qualifying block 0.67
+  widest only prints in a LATER block than the first qualifying one: trades 252 mkts 24 sh 5,099 avgq 0.932 win(tr) 1.000 mkts with any losing fill 0 net +6.54c t 6.6 net$ +333 $/day +56
+  widest only prints >= 3 s after the first qualifying block: trades 120 mkts 14 sh 2,674 avgq 0.944 win(tr) 1.000 mkts with any losing fill 0 net +5.36c t 9.6 net$ +143 $/day +24
+    from taker BUY rows 0.94 of shares, from taker SELL rows of the other side 0.06; print size z: median 10.0, share of our size from prints < 20 sh 0.25; wallets 275, top10 0.38 of print size
+    full printed size of the traded prints 18,049 sh vs taken 15,299; markets at the 500 cap 10
+    SELL-derived prints with a BUY twin (same block, size, price): 7 of 49; exact duplicate traded rows: 49 of 744
+
+== 5. Price path around the burst (favoured side, all buyable prints of that side, size-weighted) ==
+  judged: median price paid 0.965; favoured-side VWAP 6 s before 0.976 (n 29), in the burst block 0.970, 1-4 s after 0.973 (n 38), 5-10 s after 0.982
+    markets where the VWAP 6 s BEFORE the burst was already <= price paid + 0.01: 13; markets where 1-4 s AFTER it is still <= paid + 0.01: 18; markets where some print 1-4 s after is <= paid: 18; share of same-block same-side volume printed at >= 0.98: 0.54
+  widest: median price paid 0.951; favoured-side VWAP 6 s before 0.976 (n 47), in the burst block 0.965, 1-4 s after 0.969 (n 58), 5-10 s after 0.985
+    markets where the VWAP 6 s BEFORE the burst was already <= price paid + 0.01: 19; markets where 1-4 s AFTER it is still <= paid + 0.01: 25; markets where some print 1-4 s after is <= paid: 30; share of same-block same-side volume printed at >= 0.98: 0.41
+
+== 6. Statistics: by day, drop best day, drop best ten markets ==
+  judged by day: {21: (13, 2597, 144), 22: (8, 2001, 73), 23: (6, 1381, 96), 24: (7, 1943, 107), 25: (3, 997, 37), 26: (2, 666, 23)}
+  judged without best day (Nov 21): trades 321 mkts 26 sh 6,988 avgq 0.950 win(tr) 1.000 mkts with any losing fill 0 net +4.80c t 6.3 net$ +335 $/day +67
+  judged without the ten best markets: trades 266 mkts 29 sh 5,539 avgq 0.964 win(tr) 1.000 mkts with any losing fill 0 net +3.43c t 24.2 net$ +190 $/day +32 | top-10 markets = 60% of net$; median market net $7.96; markets with net < $5: 13
+    distinct hours with a trade 34 for 39 markets; max markets in one hour 2; one loss at the cap would cost about $474 vs total net $480
+  widest by day: {21: (19, 3993, 209), 22: (13, 3498, 145), 23: (6, 2356, 148), 24: (11, 2662, 151), 25: (6, 1718, 130), 26: (4, 1072, 49)}
+  widest without best day (Nov 21): trades 534 mkts 40 sh 11,306 avgq 0.942 win(tr) 1.000 mkts with any losing fill 0 net +5.52c t 9.2 net$ +624 $/day +125
+  widest without the ten best markets: trades 543 mkts 49 sh 10,794 avgq 0.953 win(tr) 1.000 mkts with any losing fill 0 net +4.48c t 19.3 net$ +484 $/day +81 | top-10 markets = 42% of net$; median market net $11.80; markets with net < $5: 15
+    distinct hours with a trade 46 for 59 markets; max markets in one hour 4; one loss at the cap would cost about $474 vs total net $833
+  widest signal-still-true by day: {21: (9, 1564, 74), 22: (7, 1331, 52), 23: (2, 789, 44), 24: (4, 953, 35), 25: (3, 992, 37), 26: (2, 643, 31)}
+  widest signal-still-true without best day (Nov 21): trades 189 mkts 18 sh 4,709 avgq 0.956 win(tr) 1.000 mkts with any losing fill 0 net +4.21c t 12.7 net$ +198 $/day +40
+  widest signal-still-true without the ten best markets: trades 94 mkts 17 sh 2,308 avgq 0.961 win(tr) 1.000 mkts with any losing fill 0 net +3.71c t 16.6 net$ +86 $/day +14 | top-10 markets = 69% of net$; median market net $7.99; markets with net < $5: 9
+    distinct hours with a trade 23 for 27 markets; max markets in one hour 3; one loss at the cap would cost about $474 vs total net $272
+
+== 7. E99 sensitivity (widest, D=1, six days) and the unfiltered losers ==
+  |EA-K| >=  0.00: trades 1424 mkts 94 sh 30,659 avgq 0.918 win(tr) 0.948 mkts with any losing fill 4 net +1.30c t 0.5 net$ +399 $/day +66
+  |EA-K| >=  5.00: trades 1411 mkts 93 sh 30,159 avgq 0.920 win(tr) 0.948 mkts with any losing fill 4 net +0.99c t 0.3 net$ +299 $/day +50
+  |EA-K| >= 10.00: trades 1242 mkts 86 sh 26,062 avgq 0.928 win(tr) 0.973 mkts with any losing fill 2 net +3.02c t 1.3 net$ +787 $/day +131
+  |EA-K| >= 15.00: trades 967 mkts 72 sh 20,248 avgq 0.933 win(tr) 0.983 mkts with any losing fill 1 net +4.21c t 2.5 net$ +852 $/day +142
+  |EA-K| >= 18.63: trades 744 mkts 59 sh 15,299 avgq 0.943 win(tr) 1.000 mkts with any losing fill 0 net +5.44c t 11.8 net$ +833 $/day +139
+  |EA-K| >= 20.46: trades 699 mkts 55 sh 13,963 avgq 0.942 win(tr) 1.000 mkts with any losing fill 0 net +5.54c t 11.1 net$ +773 $/day +129
+  |EA-K| >= 25.00: trades 541 mkts 43 sh 10,550 avgq 0.946 win(tr) 1.000 mkts with any losing fill 0 net +5.12c t 11.1 net$ +541 $/day +90
+  |EA-K| >= 30.00: trades 378 mkts 33 sh 7,306 avgq 0.948 win(tr) 1.000 mkts with any losing fill 0 net +5.00c t 9.1 net$ +365 $/day +61
+            tr      sh      net     q     f   dist
+t0                                                
+1795222200  19 500.000 -411.279 0.789 0.989  5.736
+1795498500  21 497.197 -423.371 0.861 0.985  8.752
+1795611000  16 500.000 -433.473 0.858 0.988 11.830
+1795675500  18 500.000 -338.746 0.661 0.981 15.034
+
+== 8. Hand check of accounting (raw tape row -> our numbers) ==
+  t0 1795293300 block 1795293551 (t1-49) raw BUY Up p=0.9727 z=205.306 -> buy Up at 0.9727 size 100.000; model f 0.9936 dist 34.7; up_won True; fee/sh 0.00133; net 2.5934 = 100.000*(1-0.9727-0.00133)
+  t0 1795603500 block 1795603774 (t1-26) raw BUY Down p=0.9700 z=15.000 -> buy Down at 0.9700 size 15.000; model f 1.0000 dist 32.0; up_won False; fee/sh 0.00146; net 0.4282 = 15.000*(1-0.9700-0.00146)
+  t0 1795303800 block 1795304071 (t1-29) raw BUY Up p=0.9563 z=40.000 -> buy Up at 0.9563 size 40.000; model f 0.9912 dist 18.9; up_won True; fee/sh 0.00209; net 1.6663 = 40.000*(1-0.9563-0.00209)
+  t0 1795554000 block 1795554278 (t1-22) raw BUY Down p=0.9600 z=301.500 -> buy Down at 0.9600 size 100.000; model f 0.9928 dist 21.2; up_won False; fee/sh 0.00192; net 3.8080 = 100.000*(1-0.9600-0.00192)
+  t0 1795554000 block 1795554278 (t1-22) raw BUY Down p=0.9600 z=20.198 -> buy Down at 0.9600 size 20.198; model f 0.9928 dist 21.2; up_won False; fee/sh 0.00192; net 0.7691 = 20.198*(1-0.9600-0.00192)
+  t0 1795418100 block 1795418347 (t1-53) raw BUY Down p=0.9600 z=15.000 -> buy Down at 0.9600 size 15.000; model f 0.9930 dist 47.5; up_won False; fee/sh 0.00192; net 0.5712 = 15.000*(1-0.9600-0.00192)
+
+diagnostic runs executed by this script: 44

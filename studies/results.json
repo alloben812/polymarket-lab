@@ -1,0 +1,188 @@
+{
+ "econ_release_lag": {
+  "title": "Scheduled economic releases: how fast do Polymarket prices absorb a number that is published at a known second, and what was left for someone acting seconds or minutes later?",
+  "study": {
+   "key": "econ_release_lag",
+   "protocol_file": "/home/user/polymarket-lab/studies/gaps/econ_release_lag/protocol.md",
+   "results_file": "/home/user/polymarket-lab/studies/gaps/econ_release_lag/results.md",
+   "headline": "Polymarket absorbs scheduled economic numbers in about 5 seconds (98% of the stale-price money is taken within 30 s, mostly by three wallets), so a taker arriving at +30 s finds at most about $7-13 a day at $500 per market, with t = 1.84 in the reporting part.",
+   "key_numbers": "Sample: 51 release seconds (53 release ids), 75 Polymarket events, 268 markets, 2026-09-01..11-26; reporting part from 2026-10-15 = 30 releases / 140 markets.\nE1: winner's last pre-release price median 0.888; 140 of 268 markets still uncertain (<0.90).\nE2 (uncertain markets): median 5 s to first print >=0.95; 76/120/128 of 140 within 5 s/30 s/2 min; per release median 4 s. By type: ISM 0 s, Michigan 1, JOLTS 2, non-US GDP 1, central banks 4, US GDP 4, CPI 6, PCE 6, PPI 7, Employment 11, FOMC 15, non-US inflation 21.\nE3 (stale trades after release, all takers): $107,046 changed hands, $30,347 gap (~$350/day). Gap by time: 0-5 s $12,768; 5-30 s $16,964; 30 s-2 min $462; 2-10 min $113; later $40. 110 taker wallets, top three 46.7%, top ten 76.7%; per release median 4 wallets, top three take 100%.\nE4 (winner at <=0.97, $500/market, fee 0.01, outcome known) | whole period | reporting part | t by release (reporting):\n+5 s: $6,147 on $22,913 cost ($70.65/day) | $2,038 on $9,049 ($47.40/day) | 2.56 (54% of it in fills stamped +5/+6 s)\n+30 s (primary): $640 on $3,692 ($7.36/day) | $570 on $3,327 ($13.25/day), fills in 11 markets / 5 releases | 1.84\n+2 min: $183 ($2.11/day) | $121 ($2.81/day) | 1.40\n+10 min: $76 ($0.88/day) | $74 ($1.72/day) | 1.00\nAt +30 s: zero fills in Employment, PPI, US GDP, FOMC, JOLTS, ISM, Michigan; $485 of the $640 comes from Germany GDP, Argentina CPI and Korea GDP; $134 from flagged markets (eggs, delayed October CPI resolution). Nothing left after 5 s in markets above $100K volume.",
+   "verdict": "INCONCLUSIVE",
+   "variants_run": 4,
+   "caveats": "- E4 is an upper bound, not a backtest of achievable profit: it uses the resolved outcome, so every fill is profitable by construction, and it assumes we take every print away from the taker who really got it. The t-statistics measure how regularly stale offers exist, not whether we would win them.\n- The +5 s variant does clear t > 2 in the reporting part (2.56, 140 markets), but it was not the declared primary and 54% of its profit sits in fills stamped +5/+6 s, inside the 1-2 s block-time jitter. I did not call it an opportunity for that reason.\n- Only prints are visible. Untaken offers and book depth are unknown, and maker behaviour (how fast quotes are pulled) cannot be seen.\n- T is the scheduled second, never re-timed. For tier B publishers the clock time came from my own knowledge of their standing publication times, not from pages fetched today; the tape gate confirmed 36 of them and dropped 7 (RBNZ-sep, BOC-sep, ECB-sep, BOE-sep, SNB-sep, BOI-oct, ECB-oct; 27 markets, all fully priced, largest pre-release gap 0.09). Argentina's first reaction comes at +15 to +39 s, probably the publisher's own delay.\n- bls.gov blocks direct requests (403); the BLS 2026 schedule was read through WebFetch, whose summary I could not check against the raw page. BEA and Fed calendars were fetched directly.\n- Retail sales and weekly jobless claims have no Polymarket markets. China GDP was lost because the rules gave the wrong date (5 markets closed before the scheduled time). BoJ, Copom, Colombia, SARB, RBI, Bank of Korea and China CPI were excluded in advance for lack of a scheduled second.\n- 39 markets were flagged in advance as needing judgement or resolving late. The October CPI annual and core y/y events stayed open ten days with the winner at about 0.95; fills there are resolution-risk carry, not a time gap.\n- Fee of 0.01 was applied everywhere, including the US GDP event whose gamma field says 0; the fee history before 2026-11-20 is unverified.\n- Small sample: 87 days, two FOMC meetings, three prints of each monthly US release; 52% of the +5 s profit comes from three releases and 80% of the +30 s profit from three.\n- Process: the first discovery run included the `finance` tag and pulled 10,000 irrelevant events before I discarded them (heavier on the API than intended). I saw the tape of one release (September CPI) as the sanity slice before running the rest, after the protocol was fixed.\n- Toolkit: `stats.ratio_cluster` gives meaningless t-values (26, 122) when only one or two clusters have non-zero cost, so the mean-per-release t is the one reported; `updown.buyable` assumes Up/Down names, so Yes/No conversion is in the study's own `lib.py`; `gamma.iter_events` needs `limit=50`. Nothing under pmlab/ was edited and NOTES.md was not touched.",
+   "ideas": [
+    "Record the economy books by 1-second REST polling from T-60 s to T+120 s at the next releases (Employment 2026-12-04, FOMC 2026-12-09, CPI 2026-12-10) to see resting stale offers and how fast makers pull them.",
+    "Measure our own latency: seconds from the scheduled time until the number is readable on bls.gov, bea.gov and federalreserve.gov from a VPS, against the +3 to +6 s at which incumbents' fills are stamped.",
+    "Take the incumbent wallets apart with pmlab.wallet (0x8cb3ed, 0x059468, 0x2f633e, 0x67babd): are they profitable after wrong-bucket losses, do they quote before the release, what else do they snipe.",
+    "Maker side of the same event: resting bids on the outcome-consistent side in thin non-US markets (Germany GDP, Korea GDP, Argentina CPI), where absorption took 1-6 minutes.",
+    "Separate study of thin non-US releases at off-hours with an independently fetched calendar (Eurostat, Destatis, INDEC, Bank of Korea, NBS, BoJ), the only place anything survived 30 seconds.",
+    "Delayed-resolution carry: the October CPI events traded near 0.95 for ten days after the number; find out what the dispute was and whether such cases are systematically safe.",
+    "Pre-release side: takers at 0.40-0.60 won 49.1%, so no edge before the number; test whether nowcasts (Cleveland Fed, GDPNow) beat bucket prices in the last day.",
+    "Use the public L2 archive (chitoyuuri/polymarket-l2-v3-1-archive, category economy) to replace print-based E4 with true book depth at T+d."
+   ]
+  },
+  "audit": {
+   "key": "econ_release_lag",
+   "verdict": "WEAKENED",
+   "problems": [
+    {
+     "issue": "Argentina CPI October: the scheduled time T is not the publication second. Nothing prints for 39 s after 19:00:00 (the two earlier months: +21 s and +15 s). The tier B gate accepts a first move up to +60 s, wider than the 30 s delay under test, so the first reaction is booked as a '+30 s' opportunity.",
+     "severity": "high",
+     "effect": "$228 of the $570 reporting-part +30 s total (40%) and the whole best day. Without it and the flagged markets: $268, $6.22/day."
+    },
+    {
+     "issue": "Germany GDP Q3 was left unflagged as 'mechanical', but the market disagreed about the answer for about 100 s (winner at 0.42-0.45 until +24 s, 0.56-0.60 at +58 s, 0.99 only at +240 s; three takers still bought the eventual loser at 0.39 at +57 s). The rules resolve on one of several year-on-year figures in the Destatis release. E4 buys the resolved winner throughout.",
+     "severity": "high",
+     "effect": "$208 of the $570 (37%). Without it, Argentina and the flagged markets: $60, $1.38/day."
+    },
+    {
+     "issue": "Half of the +30 s profit is not a stale quote that survived 30 s: fills priced at least 5 cents below an earlier post-release print of the same winner (Argentina 0.35 at +55 s after 0.95-0.99 at +39 s; Korea GDP 0.87-0.92 after 0.98; eggs 0.78 after 0.97). These are fresh mistaken or profit-taking orders, taken in the same block by one to three wallets (confirmed as separate taker transactions).",
+     "severity": "high",
+     "effect": "$318 of the $640 whole-period +30 s total needs winning a same-second race at a later instant; only $322 could have been resting (Germany $208, CPI October carry $74, eggs $26)."
+    },
+    {
+     "issue": "t = 1.84 is not a test: 25 of 30 reporting releases are exactly zero and the other five are positive by construction. The result sits in a handful of markets.",
+     "severity": "high",
+     "effect": "Bootstrap by release for the reporting total: $70 to $1,228. Without the best day $342 ($7.95/day, t 1.55). The best ten markets carry $564 of $570; without them $6 ($0.14/day). Profit on 5 of 21 release days."
+    },
+    {
+     "issue": "The +5 s row is unstable: it depends on one second of timestamp lag and on the arbitrary order of prints inside one second (the code takes them in reversed API order).",
+     "severity": "medium",
+     "effect": "Reporting part $2,038 as published; $1,042 with start +6 s or lag 4 s; $3,277 with lag 2 s; $1,488 to $4,664 by print order inside a second. Quote as $1,000-4,700, not $2,038 with t = 2.56. The +30 s row is unaffected (under $3)."
+    },
+    {
+     "issue": "No time cap on E4: US CPI October fills run to +889,612 s (ten days) in the two events with delayed resolution.",
+     "severity": "medium",
+     "effect": "$74 of the $570 for $1,632 held ten days under dispute risk. Fills within 2 h of T only: $540 reporting."
+    },
+    {
+     "issue": "The reporting part was not unseen by the lab: the same tapes were downloaded by the economics wallet study (15:42-15:46) and NOTES.md already said '98.8% taken within 60 s' before this protocol was written (15:51). The 30 s primary was chosen knowing the answer. The protocol did precede this study's own tapes (first tape 15:51:51).",
+     "severity": "medium",
+     "effect": "No number changes; the early/reporting split is cosmetic and the bias is toward confirming a known null."
+    },
+    {
+     "issue": "Outcome look-ahead (admitted): every fill uses the resolved winner, so wrong-bucket losses cannot appear.",
+     "severity": "medium",
+     "effect": "Only visible wrong-side evidence: takers who went long the eventual loser at 0.50 or more within 10 minutes lost $329 over 7 releases. E4 stays an upper bound."
+    },
+    {
+     "issue": "Fee rate: 0.01 was applied to all 51 releases, but NOTES.md records the measured economics rate as 0.036-0.048 before 2026-11-21; only 2 releases fall after the change. The results call the history 'unverified'.",
+     "severity": "low",
+     "effect": "+30 s fees $16 instead of $4 (net $628 whole, $559 reporting); +5 s fees $144 instead of $37 (net $6,039 / $2,004)."
+    },
+    {
+     "issue": "Fixed 3 s lag files 16 post-release prints stamped T..T+2 as 'before the release' (Bank of Canada October, ISM services September, Michigan, Japan GDP).",
+     "severity": "low",
+     "effect": "E1 is set by a post-release print in 7-8 markets (uncertain set 145 instead of 140 at lag 2 s); about $370 of gap missing from E3. Medians and the 98.0% within 30 s do not move for any lag from 0 to 3 s."
+    },
+    {
+     "issue": "gamma volumeNum is shares, not dollars (tape shares equal volumeNum on 256 of 256 complete tapes; dollar turnover median 0.50 of it).",
+     "severity": "low",
+     "effect": "'$318M volume', 'under $5,000', 'above $100K' are share counts. The filter itself is as the protocol wrote it."
+    },
+    {
+     "issue": "Volume filter selects on final volume, which includes post-release trading. I measured the 290 dropped markets with the same rules.",
+     "severity": "low",
+     "effect": "+30 s and +2 min: zero fills. +5 s: +$476 whole period (+$176 reporting). Stale gap +$844, all inside 30 s. Nothing was hidden."
+    },
+    {
+     "issue": "'Mostly by three wallets' is loose: the top three take 46.7% over the study (per release about 100%, but not the same three). The pool is lumpy: three releases hold 59% of the gap, ten hold 83%, 13 of 51 have none.",
+     "severity": "low",
+     "effect": "'$350 a day' is a mean; the median release with any stale trade has $228."
+    },
+    {
+     "issue": "Reproducibility and description: the step from events_raw (10,178 events) to events_core (281) has no script in the folder; the US CPI August 'early move' is described as one 5-10 share print but is five prints worth about $315 buying eventual losers.",
+     "severity": "low",
+     "effect": "None on the numbers: every core event is matched or excluded by a written rule, only three earnings markets were left in raw, and T for CPI August is supported by 163 prints starting at +1 s."
+    }
+   ],
+   "corrected_numbers": "Reproduced exactly (three data paths): 268 markets / 51 release seconds; E1 median 0.888; E2 median 5 s, 76/120/128 of 140 within 5 s/30 s/2 min; E3 $107,046 changed hands, $30,347 gap, 98.0% within 30 s, top three 46.7%; E4 +30 s $640 (whole) / $570 (reporting), t 1.84; +5 s $6,147 / $2,038, t 2.56.\n\n+30 s, reporting part, 43 days:\n- as published: $570, $13.25/day\n- fee 0.04 before 2026-11-21: $559, $13.01/day\n- without flagged markets (ten-day carry): $495, $11.52/day\n- also without Argentina CPI October: $268, $6.22/day\n- also without Germany GDP: $60, $1.38/day\n- US official releases, unflagged: $0 (whole period $10, $0.11/day)\n- without best day: $342, $7.95/day; without best ten markets: $6, $0.14/day\n- bootstrap by release: $70 to $1,228\n- the 290 markets under the volume filter add $0\n\n+30 s, whole period: $640 as published, $628 with the measured fee; $318 of it is offers that appeared after the market had moved, $322 could have been resting.\n\n+5 s, reporting part: $2,038 as published; range $1,000-4,700 (one second of timing, print order inside a second); without best day $1,338; without best ten markets $371. US official unflagged, whole period: $3,838 at +5 s, $2,477 at +7 s, $21 at +20 s.\n\nE3: $30,347 stands; add about $370 (prints stamped T..T+2) and $844 (sub-threshold markets).",
+   "notes": "The description of the market holds; the small positive remainder at +30 s does not. Read the correction as downward: the analyst's own conclusion (no dependable edge at +30 s) gets stronger and should be NO EDGE at 30 s and later, not INCONCLUSIVE. Do not fund a late-taker strategy on this study.\n\nReproduction coverage:\n- own E1-E4 code on the analyst's cached raw rows: 268 markets (100%), identical per market\n- same code on another study's earlier download (data/econ_tapes): 187 markets / 33 release seconds (70%), identical\n- my own fresh download with transaction hashes: 75 markets / 34 release seconds (28%), including all 17 markets with +30 s fills, row-for-row identical\n- winners from the live tokens endpoint: 268 of 268 agree\n- two fills recomputed by hand (Korea GDP $42.76, Argentina CPI $196.65): match; the $500 cap binds exactly\n\nChecked and clean: tapes complete against gamma volume, none capped, timestamps monotonic, no page duplicates (identical-looking rows have different transaction hashes), price conversions, fee formula, settlement direction, time zones and daylight-saving switches, the seven dropped tier B releases (zero E4 at nominal times), four variants declared and four run.\n\nNot checked: the BLS, BEA and Fed calendar pages (my fetch was refused in this session; the tape supports all 17 US official times, first move at +1 to +12 s); whether release markets exist outside the tags used for discovery; book depth and whether any offer was resting at T + 30 s.\n\nFiles:\n- /home/user/polymarket-lab/studies/gaps/econ_release_lag/audit.md\n- /home/user/polymarket-lab/studies/gaps/econ_release_lag/audit_scripts/ (a1.py to a12.py; run from a scratch directory, so paths inside point there and the downloads are not kept)\nNo analyst file was edited, NOTES.md was not touched, nothing was committed."
+  }
+ },
+ "crypto_levels_vs_options": {
+  "title": "Crypto price-level markets versus option-implied probabilities: are the gaps large and slow enough to trade with a 0.01 fee?",
+  "study": {
+   "key": "crypto_levels_vs_options",
+   "protocol_file": "/home/user/polymarket-lab/studies/gaps/crypto_levels_vs_options/protocol.md",
+   "results_file": "/home/user/polymarket-lab/studies/gaps/crypto_levels_vs_options/results.md",
+   "headline": "The gap between Polymarket BTC/ETH threshold prices and a DVOL lognormal model is small (2-3 points, not 5-6) and mostly model error or untradable empty-book mids; after the tape check the best variant is +$694 on 43 entries (t=2.08) across only 34 markets, all from the NO side in a month when BTC fell 27%, so no tradable edge is shown.",
+   "key_numbers": "Universe: 560 \"above at noon ET\" markets (BTC 323, ETH 237; 62 asset-date clusters; tune 359 / report 201) and 825 one-touch markets, resolving 27 Oct-26 Nov, volume >= $5K.\n\nL1 gap (market minus DVOL model, strikes with model prob 0.05-0.95, 40,866 market-hours): mean +0.005, sd 0.039, mean abs 0.024, 8.6% of hours at >= 0.05. Mean abs by horizon: 2-12h 0.041, 12-48h 0.030, >=48h 0.023. With realised 24h vol: mean abs 0.046.\nL2: autocorrelation 0.65 / 0.58 / 0.47 at 1 / 4 / 12 h. Gaps >= 0.05 lose 59% in 1 h (half-life 0.8 h), then a slow tail (0.32 left at 4 h, 0.24 at 12 h). The market moves (-0.68 x gap in 4 h), the model does not.\nDeribit check (BTC, 10 daily expiries): one-day ATM IV / DVOL median 1.10 (quartiles 0.96-1.27); option digitals deviate from the model with the same sign as Polymarket.\nOutcome reproduction from Binance: 550/550 daily ladders, 825/825 one-touch.\n\nL3 primary, tuned variant g=0.05, 48h-7d (period | entries | markets | clusters | PnL | return | t | $/day):\npaper tune | 729 | 313 | 40 | +$4,654 | +31.9% | 2.51 | +233\npaper report | 507 | 194 | 22 | +$2,664 | +26.3% | 3.96 | +242\nconfirmed tune | 32 | 27 | 16 | +$472 | +73.7% | 1.49 | +24\nconfirmed report | 43 | 34 | 15 | +$695 | +80.8% | 2.08 | +63\nconfirmed report, full $20 size on tape | 13 | - | - | +$47 | - | - | +4\nConfirmed report by side: NO 31 entries +$704, YES 12 entries -$10; two clusters (BTC 16-17 Nov) = $497.\nOther confirmed report variants (g, band: entries, PnL, t): 0.05 2-12h: 40, +$140, 0.86; 0.05 12-48h: 63, +$151, 1.38; 0.08 2-12h: 30, -$81, -1.58; 0.08 12-48h: 12, +$7, 0.20; 0.08 48h-7d: 16, +$102, 2.59; 0.12 2-12h: 16, -$19, -0.45; 0.12 12-48h: 3, -$35, -2.13; 0.12 48h-7d: 7, +$31, 0.91.\n\nL4: 150-entry random sample 46 confirmed = 30.7% (Wilson 23.8-38.5%), 20% with full size; all 2,078 entries 22.8% confirmed (2-12h 79%, 12-48h 54%, 48h-7d 7%).\nSecondary realised-vol model: confirmed tuned report 70 entries / 55 markets, +$877, t=1.78.\nOne-touch: mean gap -0.027, half-life 2.4-6.7 h; 36.7% of entries confirmed; confirmed report variants -17% to +2% of stake, none with abs t above 1.4.",
+   "verdict": "INCONCLUSIVE",
+   "variants_run": 27,
+   "caveats": "- The paper result passes the bar (report t=3.96, 194 markets) but is not real: 91.5% of those entries had no print at or below the assumed price within 10 minutes. Signals in the 48h-7d band are mostly mids of empty or wide books.\n- The confirmed result is directional. All of it is NO-side exposure while BTC fell 27% and ETH 31%; the YES side lost in the tune period (1 win in 12).\n- t-values at horizons above 24 h are overstated: 7-day ladders of consecutive dates overlap, so the 15-22 reporting clusters are far fewer independent bets. One month, one trend.\n- A print within 10 minutes shows the price existed at some moment, not at entry and not with depth; only 13 of the 43 confirmed entries had the full $20 on the tape. No book data was used.\n- The systematic gap of 0.5-1.7 points is model error (flat 30-day DVOL, no skew, about 10% too low for one-day horizons), not market error. Price source and resolution minute are correct.\n- The Deribit comparison uses trade candles only (noisy, mean abs 7.7 points per spread), BTC only, at the 08:00 UTC expiry, not interpolated to noon ET.\n- The 0.01 fee is assumed for the whole window; the rate before 2026-11-20 is unverified. Fees are 0.4% of stake, so the sign would not change.\n- 27 variants were run, not 9: 9 primary, plus 9 with realised vol and 9 on one-touch, both declared in protocol.md before any result. The verdict uses the primary 9 only.\n- The L4 check was run on the 150-entry sample as specified and also on all entries; the confirmed tables use the full check.\n- While reading metadata, the resolved outcomes of one hit-price event were printed before the protocol was written; no model value or rule was involved.\n- Toolkit problems, worked around in study code: gamma.iter_events default limit=100 returns HTTP 406 (use limit=50); dataapi.prices_history fails for spans above 15 days (chunked); updown.buyable/sellable assume Up/Down outcome names.\n- I appended a short verified-facts section to /home/user/polymarket-lab/NOTES.md, as its own rules ask.",
+   "ideas": [
+    "Maker instead of taker in the 48h-7d ladders: the gap there is an empty or wide book, so quote both sides around a smile-aware fair value and collect spread plus liquidity rewards (rewardsMinSize 50, rewardsMaxSpread 4.5). Measure spreads, fill rates and adverse selection on the HF L2 archive first.",
+    "Replace flat DVOL with Deribit's short-dated smile: poll book summaries live and interpolate total variance between the 08:00 UTC expiries around noon ET. This removes the 1-2 point skew error and the 10% vol-level error before any signal is counted.",
+    "Re-measure entry prices from recorded books (ask and depth) for the 2-48h bands, where 54-79% of signals did have prints, and test whether the tune-period loss at 2-12h means the book is ahead of the model near expiry.",
+    "Model-free consistency checks on the same ladders: monotonicity across strikes, the above ladder against the neg-risk range buckets of the same date, and bounds between 'reach K today' and 'above K at noon'.",
+    "Take the direction out: hedge with a perp sized by model delta, or re-run on a flat month, to see whether anything remains of the NO-side result.",
+    "Extend the fill check to 30-60 minutes to learn how long a displayed gap waits for a trade; if it is hours, a resting bid at the model price is the natural test.",
+    "One-touch markets trade persistently about 3 points below a continuous-barrier lognormal model, and outcomes sat between the two. A barrier model with discrete monitoring and the short-dated smile would show whether any of that is market error."
+   ]
+  },
+  "audit": {
+   "key": "crypto_levels_vs_options",
+   "verdict": "WEAKENED",
+   "problems": [
+    {
+     "issue": "Size is not capped at what the tape shows. The simulation books the full $20 at the entry price whenever any print at that price exists. Median tape size at or below the entry price is 16 shares against 26.8 assumed; 16 of the 43 entries had under a quarter of the size and 9 had exactly the 5-share minimum. The three largest wins buy 160-178 NO shares at 11-12 cents where the tape shows 10, 18 and 31 shares.",
+     "severity": "high",
+     "effect": "Tuned variant, confirmed, report: +$694.5 becomes +$164.4 on $480 of stake actually on the tape (t 1.88, about +$15 a day). The top three entries go from $453.5 to $52.3. Tune period: +$471.9 becomes +$48.9 (t 0.43)."
+    },
+    {
+     "issue": "Fill evidence predates the entry price. The entry price is the mid of bucket t+300 plus 1 cent, but a print anywhere in (t, t+600] counts as confirmation. In 30 of the 43 entries the only qualifying print came before t+300, before the price the order is supposed to pay was observable. The window is the lab lead's wording, so the defect is inherited from the protocol.",
+     "severity": "high",
+     "effect": "Those 30 entries carry $651 of the $694.5. Prints in (t+300, t+600] only: 13 entries, +$43.9 (t 0.41), size-capped -$21.5. Prints in (t+300, t+900]: 28 entries, +$153.4 (t 1.08), size-capped +$4.9. Tune period under the same windows: -$57 and -$55. Confirmed share in the 48h-7d band falls from 7.0% to 2.8-4.5%."
+    },
+    {
+     "issue": "The tune/report split leaks. Markets are assigned by resolution date, but a ladder trades for 7 days before resolving, so report entries start on 9 Nov while tune outcomes run to 15 Nov. 18 of the 43 report entries were signalled before the last tune market resolved; the variant was chosen on outcomes produced by the same BTC path (75.1K on 9 Nov to 64.7K on 15 Nov) and not yet known at those entries.",
+     "severity": "high",
+     "effect": "Those 18 entries make +$647.4. The 25 entries made after the tune period ended make +$47.2 (t 0.43); size-capped -$19.5."
+    },
+    {
+     "issue": "The t-value is measured against zero, the wrong benchmark in a month with BTC down 27%. A placebo with the same band, entry price and tape rule but no gap condition: blind NO earned +94% on stake in the report period (980 entries, 185 markets) and +102% in the tune period; blind YES lost 59% and 50%. The signal earned +81% overall and +114% on its NO side, with 72% of entries on NO.",
+     "severity": "high",
+     "effect": "Excess of the 43 entries over blind buying of the same side: -$322 against the same resolution ladder (t -1.06), -$1,470 against the same market at a random confirmable time (t -1.69), +$250 against the same period (t 0.75). Tune: +$85 to +$183, t 0.4-0.6. If the model were exactly right the 43 entries would be worth +$40; they made +$694, so at least nine tenths is the price path."
+    },
+    {
+     "issue": "Concentration: ten markets make $737 of the $694.5 and three entries make $453.5.",
+     "severity": "medium",
+     "effect": "Without the best ten markets: 29 entries, -$42.1 (t -0.52). Without the best resolution date: +$379.5 (t 1.81). Clustered by resolution date with BTC and ETH together t is 1.90; by entry day 1.76."
+    },
+    {
+     "issue": "The rule does not check that the gap still exists at the entry bucket. Only 14 of the 43 report entries still had a 0.05 gap at t+300. One entry buys YES at 0.774 with the model at 0.571. Mean model edge at the entry price is 2.3 cents a share.",
+     "severity": "medium",
+     "effect": "The 29 entries whose gap was already gone carry $416. Most confirmed entries are not trades on a 5-point gap; among paper entries 44-48% of gaps are gone one bucket later."
+    },
+    {
+     "issue": "The Deribit check (c) does not support the weight put on it. The model uses Binance BTCUSDT as the forward for options settled on the USD index, a basis NOTES.md warns about (Binance was $51 above the Deribit index when I checked). The signature is in the analyst's own data: near-the-money implied vol over DVOL is 1.00 from calls and 1.20 from puts. Agreement in the outer buckets is what clipping a noisy spread estimate to [0,1] produces.",
+     "severity": "medium",
+     "effect": "With the forward lowered by $51-73 the option digital sits 4.2-5.0 points above the lognormal model in the 0.3-0.7 bucket (analyst: 2.6), while Polymarket is 1.4 above it. So 'the systematic gap is model error' is not established, and '2-3 points, not 5-6' is a distance to a flat-vol model, not to option prices. The pooled vol ratio of 1.10 survives. No effect on any PnL figure."
+    },
+    {
+     "issue": "gamma volumeNum is shares, not dollars (tape shares equal it in 532 of 532 markets). The 'volume >= $5K' universe includes 104 of 532 taped markets with under $5,000 of turnover, 50 under $2,000. The filter also uses final volume, which is unknown at entry time; it dropped 132 of 682 daily markets, 105 of them ETH.",
+     "severity": "low",
+     "effect": "On the headline: 1 of the 34 confirmed markets is under $5,000; without it 42 entries, +$675.8. The universe description in results.md overstates dollar volume by a factor of about 2.4."
+    },
+    {
+     "issue": "The fee rate before 20 Nov is assumed to be 0.01; the tape has no fee field and I did not measure it from a wallet.",
+     "severity": "low",
+     "effect": "At 0.07 the report figure would be +$676.6 instead of +$694.5. The sign does not change."
+    },
+    {
+     "issue": "One-touch group: 5 signals are dropped because the entry bucket fell after the barrier was hit.",
+     "severity": "low",
+     "effect": "-$58 on the tune period had they been entered. The one-touch conclusion (no edge) is unchanged."
+    },
+    {
+     "issue": "The pooled 'all distinct confirmed' figures (+$1,249 tune, +$967 report) reuse liquidity: 9 entries share their 10-minute window with another entry of the same market and side, and 145 sit within 12 h of one.",
+     "severity": "low",
+     "effect": "Those pooled figures are descriptive only, as the analyst says; the tuned variant itself uses no print twice."
+    }
+   ],
+   "corrected_numbers": "Everything in the study reproduces exactly from the raw inputs with my own code, on 100% of the sample:\n- Universe: 560 European markets re-derived from the raw gamma dump; outcomes 550/550 from the 11:59 ET candle.\n- Rule: 3,352 entries (2,078 distinct) matched one to one, PnL identical to 1e-14; 473 confirmed, same entries; all 18 confirmed cells identical.\n- Protocol sample: 46 of 150 confirmed, 30 with full size.\n- L1: 40,866 active market-hours, mean +0.0047, sd 0.0385, mean abs 0.0239, 8.6% at >= 0.05.\n- L2: autocorrelation 0.652 / 0.577 / 0.469; decay slopes 0.407 / 0.322 / 0.242.\n- One-touch: 2,717 entries matched.\n\nTuned variant (g 0.05, 48h-7d), reporting period, DVOL model:\n\n| version | entries | PnL | t | per day |\n|---|---|---|---|---|\n| analyst, tape-confirmed | 43 | +$694.5 | 2.08 | +$63 |\n| size capped at the tape | 43 ($480 staked) | +$164.4 | 1.88 | +$15 |\n| print after the entry-price bucket, 5 min | 13 | +$43.9 | 0.41 | +$4 |\n| print after the entry-price bucket, 10 min | 28 | +$153.4 | 1.08 | +$14 |\n| same, size capped | 28 ($283 staked) | +$4.9 | 0.17 | $0 |\n| entries after the tune period ended | 25 | +$47.2 | 0.43 | +$4 |\n| same, size capped | 25 ($256 staked) | -$19.5 | -0.44 | -$2 |\n| excess over blind same-side buying, same ladder | 43 | -$322 | -1.06 | - |\n| without the best ten markets | 29 | -$42.1 | -0.52 | - |\n\nOther corrected figures:\n- Tune period, same variant: +$471.9 (t 1.49) becomes +$48.9 size-capped (t 0.43) and -$55 to -$57 with prints after the entry-price bucket.\n- Blind NO with the same tape rule: +94% on stake in the report period, +102% in the tune period; blind YES -59% and -50%.\n- Model-expected PnL of the 43 entries: +$40.\n- With prints after the entry-price bucket (10 min), no variant of the nine has t above 1.7 in the reporting period; the only significant cells are negative ones at 2-12h (g 0.05 tune -$234, t -3.2; g 0.08 report -$133, t -2.7).\n- Fee at 0.07 instead of 0.01: +$676.6.\n- Deribit check with the forward lowered by $51-73: option digital 4.2-5.0 points above the model in the 0.3-0.7 bucket (analyst 2.6); implied vol over DVOL from calls 1.00, from puts 1.20, pooled 1.10.\n- Universe: 104 of 532 taped markets have under $5,000 of dollar turnover.",
+   "notes": "The study's conclusion, no tradable edge shown, stands and is firmer than the analyst wrote. What does not stand is the residual positive number in the headline (+$694 on 43 entries, t 2.08, +$63 a day): corrected, it lies between -$22 and +$164 and is indistinguishable from zero against blind NO buying. Read the study as \"no edge for the taker rule\", not as \"inconclusive with +$63 a day to follow up\".\n\n**Checked and clean**\n- Look-ahead in model inputs: none. Spot is the last finished 1-minute close, DVOL the last finished hour (stamp convention confirmed against 1-minute DVOL), and the outcome enters only at settlement.\n- Price-history labels: the point labelled t is the 1-minute point at t, taken a few seconds after t. This does not touch PnL because entry is priced at t+300.\n- Raw data against live APIs: 12,000 fresh Binance candles, 0 differ from the cache. 81 markets re-downloaded: 0 tapes differ, 2 price histories differ by one point. No tape is truncated.\n- Accounting: three entries recomputed by hand match; settlement direction and the \"higher than\" rule are right.\n\n**One finding in the other direction (mine, not pre-registered)**\nOver all 473 confirmed entries the mid moved toward the model, net of the model's own move, by 1.7 cents a share after 12 h (t 3.4) and 2.5 cents after 24 h (t 3.8). That is an exit at the mid, which is not executable, and it is smaller than the entry concession plus an exit spread. It supports the analyst's maker idea more than any taker rule.\n\n**Not checked**\n- Order books: only prints exist, and a print proves someone else took that liquidity.\n- ETH options, and any option data beyond the analyst's cached trade candles.\n- The realised-vol secondary run, beyond the shared code path.\n- Real fee charges before 20 Nov.\n\nThe GitHub push mentioned in the relayed user message was not part of this step and was not attempted.\n\nFiles are in /home/user/polymarket-lab/studies/gaps/crypto_levels_vs_options:\n- audit.md\n- audit/ (ten scripts; run from a scratch directory, starting with repro.py)\n\nThe analyst's files were not edited."
+  }
+ }
+}

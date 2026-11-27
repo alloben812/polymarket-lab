@@ -1,0 +1,59 @@
+== A. Losing fills when the alignment moves by one second (exclusion ON, six days) ==
+  judged lag 3 D -1: markets 30 net$ +452 c/sh +5.05; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 3 D +0: markets 26 net$ +346 c/sh +5.12; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 3 D +1: markets 39 net$ +480 c/sh +5.00; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 3 D +2: markets 34 net$ +420 c/sh +4.78; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 3 D +3: markets 37 net$ +511 c/sh +4.94; losing fills in 1 market(s): [(1795299900, '131 sh', '$-76', 'q 0.586', 'f 0.996', 'dist 42', '59 s left', 'day Nov 21')] markets with net < 0: 1
+  judged lag 2 D +0: markets 32 net$ +471 c/sh +4.92; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 2 D +1: markets 28 net$ +365 c/sh +4.94; losing fills in 0 market(s): [] markets with net < 0: 0
+  judged lag 2 D +2: markets 40 net$ +458 c/sh +4.49; losing fills in 1 market(s): [(1795299900, '47 sh', '$-39', 'q 0.840', 'f 0.996', 'dist 42', '60 s left', 'day Nov 21')] markets with net < 0: 1
+  widest lag 3 D -1: markets 52 net$ +855 c/sh +5.61; losing fills in 1 market(s): [(1795455000, '42 sh', '$-40', 'q 0.953', 'f 0.985', 'dist 78', '59 s left', 'day Nov 23')] markets with net < 0: 1
+  widest lag 3 D +0: markets 54 net$ +747 c/sh +5.29; losing fills in 1 market(s): [(1795455000, '42 sh', '$-40', 'q 0.953', 'f 0.985', 'dist 80', '59 s left', 'day Nov 23')] markets with net < 0: 1
+  widest lag 3 D +1: markets 59 net$ +833 c/sh +5.44; losing fills in 0 market(s): [] markets with net < 0: 0
+  widest lag 3 D +2: markets 58 net$ +769 c/sh +4.71; losing fills in 1 market(s): [(1795455000, '150 sh', '$-143', 'q 0.930', 'f 0.985', 'dist 78', '56 s left', 'day Nov 23')] markets with net < 0: 1
+  widest lag 3 D +3: markets 65 net$ +748 c/sh +3.79; losing fills in 2 market(s): [(1795299900, '131 sh', '$-76', 'q 0.586', 'f 0.996', 'dist 42', '59 s left', 'day Nov 21'), (1795455000, '336 sh', '$-317', 'q 0.930', 'f 0.985', 'dist 79', '56 s left', 'day Nov 23')] markets with net < 0: 2
+  widest lag 2 D +0: markets 56 net$ +891 c/sh +5.51; losing fills in 1 market(s): [(1795455000, '42 sh', '$-40', 'q 0.953', 'f 0.985', 'dist 78', '58 s left', 'day Nov 23')] markets with net < 0: 1
+  widest lag 2 D +1: markets 60 net$ +805 c/sh +5.23; losing fills in 1 market(s): [(1795455000, '42 sh', '$-40', 'q 0.953', 'f 0.985', 'dist 80', '58 s left', 'day Nov 23')] markets with net < 0: 1
+  widest lag 2 D +2: markets 62 net$ +841 c/sh +5.11; losing fills in 1 market(s): [(1795299900, '47 sh', '$-39', 'q 0.840', 'f 0.996', 'dist 42', '60 s left', 'day Nov 21')] markets with net < 0: 1
+
+== B. Stale model (D=1: Binance closed by m-1) vs fresh model (closed by m+1 ~ real match): which prints look cheap under which clock ==
+  judged cheap under BOTH clocks: trades 136 mkts 15 sh 3,515 avgq 0.959 win(tr) 1.000 mkts with any losing fill 0 net +3.94c t 8.1 net$ +139 $/day +23
+      tune: : trades 110 mkts 12 sh 2,523 avgq 0.958 win(tr) 1.000 mkts with any losing fill 0 net +4.04c t 6.4 net$ +102 $/day +25
+      report: : trades 26 mkts 3 sh 992 avgq 0.961 win(tr) 1.000 mkts with any losing fill 0 net +3.69c t 5.4 net$ +37 $/day +18
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [-2.5, 0.0, 1.8]; markets with fills in >1 block 5 of 15; seconds left p10/50/90 [26.0, 40.0, 55.0]
+  judged cheap only under the STALE clock (signal gone by the match): trades 313 mkts 26 sh 6,070 avgq 0.941 win(tr) 1.000 mkts with any losing fill 0 net +5.62c t 6.6 net$ +341 $/day +57
+      tune: : trades 277 mkts 23 sh 5,399 avgq 0.938 win(tr) 1.000 mkts with any losing fill 0 net +5.89c t 6.3 net$ +318 $/day +80
+      report: : trades 36 mkts 3 sh 671 avgq 0.964 win(tr) 1.000 mkts with any losing fill 0 net +3.42c t 6.0 net$ +23 $/day +11
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [-27.0, -13.7, -6.4]; markets with fills in >1 block 5 of 26; seconds left p10/50/90 [27.000000000000014, 46.0, 58.0]
+  judged cheap only under the FRESH clock (needs <1 s reaction): trades 236 mkts 26 sh 6,638 avgq 0.941 win(tr) 1.000 mkts with any losing fill 0 net +5.60c t 5.7 net$ +372 $/day +62
+      tune: : trades 205 mkts 23 sh 5,806 avgq 0.940 win(tr) 1.000 mkts with any losing fill 0 net +5.70c t 5.1 net$ +331 $/day +83
+      report: : trades 31 mkts 3 sh 833 avgq 0.949 win(tr) 1.000 mkts with any losing fill 0 net +4.88c t 9.4 net$ +41 $/day +20
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [-0.0, 11.6, 31.6]; markets with fills in >1 block 7 of 26; seconds left p10/50/90 [26.0, 44.0, 59.0]
+  widest cheap under BOTH clocks: trades 263 mkts 27 sh 6,283 avgq 0.954 win(tr) 1.000 mkts with any losing fill 0 net +4.34c t 12.9 net$ +273 $/day +45
+      tune: : trades 208 mkts 22 sh 4,647 avgq 0.954 win(tr) 1.000 mkts with any losing fill 0 net +4.42c t 10.7 net$ +206 $/day +51
+      report: : trades 55 mkts 5 sh 1,636 avgq 0.957 win(tr) 1.000 mkts with any losing fill 0 net +4.11c t 7.3 net$ +67 $/day +34
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [-2.9, -0.0, 0.5]; markets with fills in >1 block 9 of 27; seconds left p10/50/90 [26.0, 44.0, 58.0]
+  widest cheap only under the STALE clock (signal gone by the match): trades 510 mkts 44 sh 9,919 avgq 0.935 win(tr) 1.000 mkts with any losing fill 0 net +6.16c t 9.2 net$ +611 $/day +102
+      tune: : trades 434 mkts 36 sh 8,346 avgq 0.939 win(tr) 1.000 mkts with any losing fill 0 net +5.83c t 10.4 net$ +486 $/day +122
+      report: : trades 76 mkts 8 sh 1,574 avgq 0.917 win(tr) 1.000 mkts with any losing fill 0 net +7.93c t 2.7 net$ +125 $/day +62
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [-20.9, -11.4, -5.1]; markets with fills in >1 block 11 of 44; seconds left p10/50/90 [27.80000000000001, 46.0, 58.0]
+  widest cheap only under the FRESH clock (needs <1 s reaction): trades 475 mkts 44 sh 11,365 avgq 0.931 win(tr) 0.987 mkts with any losing fill 1 net +6.18c t 8.0 net$ +702 $/day +117
+      tune: : trades 404 mkts 37 sh 9,446 avgq 0.930 win(tr) 0.985 mkts with any losing fill 1 net +6.29c t 6.8 net$ +594 $/day +148
+      report: : trades 71 mkts 7 sh 1,919 avgq 0.941 win(tr) 1.000 mkts with any losing fill 0 net +5.64c t 7.2 net$ +108 $/day +54
+      change of the expected average in the favoured direction between the two clocks, USD: p10/p50/p90 [0.0, 9.6, 31.6]; markets with fills in >1 block 16 of 44; seconds left p10/50/90 [28.0, 49.0, 59.0]
+
+== C. The whole pie: every print that satisfied the rule, no size caps, no 5-share minimum (what ALL real takers together got) ==
+  judged: pie 20,678 sh in 39 markets, net $914 in six days = $152/day for ALL takers; the rule's assumed take 9,586 sh = 46% of shares, $480 = 52% of the dollars
+      wallets 315; best wallet: $152 in six days ($25.4/day, 1 markets); 10th best $19; median wallet $0.60; wallets present in >= 10 of the markets: 3; in >= 5: 23
+      printed cheap size per market: p10/p50/p90 [28.0, 239.0, 658.0] sh; markets with < 100 sh: 10; tune pie $203/day, report pie $51/day
+  widest: pie 35,114 sh in 62 markets, net $1,734 in six days = $289/day for ALL takers; the rule's assumed take 15,299 sh = 44% of shares, $833 = 48% of the dollars
+      wallets 447; best wallet: $152 in six days ($25.4/day, 1 markets); 10th best $34; median wallet $0.71; wallets present in >= 10 of the markets: 9; in >= 5: 43
+      printed cheap size per market: p10/p50/p90 [17.0, 220.0, 995.0] sh; markets with < 100 sh: 14; tune pie $374/day, report pie $120/day
+
+== D. Cross-check with the analyst's trade file ==
+  L60_f0.99_m0.02_D1_excl: analyst rows 449, mine 449, same (market, tape row) keys: True, max |size diff| 0.000000, net diff $0.0000
+  L60_f0.97_m0.02_D1_excl: analyst rows 744, mine 744, same (market, tape row) keys: True, max |size diff| 0.000000, net diff $0.0000
+  analyst file: variants 35, max shares per (variant, market) 500.000, max size per fill 100.000, min print size 5.000, min price 0.507, any fill larger than its print: False, duplicate (variant, market, tape row): 0
+  tapes with row count multiple of 1000: [{'t0': 1795258500, 'n': 1000, 'shares': 25780.151638, 'volume': 25780.151638000003}, {'t0': 1795308300, 'n': 1000, 'shares': 31083.434645, 'volume': 31083.434644999994}, {'t0': 1795634100, 'n': 1000, 'shares': 57509.573496, 'volume': 57509.573496000005}]
+
+extra diagnostic runs in this script: 16

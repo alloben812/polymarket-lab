@@ -529,3 +529,78 @@ Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / dat
   5-15c earned nothing; 67% of dollars at seconds 225-285 of the window. One wallet, chosen by a promoter: test on the tape first.
 - Bilberry's dollars at 0.97+ are maker SELLS at 0.999 (exits), not buys of decided buckets; its profit is taker buys at 0.15-0.85.
 - HomeRunHazard (0x52685279…), Nov 21-27: maker buys -0.37c a share (t -0.2), taker buys +4.2c net (t 1.2); rebates equal fees.
+
+## Added 2026-11-27 by the politics wallet study (details in `studies/wallets/politics/README.md`)
+
+- Accounts that use neg-risk conversions are overstated by `user-stats` / the leaderboard by a factor of 5 to
+  infinity. Rebuilt from all activity rows over the account's whole life (`studies/wallets/politics/cash.py`):
+  Bigggggggg API +534.3K, real +112.5K (47.2K of it rewards and rebates); kaxel78 +81.4K vs +5.5K; glpgb +89.8K vs
+  -1.1K; VerilyWinningly +36.7K vs -1.0K; BetaShrimp +8.9K vs +1.7K. `tools/leaders.py` inherits the error (its
+  `kept_all` and monthly columns are API figures). `pmlab.wallet` leaves converted markets out as "incomplete", so
+  its tables miss nearly all of such an account.
+- Activity TRADE rows: `usdc_size` includes the taker fee (one row checked: 25 shares at 0.42 -> 10.8045 = 10.50 +
+  0.3045 at rate 0.05). CONVERSION rows carry the USDC paid out in `usdc_size`, with `outcome_index` 999.
+- The conversion trade itself (buy NO on the m leading outcomes of a big multi-outcome event, convert to m-1 USDC
+  plus YES of every other outcome, sell that tail as a maker) is positive only for the largest account: Bigggggggg
+  1,400 events +0.41% of buys (t 4.3 by event); kaxel78 -0.31% (t -3.0), glpgb -0.84% (t -9.6), VerilyWinningly
+  -2.07% (t -7.4). At least nine accounts on the politics board do it.
+- US x Iran ceasefire markets have gamma `feeType` None (zero fee); cabinet / FAA / election-adjacent markets have
+  `politics_fees`.
+- Reward-farming makers in politics lose on their fills and are paid by rewards: 14 days, 0x9495d622 trade -12.8K,
+  rewards +21.2K; SPLPB -14.0K, +14.5K; hfv -35.3K, +44.1K. Their maker buys are 0.8 c under water one minute after
+  the fill (40 markets, t -4.5).
+- Blanket taker buying at 0.95-0.999 on 24 resolved politics tapes: -0.48 c a share after fee (t -0.2), buyers on
+  the losing side in 6 of 24 markets. Pre-registered, one variant, no edge shown; selected and small sample.
+- Sibling markets of one event reprice with a lag: 52 follower legs in 12 events, median 12 s, p90 133 s after the
+  first leg jumps (tapes only, exploratory). Largest case: FAA ground stop ladder, 14 Nov 01:13-01:15 UTC.
+- `python3 -m pmlab.wallet` needs more than 10 minutes for an account with ~28K markets in the window
+  (xtxpleasecallme, truncated at 60,000 fills): the per-market metadata calls dominate.
+
+## Added 2026-11-27 by the audit of the BTC 5m lock-in study (`studies/gaps/btc5m_lockin/audit.md`, scripts in `audit/`)
+
+- The study's numbers reproduce exactly from the raw tapes and Binance zips with independent code (all 1,728
+  markets); no look-ahead, fees and settlement direction correct. Audit verdict: WEAKENED (the study's own verdict,
+  inconclusive, stands).
+- Correction to the lock-in block above ("one-block bursts after a Binance move"): for 59-63% of the filtered shares
+  the Binance expected average had moved a median $11-14 AGAINST the favourite between the model second and the
+  print (favoured-side price 0.976 before, 0.965 in the block, 0.98 again 5-10 s later). Only 15 / 27 markets in six
+  days (floor 0.99 / 0.97) are still 2 c under the model on the Binance second closing at the match: +3.9 / +4.3
+  c/share, $23 / $45 a day at the 500-share cap, 3 / 5 markets on 25-26 Nov.
+- "No market lost" holds only for block time - 3 s with D = 1: at D = 0, D = 2 or block time - 2 s the floor-0.97
+  variant has one net-losing market (t0 1795455000) in 52-62.
+- All real takers together got $152-289 a day from the prints that met the rule (315-447 wallets, median print 10
+  shares; best wallet $25/day from one print, the most frequent wallet $3/day). A tape-fill rule capped at 500
+  shares per market silently assumes about half of that pie: always compare a tape-fill result with the pie.
+- Leader-side prints in the last minute with the expected average at least $18.63 from the strike, no model rule:
+  +1.45 c/share on 21-24 Nov (t 2.9), -0.47 c on 25-26 Nov; 36 of 731 markets had a losing print. That distance
+  alone does not make the favourite safe with 40-60 s left.
+- Tapes that end 10-70 s before the window end (148 of 1,728) are decided markets, not cut downloads (gamma volume
+  matches in 135 of 135); exact duplicate tape rows (3.5%) are real repeated fills.
+
+## Added 2026-11-27 by the finance wallet study (details in `studies/wallets/finance/README.md`)
+
+- Stock / ETF / index / commodity price markets ("close above X", "hit (HIGH/LOW) X week of / in <month>", "Up or
+  Down on <date>") settle on Pyth 1-minute candles (`pythdata.app/explore/Equity.US.<TICKER>/USD`): the Close of the
+  last regular-hours minute, NOT the exchange's official closing price; hit markets count regular-hours candles only
+  (metals/oil: the 18:00-17:00 ET session). Fee type `finance_prices_fees`, rate 0.05, `clobRewards` null (no
+  liquidity rewards now; PippiTrader's reward income fell from 16-30K a month to 1.8K in November).
+- These markets resolve on-chain a median 16 minutes after the deciding candle (p10 16, p90 21; 1,323 markets), and
+  hit markets resolve early, 16 minutes after the touch. Trading continues until then at 0.99-0.999.
+- Price sources from the sandbox: Yahoo chart API works (1-minute bars with pre/post market for the last 30 days via
+  `period1/period2` in 7-day chunks; `^GSPC`, `GC=F`, `SI=F`, `CL=F`, `DX-Y.NYB` for indices and commodities); Nasdaq
+  API `api.nasdaq.com/api/quote/<SYM>/info|chart|historical?assetclass=stocks` works with an `Accept:
+  application/json` header (real-time last sale); stockanalysis.com daily works. stooq.com is NOT reachable
+  (connection reset). Pyth: Hermes `v2/price_feeds` works, price updates return 401, benchmarks 404: no history of the
+  settlement candles. finnhub / alpaca / twelvedata need keys. Loader: `studies/wallets/finance/yh.py`.
+- No time gap in these ladders: on 547 touched hit markets takers locked in $1,185 after the touch (70% of it over an
+  hour "late", i.e. Yahoo/Pyth mismatch); 168 trades after the close in 723 close/up-down markets, taker net -$50; the
+  whole post-decision discount pool was $889 in 21 days.
+- The systematic winner there (grasstoucher69, kept 8.3% of $3.65M) buys cheap outcomes on both sides and holds; in
+  both windows checked (Nov 6-27 and Sep 25-Oct 16) all of its profit is on bearish outcomes and its bullish half loses
+  12-22%, and the losing control account shows the same split. NVDA fell 224 -> 148 over those months. Do not read the
+  finance board's 2026 autumn PnL as an edge without a rising-month check.
+- Finance taker fee from real charges (grasstoucher69, largest base): 0.0462 on Nov 7-19, 0.0493 on Nov 22-26.
+- `pmlab.wallet` net covers resolved, complete markets only: unresolved markets (the API marks them to market) and
+  markets whose inventory predates the window (merges/redeems without a matching buy) are left out. For an account
+  that merges and holds month-long markets (grasstoucher69: 1,115 merges in 21 days, 339 unresolved markets) the tool
+  net is far below the API figure (25.8K vs 64.7K over 14 days); mark open positions before comparing.

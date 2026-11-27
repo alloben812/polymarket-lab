@@ -1,0 +1,92 @@
+== oidocrop 0x23c46463c281deb26a041fdcc24ae9c5d7629c42 [08-29 15:40:00 -> 10-13 15:40:00] tag=W0 truncated=False fills=648 usd=39995 | mention fills=471 markets=256 usd=30355 (76% of turnover)
+resolved mention markets=256 unresolved=0 (net cost $0, marked at last print +0) | turnover $30354 | NET after 0.01 fee $333 | market wins 249/256 | t by market 0.78 | events 68 positive 63 | t by event 0.91
+  bootstrap 95% CI of the sum, resampling events: [-426, 978]
+  weeks: {'2026-W36': 76, '2026-W37': 253, '2026-W38': -83, '2026-W39': 183, '2026-W40': -99, '2026-W41': -35, '2026-W42': 38}
+  maker share: 36% of fills, 18% of dollars; shares sold/bought 0.09; median $/market 78
+by phase:
+  ('JUMP',)                          fills=  242 mk= 133 usd=    17185 pnl=    722.4 (   4.2%) mk_win=132/133
+  ('LIVE',)                          fills=   21 mk=  10 usd=     1013 pnl=   -427.3 ( -42.2%) mk_win=5/10
+  ('NODET',)                         fills=    4 mk=   1 usd=      349 pnl=     26.4 (   7.6%) mk_win=1/1
+  ('NOSTART',)                       fills=    3 mk=   2 usd=      135 pnl=      2.1 (   1.5%) mk_win=2/2
+  ('POST',)                          fills=  194 mk= 130 usd=    11358 pnl=    255.2 (   2.2%) mk_win=125/130
+  ('PRE',)                           fills=    7 mk=   4 usd=      315 pnl=   -245.4 ( -78.0%) mk_win=2/4
+by phase, role, direction:
+  ('JUMP', 'M', 'longNo')            fills=    2 mk=   2 usd=       80 pnl=    -10.1 ( -12.5%) mk_win=0/2
+  ('JUMP', 'M', 'longYes')           fills=   91 mk=  39 usd=     2101 pnl=     68.6 (   3.3%) mk_win=39/39
+  ('JUMP', 'T', 'longNo')            fills=    2 mk=   2 usd=      122 pnl=    -20.4 ( -16.8%) mk_win=0/2
+  ('JUMP', 'T', 'longYes')           fills=  147 mk= 126 usd=    14882 pnl=    684.3 (   4.6%) mk_win=126/126
+  ('LIVE', 'M', 'longNo')            fills=    3 mk=   2 usd=       29 pnl=     -6.2 ( -21.4%) mk_win=1/2
+  ('LIVE', 'M', 'longYes')           fills=    2 mk=   1 usd=       71 pnl=     39.0 (  54.9%) mk_win=1/1
+  ('LIVE', 'T', 'longNo')            fills=   10 mk=   7 usd=      318 pnl=    -55.0 ( -17.3%) mk_win=4/7
+  ('LIVE', 'T', 'longYes')           fills=    6 mk=   5 usd=      595 pnl=   -405.1 ( -68.1%) mk_win=3/5
+  ('NODET', 'T', 'longYes')          fills=    4 mk=   1 usd=      349 pnl=     26.4 (   7.6%) mk_win=1/1
+  ('NOSTART', 'M', 'longYes')        fills=    1 mk=   1 usd=       14 pnl=      0.1 (   1.0%) mk_win=1/1
+  ('NOSTART', 'T', 'longYes')        fills=    2 mk=   2 usd=      121 pnl=      1.9 (   1.6%) mk_win=2/2
+  ('POST', 'M', 'longNo')            fills=   24 mk=  11 usd=     1561 pnl=     -4.7 (  -0.3%) mk_win=4/11
+  ('POST', 'M', 'longYes')           fills=   44 mk=  29 usd=     1489 pnl=     46.6 (   3.1%) mk_win=29/29
+  ('POST', 'T', 'longNo')            fills=   58 mk=  50 usd=     2586 pnl=     40.3 (   1.6%) mk_win=47/50
+  ('POST', 'T', 'longYes')           fills=   68 mk=  62 usd=     5722 pnl=    172.9 (   3.0%) mk_win=62/62
+  ('PRE', 'M', 'longYes')            fills=    4 mk=   2 usd=       27 pnl=     16.1 (  58.9%) mk_win=2/2
+  ('PRE', 'T', 'longNo')             fills=    3 mk=   3 usd=      287 pnl=   -261.4 ( -91.0%) mk_win=1/3
+BUYS by price band (all buys, winners and losers together):
+  ('0.50-0.80',)                     fills=   18 mk=  16 usd=     1411 pnl=    161.0 (  11.4%) mk_win=14/16
+  ('0.80-0.95',)                     fills=   26 mk=  21 usd=     3215 pnl=   -145.6 (  -4.5%) mk_win=19/21
+  ('<0.50',)                         fills=    1 mk=   1 usd=       10 pnl=    -10.0 (-100.0%) mk_win=0/1
+  ('>=0.95',)                        fills=  381 mk= 234 usd=    23740 pnl=    303.8 (   1.3%) mk_win=233/234
+buys below 0.95 by phase and role:
+  ('JUMP', 'M')                      fills=    5 mk=   4 usd=      216 pnl=     37.4 (  17.3%) mk_win=3/4
+  ('JUMP', 'T')                      fills=   20 mk=  17 usd=     2668 pnl=    458.9 (  17.2%) mk_win=17/17
+  ('LIVE', 'M')                      fills=    2 mk=   2 usd=       71 pnl=     29.4 (  41.6%) mk_win=1/2
+  ('LIVE', 'T')                      fills=    6 mk=   6 usd=      543 pnl=   -410.0 ( -75.5%) mk_win=3/6
+  ('NODET', 'T')                     fills=    2 mk=   1 usd=      177 pnl=     23.1 (  13.1%) mk_win=1/1
+  ('POST', 'M')                      fills=    3 mk=   2 usd=      204 pnl=     23.1 (  11.3%) mk_win=2/2
+  ('POST', 'T')                      fills=    4 mk=   3 usd=      481 pnl=    100.7 (  21.0%) mk_win=3/3
+  ('PRE', 'M')                       fills=    1 mk=   1 usd=       16 pnl=      4.4 (  28.2%) mk_win=1/1
+  ('PRE', 'T')                       fills=    2 mk=   2 usd=      261 pnl=   -261.7 (-100.4%) mk_win=0/2
+buys at >= 0.95 by phase and role:
+  ('JUMP', 'M')                      fills=   85 mk=  34 usd=     1893 pnl=     19.1 (   1.0%) mk_win=34/34
+  ('JUMP', 'T')                      fills=  124 mk= 112 usd=    12193 pnl=    204.6 (   1.7%) mk_win=112/112
+  ('LIVE', 'M')                      fills=    1 mk=   1 usd=       22 pnl=      0.2 (   1.0%) mk_win=1/1
+  ('LIVE', 'T')                      fills=    7 mk=   5 usd=      264 pnl=    -55.4 ( -21.0%) mk_win=4/5
+  ('NODET', 'T')                     fills=    2 mk=   1 usd=      172 pnl=      3.3 (   1.9%) mk_win=1/1
+  ('NOSTART', 'M')                   fills=    1 mk=   1 usd=       14 pnl=      0.1 (   1.0%) mk_win=1/1
+  ('NOSTART', 'T')                   fills=    2 mk=   2 usd=      121 pnl=      1.9 (   1.6%) mk_win=2/2
+  ('POST', 'M')                      fills=   43 mk=  29 usd=     1390 pnl=     17.1 (   1.2%) mk_win=29/29
+  ('POST', 'T')                      fills=  115 mk= 105 usd=     7643 pnl=    112.6 (   1.5%) mk_win=105/105
+  ('PRE', 'T')                       fills=    1 mk=   1 usd=       27 pnl=      0.3 (   1.0%) mk_win=1/1
+buys at >=0.95: usd by phase {'JUMP': 14086, 'POST': 9034, 'LIVE': 286, 'NODET': 172, 'PRE': 27, 'NOSTART': 135} -> JUMP/POST share 97% | markets 234, wrong side 1 | pnl +304 on $23740 (+1.28%)
+    wrong: Will Trump say "Corn" during his Midterm Rally in Nebraska? pnl -21.74
+taker long-Yes fills in jump windows: 147 fills in 126 markets; first fill lag vs first print>=0.60: <=2s 35, 3-10s 22, 11-60s 15, >60s 54; first on tape (rank 0) 32; median yes px 0.987; below 0.90 in 13 markets; pnl +684 on $14882; of that at lag<=10s +384
+CONCENTRATION: top 3 markets: [('Will Trump say "Million", "Billion" or "Trillion" 25+ times ', 98), ('Will JD Vance say "America" or "American" 20+ times during R', 95), ('Will Trump say "AI" or "Artificial Intelligence" during his ', 46)] -> rest +94 on 253 markets, t 0.23
+  best event what-will-jd-vance-say-during-rnc-convention +107 -> rest +227; best 3 events +230 -> rest +103; worst 3 markets [('Will Trump say "Ukraine" during his announcement o', -93), ('Will anyone say "Final" during Big Brother E41?', -237), ('Will Trump say "Job" 20+ times during his Midterm ', -280)]
+NON-mention markets in the same window: resolved 128 (unresolved 0), turnover $9641, pnl BEFORE fee +698, t by market 1.20
+API over the window (all categories): trade_pnl +1184, fees -65.8, refunded +0.0, rebates+rewards +4.0, economic +1122 | implied taker rate = 0.0413 (fees / sum s*p*(1-p) of taker fills = 1595)
+inventory operations in window: {'MERGE': 1} {'MERGE': 5}
+RAW timelines, five largest |pnl| markets (fresh tape):
+ * Will Trump say "Job" 20+ times during his Midterm Rally in Texas? | vol 4602 | final Yes=0.0 | start 10-07 23:00:00 last<0.60 - first>=0.60 - first>=0.90 held 10-08 00:52:29 closed 10-08 03:24:25 | pnl -280 | tape rows fresh 128 cached 128
+     10-08 00:35:59 T BUY Yes 300@0.932 ph=LIVE from_start=5759 from_first60=None pnl -280 | on tape as taker: yes | yes px 10 min before [0.31, 0.03, 0.3] after [0.98, 0.28, 0.386]
+     10-08 01:22:25 T SELL Yes 10@0.002 ph=POST from_start=8545 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [0.002] after [0.001, 0.002, 0.001]
+     10-08 01:22:31 T SELL Yes 10@0.002 ph=POST from_start=8551 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [0.002, 0.002, 0.001] after [0.001, 0.001]
+     10-08 01:22:41 T SELL Yes 99@0.001 ph=POST from_start=8561 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [0.001, 0.002, 0.001] after []
+ * Will anyone say "Final" during Big Brother E41? | vol 3089 | final Yes=1.0 | start 10-01 22:00:00 last<0.60 09-29 18:42:41 first>=0.60 09-30 05:31:57 first>=0.90 held 09-30 05:31:57 closed 10-02 02:04:42 | pnl -237 | tape rows fresh 47 cached 47
+     09-29 15:02:36 T BUY No 400@0.639 ph=PRE from_start=-197844 from_first60=-52161 pnl -257 | on tape as taker: yes | yes px 10 min before [] after [0.361]
+     09-29 15:23:57 M SELL No 10@0.600 ph=PRE from_start=-196563 from_first60=-50880 pnl +6 | on tape as taker: no | yes px 10 min before [] after []
+     09-29 15:57:56 M SELL No 2@0.589 ph=PRE from_start=-194524 from_first60=-48841 pnl +1 | on tape as taker: no | yes px 10 min before [] after []
+     09-29 18:08:38 M SELL No 8@0.585 ph=PRE from_start=-186682 from_first60=-40999 pnl +5 | on tape as taker: no | yes px 10 min before [] after []
+     09-30 05:31:57 M SELL No 1@0.099 ph=JUMP from_start=-145683 from_first60=0 pnl +0 | on tape as taker: no | yes px 10 min before [] after []
+     10-01 13:01:15 M SELL No 379@0.020 ph=POST from_start=-32325 from_first60=113358 pnl +8 | on tape as taker: no | yes px 10 min before [] after [0.98]
+ * Will Trump say "Million", "Billion" or "Trillion" 25+ times during his Midterm Rally in Texas? | vol 3472 | final Yes=1.0 | start 10-07 23:00:00 last<0.60 10-08 00:47:05 first>=0.60 10-08 00:50:35 first>=0.90 held 10-08 00:54:56 closed 10-08 03:07:26 | pnl +98 | tape rows fresh 59 cached 59
+     10-08 00:50:35 T BUY Yes 300@0.889 ph=JUMP from_start=6635 from_first60=0 pnl +33 | on tape as taker: yes | yes px 10 min before [0.26] after [0.89, 0.89, 0.89]
+     10-08 00:50:37 T BUY Yes 300@0.890 ph=JUMP from_start=6637 from_first60=2 pnl +33 | on tape as taker: yes | yes px 10 min before [0.26, 0.889, 0.89] after [0.89, 0.89, 0.89]
+     10-08 00:50:40 T BUY Yes 300@0.890 ph=JUMP from_start=6640 from_first60=5 pnl +33 | on tape as taker: yes | yes px 10 min before [0.89, 0.89, 0.89] after [0.89, 0.889, 0.89]
+ * Will JD Vance say "America" or "American" 20+ times during RNC Convention? | vol 1545 | final Yes=1.0 | start 09-10 23:00:00 last<0.60 - first>=0.60 09-04 14:54:33 first>=0.90 held 09-04 14:54:33 closed 09-11 03:59:54 | pnl +95 | tape rows fresh 34 cached 34
+     09-11 01:48:48 T BUY Yes 222@0.790 ph=POST from_start=10128 from_first60=557655 pnl +46 | on tape as taker: yes | yes px 10 min before [0.79] after [0.8, 0.972, 0.8]
+     09-11 01:48:48 T BUY Yes 222@0.793 ph=POST from_start=10128 from_first60=557655 pnl +46 | on tape as taker: yes | yes px 10 min before [0.79] after [0.8, 0.972, 0.8]
+     09-11 01:48:49 T BUY Yes 222@0.972 ph=POST from_start=10129 from_first60=557656 pnl +6 | on tape as taker: yes | yes px 10 min before [0.79, 0.79, 0.793] after [0.99, 0.99, 0.99]
+     09-11 01:58:27 T BUY Yes 85@0.990 ph=POST from_start=10707 from_first60=558234 pnl +1 | on tape as taker: yes | yes px 10 min before [0.8, 0.99, 0.99] after [0.99]
+     09-11 02:13:13 M SELL Yes 5@0.990 ph=POST from_start=11593 from_first60=559120 pnl -0 | on tape as taker: no | yes px 10 min before [] after [0.99]
+     09-11 02:17:10 M SELL Yes 370@0.990 ph=POST from_start=11830 from_first60=559357 pnl -4 | on tape as taker: no | yes px 10 min before [0.99] after [0.989, 0.98]
+ * Will Trump say "Ukraine" during his announcement on healthcare? | vol 438 | final Yes=0.0 | start 09-18 18:30:00 last<0.60 - first>=0.60 - first>=0.90 held 09-18 20:21:52 closed 09-18 22:51:54 | pnl -93 | tape rows fresh 9 cached 9
+     09-18 20:12:21 T BUY Yes 200@0.895 ph=LIVE from_start=6141 from_first60=None pnl -179 | on tape as taker: yes | yes px 10 min before [] after [0.98, 0.99, 0.99]
+     09-18 20:12:49 T SELL Yes 87@0.990 ph=LIVE from_start=6169 from_first60=None pnl +86 | on tape as taker: yes | yes px 10 min before [0.895, 0.98, 0.99] after [0.95, 0.89, 0.13]
+     09-18 20:43:36 T SELL Yes 65@0.001 ph=POST from_start=8016 from_first60=None pnl +0 | on tape as taker: yes | yes px 10 min before [] after []

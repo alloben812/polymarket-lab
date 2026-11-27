@@ -1,0 +1,25 @@
+== FAR: |EA-K| >= E99 (18.63) - leader side by the D=1 Binance clock, all buyable prints, no caps ==
+  0.50-0.90 | mk 240 (lost 35) sh 160,862 win 0.8528 net +3.77c t +1.0 $+1,011/d | mk 177 (lost 21) sh 114,285 win 0.8664 net +4.79c t +1.0 $+1,369/d | mk 63 (lost 14) sh 46,577 win 0.8194 net +1.27c t +0.3 $+297/d
+  0.90-0.95 | mk 330 (lost 16) sh 151,135 win 0.9649 net +3.43c t +2.9 $+865/d | mk 242 (lost 11) sh 106,626 win 0.9758 net +4.54c t +4.5 $+1,210/d | mk 88 (lost 5) sh 44,509 win 0.9386 net +0.79c t +0.2 $+175/d
+  0.95-0.97 | mk 408 (lost 10) sh 202,116 win 0.9791 net +1.73c t +2.2 $+583/d | mk 301 (lost 6) sh 147,114 win 0.9803 net +1.88c t +2.1 $+691/d | mk 107 (lost 4) sh 55,003 win 0.9758 net +1.34c t +0.9 $+367/d
+  0.97-0.98 | mk 417 (lost 7) sh 134,435 win 0.9837 net +0.94c t +1.1 $+210/d | mk 311 (lost 4) sh 95,445 win 0.9911 net +1.66c t +2.3 $+396/d | mk 106 (lost 3) sh 38,989 win 0.9658 net -0.83c t -0.4 $-162/d
+  0.98-0.99 | mk 485 (lost 5) sh 397,304 win 0.9869 net +0.27c t +0.4 $+180/d | mk 353 (lost 2) sh 289,573 win 0.9966 net +1.20c t +4.2 $+867/d | mk 132 (lost 3) sh 107,731 win 0.9609 net -2.22c t -0.9 $-1,194/d
+  0.99-1.00 | mk 623 (lost 4) sh 1,067,742 win 0.9937 net +0.29c t +0.9 $+516/d | mk 440 (lost 2) sh 815,095 win 0.9964 net +0.56c t +2.0 $+1,150/d | mk 183 (lost 2) sh 252,647 win 0.9849 net -0.60c t -0.6 $-752/d
+  0.50-1.00 | mk 731 (lost 36) sh 2,113,594 win 0.9776 net +0.96c t +1.8 $+3,365/d | mk 512 (lost 21) sh 1,568,138 win 0.9837 net +1.45c t +2.9 $+5,682/d | mk 219 (lost 15) sh 545,456 win 0.9599 net -0.47c t -0.3 $-1,269/d
+== NEAR: |EA-K| < E99 - leader side by the D=1 Binance clock, all buyable prints, no caps ==
+  0.50-0.90 | mk 426 (lost 176) sh 874,325 win 0.7705 net +1.61c t +1.0 $+2,343/d | mk 289 (lost 121) sh 574,237 win 0.7800 net +3.04c t +1.6 $+4,369/d | mk 137 (lost 55) sh 300,088 win 0.7521 net -1.14c t -0.4 $-1,711/d
+  0.90-0.95 | mk 424 (lost 33) sh 291,128 win 0.9402 net +1.25c t +1.0 $+608/d | mk 277 (lost 22) sh 167,963 win 0.9472 net +1.94c t +1.4 $+816/d | mk 147 (lost 11) sh 123,166 win 0.9307 net +0.31c t +0.1 $+192/d
+  0.95-0.97 | mk 414 (lost 14) sh 211,844 win 0.9825 net +2.13c t +3.9 $+753/d | mk 270 (lost 6) sh 127,506 win 0.9910 net +3.01c t +6.1 $+961/d | mk 144 (lost 8) sh 84,337 win 0.9696 net +0.80c t +0.7 $+338/d
+  0.97-0.98 | mk 387 (lost 7) sh 111,758 win 0.9906 net +1.64c t +3.4 $+305/d | mk 251 (lost 4) sh 64,823 win 0.9961 net +2.18c t +8.5 $+353/d | mk 136 (lost 3) sh 46,935 win 0.9829 net +0.89c t +0.8 $+209/d
+  0.98-0.99 | mk 389 (lost 5) sh 296,594 win 0.9967 net +1.28c t +4.5 $+631/d | mk 248 (lost 1) sh 188,650 win 0.9998 net +1.55c t +36.6 $+733/d | mk 141 (lost 4) sh 107,944 win 0.9913 net +0.79c t +1.0 $+426/d
+  0.99-1.00 | mk 372 (lost 2) sh 659,314 win 0.9987 net +0.80c t +7.4 $+880/d | mk 234 (lost 1) sh 446,003 win 0.9996 net +0.89c t +20.8 $+990/d | mk 138 (lost 1) sh 213,311 win 0.9968 net +0.62c t +1.9 $+659/d
+  0.50-1.00 | mk 506 (lost 176) sh 2,444,963 win 0.9081 net +1.35c t +1.8 $+5,519/d | mk 333 (lost 121) sh 1,569,183 win 0.9128 net +2.10c t +2.7 $+8,222/d | mk 173 (lost 55) sh 875,780 win 0.8996 net +0.03c t +0.0 $+114/d
+  far, 40-60 s left, price 0.50-0.97: mk 474 (lost 34) sh 438,549 net +2.97c t +1.9
+  far, 40-60 s left, price 0.97-1.00: mk 591 (lost 6) sh 1,303,628 net +0.28c t +0.6
+  far, 22-39 s left, price 0.50-0.97: mk 89 (lost 8) sh 71,245 net +2.23c t +1.1
+  far, 22-39 s left, price 0.97-1.00: mk 166 (lost 2) sh 280,164 net +0.58c t +1.0
+  far, 2-21 s left, price 0.50-0.97: mk 2 (lost 0) sh 4,320 net +3.85c t +53.1
+  far, 2-21 s left, price 0.97-1.00: mk 13 (lost 0) sh 15,688 net +1.07c t +11.0
+
+== tapes that stop before the end ==
+  markets whose last tape row is more than 10 s before t1: 148 ; their |final - ptb| p10/p50: [34.6, 109.3]  vs all markets p50 54.2 ; with gamma volume matching: 135 of 135

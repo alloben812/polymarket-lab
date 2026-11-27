@@ -1,0 +1,30 @@
+== DATA ==
+markets 1728 closed 1728 up_won True/False/None 863 865 0
+fee_rate {0.05: 1728} fee_type {'crypto_btc_5m_15m_fees': 1728}
+unique conditions 1728  tapes sorted 1728  odd sides/outcomes 0 0
+rows per tape min/median/max 519 1472.0 4278  tapes with n %% 1000 == 0: 3
+last tape row minus t1 (s): pct 0/1/50/99/100 [-71.0, -37.730000000000004, 20.0, 89.0, 113.0]  first row minus t0: pct 0/50/100 [-85604.0, -966.0, -131.0]
+gamma volume present 1575  |tape shares - volume|/volume < 1e-6: 1572  mismatches: [{'t0': 1795411500, 'shares': 120752.07108, 'volume': 12.0, 'n': 2065, 'dups': 130}, {'t0': 1795424400, 'shares': 60110.341818, 'volume': 1.960785, 'n': 2345, 'dups': 80}, {'t0': 1795434300, 'shares': 33088.714589, 'volume': 46.380785, 'n': 1305, 'dups': 65}]
+exact duplicate rows 93551 of 2653763  -> tape share totals match gamma WITH duplicates kept, so they are real repeated fills
+official prices present 1727  (final >= ptb) == up_won: 1727  exact ties final == ptb: 0  min |final-ptb|: 0.013272413234517444
+up share: all 0.499 tune 0.499 report 0.500
+
+== DESCRIPTIVE (own extract; taker BUY rows, block-3 in [t1-60, t1)) ==
+   0.50-0.80 | sh 673,466 win 0.652 fee 1.084c net -1.87c t -1.1 | sh 451,858 win 0.688 fee 1.083c net +1.56c t +0.8 | sh 221,609 win 0.580 fee 1.086c net -8.85c t -3.1
+   0.80-0.90 | sh 439,631 win 0.870 fee 0.628c net +1.26c t +0.7 | sh 271,724 win 0.886 fee 0.628c net +2.84c t +1.6 | sh 167,906 win 0.845 fee 0.626c net -1.30c t -0.4
+   0.90-0.95 | sh 414,189 win 0.949 fee 0.345c net +2.07c t +2.1 | sh 258,981 win 0.961 fee 0.345c net +3.21c t +3.6 | sh 155,207 win 0.930 fee 0.345c net +0.17c t +0.1
+   0.95-0.98 | sh 626,979 win 0.982 fee 0.170c net +1.53c t +3.0 | sh 415,735 win 0.989 fee 0.171c net +2.23c t +5.1 | sh 211,244 win 0.968 fee 0.168c net +0.16c t +0.1
+   0.98-1.00 | sh 2,400,744 win 0.994 fee 0.058c net +0.55c t +2.0 | sh 1,723,803 win 0.998 fee 0.057c net +0.86c t +5.2 | sh 676,941 win 0.986 fee 0.061c net -0.23c t -0.3
+   0.90-1.00 | sh 3,441,911 win 0.987 fee 0.113c net +0.91c t +2.6 | sh 2,398,519 win 0.992 fee 0.108c net +1.35c t +6.2 | sh 1,043,392 win 0.974 fee 0.125c net -0.09c t -0.1
+   0.90-1.00 with exact duplicate rows removed: sh 3,283,370 net +0.89c t +2.6
+   0.90-1.00 Nov 21: markets 167 sh 612,490 net +1.26c t +4.3  net$ +7,706  worst market $ -1,006
+   0.90-1.00 Nov 22: markets 157 sh 590,959 net +0.91c t +1.5  net$ +5,378  worst market $ -3,395
+   0.90-1.00 Nov 23: markets 144 sh 597,704 net +1.06c t +2.1  net$ +6,360  worst market $ -2,104
+   0.90-1.00 Nov 24: markets 157 sh 597,366 net +2.16c t +15.6  net$ +12,920  worst market $ -283
+   0.90-1.00 Nov 25: markets 141 sh 473,244 net +0.09c t +0.0  net$ +405  worst market $ -7,772
+   0.90-1.00 Nov 26: markets 146 sh 570,149 net -0.24c t -0.2  net$ -1,390  worst market $ -5,707
+
+== BASIS (own TWAPs; last window lacks the 27 Nov 00:00:00 kline) ==
+n 1726 mean -0.031 sd 5.640 abs p50/p95/p99/max [2.92, 10.96, 18.63, 61.37]  proxy wrong: 33 = 0.0191
+E99 tune-only 20.46 report-only 12.47 ; windows with |err| > 18.63: tune 17 report 1 ; > 25: 3 ; > 30: 2 ; > 40: 2
+by day sd / p99: {21: (np.float64(7.01), 20.74), 22: (np.float64(5.21), 18.32), 23: (np.float64(7.13), 23.22), 24: (np.float64(5.12), 14.5), 25: (np.float64(4.91), 13.83), 26: (np.float64(3.73), 10.83)}

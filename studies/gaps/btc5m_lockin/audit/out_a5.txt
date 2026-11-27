@@ -1,0 +1,19 @@
+== E. Real takers of the qualifying prints (widest, D=1, no caps) ==
+  stale clock (the study's rule): pie 35,114 sh, $1,734 in six days ($289/day; tune $374/day, report $120/day), 62 markets, 447 wallets
+    five most frequent wallets (markets, prints, shares, net $ six days): [(30, 41, 400, 18.7), (22, 22, 374, 19.5), (14, 18, 129, 6.4), (12, 15, 899, 41.4), (11, 11, 341, 25.2)]
+    five richest wallets net $: [152.3, 123.9, 122.6, 65.2, 50.2] ; share of pie dollars taken by the top wallet 8.8%, by the top 10 41.7%
+  both clocks: pie 21,753 sh, $907 in six days ($151/day; tune $200/day, report $53/day), 29 markets, 260 wallets
+    five most frequent wallets (markets, prints, shares, net $ six days): [(9, 14, 135, 5.5), (7, 8, 513, 22.3), (6, 6, 99, 4.2), (5, 6, 46, 1.9), (5, 11, 20, 0.9)]
+    five richest wallets net $: [152.3, 114.8, 77.3, 46.3, 39.5] ; share of pie dollars taken by the top wallet 16.8%, by the top 10 61.5%
+
+== F. Tightest legitimate alignment (D=0: Binance second closing at m; real match about 0.9 s later) by period ==
+  judged D=0 TUNE  : trades 228 mkts 21 sh 5,217 avgq 0.943 win(tr) 1.000 mkts with any losing fill 0 net +5.40c t 4.5 net$ +282 $/day +70
+  judged D=0 REPORT: trades 52 mkts 5 sh 1,538 avgq 0.956 win(tr) 1.000 mkts with any losing fill 0 net +4.16c t 7.3 net$ +64 $/day +32
+  widest D=0 TUNE  : trades 516 mkts 44 sh 11,283 avgq 0.939 win(tr) 0.988 mkts with any losing fill 1 net +5.45c t 7.2 net$ +615 $/day +154
+  widest D=0 REPORT: trades 104 mkts 10 sh 2,832 avgq 0.951 win(tr) 1.000 mkts with any losing fill 0 net +4.66c t 9.8 net$ +132 $/day +66
+
+== G. Tape completeness for the traded markets ==
+  traded markets (widest): 59  with gamma volume to compare: 53  matching: 52  no-volume markets: last tape row minus t1 min -4
+  all 153 no-volume markets: rows min/median 629 1455  last row minus t1 min -32  shares median 42726 vs 42189
+  rows with block time in the last 60 s per market: min 0
+extra runs: 2

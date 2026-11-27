@@ -823,6 +823,14 @@ class Engine:
                                                             "pending": len(self.pending),
                                                             "bookcheck": self.bookcheck}))
                 last_flush = time.time()
+                # forget per-token state of matches that ended long ago (bounded memory over a weekend)
+                if self.now_r - getattr(self, "_last_gc", 0) > 600 * 1000:
+                    self._last_gc = self.now_r
+                    for tok, (slug, mk) in list(self.tok.items()):
+                        t0 = (self.matches.get(slug) or {}).get("t0")
+                        if t0 and self.now_r / 1000 > t0 + 4 * 3600:
+                            for dct in (self.books, self.samples, self.hist, self.mid_track, self.last_sec):
+                                dct.pop(tok, None)
                 # forget triggers whose exits are long done
                 for tid in [t for t, v in self.open_trigs.items() if v.get("final_r") and
                             self.now_r - v["final_r"] > 3600 * 1000]:

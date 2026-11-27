@@ -70,7 +70,8 @@ class WS:
                                                .encode()).digest()).decode()
         if expect.lower() not in head.decode("latin-1").lower():
             raise ConnectionError("bad Sec-WebSocket-Accept")
-        self.buf = rest
+        self.buf = bytearray(rest)
+        self.pos = 0
         self.frag = b""
 
     def _recv_exact(self, n: int) -> bytes:
@@ -83,32 +84,37 @@ class WS:
         return out
 
     def _parse(self):
-        b = self.buf
-        if len(b) < 2:
+        """Parse one complete frame at self.pos (no copying of the rest of the buffer)."""
+        b, o = self.buf, self.pos
+        avail = len(b) - o
+        if avail < 2:
             return None
-        b1, b2 = b[0], b[1]
+        b1, b2 = b[o], b[o + 1]
         n = b2 & 0x7F
         i = 2
         if n == 126:
-            if len(b) < 4:
+            if avail < 4:
                 return None
-            n = struct.unpack("!H", b[2:4])[0]
+            n = struct.unpack_from("!H", b, o + 2)[0]
             i = 4
         elif n == 127:
-            if len(b) < 10:
+            if avail < 10:
                 return None
-            n = struct.unpack("!Q", b[2:10])[0]
+            n = struct.unpack_from("!Q", b, o + 2)[0]
             i = 10
         mask = None
         if b2 & 0x80:
-            if len(b) < i + 4:
+            if avail < i + 4:
                 return None
-            mask = b[i:i + 4]
+            mask = bytes(b[o + i:o + i + 4])
             i += 4
-        if len(b) < i + n:
+        if avail < i + n:
             return None
-        data = b[i:i + n]
-        self.buf = b[i + n:]
+        data = bytes(b[o + i:o + i + n])
+        self.pos = o + i + n
+        if self.pos > (1 << 20):  # compact now and then
+            del self.buf[:self.pos]
+            self.pos = 0
         return b1, b1 & 0x0F, mask, data
 
     def send(self, payload, opcode: int = 0x1) -> None:
@@ -141,7 +147,7 @@ class WS:
             chunk = self.sock.recv(262144)  # may raise socket.timeout; the buffer stays intact
             if not chunk:
                 raise ConnectionError("socket closed")
-            self.buf += chunk
+            self.buf.extend(chunk)
         b1, opcode, mask, data = fr
         if mask:
             data = bytes(b ^ mask[i % 4] for i, b in enumerate(data))

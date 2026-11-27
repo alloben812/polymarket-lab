@@ -98,8 +98,18 @@ EXP_BIDS_MAX_WINDOWS = 36                             # 3 hours of 5-minute wind
 EXP_BIDS_STEP_WORST = Decimal("5.00")                 # exp_bids.MAX_WINDOW_NOTIONAL: worst loss of one window
 EXP_FAV_TICKETS = (5, 10)
 EXP_FAV_MAX_HOURS = 12
-GIT_IDENT = ["-c", "user.name=pm-operator", "-c", "user.email=pm-operator@localhost.invalid",
+BIDS_LINE_WORST = EXP_BIDS_STEP_WORST                 # an exp_bids record line not understood: one window lost
+FAV_LINE_WORST = Decimal(max(EXP_FAV_TICKETS))         # an exp_fav record line not understood: one whole ticket lost
+FAV_NO_MONEY_STATES = ("unfilled", "rejected", "dry-run")
+NEUTRAL_NAME, NEUTRAL_EMAIL = "pm-operator", "pm-operator@localhost.invalid"
+# every commit the operator creates carries this identity, whatever the owner's git configuration says: git takes
+# author.* / committer.* over user.*, and the GIT_AUTHOR_* / GIT_COMMITTER_* variables over all of them
+GIT_IDENT = ["-c", f"user.name={NEUTRAL_NAME}", "-c", f"user.email={NEUTRAL_EMAIL}",
+             "-c", f"author.name={NEUTRAL_NAME}", "-c", f"author.email={NEUTRAL_EMAIL}",
+             "-c", f"committer.name={NEUTRAL_NAME}", "-c", f"committer.email={NEUTRAL_EMAIL}",
              "-c", "commit.gpgsign=false"]
+GIT_IDENT_ENV = {"GIT_AUTHOR_NAME": NEUTRAL_NAME, "GIT_AUTHOR_EMAIL": NEUTRAL_EMAIL,
+                 "GIT_COMMITTER_NAME": NEUTRAL_NAME, "GIT_COMMITTER_EMAIL": NEUTRAL_EMAIL}
 PROGRAM_FILES = {"smoke": "smoke.py", "exp_bids": "exp_bids.py", "exp_fav": "exp_fav.py"}
 PY_FLAGS = ("-I", "-B", "-u")    # isolated (no folder on the path, no PYTHON* variables), no .pyc files, unbuffered
 BALANCE_SOURCE = ("smoke", "auth")   # the only output trusted as the CURRENT balance (read right then)
@@ -504,49 +514,125 @@ class GitError(Exception):
     pass
 
 
-def fav_trades(rows: list[dict], since: float | None) -> list[tuple[str | None, str, Decimal]]:
-    """exp_fav.py records -> (day, "realised" | "at_risk", USD), mirroring exp_fav's own build_ledger.
+class LedgerError(Exception):
+    """The programs' records could not be read, or profit and loss could not be computed. Fail closed: the
+    loss limits count as reached (STOP, a live run interrupted, no live start) until the owner intervenes."""
+
+
+def rec_dec(v, signed: bool = False) -> Decimal:
+    """A USD amount or share count from a record line. Text that is not a number, NaN, infinity, and (unless
+    `signed`) a negative amount raise ValueError: the caller then counts the record at its worst case."""
+    if type(v) not in (int, float, str):
+        raise ValueError(f"not a number: {short(v)}")
+    try:
+        d = Decimal(str(v))
+    except InvalidOperation:
+        raise ValueError(f"not a number: {short(v)}") from None
+    if not d.is_finite() or (not signed and d < 0):
+        raise ValueError(f"not a usable amount: {short(v)}")
+    return d
+
+
+def rec_key(v) -> bool:
+    return (type(v) is str and v != "") or type(v) is int
+
+
+def rec_day(v) -> str | None:
+    return v if type(v) is str else None      # None counts toward today: the worst case for the daily limit
+
+
+def read_records(f: Path):
+    """The non-empty lines of one record file: a dict per line, None for a line that is not a JSON object
+    (torn, not UTF-8, not JSON, a list, a number). A file that cannot be read raises LedgerError."""
+    try:
+        data = f.read_bytes()
+    except OSError as e:
+        raise LedgerError(f"record file {f.name} could not be read ({type(e).__name__})") from None
+    for raw in data.splitlines():
+        if not raw.strip():
+            continue
+        try:
+            r = json.loads(raw.decode("utf-8"))
+        except (UnicodeDecodeError, ValueError, RecursionError):
+            yield None
+            continue
+        yield r if isinstance(r, dict) else None
+
+
+def fav_worst(dec: dict, o: dict | None) -> Decimal:
+    """The most a trade whose record is not understood can have cost: its whole ticket (the largest ticket when
+    the ticket itself is unreadable), or its recorded cost when that is readable and larger (the fee)."""
+    vals = []
+    for v in (dec.get("ticket"), (o or {}).get("cost") if isinstance(o, dict) else None):
+        try:
+            vals.append(rec_dec(v))
+        except ValueError:
+            pass
+    try:
+        rec_dec(dec.get("ticket"))
+    except ValueError:
+        vals.append(FAV_LINE_WORST)
+    return max(vals)
+
+
+def fav_trades(rows: list, since: float | None) -> list[tuple[str | None, str, Decimal]]:
+    """exp_fav.py records -> (day, "realised" | "at_risk" | "malformed", USD), mirroring exp_fav's build_ledger.
 
     A trade is a `decision` with sent != false, its first `order` (a later `late-check` order row replaces the
     fill), and its first `result`. Filled: cost includes the fee; won pays 1 per share. Fill unknown: lost
     costs the whole ticket, won counts 0 (cannot be worse), unresolved counts the whole ticket at risk.
+    A row or trade that is not understood (a ticket, cost or share count that is not a number, an unknown fill
+    state, a key that is not a string, a sent decision without a key) never stops the calculation: it is
+    returned as "malformed" with its worst case (fav_worst; FAV_LINE_WORST for a row of unknown trade).
     """
     by: dict = defaultdict(dict)
+    out: list = []
     for r in rows:
-        typ, k = r.get("type"), r.get("key")
-        if typ not in ("decision", "order", "result") or not k:
-            continue
-        if typ == "decision" and r.get("sent") is False:
-            continue
-        if typ == "order" and r.get("post") == "late-check" and "order" in by[k]:
-            by[k]["order"] = {**by[k]["order"], **{x: r.get(x) for x in ("fill_state", "filled_shares", "cost")}}
-            continue
-        by[k].setdefault(typ, r)
-    out = []
+        try:
+            typ, k = r.get("type"), r.get("key")
+            if typ not in ("decision", "order", "result"):
+                continue
+            if typ == "decision" and r.get("sent") is False:
+                continue
+            if not rec_key(k):
+                if typ == "decision":
+                    raise ValueError("a decision without a usable key")
+                continue                                    # an order or result alone moves no money
+            if typ == "order" and r.get("post") == "late-check" and "order" in by[k]:
+                by[k]["order"] = {**by[k]["order"], **{x: r.get(x) for x in ("fill_state", "filled_shares", "cost")}}
+                continue
+            by[k].setdefault(typ, r)
+        except Exception:  # noqa: BLE001  any row: worst case, never a crash
+            out.append((None, "malformed", FAV_LINE_WORST))
     for k, g in by.items():
         dec = g.get("decision")
         if dec is None:
             continue
-        t = dec.get("t")
-        if since is not None and isinstance(t, (int, float)) and t < since - 60:
-            continue
-        ticket = Decimal(str(dec.get("ticket") or "10"))
-        o = g.get("order")
-        state = (o or {}).get("fill_state", "unknown") if o is not None else "unknown"
-        if state not in ("filled", "unknown"):
-            continue                                        # unfilled, rejected, dry-run: no money moved
-        cost = Decimal(str(o["cost"])) if state == "filled" and o.get("cost") is not None else ticket
-        shares = Decimal(str(o["filled_shares"])) if state == "filled" and o.get("filled_shares") is not None else None
-        res = g.get("result")
-        day = dec.get("day")
-        if res is None or res.get("winner") is None:
-            out.append((day, "at_risk", cost))
-        elif res.get("winner_is_split"):
-            out.append((day, "realised", (shares * Decimal("0.5") - cost) if shares is not None else -ticket))
-        elif res["winner"] == dec.get("outcome"):
-            out.append((day, "realised", (shares - cost) if shares is not None else Decimal(0)))
-        else:
-            out.append((day, "realised", -cost))
+        day = rec_day(dec.get("day"))
+        try:
+            t = dec.get("t")
+            if since is not None and type(t) in (int, float) and t < since - 60:
+                continue
+            ticket = rec_dec(dec.get("ticket") or "10")
+            o = g.get("order")
+            state = (o or {}).get("fill_state", "unknown") if o is not None else "unknown"
+            if state in FAV_NO_MONEY_STATES:
+                continue                                    # unfilled, rejected, dry-run: no money moved
+            if state not in ("filled", "unknown"):
+                raise ValueError(f"fill state not understood: {short(state)}")
+            cost = rec_dec(o["cost"]) if state == "filled" and o.get("cost") is not None else ticket
+            shares = rec_dec(o["filled_shares"]) if state == "filled" and o.get("filled_shares") is not None else None
+            res = g.get("result")
+            if res is None or res.get("winner") is None:
+                out.append((day, "at_risk", cost))
+            elif res.get("winner_is_split"):
+                out.append((day, "realised", (shares * Decimal("0.5") - cost) if shares is not None else -ticket))
+            elif res["winner"] == dec.get("outcome"):
+                out.append((day, "realised", (shares - cost) if shares is not None else Decimal(0)))
+            else:
+                out.append((day, "realised", -cost))
+        except Exception:  # noqa: BLE001  any trade: worst case, never a crash
+            out.append((day, "malformed", fav_worst(dec, g.get("order"))))
     return out
 
 
@@ -577,7 +663,8 @@ class Operator:
                 "running": None, "events": [], "baseline": None, "balance": None, "day_open": None,
                 "lowered": None, "limit_hit": None, "last_cycle": None, "last_publish": 0, "dirty": True,
                 "help_cache": {}, "last_balance_probe": 0, "report_error": None, "control_error": None,
-                "milestones_reached": 0, "control_note": "", "publish_failed_at": None, "cycle_error": None}
+                "milestones_reached": 0, "control_note": "", "publish_failed_at": None, "cycle_error": None,
+                "ledger_error": None, "malformed_seen": None}
 
     def load_state(self) -> dict:
         st = self.default_state()
@@ -662,9 +749,8 @@ class Operator:
                    milestone=vals.get("milestone_step_usd", DEFAULT_MILESTONE_STEP))
         return res
 
-    def limits(self, a: dict) -> dict:
-        if not a["ok"]:
-            return {}
+    def limit_values(self, a: dict) -> tuple[Decimal, Decimal]:
+        """The limits in force (ARMED, lowered by set_limits); they do not depend on the records."""
         tot, daily = a["total"], a["daily"]
         lw = self.st.get("lowered")
         if lw and lw.get("fp") == a["fp"]:
@@ -672,97 +758,138 @@ class Operator:
                 tot = min(tot, Decimal(lw["total"]))
             if lw.get("daily") is not None:
                 daily = min(daily, Decimal(lw["daily"]))
-        daily = min(daily, tot)
-        p = self.pnl()
-        return {"armed_total_usd": a["total"], "armed_daily_usd": a["daily"], "total_usd": tot,
-                "daily_usd": daily, "left_total_usd": tot - p["loss_total_usd"],
-                "left_today_usd": daily - p["loss_today_usd"]}
+        return tot, min(daily, tot)
+
+    def limits(self, a: dict, p: dict | None = None) -> dict:
+        """Limits and what is left of them. Any error here raises LedgerError (fail closed)."""
+        if not a["ok"]:
+            return {}
+        p = self.pnl() if p is None else p
+        try:
+            tot, daily = self.limit_values(a)
+            return {"armed_total_usd": a["total"], "armed_daily_usd": a["daily"], "total_usd": tot,
+                    "daily_usd": daily, "left_total_usd": tot - p["loss_total_usd"],
+                    "left_today_usd": daily - p["loss_today_usd"]}
+        except Exception as e:  # noqa: BLE001
+            raise LedgerError(f"loss limits not computed: {type(e).__name__}: {e}") from None
 
     # ------------------------------------------------------------------ profit and loss
     def ledger(self) -> dict:
-        """Live record files of the programs (exp_bids schema; exp_fav is read the same way if it follows it).
+        """The programs' live record files (exp_bids schema; exp-fav-*.jsonl in exp_fav's own schema).
 
         realised = sum of `pnl` of resolved orders; at risk = cost of filled but unresolved orders plus the
         full notional of orders sent without a final record (interrupted session): the worst case.
+        A line or record that is not understood is counted at its worst case (its whole notional or ticket as
+        at risk, toward today) and counted in `unreadable` / `unreadable_usd`; it never stops the calculation.
+        Anything else that goes wrong (a file that cannot be read, an unexpected error) raises LedgerError.
         """
+        try:
+            return self._ledger()
+        except LedgerError:
+            raise
+        except Exception as e:  # noqa: BLE001
+            raise LedgerError(f"records not read: {type(e).__name__}: {e}") from None
+
+    def _ledger(self) -> dict:
         since = (self.st.get("baseline") or {}).get("ts")
+        if since is not None and type(since) not in (int, float):
+            raise LedgerError(f"state: the baseline time is not a number ({short(since)})")
         today = day_of(self.now())
         placed: dict = {}
         final: dict = {}
-        bad = 0
         fav_rows: list[dict] = []
-        for f in sorted((self.pilot / "out").glob("*.jsonl")):
-            if f.name.endswith(".dryrun.jsonl"):
-                continue
-            if f.name.startswith("exp-fav-"):                # exp_fav.py has its own schema: read below
-                try:
-                    for ln in f.read_text(encoding="utf-8").splitlines():
-                        if ln.strip():
-                            try:
-                                r = json.loads(ln)
-                            except json.JSONDecodeError:
-                                bad += 1
-                                continue
-                            if isinstance(r, dict) and r.get("mode") in (None, "live"):
-                                fav_rows.append(r)
-                except OSError:
-                    pass
-                continue
-            try:
-                lines = f.read_text(encoding="utf-8").splitlines()
-            except OSError:
-                continue
-            for ln in lines:
-                if not ln.strip():
-                    continue
-                try:
-                    r = json.loads(ln)
-                except json.JSONDecodeError:
-                    bad += 1
-                    continue
-                if not isinstance(r, dict) or r.get("mode") not in (None, "live"):
-                    continue
-                ws = r.get("window_start")
-                if since is not None and isinstance(ws, (int, float)) and ws < since - 60:
-                    continue
-                k = (f.name.split("-")[0], r.get("exp"), r.get("key"))
-                if r.get("type") == "placed":
-                    placed[k] = r
-                elif r.get("type") == "order":
-                    final[k] = r
         out = {"realised_total": Decimal(0), "at_risk_total": Decimal(0), "realised_today": Decimal(0),
-               "at_risk_today": Decimal(0), "unreadable": bad}
+               "at_risk_today": Decimal(0), "unreadable": 0, "unreadable_usd": Decimal(0)}
 
         def add(kind, r, amount):
             out[f"{kind}_total"] += amount
             if r.get("day") in (None, today):
                 out[f"{kind}_today"] += amount
 
+        def malformed(amount, day=None):
+            out["unreadable"] += 1
+            out["unreadable_usd"] += amount
+            add("at_risk", {"day": rec_day(day)}, amount)
+
+        for f in sorted((self.pilot / "out").glob("*.jsonl")):
+            if f.name.endswith(".dryrun.jsonl"):
+                continue
+            fav = f.name.startswith("exp-fav-")              # exp_fav.py has its own schema: read below
+            worst = FAV_LINE_WORST if fav else BIDS_LINE_WORST
+            for r in read_records(f):
+                try:
+                    if r is None:
+                        raise ValueError("not a JSON object")
+                    mode = r.get("mode")
+                    if mode is not None and type(mode) is not str:
+                        raise ValueError("mode not understood")
+                    if mode not in (None, "live"):
+                        continue
+                    if fav:
+                        fav_rows.append(r)
+                        continue
+                    ws = r.get("window_start")
+                    if since is not None and type(ws) in (int, float) and ws < since - 60:
+                        continue
+                    typ = r.get("type")
+                    if typ not in ("placed", "order"):
+                        continue
+                    if not rec_key(r.get("key")) or (r.get("exp") is not None and type(r.get("exp")) is not str):
+                        raise ValueError("key or experiment name not understood")
+                    k = (f.name.split("-")[0], r.get("exp"), r.get("key"))
+                    if typ == "placed":
+                        placed[k] = r
+                    else:
+                        final[k] = r
+                except Exception:  # noqa: BLE001  one line: worst case, never a crash
+                    malformed(worst, r.get("day") if isinstance(r, dict) else None)
+
+        def bids_worst(*recs) -> Decimal:
+            vals = []
+            for r in recs:
+                for x in ("notional", "cost"):
+                    try:
+                        vals.append(rec_dec((r or {}).get(x)))
+                    except ValueError:
+                        pass
+            return max(vals) if vals else BIDS_LINE_WORST
+
         for k, r in final.items():
             try:
                 if r.get("pnl") is not None:
-                    add("realised", r, Decimal(str(r["pnl"])))
+                    add("realised", r, rec_dec(r["pnl"], signed=True))
                 elif r.get("cost") is not None:
-                    if Decimal(str(r["cost"])) > 0:
-                        add("at_risk", r, Decimal(str(r["cost"])))
+                    c = rec_dec(r["cost"])
+                    if c > 0:
+                        add("at_risk", r, c)
                 else:                        # cost unknown (e.g. exp_bids post-error): the full order counts
                     n = r.get("notional") or (placed.get(k) or {}).get("notional") or "0"
-                    add("at_risk", r, Decimal(str(n)))
-            except InvalidOperation:
-                bad += 1
+                    add("at_risk", r, rec_dec(n))
+            except Exception:  # noqa: BLE001
+                malformed(bids_worst(r, placed.get(k)), r.get("day"))
         for k, r in placed.items():
             if k not in final:
                 try:
-                    add("at_risk", r, Decimal(str(r.get("notional", "0"))))
-                except InvalidOperation:
-                    bad += 1
+                    add("at_risk", r, rec_dec(r.get("notional", "0")))
+                except Exception:  # noqa: BLE001
+                    malformed(BIDS_LINE_WORST, r.get("day"))
         for day, kind, amount in fav_trades(fav_rows, since):
-            add(kind, {"day": day}, amount)
-        out["unreadable"] = bad
+            if kind == "malformed":
+                malformed(amount, day)
+            else:
+                add(kind, {"day": day}, amount)
         return out
 
     def pnl(self) -> dict:
-        lg = self.ledger()
+        """Profit and loss for the limits and the report. Any error raises LedgerError (fail closed)."""
+        try:
+            return self._pnl(self.ledger())
+        except LedgerError:
+            raise
+        except Exception as e:  # noqa: BLE001
+            raise LedgerError(f"profit and loss not computed: {type(e).__name__}: {e}") from None
+
+    def _pnl(self, lg: dict) -> dict:
         bal = self.st.get("balance") or {}
         base = self.st.get("baseline") or {}
         dop = self.st.get("day_open") or {}
@@ -781,14 +908,19 @@ class Operator:
                 "cash_change_total_usd": cash_tot, "cash_change_today_usd": cash_day,
                 "ledger_realised_total_usd": lg["realised_total"], "ledger_at_risk_total_usd": lg["at_risk_total"],
                 "ledger_realised_today_usd": lg["realised_today"], "ledger_at_risk_today_usd": lg["at_risk_today"],
-                "ledger_unreadable_lines": lg["unreadable"], "loss_total_usd": loss_tot, "loss_today_usd": loss_day}
+                "ledger_unreadable_lines": lg["unreadable"], "ledger_unreadable_worst_usd": lg["unreadable_usd"],
+                "loss_total_usd": loss_tot, "loss_today_usd": loss_day}
 
     def note_balance(self, bal: Decimal) -> None:
         now = self.now()
         prev = self.st.get("balance") or {}
-        lg = self.ledger()
-        net = lg["realised_total"] - lg["at_risk_total"]       # what the records say cash should have moved by
-        if prev.get("usd") is not None and prev.get("ledger_net") is not None:
+        try:
+            lg = self.ledger()
+            net = lg["realised_total"] - lg["at_risk_total"]   # what the records say cash should have moved by
+        except LedgerError as e:
+            net = None                                          # the balance is still recorded; limits fail closed
+            self.fail_closed(str(e))
+        if net is not None and prev.get("usd") is not None and prev.get("ledger_net") is not None:
             d_bal = bal - Decimal(prev["usd"])
             d_led = net - Decimal(prev["ledger_net"])
             if d_bal > BALANCE_JUMP_TOLERANCE and d_bal - d_led > BALANCE_JUMP_TOLERANCE:
@@ -796,7 +928,8 @@ class Operator:
                 self.event("warning", "balance rose more than the programs' records explain",
                            reason=f"balance +{money(d_bal)}, records {money(d_led)} USD: a deposit or redeemed "
                                   f"winnings; after a deposit the owner writes baseline_balance_usd in ARMED")
-        self.st["balance"] = {"usd": str(bal), "utc": utc(now), "ts": now, "ledger_net": str(net)}
+        self.st["balance"] = {"usd": str(bal), "utc": utc(now), "ts": now,
+                              "ledger_net": None if net is None else str(net)}
         today = day_of(now)
         if (self.st.get("day_open") or {}).get("day") != today:
             # the day opens at the last reading before midnight when it is recent (a live run crossing midnight),
@@ -935,12 +1068,21 @@ class Operator:
             raise Bad("a live exp_bids.py session started outside the operator is running")
         if lock_is_held(self.fav_lock):
             raise Bad("an exp_fav.py session started outside the operator is running")
-        if self.balance_probe("before a live run") is None:
-            raise Bad("balance could not be read with smoke.py auth --live; live run not started")
+        for probe in (False, True):              # before the balance probe, and after it (it reads the records)
+            if probe and self.balance_probe("before a live run") is None:
+                raise Bad("balance could not be read with smoke.py auth --live; live run not started")
+            if self.st.get("ledger_error"):
+                raise Bad(f"the programs' records could not be read ({self.st['ledger_error']['reason']}): "
+                          f"loss limits treated as reached")
         a = self.read_armed()
         if not a["ok"]:
             raise Bad(f"not armed: {a['reason']}")
-        lim = self.limits(a)
+        try:
+            lim = self.limits(a)
+        except LedgerError as e:
+            self.fail_closed(str(e))
+            raise Bad(f"the programs' records could not be read ({self.scrub(str(e))[:300]}): "
+                      f"loss limits treated as reached") from None
         step = SPECS[(act["program"], act["cmd"])].step_worst(act["params"])
         if lim["left_total_usd"] < step or lim["left_today_usd"] < step:
             raise Bad(f"limits left (total {money(lim['left_total_usd'])}, today {money(lim['left_today_usd'])} USD) "
@@ -1079,20 +1221,19 @@ class Operator:
             a = self.read_armed()
             if not a["ok"]:
                 return self.event("refused", what, reason=f"not armed: {a['reason']}", **kw)
-            cur = self.limits(a)
+            cur_t, cur_d = self.limit_values(a)      # not the records: lowering works even when they are unreadable
             new_t = act["params"].get("max_total_loss_usd")
             new_d = act["params"].get("max_daily_loss_usd")
-            for name, new, old in (("max_total_loss_usd", new_t, cur["total_usd"]),
-                                   ("max_daily_loss_usd", new_d, cur["daily_usd"])):
+            for name, new, old in (("max_total_loss_usd", new_t, cur_t),
+                                   ("max_daily_loss_usd", new_d, cur_d)):
                 if new is not None and Decimal(new) > old:
                     return self.event("refused", what, reason=f"{name} {new} is above the current {money(old)}: "
                                                                f"limits can only be lowered", **kw)
             lw = self.st.get("lowered") if (self.st.get("lowered") or {}).get("fp") == a["fp"] else {}
             self.st["lowered"] = {"fp": a["fp"], "total": new_t or (lw or {}).get("total"),
                                   "daily": new_d or (lw or {}).get("daily")}
-            lim = self.limits(a)
-            self.event("done", what, reason=f"limits now total {money(lim['total_usd'])}, "
-                                            f"daily {money(lim['daily_usd'])} USD", **kw)
+            lim_t, lim_d = self.limit_values(a)
+            self.event("done", what, reason=f"limits now total {money(lim_t)}, daily {money(lim_d)} USD", **kw)
         elif cmd == "report":
             self.st["dirty"] = True
             self.event("done", what, **kw)
@@ -1104,13 +1245,52 @@ class Operator:
 
     # ------------------------------------------------------------------ limits
     def check_limits(self) -> None:
+        """The loss limits. Fail closed: any error while reading the records or computing profit and loss counts
+        as a reached limit (fail_closed), armed or not."""
+        try:
+            self._check_limits()
+        except LedgerError as e:
+            self.fail_closed(str(e))
+
+    def fail_closed(self, why: str) -> None:
+        """The records could not be read or profit and loss not computed: treated as a reached limit. STOP is
+        created, a live run is interrupted, live starts are refused (STOP, and ledger_error while the error
+        lasts) until the owner fixes the records and removes STOP by hand. The report says so."""
+        msg = self.scrub(why)[:300]
+        stop_note = "STOP created"
+        try:
+            self.write_stop(f"the programs' records could not be read or the loss not computed ({msg}): "
+                            f"loss limits treated as reached")
+        except OSError as e:
+            stop_note = f"STOP could not be created ({type(e).__name__}); live starts are refused all the same"
+        if (self.st.get("ledger_error") or {}).get("reason") != msg:
+            self.st["ledger_error"] = {"utc": utc(self.now()), "reason": msg}
+            self.event("limit", "loss limits treated as reached: the programs' records could not be read",
+                       reason=f"{msg}; {stop_note}; no live run starts until the owner fixes the records and "
+                              f"removes STOP")
+        if self.child and self.child["live"]:
+            self.interrupt("the programs' records could not be read: loss limits treated as reached")
+
+    def _check_limits(self) -> None:
+        p = self.pnl()
+        if self.st.get("ledger_error"):
+            self.st["ledger_error"] = None
+            self.event("recovered", "the programs' records are readable again",
+                       reason="STOP stays until the owner removes it" if self.stop_file.exists() else None)
+        seen = [p["ledger_unreadable_lines"], money(p["ledger_unreadable_worst_usd"])]
+        if seen[0] and seen != self.st.get("malformed_seen"):
+            self.event("warning", "record lines not understood",
+                       reason=f"{seen[0]} line(s) in pilot/out/*.jsonl could not be read; each counts as lost in "
+                              f"full toward the limits ({seen[1]} USD in all); fix or move them")
+        self.st["malformed_seen"] = seen
         a = self.read_armed()
         if not a["ok"]:
             return
         if not self.st.get("baseline") and self.now() - self.st.get("last_balance_probe", 0) >= 300:
             # just armed: read the starting balance now, so the experiment's ledger starts here
             self.balance_probe("armed: starting balance")
-        lim = self.limits(a)
+            p = None
+        lim = self.limits(a, p)
         hit = None
         if lim["left_total_usd"] <= 0:
             hit = ("total", lim["total_usd"])
@@ -1134,7 +1314,7 @@ class Operator:
     # ------------------------------------------------------------------ control channel
     def git_raw(self, *args, data: bytes = b"", timeout: int = GIT_TIMEOUT_S) -> bytes:
         """git in the main repository, hooks off (a relative core.hooksPath must never pick up a tree's hooks)."""
-        env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
+        env = dict(os.environ, GIT_TERMINAL_PROMPT="0", **GIT_IDENT_ENV)   # the owner's identity never reaches a commit
         env.setdefault("GIT_SSH_COMMAND", "ssh -o BatchMode=yes")
         name = next((x for x in args if not x.startswith("-") and "=" not in x), "?")
         try:
@@ -1285,21 +1465,34 @@ class Operator:
             self.check_limits()
 
     # ------------------------------------------------------------------ reports
-    def build_report(self) -> tuple[dict, str, str]:
+    def build_report(self, enforce: bool = False) -> tuple[dict, str, str]:
+        """The report. It never depends on the records: when they cannot be read, the report carries the error
+        instead of the numbers (and with `enforce`, as in publish, the limits fail closed first)."""
         a = self.read_armed()
-        lim = self.limits(a) if a["ok"] else {}
-        p = self.pnl()
-        cash = p["cash_change_total_usd"]
-        # a milestone needs both measures: the balance (a deposit raises it) and the programs' records
-        # (realised minus still at risk; a deposit does not move them). The smaller one counts.
-        led = p["ledger_realised_total_usd"] - p["ledger_at_risk_total_usd"]
-        prof = None if cash is None else min(cash, led)
         step = a["milestone"] if a["ok"] else DEFAULT_MILESTONE_STEP
-        reached = int((prof / step).to_integral_value(rounding=ROUND_FLOOR)) if prof is not None and prof > 0 else 0
+        lim, p, prof, cash, led, reached = {}, {}, None, None, None, 0
+        try:
+            p = self.pnl()
+            lim = self.limits(a, p) if a["ok"] else {}
+            cash = p["cash_change_total_usd"]
+            # a milestone needs both measures: the balance (a deposit raises it) and the programs' records
+            # (realised minus still at risk; a deposit does not move them). The smaller one counts.
+            led = p["ledger_realised_total_usd"] - p["ledger_at_risk_total_usd"]
+            prof = None if cash is None else min(cash, led)
+            reached = (int((prof / step).to_integral_value(rounding=ROUND_FLOOR))
+                       if prof is not None and prof > 0 else 0)
+            led_err = None
+        except Exception as e:  # noqa: BLE001
+            led_err = self.scrub(str(e) if isinstance(e, LedgerError) else f"{type(e).__name__}: {e}")[:300]
+            lim, p, prof, cash, led, reached = {}, {}, None, None, None, 0
+            if enforce:
+                self.fail_closed(led_err)
         if reached > self.st.get("milestones_reached", 0):
             self.st["milestones_reached"] = reached
             self.event("milestone", f"profit passed {money(step * reached)} USD",
                        reason=f"profit {money(prof)} (balance {money(cash)}, records {money(led)})")
+        if led_err is None and self.st.get("ledger_error"):
+            led_err = self.st["ledger_error"]["reason"]
         c = self.child
         rep = {
             "operator_version": VERSION,
@@ -1310,9 +1503,13 @@ class Operator:
             "limits": {k: money(v) for k, v in lim.items()},
             "limit_hit": {k: v for k, v in (self.st.get("limit_hit") or {}).items() if k != "key"} or None,
             "pnl": {k: (money(v) if isinstance(v, Decimal) else v) for k, v in p.items()},
+            "records_error": None if led_err is None else
+            {"reason": led_err, "since_utc": (self.st.get("ledger_error") or {}).get("utc"),
+             "effect": "loss limits treated as reached: STOP, live run interrupted, no live start until the owner "
+                       "fixes the records and removes STOP"},
             "milestones": {"step_usd": money(step), "profit_usd": None if prof is None else money(prof),
-                           "cash_profit_usd": None if cash is None else money(cash), "records_profit_usd": money(led),
-                           "reached": reached},
+                           "cash_profit_usd": None if cash is None else money(cash),
+                           "records_profit_usd": None if led is None else money(led), "reached": reached},
             "control": {"last_seq": self.st["last_seq"], "issued_utc": self.st.get("last_seq_issued_utc"),
                         "note": self.st.get("control_note") or "", "fetch_error": self.st.get("control_error")},
             "queue": [{"seq": q["seq"], "id": q["id"], "action": describe(q)} for q in self.st["queue"]],
@@ -1343,12 +1540,20 @@ class Operator:
             h = r["limit_hit"]
             L.append(f"- **Предел достигнут:** {h['kind']} в {h['utc']}, убыток {h['loss_usd']} при пределе "
                      f"{h['limit_usd']} USD")
+        if r.get("records_error"):
+            L.append(f"- **Записи программ не прочитаны, пределы считаются достигнутыми:** "
+                     f"{r['records_error']['reason']}. Файл STOP создан, живая программа прервана, новые живые "
+                     f"запуски отклоняются, пока вы не исправите записи и сами не удалите STOP")
         p = r["pnl"]
-        L.append(f"- Баланс pUSD: {p['balance_usd']} (прочитан {p['balance_utc']}); старт {p['baseline_usd']}; "
-                 f"изменение всего {p['cash_change_total_usd']}, сегодня {p['cash_change_today_usd']}")
-        L.append(f"- По записям программ: итог рассчитанных {p['ledger_realised_total_usd']} "
-                 f"(сегодня {p['ledger_realised_today_usd']}), под риском {p['ledger_at_risk_total_usd']}")
-        L.append(f"- Убыток для пределов: всего {p['loss_total_usd']}, сегодня {p['loss_today_usd']} USD")
+        if p:
+            L.append(f"- Баланс pUSD: {p['balance_usd']} (прочитан {p['balance_utc']}); старт {p['baseline_usd']}; "
+                     f"изменение всего {p['cash_change_total_usd']}, сегодня {p['cash_change_today_usd']}")
+            L.append(f"- По записям программ: итог рассчитанных {p['ledger_realised_total_usd']} "
+                     f"(сегодня {p['ledger_realised_today_usd']}), под риском {p['ledger_at_risk_total_usd']}")
+            if p.get("ledger_unreadable_lines"):
+                L.append(f"- **Нечитаемых строк в записях: {p['ledger_unreadable_lines']}**; каждая посчитана как "
+                         f"полный убыток, всего {p['ledger_unreadable_worst_usd']} USD (исправьте или уберите их)")
+            L.append(f"- Убыток для пределов: всего {p['loss_total_usd']}, сегодня {p['loss_today_usd']} USD")
         m = r["milestones"]
         L.append(f"- Прибыль (меньшая из двух: по балансу {m['cash_profit_usd']}, по записям {m['records_profit_usd']}): "
                  f"{m['profit_usd']} USD; ступеней по {m['step_usd']}: {m['reached']}")
@@ -1372,6 +1577,23 @@ class Operator:
                 L.append("  ```")
         return "\n".join(L) + "\n"
 
+    def minimal_report(self, err: str) -> tuple[dict, str, str]:
+        """The fallback when the full report could not be built: the error, STOP, control and the events."""
+        err = self.scrub(err)[:300]
+        evs = [self.scrub.obj({k: v for k, v in e.items() if k != "tail"}) for e in self.st.get("events", [])]
+        rep = self.scrub.obj({"operator_version": VERSION, "generated_utc": utc(self.now()),
+                              "report_build_error": err, "stop_file": self.stop_file.exists(),
+                              "records_error": self.st.get("ledger_error"),
+                              "control": {"last_seq": self.st.get("last_seq"),
+                                          "issued_utc": self.st.get("last_seq_issued_utc")},
+                              "events": evs[-REPORT_EVENTS:]})
+        md = (f"# Отчёт оператора, {rep['generated_utc']}\n\n- **Полный отчёт не собран:** {err}\n"
+              f"- Файл STOP: **{'есть' if rep['stop_file'] else 'нет'}**\n\n## События (последние)\n\n"
+              + "".join(f"- {e.get('utc')} **{e.get('outcome')}** {e.get('what')}"
+                        + (f": {e['reason']}" if e.get("reason") else "") + "\n" for e in reversed(rep["events"])))
+        ev = "".join(json.dumps(e, sort_keys=True, default=str) + "\n" for e in evs)
+        return rep, md, ev
+
     def publish(self) -> bool:
         """Commit the report to `live-reports` and push it, with git plumbing only.
 
@@ -1379,7 +1601,10 @@ class Operator:
         into the home folder or hooks), and no hook runs. Every commit carries the whole tree: the three
         regular files under reports/, so whatever else someone put on the branch drops out of its tip.
         """
-        rep, md, ev = self.build_report()
+        try:
+            rep, md, ev = self.build_report(enforce=True)
+        except Exception as e:  # noqa: BLE001  a report goes out whatever failed while building it
+            rep, md, ev = self.minimal_report(f"{type(e).__name__}: {e}")
         leaks = self.scrub.obj_leaks(rep) + self.scrub.leaks(md) + self.scrub.leaks(ev)
         if leaks:
             self.st["report_error"] = f"report withheld: scrubber found {sorted(set(leaks))}"
@@ -2081,9 +2306,10 @@ def cmd_selftest(a) -> int:
              "pnl": "-0.50"},
             {"type": "order", "exp": "probe", "mode": "dry-run", "key": "k4", "day": today, "pnl": "-9"})) + "\n{torn")
         lg = op.ledger()
-        expect("ledger: unknown cost and no final record count in full; dry-run rows ignored",
-               lg["realised_total"] == Decimal("-0.50") and lg["at_risk_total"] == Decimal("3.00")
-               and lg["unreadable"] == 1, str(lg))
+        expect("ledger: unknown cost and no final record count in full; dry-run rows ignored; the torn line counts "
+               "as one window lost (5.00)",
+               lg["realised_total"] == Decimal("-0.50") and lg["at_risk_total"] == Decimal("8.00")
+               and lg["unreadable"] == 1 and lg["unreadable_usd"] == BIDS_LINE_WORST, str(lg))
         rf.unlink()
         ff = pilot / "out" / f"exp-fav-{today.replace('-', '')}.jsonl"
         tnow = time.time()
@@ -2325,6 +2551,135 @@ def cmd_selftest(a) -> int:
         op.st.update(baseline=None, balance=None, day_open=None, milestones_reached=0, limit_hit=None)
         if op.armed_file.exists():
             op.armed_file.unlink()
+
+        # --- 6c. verification finding 1: the loss limits fail closed -------------------------------------------------
+        print("records not understood or unreadable during a live run: worst case, fail closed, the report goes out")
+        for f in (pilot / "out").glob("*.jsonl"):
+            f.unlink()
+        if op.stop_file.exists():
+            op.stop_file.unlink()
+        (sd / "fake-balance").write_text("200")
+        (sd / "fake-pnl").write_text("0")
+        arm("max_total_loss_usd = 30\nmax_daily_loss_usd = 12\n")
+        os.environ["FAKE_WINDOW_S"] = "0.5"
+        today = day_of(time.time())
+        dstamp = today.replace("-", "")
+
+        def published() -> tuple[dict, str]:
+            return (json.loads(sh("git", "show", f"refs/heads/{REPORT_BRANCH}:reports/latest.json", cwd=origin)),
+                    sh("git", "show", f"refs/heads/{REPORT_BRANCH}:reports/latest.md", cwd=origin))
+
+        n_err = len(events(op, outcome="error"))
+        # exp_bids format: a key that is a list (was TypeError: unhashable) and a pnl that is not a number (was
+        # skipped, so the loss did not count); both while a live exp_bids run is in progress
+        push_control(24, [{"id": "f1live", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 36, "live": True}}])
+        cycles(op, until=lambda o: events(o, id="f1live", outcome="started"))
+        bids_bad = pilot / "out" / f"exp-probe-{dstamp}.jsonl"
+        bids_bad.write_text(json.dumps({"type": "order", "exp": "probe", "mode": "live", "key": ["a", "list"],
+                                        "day": today, "cost": "1.00", "pnl": "-1.00"}) + "\n"
+                            + json.dumps({"type": "order", "exp": "probe", "mode": "live", "key": "p2", "day": today,
+                                          "cost": "1.00", "notional": "2.00", "pnl": "lost"}) + "\n")
+        op.st["dirty"] = True
+        op.cycle()
+        lg = op.ledger()
+        rep, md = published()
+        expect("finding 1, exp_bids format: two lines not understood during a live run: no crash, counted as lost "
+               "(5.00 for the unknown order, its notional 2.00 for the other)",
+               len(events(op, outcome="error")) == n_err and lg["unreadable"] == 2
+               and lg["unreadable_usd"] == Decimal("7.00") and op.pnl()["loss_today_usd"] >= 7, str(lg))
+        expect("finding 1, exp_bids format: the live run goes on (7.00 < daily 12) and the report shows the lines",
+               op.child is not None and not op.stop_file.exists() and op.st.get("report_error") is None
+               and rep["pnl"]["ledger_unreadable_lines"] == 2 and rep["pnl"]["ledger_unreadable_worst_usd"] == "7.00"
+               and "Нечитаемых строк в записях: 2" in md and events(op, outcome="warning", what="record lines not understood"),
+               f"{rep['pnl']} {op.st.get('report_error')}")
+        # exp_fav format: a ticket that is not a number (was InvalidOperation out of fav_trades: no limits, no reports)
+        fav_bad = pilot / "out" / f"exp-fav-{dstamp}.jsonl"
+        fav_bad.write_text(json.dumps({"type": "decision", "key": "fbad", "sent": True, "ticket": "ten",
+                                       "outcome": "Yes", "day": today, "t": time.time(), "mode": "live"}) + "\n")
+        cycles(op, until=lambda o: o.child is None)
+        lg = op.ledger()
+        rep, md = published()
+        expect("finding 1, exp_fav format: a ticket 'ten' during a live run: no crash, counted as a whole ticket "
+               "(10.00) lost", len(events(op, outcome="error")) == n_err and lg["unreadable"] == 3
+               and lg["unreadable_usd"] == Decimal("17.00"), str(lg))
+        expect("finding 1, exp_fav format: 17.00 counted reaches the daily limit 12: STOP, the live run interrupted, "
+               "reported", op.stop_file.exists() and events(op, outcome="limit", what="daily loss limit reached")
+               and events(op, id="f1live", outcome="interrupted") and rep["stop_file"] and rep["limit_hit"]
+               and op.st.get("report_error") is None, f"{rep.get('limit_hit')} {op.st.get('report_error')}")
+        # an error while reading the records (a record file that cannot be read) during a live run
+        bids_bad.unlink()
+        fav_bad.unlink()
+        op.stop_file.unlink()
+        op.st.update(limit_hit=None)
+        push_control(25, [{"id": "f3live", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 36, "live": True}}])
+        cycles(op, until=lambda o: events(o, id="f3live", outcome="started"))
+        broken = pilot / "out" / f"exp-broken-{dstamp}.jsonl"
+        broken.mkdir()                                     # read_bytes: IsADirectoryError (root ignores chmod 000)
+        cycles(op, until=lambda o: o.child is None)
+        rep, md = published()
+        expect("finding 1: a record file that cannot be read during a live run: STOP created, the live run "
+               "interrupted as at a limit",
+               op.stop_file.exists() and events(op, id="f3live", outcome="interrupted")
+               and any("records could not be read" in e.get("reason", "")
+                       for e in events(op, id="f3live", outcome="interrupt"))
+               and any("records could not be read" in e["what"] for e in events(op, outcome="limit"))
+               and len(events(op, outcome="error")) == n_err,
+               str([(e["outcome"], e.get("reason")) for e in events(op, id="f3live")]))
+        expect("finding 1: ... and the report still goes out, with the error text, scrubbed",
+               op.st.get("report_error") is None and rep.get("records_error")
+               and "exp-broken" in rep["records_error"]["reason"]
+               and "IsADirectoryError" in rep["records_error"]["reason"] and rep["stop_file"] and rep["pnl"] == {}
+               and "Записи программ не прочитаны" in md and not op.scrub.leaks(json.dumps(rep) + md)
+               and str(tmp) not in json.dumps(rep) + md, f"{rep.get('records_error')} {op.st.get('report_error')}")
+        op.stop_file.unlink()                              # the owner removes STOP, but the records are still broken
+        push_control(26, [{"id": "f3again", "program": "exp_bids", "cmd": "run",
+                           "params": {"config": "tails", "windows": 2, "live": True}}])
+        cycles(op, n=2)
+        expect("finding 1: while the error lasts a live start is refused even after STOP was removed; STOP is back",
+               events(op, id="f3again", outcome="refused") and not events(op, id="f3again", outcome="started")
+               and op.stop_file.exists(), str(events(op, id="f3again")))
+        broken.rmdir()
+        op.cycle()
+        expect("finding 1: records readable again: reported; STOP stays until the owner removes it",
+               events(op, outcome="recovered") and op.st.get("ledger_error") is None and op.stop_file.exists()
+               and published()[0].get("records_error") is None)
+        # an error while computing profit and loss (a balance in the state that is not a number), no live run
+        op.stop_file.unlink()
+        op.st["balance"] = {"usd": "garbage", "utc": utc(time.time()), "ts": time.time(), "ledger_net": "0"}
+        op.cycle()
+        rep, md = published()
+        expect("finding 1: profit and loss not computable: STOP created, the report says so",
+               op.stop_file.exists() and rep.get("records_error")
+               and "profit and loss not computed" in rep["records_error"]["reason"]
+               and op.st.get("report_error") is None, str(rep.get("records_error")))
+        op.st["balance"] = None
+        op.stop_file.unlink()
+        op.cycle()
+        # an unexpected exception inside the calculation itself (fav_trades raising): fail closed, report published
+        real_fav_trades = globals()["fav_trades"]
+
+        def fav_boom(rows, since):
+            raise ZeroDivisionError("unexpected (test)")
+        globals()["fav_trades"] = fav_boom
+        try:
+            op.st["dirty"] = True
+            op.cycle()
+            rep, md = published()
+        finally:
+            globals()["fav_trades"] = real_fav_trades
+        expect("finding 1: an unexpected exception inside the calculation: STOP created, the report goes out with it",
+               op.stop_file.exists() and rep.get("records_error") and "ZeroDivisionError" in rep["records_error"]["reason"]
+               and op.st.get("report_error") is None, str(rep.get("records_error")))
+        op.cycle()
+        op.stop_file.unlink()
+        for f in (pilot / "out").glob("*.jsonl"):
+            f.unlink()
+        op.st.update(baseline=None, balance=None, day_open=None, milestones_reached=0, limit_hit=None,
+                     ledger_error=None, malformed_seen=None)
+        op.armed_file.unlink()
+        os.environ["FAKE_WINDOW_S"] = "0.15"
 
         # --- 7. reports and the untouched working copy -------------------------------------------------------------
         print("reports branch, scrubbing of what was pushed, the working copy")

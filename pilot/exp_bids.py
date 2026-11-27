@@ -545,8 +545,11 @@ class Session:
             self.geo_checked = True
         cancel_at = w.start + lv.cancel_offset
         expiration = max(cancel_at + GTD_SECURITY_S, int(now) + SDK_MIN_EXPIRATION_S + EXPIRATION_MARGIN_S)
-        signed = env.sign(rec.token, rec.price, rec.size, expiration)
-        guard_signed(signed, rec.token, notional, self.live)
+        try:
+            signed = env.sign(rec.token, rec.price, rec.size, expiration)
+        except Exception as e:  # noqa: BLE001  (SDK input checks: tick, size, expiration)
+            return self.skip(w, rec, f"SDK refused to build the order: {type(e).__name__}: {e}")
+        guard_signed(signed, rec.token, notional, self.live)     # Refusal here stops the whole session
         rec.signed_expiration, rec.cancel_at, rec.placed_at = expiration, cancel_at, now
         placed_line = {"type": "placed", "exp": self.cfg.name, "mode": "live" if self.live else "dry-run",
                        "session": self.session, "key": rec.key, "day": day_of(now),
@@ -560,7 +563,15 @@ class Session:
                 f"(bid {rec.bid} ask {rec.ask}, mid Up {rec.mid_up}) signed exp {utc(expiration)}, "
                 f"cancel {utc(cancel_at)}; NOT posted")
             return
-        r = env.post(signed)
+        try:
+            r = env.post(signed)
+        except Exception as e:  # noqa: BLE001  network error: the order may or may not rest
+            rec.status, rec.reason = "post-error", f"{type(e).__name__}: {e}"
+            rec.cancel_at = cancel_at
+            w.orders.append(rec)
+            out(f"    POST ERROR {lv.label} {rec.outcome}: {rec.reason}; counted as filled in today's caps, "
+                f"expires by GTD at the latest")
+            return
         if r["ok"]:
             rec.status, rec.order_id = "posted", r["order_id"]
             self.push(cancel_at, "cancel", w, rec)
@@ -663,7 +674,7 @@ class Session:
             "mode": "live" if self.live else "dry-run", "window_start": w.start,
             "window_start_utc": utc(w.start), "slug": w.slug, "condition_id": w.market["condition_id"],
             "result": result, "skipped": w.skipped_reason or None,
-            "orders_sent": sum(1 for r in w.orders if r.status in ("posted", "dry-run", "rejected-recorded")),
+            "orders_sent": sum(1 for r in w.orders if r.status in ("posted", "dry-run", "rejected-recorded", "post-error")),
             "orders_filled": sum(1 for ln in lines if ln["filled_size"] not in (None, "0") and D(ln["filled_size"]) > 0),
             "cost": str(tot["cost"]), "payout": str(tot["payout"]), "pnl": str(tot["pnl"])})
         out(f"  {w.slug}: result {result or 'UNRESOLVED'}; {len(lines)} order records; "
@@ -771,6 +782,9 @@ def cmd_run(a) -> int:
         except KeyboardInterrupt:
             s.interrupt()
             return 130
+        except BaseException:
+            s.interrupt()                       # cancel this session's open orders, then report the error
+            raise
     finally:
         client.close()
 
@@ -1159,6 +1173,19 @@ def cmd_selftest(a) -> int:
             env = FakeEnv(client, True, t0=1_800_000_007.0, ask="0.40")
             Session(cfg, env, True, 1).run()
             expect("best ask 0.40 <= price 0.40 -> skipped (post-only would be rejected)", not env.posted)
+            # network error while posting: counted as fully filled (worst case) in the day's caps
+            for f in OUT_DIR.glob("*"):
+                f.unlink()
+
+            class PostErr(FakeEnv):
+                def post(self, signed):
+                    raise TimeoutError("simulated")
+            env = PostErr(client, True, t0=1_800_000_007.0)
+            Session(cfg, env, True, 1).run()
+            n, f_, o_ = ledger(day_of(1_800_000_007.0), True, "")
+            st = [r["status"] for r in read_records(OUT_DIR.glob("*.jsonl")) if r["type"] == "order"]
+            expect("post error -> recorded as post-error, its 4.00 counted as filled today",
+                   st == ["post-error", "post-error"] and f_ == Decimal("4.00"), f"{st}, filled {f_}")
             # STOP file mid-session: no orders after it
             STOP_FILE.write_text("")
             env = FakeEnv(client, True, t0=1_800_000_007.0)

@@ -663,3 +663,11 @@ Scripts: `tools_scratch/v3_verify_*.py`. All checks are against live gamma / dat
 - The WebSocket handshake to the public market channel worked from this sandbox through the proxy on 2026-11-27
   evening (9 messages in 15 s), contrary to the earlier note. Order placement from here stays impossible (US IP).
 - polymarket-client 0.20.1 needs Python 3.11+.
+- Geoblock detail (official page https://docs.polymarket.com/api-reference/geoblock.md, read 2026-11-27). Close-only on
+  the frontend AND the API (no new positions): AR, AU, BY, BE, BI, BR, CA-BC/ON/AB/QC, CF, CD, ET, FR, DE, IQ, IT, LB,
+  LY, MM, NZ, NI, KP, PL, RU, SG, SO, SK, SI, SS, SD, TW, TH, GB, US, UM, VE, YE, ZW. Blocked completely: IR, SY, CU, KP,
+  Crimea, Donetsk, Luhansk. Close-only on the FRONTEND ONLY, API not restricted: Ireland, Japan, Malta (sports only),
+  Netherlands, South Korea. Serbia and Finland are not listed.
+- Servers (same page): primary servers in AWS eu-west-2 (London); "closest non-georestricted region: eu-west-1"
+  (Ireland). Direct co-location in eu-west-2 is offered after a KYC/KYB form to market makers and individual traders
+  operating on their own account, not to Builder Program participants or third-party applications.

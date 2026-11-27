@@ -14,8 +14,8 @@ checks `s7`-`s10`, all marked as such). Raw outputs: `out/tables.md` (B-a, B-b, 
   Early period (20 Oct - 12 Nov) -1.48 c (1,321 markets, t -2.3). The "sure thing" lost in 5.9% of the late
   entries (34 of 577) and 5.2% of the early ones (68 of 1,321); break-even at these prices is about 3.6%.
 - **Sports carries the loss** (87% of the entries): late -2.35 c/share (523 markets, t -2.2), early -1.55 c (1,125,
-  t -2.2). Most sports entries are in-play (endDate is the scheduled start), and in-play 0.95 favourites lose about
-  6% of the time. **Weather** is the worst family: -19.0 c late (13 markets), -11.9 c early (45, t -2.2); 10 of 58
+  t -2.2). Most sports entries are in-play (endDate is the scheduled start), and 5.5% of all sports entries (90 of
+  1,648) lost. **Weather** is the worst family: -19.0 c late (13 markets), -11.9 c early (45, t -2.2); 10 of 58
   favourites at 0.95-0.98 lost.
 - **Crypto price markets and politics are positive but not proven.** Crypto: +3.30 c late (15 markets, 0 lost),
   +1.52 c early (47, 1 lost). Politics: +4.01 c late (21, 0 lost), +2.35 c early (88, 1 lost). The tape version
@@ -32,7 +32,9 @@ checks `s7`-`s10`, all marked as such). Raw outputs: `out/tables.md` (B-a, B-b, 
   0.5-2.7%) against a break-even of 3.4%, +0.23 USD per 10 USD (t 4.2 by event, 4.4 by day)**; late period 109
   markets, +0.24 USD per 10 USD (t 2.5). With 60 s delay the same (+0.24, 387 markets), with 300 s +0.21 (247).
   All five losses are Bitcoin up/down markets that reversed in the last 10-70 minutes. **Politics does not hold
-  up:** POLITICS_EXT
+  up:** 720 entries, 15 lost (2.1%), +1.44 c at the mid
+  (t 2.3) but +0.05 c in the late period (132 entries, 5 lost); on the tape (A1, 336 markets, 10 lost) -4.1 c/share,
+  early -14.2 c. Politics bonds are a coin with a 2-3% loss rate against a ~3.5% break-even and a lock-up of days.
 - **Live micro-test: one, on crypto price markets only** (hourly and daily up/down, "above X", ranges,
   "dip to / reach"; fee 0.01): 10 USD taker buys at 0.95-0.98 in the last hour, 300 repetitions, stop at the 4th
   loss in the first 100. Details in "Live micro-test". If the edge is what the data say, it is worth about 2-5 USD a
@@ -65,6 +67,9 @@ money locked, and what could a ~200 EUR account earn by repeating it many times 
   price series equals its payoff in 4,424 of 4,424 (token order is right). The two tokens' mids sum to exactly 1 on
   111,625 paired buckets (1st-99th percentile 0.0000 off). Data-api token ids are float-rounded: matching by name
   is required, as the protocol says.
+- Post-hoc extension data (s8): 3,796 out-of-sample crypto and politics markets of the same universe, one token's
+  price history each (the other is 1 - p, exact per the check above), all resolved, no download errors; 1,234
+  whole-market tapes of their entry markets (none capped).
 - Fee per share = rate x p x (1-p): 0.146 c at p = 0.97 and rate 0.05, as NOTES.md.
 - **Calibration below 0.80 is poor in sports** (sanity table in `out/tables.md`): favourites at 0.60-0.80 one hour
   before the scheduled start won about 59% against a mid of 0.69 (sports/start, 1,106 markets), while politics
@@ -80,12 +85,17 @@ cells), B-b (33 share cells, 165 outcome cells), the claim in 3 fill variants (C
 periods = 22 cells each; C-tape: 3 rows x 3 periods), B-c capacity (3 x 3), B-d losers list, plus the sanity
 calibration table (15 cells). **532 table cells, 3 claim variants.**
 
-Added after the results were seen, none of them used for the verdict (8 more): A1 C-tape with only prints at or
-after the entry time, A2 the same 5 minutes later, A3 print-timing profile, A4 size check, D1 weekday/weekend split,
-D2 crypto sub-types, D3 pooled "all families except sports and weather" (C-mid and C-cons), the B-d denominator (s9),
-and the extension of the unchanged claim to all out-of-sample crypto and politics markets (s8, 3 fill variants).
-Two diagnostics of the sanity table (calibration by volume tier and by family). **Total: 3 pre-registered + 11
-post-hoc variants/splits + 2 diagnostics.**
+Added after the first results were seen, none used for the verdict:
+- 10 more trading-rule variants: A1 (C-tape, prints at or after the entry time), A2 (A1 delayed 5 min), D3 pooled
+  "all families except sports and weather" (C-mid, C-cons), the s8 extension of the unchanged claim to all
+  out-of-sample crypto and politics markets (C-mid, C-cons, C-tape A1), s10 one trade per market at the first print
+  after 10 s, 60 s, 300 s (crypto).
+- 7 descriptive splits: A3 print timing, A4 size, D1 weekday/weekend, D2 crypto sub-types, s8 crypto sub-types and
+  weekday/weekend, s9 B-d denominator.
+- 6 diagnostics: sanity calibration by volume tier and by family, timing of the 5-minute price bucket against the
+  tape, s10 clustered by endDate hour and by UTC day, s10 after the 18 Nov Chainlink switch, crypto size availability.
+
+**Total: 13 trading-rule variants (3 pre-registered + 10 post hoc), 7 splits, 6 diagnostics.**
 
 ## Headline numbers (after fees)
 
@@ -161,6 +171,64 @@ crypto 9% / 9% (11), sports/start 99% / 94% (3,022: the game has only started). 
 lost, mean lock-up 66 h); 0.80-0.95 +11 c (28, 0 lost, 134 h). Gap from endDate to settlement (median): sports/start
 3.2 h, politics 2.0 h, weather 11.7 h, crypto 0.2 h, finance 0.3 h.
 
+## Post-hoc: extension and attacks on the crypto result (not part of the verdict)
+
+### s8: the unchanged claim on all out-of-sample crypto and politics markets (3,796 markets, 1,234 entries)
+
+| variant | family | period | markets | lost | win % (Wilson 95%) | mean price | net c/share | t (event) | mean lock-up h |
+|---|---|---|---|---|---|---|---|---|---|
+| C-mid | crypto | early | 376 | 4 | 98.94 (97.3-99.6) | 0.964 | +2.50 | +4.7 | 1.5 |
+| C-mid | crypto | late | 138 | 1 | 99.28 (96.0-99.9) | 0.965 | +2.79 | +3.8 | 0.7 |
+| C-cons | crypto | late | 138 | 1 | 99.28 | 0.969 | +2.38 | +5.3 | 0.7 |
+| C-tape A1 | crypto | early | 304 | 3 | 99.01 (97.1-99.7) | 0.969 | +2.89 | +11.3 | 0.9 |
+| C-tape A1 | crypto | late | 104 | 1 | 99.04 (94.8-99.8) | 0.970 | +2.80 | +16.4 | 0.7 |
+| C-mid | politics | early | 588 | 10 | 98.30 (96.9-99.1) | 0.966 | +1.75 | +2.8 | 57.7 |
+| C-mid | politics | late | 132 | 5 | 96.21 (91.4-98.4) | 0.962 | +0.05 | +0.0 | 298.9 |
+| C-tape A1 | politics | early | 264 | 6 | 97.73 | 0.969 | -14.19 | -1.0 | 81.7 |
+| C-tape A1 | politics | late | 72 | 4 | 94.44 | 0.967 | +2.58 | +5.0 | 287.7 |
+
+Crypto sub-types (extension, tape A1, both periods): hourly up/down 275 markets, 4 lost, +2.77 c (t 8.4); above-X 53,
+0 lost, +2.95 c; ranges 43, 0 lost, +2.97 c; daily up/down 16, 0 lost, +3.46 c; dip/reach 18, 0 lost, +2.73 c.
+Weekday 321 markets, 4 lost, +2.81 c; weekend 87, 0 lost, +3.15 c. Full table: `out/extension_tables.md`.
+
+### s10: one 10 USD trade per crypto market at the first real print after a delay (sample + extension, 576 markets)
+
+| delay after trigger | period | markets with a print | lost | loss % (Wilson 95%) | mean price | net per 10 USD | t (event) | break-even loss % |
+|---|---|---|---|---|---|---|---|---|
+| 10 s | early | 320 | 4 | 1.25 (0.5-3.2) | 0.966 | +0.223 | +3.5 | 3.40 |
+| 10 s | late | 109 | 1 | 0.92 (0.2-5.0) | 0.967 | +0.239 | +2.5 | 3.23 |
+| 10 s | both | 429 | 5 | 1.17 (0.5-2.7) | 0.966 | +0.227 | +4.2 | 3.36 |
+| 60 s | both | 387 | 4 | 1.03 (0.4-2.6) | 0.966 | +0.244 | +4.6 | 3.39 |
+| 300 s | both | 247 | 3 | 1.21 (0.4-3.5) | 0.967 | +0.211 | +2.9 | 3.25 |
+
+Hourly up/down alone at 10 s: 280 markets, 4 lost (1.4%), +0.20 per 10 USD (t 2.7); late 55 markets, 1 lost,
++0.13 (t 0.7). Other crypto types: 149 markets, 1 lost, +0.27 (t 3.9). The five losses: Bitcoin daily up/down
+8 Nov (bought 0.960, 72 min before settlement) and Bitcoin hourly up/down of 2 Nov 2 pm, 25 Oct 8 pm, 16 Nov 2 pm,
+12 Nov 10 am ET (bought 0.950-0.973, 15-21 minutes before settlement, i.e. about 10 minutes before the hour ended).
+
+### Attacks
+
+- **Look-ahead in the trigger?** The trigger is a 5-minute `prices-history` bucket. Against the tape (crypto, 611
+  buckets with prints in every window), the bucket at t is closest to the median print in [t-60, t] (median absolute
+  difference 1.5 c), then [t, t+60] (2.4 c), and far from [t+240, t+300] (9.0 c): it is a snapshot at t, not a
+  forward-looking bar. The buy is the first print at least 10 s after it.
+- **Which token is the favourite** is decided at t (A1); s6's C-tape used prints from endDate - 1 h, which leaks the
+  later choice; A1 and s10 remove it.
+- **Impossible fills.** s10 buys at a price someone else paid at that time, one trade per market, 10 USD: 388 of
+  576 markets had at least 20 USD of such prints. Not checked: queue, the 1-3 s block lag, and whether our order
+  would have come before or after the printed buyer.
+- **Correlation.** Clustering by event, by endDate hour (311 clusters) and by UTC day (36 clusters) gives t 4.2,
+  4.2 and 4.4. The five losses are on five different days.
+- **Small sample / multiple testing.** The crypto family was selected by the protocol's own rule 19, but the
+  extension, the delay variants and the decision to look at them were made after seeing the sample. Ten post-hoc
+  rule variants were run; crypto was positive with t above 2 in every one with more than 100 markets; the
+  in-sample A1 / A2 on 49 / 28 markets give +0.7 / -0.04 c, each turning on one loss; politics failed. Treat this as one strong hypothesis.
+- **Regime.** Hourly up/down moved from Binance to Chainlink settlement on 18 Nov; after that date there are only
+  38 crypto markets with a print (0 lost, +0.36 per 10 USD). The tested period is 36 days in one market regime
+  (BTC fell during it).
+- **Selection on volume.** Universe = markets that ended with >= 10,000 USD volume. A live rule cannot see final
+  volume; markets that stayed thin are not tested.
+
 ## Opportunities per day, net per trade, capacity
 
 Universe scale factor 36,604 / 5,000 = 7.32. Entries per day (both periods, universe estimate): crypto 12.6, politics
@@ -174,6 +242,11 @@ mostly sports, which loses), weather 12 vs 12.
   **+0.23 USD per 10 USD trade (+2.3%), +0.45 per 20 USD**; late period +0.24 per 10 USD (109 markets). One loss
   costs about 9.7 / 19.4 USD, as much as 40 winning trades: the result is the loss rate (1.2% measured, 3.4%
   break-even).
+- **Weekends.** Crypto price markets run seven days a week: 11-12 entries per weekend day against 13 on weekdays,
+  and the extension's weekend entries did as well as weekday ones (87 tape markets, 0 lost, +3.15 c/share). What
+  disappears at weekends is politics (5 a day instead of 29) and the stock / index markets (finance: a handful in
+  the sample); what grows is sports (555 a day instead of 251), which loses money in this rule. So the weekend
+  version of this trade is the crypto one.
 - **Opportunities and size (crypto).** 576 crypto entries in the universe in 36 days = **16 a day** (13 on
   weekdays, 11-12 on weekend days in the sample split; the extension has 391 weekday and 123 weekend entries, both
   positive: weekday +2.58 c, weekend +2.58 c at the mid). 429 (12 a day) had a qualifying print >= 10 s after the
@@ -240,8 +313,20 @@ Worth one, on crypto only. It tests a post-hoc result, so it is a test, not a de
 - Late period is 12 days. Zero-loss cells: t values there are not evidence. The family label of `pmlab.gamma.family`
   puts mentions into other families and Elon post counts into politics.
 - The B-d reading of rules is by slug, rules text and timing, not by replaying each event; one score checked on ESPN.
+- The positive crypto result is post hoc (extension, one-trade-per-market variant, delays): it was not in the
+  protocol and it is not the verdict. It covers 36 days of one regime, markets that ended with >= 10,000 USD volume,
+  and prints that other traders took; whether a 10 USD order sent a few seconds later gets the same price is exactly
+  what the live test has to show. No `audit.md` yet: an independent check is still required by AGENTS.md.
+- The protocol's time budget held: all 5,000 sampled markets, all 171 B-c tapes and the extension were downloaded;
+  nothing was narrowed.
 
 ## Ideas, not tested
+
+- Whether the five crypto losses are predictable: all are Bitcoin up/down that reversed 10-70 minutes before the end.
+  Skipping entries when the Binance distance to the strike is small relative to recent volatility might remove them
+  (the lock-in study did this for 5-minute markets); needs `data/binance_1s` for Oct-Nov and a new protocol.
+- Buying at 0.98-0.995 in crypto (B-a, T-6h to T-10m: 32-48 markets per time, 0-1 lost, -1.6 to +1.1 c) has a smaller loss budget (1-2%):
+  same test, different bucket, not run on the tape.
 
 - Crypto hourly up/down and range markets in the last hour with a Binance/Chainlink fair-value model (distance to the
   strike, time left, volatility) instead of the bare price: buy only when the model gives >= 0.99 and the ask is

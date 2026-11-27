@@ -1,6 +1,6 @@
 # Structural (parity / neg-risk / ladder) arbitrage for a small account — protocol
 
-Written 2026-11-27 18:45 UTC, before any outcome-based number was computed. Catalog family `negrisk-arb`.
+Written 2026-11-27 18:25 UTC, before any outcome-based number was computed. Catalog family `negrisk-arb`.
 Inspected before writing (formats only, no outcome statistic): one hour of the PendulumFlow V3.1 archive
 (2026-11-25T14: politics and weather lean files, `opening_state`, `x_market_index`, manifest), the
 `data/rec_rest` file layout, one gamma `/events` page (field names). Frozen after saving; new ideas go to

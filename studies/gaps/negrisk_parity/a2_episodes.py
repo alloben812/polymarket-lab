@@ -141,7 +141,7 @@ def run(tag):
     while i < n:
         tsi = TS[i]; touched = set()
         while i < n and TS[i] == tsi:
-            k = tok.get(b2i(aid[i]))
+            k = tok.get(b2i(aid[i])) if aid[i] is not None else None
             if k:
                 c, y = k; e_ = et[i]
                 if e_ == "book":

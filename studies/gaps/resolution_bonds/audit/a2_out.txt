@@ -1,0 +1,34 @@
+variant | markets | lost | loss % (Wilson) | break-even % | net per 10 USD | t event | t day
+10s first print, both | 429 | 5 | 1.17 (0.5-2.7) | 3.36 | +0.227 | +4.2 | +4.4
+10s first print, early | 320 | 4 | 1.25 (0.5-3.2) | 3.40 | +0.223 | +3.5 | +3.6
+10s first print, late | 109 | 1 | 0.92 (0.2-5.0) | 3.23 | +0.239 | +2.5 | +2.6
+10s, both (kept) | 429 | 5 | 1.17 (0.5-2.7) | 3.36 | +0.227 | +4.2 | +4.4
+10s +1 tick (0.01) on the print price | 429 | 5 | 1.17 (0.5-2.7) | 2.37 | +0.124 | +2.3 | +2.4
+10s +2 ticks | 429 | 5 | 1.17 (0.5-2.7) | 1.38 | +0.022 | +0.4 | +0.4
+60s first print | 387 | 4 | 1.03 (0.4-2.6) | 3.39 | +0.244 | +4.6 | +4.7
+300s first print | 247 | 3 | 1.21 (0.4-3.5) | 3.25 | +0.211 | +2.9 | +2.9
+live-like: print within 10-60 s of trigger | 255 | 3 | 1.18 (0.4-3.4) | 3.38 | +0.228 | +3.2 | +3.3
+live-like: print within 10-300 s of trigger | 369 | 5 | 1.36 (0.6-3.1) | 3.37 | +0.209 | +3.3 | +3.5
+first print >=10s with >=10 USD in that print | 391 | 3 | 0.77 (0.3-2.2) | 3.31 | +0.264 | +5.7 | +5.8
+13s (block-3s => match >= t+10) | 421 | 5 | 1.19 (0.5-2.7) | 3.37 | +0.226 | +4.1 | +4.3
+type updown hourly | 280 | 4 | 1.43 (0.6-3.6) | 3.38 | +0.202 | +2.7 | +2.8
+type updown daily | 20 | 1 | 5.00 (0.9-23.6) | 3.10 | -0.200 | -0.4 | -0.4
+type above | 61 | 0 | 0.00 (0.0-5.9) | 3.32 | +0.345 | +26.3 | +28.7
+type range | 51 | 0 | 0.00 (0.0-7.0) | 3.50 | +0.364 | +26.3 | +24.7
+type dip/reach | 17 | 0 | 0.00 (0.0-18.4) | 3.01 | +0.311 | +14.0 | +13.6
+asset bitcoin | 375 | 5 | 1.33 (0.6-3.1) | 3.37 | +0.212 | +3.4 | +3.6
+asset ethereum | 51 | 0 | 0.00 (0.0-7.0) | 3.24 | +0.336 | +25.2 | +26.4
+asset solana | 2 | 0 | 0.00 (0.0-65.8) | 3.39 | +0.352 | +2.6 | +2.6
+asset xrp | 1 | 0 | 0.00 (0.0-79.3) | 2.97 | +0.306 | +nan | +nan
+weekend (closed Sat/Sun UTC) | 94 | 1 | 1.06 (0.2-5.8) | 3.30 | +0.231 | +2.1 | +2.0
+weekday | 335 | 4 | 1.19 (0.5-3.0) | 3.38 | +0.226 | +3.7 | +3.9
+hourly updown before 18 Nov (Binance) | 279 | 4 | 1.43 (0.6-3.6) | 3.38 | +0.202 | +2.7 | +2.8
+hourly updown from 18 Nov (Chainlink) | 1 | 0 | 0.00 (0.0-79.3) | 2.57 | +0.263 | +nan | +nan
+non-hourly crypto | 149 | 1 | 0.67 (0.1-3.7) | 3.32 | +0.274 | +3.9 | +3.8
+entries without a qualifying print: 147, lost 1; all entries 576, lost 6
+without best day 2026-10-30: mean +0.221 per 10 USD on 411
+without 10 best markets: +0.220; days 36; worst day sum -7.90 USD
+mean win +0.348, mean loss -10.00
+delay trigger->first print (block time) s: median 40, p75 149, p90 445, share > 300 s 0.14
+losers (10 s): bitcoin-up-or-down-on-november-8-2026 p=0.960 t-trig 75s, 72 min to close; bitcoin-up-or-down-november-2-2026-2pm-et p=0.973 t-trig 58s, 21 min to close; bitcoin-up-or-down-october-25-2026-8pm-et p=0.970 t-trig 66s, 15 min to close; bitcoin-up-or-down-november-16-2026-2pm-et p=0.959 t-trig 25s, 21 min to close; bitcoin-up-or-down-november-12-2026-10am-et p=0.950 t-trig 33s, 21 min to close
+trades per day (10s variant): 11.9 over 36 days

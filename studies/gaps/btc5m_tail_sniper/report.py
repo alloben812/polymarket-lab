@@ -127,6 +127,10 @@ def main():
     sh = tb[tb["shift"] == 0.5]
     r = table(sh, 8, {"all": sp["all"]}, "OOS-BOOK sensitivity: tau shifted +0.5 s (clock offset), fee 0.05", [0.0, 2.0])
     r["dataset"] = "oos_book_shift"; allrows.append(r)
+    say("\nSame-moment persistence (OOS-BOOK): tickets filled on the FIRST attempt at delay d, as a share of d = 0 tickets")
+    for cap in CAPS:
+        n0 = int(((main_b.cap == cap) & (main_b.d == 0.0)).sum())
+        say(f"- {cap}: " + ", ".join(f"d={d}: {100 * int(((main_b.cap == cap) & (main_b.d == d) & (main_b.attempts == 1)).sum()) / n0:.1f}%" for d in BOOK_DELAYS))
     # $20 capacity at the fill moment
     say("\nShown size at <= cap at the fill moment (OOS-BOOK, all tickets): share of tickets whose $20 order would fill in full")
     for cap in CAPS:

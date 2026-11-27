@@ -1,0 +1,26 @@
+{"sample_markets": 4424, "sample_noh": 576, "ext_markets": 3796}
+row | markets | events | lost | net c/share | SE c | t(event)
+sample C-mid ALL early | 1321 | 987 | 68 | -1.48 | 0.63 | -2.3
+sample C-cons ALL early | 1320 | 986 | 68 | -1.70 | 0.62 | -2.7
+sample C-mid ALL late | 577 | 450 | 34 | -2.30 | 1.01 | -2.3
+sample C-cons ALL late | 577 | 450 | 34 | -2.08 | 0.98 | -2.1
+sample C-mid sports early | 1125 | 802 | 59 | -1.55 | 0.69 | -2.2
+sample C-cons sports early | 1125 | 802 | 59 | -1.70 | 0.68 | -2.5
+sample C-mid sports late | 523 | 400 | 31 | -2.35 | 1.07 | -2.2
+sample C-cons sports late | 523 | 400 | 31 | -2.25 | 1.02 | -2.2
+sample C-mid weather early | 45 | 43 | 7 | -11.85 | 5.49 | -2.2
+sample C-cons weather early | 45 | 43 | 7 | -12.04 | 5.32 | -2.3
+sample C-mid weather late | 13 | 13 | 3 | -19.00 | 12.13 | -1.6
+sample C-cons weather late | 13 | 13 | 3 | -18.71 | 12.05 | -1.6
+sample C-mid crypto early | 47 | 43 | 1 | +1.52 | 2.12 | +0.7
+sample C-cons crypto early | 47 | 43 | 1 | +0.23 | 2.16 | +0.1
+sample C-mid crypto late | 15 | 14 | 0 | +3.30 | 0.23 | +14.3
+sample C-cons crypto late | 15 | 14 | 0 | +8.81 | 4.53 | +1.9
+sample C-mid politics early | 88 | 84 | 1 | +2.35 | 1.14 | +2.1
+sample C-cons politics early | 87 | 83 | 1 | +1.83 | 1.16 | +1.6
+sample C-mid politics late | 21 | 18 | 0 | +4.01 | 0.21 | +18.7
+sample C-cons politics late | 21 | 18 | 0 | +3.64 | 0.41 | +8.9
+ext C-mid crypto early | 376 | 344 | 4 | +2.50 | 0.54 | +4.7
+ext C-mid crypto late | 138 | 123 | 1 | +2.79 | 0.73 | +3.8
+ext C-mid politics early | 588 | 362 | 10 | +1.75 | 0.63 | +2.8
+ext C-mid politics late | 132 | 80 | 5 | +0.05 | 1.93 | +0.0

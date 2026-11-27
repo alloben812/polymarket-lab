@@ -4,3 +4,11 @@ __pycache__/
 .venv/
 .pytest_cache/
 *.egg-info/
+# bulky generated artefacts of studies stay local (re-creatable from the scripts next to them)
+studies/**/out/
+studies/**/cache/
+studies/**/*.jsonl
+studies/**/*.jsonl.gz
+studies/**/*.parquet
+studies/**/fills*.json
+studies/**/tapes/

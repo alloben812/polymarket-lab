@@ -1,0 +1,21 @@
+0x66e7ce01c6831b8a2503d09edd6167152ee68bcd  0x66e7ce01c6831b8a2503d09edd6167152ee68bcd  joined 2026-02-23  markets traded 26502  fills 477615
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):        180,244
+  taker fees charged:                                   -41,287
+  fees refunded:                                         19,337
+  rebates+rewards (taker 2,303 / maker 11,951 / rewards 21,691):     35,945
+  yield + referral income:                                  364
+  ECONOMIC PnL (the API's bottom line, trust this):     194,604   of which unrealized -16,767
+  volume $8,470,580 (19,582,249 shares): gross +2.13% of volume, fees net of refunds -0.26%, kept +2.30%
+  share of what was kept that is rebates/rewards: 18%
+  taker_tier: {"address": "0x66e7ce01c6831b8a2503d09edd6167152ee68bcd", "tier": 3, "tier_name": "Gold", "wv_30d": 354455.664079}
+  maker_tier: {"address": "0x66e7ce01c6831b8a2503d09edd6167152ee68bcd", "snapshot_date": "2026-11-26", "tier": 1, "rebate_bps": 300, "wv_30d": 537621.414602, "own_wv_30d": 537621.414602}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-03      -1,577     -3,136     3,125        48     -1,540      -1,588       35,044    10,232
+  2026-04       1,099    -16,214    16,213     1,130      2,228       1,097      189,421    42,445
+  2026-05      -5,375         -9         0       557     -4,809      -5,366       66,565    12,013
+  2026-06       7,020       -631         0     1,488      7,879       6,391      578,929    79,014
+  2026-07      55,252     -1,609         0       838     54,483      53,645      343,330    28,456
+  2026-08      17,615       -676         0       991     17,935      16,943      257,500    12,100
+  2026-09      22,554     -1,752         0     3,808     24,632      20,824      596,275    21,708
+  2026-10      48,257     -3,082         0     7,184     52,389      45,205    2,334,280   123,468
+  2026-11      35,177    -14,173         0    19,901     41,189      21,288    4,065,515   148,042

@@ -1,0 +1,50 @@
+[cat-dog] fills 459 in 0s
+cat-dog  0x7056f248c5098cce2fb0a062cdd2ab0f8318c95c  window 2026-11-13 15:43 .. 2026-11-27 15:43 UTC
+summary: {"fills": 459, "markets": 59, "resolved_complete_markets": 21, "incomplete_markets": 10, "unresolved_markets": 30, "turnover_usd": 68145, "maker_share_usd": 0.529, "sell_share_usd": 0.378, "markets_with_both_outcomes_traded": 5, "uses_split_merge": true, "gross": 1218.83, "fees_est": 20.2, "net": 1198.63, "fee_rate_unknown_markets": 0, "net_per_market": 57.077, "t_by_market": 0.77, "win_share_markets": 0.81, "median_market_turnover": 835.83, "max_market_turnover": 5770.09, "avg_fill_usd": 148.46}
+inventory events: {'REDEEM': 18, 'MERGE': 1}
+API says for the same days: gross 3628, fees -238, refunded 0, rebates 88, kept 3484, volume $70386, fills 456
+
+by family:
+  family    markets  resolved_complete  incomplete  turnover  taker_share  gross    fees_est  net      net_pct_turnover  net_per_market  t_by_market
+  culture   57       21                 8           66167     0.455        1218.83  20.2      1198.63  1.81              57.08           0.77       
+  finance   1        0                  1           1937      1.0          0.0      0.0       0.0      0.0               None            None       
+  politics  1        0                  1           41        1.0          0.0      0.0       0.0      0.0               None            None       
+
+by role and side (edge in cents per share, resolved markets):
+  key            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', 'BUY')   62     9661    4998  0.5173  13.021         0.0           13.021        6.595   1.97   16       1257.93
+  ('M', 'SELL')  45     6325    4686  0.7409  9.653          0.0           9.653         7.064   1.37   10       610.55 
+  ('T', 'BUY')   28     11004   5590  0.508   -1.215         0.154         -1.369        12.749  -0.11  13       -150.62
+  ('T', 'SELL')  4      1432    916   0.6396  -36.036        0.23          -36.266       0.751   None   2        -519.24
+
+by role and price:
+  key                 fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', '0.05-0.15')  2      2000    113   0.0565  -5.65          0.0           -5.65         None    None   1        -113.0 
+  ('M', '0.15-0.30')  15     1490    404   0.2713  37.007         0.0           37.007        16.933  None   2        551.58 
+  ('M', '0.30-0.45')  24     1852    699   0.3772  34.965         0.0           34.965        16.887  2.07   5        647.71 
+  ('M', '0.45-0.55')  14     2460    1206  0.4901  10.246         0.0           10.246        3.453   None   3        252.09 
+  ('M', '0.55-0.70')  9      520     329   0.6323  59.385         0.0           59.385        None    None   1        308.79 
+  ('M', '0.70-0.85')  4      1732    1381  0.7971  4.535          0.0           4.535         16.319  None   3        78.56  
+  ('M', '0.85-0.95')  17     3561    3185  0.8946  4.076          0.0           4.076         1.809   2.25   7        145.12 
+  ('M', '0.99-1.00')  22     2370    2367  0.999   -0.1           0.0           -0.1          0.0     None   6        -2.37  
+  ('T', '0.00-0.05')  1      700     35    0.0498  -4.975         0.047         -5.023        None    None   1        -35.16 
+  ('T', '0.05-0.15')  1      1794    265   0.1474  -14.742        0.126         -14.868       None    None   1        -266.78
+  ('T', '0.15-0.30')  6      1126    195   0.1732  2.606          0.143         2.463         18.523  None   4        27.74  
+  ('T', '0.30-0.45')  5      1279    486   0.3795  21.203         0.235         20.968        32.792  None   4        268.25 
+  ('T', '0.45-0.55')  1      808     416   0.5147  48.529         0.25          48.279        None    None   1        389.99 
+  ('T', '0.55-0.70')  8      3080    1923  0.6242  -24.855        0.233         -25.088       17.255  -1.45  5        -772.81
+  ('T', '0.70-0.85')  3      1158    889   0.7682  -40.479        0.178         -40.656       36.276  None   3        -470.72
+  ('T', '0.85-0.95')  6      2303    2115  0.9182  8.18           0.075         8.105         0.891   None   4        186.66 
+  ('T', '0.95-0.99')  1      186     183   0.984   1.6            0.016         1.584         None    None   1        2.95   
+
+by role and point in the market's life:
+  key                                            fills  shares  usd   avg_px  edge_c_per_sh  fee_c_per_sh  net_c_per_sh  se_c    t      markets  net_usd
+  ('M', 'life', 't 1-7 d to end')                39     6296    4328  0.6875  13.272         0.0           13.272        6.705   1.98   10       835.59 
+  ('M', 'life', 'u 6-24 h to end')               47     6684    2902  0.4341  22.216         0.0           22.216        10.552  2.11   14       1484.9 
+  ('M', 'life', 'v 1-6 h to end')                1      1000    450   0.45    -45.0          0.0           -45.0         None    None   1        -450.0 
+  ('M', 'life', 'z after end (pre-resolution)')  20     2006    2004  0.999   -0.1           0.0           -0.1          0.0     None   5        -2.01  
+  ('T', 'life', 't 1-7 d to end')                17     6827    3519  0.5154  3.248          0.164         3.084         7.766   0.4    9        210.55 
+  ('T', 'life', 'u 6-24 h to end')               11     3572    1850  0.5179  -9.351         0.191         -9.542        16.66   -0.57  10       -340.8 
+  ('T', 'life', 'z after end (pre-resolution)')  4      2037    1137  0.5584  -26.382        0.108         -26.49        27.463  None   3        -539.61
+
+full result written to studies/wallets/culture/cat-dog.json

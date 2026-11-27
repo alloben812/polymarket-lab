@@ -1,0 +1,178 @@
+##### perfectnosta: 2960 fills, 134 economics markets
+  shares bought 303703, sold 65241 (sold/bought 0.21); position cost per market: median 317, p90 3233, max 34430
+  first buy to scheduled end, days: median 15.6, p10 1.2, p90 89.3
+  econ markets touched per ISO week: 36:22 37:22 38:25 39:19 40:22 41:23 42:13 43:7 44:16 45:14 46:16 47:14 48:8
+  buy $ by price: <0.05 0.00 | .05-.3 0.04 | .3-.7 0.31 | .7-.9 0.52 | .9-.97 0.12 | >=.97 0.01
+
+- will-the-ecb-announce-no-change-at-the-october-2026-meeting-20260723225848781  end=10-30 03:59 closed=10-29 15:18 final={'Yes': 1.0, 'No': 0.0} vol=302743
+    rules: This market will resolve according to the change in basis points in the deposit facility rate resulting from the October 2026 meeting of the European Central Bank, relative to the level it was prior to this meeting.  The resolutio
+    09-01 16:45-16:53 BUY  M Yes  n=   2 sh=      725 px=0.879 usd=     637
+    09-09 22:02-22:02 BUY  T Yes  n=   1 sh=      648 px=0.830 usd=     538
+    09-10 12:19-12:19 BUY  M Yes  n=   6 sh=      114 px=0.830 usd=      95
+    09-30 21:36-21:36 BUY  T Yes  n=   2 sh=     7364 px=0.827 usd=    6089
+    09-30 21:36-21:36 BUY  M Yes  n=   5 sh=      866 px=0.840 usd=     727
+    ... 3 more day-groups ...
+    10-07 09:27-09:27 BUY  T Yes  n=   1 sh=    11599 px=0.865 usd=   10039
+    10-12 01:42-09:38 BUY  M Yes  n=   6 sh=     1100 px=0.915 usd=    1006
+    10-15 06:41-06:41 BUY  M Yes  n=   3 sh=      800 px=0.900 usd=     720
+    net shares now {'Yes': 39617}; cash -34430; net 5186.975900209982
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-december-2026-meeting-20  end=12-09 23:59 closed=open final=["0.039", "0.961"] vol=17533399
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    10-30 12:26-12:26 BUY  T No   n=   1 sh=      257 px=0.750 usd=     193
+    10-30 12:36-13:21 BUY  M No   n=  10 sh=     4743 px=0.750 usd=    3557
+    11-04 03:39-03:39 BUY  T No   n=   1 sh=     5000 px=0.770 usd=    3850
+    11-05 15:00-15:26 BUY  M No   n=   5 sh=     5000 px=0.750 usd=    3750
+    11-06 00:51-09:37 SELL M No   n=   6 sh=     5000 px=0.700 usd=    3500
+    11-06 23:25-23:25 SELL T No   n=   1 sh=    10000 px=0.780 usd=    7800
+    11-09 17:09-17:09 BUY  T No   n=   1 sh=     5000 px=0.810 usd=    4050
+    11-10 15:30-15:30 SELL T No   n=   1 sh=     5000 px=0.968 usd=    4840
+    net shares now {}; cash 740; net n/a (open or incomplete)
+
+- will-there-be-no-change-in-fed-interest-rates-after-the-october-2026-meeting-202  end=10-29 03:59 closed=10-28 20:01 final={'Yes': 1.0, 'No': 0.0} vol=31993967
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-21 20:54-20:54 BUY  T Yes  n=   1 sh=     4000 px=0.470 usd=    1880
+    09-23 14:50-14:50 BUY  T Yes  n=   1 sh=     2000 px=0.300 usd=     600
+    09-29 19:07-19:07 SELL T Yes  n=   1 sh=     1500 px=0.500 usd=     750
+    09-29 19:32-19:43 SELL M Yes  n=   5 sh=     1125 px=0.510 usd=     574
+    10-01 17:33-17:33 BUY  T Yes  n=   1 sh=     3896 px=0.770 usd=    3000
+    10-02 20:34-20:34 SELL M Yes  n=   1 sh=     7271 px=0.820 usd=    5962
+    10-21 18:33-18:33 BUY  T Yes  n=   1 sh=     3500 px=0.870 usd=    3045
+    net shares now {'Yes': 3500}; cash -1239; net 2261.0572420893377
+
+- will-inflation-reach-more-than-4pt5-in-2026  end=01-01 04:59 closed=open final=["0.036", "0.964"] vol=316396
+    rules: This market will resolve to “Yes” if the Consumer Price Index (CPI) increased by greater than the listed percent over the 12 month period ending with any month in 2026 according to the monthly Bureau of Labor Statistics (BLS) repo
+    10-03 21:45-21:45 BUY  T No   n=   1 sh=     7350 px=0.857 usd=    6296
+    10-30 00:12-00:12 SELL T No   n=   1 sh=     6680 px=0.857 usd=    5725
+    11-06 23:32-23:32 BUY  T No   n=   1 sh=      350 px=0.900 usd=     315
+    11-07 01:49-01:49 BUY  M No   n=   1 sh=     1150 px=0.900 usd=    1035
+    net shares now {'No': 2170}; cash -1921; net n/a (open or incomplete)
+
+- bank-of-england-increases-interest-rates-by-25-bps-after-november-2026-meeting-2  end=11-05 23:59 closed=11-05 14:01 final={'Yes': 1.0, 'No': 0.0} vol=227902
+    rules: This market will resolve according to the change in basis points in the Bank Rate resulting from the November 2026 meeting of the Bank of England’s Monetary Policy Committee, relative to the level it was prior to this meeting.  Th
+    09-11 00:06-00:06 BUY  M Yes  n=   1 sh=       12 px=0.370 usd=       4
+    09-11 00:06-00:06 BUY  T Yes  n=   1 sh=     2379 px=0.359 usd=     853
+    09-15 21:36-21:36 BUY  T Yes  n=   1 sh=      448 px=0.462 usd=     207
+    09-17 13:56-13:56 BUY  T Yes  n=   1 sh=     1997 px=0.607 usd=    1212
+    09-21 20:18-20:29 BUY  M Yes  n=   2 sh=        6 px=0.550 usd=       3
+    ... 4 more day-groups ...
+    10-29 11:53-17:18 SELL M Yes  n=  11 sh=     2520 px=0.983 usd=    2478
+    10-30 08:24-08:24 SELL M Yes  n=   1 sh=     1058 px=0.983 usd=    1040
+    10-31 10:29-10:32 SELL M Yes  n=  17 sh=     3596 px=0.983 usd=    3535
+    net shares now {}; cash 2745; net 2731.785971067552
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-december-2026-meeting-2  end=12-09 23:59 closed=open final=["0.945", "0.055"] vol=13999290
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    11-10 15:31-15:31 BUY  T Yes  n=   1 sh=     5000 px=0.850 usd=    4250
+    11-21 08:37-08:37 BUY  T Yes  n=   1 sh=     5000 px=0.900 usd=    4500
+    net shares now {'Yes': 10000}; cash -8750; net n/a (open or incomplete)
+
+- will-the-fed-increase-interest-rates-by-25-bps-after-the-september-2026-meeting-  end=09-16 00:00 closed=09-16 21:40 final={'Yes': 1.0, 'No': 0.0} vol=42158279
+    rules: The FED interest rates are defined in this market by the upper bound of the target federal funds range. The decisions on the target federal funds range are made by the Federal Open Market Committee (FOMC) meetings.  This market wi
+    09-14 16:01-16:01 BUY  T Yes  n=   1 sh=     6000 px=0.840 usd=    5040
+    net shares now {'Yes': 6000}; cash -5040; net 951.936
+
+- will-annual-inflation-be-3pt7-in-september-2026  end=10-15 03:59 closed=10-14 14:32 final={'Yes': 1.0, 'No': 0.0} vol=37089
+    rules: This is a market about inflation over the 12-month period ending September 2026, before seasonal adjustment, as reported by the Bureau of Labor Statistics.  This market will resolve to the percentage change in the Consumer Price I
+    09-21 22:17-22:58 BUY  M No   n=   2 sh=       24 px=0.740 usd=      17
+    09-22 11:38-21:27 BUY  M No   n=   6 sh=     1476 px=0.722 usd=    1067
+    09-27 13:15-21:57 BUY  M No   n=   2 sh=        3 px=0.680 usd=       2
+    09-30 21:45-21:45 BUY  T Yes  n=   1 sh=      677 px=0.289 usd=     196
+    09-30 21:45-21:45 BUY  M Yes  n=   1 sh=      100 px=0.290 usd=      29
+    ... 8 more day-groups ...
+    10-12 20:04-20:32 BUY  T Yes  n=   2 sh=      546 px=0.445 usd=     243
+    10-13 01:30-18:55 BUY  M Yes  n=  38 sh=      309 px=0.390 usd=     121
+    10-13 21:39-21:42 BUY  T Yes  n=   2 sh=      800 px=0.396 usd=     317
+    net shares now {'Yes': 7511}; cash -3195; net 4303.459312277374
+
+- will-the-ecb-announce-a-25-bps-increase-at-the-december-2026-meeting  end=12-17 11:59 closed=open final=["0.9755", "0.0245"] vol=44174
+    rules: This market will resolve according to the change in basis points in the deposit facility rate resulting from the December 2026 meeting of the European Central Bank, relative to the level it was prior to this meeting.  The resoluti
+    11-10 13:22-13:22 BUY  T Yes  n=   1 sh=     2237 px=0.849 usd=    1899
+    11-10 13:22-13:22 BUY  M Yes  n=   3 sh=     1220 px=0.850 usd=    1037
+    11-13 16:34-16:34 BUY  M Yes  n=   2 sh=       40 px=0.950 usd=      38
+    11-13 16:34-16:34 BUY  T Yes  n=   1 sh=     1625 px=0.949 usd=    1542
+    net shares now {'Yes': 5122}; cash -4516; net n/a (open or incomplete)
+
+- no-change-in-bank-of-englands-interest-rates-after-november-2026-meeting-2026073  end=11-05 23:59 closed=11-05 14:01 final={'Yes': 0.0, 'No': 1.0} vol=156907
+    rules: This market will resolve according to the change in basis points in the Bank Rate resulting from the November 2026 meeting of the Bank of England’s Monetary Policy Committee, relative to the level it was prior to this meeting.  Th
+    09-01 16:50-16:50 BUY  M Yes  n=   3 sh=     6120 px=0.665 usd=    4070
+    10-28 18:05-23:39 SELL T Yes  n=   2 sh=      190 px=0.017 usd=       3
+    10-28 18:14-23:39 SELL M Yes  n=   2 sh=      238 px=0.015 usd=       4
+    10-29 07:58-07:58 SELL M Yes  n=   1 sh=     7922 px=0.010 usd=      79
+    net shares now {'Yes': -2230}; cash -3984; net n/a (open or incomplete)
+
+- will-annual-inflation-be-3pt4-in-august-1786474663059  end=09-11 03:59 closed=09-11 14:32 final={'Yes': 1.0, 'No': 0.0} vol=45450
+    rules: This is a market about inflation over the 12-month period ending August 2026, before seasonal adjustment, as reported by the Bureau of Labor Statistics.  This market will resolve to the percentage change in the Consumer Price Inde
+    09-01 08:23-08:23 BUY  T Yes  n=   1 sh=      220 px=0.460 usd=     101
+    09-01 08:53-14:56 BUY  M Yes  n=  18 sh=      600 px=0.460 usd=     276
+    09-02 06:26-15:00 BUY  M Yes  n=  54 sh=     1252 px=0.460 usd=     576
+    09-03 04:01-23:05 BUY  M Yes  n=  28 sh=     2058 px=0.447 usd=     919
+    09-04 13:24-21:44 BUY  M Yes  n=  16 sh=      530 px=0.427 usd=     226
+    ... 4 more day-groups ...
+    09-09 22:09-22:09 BUY  T Yes  n=   1 sh=     1223 px=0.474 usd=     580
+    09-10 00:05-12:12 BUY  M Yes  n=  24 sh=      199 px=0.470 usd=      93
+    09-10 08:09-08:09 BUY  T Yes  n=   1 sh=      800 px=0.487 usd=     389
+    net shares now {'Yes': 8041}; cash -3679; net 4356.002286742119
+
+- will-the-us-economy-be-overheating-at-the-end-of-2026  end=02-01 04:59 closed=open final=["0.4205", "0.5795"] vol=59804
+    rules: The unemployment rate is defined as the seasonally adjusted unemployment rate (total unemployed as a percent of the civilian labor force, denoted as U-3) reported by the Bureau of Labor Statistics in the Employment Situation relea
+    09-02 21:50-21:50 BUY  T Yes  n=   1 sh=      435 px=0.350 usd=     152
+    09-04 21:01-21:01 BUY  T Yes  n=   1 sh=      111 px=0.420 usd=      47
+    09-04 21:07-21:39 BUY  M Yes  n=   7 sh=      361 px=0.420 usd=     152
+    09-05 02:17-15:39 BUY  M Yes  n=   6 sh=      239 px=0.420 usd=     100
+    09-15 19:34-19:34 BUY  M Yes  n=   1 sh=      100 px=0.670 usd=      67
+    ... 7 more day-groups ...
+    11-02 16:45-20:10 SELL M Yes  n=   2 sh=      164 px=0.954 usd=     156
+    11-03 13:24-14:08 SELL M Yes  n=   2 sh=      114 px=0.954 usd=     109
+    11-06 23:30-23:30 SELL T Yes  n=   1 sh=      461 px=0.819 usd=     378
+    net shares now {'Yes': 2890}; cash -1394; net n/a (open or incomplete)
+
+- bank-of-england-rate-hike-in-2026  end=01-01 04:59 closed=11-05 16:56 final={'Yes': 1.0, 'No': 0.0} vol=68138
+    rules: This market will resolve to “Yes” if the Bank of England's Bank Rate is increased at any point between market creation and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to “No”.  This market may not resolve t
+    09-04 21:03-21:03 BUY  T Yes  n=   1 sh=      124 px=0.407 usd=      50
+    09-08 21:09-21:09 BUY  T Yes  n=   1 sh=      528 px=0.576 usd=     304
+    09-09 21:53-21:54 BUY  T Yes  n=   2 sh=      635 px=0.679 usd=     431
+    09-09 22:02-22:05 BUY  M Yes  n=   2 sh=       43 px=0.710 usd=      31
+    09-11 00:02-00:02 BUY  T Yes  n=   1 sh=      275 px=0.788 usd=     217
+    09-11 00:25-05:43 BUY  M Yes  n=   3 sh=      299 px=0.790 usd=     236
+    10-29 01:27-19:03 SELL M Yes  n=   2 sh=      216 px=0.982 usd=     212
+    10-30 04:06-04:08 SELL M Yes  n=   2 sh=       61 px=0.982 usd=      60
+    10-31 00:59-22:51 SELL M Yes  n=   5 sh=     1811 px=0.982 usd=    1778
+    net shares now {'Yes': -184}; cash 781; net n/a (open or incomplete)
+
+- will-annual-inflation-be-3pt6-in-september-2026  end=10-15 03:59 closed=10-14 14:32 final={'Yes': 0.0, 'No': 1.0} vol=46477
+    rules: This is a market about inflation over the 12-month period ending September 2026, before seasonal adjustment, as reported by the Bureau of Labor Statistics.  This market will resolve to the percentage change in the Consumer Price I
+    09-15 21:30-21:30 BUY  T Yes  n=   1 sh=       38 px=0.390 usd=      15
+    09-15 22:02-22:02 BUY  M Yes  n=   1 sh=        5 px=0.390 usd=       2
+    09-16 00:39-00:39 BUY  M Yes  n=   2 sh=       20 px=0.390 usd=       8
+    09-17 04:11-04:31 BUY  M Yes  n=   8 sh=      340 px=0.388 usd=     132
+    09-17 17:25-17:25 BUY  T Yes  n=   1 sh=      177 px=0.416 usd=      74
+    ... 9 more day-groups ...
+    10-12 20:09-21:16 BUY  T Yes  n=   2 sh=      357 px=0.418 usd=     149
+    10-13 00:22-21:39 BUY  M Yes  n=  43 sh=     1233 px=0.431 usd=     531
+    10-13 07:58-08:04 BUY  T Yes  n=   3 sh=      273 px=0.429 usd=     117
+    net shares now {'Yes': 7583}; cash -3233; net -3240.089538747791
+
+- will-the-bank-of-canada-increase-the-target-for-the-overnight-rate-by-25-bps-at-  end=12-09 00:00 closed=open final=["0.805", "0.195"] vol=127071
+    rules: This market will resolve according to the change in basis points in the target for the overnight rate resulting from the December 2026 interest rate announcement of the Bank of Canada, relative to the level it was prior to this an
+    09-14 16:01-16:01 BUY  T Yes  n=   1 sh=      409 px=0.331 usd=     135
+    09-14 16:01-16:01 BUY  M Yes  n=   1 sh=        5 px=0.350 usd=       2
+    09-21 05:08-06:48 BUY  M Yes  n=   4 sh=       59 px=0.350 usd=      21
+    09-24 02:19-02:23 BUY  M Yes  n=   3 sh=      589 px=0.350 usd=     206
+    11-01 17:00-17:00 SELL T Yes  n=   1 sh=        6 px=0.370 usd=       2
+    ... 3 more day-groups ...
+    11-18 09:46-09:46 BUY  T Yes  n=   1 sh=     1050 px=0.470 usd=     493
+    11-18 12:05-15:08 BUY  M Yes  n=   7 sh=      335 px=0.470 usd=     158
+    11-24 20:59-23:23 BUY  M Yes  n=  10 sh=     1000 px=0.765 usd=     765
+    net shares now {'Yes': 3843}; cash -2019; net n/a (open or incomplete)
+
+- bank-of-england-increases-interest-rates-by-25-bps-after-december-2026-meeting  end=12-17 23:59 closed=open final=["0.775", "0.225"] vol=62504
+    rules: This market will resolve according to the change in basis points in the Bank Rate resulting from the December 2026 meeting of the Bank of England’s Monetary Policy Committee, relative to the level it was prior to this meeting.  Th
+    11-18 18:57-18:57 BUY  T Yes  n=   1 sh=      857 px=0.756 usd=     648
+    11-18 19:03-19:17 BUY  M Yes  n=   4 sh=      693 px=0.724 usd=     502
+    11-19 08:00-10:01 BUY  M Yes  n=   7 sh=       44 px=0.720 usd=      32
+    11-25 15:27-17:35 BUY  M Yes  n=   7 sh=      611 px=0.770 usd=     470
+    11-25 15:27-15:27 BUY  T Yes  n=   1 sh=     1351 px=0.765 usd=    1034
+    11-26 11:56-14:36 BUY  M Yes  n=   3 sh=       62 px=0.770 usd=      48
+    11-27 08:49-08:49 BUY  M Yes  n=   3 sh=       61 px=0.770 usd=      47
+    net shares now {'Yes': 3678}; cash -2780; net n/a (open or incomplete)

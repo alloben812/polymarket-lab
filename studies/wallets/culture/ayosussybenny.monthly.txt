@@ -1,0 +1,15 @@
+ayosussybenny  0xad7fe966ec683f63666069950848b6075ca9c31f  joined 2026-06-07  markets traded 528  fills 1386
+  profile 'Profit/Loss' (trade_pnl, BEFORE fees):         14,537
+  taker fees charged:                                    -1,377
+  rebates+rewards (taker 23 / maker 29 / rewards 83):        135
+  yield + referral income:                                   11
+  ECONOMIC PnL (the API's bottom line, trust this):      13,306   of which unrealized 5
+  volume $89,519 (254,497 shares): gross +16.24% of volume, fees net of refunds -1.54%, kept +14.86%
+  share of what was kept that is rebates/rewards: 1%
+  taker_tier: {"address": "0xad7fe966ec683f63666069950848b6075ca9c31f", "tier": 0, "tier_name": "Tier 0", "wv_30d": 13822.027899}
+  maker_tier: {"address": "0xad7fe966ec683f63666069950848b6075ca9c31f", "snapshot_date": "2026-11-26", "tier": 0, "rebate_bps": 0, "wv_30d": 239.58593, "own_wv_30d": 239.58593}
+  month         gross       fees  refunded   rebates   NET kept net w/o reb      volume$     fills
+  2026-08       2,580       -365         0        91      2,313       2,222       24,508       551
+  2026-09       1,328       -217         0        25      1,139       1,114       13,055       237
+  2026-10       2,901       -243         0         5      2,663       2,658       19,262       266
+  2026-11       7,729       -552         0        14      7,191       7,177       32,694       332

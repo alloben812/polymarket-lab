@@ -1935,7 +1935,8 @@ def cmd_selftest(a) -> int:
     real_home = os.environ.get("HOME")
     tmp = Path(tempfile.mkdtemp(prefix="pm-operator-selftest-"))
     saved_env = {k: os.environ.get(k) for k in ("HOME", "GIT_CONFIG_NOSYSTEM", "FAKE_WINDOW_S", "PM_WALLET",
-                                                 "GIT_CONFIG_GLOBAL")}
+                                                 "GIT_CONFIG_GLOBAL", "GIT_AUTHOR_NAME", "GIT_AUTHOR_EMAIL",
+                                                 "GIT_COMMITTER_NAME", "GIT_COMMITTER_EMAIL")}
     print(f"selftest: throwaway directory {tmp} (removed at the end); the real ~/.polymarket-pilot is not touched")
     try:
         home = tmp / "home"
@@ -2760,6 +2761,39 @@ def cmd_selftest(a) -> int:
         sh("git", "push", "-q", "origin", f"HEAD:refs/heads/{REPORT_BRANCH}", cwd=chk)
         op.st["dirty"] = True
         expect("report push recovers when the branch moved elsewhere", op.publish(), str(op.st.get("report_error")))
+        # verification finding 2: a personal author / committer identity in the owner's git config (repository and
+        # global) and then also in the environment must not reach a report commit
+        ident_keys = (("author.name", "Personal Author"), ("author.email", "personal.author@example.org"),
+                      ("committer.name", "Personal Committer"), ("committer.email", "personal.committer@example.org"))
+        for k, val in ident_keys:
+            sh("git", "config", k, val, cwd=code)
+            sh("git", "config", "--global", k, val)        # the throwaway HOME's ~/.gitconfig
+        ident_env = {"GIT_AUTHOR_NAME": "Env Author", "GIT_AUTHOR_EMAIL": "env.author@example.org",
+                     "GIT_COMMITTER_NAME": "Env Committer", "GIT_COMMITTER_EMAIL": "env.committer@example.org"}
+        neutral = f"{NEUTRAL_NAME}|{NEUTRAL_EMAIL}|{NEUTRAL_NAME}|{NEUTRAL_EMAIL}"
+        seen_ids = []
+        try:
+            for with_env in (False, True):
+                if with_env:
+                    os.environ.update(ident_env)
+                op.event("done", f"identity probe {'config and environment' if with_env else 'config'}")
+                ok = op.publish()
+                seen_ids.append((ok, sh("git", "log", "-1", "--format=%an|%ae|%cn|%ce", f"refs/heads/{REPORT_BRANCH}",
+                                        cwd=origin).strip()))
+        finally:
+            for k in ident_env:
+                os.environ.pop(k, None)
+            for k, _ in ident_keys:
+                sh("git", "config", "--unset", k, cwd=code)
+                sh("git", "config", "--global", "--unset", k)
+        expect("finding 2: author.* / committer.* in the owner's git config do not reach a report commit",
+               seen_ids[0] == (True, neutral), str(seen_ids[0]))
+        expect("finding 2: GIT_AUTHOR_* / GIT_COMMITTER_* in the environment do not reach a report commit",
+               seen_ids[1] == (True, neutral), str(seen_ids[1]))
+        all_ids = sh("git", "log", "--format=%an|%ae|%cn|%ce|%s", f"refs/heads/{REPORT_BRANCH}", cwd=origin)
+        expect("finding 2: every operator report commit on live-reports carries the neutral identity",
+               all(ln.startswith(neutral + "|") for ln in all_ids.splitlines() if "|operator report " in ln)
+               and "Personal" not in all_ids and "Env " not in all_ids, all_ids[:300])
         shim = Path(__file__).resolve().parent / "operator.py"
         if shim.exists():
             shutil.copy(shim, pilot / "operator.py")

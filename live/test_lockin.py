@@ -99,6 +99,7 @@ class Scenario:
         recv_ms=50,
         exchange_ms=0,
         source="websocket",
+        transaction=None,
     ):
         return self.row(
             "ws",
@@ -113,6 +114,7 @@ class Scenario:
                 "price": price,
                 "size": size,
                 "timestamp": str(event_time * 1000 + exchange_ms),
+                "transaction_hash": transaction,
             },
         )
 
@@ -325,4 +327,28 @@ def test_duplicate_after_reference_arrival_does_not_reopen_decision():
     assert first["reason"] == "reference_late"
     scenario.reference([(MATCH - 2, "60100")], MATCH, 70)
     [duplicate] = scenario.trade(recv_ms=80)
+    assert duplicate["reason"] == "duplicate_print"
+
+
+def test_equal_trades_from_distinct_transactions_are_kept():
+    scenario = start()
+    one, two = "0x" + "01" * 32, "0x" + "02" * 32
+    [first] = scenario.trade(transaction=one)
+    [mirror] = scenario.trade(
+        DOWN, side="SELL", price="0.05", transaction=one.upper(), recv_ms=60
+    )
+    [second] = scenario.trade(transaction=two, recv_ms=70)
+    [unknown] = scenario.trade(transaction=None, recv_ms=80)
+    assert first["action"] == second["action"] == "intent"
+    assert mirror["reason"] == unknown["reason"] == "duplicate_print"
+    data = json.dumps([first, mirror, second, unknown], allow_nan=False)
+    assert one not in data and two not in data
+
+
+def test_first_unidentified_print_can_match_one_later_known_transaction():
+    scenario = start()
+    [first] = scenario.trade()
+    [duplicate] = scenario.trade(transaction="0x" + "01" * 32, recv_ms=60)
+    [new] = scenario.trade(transaction="0x" + "02" * 32, recv_ms=70)
+    assert first["action"] == new["action"] == "intent"
     assert duplicate["reason"] == "duplicate_print"

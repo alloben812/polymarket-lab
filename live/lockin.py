@@ -7,8 +7,9 @@ on the complement. It never supplies an executable price or depth. A paper
 intent requires a covered, fresh ask and uses at most its displayed size,
 the print size, and 100 shares. The paper executor enforces the 500-share
 market cap against its pending and executed quantities. Identical and mirrored
-print messages are considered once. Without a unique fill ID this can merge
-distinct fills with identical economic details and exchange time.
+messages from the same transaction are considered once. Without a transaction
+identifier, distinct fills with identical economic details and exchange time
+can be merged.
 """
 
 from __future__ import annotations
@@ -70,7 +71,7 @@ class Lockin:
         self._print_order: deque[tuple[int, tuple[str, int, Decimal, Decimal]]] = (
             deque()
         )
-        self._prints: set[tuple[str, int, Decimal, Decimal]] = set()
+        self._prints: dict[tuple[str, int, Decimal, Decimal], set[str | None]] = {}
 
     def _reference(self, row: dict) -> None:
         if row.get("symbol") != "BTCUSDT":
@@ -207,19 +208,34 @@ class Lockin:
         return []
 
     def _duplicate(
-        self, token: str, exchange_ms: int, price: Decimal, size: Decimal, recv_ns: int
+        self,
+        token: str,
+        exchange_ms: int,
+        price: Decimal,
+        size: Decimal,
+        recv_ns: int,
+        transaction: str | None,
     ) -> bool:
-        # A mirror BUY/SELL representation of a print has the same fingerprint
-        # after conversion to the buyable outcome, price and absolute size.
+        # A mirror BUY/SELL representation of a print shares its buyable
+        # outcome, price and absolute size. One transaction can emit both.
         cutoff = recv_ns - MAX_AGE_NS - CLOCK_TOLERANCE_NS
         while self._print_order and self._print_order[0][0] < cutoff:
             _, expired = self._print_order.popleft()
-            self._prints.remove(expired)
+            self._prints.pop(expired)
         key = (token, exchange_ms, price, size)
-        if key in self._prints:
+        transactions = self._prints.get(key)
+        if transactions is None:
+            self._prints[key] = {transaction}
+            self._print_order.append((recv_ns, key))
+            return False
+        if transaction is None or transaction in transactions:
             return True
-        self._prints.add(key)
-        self._print_order.append((recv_ns, key))
+        if None in transactions:
+            # Match the first known transaction to the prior unidentified print.
+            transactions.remove(None)
+            transactions.add(transaction)
+            return True
+        transactions.add(transaction)
         return False
 
     def _candidate(self, row: dict, book: BookReplay, traded_token: str) -> list[dict]:
@@ -296,7 +312,15 @@ class Lockin:
         if quote.asks:
             ask, depth = quote.asks[0]
             snapshot.update(ask_price=str(ask), ask_size=str(depth))
-        if self._duplicate(token, exchange_ms, candidate_price, size, recv_ns):
+        transaction = payload.get("transaction_hash")
+        transaction = (
+            transaction.lower()
+            if isinstance(transaction, str) and transaction
+            else None
+        )
+        if self._duplicate(
+            token, exchange_ms, candidate_price, size, recv_ns, transaction
+        ):
             return skip("duplicate_print")
         if candidate_price < MIN_PRICE:
             return skip("price_below_floor")

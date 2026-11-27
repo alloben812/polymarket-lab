@@ -1,0 +1,3 @@
+Cb94C437 politics buys with a sibling tape: 1638 in 17 events
+  sibling moved >= 2 c in the 120 s before: 364 (22.2%);  placebo one hour earlier: 147 (9.0%);  ratio 2.48
+  OWN market moved >= 2 c in the 120 s before: 341 (20.8%);  placebo: 74 (4.5%)

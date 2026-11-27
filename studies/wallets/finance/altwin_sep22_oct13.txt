@@ -53,3 +53,17 @@ NVDA: 224.58 -> 214.13 (-4.7%) over the window, min 214.13 max 239.24
     ('type', 'hit-month')        mkts   90 usd    21563 avg px 0.36 net $   -1651 ( -7.7%) c/sh  -2.75 t  -0.9
     ('type', 'hit-week')         mkts  152 usd    16979 avg px 0.41 net $   -3620 (-21.3%) c/sh  -8.65 t  -2.4
     ('type', 'updown-day')       mkts   88 usd    47991 avg px 0.50 net $   -7608 (-15.9%) c/sh  -8.00 t  -1.1
+
+#### PippiTrader 2026-09-25..2026-10-16: fills 20024 (truncated=False), resolved price-market buys 12647
+    ('ALL',)                     mkts 1546 usd   344099 avg px 0.54 net $    7896 (  2.3%) c/sh   1.25 t   1.2
+    bear                         mkts 1075 usd   172744 avg px 0.55 net $   26420 ( 15.3%) c/sh   8.46 t   4.1
+    bull                         mkts 1176 usd   171355 avg px 0.54 net $  -18525 (-10.8%) c/sh  -5.79 t  -2.8
+    ('bear', 'px<0.45')          mkts  565 usd    26467 avg px 0.26 net $   15535 ( 58.7%) c/sh  15.50 t   5.1
+    ('bear', 'px>=0.45')         mkts  784 usd   146277 avg px 0.69 net $   10885 (  7.4%) c/sh   5.14 t   2.3
+    ('bull', 'px<0.45')          mkts  662 usd    31662 avg px 0.27 net $   -5634 (-17.8%) c/sh  -4.79 t  -1.7
+    ('bull', 'px>=0.45')         mkts  795 usd   139694 avg px 0.69 net $  -12890 ( -9.2%) c/sh  -6.37 t  -2.6
+    ('role', 'M')                mkts 1432 usd   250931 avg px 0.56 net $    -139 ( -0.1%) c/sh  -0.03 t  -0.0
+    ('role', 'T')                mkts 1020 usd    93168 avg px 0.50 net $    8034 (  8.6%) c/sh   4.30 t   2.6
+    ('type', 'hit-month')        mkts  505 usd   129901 avg px 0.53 net $    6325 (  4.9%) c/sh   2.56 t   1.5
+    ('type', 'hit-week')         mkts 1037 usd   212891 avg px 0.56 net $    2169 (  1.0%) c/sh   0.57 t   0.4
+    ('type', 'updown-day')       mkts    4 usd     1307 avg px 0.73 net $    -598 (-45.8%) c/sh -33.30 t  -4.9

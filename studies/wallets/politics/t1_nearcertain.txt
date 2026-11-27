@@ -1,0 +1,22 @@
+politics tapes 90, resolved 24, taker buys at 0.95-0.999: 3404 fills, 24 markets, 1047 wallets, $1,980,262
+  ALL                                fills   3404 markets  24 (lost in 6) shares  2,015,112  gross -0.41 c/sh  after fee -0.48 c/sh (se 2.15, t -0.2)  total $-9,692
+  tune (earlier half of markets)     fills    946 markets  12 (lost in 5) shares    850,444  gross -3.66 c/sh  after fee -3.73 c/sh (se 5.71, t -0.7)  total $-31,705
+  REPORT (later half of markets)     fills   2458 markets  12 (lost in 1) shares  1,164,669  gross +1.97 c/sh  after fee +1.89 c/sh (se 0.13, t 14.1)  total $22,013
+  price 0.95-0.97                    fills   1591 markets  24 (lost in 4) shares    524,545  gross +2.58 c/sh  after fee +2.40 c/sh (se 1.17, t 2.1)  total $12,614
+  price 0.97-0.99                    fills   1146 markets  24 (lost in 2) shares    547,797  gross +0.28 c/sh  after fee +0.20 c/sh (se 1.69, t 0.1)  total $1,093
+  price 0.99-0.999                   fills    667 markets  23 (lost in 2) shares    942,771  gross -2.47 c/sh  after fee -2.48 c/sh (se 3.03, t -0.8)  total $-23,399
+  after gamma end date               fills    619 markets   6 (lost in 0) shares    808,177  gross +1.08 c/sh  after fee +1.02 c/sh (se 0.25, t 4.1)  total $8,282
+  0-6 h to end                       fills    466 markets  13 (lost in 2) shares    300,351  gross +0.34 c/sh  after fee +0.28 c/sh (se 0.63, t 0.4)  total $852
+  6-24 h to end                      fills    422 markets   8 (lost in 2) shares    161,725  gross -20.46 c/sh  after fee -20.50 c/sh (se 19.93, t -1.0)  total $-33,155
+  1-7 d to end                       fills   1380 markets   8 (lost in 1) shares    533,948  gross +2.18 c/sh  after fee +2.05 c/sh (se 1.32, t 1.6)  total $10,972
+  over 7 d to end                    fills    517 markets  10 (lost in 3) shares    210,911  gross +1.67 c/sh  after fee +1.59 c/sh (se 0.24, t 6.6)  total $3,357
+  top wallets by $ bought at 0.95+:
+    0x2d99e29c4f066ba32098c65e4c7454b277d94ca3 $  178,031 in   1 markets, after fee $     929
+    0x7f9e2d1df78614564a70becc7fa14aa9a6623a0e $  159,360 in   3 markets, after fee $   4,207
+    0x2974bd0059e48f215c391882976e0f1b4c8c9c23 $  125,775 in   3 markets, after fee $   3,456
+    0x12d6cccfc7470a3f4bafc53599a4779cbf2cf2a8 $   75,607 in   3 markets, after fee $     452
+    0xc4086b708cd3a50880b7069add1a1a80000f4675 $   74,720 in   3 markets, after fee $     188
+    0x88c4919de76e526d55a32c1f8afb439dd1f1129a $   74,044 in   3 markets, after fee $   1,986
+    0xe5982977b7979d9196e0f8585399bcf8e8912f57 $   43,716 in   1 markets, after fee $     246
+    0x1295269296e51cd28a3db85fa6728c0e352b5cfd $   39,618 in   1 markets, after fee $     205
+  wallets with >= 10 markets: 0  of them positive after fee: 0

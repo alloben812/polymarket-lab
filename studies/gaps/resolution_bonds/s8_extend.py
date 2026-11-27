@@ -6,7 +6,7 @@ same bucket [0.95, 0.98), same window [endDate - 1 h, closedTime), same C-mid / 
 split date. Only one token's price history is fetched (token 0); the other is 1 - p, which the sample shows is exact
 (the two 5-minute mids summed to 1.0000 at the 1st and 99th percentile on 111,625 paired buckets).
 
-Usage: python3 s8_extend.py fetch | build
+Usage: python3 s8_extend.py fetch | build | tapes | analyse | splits
 """
 import gzip
 import json
@@ -137,7 +137,7 @@ def tapes():
     """Whole-market tapes of every extension entry market (same 60,000-row cap as rule 20)."""
     panel = pickle.load(open(EXT / "panel.pkl", "rb"))
     td = DATA / "tapes"
-    todo = [r["cid"] for r in panel if r["claim"] and not (td / f"{r['cid']}.json.gz").exists()]
+    todo = [r["cid"] for r in sorted(panel, key=lambda r: r["fam"] != "crypto") if r["claim"] and not (td / f"{r['cid']}.json.gz").exists()]
     print("tapes to fetch", len(todo), flush=True)
     t0 = time.time()
     for i, cid in enumerate(todo):
@@ -227,5 +227,50 @@ def td_rows(r):
     return (pr, sh, cost) if sh > 0 else None
 
 
+
+
+def splits():
+    """Crypto sub-types and weekday/weekend on the extension (C-mid and C-tape A1). Descriptive, post hoc."""
+    from collections import defaultdict
+    from datetime import datetime, timezone
+    from pmlab.stats import ratio_cluster
+    from s7_attack import crypto_type
+    from common import OUT
+    panel = pickle.load(open(EXT / "panel.pkl", "rb"))
+    ent = [r for r in panel if r["claim"] and r["fam"] == "crypto"]
+
+    def cl(items):
+        num, den = defaultdict(float), defaultdict(float)
+        for ev, pr, sh in items:
+            num[ev] += pr
+            den[ev] += sh
+        ev = list(num)
+        return ratio_cluster([num[e] for e in ev], [den[e] for e in ev])
+
+    L = ["", "## Crypto splits on the extension (descriptive)", "",
+         "split | value | period | markets | lost | C-mid net c/share (t) | C-tape A1 markets | A1 lost | A1 net c/share (t) | A1 $ bought | mean lock-up h",
+         "|".join(["---"] * 11)]
+    keys = {"type": lambda r: crypto_type(r["slug"]),
+            "day": lambda r: "weekend" if datetime.fromtimestamp(r["closed"], tz=timezone.utc).weekday() >= 5 else "weekday"}
+    for name, fn in keys.items():
+        for v in sorted({fn(r) for r in ent}):
+            for per in ("early", "late", "both"):
+                rs = [r for r in ent if fn(r) == v and (per == "both" or r["late"] == (per == "late"))]
+                if not rs:
+                    continue
+                m, se, t = cl([(r["event"], r["claim"]["pay"] - r["claim"]["p"] - fee_per_share(r["claim"]["p"], r["rate"]), 1.0) for r in rs])
+                tp = [(r, td_rows(r)) for r in rs]
+                tp = [(r, x) for r, x in tp if x]
+                a = "0 | - | - | -"
+                if tp:
+                    m2, se2, t2 = cl([(r["event"], x[0], x[1]) for r, x in tp])
+                    a = f"{len(tp)} | {sum(1 for r, _ in tp if r['claim']['pay'] < 1)} | {100*m2:+.2f} ({t2:+.1f}) | {sum(x[2] for _, x in tp):,.0f}"
+                L.append(f"{name} | {v} | {per} | {len(rs)} | {sum(1 for r in rs if r['claim']['pay'] < 1)} | {100*m:+.2f} ({t:+.1f}) | {a} | "
+                         f"{sum(r['claim']['lock_h'] for r in rs)/len(rs):.1f}")
+    with open(OUT / "extension_tables.md", "a") as f:
+        f.write("\n".join(L) + "\n")
+    print("\n".join(L))
+
+
 if __name__ == "__main__":
-    {"fetch": fetch, "build": build, "tapes": tapes, "analyse": analyse}[sys.argv[1]]()
+    {"fetch": fetch, "build": build, "tapes": tapes, "analyse": analyse, "splits": splits}[sys.argv[1]]()

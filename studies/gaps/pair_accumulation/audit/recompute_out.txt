@@ -1,0 +1,30 @@
+## A. replicate: lag 3, skip, strict (all 12 series)  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.306 (se 0.106, t -12.3) early -1.460 (t -10.6) late -0.996 (t -6.5) | filled legs 8660, win rate 0.401, net/share -0.0488
+L=0.4: n=7200 net/window=-1.328 (se 0.125, t -10.6) early -1.395 (t -8.9) late -1.194 (t -5.8) | filled legs 9721, win rate 0.361, net/share -0.0393
+L=0.3: n=7200 net/window=-1.456 (se 0.177, t -8.2) early -1.585 (t -7.1) late -1.199 (t -4.2) | filled legs 9605, win rate 0.267, net/share -0.0327
+L=0.05: n=7200 net/window=-3.739 (se 0.464, t -8.1) early -3.477 (t -5.9) late -4.263 (t -5.8) | filled legs 7332, win rate 0.032, net/share -0.0184
+## B. no placement skip  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.974 (se 0.103, t -19.1) early -2.005 (t -16.9) late -1.914 (t -9.5) | filled legs 11926, win rate 0.396, net/share -0.0536
+L=0.4: n=7200 net/window=-1.672 (se 0.133, t -12.6) early -1.717 (t -10.7) late -1.583 (t -6.7) | filled legs 11194, win rate 0.357, net/share -0.0430
+L=0.3: n=7200 net/window=-1.515 (se 0.183, t -8.3) early -1.644 (t -7.1) late -1.256 (t -4.2) | filled legs 9814, win rate 0.267, net/share -0.0333
+L=0.05: n=7200 net/window=-3.739 (se 0.464, t -8.1) early -3.477 (t -5.9) late -4.263 (t -5.8) | filled legs 7332, win rate 0.032, net/share -0.0184
+## C. lag 0  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.320 (se 0.107, t -12.3) early -1.445 (t -10.5) late -1.070 (t -6.6) | filled legs 9106, win rate 0.403, net/share -0.0470
+L=0.4: n=7200 net/window=-1.326 (se 0.125, t -10.6) early -1.406 (t -9.0) late -1.167 (t -5.5) | filled legs 10025, win rate 0.362, net/share -0.0381
+L=0.3: n=7200 net/window=-1.469 (se 0.179, t -8.2) early -1.610 (t -7.1) late -1.189 (t -4.1) | filled legs 9688, win rate 0.267, net/share -0.0328
+L=0.05: n=7200 net/window=-3.757 (se 0.464, t -8.1) early -3.513 (t -5.9) late -4.246 (t -5.8) | filled legs 7325, win rate 0.032, net/share -0.0185
+## D. lag 6  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.323 (se 0.112, t -11.8) early -1.507 (t -10.3) late -0.955 (t -6.3) | filled legs 7759, win rate 0.395, net/share -0.0552
+L=0.4: n=7200 net/window=-1.318 (se 0.120, t -11.0) early -1.436 (t -9.4) late -1.081 (t -5.7) | filled legs 9099, win rate 0.358, net/share -0.0417
+L=0.3: n=7200 net/window=-1.407 (se 0.173, t -8.1) early -1.559 (t -7.1) late -1.103 (t -4.0) | filled legs 9433, win rate 0.268, net/share -0.0322
+L=0.05: n=7200 net/window=-3.740 (se 0.464, t -8.1) early -3.479 (t -5.9) late -4.263 (t -5.8) | filled legs 7333, win rate 0.032, net/share -0.0184
+## E. touch (<=) fills  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.141 (se 0.106, t -10.7) early -1.295 (t -9.3) late -0.833 (t -5.6) | filled legs 8757, win rate 0.408, net/share -0.0422
+L=0.4: n=7200 net/window=-1.105 (se 0.126, t -8.8) early -1.173 (t -7.4) late -0.969 (t -4.6) | filled legs 9828, win rate 0.368, net/share -0.0324
+L=0.3: n=7200 net/window=-1.057 (se 0.183, t -5.8) early -1.176 (t -5.1) late -0.819 (t -2.8) | filled legs 9728, win rate 0.277, net/share -0.0235
+L=0.05: n=7200 net/window=-2.401 (se 0.519, t -4.6) early -2.352 (t -3.6) late -2.500 (t -2.9) | filled legs 7409, win rate 0.038, net/share -0.0117
+## F. touch + no skip + lag 0 (most generous)  (markets read: 7200)
+L=0.45: n=7200 net/window=-1.715 (se 0.099, t -17.2) early -1.758 (t -15.4) late -1.629 (t -8.4) | filled legs 12079, win rate 0.404, net/share -0.0460
+L=0.4: n=7200 net/window=-1.364 (se 0.134, t -10.1) early -1.429 (t -8.9) late -1.233 (t -5.1) | filled legs 11342, win rate 0.365, net/share -0.0346
+L=0.3: n=7200 net/window=-1.097 (se 0.190, t -5.8) early -1.231 (t -5.2) late -0.828 (t -2.6) | filled legs 9943, win rate 0.276, net/share -0.0238
+L=0.05: n=7200 net/window=-2.421 (se 0.519, t -4.7) early -2.388 (t -3.7) late -2.487 (t -2.9) | filled legs 7403, win rate 0.038, net/share -0.0118

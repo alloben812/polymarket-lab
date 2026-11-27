@@ -50,6 +50,26 @@
 "last": 1788390000
 },
 {
+"c": "0xea50c0c0530aeeba690a0c4f1eac1be8108b8b8b41c566faf7adbf65a72df5eb",
+"slug": "will-russia-enter-ternuvate-again-by-october-31",
+"T_pre": 1788431400,
+"p_pre": 0.06,
+"T_post": 1788435000,
+"p_post": 0.875,
+"bucket": 1800,
+"last": 1788433200
+},
+{
+"c": "0xdb018a01cb1f57281c656ffcfdb0e99215410836f82868cb09d4eb25a1504b2c",
+"slug": "pete-hegseth-out-as-secretary-of-defense-by-october-31",
+"T_pre": 1788442200,
+"p_pre": 0.495,
+"T_post": 1788445800,
+"p_post": 0.115,
+"bucket": 1800,
+"last": 1788442200
+},
+{
 "c": "0x253933f9dbecd421ec7b6f3d05ac80ee6008c24c4c8dc54077f383506c86a6c4",
 "slug": "russia-ukraine-peace-talks-by-october-15-2026",
 "T_pre": 1788463800,
@@ -58,6 +78,16 @@
 "p_post": 0.605,
 "bucket": 1800,
 "last": 1788463800
+},
+{
+"c": "0xd9d9532b0d1a2485cfda6cae8cd4831bb323b7df6aeb72741bca50c6c4587393",
+"slug": "will-the-democratic-party-win-the-mo-05-house-seat",
+"T_pre": 1788471000,
+"p_pre": 0.16,
+"T_post": 1788474600,
+"p_post": 0.76,
+"bucket": 1800,
+"last": 1788472800
 },
 {
 "c": "0x88c449eb01e281238d1de7d112faaeb1cb8c74f8f9c3b24cb21b126e4b4f68ba",
@@ -88,6 +118,16 @@
 "p_post": 0.51,
 "bucket": 1800,
 "last": 1788499800
+},
+{
+"c": "0xcfbc2e5fbabb9e8a03bf234367244d4c97eaaf3ac33e2ba001541ee3e0e62416",
+"slug": "israel-closes-its-airspace-by-september-30",
+"T_pre": 1788546600,
+"p_pre": 0.17,
+"T_post": 1788550200,
+"p_post": 0.665,
+"bucket": 1800,
+"last": 1788546600
 },
 {
 "c": "0x6c3f1009a0c91ba9f7aae44aeadf86863b0d433b60f7a090fd00c945019aa32f",
@@ -130,6 +170,26 @@
 "last": 1788703200
 },
 {
+"c": "0xc0389e3f6ad0e8b502f750f829a55e8e7e7829c316c342781711b8811a71cf2a",
+"slug": "will-grune-win-between-5-and-7-of-all-valid-second-votes-sachsen-anhalt",
+"T_pre": 1788708600,
+"p_pre": 0.695,
+"T_post": 1788712200,
+"p_post": 0.0355,
+"bucket": 1800,
+"last": 1788710400
+},
+{
+"c": "0xcd4ed181dc3d8f18a05866d926b52f6b15737c08f08758845aa9ce9939313a7b",
+"slug": "will-grune-win-at-least-7-of-all-valid-second-votes-sachsen-anhalt",
+"T_pre": 1788708600,
+"p_pre": 0.1315,
+"T_post": 1788712200,
+"p_post": 0.9465,
+"bucket": 1800,
+"last": 1788710400
+},
+{
 "c": "0x9911d6d2f3cc96c85466122ea72a9986a28295a0daaef39a815aac109539445b",
 "slug": "will-the-afd-win-the-2026-sachsen-anhalt-parliamentary-election-by-at-least-25",
 "T_pre": 1788708600,
@@ -150,6 +210,26 @@
 "last": 1788710400
 },
 {
+"c": "0xd4a0412f91ddb4bb4062bf563c360cb2645adce35c1395a6d5bf439afe9cd6ac",
+"slug": "will-sven-schulze-be-the-next-minister-president-of-sachsen-anhalt-20260806163204152",
+"T_pre": 1788710400,
+"p_pre": 0.78,
+"T_post": 1788714000,
+"p_post": 0.365,
+"bucket": 1800,
+"last": 1788710400
+},
+{
+"c": "0xba1553d561fea958df1534460526e7ef166d9d766c90df2015ba8abbfee799aa",
+"slug": "will-spd-win-between-7-and-9-of-all-valid-second-votes-sachsen-anhalt",
+"T_pre": 1788715800,
+"p_pre": 0.93,
+"T_post": 1788719400,
+"p_post": 0.465,
+"bucket": 1800,
+"last": 1788717600
+},
+{
 "c": "0x2bd05ac2c0587cc5fc070d11014bb2057005b896333e1dabfa4d8744ec1ee0dc",
 "slug": "will-spd-win-at-least-9-of-all-valid-second-votes-sachsen-anhalt",
 "T_pre": 1788715800,
@@ -168,6 +248,26 @@
 "p_post": 0.6675,
 "bucket": 1800,
 "last": 1788719400
+},
+{
+"c": "0xd7b890aede07d9713e4bfe60c3f7dc7b81c63eef06092a11a169794d6d74979a",
+"slug": "will-bsw-win-between-3-and-5-of-all-valid-second-votes-sachsen-anhalt",
+"T_pre": 1788717600,
+"p_pre": 0.415,
+"T_post": 1788721200,
+"p_post": 0.0395,
+"bucket": 1800,
+"last": 1788717600
+},
+{
+"c": "0xc095fac589c6c2fb6ad6f39d54181c4e6b4debf3d5db916e9f60e5f5e502ae53",
+"slug": "will-bsw-win-between-5-and-7-of-all-valid-second-votes-sachsen-anhalt",
+"T_pre": 1788717600,
+"p_pre": 0.59,
+"T_post": 1788721200,
+"p_post": 0.9625,
+"bucket": 1800,
+"last": 1788717600
 },
 {
 "c": "0x9194103ad3ae2c3d2a1d739358843fccea3c13ab39b1aab58a8bb87e486bbcdb",
@@ -200,12 +300,52 @@
 "last": 1788796800
 },
 {
+"c": "0xeff40c2677dabb36118e71e65dfab4bae514a20ba97311304162a7ed73c4c086",
+"slug": "trump-renames-new-mexico-to-new-america-by-september-30-2026",
+"T_pre": 1788796800,
+"p_pre": 0.495,
+"T_post": 1788800400,
+"p_post": 0.145,
+"bucket": 1800,
+"last": 1788796800
+},
+{
+"c": "0xde3a0bfe02d1990325084f5ec59f6b6c46f63c1cb11315daa1cb0f7bd371aa4d",
+"slug": "laptop-airdrop-by-september-9",
+"T_pre": 1788814800,
+"p_pre": 0.685,
+"T_post": 1788818400,
+"p_post": 0.21,
+"bucket": 1800,
+"last": 1788818400
+},
+{
+"c": "0xcfbc2e5fbabb9e8a03bf234367244d4c97eaaf3ac33e2ba001541ee3e0e62416",
+"slug": "israel-closes-its-airspace-by-september-30",
+"T_pre": 1788816600,
+"p_pre": 0.61,
+"T_post": 1788820200,
+"p_post": 0.965,
+"bucket": 1800,
+"last": 1788816600
+},
+{
 "c": "0x8e0c12663aac3ff057b2b3954864e2370ec1a9c94992104996f79f7da097cda1",
 "slug": "will-maura-sullivan-be-the-democratic-nominee-for-nh-01",
 "T_pre": 1788906600,
 "p_pre": 0.835,
 "T_post": 1788910200,
 "p_post": 0.425,
+"bucket": 1800,
+"last": 1788913800
+},
+{
+"c": "0xf64108affb6c655b7a50d662d2c508bef1897e40bb3106f7405552c177c92d78",
+"slug": "will-stefany-shaheen-be-the-democratic-nominee-for-nh-01",
+"T_pre": 1788913800,
+"p_pre": 0.545,
+"T_post": 1788917400,
+"p_post": 0.945,
 "bucket": 1800,
 "last": 1788913800
 },
@@ -220,12 +360,32 @@
 "last": 1788964200
 },
 {
+"c": "0xcebf7f8be2c5e2b20526450fe1627f676e843e648fb98ffd0bdb224daba9a912",
+"slug": "laptop-fdv-above-350m-one-day-after-launch",
+"T_pre": 1788966000,
+"p_pre": 0.445,
+"T_post": 1788967800,
+"p_post": 0.81,
+"bucket": 1800,
+"last": 1788966000
+},
+{
 "c": "0x576df0755393742f793a7a67016d482cd37ef1ef9d0623cc14fddafcadf1d83f",
 "slug": "will-aaron-guckian-win-the-2026-rhode-island-governor-republican-primary-election",
 "T_pre": 1788996600,
 "p_pre": 0.108,
 "T_post": 1789000200,
 "p_post": 0.593,
+"bucket": 1800,
+"last": 1789000200
+},
+{
+"c": "0xc379c4b420b00afd99e427ccc93da241459fd858d79d61190ad091ae114185b7",
+"slug": "will-elaine-pelino-win-the-2026-rhode-island-governor-republican-primary-election",
+"T_pre": 1788996600,
+"p_pre": 0.89,
+"T_post": 1789000200,
+"p_post": 0.395,
 "bucket": 1800,
 "last": 1789000200
 },
@@ -270,6 +430,26 @@
 "last": 1789005600
 },
 {
+"c": "0xe131e7ab7b8a0acec1402087f1295dedd80a945d34c9841ca5cde8e5f23be396",
+"slug": "israel-x-lebanon-diplomatic-meeting-by-september-15-2026-159-758",
+"T_pre": 1789059600,
+"p_pre": 0.085,
+"T_post": 1789063200,
+"p_post": 0.72,
+"bucket": 1800,
+"last": 1789061400
+},
+{
+"c": "0xe088f69ad36731df6f8584297be5e2afeb68c2941cfbe227b1a3db4cb938c796",
+"slug": "israel-x-lebanon-diplomatic-meeting-by-september-18-2026",
+"T_pre": 1789059600,
+"p_pre": 0.38,
+"T_post": 1789063200,
+"p_post": 0.73,
+"bucket": 1800,
+"last": 1789061400
+},
+{
 "c": "0x3a3becf905da80c4f5a7d886514120d52febd9635bf13522924888cd9da803f3",
 "slug": "israel-x-iran-ceasefire-continues-through-september-15",
 "T_pre": 1789061400,
@@ -278,6 +458,16 @@
 "p_post": 0.9,
 "bucket": 1800,
 "last": 1789063200
+},
+{
+"c": "0xecaa476d11ac4a93b00fa2f010df31a6a450bbe91691e24b6be23e888bb91e44",
+"slug": "will-afd-win-the-most-seats-in-2-german-state-elections-in-september-2026-20260630185301107",
+"T_pre": 1789104600,
+"p_pre": 0.795,
+"T_post": 1789108200,
+"p_post": 0.44,
+"bucket": 1800,
+"last": 1789104600
 },
 {
 "c": "0x2a25f3fd54fd0b18fee936f7f6b701e119c86f08f6d2a621b995193851014fb3",
@@ -330,12 +520,32 @@
 "last": 1789322400
 },
 {
+"c": "0xbbb881b0ecfbfbd6bdc5fab54fc82871a2daf99417e51106f58ad1abacdbb65b",
+"slug": "will-the-moderate-party-m-win-the-third-most-seats-in-the-2026-swedish-parliamentary-election",
+"T_pre": 1789320600,
+"p_pre": 0.755,
+"T_post": 1789324200,
+"p_post": 0.33,
+"bucket": 1800,
+"last": 1789322400
+},
+{
 "c": "0x1b33d6010bc4f06aaa6f67a86ef7b5211e4d7d14522d25dd20a7648936421f6e",
 "slug": "will-sweden-democrats-sd-win-between-16-and-18-of-all-valid-votes-20260812172636422",
 "T_pre": 1789320600,
 "p_pre": 0.16,
 "T_post": 1789324200,
 "p_post": 0.605,
+"bucket": 1800,
+"last": 1789326000
+},
+{
+"c": "0xdd725685718b2d500be6f5dd469a405c8ccc24dcde8c8ff9e372a42567c9905d",
+"slug": "will-moderate-party-m-win-at-least-20-of-all-valid-votes-20260812172636434",
+"T_pre": 1789326000,
+"p_pre": 0.046,
+"T_post": 1789329600,
+"p_post": 0.5065,
 "bucket": 1800,
 "last": 1789326000
 },
@@ -380,6 +590,16 @@
 "last": 1789398000
 },
 {
+"c": "0xc68ccd3b9c93d90dac002cdbbbd61f4b02e788069549c18687f92d49f58617e5",
+"slug": "will-the-next-governing-coalition-of-sweden-include-m-kd-l-c",
+"T_pre": 1789398000,
+"p_pre": 0.49,
+"T_post": 1789401600,
+"p_post": 0.085,
+"bucket": 1800,
+"last": 1789398000
+},
+{
 "c": "0x2f5b7c9504f4620a1ae3c9fa7223a3761125709eaf0e50a122c452a0080d4669",
 "slug": "will-rand-paul-vote-yea-on-the-clarity-act-20260729190926669",
 "T_pre": 1789408800,
@@ -420,6 +640,26 @@
 "last": 1789479000
 },
 {
+"c": "0xc0a0bf8490c3a6b7d585aead6d5882916181e4ec276ad06d476bca8071bb877f",
+"slug": "will-friedrich-merz-visit-ukraine-by-december-31-2026-20260729210126055",
+"T_pre": 1789498800,
+"p_pre": 0.295,
+"T_post": 1789502400,
+"p_post": 0.68,
+"bucket": 1800,
+"last": 1789500600
+},
+{
+"c": "0xb4299322010815429e91d888b48410a093a51fdbeeea2c3c6f2c4a2ac8415d06",
+"slug": "will-trump-be-impeached-by-june-30-2027",
+"T_pre": 1789502400,
+"p_pre": 0.505,
+"T_post": 1789506000,
+"p_post": 0.05,
+"bucket": 1800,
+"last": 1789509600
+},
+{
 "c": "0xa03d6aa64d13ad2965f73e1e1aa4f5aecdc3d544d3cf8819ef2f3d3240396c74",
 "slug": "moscow-air-traffic-suspended-by-september-15-20260824",
 "T_pre": 1789534800,
@@ -440,6 +680,46 @@
 "last": 1789603200
 },
 {
+"c": "0xabc341cc5fefcc1611837576594d131336784fa96210008da4e2004123917a84",
+"slug": "will-alexandru-nazare-be-the-next-prime-minister-of-romania",
+"T_pre": 1789653600,
+"p_pre": 0.506,
+"T_post": 1789657200,
+"p_post": 0.1395,
+"bucket": 1800,
+"last": 1789653600
+},
+{
+"c": "0xbf3e73c18f9fba93022128610729e6d8b399ba9e41ee2c0bc01400344923f9c8",
+"slug": "will-the-next-prime-minister-of-romania-be-an-independent-or-a-technocrat",
+"T_pre": 1789653600,
+"p_pre": 0.605,
+"T_post": 1789657200,
+"p_post": 0.22,
+"bucket": 1800,
+"last": 1789653600
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1789660800,
+"p_pre": 0.265,
+"T_post": 1789664400,
+"p_post": 0.695,
+"bucket": 1800,
+"last": 1789660800
+},
+{
+"c": "0xb762e467ae24e1f0b4f1de851183c74e25f8af433bb57b824d3d521aa425f8c7",
+"slug": "trump-declassifies-new-ufo-files-by-september-30-20260810145949437",
+"T_pre": 1789662600,
+"p_pre": 0.581,
+"T_post": 1789666200,
+"p_post": 0.9395,
+"bucket": 1800,
+"last": 1789662600
+},
+{
 "c": "0x7c162a2f68adfde9be73c1b1b794673a541ac971732e3116977b8fbdd0a840d9",
 "slug": "us-x-iran-ceasefire-continues-through-september-20-20260917",
 "T_pre": 1789662600,
@@ -450,6 +730,36 @@
 "last": 1789664400
 },
 {
+"c": "0xe7fdcddbf41b9641e0fd636a15e672054cbc61a8b1e0f00c4a4a96430013c7c5",
+"slug": "perim-island-no-longer-under-houthi-control-by-october-31-20260916",
+"T_pre": 1789664400,
+"p_pre": 0.51,
+"T_post": 1789668000,
+"p_post": 0.1,
+"bucket": 1800,
+"last": 1789666200
+},
+{
+"c": "0xba737dd3404eb2b79fdd95de5183d658a0cb4760cd411b62d00742540a5b3461",
+"slug": "perim-island-no-longer-under-houthi-control-by-december-31-20260916",
+"T_pre": 1789664400,
+"p_pre": 0.53,
+"T_post": 1789668000,
+"p_post": 0.145,
+"bucket": 1800,
+"last": 1789666200
+},
+{
+"c": "0xdb8fb581be31b38b83219f4b3471ad78529a5cfb6f7fc51a9ff0c28873b685ad",
+"slug": "will-democrats-win-the-texas-michigan-and-maine-senate-seats",
+"T_pre": 1789669800,
+"p_pre": 0.175,
+"T_post": 1789671600,
+"p_post": 0.6,
+"bucket": 1800,
+"last": 1789669800
+},
+{
 "c": "0x3ebfc39ef533f45e1ea4faa9b72715ff2251de8c86623de65e457aa8df4c8bf3",
 "slug": "us-x-iran-ceasefire-continues-through-september-25-20260917",
 "T_pre": 1789678800,
@@ -458,6 +768,26 @@
 "p_post": 0.87,
 "bucket": 1800,
 "last": 1789678800
+},
+{
+"c": "0xba737dd3404eb2b79fdd95de5183d658a0cb4760cd411b62d00742540a5b3461",
+"slug": "perim-island-no-longer-under-houthi-control-by-december-31-20260916",
+"T_pre": 1789686000,
+"p_pre": 0.155,
+"T_post": 1789689600,
+"p_post": 0.635,
+"bucket": 1800,
+"last": 1789687800
+},
+{
+"c": "0xc0a0bf8490c3a6b7d585aead6d5882916181e4ec276ad06d476bca8071bb877f",
+"slug": "will-friedrich-merz-visit-ukraine-by-december-31-2026-20260729210126055",
+"T_pre": 1789736400,
+"p_pre": 0.74,
+"T_post": 1789740000,
+"p_post": 0.385,
+"bucket": 1800,
+"last": 1789736400
 },
 {
 "c": "0x4eea504d6a9a609f2e6fe6b88de6327755282192ebbae4b3b170eac91b611214",
@@ -498,6 +828,26 @@
 "p_post": 0.155,
 "bucket": 1800,
 "last": 1789918200
+},
+{
+"c": "0xf977348655e4f012efb11a60aea84a0beb43888f21ff3b86f7f8f3868948493f",
+"slug": "will-spd-win-the-second-most-seats-in-the-2026-mecklenburg-vorpommern-parliamentary-elections-20260806103311325",
+"T_pre": 1789918200,
+"p_pre": 0.425,
+"T_post": 1789921800,
+"p_post": 0.78,
+"bucket": 1800,
+"last": 1789918200
+},
+{
+"c": "0xc6dcd6862c4d7d4da5079593f2ea67f73fbb2e36bd06c385bc02466d03c1a12d",
+"slug": "will-linke-win-less-than-8-of-all-valid-second-votes-mecklenburg-vorpommern",
+"T_pre": 1789918200,
+"p_pre": 0.21,
+"T_post": 1789921800,
+"p_post": 0.883,
+"bucket": 1800,
+"last": 1789920000
 },
 {
 "c": "0x255384774c05718ae95522d0f836ae1408c16ee877a4ddf047bcb03eeee93a51",
@@ -560,6 +910,16 @@
 "last": 1789968600
 },
 {
+"c": "0xfdfdcbcf9c268407faefe9f0b29743f2aa6e701c5873bba02d87b206b8f9ae2e",
+"slug": "will-russia-enter-dobropillia-by-september-30",
+"T_pre": 1789979400,
+"p_pre": 0.125,
+"T_post": 1789983000,
+"p_post": 0.765,
+"bucket": 1800,
+"last": 1789981200
+},
+{
 "c": "0x5ee38949a4ba69f716052e5139b03953e2ecf79e8130d583f92acd87e3c1ca68",
 "slug": "will-united-russia-win-between-340-and-354-seats-in-the-next-russian-state-duma-election",
 "T_pre": 1789984800,
@@ -588,6 +948,16 @@
 "p_post": 0.915,
 "bucket": 1800,
 "last": 1789986600
+},
+{
+"c": "0xc04f9aec719287435df8267da59ddc825f7d1f076cd4078554a70160e04fdb46",
+"slug": "will-russia-enter-mykolaivka-by-september-30-2026-20260805154948090",
+"T_pre": 1789990200,
+"p_pre": 0.255,
+"T_post": 1789993800,
+"p_post": 0.645,
+"bucket": 1800,
+"last": 1789992000
 },
 {
 "c": "0x2db6568b722fe6946b6a8471196334e473cfaba5743d620b8b3d7c8a93f6ec15",
@@ -660,6 +1030,16 @@
 "last": 1790069400
 },
 {
+"c": "0xbb12ad2ac9c3e69ebd2022a8f705d7f758a4c6027f43dc44df4e5ec5ed1c285f",
+"slug": "saudi-oil-pipeline-east-west-restarts-by-september-22",
+"T_pre": 1790067600,
+"p_pre": 0.016,
+"T_post": 1790071200,
+"p_post": 0.6605,
+"bucket": 1800,
+"last": 1790069400
+},
+{
 "c": "0x56fda0f04440ef5a2b8f4cb1d33e256f0e28d5cb635d812b1314c8078a0a1b1d",
 "slug": "trump-renames-ai-by-september-30",
 "T_pre": 1790089200,
@@ -668,6 +1048,26 @@
 "p_post": 0.505,
 "bucket": 1800,
 "last": 1790089200
+},
+{
+"c": "0xc4ebab9f2830f6df67ab1b98615d5a9be8eebd106fd0f37e9a25e4a4edcc427c",
+"slug": "will-no-qualifying-diplomatic-us-iran-meeting-occur-by-september-30-2026-20260622185050763",
+"T_pre": 1790096400,
+"p_pre": 0.692,
+"T_post": 1790100000,
+"p_post": 0.298,
+"bucket": 1800,
+"last": 1790098200
+},
+{
+"c": "0xed5a9e7831ee363d92cb102f2c21e2465b09196ef5beb7c8e23671851a1c3ca4",
+"slug": "us-x-iran-diplomatic-meeting-by-september-30-2026",
+"T_pre": 1790096400,
+"p_pre": 0.3,
+"T_post": 1790100000,
+"p_post": 0.7,
+"bucket": 1800,
+"last": 1790098200
 },
 {
 "c": "0x1ba55a9ab62aaa724cc52a06d5f5b90104cdd3b85bf4383f7ab4bd415a14d808",
@@ -690,6 +1090,26 @@
 "last": 1790100000
 },
 {
+"c": "0xafe03ac32316ce79c3e911db5de76b0364e89004471292450d515351e85aa05e",
+"slug": "will-steve-witkoff-attend-a-us-x-iran-diplomatic-meeting-by-december-31-2026-20260812154221266",
+"T_pre": 1790098200,
+"p_pre": 0.47,
+"T_post": 1790101800,
+"p_post": 0.885,
+"bucket": 1800,
+"last": 1790098200
+},
+{
+"c": "0xf59c65f8c75e1140bdda92fc572fa421137b11d690106a3665888cfc391a1265",
+"slug": "us-x-iran-diplomatic-meeting-by-october-31-2026",
+"T_pre": 1790098200,
+"p_pre": 0.405,
+"T_post": 1790101800,
+"p_post": 0.88,
+"bucket": 1800,
+"last": 1790098200
+},
+{
 "c": "0x42d86517194ccb44fc99732d796f416ae6850d28b91d10210b3bb094639735d9",
 "slug": "will-kazem-gharibabadi-attend-a-us-x-iran-diplomatic-meeting-by-december-31-2026-20260812154221273",
 "T_pre": 1790098200,
@@ -700,6 +1120,26 @@
 "last": 1790098200
 },
 {
+"c": "0xdca2cba35540a61d868b922952c9545851b047f91b01947fb365cf3c6d8479c2",
+"slug": "will-mohammed-bin-abdulrahman-al-thani-attend-a-us-x-iran-diplomatic-meeting-by-december-31-2026-20260812154221277",
+"T_pre": 1790100000,
+"p_pre": 0.115,
+"T_post": 1790103600,
+"p_post": 0.745,
+"bucket": 1800,
+"last": 1790101800
+},
+{
+"c": "0xfbe29d06a6d9180b8d26d053680cae3b180801add24e64971e12b1f7455b4c7e",
+"slug": "republican-senate-odds-dip-to-30-by-october-31",
+"T_pre": 1790100000,
+"p_pre": 0.25,
+"T_post": 1790103600,
+"p_post": 0.68,
+"bucket": 1800,
+"last": 1790101800
+},
+{
 "c": "0x13a3e12dd8cbecd31882d2a0841e3ab3670e5162841c4076d22288491654a4de",
 "slug": "republican-house-odds-dip-to-5-by-october-31",
 "T_pre": 1790105400,
@@ -708,6 +1148,26 @@
 "p_post": 0.685,
 "bucket": 1800,
 "last": 1790105400
+},
+{
+"c": "0xb007530f03c04a08fc761b15ef4dc5c1435fd39ccac79191f39569aaaf0b459f",
+"slug": "will-ted-cruz-win-the-2028-us-presidential-election",
+"T_pre": 1790107200,
+"p_pre": 0.495,
+"T_post": 1790109000,
+"p_post": 0.003,
+"bucket": 1800,
+"last": 1790107200
+},
+{
+"c": "0xe72f96c82e38e48805bd95264265e858b9f0e83af1b661894b4bf9c84f96a6bd",
+"slug": "israel-military-action-against-syria-by-october-31-2026",
+"T_pre": 1790109000,
+"p_pre": 0.755,
+"T_post": 1790112600,
+"p_post": 0.315,
+"bucket": 1800,
+"last": 1790110800
 },
 {
 "c": "0x62bb9d57d8340148046e4e6380c7c3b9f84b6124d8765cde264fb5bd7e28fe4b",
@@ -726,6 +1186,16 @@
 "p_pre": 0.255,
 "T_post": 1790119800,
 "p_post": 0.615,
+"bucket": 1800,
+"last": 1790118000
+},
+{
+"c": "0xaef0d4a34b0cc1cf915dbf965777e4da89d15c4ab8b0fa8a5fc127360a251b63",
+"slug": "next-us-iran-senior-diplomatic-meeting-by-october-31-2026-copy",
+"T_pre": 1790118000,
+"p_pre": 0.255,
+"T_post": 1790119800,
+"p_post": 0.665,
 "bucket": 1800,
 "last": 1790118000
 },
@@ -810,6 +1280,46 @@
 "last": 1790188200
 },
 {
+"c": "0xf273da5c76e0116c0ec63787453b54d74f0c182256dff4ed2f27f08b14048f7c",
+"slug": "will-christine-lagarde-win-the-2027-french-presidential-election",
+"T_pre": 1790188200,
+"p_pre": 0.495,
+"T_post": 1790190000,
+"p_post": 0.015,
+"bucket": 1800,
+"last": 1790188200
+},
+{
+"c": "0xe38ab46c26cff272c66e5593c5711870110837755e375420db1f614a1a6843b5",
+"slug": "will-iliana-iotova-win-the-2026-bulgarian-presidential-first-round-by-20-30",
+"T_pre": 1790193600,
+"p_pre": 0.48,
+"T_post": 1790197200,
+"p_post": 0.13,
+"bucket": 1800,
+"last": 1790193600
+},
+{
+"c": "0xe29ca104ce56feb4c093c133b5dfc0c379e505373b4412cfec54fe2220f20b68",
+"slug": "will-chris-van-hollen-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1790197200,
+"p_pre": 0.495,
+"T_post": 1790199000,
+"p_post": 0.0105,
+"bucket": 1800,
+"last": 1790197200
+},
+{
+"c": "0xd0e58ada317f9778a221592cfed03405b235b137c8dd916817a39b72bf6dc19a",
+"slug": "will-mitch-landrieu-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1790197200,
+"p_pre": 0.495,
+"T_post": 1790199000,
+"p_post": 0.0105,
+"bucket": 1800,
+"last": 1790197200
+},
+{
 "c": "0x4090a61387fac4a1c1ea18e5effc8b1b9bdf6b5c0c274f84a8e028772d568da1",
 "slug": "will-russia-capture-bilytske-by-september-30-2026-564",
 "T_pre": 1790200800,
@@ -818,6 +1328,16 @@
 "p_post": 0.6505,
 "bucket": 1800,
 "last": 1790206200
+},
+{
+"c": "0xccf8e8626aa7f6f7a54ea02c4f0850c9416ae8b9e3220c4078da9025417640ce",
+"slug": "will-iliana-iotova-win-the-2026-bulgarian-presidential-first-round-by-30-40",
+"T_pre": 1790204400,
+"p_pre": 0.09,
+"T_post": 1790208000,
+"p_post": 0.445,
+"bucket": 1800,
+"last": 1790204400
 },
 {
 "c": "0x855152e266859a1c910490064c3d27251c44fa43e26d0715f605a254b15a5e14",
@@ -830,6 +1350,36 @@
 "last": 1790222400
 },
 {
+"c": "0xbd9d064846ddc9221c1d096d06a4e10b0a6a95f6e7a30a3da2c6de6cd37d4b09",
+"slug": "will-russia-and-ukraine-hold-any-diplomatic-meeting-by-september-30-2026-20260819-521",
+"T_pre": 1790245800,
+"p_pre": 0.165,
+"T_post": 1790249400,
+"p_post": 0.565,
+"bucket": 1800,
+"last": 1790247600
+},
+{
+"c": "0xee4b4e8a57a542b3c659b6e5dac589c74ced77b92eb0c89fb89976e90feacce9",
+"slug": "uptspt-anti-cartel-operation-outside-of-the-uptspt-by-september-30-20260810131538351",
+"T_pre": 1790254800,
+"p_pre": 0.1,
+"T_post": 1790258400,
+"p_post": 0.655,
+"bucket": 1800,
+"last": 1790260200
+},
+{
+"c": "0xbc700e149f9c3e206e53dc00079fa25bd7d038cdd9b1f386866d8920313f2a13",
+"slug": "will-netanyahu-use-a-visual-aid-during-his-unga-speech",
+"T_pre": 1790272800,
+"p_pre": 0.9,
+"T_post": 1790276400,
+"p_post": 0.065,
+"bucket": 1800,
+"last": 1790278200
+},
+{
 "c": "0x7c68d0a1699ffc12d44bf91329f0e4cfe5da7a55cff95b527fb71eaf389b3cd8",
 "slug": "lula-or-bolsonaro-favored-on-october-5",
 "T_pre": 1790280000,
@@ -840,6 +1390,26 @@
 "last": 1790280000
 },
 {
+"c": "0xbc700e149f9c3e206e53dc00079fa25bd7d038cdd9b1f386866d8920313f2a13",
+"slug": "will-netanyahu-use-a-visual-aid-during-his-unga-speech",
+"T_pre": 1790298000,
+"p_pre": 0.63,
+"T_post": 1790299800,
+"p_post": 0.9995,
+"bucket": 1800,
+"last": 1790298000
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1790314200,
+"p_pre": 0.305,
+"T_post": 1790317800,
+"p_post": 0.735,
+"bucket": 1800,
+"last": 1790316000
+},
+{
 "c": "0x578d1326a924116ba81d7067ee325adc8443062e9ccc171148f8c6db2685ed6c",
 "slug": "will-john-thune-be-the-next-us-senate-minority-leader",
 "T_pre": 1790314200,
@@ -848,6 +1418,16 @@
 "p_post": 0.115,
 "bucket": 1800,
 "last": 1790314200
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1790409600,
+"p_pre": 0.285,
+"T_post": 1790413200,
+"p_post": 0.74,
+"bucket": 1800,
+"last": 1790411400
 },
 {
 "c": "0x2f3eaf103e9b1cfd09e31a4da7e547d0b8de41f01936ad5e256ada3b1a8caf6a",
@@ -878,6 +1458,36 @@
 "p_post": 0.925,
 "bucket": 300,
 "last": 1790594100
+},
+{
+"c": "0xf8bfad34f437f48cf5c69c4daa12337b4572cd785504b6daf9c3ba2ee94d12ec",
+"slug": "will-putin-and-zelenskyy-not-meet-by-december-31-2027",
+"T_pre": 1790643600,
+"p_pre": 0.62,
+"T_post": 1790644200,
+"p_post": 0.22,
+"bucket": 300,
+"last": 1790643600
+},
+{
+"c": "0xc04f9aec719287435df8267da59ddc825f7d1f076cd4078554a70160e04fdb46",
+"slug": "will-russia-enter-mykolaivka-by-september-30-2026-20260805154948090",
+"T_pre": 1790651700,
+"p_pre": 0.2335,
+"T_post": 1790652300,
+"p_post": 0.6705,
+"bucket": 300,
+"last": 1790651700
+},
+{
+"c": "0xc577fc8f1910dd6db9ae759059e302c7a98f5ee62bd8ff2325c38ffc274596f4",
+"slug": "will-no-qualifying-russia-x-ukraine-peace-talks-take-place-by-december-31-2027",
+"T_pre": 1790652600,
+"p_pre": 0.07,
+"T_post": 1790652900,
+"p_post": 0.475,
+"bucket": 300,
+"last": 1790652600
 },
 {
 "c": "0xa30e099a9dddebe782d51086f4731e648b0670eb71c778c7ec8d7df55b87529a",
@@ -920,6 +1530,16 @@
 "last": 1790692800
 },
 {
+"c": "0xb9a948ca5dcbafe204aec86b1cc2889e33182868de18459b3f678e6dda38fb4f",
+"slug": "will-ohio-enact-a-data-center-moratorium-by-december-31-2027",
+"T_pre": 1790695500,
+"p_pre": 0.26,
+"T_post": 1790696100,
+"p_post": 0.705,
+"bucket": 300,
+"last": 1790695500
+},
+{
 "c": "0xaa1df7d50d4cf7cfed01d8717530fe624a2d251b6cbf104c41a4adcd76a1e032",
 "slug": "us-x-iran-ceasefire-continues-through-october-7",
 "T_pre": 1790700000,
@@ -928,6 +1548,16 @@
 "p_post": 0.795,
 "bucket": 300,
 "last": 1790700000
+},
+{
+"c": "0xc04f9aec719287435df8267da59ddc825f7d1f076cd4078554a70160e04fdb46",
+"slug": "will-russia-enter-mykolaivka-by-september-30-2026-20260805154948090",
+"T_pre": 1790778600,
+"p_pre": 0.353,
+"T_post": 1790779200,
+"p_post": 0.965,
+"bucket": 300,
+"last": 1790778900
 },
 {
 "c": "0xa699840204609b5dcd561a701b1e4f67eeb9cbca006b5127b71c68467d3426a4",
@@ -980,6 +1610,36 @@
 "last": 1790820600
 },
 {
+"c": "0xbe824a07ac6c89bdcef941f3aea3b79cbc3d255b8c9bd2abbde12c68b0918ded",
+"slug": "will-trump-speak-to-ahmed-al-sharaa-by-october-31",
+"T_pre": 1790822700,
+"p_pre": 0.155,
+"T_post": 1790823300,
+"p_post": 0.7,
+"bucket": 300,
+"last": 1790823900
+},
+{
+"c": "0xf5a2de86062e477b0ba22f9665c457184c84f981ddbb130e719e4611dbdcb774",
+"slug": "will-russia-target-kyiv-on-october-4-2026",
+"T_pre": 1790826300,
+"p_pre": 0.495,
+"T_post": 1790826900,
+"p_post": 0.905,
+"bucket": 300,
+"last": 1790826600
+},
+{
+"c": "0xd0b24abd98e6e21723a9b48a5dd416fb31f9fa842a8cf5236d0599df0c8deca0",
+"slug": "will-no-next-israeli-minister-of-justice-be-appointed-by-february-28-2027",
+"T_pre": 1790847000,
+"p_pre": 0.06,
+"T_post": 1790847600,
+"p_post": 0.465,
+"bucket": 300,
+"last": 1790847000
+},
+{
 "c": "0x7d23bb65fccfb3726b9a148120fcd033e9511dd98910398e112f86bedd7cbf8e",
 "slug": "saudi-arabia-military-action-against-yemen-on-october-2",
 "T_pre": 1790860800,
@@ -1020,6 +1680,16 @@
 "last": 1790876700
 },
 {
+"c": "0xcf219f2056a06792e7798ddfe35e2260d9df015014cadf04b43812e40e0f0694",
+"slug": "will-rahm-emanuel-win-the-2028-us-presidential-election",
+"T_pre": 1790875800,
+"p_pre": 0.495,
+"T_post": 1790876400,
+"p_post": 0.0055,
+"bucket": 300,
+"last": 1790876100
+},
+{
 "c": "0x404485926e867661e33bcc86f612b69d3472a64de01ca69d52582f61547ff9ce",
 "slug": "israel-military-action-against-lebanon-on-october-15",
 "T_pre": 1790878500,
@@ -1028,6 +1698,16 @@
 "p_post": 0.745,
 "bucket": 300,
 "last": 1790878800
+},
+{
+"c": "0xf8be1790e24a1b309e2b578df39ed2228c6916e6665f5866e5cf53ebe4352111",
+"slug": "will-daniel-hadad-win-the-2027-argentina-presidential-election",
+"T_pre": 1790881500,
+"p_pre": 0.495,
+"T_post": 1790882100,
+"p_post": 0.025,
+"bucket": 300,
+"last": 1790881800
 },
 {
 "c": "0x56f4e71217352df656b30966dec29eace8a184d6a9ea44775a1b26a8220b96e6",
@@ -1140,6 +1820,26 @@
 "last": 1791039600
 },
 {
+"c": "0xd0174e85bc06d494fb87da9ec90799b2340a75751f42d7114a1ae91f2297e73c",
+"slug": "trump-names-ai-czar-by-october-4-2026-20260928",
+"T_pre": 1791043500,
+"p_pre": 0.825,
+"T_post": 1791044100,
+"p_post": 0.305,
+"bucket": 300,
+"last": 1791043500
+},
+{
+"c": "0xcb27e43eb122b963be232cdbe641356d25b65f4ad73964fdc0d8b743a4fe0e6d",
+"slug": "will-russia-capture-all-of-kostyantynivka-by-june-30-2027",
+"T_pre": 1791043500,
+"p_pre": 0.14,
+"T_post": 1791044100,
+"p_post": 0.675,
+"bucket": 300,
+"last": 1791043800
+},
+{
 "c": "0x8acd130bd0984649518109f04e39ba032331e2092f5fb49fffc86115d0b990d2",
 "slug": "will-there-be-3-us-aircraft-carriers-in-centcom-on-november-30-2026",
 "T_pre": 1791043800,
@@ -1158,6 +1858,16 @@
 "p_post": 0.9995,
 "bucket": 300,
 "last": 1791158100
+},
+{
+"c": "0xd0174e85bc06d494fb87da9ec90799b2340a75751f42d7114a1ae91f2297e73c",
+"slug": "trump-names-ai-czar-by-october-4-2026-20260928",
+"T_pre": 1791164700,
+"p_pre": 0.38,
+"T_post": 1791165300,
+"p_post": 0.85,
+"bucket": 300,
+"last": 1791164700
 },
 {
 "c": "0xa0c4607a7d7c5ffe77cae5ffe47ccdc2207c8faceaaa225cf5a7de4ec93e543a",
@@ -1200,6 +1910,16 @@
 "last": 1791218400
 },
 {
+"c": "0xe5b8e3984b02d404637550684b88ff786c54cd9081938ad9f3bc42f54c88b5d0",
+"slug": "will-flavio-bolsonaro-win-the-most-votes-in-the-second-round-of-the-brazil-presidential-election-from-para",
+"T_pre": 1791220200,
+"p_pre": 0.14,
+"T_post": 1791220800,
+"p_post": 0.615,
+"bucket": 300,
+"last": 1791220500
+},
+{
 "c": "0x002341871854e39158ec683fd0583a3000210a5f31ce5cc4a4b3cc7aec1ed900",
 "slug": "will-yashar-win-the-second-most-seats-israel-2026",
 "T_pre": 1791225600,
@@ -1210,6 +1930,16 @@
 "last": 1791225600
 },
 {
+"c": "0xca394e0db041f91ac2d69f3ea06efdfc8643acb0d2751283bd594e7b8bd581f9",
+"slug": "israel-x-iran-ceasefire-continues-through-november-15",
+"T_pre": 1791230400,
+"p_pre": 0.26,
+"T_post": 1791231000,
+"p_post": 0.715,
+"bucket": 300,
+"last": 1791230700
+},
+{
 "c": "0x6f4b75cb7dbe82fdcc339acd703f0d0d215b0af33cc48c7ba5e1485b2e174a9d",
 "slug": "israel-x-iran-ceasefire-continues-through-october-9",
 "T_pre": 1791230400,
@@ -1218,6 +1948,16 @@
 "p_post": 0.73,
 "bucket": 300,
 "last": 1791230400
+},
+{
+"c": "0xd6f75e5779e98d1fb5f738f4fa0351ed8b01591c8ab9ab502d3b3bdbe4946fb5",
+"slug": "saudi-arabia-military-action-against-yemen-on-october-1",
+"T_pre": 1791231600,
+"p_pre": 0.745,
+"T_post": 1791232200,
+"p_post": 0.1055,
+"bucket": 300,
+"last": 1791231900
 },
 {
 "c": "0x7d23bb65fccfb3726b9a148120fcd033e9511dd98910398e112f86bedd7cbf8e",
@@ -1270,6 +2010,16 @@
 "last": 1791283800
 },
 {
+"c": "0xe0c320b4dc7f5054993175cc9efb97afaed572cdbf73fd72f29bcc0ea95ffcd7",
+"slug": "will-fewer-than-20-ships-transit-the-strait-of-hormuz-between-september-28-october-4",
+"T_pre": 1791288000,
+"p_pre": 0.0775,
+"T_post": 1791288600,
+"p_post": 0.7225,
+"bucket": 300,
+"last": 1791288300
+},
+{
 "c": "0x7d23bb65fccfb3726b9a148120fcd033e9511dd98910398e112f86bedd7cbf8e",
 "slug": "saudi-arabia-military-action-against-yemen-on-october-2",
 "T_pre": 1791291000,
@@ -1278,6 +2028,46 @@
 "p_post": 0.49,
 "bucket": 300,
 "last": 1791291000
+},
+{
+"c": "0xae76ef049f09b109cfb0a9bfa2335d7c9fde5bd262c64548b43308c810c314ec",
+"slug": "will-yulia-navalnaya-win-the-nobel-peace-prize-in-2026-261",
+"T_pre": 1791504300,
+"p_pre": 0.655,
+"T_post": 1791504900,
+"p_post": 0.218,
+"bucket": 300,
+"last": 1791504300
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1791532500,
+"p_pre": 0.78,
+"T_post": 1791533100,
+"p_post": 0.295,
+"bucket": 300,
+"last": 1791532500
+},
+{
+"c": "0xeec3372bdb747d77f77200e3e7fb6f77df50ccf15cbb25675dfdc35fc16e0daf",
+"slug": "will-russia-and-ukraine-hold-any-diplomatic-meeting-by-november-30-2026",
+"T_pre": 1791569700,
+"p_pre": 0.265,
+"T_post": 1791570300,
+"p_post": 0.755,
+"bucket": 300,
+"last": 1791570000
+},
+{
+"c": "0xfbe29d06a6d9180b8d26d053680cae3b180801add24e64971e12b1f7455b4c7e",
+"slug": "republican-senate-odds-dip-to-30-by-october-31",
+"T_pre": 1791583200,
+"p_pre": 0.845,
+"T_post": 1791583500,
+"p_post": 0.345,
+"bucket": 300,
+"last": 1791583200
 },
 {
 "c": "0x43c826059f577b718102be032ce4f60b5718190cd4df55eec41212a809878a59",
@@ -1328,6 +2118,26 @@
 "p_post": 0.835,
 "bucket": 300,
 "last": 1791741900
+},
+{
+"c": "0xef0933538fa1bbb54b5f81a833178e125bb4289fc3905fe565cf90ada59c0521",
+"slug": "oil-below-85-on-november-2-and-the-republicans-win-the-senate",
+"T_pre": 1791822900,
+"p_pre": 0.495,
+"T_post": 1791823500,
+"p_post": 0.085,
+"bucket": 300,
+"last": 1791822900
+},
+{
+"c": "0xd770bb9e01de3d673249a4371896024643df1b7a34a292c4521405a0ee78643f",
+"slug": "hormuz-agreement-and-oil-below-80-and-the-republicans-win-the-senate",
+"T_pre": 1791823200,
+"p_pre": 0.495,
+"T_post": 1791823800,
+"p_post": 0.0205,
+"bucket": 300,
+"last": 1791823500
 },
 {
 "c": "0x699edd4556a15758bcddd34b896eb4d1cf8eaf712f0fdd984971cc08ee244ecf",
@@ -1450,6 +2260,36 @@
 "last": 1791985500
 },
 {
+"c": "0xce2c3d408a3ffe6e625885b415af3ecf65eeba64f23ffa90fc141d6dda97a386",
+"slug": "us-x-iran-ceasefire-continues-through-october-17",
+"T_pre": 1791985200,
+"p_pre": 0.5,
+"T_post": 1791985800,
+"p_post": 0.94,
+"bucket": 300,
+"last": 1791985500
+},
+{
+"c": "0xdbcc19248725b32aa85acbdd91f1877cb124a68cf6d7bc2d036e0e91ffa0f9c6",
+"slug": "us-x-iran-ceasefire-continues-through-november-8",
+"T_pre": 1791985500,
+"p_pre": 0.255,
+"T_post": 1791985800,
+"p_post": 0.74,
+"bucket": 300,
+"last": 1791985500
+},
+{
+"c": "0xff019ccfa1337dc7d12968183949ff5877a8b66ab19903e42331a7b94f97cfd7",
+"slug": "us-x-iran-ceasefire-continues-through-october-28",
+"T_pre": 1791985500,
+"p_pre": 0.255,
+"T_post": 1791985800,
+"p_post": 0.875,
+"bucket": 300,
+"last": 1791985500
+},
+{
 "c": "0x7cdbf19b8c340e90ca7920962daeb7bcbd109cb44b658e33b75ce2fae18aa89e",
 "slug": "us-x-yemen-ceasefire-continues-through-october-21",
 "T_pre": 1791999300,
@@ -1468,6 +2308,16 @@
 "p_post": 0.935,
 "bucket": 300,
 "last": 1792003200
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1792017600,
+"p_pre": 0.775,
+"T_post": 1792018200,
+"p_post": 0.29,
+"bucket": 300,
+"last": 1792017900
 },
 {
 "c": "0x9841f98ef43863279f2a7affd3b2d258c3b86b526f5f8ba23ec3677128beb268",
@@ -1510,6 +2360,16 @@
 "last": 1792113900
 },
 {
+"c": "0xf9eb785673b4fc2bdff566de3e5fe9467e63d1fa8acbf021384d8ef300ba88d4",
+"slug": "jd-vance-2028-presidential-odds-leader-on-november-30",
+"T_pre": 1792121700,
+"p_pre": 0.35,
+"T_post": 1792122300,
+"p_post": 0.75,
+"bucket": 300,
+"last": 1792121700
+},
+{
 "c": "0x995fb197e75478e59a7b547092406f4c4be476fe2525fdbd159d7496b296774d",
 "slug": "will-israel-election-happen-as-scheduled-20260720204824362",
 "T_pre": 1792160700,
@@ -1526,6 +2386,16 @@
 "p_pre": 0.1355,
 "T_post": 1792170300,
 "p_post": 0.632,
+"bucket": 300,
+"last": 1792170000
+},
+{
+"c": "0xc587f97b3eaac5948ed7e148bb5248f51f98795ea0e1c3bc9acf635b0a2f95b0",
+"slug": "katie-zacharia-out-as-press-secretary-by-december-31",
+"T_pre": 1792169700,
+"p_pre": 0.385,
+"T_post": 1792170300,
+"p_post": 0.8,
 "bucket": 300,
 "last": 1792170000
 },
@@ -1560,6 +2430,16 @@
 "last": 1792291200
 },
 {
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1792287300,
+"p_pre": 0.845,
+"T_post": 1792287900,
+"p_post": 0.44,
+"bucket": 300,
+"last": 1792287600
+},
+{
 "c": "0x4a20822edab3e6c50f71c30911fd585a4760ec3a831e2a67f4b973d95dbc42de",
 "slug": "paris-curfew-by-october-19",
 "T_pre": 1792290900,
@@ -1568,6 +2448,16 @@
 "p_post": 0.035,
 "bucket": 300,
 "last": 1792290900
+},
+{
+"c": "0xe87adbaca7c3ca08c07f102013ea6c0cf355746726d1e8bc4b2d4abf1187068f",
+"slug": "paris-curfew-by-october-21",
+"T_pre": 1792290900,
+"p_pre": 0.525,
+"T_post": 1792291500,
+"p_post": 0.07,
+"bucket": 300,
+"last": 1792291200
 },
 {
 "c": "0x2aaffb7c88af0204f5095581dc72f82886f4e13902fe5c7727fac6ed48a25f11",
@@ -1620,6 +2510,16 @@
 "last": 1792424100
 },
 {
+"c": "0xcb6397a53e4145bc422a9b8592573494e8ec431fc1aef16c025f4f5f0a487b5c",
+"slug": "will-sylvain-durif-win-the-2027-french-presidential-election",
+"T_pre": 1792423800,
+"p_pre": 0.495,
+"T_post": 1792424400,
+"p_post": 0.01,
+"bucket": 300,
+"last": 1792424100
+},
+{
 "c": "0x8cd2457d67e7c9260161f6307ec7c4dde35217b94dbe7959c0ef9d0a63f7344d",
 "slug": "us-x-iran-ceasefire-continues-through-october-24",
 "T_pre": 1792425300,
@@ -1640,6 +2540,16 @@
 "last": 1792428600
 },
 {
+"c": "0xe87adbaca7c3ca08c07f102013ea6c0cf355746726d1e8bc4b2d4abf1187068f",
+"slug": "paris-curfew-by-october-21",
+"T_pre": 1792428300,
+"p_pre": 0.324,
+"T_post": 1792428900,
+"p_post": 0.7945,
+"bucket": 300,
+"last": 1792429800
+},
+{
 "c": "0x0c5fdd1f8d8efa97620737cc3d748bb94ec1582aaba5f328fd6d8b414fecd1c4",
 "slug": "paris-curfew-by-october-24",
 "T_pre": 1792428600,
@@ -1658,6 +2568,16 @@
 "p_post": 0.5455,
 "bucket": 300,
 "last": 1792429200
+},
+{
+"c": "0xfa84e45ad7062fff6aa8f96cbcd683053771681adde42e304050660189d5b715",
+"slug": "will-naftali-bennett-receive-the-first-mandate-to-form-a-government-after-the-2026-israeli-election-20261019144924877",
+"T_pre": 1792444200,
+"p_pre": 0.505,
+"T_post": 1792444500,
+"p_post": 0.055,
+"bucket": 300,
+"last": 1792444200
 },
 {
 "c": "0x2687aea6fcc6bc4067faaf22bcac2959a342f698f9d172033ef5dcd9edc5e19f",
@@ -1730,6 +2650,16 @@
 "last": 1792801200
 },
 {
+"c": "0xd0b24abd98e6e21723a9b48a5dd416fb31f9fa842a8cf5236d0599df0c8deca0",
+"slug": "will-no-next-israeli-minister-of-justice-be-appointed-by-february-28-2027",
+"T_pre": 1792835400,
+"p_pre": 0.345,
+"T_post": 1792836000,
+"p_post": 0.745,
+"bucket": 300,
+"last": 1792835700
+},
+{
 "c": "0x1b52d0becf2890d16450386b62f3abba63e0ddf0ab7653258dc1b99aa4560198",
 "slug": "will-maria-corina-machado-enter-venezuela-by-december-31-20260728195714929",
 "T_pre": 1792942200,
@@ -1748,6 +2678,16 @@
 "p_post": 0.6845,
 "bucket": 300,
 "last": 1792942200
+},
+{
+"c": "0xda4a7d85a3c1abaf52bb4dd561d45c1cb33e7f76f76a21069a0d10d4668aefa6",
+"slug": "will-aleksandar-vucic-united-serbia-win-the-most-seats-in-the-2026-serbian-parliamentary-election",
+"T_pre": 1792959900,
+"p_pre": 0.515,
+"T_post": 1792960500,
+"p_post": 0.08,
+"bucket": 300,
+"last": 1792960200
 },
 {
 "c": "0x258ff19b4baff0ed24bc28f58e83c8be6f2f91d9134700703e0aa51810c51a63",
@@ -1830,6 +2770,16 @@
 "last": 1793127000
 },
 {
+"c": "0xd05da9807740aa0f5bc9e9232daabe87a21e5012c19e283abf414f1c1651118b",
+"slug": "will-yashar-win-the-most-seats-in-the-2026-israeli-legislative-election",
+"T_pre": 1793130900,
+"p_pre": 0.665,
+"T_post": 1793131500,
+"p_post": 0.235,
+"bucket": 300,
+"last": 1793130900
+},
+{
 "c": "0x2e03c21412a3f54bde80eea2937782997497f1e1f9d1b9b07d874b59d7c0c548",
 "slug": "will-likud-win-the-second-most-seats-israel-2026",
 "T_pre": 1793130900,
@@ -1870,6 +2820,16 @@
 "last": 1793207100
 },
 {
+"c": "0xd19660d91d29d599eb38b07fa245662b608892bc1e17139be82a3961f19bebdd",
+"slug": "israel-x-iran-ceasefire-continues-through-october-30",
+"T_pre": 1793227200,
+"p_pre": 0.5,
+"T_post": 1793227800,
+"p_post": 0.955,
+"bucket": 300,
+"last": 1793227800
+},
+{
 "c": "0x5470b8ebb3de0afd56dcf537c62575f80cc86bda01ff57a332e8f3ae44c71b65",
 "slug": "us-x-iran-ceasefire-continues-through-november-2",
 "T_pre": 1793229000,
@@ -1900,6 +2860,26 @@
 "last": 1793268000
 },
 {
+"c": "0xc51a030f393f4f823d7935886cc747cc68de8acfc83d0215d8c5deb07db72c61",
+"slug": "will-catherine-cortez-masto-vote-yea-on-the-clarity-act-20260729190926660",
+"T_pre": 1793279400,
+"p_pre": 0.0295,
+"T_post": 1793280000,
+"p_post": 0.4865,
+"bucket": 300,
+"last": 1793279400
+},
+{
+"c": "0xbf6d27cd173fe4df59f91dd1d3e8fd5a2f7b10a72cdee9540eac16c4fa6d554c",
+"slug": "will-voter-turnout-in-the-2026-serbian-parliamentary-election-be-66-70",
+"T_pre": 1793295300,
+"p_pre": 0.948,
+"T_post": 1793295900,
+"p_post": 0.5215,
+"bucket": 300,
+"last": 1793296200
+},
+{
 "c": "0x287fac2828d12b9ab36a145b5514ecbb10287a76fe0063ccc6e8eccde32a9970",
 "slug": "will-voter-turnout-in-the-2026-serbian-parliamentary-election-be-70-or-more",
 "T_pre": 1793295600,
@@ -1910,6 +2890,16 @@
 "last": 1793295600
 },
 {
+"c": "0xcf7d94c9aa083c8235103832dc28e4b85d4436a58453fcdfec2ff2e21c4b10cb",
+"slug": "will-jptdpt-vance-attend-a-us-x-iran-diplomatic-meeting-by-december-31-2026-20260812154221264",
+"T_pre": 1793295900,
+"p_pre": 0.27,
+"T_post": 1793296500,
+"p_post": 0.695,
+"bucket": 300,
+"last": 1793296200
+},
+{
 "c": "0x3898eb068257acb3c1a114a1ee087453be4e5c7fb85bd5767d3e5f5b0dfd6c16",
 "slug": "will-russia-target-kyiv-on-october-28-2026",
 "T_pre": 1793296200,
@@ -1918,6 +2908,16 @@
 "p_post": 0.451,
 "bucket": 300,
 "last": 1793296500
+},
+{
+"c": "0xd19660d91d29d599eb38b07fa245662b608892bc1e17139be82a3961f19bebdd",
+"slug": "israel-x-iran-ceasefire-continues-through-october-30",
+"T_pre": 1793299800,
+"p_pre": 0.5025,
+"T_post": 1793300400,
+"p_post": 0.904,
+"bucket": 300,
+"last": 1793300100
 },
 {
 "c": "0x272ce757549b96bc04a10b8d90e9a9019aae3017328e901ee29cae42071d8ac1",
@@ -1950,6 +2950,16 @@
 "last": 1793319000
 },
 {
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1793325600,
+"p_pre": 0.44,
+"T_post": 1793326200,
+"p_post": 0.035,
+"bucket": 300,
+"last": 1793331000
+},
+{
 "c": "0x2687aea6fcc6bc4067faaf22bcac2959a342f698f9d172033ef5dcd9edc5e19f",
 "slug": "saudi-arabia-military-action-against-yemen-on-october-6",
 "T_pre": 1793325600,
@@ -1958,6 +2968,16 @@
 "p_post": 0.52,
 "bucket": 300,
 "last": 1793325900
+},
+{
+"c": "0xe50af0f2a196ec216438aaed3884c58eab5c92e86707b0dcea997bcdf6fd0081",
+"slug": "saudi-arabia-military-action-against-yemen-on-september-26-20260916",
+"T_pre": 1793376000,
+"p_pre": 0.495,
+"T_post": 1793376300,
+"p_post": 0.0015,
+"bucket": 300,
+"last": 1793376000
 },
 {
 "c": "0x3898eb068257acb3c1a114a1ee087453be4e5c7fb85bd5767d3e5f5b0dfd6c16",
@@ -1990,6 +3010,16 @@
 "last": 1793627100
 },
 {
+"c": "0xd2c0cc6a7ad3c0e2590fa55095052e98b1a2b146e9b807138c7421ac0e39c60e",
+"slug": "will-adam-hamilton-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1793636400,
+"p_pre": 0.495,
+"T_post": 1793636700,
+"p_post": 0.015,
+"bucket": 300,
+"last": 1793636400
+},
+{
 "c": "0x9cc68279976a71ec9b9c2393f5f98367328830db295d3f9b5600a2daf2c022e9",
 "slug": "us-x-iran-ceasefire-continues-through-november-3",
 "T_pre": 1793640600,
@@ -2010,12 +3040,42 @@
 "last": 1793652900
 },
 {
+"c": "0xc83347e2b7a1d1341cba0fc6d03696c3be31c783b732355a04c8f8621ef4df09",
+"slug": "us-x-iran-ceasefire-continues-through-november-15",
+"T_pre": 1793666100,
+"p_pre": 0.58,
+"T_post": 1793666700,
+"p_post": 0.14,
+"bucket": 300,
+"last": 1793666400
+},
+{
 "c": "0x613613192c69d90cee89758c260a019368fc1f4a596b4d300c39b6235d2b643f",
 "slug": "us-iran-ceasefire-continues-through-the-midterms",
 "T_pre": 1793666100,
 "p_pre": 0.912,
 "T_post": 1793666700,
 "p_post": 0.2,
+"bucket": 300,
+"last": 1793666400
+},
+{
+"c": "0xdbcc19248725b32aa85acbdd91f1877cb124a68cf6d7bc2d036e0e91ffa0f9c6",
+"slug": "us-x-iran-ceasefire-continues-through-november-8",
+"T_pre": 1793666100,
+"p_pre": 0.72,
+"T_post": 1793666700,
+"p_post": 0.14,
+"bucket": 300,
+"last": 1793666400
+},
+{
+"c": "0xb0d59b1a50cdc384b409f675897000513e181795220c6b1e3a0a0be05473fcb7",
+"slug": "us-x-iran-ceasefire-continues-through-november-4",
+"T_pre": 1793666100,
+"p_pre": 0.885,
+"T_post": 1793666700,
+"p_post": 0.275,
 "bucket": 300,
 "last": 1793666400
 },
@@ -2048,6 +3108,16 @@
 "p_post": 0.24,
 "bucket": 300,
 "last": 1793666700
+},
+{
+"c": "0xdddcb7d56ac0aa71737053a3567a64a0d604e7c7bf50c73382a35d22d25d2e0d",
+"slug": "us-x-iran-ceasefire-continues-through-november-5",
+"T_pre": 1793666400,
+"p_pre": 0.82,
+"T_post": 1793667000,
+"p_post": 0.13,
+"bucket": 300,
+"last": 1793666400
 },
 {
 "c": "0x89596504399d36aab4ed5d00a87f7ab1d6c34319f1261db9ea58d2600f9ba744",
@@ -2090,6 +3160,16 @@
 "last": 1793747100
 },
 {
+"c": "0xb470bc5d43c2f41ce9e741f7c9f0041b2dbcc58ddccd65e006b816b545efa9c4",
+"slug": "will-the-republican-party-win-the-fl-13-house-seat",
+"T_pre": 1793751600,
+"p_pre": 0.47,
+"T_post": 1793752200,
+"p_post": 0.875,
+"bucket": 300,
+"last": 1793751600
+},
+{
 "c": "0x89e54c86f437d7696d9789c5ff901dd5f3b35a5594f5aadf27af50bc6d2ca50e",
 "slug": "will-the-democratic-party-win-the-fl-13-house-seat",
 "T_pre": 1793751600,
@@ -2108,6 +3188,16 @@
 "p_post": 0.19,
 "bucket": 300,
 "last": 1793753100
+},
+{
+"c": "0xd6d1c21478a65c24a17a95ce3956e9e9f260df9187a0766807622893d6b21649",
+"slug": "will-tim-ohare-win-the-2026-tarrant-county-judge-election-20260626003334864",
+"T_pre": 1793754000,
+"p_pre": 0.515,
+"T_post": 1793754600,
+"p_post": 0.085,
+"bucket": 300,
+"last": 1793754300
 },
 {
 "c": "0x17595904c52ac8de41da5c06398adf10a6f8267f48266c9c4d04092682f9dbbf",
@@ -2150,6 +3240,16 @@
 "last": 1793758800
 },
 {
+"c": "0xf112827d59745e6203e4933a18569fa0bc8f806b2f751e9bc4db03d3ef1b2238",
+"slug": "will-the-democratic-party-candidate-win-the-2026-texas-senate-election-by-9-12",
+"T_pre": 1793758800,
+"p_pre": 0.6255,
+"T_post": 1793759400,
+"p_post": 0.212,
+"bucket": 300,
+"last": 1793758800
+},
+{
 "c": "0x6f07f3f6eaebf29ab35c4c1a35eb4b1d5ecba488ececf3a4a6dfb6ce28fbe766",
 "slug": "will-the-republican-party-win-the-tx-06-house-seat",
 "T_pre": 1793760600,
@@ -2170,6 +3270,16 @@
 "last": 1793763900
 },
 {
+"c": "0xd4bc06a5741c9c61b3d89563cd455f81d362ec4311d057092e196bf149394d83",
+"slug": "will-the-democratic-party-win-the-sc-02-house-seat",
+"T_pre": 1793763600,
+"p_pre": 0.694,
+"T_post": 1793764200,
+"p_post": 0.181,
+"bucket": 300,
+"last": 1793763900
+},
+{
 "c": "0x90c0ab6b7fa75ea903689744bc0b24989b646d3ac86cf96cbc96a816a7788137",
 "slug": "will-the-democratic-party-win-the-tx-27-house-seat",
 "T_pre": 1793763600,
@@ -2178,6 +3288,16 @@
 "p_post": 0.38,
 "bucket": 300,
 "last": 1793763600
+},
+{
+"c": "0xc4f1456dc523bfe110e6a2afc7c2144ef3925650e78fa826d2211ddae6763a3d",
+"slug": "will-the-republican-party-win-the-nc-05-house-seat",
+"T_pre": 1793763900,
+"p_pre": 0.715,
+"T_post": 1793764500,
+"p_post": 0.295,
+"bucket": 300,
+"last": 1793768700
 },
 {
 "c": "0x9c498399a366209dbafcb311f03478216f907f5213915291ba0012161647ad4e",
@@ -2230,6 +3350,16 @@
 "last": 1793765700
 },
 {
+"c": "0xf112827d59745e6203e4933a18569fa0bc8f806b2f751e9bc4db03d3ef1b2238",
+"slug": "will-the-democratic-party-candidate-win-the-2026-texas-senate-election-by-9-12",
+"T_pre": 1793769600,
+"p_pre": 0.358,
+"T_post": 1793770200,
+"p_post": 0.8035,
+"bucket": 300,
+"last": 1793769600
+},
+{
 "c": "0xa747a9151b86b41bcb2509eb947d8049a84acd28beeed2aeb833c9796817a2f6",
 "slug": "will-the-democratic-party-candidate-win-the-2026-texas-senate-election-by-12-or-more",
 "T_pre": 1793769600,
@@ -2238,6 +3368,16 @@
 "p_post": 0.1845,
 "bucket": 300,
 "last": 1793769600
+},
+{
+"c": "0xc52d0ad0d001293473fa50126015c9d6db3baab756002f7b4ccf9eb179b1c403",
+"slug": "us-x-iran-effective-ceasefire-continues-through-november-8-20261103",
+"T_pre": 1793772600,
+"p_pre": 0.265,
+"T_post": 1793772900,
+"p_post": 0.735,
+"bucket": 300,
+"last": 1793772600
 },
 {
 "c": "0x38d30cf57afeae6b217507b6ecf7f96b55d573ce7d61e9ff64fc53cb31edca4a",
@@ -2260,6 +3400,36 @@
 "last": 1793774400
 },
 {
+"c": "0xc53f04f5df2f4ebbffe867bb7337fb1f14d490fe38b66699579fbcaa4f8f1ed5",
+"slug": "will-a-win-the-ak-al-house-seat",
+"T_pre": 1793774400,
+"p_pre": 0.524,
+"T_post": 1793775000,
+"p_post": 0.0935,
+"bucket": 300,
+"last": 1793774400
+},
+{
+"c": "0xcc842c2fed3a0714caf0a408fa4fd7a3d0cf36c57adc02d0830a3612d4373a14",
+"slug": "will-the-republican-party-win-the-az-05-house-seat",
+"T_pre": 1793778000,
+"p_pre": 0.5,
+"T_post": 1793778600,
+"p_post": 0.09,
+"bucket": 300,
+"last": 1793778000
+},
+{
+"c": "0xbd353d44ec152e7bb9061883baed937386a50b3e3b6358c5d47ef9a572381f8b",
+"slug": "will-the-republican-party-win-the-az-02-house-seat",
+"T_pre": 1793827200,
+"p_pre": 0.125,
+"T_post": 1793827800,
+"p_post": 0.635,
+"bucket": 300,
+"last": 1793827500
+},
+{
 "c": "0x86b398869c0bbdd80f5636abf20ebd6a3f86cf2656a41f186de652a5826115b3",
 "slug": "will-the-democratic-party-win-the-az-02-house-seat",
 "T_pre": 1793827200,
@@ -2280,6 +3450,16 @@
 "last": 1793903100
 },
 {
+"c": "0xf8446923a5100797caa47c0d0502d2403568d45ccddc995f2aa56a8611dcb024",
+"slug": "will-abdul-el-sayed-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1793911800,
+"p_pre": 0.44,
+"T_post": 1793912400,
+"p_post": 0.001,
+"bucket": 300,
+"last": 1793913900
+},
+{
 "c": "0x56f4e71217352df656b30966dec29eace8a184d6a9ea44775a1b26a8220b96e6",
 "slug": "will-donald-trump-publicly-insult-ken-paxton-by-october-31-2026",
 "T_pre": 1793912100,
@@ -2288,6 +3468,16 @@
 "p_post": 0.9995,
 "bucket": 300,
 "last": 1793912400
+},
+{
+"c": "0xb7efa9c7d7d007df76ef9fa24ad01c51cbe9464b096740a4ae8c37dc0fcf7df6",
+"slug": "will-scott-colom-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1793921700,
+"p_pre": 0.495,
+"T_post": 1793922300,
+"p_post": 0.005,
+"bucket": 300,
+"last": 1793922000
 },
 {
 "c": "0x5ad9e545fef6424f4f5508df4eb13750bda5109a69959b2f9fc9b4df2696980a",
@@ -2310,6 +3500,26 @@
 "last": 1793991000
 },
 {
+"c": "0xec10a736a52480e4cc689cfcdf2a5a5f2bacb86aa84c1dd1163b3809010eb297",
+"slug": "susie-wiles-out-as-white-house-chief-of-staff-by-december-31",
+"T_pre": 1793990700,
+"p_pre": 0.33,
+"T_post": 1793991300,
+"p_post": 0.98,
+"bucket": 300,
+"last": 1793991000
+},
+{
+"c": "0xc52d0ad0d001293473fa50126015c9d6db3baab756002f7b4ccf9eb179b1c403",
+"slug": "us-x-iran-effective-ceasefire-continues-through-november-8-20261103",
+"T_pre": 1794010200,
+"p_pre": 0.495,
+"T_post": 1794010500,
+"p_post": 0.08,
+"bucket": 300,
+"last": 1794010200
+},
+{
 "c": "0x54f2ba48b95a74d959eb02a2e5c82b3da0851f1ae347cabcdb7ebaac9b31bc2b",
 "slug": "will-dana-white-be-the-next-white-house-press-secretary",
 "T_pre": 1794080700,
@@ -2330,8 +3540,28 @@
 "last": 1794081300
 },
 {
+"c": "0xd5e34ba5a21008bf44b58f9de2f5a5ae151ebada9f2e5725f71c1fb9123a5242",
+"slug": "will-abdul-el-sayed-win-the-2028-us-presidential-election",
+"T_pre": 1794237300,
+"p_pre": 0.495,
+"T_post": 1794237900,
+"p_post": 0.005,
+"bucket": 300,
+"last": 1794237600
+},
+{
 "c": "0x9d99aee560bc009687eda1b67e40dd275a42e1cb782af0fb0db6c8912008615c",
 "slug": "will-marjorie-taylor-greene-win-the-2028-us-presidential-election",
+"T_pre": 1794237300,
+"p_pre": 0.495,
+"T_post": 1794237900,
+"p_post": 0.0045,
+"bucket": 300,
+"last": 1794237600
+},
+{
+"c": "0xc12f29cd00f3b0ebf61e813ce99d793e90ecf62de52fb353f6da6450c80a1559",
+"slug": "will-cory-booker-win-the-2028-us-presidential-election",
 "T_pre": 1794237300,
 "p_pre": 0.495,
 "T_post": 1794237900,
@@ -2348,6 +3578,16 @@
 "p_post": 0.045,
 "bucket": 300,
 "last": 1794240900
+},
+{
+"c": "0xbdae335afcab79276d5d4d7bfb0146e6ff26e3d7bf0d211a28d94484cd423273",
+"slug": "will-shawn-fain-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1794239100,
+"p_pre": 0.495,
+"T_post": 1794239400,
+"p_post": 0.055,
+"bucket": 300,
+"last": 1794239100
 },
 {
 "c": "0x9e69d69cdbccdef7f8543d02dc2a60d299121286463cc5bbaf57b0aff5693a68",
@@ -2400,6 +3640,16 @@
 "last": 1794249000
 },
 {
+"c": "0xd9bb376cf318f5628fa34f565145388ff998bef1310df78ea086c409cedbae81",
+"slug": "alice-huang-federally-charged-by-march-31-2027",
+"T_pre": 1794267600,
+"p_pre": 0.505,
+"T_post": 1794268200,
+"p_post": 0.1,
+"bucket": 300,
+"last": 1794267900
+},
+{
 "c": "0x4f330fc689830668acf7d6e6e24dcd7450dc0387855f63aecbfac64b6d458650",
 "slug": "will-the-feds-upper-bound-reach-4pt5-or-higher-before-2027-835-459",
 "T_pre": 1794309000,
@@ -2430,6 +3680,16 @@
 "last": 1794482100
 },
 {
+"c": "0xb7e58bb8beb863161f6e85c1ee06f1f912125bbab0f0eddf2c40f6967aecbef6",
+"slug": "will-trump-pardon-jensen-huang-before-2027",
+"T_pre": 1794509400,
+"p_pre": 0.5,
+"T_post": 1794510000,
+"p_post": 0.08,
+"bucket": 300,
+"last": 1794509700
+},
+{
 "c": "0x6a8eca0acc5906e7b11c48b3fc263f4feb25e7e03daf47c6860a2c6a38e2c746",
 "slug": "will-jensen-huang-publicly-testify-before-congress-by-june-30-2027",
 "T_pre": 1794513900,
@@ -2438,6 +3698,16 @@
 "p_post": 0.915,
 "bucket": 300,
 "last": 1794514500
+},
+{
+"c": "0xe3baa245e6ea1e88ecb18bf6a3178669fcf84e219f62bc32ecac20834f59e85a",
+"slug": "will-jensen-huang-publicly-testify-before-congress-by-march-31-2027",
+"T_pre": 1794514800,
+"p_pre": 0.835,
+"T_post": 1794515400,
+"p_post": 0.43,
+"bucket": 300,
+"last": 1794517500
 },
 {
 "c": "0x559585d3b9ea635c7f497a524a02839c5d6492345d153280077f534e04d01d60",
@@ -2450,6 +3720,16 @@
 "last": 1794528000
 },
 {
+"c": "0xf35270facfc29fca340b4b8b2cfabd670797be3fd3bc09a3c5253c1c757a58c1",
+"slug": "will-branko-milutinovic-be-the-next-prime-minister-of-serbia-20260629223938658",
+"T_pre": 1794528600,
+"p_pre": 0.005,
+"T_post": 1794529200,
+"p_post": 0.505,
+"bucket": 300,
+"last": 1794528900
+},
+{
 "c": "0x55018620eb2dbf1f715fd9215dc1a51673b14b0e092c1d5f13319bb912ddd329",
 "slug": "china-ballistic-missile-launch-by-december-31-20260706145934670",
 "T_pre": 1794568500,
@@ -2458,6 +3738,16 @@
 "p_post": 0.595,
 "bucket": 300,
 "last": 1794568800
+},
+{
+"c": "0xb4bc952b12bf4f6e8e1e32d0b70d56cb70ac6aac22b65ec2fe553eceb440fc0c",
+"slug": "will-rob-sand-win-the-2028-democratic-presidential-nomination",
+"T_pre": 1794592200,
+"p_pre": 0.495,
+"T_post": 1794592500,
+"p_post": 0.01,
+"bucket": 300,
+"last": 1794592200
 },
 {
 "c": "0x9c8c0ef1a573ea1b641900c2cd9f55f084925576fde1c178410146afe348264b",
@@ -2478,6 +3768,56 @@
 "p_post": 0.085,
 "bucket": 300,
 "last": 1794606900
+},
+{
+"c": "0xc34866f36dae9159b0850c92e659e6d9641a4d57fb8d3b75ac35b623b8c87e40",
+"slug": "faa-nationwide-ground-stop-lifted-by-november-13-1159pm-et",
+"T_pre": 1794607200,
+"p_pre": 0.5,
+"T_post": 1794607800,
+"p_post": 0.92,
+"bucket": 300,
+"last": 1794607200
+},
+{
+"c": "0xd256595fb7e880fb0f2a07b105911608f7357aa7de2cac70115f7960d60d8dff",
+"slug": "faa-nationwide-ground-stop-lifted-by-november-13-6pm-et",
+"T_pre": 1794607500,
+"p_pre": 0.5,
+"T_post": 1794607800,
+"p_post": 0.1,
+"bucket": 300,
+"last": 1794607500
+},
+{
+"c": "0xde3eb3be484adfb82df875862409dba98cfdbd1707d4f4d2a88c260500031677",
+"slug": "faa-nationwide-ground-stop-lifted-by-november-13-7pm-et",
+"T_pre": 1794609300,
+"p_pre": 0.495,
+"T_post": 1794609900,
+"p_post": 0.06,
+"bucket": 300,
+"last": 1794609300
+},
+{
+"c": "0xbb9fbe35f962cc063091c70d7b469568e76d76896aebba44077fab27f9a6c92d",
+"slug": "faa-nationwide-ground-stop-lifted-by-november-13-10pm-et",
+"T_pre": 1794618600,
+"p_pre": 0.105,
+"T_post": 1794619200,
+"p_post": 0.93,
+"bucket": 300,
+"last": 1794618900
+},
+{
+"c": "0xc34866f36dae9159b0850c92e659e6d9641a4d57fb8d3b75ac35b623b8c87e40",
+"slug": "faa-nationwide-ground-stop-lifted-by-november-13-1159pm-et",
+"T_pre": 1794618600,
+"p_pre": 0.33,
+"T_post": 1794619200,
+"p_post": 0.995,
+"bucket": 300,
+"last": 1794618900
 },
 {
 "c": "0x452b8bb0f99644225b0c05b149ea8c0de495643e700f522c695ff6fe8132e75d",
@@ -2558,6 +3898,16 @@
 "p_post": 0.375,
 "bucket": 300,
 "last": 1795028100
+},
+{
+"c": "0xfaa4ebb4d59570d553b9bf42fe48bde93db3bcda30e19308235e743f2e9d0636",
+"slug": "will-vesna-spasojevic-brkic-be-the-next-prime-minister-of-serbia-20260629223938659",
+"T_pre": 1795136280,
+"p_pre": 0.015,
+"T_post": 1795136760,
+"p_post": 0.5035,
+"bucket": 60,
+"last": 1795136700
 },
 {
 "c": "0x7786e6cc2a49fcd0ec96d5989bb76135dd95adf378e44fc0ae12fc7120dc486a",

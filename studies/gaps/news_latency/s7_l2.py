@@ -146,6 +146,8 @@ def main():
     pool = [j for j in jumps if j["status"] == "main" and labels.get((j["c"], str(j["t0"])), "unscheduled") == "unscheduled"]
     rng = random.Random(20261127)
     pick = pool if len(pool) <= 30 else rng.sample(pool, 30)
+    if len(sys.argv) > 1:              # Amendment 2: first N of the seeded draw, in draw order
+        pick = pick[:int(sys.argv[1])]
     tok = {}
     with gzip.open(HERE.parents[2] / "data" / "gaps_news" / "markets_all.jsonl.gz", "rt") as f:
         want = {j["c"] for j in pick}

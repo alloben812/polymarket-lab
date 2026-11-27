@@ -29,32 +29,41 @@ def b2i(b):
 
 
 def load_top(tag):
+    import pyarrow as pa
     t = pq.read_table(f"{D}/hours/{tag}.ev.parquet", columns=["event_type", "timestamp", "asset_id", "best_bid",
                       "best_ask", "recv_lag_ms", "row_ordinal"])
-    t = t.filter(pc.is_in(t["event_type"], value_set=__import__("pyarrow").array(["price_change", "best_bid_ask"])))
-    df = t.to_pandas()
-    df = df[df.best_bid.notna() & df.best_ask.notna()]
-    ua = pd.Series(df.asset_id.unique())
-    amap = {a: TOK.get(b2i(a)) for a in ua}
-    df["cond"] = df.asset_id.map(lambda a: amap[a][0] if amap[a] else None)
-    df["isyes"] = df.asset_id.map(lambda a: amap[a][1] if amap[a] else -1)
-    df = df[df.cond.notna()]
-    bb, ba = df.best_bid.astype(float).values, df.best_ask.astype(float).values
+    t = t.filter(pc.is_in(t["event_type"], value_set=pa.array(["price_change", "best_bid_ask"])))
+    t = t.filter(pc.and_(pc.is_valid(t["best_bid"]), pc.is_valid(t["best_ask"])))
+    da = pc.dictionary_encode(t["asset_id"]).combine_chunks()
+    keys = [TOK.get(b2i(a)) for a in da.dictionary.to_pylist()]
+    ci = np.array([(-1 if k is None else 0) for k in keys])
+    conds = np.array([k[0] if k else None for k in keys], dtype=object)
+    isy = np.array([k[1] if k else -1 for k in keys])
+    ind = da.indices.to_numpy()
+    df = pd.DataFrame({
+        "ts": t["timestamp"].cast(pa.int64()).to_numpy() + t["recv_lag_ms"].to_numpy(),
+        "timestamp": t["timestamp"].cast(pa.int64()).to_numpy(),
+        "row_ordinal": t["row_ordinal"].to_numpy(),
+        "cond": conds[ind], "isyes": isy[ind],
+        "bb": t["best_bid"].cast(pa.float64()).to_numpy(), "ba": t["best_ask"].cast(pa.float64()).to_numpy()})
+    df = df[df.isyes >= 0]
     y = df.isyes.values == 1
-    df["yb"] = np.where(y, bb, 1 - ba); df["ya"] = np.where(y, ba, 1 - bb)
-    df["ts"] = df.timestamp.astype("int64") // 10**6 + df.recv_lag_ms.astype("int64") if str(df.timestamp.dtype).find("ms") >= 0 else None
+    df["yb"] = np.where(y, df.bb.values, 1 - df.ba.values); df["ya"] = np.where(y, df.ba.values, 1 - df.bb.values)
     return df[["ts", "row_ordinal", "cond", "isyes", "yb", "ya", "timestamp"]]
 
 
 def load_open(tag):
-    o = pq.read_table(f"{D}/hours/{tag}.open.parquet", columns=["asset_id", "best_bid", "best_ask", "resolved"]).to_pandas()
+    import pyarrow as pa
+    o = pq.read_table(f"{D}/hours/{tag}.open.parquet", columns=["asset_id", "best_bid", "best_ask", "resolved"])
+    o = pa.table({"asset_id": o["asset_id"], "best_bid": o["best_bid"].cast(pa.float64()),
+                  "best_ask": o["best_ask"].cast(pa.float64()), "resolved": o["resolved"]}).to_pandas()
     res = {}
     for a, bb, ba, r in zip(o.asset_id, o.best_bid, o.best_ask, o.resolved):
         k = TOK.get(b2i(a))
         if not k:
             continue
         c, y = k
-        bb = float(bb) if bb is not None else 0.0; ba = float(ba) if ba is not None else 1.0
+        bb = 0.0 if pd.isna(bb) else float(bb); ba = 1.0 if pd.isna(ba) else float(ba)
         if y == 1 or c not in res:
             res[c] = (bb, ba, bool(r)) if y == 1 else (1 - ba, 1 - bb, bool(r))
     return res

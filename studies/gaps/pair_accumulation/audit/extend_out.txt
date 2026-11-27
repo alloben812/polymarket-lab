@@ -1,0 +1,24 @@
+## conservative (strictly through), skip on
+L=0.49: pooled -1.166 (t -12.0) | 5m -1.07 (t -10.6) | 15m -1.42 (t -8.8) | 1h -2.30 (t -7.5) | legs filled 6964, win 0.431, net/share -0.0591
+L=0.48: pooled -1.200 (t -11.7) | 5m -1.11 (t -10.6) | 15m -1.43 (t -9.2) | 1h -2.23 (t -6.8) | legs filled 7445, win 0.424, net/share -0.0557
+L=0.47: pooled -1.233 (t -11.9) | 5m -1.14 (t -10.6) | 15m -1.40 (t -8.7) | 1h -2.34 (t -7.2) | legs filled 7909, win 0.417, net/share -0.0528
+L=0.46: pooled -1.261 (t -11.9) | 5m -1.17 (t -10.8) | 15m -1.38 (t -8.2) | 1h -2.27 (t -6.7) | legs filled 8323, win 0.410, net/share -0.0502
+L=0.35: pooled -1.370 (t -8.7) | 5m -1.27 (t -8.4) | 15m -1.53 (t -5.9) | 1h -2.47 (t -4.5) | legs filled 9909, win 0.315, net/share -0.0348
+L=0.2: pooled -2.087 (t -8.4) | 5m -2.02 (t -8.0) | 15m -2.11 (t -5.0) | 1h -2.88 (t -3.6) | legs filled 8578, win 0.165, net/share -0.0350
+L=0.1: pooled -3.400 (t -9.7) | 5m -3.19 (t -8.9) | 15m -2.73 (t -4.5) | 1h -5.76 (t -6.2) | legs filled 7678, win 0.068, net/share -0.0319
+## touch (<=), skip on
+L=0.49: pooled -1.088 (t -11.2) | 5m -0.99 (t -9.8) | 15m -1.31 (t -8.0) | 1h -2.18 (t -7.2) | legs filled 7018, win 0.435, net/share -0.0547
+L=0.48: pooled -1.117 (t -11.0) | 5m -1.04 (t -9.9) | 15m -1.34 (t -8.5) | 1h -2.06 (t -6.5) | legs filled 7500, win 0.429, net/share -0.0515
+L=0.47: pooled -1.131 (t -10.9) | 5m -1.05 (t -9.8) | 15m -1.27 (t -7.9) | 1h -2.07 (t -6.4) | legs filled 7974, win 0.422, net/share -0.0480
+L=0.46: pooled -1.161 (t -11.0) | 5m -1.09 (t -9.9) | 15m -1.30 (t -7.6) | 1h -2.03 (t -6.3) | legs filled 8384, win 0.414, net/share -0.0459
+L=0.35: pooled -1.091 (t -6.9) | 5m -0.99 (t -6.4) | 15m -1.13 (t -4.2) | 1h -2.31 (t -4.2) | legs filled 10017, win 0.323, net/share -0.0274
+L=0.2: pooled -1.512 (t -5.8) | 5m -1.42 (t -5.4) | 15m -1.32 (t -2.9) | 1h -2.60 (t -3.2) | legs filled 8684, win 0.175, net/share -0.0251
+L=0.1: pooled -2.214 (t -6.0) | 5m -2.02 (t -5.3) | 15m -1.67 (t -2.5) | 1h -4.39 (t -4.3) | legs filled 7784, win 0.080, net/share -0.0205
+## conservative, NO skip (placed even if ask already <= L: fills as taker at L is NOT modelled; see note)
+L=0.49: pooled -2.311 (t -28.0) | 5m -2.31 (t -27.8) | 15m -2.13 (t -17.8) | 1h -2.34 (t -9.3) | legs filled 12519, win 0.425, net/share -0.0651
+L=0.48: pooled -2.211 (t -24.9) | 5m -2.21 (t -24.7) | 15m -2.03 (t -15.8) | 1h -2.25 (t -8.2) | legs filled 12377, win 0.418, net/share -0.0617
+L=0.47: pooled -2.108 (t -22.6) | 5m -2.09 (t -22.3) | 15m -1.98 (t -14.3) | 1h -2.29 (t -7.7) | legs filled 12239, win 0.412, net/share -0.0583
+L=0.46: pooled -2.016 (t -20.5) | 5m -1.99 (t -20.2) | 15m -1.86 (t -12.6) | 1h -2.30 (t -7.1) | legs filled 12095, win 0.405, net/share -0.0552
+L=0.35: pooled -1.524 (t -9.4) | 5m -1.44 (t -9.1) | 15m -1.55 (t -5.9) | 1h -2.47 (t -4.5) | legs filled 10483, win 0.313, net/share -0.0366
+L=0.2: pooled -2.106 (t -8.4) | 5m -2.04 (t -8.0) | 15m -2.11 (t -5.0) | 1h -2.88 (t -3.6) | legs filled 8601, win 0.165, net/share -0.0353
+L=0.1: pooled -3.400 (t -9.7) | 5m -3.19 (t -8.9) | 15m -2.73 (t -4.5) | 1h -5.76 (t -6.2) | legs filled 7678, win 0.068, net/share -0.0319

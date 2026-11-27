@@ -12,12 +12,13 @@ def main():
     pool = [first[k] for k in sorted(first)]
     rng = random.Random(20261127)
     pick = pool if len(pool) <= 40 else rng.sample(pool, 40)
+    order = {j["cluster"]: k for k, j in enumerate(pick)}   # Amendment 2: draw order kept in a column
     pick.sort(key=lambda j: j["t0"])
     with open(OUT / "news_sample.csv", "w", newline="") as f:
         w = csv.writer(f)
-        w.writerow(["cluster", "t0", "t0_iso", "dir", "pf_pre", "p10", "slug", "question"])
+        w.writerow(["draw", "cluster", "t0", "t0_iso", "dir", "pf_pre", "p10", "slug", "question"])
         for j in pick:
-            w.writerow([j["cluster"], j["t0"], j["t0_iso"], "YES" if j["dir"] > 0 else "NO", j["pf_pre"], j["p10"], j["slug"], j["question"]])
+            w.writerow([order[j["cluster"]], j["cluster"], j["t0"], j["t0_iso"], "YES" if j["dir"] > 0 else "NO", j["pf_pre"], j["p10"], j["slug"], j["question"]])
             print(j["cluster"], j["t0_iso"], "YES" if j["dir"] > 0 else "NO", j["pf_pre"], "->", j["p10"], "|", j["question"])
     print("pool", len(pool), "picked", len(pick))
 

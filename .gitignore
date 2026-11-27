@@ -12,3 +12,5 @@ studies/**/*.jsonl.gz
 studies/**/*.parquet
 studies/**/fills*.json
 studies/**/tapes/
+venv/
+pilot/out/

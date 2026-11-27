@@ -48,13 +48,8 @@ def http_get_json(url, timeout=TIMEOUT):
 
 def mask_ip(ip):
     if not ip:
-        return "?"
-    if ":" in ip:
-        return ip.split(":")[0] + ":****"
-    parts = ip.split(".")
-    if len(parts) == 4:
-        return parts[0] + ".*.*.*"
-    return "****"
+        return "(not returned)"
+    return ("IPv6" if ":" in ip else "IPv4") + " ***.***"  # never shown, never saved
 
 
 def geoblock():

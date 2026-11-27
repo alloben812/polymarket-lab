@@ -279,12 +279,58 @@ def test_declines_stale_anchor_and_honors_tick_update():
     assert current["price"] == "0.932"
 
 
-def test_late_receipt_or_official_resolution_prevents_intent():
+def test_ws_market_resolution_prevents_intent_before_nominal_expiry():
     scenario = start()
-    scenario.row("resolution", MATCH, 25, slug=SLUG, condition_id=CONDITION)
+    scenario.row(
+        "ws",
+        MATCH,
+        25,
+        source="websocket",
+        payload={
+            "event_type": "market_resolved",
+            "market": CONDITION,
+            "assets_ids": [UP, DOWN],
+        },
+    )
     [resolved] = scenario.trade()
     assert resolved["reason"] == "market_closed"
 
+
+def gamma_resolution(**changes):
+    return {
+        "slug": SLUG,
+        "condition_id": CONDITION,
+        "source": "gamma",
+        "payouts": {"Up": 1, "Down": 0},
+        **changes,
+    }
+
+
+def test_early_gamma_resolution_does_not_close_market():
+    scenario = start()
+    scenario.row("resolution", MATCH, 25, **gamma_resolution())
+    [decision] = scenario.trade()
+    assert decision["action"] == "intent"
+
+
+@pytest.mark.parametrize(
+    ("changes", "closed"),
+    [
+        ({}, True),
+        ({"source": "unverified"}, False),
+        ({"condition_id": "0x" + "cd" * 32}, False),
+        ({"payouts": {"Up": 1}}, False),
+        ({"payouts": {"Up": 0.8, "Down": 0.8}}, False),
+    ],
+)
+def test_gamma_resolution_after_expiry_checks_market_and_payouts(changes, closed):
+    scenario = start()
+    scenario.row("resolution", END, 25, **gamma_resolution(**changes))
+    # After expiry all trades are independently rejected by their time gate.
+    assert (SLUG in scenario.strategy._closed) is closed
+
+
+def test_late_receipt_prevents_intent():
     scenario = start()
     [late] = scenario.trade(event_time=END - 2, recv_time=END - 2, recv_ms=1)
     assert late["reason"] == "outside_entry_window"

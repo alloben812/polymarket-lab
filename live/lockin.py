@@ -25,6 +25,7 @@ from pmlab.fees import fee_per_share
 from pmlab.px import Px
 
 from .book import BookReplay
+from .settlement import confirmed_payouts
 
 SECOND_NS = 1_000_000_000
 MILLISECOND_NS = 1_000_000
@@ -64,6 +65,7 @@ def _fresh(recv_ns: int, timestamp_ns: int) -> bool:
 class Lockin:
     def __init__(self):
         self._markets: dict[str, tuple[dict, str]] = {}
+        self._markets_by_slug: dict[str, dict] = {}
         self._closed: set[str] = set()
         self._ticks: dict[str, tuple[int, Decimal]] = {}
         self._bars: dict[int, tuple[float, int]] = {}
@@ -170,6 +172,7 @@ class Lockin:
                 and market.get("slug") == f"btc-updown-5m-{start}"
                 and set(market["tokens"]) == {"Up", "Down"}
             ):
+                self._markets_by_slug[market["slug"]] = market
                 for outcome, token in market["tokens"].items():
                     self._markets[token] = (market, outcome)
             return []
@@ -177,7 +180,9 @@ class Lockin:
             self._reference(row)
             return []
         if kind == "resolution":
-            self._closed.add(row["slug"])
+            market = self._markets_by_slug.get(row.get("slug"))
+            if market is not None and confirmed_payouts(row, market) is not None:
+                self._closed.add(market["slug"])
             return []
         if kind != "ws":
             return []

@@ -1,0 +1,21 @@
+
+######## C03B  fills 563  1793980800..1795795200 (21 d)  inv {'REDEEM': 61, 'MERGE': 1}
+type             mkts fills      usd  mk% buy% medpx |  res    net$   net%     t win% | open    mtm$ | timing by usd (vs endDate) | ET session
+other              15   142   311386  82%  79%  1.00 |   10     680   0.2%   1.1  80% |    4    1003 | after end:19% 6.5-24h:0% 1-7d:6% >7d:74% | RTH:48% pre:29% post:20% night:3%  inc=1
+hit-month          29   254   144819  63%  83%  0.96 |    4     -65  -0.3%  -0.1  75% |   22    6138 | 1-7d:5% >7d:95% | RTH:59% night:16% post:15% pre:10%  inc=3
+mcap                6    35    99461   8% 100%  0.96 |    6     325   0.3%   0.2  83% |    0       0 | >7d:100% | RTH:89% post:10% night:1%  inc=0
+updown-day         10    19    51166   4% 100%  0.93 |    9    -123  -0.2%  -0.4  89% |    0       0 | after end:98% 0-10m:1% 10-60m:1% 1-6.5h:1% | RTH:99% post:1%  inc=1
+ipo                 8    24    38614  53%  71%  0.97 |    8     318   0.8%   1.8  88% |    0       0 | 6.5-24h:25% 1-7d:14% >7d:61% | pre:45% post:29% RTH:18% night:8%  inc=0
+crypto              8    21    29174  86%  94%  0.81 |    5     357   1.3%   1.3  60% |    0       0 | after end:85% 0-10m:5% >7d:10% | RTH:90% night:7% pre:2% post:0%  inc=3
+hit-week           25    48    12055  21%  85%  0.98 |   19    3750  37.2%   1.0  95% |    3     -86 | after end:5% 10-60m:11% 1-6.5h:66% 6.5-24h:1% 1-7d:17% | post:52% RTH:37% night:9% pre:2%  inc=3
+close-day          12    18     4191  16% 100%  0.86 |   12    -793 -18.9%  -1.1  75% |    0       0 | 0-10m:43% 10-60m:3% 1-6.5h:53% | post:54% RTH:46%  inc=0
+updown-intraday     1     2       24 100% 100%  0.05 |    1     -24-100.0%   nan   0% |    0       0 | 0-10m:100% | night:100%  inc=0
+TOTAL resolved net 4424  open marked 7054  turnover 690892
+
+######## Hauchn  fills 387  1793980800..1795795200 (21 d)  inv {'REDEEM': 1, 'MERGE': 13}
+type             mkts fills      usd  mk% buy% medpx |  res    net$   net%     t win% | open    mtm$ | timing by usd (vs endDate) | ET session
+mcap               20   370   153602  16%  81%  0.56 |    0       0   nan%   nan nan% |   12   12999 | 1-7d:1% >7d:99% | pre:56% RTH:29% night:9% post:6%  inc=8
+other               2    12     6689   2% 100%  0.36 |    0       0   nan%   nan nan% |    2     -79 | >7d:100% | pre:87% night:7% RTH:6%  inc=0
+hit-month           2     2     1025   0% 100%  0.46 |    1     220  44.9%   nan 100% |    1     -12 | >7d:100% | pre:100%  inc=0
+hit-week            1     3      631   0% 100%  0.34 |    0       0   nan%   nan nan% |    1    -623 | 1-7d:100% | pre:100%  inc=0
+TOTAL resolved net 220  open marked 12285  turnover 161947

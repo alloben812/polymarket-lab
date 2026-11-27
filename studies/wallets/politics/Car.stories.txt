@@ -1,0 +1,96 @@
+
+* us-x-iran-effective-ceasefire-by-november-15-20261108  (fee type None, end 2026-11-15T20:29:00Z, closed 2026-11-17 21:31:39.919089+00, volume $549,981)
+  rules: This market will resolve to “Yes” if a continuous 14-day period during which the United States does not take a qualifying military action against Iran is completed, where the first day of that period is between market creation and the specified date (Iran Standard Time). Otherwise, this market will resolve to “No.” The first day
+  source field: - | jump 11-17 19:19:46 UTC 0.31 -> 0.03 (YES), takers in first 60 s: 23; account first fill lag 1 s
+  account: 30 min before: -
+           0-5 min after: T BUY No 24320 sh @ 0.917; M BUY No 2033 sh @ 0.931
+           5 min - 24 h after: T BUY No 202 sh @ 0.989
+  net shares over the 30-day window: {'Yes': 6696, 'No': 34029}; resolved True final {'Yes': 0.0, 'No': 1.0}
+
+* us-x-iran-effective-ceasefire-by-november-22-20261108  (fee type None, end 2026-11-22T20:29:00Z, closed None, volume $817,597)
+  rules: This market will resolve to “Yes” if a continuous 14-day period during which the United States does not take a qualifying military action against Iran is completed, where the first day of that period is between market creation and the specified date (Iran Standard Time). Otherwise, this market will resolve to “No.” The first day
+  source field: - | jump 11-08 17:20:15 UTC 0.48 -> 0.57 (YES), takers in first 60 s: 11; account first fill lag 0 s
+  account: 30 min before: -
+           0-5 min after: T BUY Yes 11388 sh @ 0.516; M SELL Yes 366 sh @ 0.590
+           5 min - 24 h after: M SELL Yes 2384 sh @ 0.533; T SELL Yes 2222 sh @ 0.520; T BUY No 2410 sh @ 0.490
+  net shares over the 30-day window: {'Yes': 12663, 'No': 11681}; resolved False final {'Yes': None, 'No': None}
+
+* pete-hegseth-out-as-secretary-of-defense-by-december-31  (fee type politics_fees, end 2027-01-01T04:59:00Z, closed None, volume $3,316,733)
+  rules: This market will resolve to “Yes” if Pete Hegseth ceases to be U.S. Secretary of Defense for any period of time between market creation and the specified date (ET). Otherwise, this market will resolve to “No”. An announcement of Pete Hegseth's resignation/removal before this market's end date will immediately resolve this market
+  source field: - | jump 11-04 18:22:36 UTC 0.62 -> 0.42 (YES), takers in first 60 s: 50; account first fill lag 0 s
+  account: 30 min before: -
+           0-5 min after: T BUY No 3665 sh @ 0.455; M BUY No 11 sh @ 0.430; M SELL No 3676 sh @ 0.590
+           5 min - 24 h after: -
+  net shares over the 30-day window: {'Yes': 2582, 'No': 3218}; resolved False final {'Yes': None, 'No': None}
+
+* trump-meets-with-putin-by-november-30  (fee type politics_fees, end 2026-12-01T04:59:00Z, closed 2026-11-18 13:45:08.235271+00, volume $93,868)
+  rules: This market will resolve to "Yes" if Donald Trump meets with Vladimir Putin between market creation and the listed date, 11:59 PM ET. Otherwise, this market will resolve to "No". A meeting is defined as any encounter where both Trump and Putin are present and interact with each other in person. An exchange of words, handshake, d
+  source field: - | jump 10-29 17:17:11 UTC 0.84 -> 0.47 (YES), takers in first 60 s: 11; account first fill lag 0 s
+  account: 30 min before: -
+           0-5 min after: T SELL Yes 3052 sh @ 0.602
+           5 min - 24 h after: -
+  net shares over the 30-day window: {'Yes': -3052}; resolved True final {'Yes': 1.0, 'No': 0.0}
+
+* faa-nationwide-ground-stop-lifted-by-november-14-12pm-et  (fee type politics_fees, end 2026-11-14T17:00:00Z, closed 2026-11-14 03:45:39.999923+00, volume $108,605)
+  rules: The FAA issued a nationwide ground stop for flights departing U.S. airports on November 13, 2026 (see: https://www.cnn.com/2026/11/13/us/faa-nationwide-ground-stop). This market will resolve to “Yes” if the FAA, the U.S. Department of Transportation, or their authorized representatives officially announce that this nationwide gr
+  source field: - | jump 11-14 01:14:32 UTC 0.85 -> 0.98 (YES), takers in first 60 s: 8; account first fill lag 41 s
+  account: 30 min before: M SELL No 1013 sh @ 0.201
+           0-5 min after: T BUY Yes 2662 sh @ 0.858
+           5 min - 24 h after: -
+  net shares over the 30-day window: {'Yes': 2730, 'No': 1989}; resolved True final {'Yes': 1.0, 'No': 0.0}
+
+* will-trump-call-for-jensen-huangs-return-as-nvidia-ceo-by-november-30-2026  (fee type politics_fees, end 2026-12-01T04:59:00Z, closed 2026-11-23 05:23:58.759498+00, volume $160,363)
+  rules: On November 12, 2026, NVIDIA announced that Jensen Huang had resigned as its President, Chief Executive Officer, and a member of its Board of Directors, effective immediately. This market will resolve to "Yes" if Donald Trump publicly calls for Jensen Huang's return as CEO of NVIDIA between market creation and the specified date
+  source field: - | jump 11-23 02:54:58 UTC 0.24 -> 0.72 (YES), takers in first 60 s: 21; account first fill lag 31 s
+  account: 30 min before: -
+           0-5 min after: T BUY Yes 1096 sh @ 0.929; M BUY Yes 1044 sh @ 0.784
+           5 min - 24 h after: T BUY No 4365 sh @ 0.318; M BUY No 1000 sh @ 0.260; T SELL No 1000 sh @ 0.250; T BUY Yes 1775 sh @ 0.738; M BUY Yes 1397 sh @ 0.705
+  net shares over the 30-day window: {'Yes': 5312, 'No': 4365}; resolved True final {'Yes': 1.0, 'No': 0.0}
+
+* us-x-iran-effective-ceasefire-by-november-8-20261108  (fee type None, end 2026-11-08T20:29:00Z, closed 2026-11-17 21:30:04.206222+00, volume $1,012,745)
+  rules: This market will resolve to “Yes” if a continuous 14-day period during which the United States does not take a qualifying military action against Iran is completed, where the first day of that period is between market creation and the specified date (Iran Standard Time). Otherwise, this market will resolve to “No.” The first day
+  source field: - | jump 11-17 19:19:41 UTC 0.31 -> 0.02 (YES), takers in first 60 s: 12; account first fill lag 5 s
+  account: 30 min before: -
+           0-5 min after: T BUY No 3929 sh @ 0.910
+           5 min - 24 h after: T BUY No 4522 sh @ 0.990
+  net shares over the 30-day window: {'Yes': 5048, 'No': 9793}; resolved True final {'Yes': 0.0, 'No': 1.0}
+
+* will-magdalena-andersson-be-the-next-prime-minister-of-sweden  (fee type politics_fees, end 2027-07-01T03:59:00Z, closed None, volume $4,196,434)
+  rules: Parliamentary elections are scheduled to be held in Sweden on September 13, 2026. This market will resolve to the next individual who is officially appointed and assumes office as Prime Minister of Sweden following the next parliamentary election. To count for resolution, the individual must officially assume office. Any interim
+  source field: - | jump 11-15 18:49:13 UTC 0.34 -> 0.78 (YES), takers in first 60 s: 18; account first fill lag 226 s
+  account: 30 min before: -
+           0-5 min after: T BUY Yes 2055 sh @ 0.691
+           5 min - 24 h after: M SELL Yes 666 sh @ 0.695
+  net shares over the 30-day window: {'Yes': 1389}; resolved False final {'Yes': None, 'No': None}
+
+* pete-hegseth-out-as-secretary-of-defense-by-october-31-20261001003401433  (fee type politics_fees, end 2026-12-01T04:59:00Z, closed None, volume $1,324,922)
+  rules: This market will resolve to “Yes” if Pete Hegseth ceases to be U.S. Secretary of Defense for any period of time between market creation and the specified date, 11:59 PM ET. Otherwise, this market will resolve to “No”. An announcement of Pete Hegseth's resignation/removal by this market's end date will immediately resolve this ma
+  source field: - | jump 11-04 18:22:21 UTC 0.60 -> 0.34 (YES), takers in first 60 s: 14; account first fill lag 3 s
+  account: 30 min before: -
+           0-5 min after: M BUY Yes 1847 sh @ 0.270; M SELL Yes 45 sh @ 0.419
+           5 min - 24 h after: M SELL Yes 1801 sh @ 0.390
+  net shares over the 30-day window: {'Yes': -1000, 'No': 0}; resolved False final {'Yes': None, 'No': None}
+
+* next-white-house-press-secretary-announced-by-november-30-2026  (fee type politics_fees, end 2026-12-01T04:59:00Z, closed None, volume $742,203)
+  rules: This market will resolve to "Yes" if Donald Trump or the Trump administration announces a new White House Press Secretary to replace Katie Zacharia between market creation and the specified date, 11:59 PM ET. Otherwise, this market will resolve to "No". An individual announced as an acting or interim Press Secretary will not qua
+  source field: - | jump 11-06 23:34:36 UTC 0.56 -> 0.47 (YES), takers in first 60 s: 1; account first fill lag 0 s
+  account: 30 min before: T SELL Yes 354 sh @ 0.570
+           0-5 min after: T BUY No 815 sh @ 0.438
+           5 min - 24 h after: M SELL No 815 sh @ 0.560; M BUY No 213 sh @ 0.122; T BUY No 327 sh @ 0.399; T SELL No 539 sh @ 0.480; M BUY Yes 1600 sh @ 0.415
+  net shares over the 30-day window: {'Yes': 2474, 'No': 0}; resolved False final {'Yes': None, 'No': None}
+
+* will-trump-meet-with-kim-jong-un-in-2026  (fee type politics_fees, end 2027-01-02T04:59:00Z, closed None, volume $450,370)
+  rules: This market will resolve to "Yes" if the listed individual meets with Donald Trump between January 1, and December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to "No". A meeting is defined as any encounter where both listed individual and Trump are present and interact with each other in person. The resolution sou
+  source field: - | jump 11-16 14:28:26 UTC 0.09 -> 0.17 (YES), takers in first 60 s: 7; account first fill lag 0 s
+  account: 30 min before: T BUY Yes 4503 sh @ 0.071
+           0-5 min after: M BUY No 3832 sh @ 0.816
+           5 min - 24 h after: -
+  net shares over the 30-day window: {'Yes': 4503, 'No': 3832}; resolved False final {'Yes': None, 'No': None}
+
+* faa-nationwide-ground-stop-lifted-by-november-13-10pm-et  (fee type politics_fees, end 2026-11-14T03:00:00Z, closed 2026-11-14 03:43:14.38911+00, volume $347,858)
+  rules: The FAA issued a nationwide ground stop for flights departing U.S. airports on November 13, 2026 (see: https://www.cnn.com/2026/11/13/us/faa-nationwide-ground-stop). This market will resolve to “Yes” if the FAA, the U.S. Department of Transportation, or their authorized representatives officially announce that this nationwide gr
+  source field: - | jump 11-14 01:14:56 UTC 0.14 -> 0.93 (YES), takers in first 60 s: 16; account first fill lag 20 s
+  account: 30 min before: M SELL Yes 222 sh @ 0.110; M BUY Yes 555 sh @ 0.096
+           0-5 min after: T BUY Yes 10 sh @ 0.300; M BUY Yes 19 sh @ 0.310; M SELL Yes 1702 sh @ 0.890
+           5 min - 24 h after: T BUY Yes 555 sh @ 0.960
+  net shares over the 30-day window: {'Yes': 1524, 'No': 969}; resolved True final {'Yes': 1.0, 'No': 0.0}

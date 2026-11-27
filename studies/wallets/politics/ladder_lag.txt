@@ -1,0 +1,17 @@
+events with a multi-leg jump cluster: 12; follower legs: 52
+  lag leader -> follower leg (s): p10 0, median 12.0, p90 133;  followers lagging >= 5 s: 33, >= 30 s: 18
+  follower legs with at least one print at the OLD level after the leader moved (+3 s): 16; shares printed stale 10,963; value vs level 5 min later $3,751
+   11-14 01:13:17 faa-nationwide-ground-stop-lifted-by-november-13-9pm-et  lag  119 s  0.07->0.86  stale prints   3 (   3858 sh) value $  +3091
+   11-12 17:19:13 us-x-iran-effective-ceasefire-by-november-30-20261108    lag  177 s  0.66->0.57  stale prints  16 (   1709 sh) value $   +167
+   11-23 22:12:04 will-magdalena-andersson-be-the-next-prime-minister-of-s lag  244 s  0.35->0.30  stale prints  15 (   1817 sh) value $    +90
+   11-25 19:29:54 us-x-iran-effective-ceasefire-by-november-30-20261108    lag   63 s  0.70->0.57  stale prints   1 (    525 sh) value $    +70
+   04-16 00:38:28 will-delcy-rodrguez-be-the-leader-of-venezuela-end-of-20 lag  102 s  0.60->0.51  stale prints  42 (    956 sh) value $    +69
+   11-17 19:19:41 us-x-iran-effective-ceasefire-by-november-22-20261108    lag   12 s  0.47->0.35  stale prints   2 (    531 sh) value $    +68
+   11-06 14:50:12 will-magdalena-andersson-be-the-next-prime-minister-of-s lag  133 s  0.57->0.39  stale prints   2 (    345 sh) value $    +62
+   11-12 10:11:49 will-ulf-kristersson-be-the-next-prime-minister-of-swede lag   36 s  0.46->0.31  stale prints   4 (    376 sh) value $    +58
+   11-17 19:19:41 us-x-iran-effective-ceasefire-by-november-30-20261108    lag   12 s  0.59->0.45  stale prints   1 (    217 sh) value $    +30
+   09-04 20:38:10 russia-x-ukraine-ceasefire-agreement-by-march-31-2027    lag  212 s  0.46->0.53  stale prints   9 (    271 sh) value $    +16
+   11-20 13:38:13 will-ulf-kristersson-be-the-next-prime-minister-of-swede lag   18 s  0.40->0.46  stale prints   7 (    146 sh) value $    +10
+   09-21 13:04:00 will-delcy-rodrguez-be-the-leader-of-venezuela-end-of-20 lag   12 s  0.46->0.56  stale prints   1 (     73 sh) value $     +7
+   09-13 18:01:43 will-magdalena-andersson-be-the-next-prime-minister-of-s lag   33 s  0.72->0.91  stale prints   3 (     29 sh) value $     +5
+   11-12 17:19:13 us-x-iran-effective-ceasefire-by-november-8-20261108     lag  251 s  0.13->0.21  stale prints   2 (     52 sh) value $     +4

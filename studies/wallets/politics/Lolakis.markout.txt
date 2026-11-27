@@ -1,0 +1,6 @@
+Lolakis: 799 fills in 30 markets (family politics); cents per share, share-weighted, clustered by market
+  M BUY  n   196 sh    152434 | pre -0.87 (t -8.1, 28 mk) | m1 -0.51 (t -3.4, 28 mk) | m10 -0.37 (t -1.8, 28 mk) | m60 -0.20 (t -0.8, 27 mk) | m24 +0.58 (t 0.8, 24 mk) | preceded by same-direction prints in 30 s: 16%; median age of last print 217 s
+  M SELL n   539 sh    189441 | pre -0.48 (t -7.4, 30 mk) | m1 -0.62 (t -2.5, 30 mk) | m10 -0.65 (t -3.3, 30 mk) | m60 -0.64 (t -2.0, 29 mk) | m24 -0.32 (t -0.9, 26 mk) | preceded by same-direction prints in 30 s: 14%; median age of last print 116 s
+  T BUY  n    33 sh     28749 | pre +1.38 (t 3.5, 10 mk) | m1 -0.39 (t -1.0, 10 mk) | m10 -0.18 (t -0.6, 10 mk) | m60 +0.68 (t 0.5, 10 mk) | m24 +3.31 (t 1.7, 8 mk) | preceded by same-direction prints in 30 s: 27%; median age of last print 111 s
+  T SELL n    31 sh     13304 | pre +0.40 (t 2.0, 17 mk) | m1 +0.10 (t 0.3, 17 mk) | m10 +0.72 (t 0.8, 17 mk) | m60 -0.58 (t -0.3, 17 mk) | m24 -0.67 (t -0.4, 14 mk) | preceded by same-direction prints in 30 s: 48%; median age of last print 26 s
+  all all  n   799 sh    383927 | pre -0.46 (t -5.5, 30 mk) | m1 -0.53 (t -3.1, 30 mk) | m10 -0.46 (t -2.9, 30 mk) | m60 -0.36 (t -2.2, 29 mk) | m24 +0.32 (t 0.8, 26 mk) | preceded by same-direction prints in 30 s: 17%; median age of last print 118 s

@@ -1,0 +1,183 @@
+
+################ grasstoucher69: 1140 resolved equity price markets; 14 stories evenly spaced through the PnL ranking
+  ORDER TEST (all 1466 markets with a model value): buy fills at/after the deciding time 55 ($1699) vs before 8533 ($261026)
+  * Will SpaceX (SPCX) hit (HIGH) $130 in November?  [hit-month, Pyth 1-min candles]  outcome: ['Yes']  decided 11-27 14:31 (touch); resolved on-chain 11-27 14:47 (+16 min)
+      BUY No: 35 fills 5678 sh @ 0.451 (0 maker) between 11-25 17:50 and 11-25 20:29 UTC, 44.0 h before decision (median); ref 121.98..127.45 vs strike 130.00; model fair 0.54; PM price 1-2 h after the last fill 0.00
+      result $-2626
+  * Will Meta Platforms, Inc. (META) hit (HIGH) $630 Week of November 23 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-27 14:32 (touch); resolved on-chain 11-27 15:36 (+64 min)
+      BUY No: 3 fills 210 sh @ 0.789 (0 maker) between 11-23 01:03 and 11-23 09:23 UTC, 101.2 h before decision (median); ref 567.50..586.14 vs strike 630.00; model fair 0.83; PM price 1-2 h after the last fill 0.83
+      BUY Yes: 1 fills 11 sh @ 0.260 (0 maker) between 11-24 05:30 and 11-24 05:30 UTC, 81.0 h before decision (median); ref 599.58..599.58 vs strike 630.00; model fair 0.35; PM price 1-2 h after the last fill 1.00
+      result $-159
+  * Will Coinbase Global, Inc. (COIN) hit (LOW) $95 Week of November 23 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-25 14:46 (touch); resolved on-chain 11-25 15:04 (+19 min)
+      BUY No: 1 fills 100 sh @ 0.710 (0 maker) between 11-23 01:07 and 11-23 01:07 UTC, 61.6 h before decision (median); ref 102.30..102.30 vs strike 95.00; model fair 0.58; PM price 1-2 h after the last fill 0.00
+      result $-72
+  * Amazon (AMZN) Up or Down on November 17?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-17 21:00 (session close); resolved on-chain 11-17 21:16 (+16 min)
+      BUY Up: 3 fills 217 sh @ 0.167 (1 maker) between 11-17 17:01 and 11-17 19:55 UTC, 3.9 h before decision (median); ref 255.26..256.53 vs strike 257.80; model fair 0.25; PM price 1-2 h after the last fill 0.00
+      result $-37
+  * Will NVIDIA (NVDA) hit (HIGH) $188 Week of November 9 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-13 21:00 (period end, never touched); resolved on-chain 11-13 21:18 (+19 min)
+      BUY Yes: 2 fills 76 sh @ 0.241 (0 maker) between 11-11 07:42 and 11-11 09:44 UTC, 60.3 h before decision (median); ref 170.48..170.48 vs strike 188.00; model fair 0.24; PM price 1-2 h after the last fill 0.00
+      result $-19
+  * Will NVIDIA (NVDA) close above $185 on November 9?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-09 21:00 (session close); resolved on-chain 11-09 21:16 (+16 min)
+      BUY No: 1 fills 7 sh @ 0.820 (1 maker) between 11-09 09:01 and 11-09 09:01 UTC, 12.0 h before decision (median); ref 177.71..177.71 vs strike 185.00; model fair 0.80; PM price 1-2 h after the last fill 1.00
+      BUY Yes: 13 fills 83 sh @ 0.122 (0 maker) between 11-09 09:02 and 11-09 14:36 UTC, 6.4 h before decision (median); ref 178.62..174.84 vs strike 185.00; model fair 0.11; PM price 1-2 h after the last fill 0.00
+      result $-9
+  * Will Microsoft Corporation (MSFT) hit (HIGH) $525 in November?  [hit-month, Pyth 1-min candles]  outcome: ['Yes']  decided 11-19 14:50 (touch); resolved on-chain 11-19 15:06 (+16 min)
+      BUY No: 1 fills 10 sh @ 0.350 (0 maker) between 11-17 15:25 and 11-17 15:25 UTC, 47.4 h before decision (median); ref 509.36..509.36 vs strike 525.00; model fair 0.44; PM price 1-2 h after the last fill 0.00
+      result $-4
+  * Will Google (GOOGL) close above $290 on November 24?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-24 21:00 (session close); resolved on-chain 11-24 21:16 (+17 min)
+      BUY Yes: 1 fills 5 sh @ 0.070 (1 maker) between 11-24 10:00 and 11-24 10:00 UTC, 11.0 h before decision (median); ref 281.04..281.04 vs strike 290.00; model fair 0.10; PM price 1-2 h after the last fill 0.00
+      result $-0
+  * Will Microsoft Corporation (MSFT) hit (LOW) $502.50 Week of November 16 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-17 15:42 (touch); resolved on-chain 11-17 15:58 (+16 min)
+      BUY No: 2 fills 15 sh @ 0.699 (0 maker) between 11-16 11:13 and 11-16 22:58 UTC, 22.6 h before decision (median); ref 527.49..519.22 vs strike 502.50; model fair 0.73; PM price 1-2 h after the last fill 0.00
+      BUY Yes: 1 fills 20 sh @ 0.370 (0 maker) between 11-16 14:40 and 11-16 14:40 UTC, 25.0 h before decision (median); ref 521.71..521.71 vs strike 502.50; model fair 0.33; PM price 1-2 h after the last fill 1.00
+      result $+2
+  * Will Micron Technology, Inc. (MU) hit (HIGH) $870 Week of November 9 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-13 21:00 (period end, never touched); resolved on-chain 11-13 21:33 (+34 min)
+      BUY No: 2 fills 30 sh @ 0.765 (0 maker) between 11-09 16:16 and 11-11 20:06 UTC, 74.8 h before decision (median); ref 738.31..817.01 vs strike 870.00; model fair 0.65; PM price 1-2 h after the last fill 1.00
+      result $+7
+  * SpaceX (SPCX) Up or Down on November 11?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-11 21:00 (session close); resolved on-chain 11-11 21:15 (+16 min)
+      BUY Down: 1 fills 20 sh @ 0.250 (1 maker) between 11-11 12:59 and 11-11 12:59 UTC, 8.0 h before decision (median); ref 145.65..145.65 vs strike 143.15; model fair 0.33; PM price 1-2 h after the last fill 1.00
+      result $+15
+  * Will Tesla, Inc. (TSLA) hit (LOW) $352.50 Week of November 9 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-13 21:00 (period end, never touched); resolved on-chain 11-13 21:18 (+19 min)
+      BUY No: 1 fills 100 sh @ 0.520 (0 maker) between 11-09 14:38 and 11-09 14:38 UTC, 102.4 h before decision (median); ref 370.98..370.98 vs strike 352.50; model fair 0.52; PM price 1-2 h after the last fill 1.00
+      result $+47
+  * S&P 500 (SPX) Up or Down on November 19?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-19 21:00 (session close); resolved on-chain 11-19 23:44 (+164 min)
+      BUY Down: 5 fills 260 sh @ 0.230 (4 maker) between 11-19 05:36 and 11-19 08:04 UTC, 14.5 h before decision (median); ref 7322.28..7322.28 vs strike 7322.28; model fair 0.50; PM price 1-2 h after the last fill 1.00
+      result $+199
+  * S&P 500 (SPY) closes above $725 on November 19?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-19 21:00 (session close); resolved on-chain 11-19 21:16 (+17 min)
+      BUY No: 26 fills 7502 sh @ 0.028 (16 maker) between 11-19 10:59 and 11-19 13:28 UTC, 10.0 h before decision (median); ref 739.42..738.66 vs strike 725.00; model fair 0.06; PM price 1-2 h after the last fill 1.00
+      result $+7285
+
+################ thanksforplayin: 461 resolved equity price markets; 14 stories evenly spaced through the PnL ranking
+  ORDER TEST (all 624 markets with a model value): buy fills at/after the deciding time 6 ($89) vs before 2572 ($173852)
+  * Apple (AAPL) Up or Down on November 6?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-06 21:00 (session close); resolved on-chain 11-06 21:17 (+18 min)
+      BUY Up: 9 fills 3891 sh @ 0.222 (4 maker) between 11-06 19:46 and 11-06 20:48 UTC, 0.5 h before decision (median); ref 343.92..343.33 vs strike 344.31; model fair 0.18; PM price 1-2 h after the last fill 0.00
+      SELL Up: 4 fills 142 sh @ 0.063 (1 maker) between 11-06 20:14 and 11-06 20:53 UTC, 0.3 h before decision (median); ref 343.83..342.68 vs strike 344.31; model fair 0.05; PM price 1-2 h after the last fill 0.00
+      result $-866
+  * S&P 500 (SPY) closes above $750 on November 10?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-10 21:00 (session close); resolved on-chain 11-10 21:16 (+16 min)
+      BUY No: 7 fills 3933 sh @ 0.182 (3 maker) between 11-10 16:48 and 11-10 20:53 UTC, 0.1 h before decision (median); ref 746.31..750.99 vs strike 750.00; model fair 0.19; PM price 1-2 h after the last fill 0.00
+      SELL No: 4 fills 224 sh @ 0.778 (1 maker) between 11-10 16:48 and 11-10 20:55 UTC, 4.1 h before decision (median); ref 746.31..750.46 vs strike 750.00; model fair 0.65
+      BUY Yes: 9 fills 487 sh @ 0.193 (0 maker) between 11-10 19:17 and 11-10 20:32 UTC, 0.7 h before decision (median); ref 747.97..749.23 vs strike 750.00; model fair 0.33; PM price 1-2 h after the last fill 1.00
+      SELL Yes: 10 fills 487 sh @ 0.530 (2 maker) between 11-10 19:17 and 11-10 20:51 UTC, 0.7 h before decision (median); ref 747.97..750.72 vs strike 750.00; model fair 0.50; PM price 1-2 h after the last fill 1.00
+      result $-390
+  * S&P 500 (SPY) closes above $745 on November 12?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-12 21:00 (session close); resolved on-chain 11-12 21:16 (+17 min)
+      BUY No: 5 fills 6290 sh @ 0.020 (4 maker) between 11-12 13:57 and 11-12 14:01 UTC, 7.0 h before decision (median); ref 754.89..755.20 vs strike 745.00; model fair 0.14; PM price 1-2 h after the last fill 0.00
+      SELL No: 3 fills 846 sh @ 0.010 (2 maker) between 11-12 15:22 and 11-12 15:22 UTC, 5.6 h before decision (median); ref 757.07..757.07 vs strike 745.00; model fair 0.05; PM price 1-2 h after the last fill 0.00
+      result $-118
+  * Will NVIDIA (NVDA) close above $155 on November 18?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+16 min)
+      BUY Yes: 9 fills 247 sh @ 0.796 (4 maker) between 11-18 12:58 and 11-18 13:07 UTC, 8.0 h before decision (median); ref 160.00..159.35 vs strike 155.00; model fair 0.74; PM price 1-2 h after the last fill 0.00
+      SELL Yes: 8 fills 247 sh @ 0.744 (2 maker) between 11-18 14:30 and 11-18 14:34 UTC, 6.4 h before decision (median); ref 159.08..159.34 vs strike 155.00; model fair 0.75; PM price 1-2 h after the last fill 0.00
+      result $-13
+  * Will Apple (AAPL) close above $350 on November 18?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+16 min)
+      BUY No: 1 fills 5 sh @ 0.500 (0 maker) between 11-17 22:09 and 11-17 22:09 UTC, 22.8 h before decision (median); ref 349.10..349.10 vs strike 350.00; model fair 0.57; PM price 1-2 h after the last fill 0.00
+      result $-2
+  * Apple (AAPL) Up or Down on November 18?  [updown-day, Pyth 1-min candles]  outcome: ['Up']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+16 min)
+      BUY Up: 1 fills 10 sh @ 0.700 (0 maker) between 11-18 14:31 and 11-18 14:31 UTC, 6.5 h before decision (median); ref 353.84..353.84 vs strike 351.90; model fair 0.68; PM price 1-2 h after the last fill 1.00
+      SELL Up: 2 fills 10 sh @ 0.685 (1 maker) between 11-18 15:34 and 11-18 15:41 UTC, 5.4 h before decision (median); ref 353.38..353.33 vs strike 351.90; model fair 0.65; PM price 1-2 h after the last fill 1.00
+      result $-0
+  * Will Google (GOOGL) close above $290 on November 17?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-17 21:00 (session close); resolved on-chain 11-17 21:16 (+16 min)
+      BUY Yes: 1 fills 7 sh @ 0.060 (0 maker) between 11-16 21:00 and 11-16 21:00 UTC, 24.0 h before decision (median); ref 283.80..283.80 vs strike 290.00; model fair 0.19; PM price 1-2 h after the last fill 0.00
+      SELL Yes: 1 fills 7 sh @ 0.180 (1 maker) between 11-16 22:12 and 11-16 22:12 UTC, 22.8 h before decision (median); ref 284.07..284.07 vs strike 290.00; model fair 0.20; PM price 1-2 h after the last fill 0.00
+      result $+1
+  * S&P 500 (SPY) closes above $725 on November 18?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+16 min)
+      BUY No: 1 fills 20 sh @ 0.300 (0 maker) between 11-17 15:45 and 11-17 15:45 UTC, 29.2 h before decision (median); ref 730.97..730.97 vs strike 725.00; model fair 0.30; PM price 1-2 h after the last fill 0.00
+      SELL No: 1 fills 20 sh @ 0.280 (1 maker) between 11-17 21:20 and 11-17 21:20 UTC, 23.7 h before decision (median); ref 731.91..731.91 vs strike 725.00; model fair 0.23; PM price 1-2 h after the last fill 0.00
+      BUY Yes: 1 fills 100 sh @ 0.760 (0 maker) between 11-18 15:56 and 11-18 15:56 UTC, 5.1 h before decision (median); ref 729.98..729.98 vs strike 725.00; model fair 0.77; PM price 1-2 h after the last fill 1.00
+      SELL Yes: 2 fills 100 sh @ 0.810 (0 maker) between 11-18 15:57 and 11-18 16:00 UTC, 5.0 h before decision (median); ref 729.70..730.62 vs strike 725.00; model fair 0.79; PM price 1-2 h after the last fill 1.00
+      result $+3
+  * Will Meta (META) finish week of November 16 above $610?  [close-week, Pyth 1-min candles]  outcome: ['No']  decided 11-20 21:00 (session close); resolved on-chain 11-20 21:17 (+18 min)
+      BUY No: 1 fills 13 sh @ 0.390 (0 maker) between 11-19 15:39 and 11-19 15:39 UTC, 29.3 h before decision (median); ref 615.08..615.08 vs strike 610.00; model fair 0.41; PM price 1-2 h after the last fill 1.00
+      SELL No: 2 fills 13 sh @ 0.860 (2 maker) between 11-19 22:30 and 11-19 22:30 UTC, 22.5 h before decision (median); ref 590.07..590.07 vs strike 610.00; model fair 0.86; PM price 1-2 h after the last fill 1.00
+      result $+6
+  * Will S&P 500 (SPY) hit (HIGH) $765 Week of November 16 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-20 21:00 (period end, never touched); resolved on-chain 11-20 21:18 (+18 min)
+      BUY No: 3 fills 70 sh @ 0.708 (3 maker) between 11-16 14:53 and 11-16 15:54 UTC, 102.0 h before decision (median); ref 748.20..746.82 vs strike 765.00; model fair 0.60; PM price 1-2 h after the last fill 1.00
+      SELL No: 2 fills 70 sh @ 0.960 (2 maker) between 11-19 13:32 and 11-19 18:43 UTC, 28.9 h before decision (median); ref 738.50..721.68 vs strike 765.00; model fair 0.98; PM price 1-2 h after the last fill 1.00
+      result $+18
+  * Will NVIDIA (NVDA) close above $175 on November 12?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-12 21:00 (session close); resolved on-chain 11-12 21:16 (+17 min)
+      BUY No: 1 fills 393 sh @ 0.890 (1 maker) between 11-12 00:49 and 11-12 00:49 UTC, 20.2 h before decision (median); ref 158.77..158.77 vs strike 175.00; model fair 0.98; PM price 1-2 h after the last fill 1.00
+      result $+43
+  * S&P 500 (SPX) Up or Down on November 24?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-24 21:00 (session close); resolved on-chain 11-24 23:28 (+149 min)
+      BUY Up: 3 fills 692 sh @ 0.210 (1 maker) between 11-24 14:30 and 11-24 14:30 UTC, 6.5 h before decision (median); ref 7236.85..7236.85 vs strike 7236.85; model fair 0.50; PM price 1-2 h after the last fill 0.00
+      SELL Up: 12 fills 692 sh @ 0.370 (6 maker) between 11-24 14:45 and 11-24 15:02 UTC, 6.1 h before decision (median); ref 7190.71..7211.54 vs strike 7236.85; model fair 0.35; PM price 1-2 h after the last fill 0.00
+      result $+100
+  * Will S&P 500 (SPY) hit (HIGH) $755 Week of November 16 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-20 21:00 (period end, never touched); resolved on-chain 11-20 21:18 (+18 min)
+      BUY No: 15 fills 1002 sh @ 0.699 (11 maker) between 11-16 18:48 and 11-18 15:00 UTC, 77.0 h before decision (median); ref 740.53..733.66 vs strike 755.00; model fair 0.71; PM price 1-2 h after the last fill 1.00
+      SELL No: 4 fills 1002 sh @ 0.900 (4 maker) between 11-19 09:20 and 11-20 09:05 UTC, 30.6 h before decision (median); ref 737.92..712.89 vs strike 755.00; model fair 0.89; PM price 1-2 h after the last fill 1.00
+      result $+202
+  * S&P 500 (SPY) closes above $760 on November 11?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-11 21:00 (session close); resolved on-chain 11-11 21:15 (+16 min)
+      BUY No: 12 fills 8146 sh @ 0.093 (2 maker) between 11-11 15:27 and 11-11 20:53 UTC, 2.0 h before decision (median); ref 756.32..759.83 vs strike 760.00; model fair 0.33; PM price 1-2 h after the last fill 1.00
+      SELL No: 9 fills 503 sh @ 0.493 (3 maker) between 11-11 15:39 and 11-11 20:57 UTC, 0.4 h before decision (median); ref 756.83..759.62 vs strike 760.00; model fair 0.53
+      result $+7125
+
+################ superstonksbro: 244 resolved equity price markets; 14 stories evenly spaced through the PnL ranking
+  ORDER TEST (all 372 markets with a model value): buy fills at/after the deciding time 19 ($493) vs before 2189 ($206743)
+  * Will NVIDIA (NVDA) hit (LOW) $168 in November?  [hit-month, Pyth 1-min candles]  outcome: ['Yes']  decided 11-10 15:54 (touch); resolved on-chain 11-10 16:10 (+16 min)
+      BUY No: 12 fills 3572 sh @ 0.612 (10 maker) between 11-06 16:13 and 11-06 17:03 UTC, 95.1 h before decision (median); ref 187.93..188.17 vs strike 168.00; model fair 0.46; PM price 1-2 h after the last fill 0.00
+      BUY Yes: 2 fills 137 sh @ 0.740 (0 maker) between 11-10 14:33 and 11-10 15:50 UTC, 0.7 h before decision (median); ref 171.15..168.55 vs strike 168.00; model fair 0.92; PM price 1-2 h after the last fill 1.00
+      result $-2160
+  * Will Amazon (AMZN) close above $255 on November 17?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-17 21:00 (session close); resolved on-chain 11-17 21:16 (+16 min)
+      BUY No: 7 fills 1219 sh @ 0.231 (4 maker) between 11-17 14:36 and 11-17 14:50 UTC, 6.4 h before decision (median); ref 258.38..258.70 vs strike 255.00; model fair 0.24; PM price 1-2 h after the last fill 0.00
+      result $-288
+  * Will Meta Platforms, Inc. (META) hit (HIGH) $650 Week of November 9 2026?  [hit-week, Pyth 1-min candles]  outcome: ['No']  decided 11-13 21:00 (period end, never touched); resolved on-chain 11-13 21:34 (+34 min)
+      BUY Yes: 3 fills 130 sh @ 0.738 (3 maker) between 11-10 14:36 and 11-10 20:54 UTC, 72.1 h before decision (median); ref 640.47..645.25 vs strike 650.00; model fair 0.84; PM price 1-2 h after the last fill 0.00
+      BUY No: 2 fills 53 sh @ 0.410 (0 maker) between 11-11 16:02 and 11-11 16:02 UTC, 53.0 h before decision (median); ref 639.94..639.94 vs strike 650.00; model fair 0.25; PM price 1-2 h after the last fill 1.00
+      result $-65
+  * Will Amazon (AMZN) close above $245 on November 25?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-25 21:00 (session close); resolved on-chain 11-25 21:16 (+17 min)
+      BUY Yes: 1 fills 12 sh @ 0.780 (0 maker) between 11-24 14:33 and 11-24 14:33 UTC, 30.4 h before decision (median); ref 252.29..252.29 vs strike 245.00; model fair 0.84; PM price 1-2 h after the last fill 0.00
+      result $-10
+  * Will Apple (AAPL) close above $350 on November 11?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-11 21:00 (session close); resolved on-chain 11-11 21:16 (+16 min)
+      BUY No: 1 fills 7 sh @ 0.490 (0 maker) between 11-10 14:53 and 11-10 14:53 UTC, 30.1 h before decision (median); ref 349.44..349.44 vs strike 350.00; model fair 0.54; PM price 1-2 h after the last fill 0.00
+      BUY Yes: 1 fills 5 sh @ 0.870 (1 maker) between 11-11 14:46 and 11-11 14:46 UTC, 6.2 h before decision (median); ref 354.33..354.33 vs strike 350.00; model fair 0.86; PM price 1-2 h after the last fill 1.00
+      result $-3
+  * Will Microsoft (MSFT) close above $510 on November 18?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+17 min)
+      BUY Yes: 1 fills 1 sh @ 0.240 (1 maker) between 11-18 15:00 and 11-18 15:00 UTC, 6.0 h before decision (median); ref 504.72..504.72 vs strike 510.00; model fair 0.23; PM price 1-2 h after the last fill 0.00
+      result $-0
+  * Will Amazon (AMZN) close above $275 on November 16?  [close-day, Pyth 1-min candles]  outcome: ['No']  decided 11-16 21:00 (session close); resolved on-chain 11-16 21:16 (+16 min)
+      BUY No: 1 fills 5 sh @ 0.810 (1 maker) between 11-13 15:05 and 11-13 15:05 UTC, 77.9 h before decision (median); ref 268.00..268.00 vs strike 275.00; model fair 0.82; PM price 1-2 h after the last fill 1.00
+      result $+1
+  * Will Robinhood Markets, Inc. (HOOD) hit (LOW) $65 Week of November 16 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-20 15:46 (touch); resolved on-chain 11-20 16:02 (+16 min)
+      BUY Yes: 1 fills 6 sh @ 0.500 (1 maker) between 11-20 15:23 and 11-20 15:23 UTC, 0.4 h before decision (median); ref 66.50..66.50 vs strike 65.00; model fair 0.50; PM price 1-2 h after the last fill 1.00
+      result $+3
+  * Will Tesla (TSLA) close above $370 on November 11?  [close-day, Pyth 1-min candles]  outcome: ['Yes']  decided 11-11 21:00 (session close); resolved on-chain 11-11 21:16 (+16 min)
+      BUY Yes: 2 fills 20 sh @ 0.700 (2 maker) between 11-10 14:56 and 11-10 14:57 UTC, 30.1 h before decision (median); ref 376.61..377.52 vs strike 370.00; model fair 0.67; PM price 1-2 h after the last fill 1.00
+      result $+6
+  * Meta (META) Up or Down on November 18?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-18 21:00 (session close); resolved on-chain 11-18 21:16 (+16 min)
+      BUY Down: 1 fills 42 sh @ 0.520 (1 maker) between 11-18 14:41 and 11-18 14:41 UTC, 6.3 h before decision (median); ref 616.33..616.33 vs strike 618.91; model fair 0.57; PM price 1-2 h after the last fill 1.00
+      result $+20
+  * Will SpaceX (SPCX) hit (HIGH) $130 Week of November 23 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-27 14:31 (touch); resolved on-chain 11-27 14:47 (+16 min)
+      BUY Yes: 3 fills 124 sh @ 0.597 (1 maker) between 11-25 20:46 and 11-25 20:51 UTC, 41.7 h before decision (median); ref 126.66..127.40 vs strike 130.00; model fair 0.56; PM price 1-2 h after the last fill 1.00
+      result $+49
+  * Will Microsoft Corporation (MSFT) hit (LOW) $525 Week of November 9 2026?  [hit-week, Pyth 1-min candles]  outcome: ['Yes']  decided 11-11 15:13 (touch); resolved on-chain 11-11 15:29 (+16 min)
+      BUY Yes: 6 fills 329 sh @ 0.385 (1 maker) between 11-10 16:38 and 11-10 17:25 UTC, 21.8 h before decision (median); ref 542.04..537.36 vs strike 525.00; model fair 0.40; PM price 1-2 h after the last fill 1.00
+      result $+200
+  * Apple (AAPL) Up or Down on November 6?  [updown-day, Pyth 1-min candles]  outcome: ['Down']  decided 11-06 21:00 (session close); resolved on-chain 11-06 21:17 (+18 min)
+      BUY Down: 7 fills 4150 sh @ 0.871 (5 maker) between 11-06 20:47 and 11-06 20:50 UTC, 0.2 h before decision (median); ref 343.24..343.25 vs strike 344.31; model fair 0.93; PM price 1-2 h after the last fill 1.00
+      result $+527
+  * Will NVIDIA (NVDA) hit (LOW) $128 in November?  [hit-month, Pyth 1-min candles]  outcome: ['Yes']  decided 11-20 19:53 (touch); resolved on-chain 11-20 20:09 (+16 min)
+      BUY Yes: 20 fills 13827 sh @ 0.394 (8 maker) between 11-16 16:02 and 11-20 19:36 UTC, 4.3 h before decision (median); ref 159.13..129.85 vs strike 128.00; model fair 0.51; PM price 1-2 h after the last fill 1.00
+      result $+8254
+
+################ CoinTrick (buys at >= 0.90, equity price markets with a Yahoo proxy): at/after the deciding time 918 fills $181855; before 160 fills $43675
+  delay decision -> fill: p10 5 s, median 120 s, p90 829 s; fill -> on-chain resolution median 17 min
+  the 'before' fills: median price 0.999, median model fair 1.000, distance to strike in sigmas of time left: median 20.6, min 0.0; lost: 0 of 160 resolved
+  * Will NVIDIA (NVDA) hit (LOW) $152 Week of November 16 2026? [hit-week] BUY Yes 26199 @ 0.9931 (taker) at 11-18 13:21; decided 11-17 20:03 (touch) -> fill +1039 min; resolved 11-18 13:22; ref 159.88 vs strike 152.00; final 1.0
+  * Will S&P 500 (SPY) hit (LOW) $700 Week of November 16 2026? [hit-week] BUY Yes 19025 @ 0.9990 (maker) at 11-20 17:54; decided 11-20 17:38 (touch) -> fill +16 min; resolved 11-20 17:55; ref 699.93 vs strike 700.00; final 1.0
+  * Will Palantir Technologies Inc. (PLTR) hit (LOW) $159 Week of November 16 2026? [hit-week] BUY Yes 7143 @ 0.9930 (maker) at 11-16 20:27; decided 11-16 20:24 (touch) -> fill +3 min; resolved 11-16 20:40; ref 159.64 vs strike 159.00; final 1.0
+  * Will S&P 500 (SPY) hit (LOW) $710 in November? [hit-month] BUY Yes 5000 @ 0.9987 (taker) at 11-20 15:24; decided 11-20 15:25 (touch) -> fill -1 min; resolved 11-20 15:41; ref 710.18 vs strike 710.00; final 1.0
+  * Will S&P 500 (SPY) hit (LOW) $690 in November? [hit-month] BUY Yes 5000 @ 0.9986 (taker) at 11-20 20:35; decided 11-20 20:35 (touch) -> fill +0 min; resolved 11-20 20:52; ref 690.26 vs strike 690.00; final 1.0
+  * Will Amazon (AMZN) close above $255 on November 17? [close-day] BUY Yes 4995 @ 0.9990 (maker) at 11-17 21:16; decided 11-17 21:00 (session close) -> fill +16 min; resolved 11-17 21:16; ref 257.75 vs strike 255.00; final 1.0
+  * Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 in November? [hit-month] BUY Yes 5000 @ 0.9900 (maker) at 11-23 14:47; decided 11-23 14:31 (touch) -> fill +16 min; resolved 11-23 15:22; ref 68.99 vs strike 70.00; final 1.0
+  * S&P 500 (SPX) Opens Up or Down on November 17? [updown-day] BUY Down 4800 @ 0.9990 (maker) at 11-17 18:59; decided 11-17 21:00 (session close) -> fill -121 min; resolved 11-17 23:28; ref 7330.34 vs strike 7420.19; final 1.0
+  * Will NVIDIA (NVDA) hit (HIGH) $168 in November? [hit-month] BUY Yes 4129 @ 0.9467 (taker) at 11-23 14:30; decided 11-23 15:00 (touch) -> fill -29 min; resolved 11-23 15:16; ref 167.04 vs strike 168.00; final 1.0
+  * Will Meta (META) close above $620 on November 17? [close-day] BUY No 3000 @ 0.9990 (maker) at 11-17 21:12; decided 11-17 21:00 (session close) -> fill +12 min; resolved 11-17 21:16; ref 618.60 vs strike 620.00; final 1.0
+  * Will Rocket Lab USA, Inc. (RKLB) hit (LOW) $50 Week of November 16 2026? [hit-week] BUY Yes 2915 @ 0.9990 (maker) at 11-20 14:30; decided 11-20 14:31 (touch) -> fill -1 min; resolved 11-20 14:47; ref 49.75 vs strike 50.00; final 1.0
+  * S&P 500 (SPY) closes above $730 on November 18? [close-day] BUY Yes 2885 @ 0.9990 (maker) at 11-18 21:04; decided 11-18 21:00 (session close) -> fill +4 min; resolved 11-18 21:17; ref 729.74 vs strike 730.00; final 1.0
+  * Will NVIDIA (NVDA) hit (LOW) $160 in November? [hit-month] BUY Yes 2872 @ 0.9984 (taker) at 11-12 14:17; decided 11-12 14:31 (touch) -> fill -13 min; resolved 11-12 14:46; ref 152.75 vs strike 160.00; final 1.0
+  * Will Robinhood Markets, Inc. (HOOD) hit (HIGH) $70 Week of November 23 2026? [hit-week] BUY Yes 2815 @ 0.9900 (maker) at 11-23 14:46; decided 11-23 14:31 (touch) -> fill +16 min; resolved 11-23 15:22; ref 68.91 vs strike 70.00; final 1.0
+
+################ C03B (buys at >= 0.90, equity price markets with a Yahoo proxy): at/after the deciding time 0 fills $0; before 5 fills $321
+  the 'before' fills: median price 0.930, median model fair 0.984, distance to strike in sigmas of time left: median 2.1, min 1.6; lost: 0 of 5 resolved
+  * Will NVIDIA (NVDA) close above $165 on November 12? [close-day] BUY Yes 140 @ 0.9495 (taker) at 11-12 20:59; decided 11-12 21:00 (session close) -> fill -1 min; resolved 11-12 21:16; ref 165.84 vs strike 165.00; final 1.0
+  * Amazon (AMZN) Up or Down on November 17? [updown-day] BUY Down 114 @ 0.9300 (taker) at 11-17 20:59; decided 11-17 21:00 (session close) -> fill -0 min; resolved 11-17 21:16; ref 257.50 vs strike 257.80; final 1.0
+  * SpaceX (SPCX) Up or Down on November 10? [updown-day] BUY Up 37 @ 0.9846 (taker) at 11-10 20:58; decided 11-10 21:00 (session close) -> fill -2 min; resolved 11-10 21:16; ref 142.72 vs strike 142.11; final 1.0
+  * Will Amazon (AMZN) close above $260 on November 6? [close-day] BUY No 35 @ 0.9000 (taker) at 11-06 20:59; decided 11-06 21:00 (session close) -> fill -1 min; resolved 11-06 21:17; ref 259.69 vs strike 260.00; final 1.0
+  * Apple (AAPL) Up or Down on November 12? [updown-day] BUY Down 15 @ 0.9200 (taker) at 11-12 20:57; decided 11-12 21:00 (session close) -> fill -3 min; resolved 11-12 21:16; ref 354.64 vs strike 355.79; final 1.0

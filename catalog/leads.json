@@ -448,5 +448,210 @@
   "ref": "Polymarket 'Bitcoin above ___ on <date>, 11AM ET' hourly ladders (slug bitcoin-above-on-november-27-2026-11am-et) vs Kalshi KXBTCD hourly",
   "why": "Seen in passing: Polymarket lists hourly BTC ladders with 20 strikes and almost no volume ($229) and spreads of 10-90c, while Kalshi's hourly KXBTCD trades 1.3-1.9M contracts. A maker quoting from Kalshi or Deribit prices might earn the spread there; not examined.",
   "channel": "r4_cross_venue"
+ },
+ {
+  "ref": "0x5268527977f700f9bf9b6d5cd843859e4e70135d (HomeRunHazard)",
+  "why": "Largest verified money-maker in the set (3.87M kept without rebates, 81% maker on sports spreads and totals). Needs a full-history pull and a comparison of its fill prices with sharp sportsbook lines, split pre-game versus in-play.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "Tokor 0xa19cba… and 0xDB5 0xdb5ad26b68d77ae966d29e7180147272ab7a3965",
+  "why": "Crypto strike and range markets at the 0.01 fee rate. Tokor kept 1.34M with 2% rebates; need to separate market-making edge from a directional bet on the Oct-Nov fall.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "Vega7 0x6ba25c… (resolve the full address via gamma public-search 'Vega7')",
+  "why": "About 10K one-cent tail tickets in BTC 5m, +10-14K a month on $0.1M lifetime volume. Cheapest candidate to replay in full and to test on the lab tape.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5",
+  "why": "New November wallet making 3.2% of volume on alt-coin up/down markets. Check window length (5m or 15m), capacity and whether it shares an operator with a known wallet.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "almach / bosona / mo-money",
+  "why": "The only BTC 5m wallets still earning $57-91K a month each without rebates. Worth a markout study of their maker fills to see what price levels and timing keep them from being picked off.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "dgdgt345dfgdf23, fossildiamond, edzachary",
+  "why": "Named in posts (igor_mikerin Oct 14 and Nov 12, DextersSolab Nov 22) but gamma public-search returned no exact profile, so they are unchecked.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "@Dan1ro0 timeline before 2026-10-19",
+  "why": "Only the last four pages were read. Same template and sponsor as RetroValix; the earlier posts may name more wallets (for example the 2026-06-27 article 'I Analyzed 10M Polymarket Bot Trades with Claude').",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "https://www.walidriachy.com/lab/polymarket-5m-bots",
+  "why": "Independent write-up 'Inside the five-minute Bitcoin bots' seen in search results (mentions BoneOhio before and after figures); not opened.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "https://www.polyresearchrobotics.com/reports/bonereaper",
+  "why": "Third-party trader reports built on 1.34M observed Bonereaper trades; could save the lab deconstruction work. Not opened.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "github.com/giuseppemineo685-beep/polycool-strategy",
+  "why": "Search snippet says it rebuilds BoneOhio as 'buy the side at 94-99c in the last two minutes' and notes x-MoneyForWhiskas was formerly '@justoneofmystrategies'. Read only, do not run.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "rb_tweets X articles 2125192375039595005 (Nov 24) and 2121613610879512672 (Nov 14); 'Trader 5' sports wallet behind the gravia campaign link",
+  "why": "Not read; the Trader 5 wallet is hidden behind a campaign URL and was not checked.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "balthazar 0x5a218c… and Bigggggggg 0x511f9c…",
+  "why": "Large multi-category wallets (kept 1.2M and 0.53M, low rebate share) trading tweet counts, Truth Social post counts, weather, elections. Relevant to other families in the lab; only a 1,000-fill sample was looked at.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "igor_mikerin 2026-10-24 post (status 2113990962145832983) and the github.com/pselamy repo it links",
+  "why": "Describes detecting fresh wallets making large first bets before news; the URL was truncated in my listing and the repo was not opened.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "ref": "https://x.com/PavelPavlyuh/status/2118315492876132694",
+  "why": "Claims 26 wallets trade within 10 s of 5+ economic releases. Identify them from the tape of CPI/NFP bracket markets and wallet_check each: this is the most direct test of the econ-release gap at the 0.01 fee.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "THEHIGHLIFE 0x8c0b024c17831a0dde038547b7e791ae6a0d7aa5",
+  "why": "Esports account, net $2.39M, 6.8% of volume, Tier 0 (no rebate dependence), positive every recent month. Deconstruct fills against match timelines to see whether it is in-play latency.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "HomeRunHazard 0x5268527977f700f9bf9b6d5cd843859e4e70135d and keeptheblueflagflyinghigh 0x0d6a1ada6d7ff785ab4b7263d9ce8e2baa85aa98",
+  "why": "Largest verified sports bots ($5.1M and $3.4M net). Mechanism undisclosed; compare entries with sportsbook lines and tip-off times.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "Stavenson 0xf5fe759cece500f58a431ef8dacea321f6e3e23d",
+  "why": "Still nets ~$11K a month on ~$130K volume after the 50/50 rule was removed; small-ticket structural edge worth reading from its tape.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "dromedaryy 0x6575759174ad221bba9947bc3f18750ec769b198",
+  "why": "Joined Aug 2026, net $799K, Oct +416K, Nov +360K; live-event sniper (Roadster stream) that also got hit on a stale bid. Shows both sides of the news-latency game.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/KyleDeWriter/status/2122374514432409893",
+  "why": "'ComboGOD' is said to have made $149K in 4 months from a Combos pricing flaw with 26.7K small trades. Profile hidden behind a referral short link (poly.market/ComboGOD); resolve the link in a browser and check the wallet.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "technician2 0x26cf4a41eb49f0c560d32a2d2e4f45715e47c612",
+  "why": "69,038 markets, $24.6M volume, zero fees paid in Sep-Nov (maker-only or fee-free categories), Oct +424K, Nov -536K. Named in an affiliate post as 'made money without touching a crypto chart'; mechanism unknown.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/0xrajath/status/2107122541219205344",
+  "why": "Protocol V2 article, not read in full. Check whether V2 changes merge/split, negative-risk conversion, resolution flow or fees for the markets live since Nov 23.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/bravadotrade/status/2108185755734458488",
+  "why": "Vendor claims UMA proposals reach its socket a median 1.4 s before they land on-chain. If the book reacts to proposals, that is a resolution-side time gap; compare proposal times in /v2/resolutions with price moves.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/arbilest_app/status/2115178367989502044",
+  "why": "Sportsbook-vs-Polymarket surebet terminal launched late October; implies persistent cross-venue gaps in sports. No numbers yet.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "@atteonthephone, @jfm_20wx, discord.gg/weatherolympus",
+  "why": "The only non-affiliate weather practitioners found. jfm_20wx promised a how-to thread (not found) and claims $125K; find his real profile name and check it. Weather fee became 0.01 on Nov 20.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "@Tenebrus87, @GollumGekko1, @holy_moses7, @XenyPM, @CarOnPolymarket",
+  "why": "Real traders who post their own mistakes and react to rule changes within hours; worth following for the effect of Nex and V2 on small makers. Resolve XenyPM's real profile name to check the maker-bot claim.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/yenwod_/status/2119896129794126320 and https://x.com/Boywus/status/2113197626757665185",
+  "why": "Engineering and microstructure references: deterministic replayable stack with inventory-skew formula; tape proof that a top maker earns 88% of profit by taking stale quotes and only at the top fee tier.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/KyleDeWriter/status/2125172891524223008",
+  "why": "Says the CFTC issued a new rule (KYC for all users within 12 months, platforms may be banned). Not verified; matters for account planning.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "Polymarket docs: crypto taker delay",
+  "why": "Docs disagree: changelog says 150 ms since Sep 4, order-lifecycle page says 250 ms on selected crypto and finance up/down markets, NOTES.md said 50 ms. Needs one direct measurement.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "https://x.com/zostaff/status/2060691218045206621",
+  "why": "'Build an HFT bot for Polymarket' article cited as the standard guide; older than the window and not read.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "ref": "HF dataset Houroux/polymarket-l2-history (sports_ws + market_ws on one receive clock, NFL/EPL/CFB, 2026-07-22..10-11)",
+  "why": "The only public data that can measure score-message -> book lag in play; I identified it but did not run the measurement (a full game is ~1 GB of market_ws files).",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "Faster METAR channels per station: KMA AMOS (RKSI), UK Met Office/NATS (EGLC), ogimet, FAA ASOS 1-minute and 5-minute data for US stations",
+  "why": "The book reprices 3-5 min before aviationweather.gov; whoever wins reads one of these. Log their publication times against the tape to see whether any is reachable from a VPS.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "0x6011655c4afb76f36dd1b08a137a1ba73466b31e",
+  "why": "Systematic weather account that sells dead buckets first (14 of 70 events); kept +101K but falling monthly (27.0K in July -> 3.6K in November). Take it apart with pmlab.wallet to see what else it does and why income is shrinking.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "Weather rule edge cases: x.5 rounding, T-group vs body group, SPECI exclusion, station-local midnight, Fahrenheit cities",
+  "why": "The speed leg is taken, but mispricing around rule details (Helsinki, Cape Town cases in x2) is untested; my W1 parser already reproduces 112 of 112 resolutions and can be reused.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "https://xtracker.polymarket.com (Post Counter, 'Export Data')",
+  "why": "Resolution source for the $468K/day Elon tweet-count events; find its data endpoint and compare post timestamps with bucket prices in the final hours.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "data/mentions_tapes + time-stamped transcripts of the official videos",
+  "why": "No one has measured the mention-market lag; fee is 0.01 and no delay field.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "studies/gaps/econ_release_lag (in progress) and @PavelPavlyuh's 26 repeat wallets",
+  "why": "Economics is the cleanest scheduled time gap (4-9 s) at fee 0.01; needs the size available at stale prices and the identity/PnL of the repeat wallets.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "UMA proposer whitelist status (The Block post 366507, 'MOOV2'; docs still say anyone can propose)",
+  "why": "Decides whether proposing outcomes (reward 0.6-0.8 per market on sports/weather with a $250 bond) is open to us at all.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "Bitquery wallets 0xd02c...b1d7, 0x619e...f583, 0x7fa1...347d, PayoRamon, NotWinr, egig",
+  "why": "Not checked; the one I checked (Mep72) contradicts the article by ~300x, so the others need the same check before anyone cites them.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "https://arxiv.org/abs/2606.16852 and https://blogs.law.ox.ac.uk/oblb/blog-post/2026/11/illusion-justice-dispute-resolution-polymarket",
+  "why": "Settlement-gap attacks and dispute statistics: both are risks for any strategy we build; only search summaries were read.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "NBA markets (secondsDelay = 0) vs all other sports (1 s)",
+  "why": "The one large live category without a taker delay; worth knowing why and who takes there (tape of close finishes: $45K traded below 0.99 after the buzzer in 3 games).",
+  "channel": "x3_time_gap"
+ },
+ {
+  "ref": "Nex launch (mid-December 2026)",
+  "why": "Cancel latency drops from ~0.7 s p99 to <10 ms; re-measure the headline and release gaps after it, because the stale-order pool that funds sniping should shrink.",
+  "channel": "x3_time_gap"
  }
 ]

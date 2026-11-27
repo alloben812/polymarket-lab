@@ -2947,5 +2947,1552 @@
   "credibility": 1,
   "verification": "PARTIAL. The Dune post exists and its summary matches the quoted 20c and 1c figures, but I could not open the page itself; the Fan, Sun, Zhao abstract confirms the 51 decisions. Neither describes a strategy.",
   "channel": "r4_cross_venue"
+ },
+ {
+  "name": "Passive two-sided maker on BTC 5m up/down (almach / bosona / mo-money)",
+  "family": "market-making",
+  "mechanism": "Rest BUY limits on Up and Down below fair value, never sell, hold to settlement. Fills arrive at different moments as BTC swings, so part of the inventory pairs into complete sets under $1 and an unpaired residual stays directional. The edge is the taker's loss: zero maker fee, stale takers and panic sellers pay the spread. Survival depends on cancelling or repricing before being picked off. Note: the author's own Aug 24 article says almach had both sides in only about 23% of 5m markets and mo-money's 5m set cost about $1.07, so on 5m most of the inventory is one-sided, not paired.",
+  "time_gap": "Binance/Chainlink price versus Polymarket takers; the maker must reprice within ms to about 1 s. This is a speed-of-cancel race, not a slow gap.",
+  "market_categories": [
+   "crypto up/down 5m",
+   "crypto up/down 15m",
+   "crypto up/down hourly and daily (small share)"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/RetroValix/status/2093781031870414955",
+    "date": "2026-08-29",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), almach"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2106843467431174326",
+    "date": "2026-10-04",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), mo-money"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2091951419989573990",
+    "date": "2026-08-24",
+    "author": "@RetroValix",
+    "kind": "x-article"
+   },
+   {
+    "url": "https://x.com/Dan1ro0/status/2123499200394731821",
+    "date": "2026-11-19",
+    "author": "@Dan1ro0",
+    "kind": "x-post (ad), almach (not bosona)"
+   },
+   {
+    "url": "https://x.com/Dan1ro0/status/2126064396241899633",
+    "date": "2026-11-26",
+    "author": "@Dan1ro0",
+    "kind": "x-post (ad), bosona; added by the verification pass from the local dump"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2122090772442861958",
+    "date": "2026-11-15",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), mo-money; added by the verification pass from the local dump"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2118450113739645026",
+    "date": "2026-11-05",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), mo-money"
+   },
+   {
+    "url": "https://x.com/RohOnChain/status/2115480282577117588",
+    "date": "2026-10-28",
+    "author": "@RohOnChain",
+    "kind": "x-post, names no wallet"
+   }
+  ],
+  "claimed_results": "almach +$249,869 (Aug 29), '+$490,861 PnL in first 180 days' (Dan1ro0, Nov 19); mo-money +$470,883 (Oct 4), '+$561.5K all time' (igor_mikerin, Nov 5), +$597,263.68 'in 148 days' (Nov 15); bosona +$520,627.12 'in 176 days' (Dan1ro0, Nov 26). Aug 29 post: average complete-set cost 96.73c, 81% of inventory paired, 150 trades per active hour, average trade $33.50. The figure '+$475,679 (Nov 12)' for almach is not in any post text I could find.",
+  "evidence": "wallet_check 2026-11-27. almach: gross 529,754, fees 54,156, rebates 74,949, kept 550,547 (rebates 14%), $17.0M volume, kept 3.24%; kept without rebates by month Jun-Nov 27/95/107/92/66/87K. bosona: gross 520,554, kept 540,789 (rebates 14%); without rebates Jun-Nov 44/74/117/87/85/57K. mo-money (name lookup crashes, checked by address): gross 627,729, kept 643,559 (rebates 12%); without rebates Jun-Nov 33/142/130/94/75/91K. No fading. Two-day fill decomposition of almach (Nov 25-27): 93% maker by dollars, buy-only, BTC 5m 75% and BTC 15m 19% of turnover, API kept $7.6K on $352K (2.2%). The three wallets have near-identical monthly curves, volumes and rebate amounts (one operator, inferred, not tier-linked).",
+  "wallets": [
+   "almach 0x3725d52f3c252e8374999cc8617292ea2608ad88",
+   "bosona 0xc2ad03f79ca3f3c17d8c7de2612ce0c89b7d40ed",
+   "mo-money 0x32ed2e546b187ca15e2841edc82b22c713cf8ec3"
+  ],
+  "requirements": "Fast quote and cancel loop (likely co-located near AWS London), live Binance and Chainlink feeds (Chainlink needs an API key from 2026-11-30), a fair-value model, capital in the tens of $K, about 150 fills per active hour.",
+  "fee_sensitivity": "Maker pays nothing. Rebates are 12-14% of what was kept, so it survives with zero rebates. All months before Nov 20 included a flat maker rebate of about 20%; under the new schedule these wallets sit in the 3-7% maker tiers.",
+  "testability": "Rebuild their maker fills as full feed minus taker feed, measure per-fill markout against Binance at fill time and at settlement, and compare quote placement with book snapshots. The lab's own naive maker lost 2-8% with 1-2 s staleness, so the test is whether a slow maker can copy the price levels. Caveat: the lab's fill tool saw only 8,584 of the 11,427 fills the API counts for almach in two days.",
+  "red_flags": "Every source is an advertisement (horizon.trade, Polymarket referral codes) and each post invents a different 'model' for the same wallet. The '81% paired at 96.73c' line contradicts the author's own article. The edge is execution speed that a small VPS probably cannot match. The maker share (93% by dollars) comes from a two-day sample.",
+  "credibility": 4,
+  "verification": "CONFIRMED. The Aug 29 post contains the mechanism and the numbers (+$249,869, 96.73c, 81%, 150 trades per hour, $33.50), and the wallet tool reproduces the researcher's figures. Two headline figures were attached to the wrong source (the cited Dan1ro0 post is about almach, not bosona); the right posts are now in sources, and one figure (+$475,679) is not in any post text.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Last-minute bids at 0.97-0.99 on the decided side of 5m markets (0x50f7 / BoneOhio / pspspsps5)",
+  "family": "resolution-bond",
+  "mechanism": "In the final minute or two, and after the window has ended but before resolution, rest BUY limits just under $1 on the leading side and hold to settlement. Holders who want cash before the payout sell into the bid. Size is scaled by an empirical reversal rate for similar gap, time and volatility. A small part of the book rests 1-3c bids on the other side. Correction from the fills: 0x50f7's bids sit at about 0.998, not 0.97-0.99.",
+  "time_gap": "The outcome is effectively known from the price feed tens of seconds before the window ends, and settlement pays minutes later. In Nov 17-27, $487K of 0x50f7's fills came after the window had ended (outcome fixed, payout pending). Scale: seconds to minutes.",
+  "market_categories": [
+   "crypto up/down 5m",
+   "crypto up/down 15m"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/RetroValix/status/2122845563188027552",
+    "date": "2026-11-18",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0x50f7"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2096366363723907562",
+    "date": "2026-09-05",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), BoneOhio"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2114771352028951038",
+    "date": "2026-10-26",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), 0x50f7"
+   },
+   {
+    "url": "https://x.com/Dan1ro0/status/2120927626273435797",
+    "date": "2026-11-12",
+    "author": "@Dan1ro0",
+    "kind": "x-post (ad), 0x50f7 described as an RVI indicator system"
+   }
+  ],
+  "claimed_results": "0x50f7: '+$648,032.73 PnL in 226 days', '$2,867 a day', average trade $216.45 (RetroValix); '$627K profit, 154K markets, $114M in volume' (igor_mikerin); '+$633,039 PnL in 216 days' (Dan1ro0). BoneOhio: +$295,910, one outcome only in 88.2% of markets (Sep 5). '+$356,592 (Oct 21)' and 'buys at 0.98-0.99' are not in the cited text (poster image or uncited post).",
+  "evidence": "wallet_check 2026-11-27. 0x50f7: gross 647,616, fees 78,215 charged (12,094 refunded), rebates 20,568 (3%), kept 602,063 on $91.8M (0.66%), 168,811 markets, no tier. Kept by month Apr-Nov 92/39/182/138/31/55/48/18K while volume fell from $18.5M to $6.2M: fading. Ten-day decomposition (Nov 17-27, $2.83M): 93% maker by dollars; maker bids at 0.99+ earned +0.19c a share (t 5.1, +$5.0K); maker tail bids at 5c or less earned +$370 (t 0.1, nothing); taker buys at 0.99+ lost $1.7K; BTC 5m as a whole lost $2.7K; fills after the window's end at 0.9967 earned +0.34c a share (t 5.1). API for the window: kept $3,911 = 0.13% of volume, about $390 a day. BoneOhio: gross 382,849, fees 402,265 charged (304,531 refunded), rebates 102,422 (26%), kept 387,537; without rebates Aug-Nov +78/+26/+31/+16K; Platinum taker tier. pspspsps5: gross 285,930, all 71,660 of fees refunded, rebates 29,439 (9%), kept 315,369; kept Jul-Nov 63/56/32/30/10K.",
+  "wallets": [
+   "0x50f7 0xee65685de42f8de9a03b4c53ee77d56a20d2cfc9",
+   "BoneOhio 0x48ac40fc545cf327edd5365435c3a9f385614a7e",
+   "pspspsps5 0xb0f85baa97990910a3e8ac2b4a58a322f01ecef5"
+  ],
+  "requirements": "Chainlink TWAP and exchange feed, a reversal-rate table by gap, time left and volatility, large capital turnover (0.13-0.66% margin needs millions of monthly volume), queue position at 0.99 and above.",
+  "fee_sensitivity": "Maker fills pay no fee. As a taker at 0.99 the fee is negligible, yet 0x50f7's own taker buys at 0.99+ lost money in the last ten days. Rebates are only 3-9% of what 0x50f7 and pspspsps5 kept; BoneOhio's lifetime figure without rebates is positive only because 305K of early-2026 fees were refunded.",
+  "testability": "Lab BTC 5m tape: for fills at 0.97 and above in the last 60 s and after the window's end, compute the realised win rate against price by gap and seconds left; measure how often and how long sellers at 0.99+ appear after the end, and who is first in the queue. The lab already found taker buys at 0.90-1.00 were the only positive bucket (+0.41c per share after fees).",
+  "red_flags": "The margin is now 0.13% of turnover and has fallen every month since June. At 0.998 one reversal cancels about 500 wins, not 50. Queue priority at 0.99+ belongs to the incumbents. The advertised '$2,867 a day' is a lifetime average, seven times the current rate. igor_mikerin's post attributes the profit to the long shots, which the fills do not support (tail bids earned nothing in the window). All three sources are ads; Dan1ro0 describes the same wallet as an RVI-indicator system.",
+  "credibility": 3,
+  "verification": "PARTIAL. The headline numbers and the reversal-rate rule are in the RetroValix post, and BoneOhio's 88.2% is in the Sep 5 post; two quoted figures are not in the cited text, and the three sources give three different stories for 0x50f7. The fills confirm near-$1 resting bids but at 0.998, with a far smaller current margin than the candidate stated.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Cheap-tail tickets in BTC 5m (Vega7)",
+  "family": "other",
+  "mechanism": "As a taker, buy the side priced at about 1c (the profitable fills average 1.18c) in BTC 5-minute markets, $10-25 per ticket, hold to settlement. Most tickets expire worthless; a hit pays 30-100x. Two thirds of the dollars go in at seconds 225-285 of the 300-second window, almost nothing in the last 15 s. Purchases at 5-15c are also made but earn nothing.",
+  "time_gap": "None claimed; this is a mispriced tail, not a latency play. Possibly connected to the 60-second TWAP settlement rule (the edge only appears from July-September 2026); not tested.",
+  "market_categories": [
+   "crypto up/down 5m"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/igor_mikerin/status/2116595300764639566",
+    "date": "2026-10-31",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral)"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2122337777312268506",
+    "date": "2026-11-16",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral)"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2122845563188027552",
+    "date": "2026-11-18",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 'Tail Limit' rule for 0x50f7"
+   }
+  ],
+  "claimed_results": "'10,249 markets later he's up $36.6K'; '1.1c: $23.74 became $2,239'; 'Since Nov 1 he's added +$6,294'; 'He's up $42.8K total now'.",
+  "evidence": "wallet_check 2026-11-27. Vega7: joined 2026-04-19, 10,603 markets, volume $95.9K, gross 47,448, fees 4,182, rebates 260, kept 43,680 (45.6% of volume). Kept by month Apr-Nov 0.2/0.2/0.5/8.8/-0.6/13.8/9.7/10.9K; the first three months were flat on $47K staked. 90-day decomposition (3,709 fills, 3,653 markets, $31.4K staked, 100% taker, BTC 5m only): the 5c-or-less bucket ($22.1K staked at 1.18c average) earned +1.85c a share net, t 4.5 with errors clustered by market, +$34.6K; the 5-15c bucket (1,604 fills, $9.3K) earned -$154. StayFocusLuia: kept 82,772 lifetime, made in May-Jul; Aug -5.1K on a 20-fold jump in volume, then +6.4/-3.7/0K, inactive since late October. 0x50f7's resting tail bids (maker, 5c or less) earned nothing in Nov 17-27.",
+  "wallets": [
+   "Vega7 0x6ba25c9f2fe6e9e5dd47983b629c00cd59958d0e",
+   "StayFocusLuia 0x931cd2259731f65ff31faa5233f446b9f50ca002",
+   "0x50f7 0xee65685de42f8de9a03b4c53ee77d56a20d2cfc9 (tail part, no edge found)"
+  ],
+  "requirements": "Very small capital ($10-25 a ticket, about $350 a day staked), a rule for when a 1c tail is worth it (distance to reference, seconds left, volatility), no speed requirement beyond seconds.",
+  "fee_sensitivity": "BTC 5m rate 0.05 at p=0.01 is about 0.05c per share, roughly 5% of the stake (0.08c under the old 0.07 rate); small against a realised return of about 2.6 times the stake. No rebate dependence.",
+  "testability": "Lab tape and Vega7's own fills (all 3,709 pulled in six seconds): taker buys at 5c or less at seconds 225-285, realised hit rate against average price, split by distance to reference and by month. Write the cell down before looking: the lab's tape study found takers losing in aggregate everywhere below 0.90.",
+  "red_flags": "One wallet chosen after the fact by a promoter with a referral link: among thousands of tail buyers a winner will exist. A similar wallet (StayFocusLuia) stopped earning in August. The lab's own whole-market tape shows takers losing below 0.90 in aggregate, so Vega7 must be selecting something the notes do not identify. Liquidity at 1c is thin and capacity is a few hundred dollars a day. The post says '1c or less'; the wallet also buys up to 15c, without profit.",
+  "credibility": 3,
+  "verification": "CONFIRMED. Both igor_mikerin posts contain the quoted figures and the rule (only BTC 5m, only the abandoned side, $10-25 stakes), and the wallet tool matches. The fill decomposition strengthens the claim (t 4.5 over 3,653 markets) but narrows it to the 5c-or-less bucket.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Limit bids below de-vigged sportsbook lines on spreads and totals (0x5268 / HomeRunHazard)",
+  "family": "sports-inplay-latency",
+  "mechanism": "As described by the post: 1-3 hours before a game, and during it, take the sharp sportsbook price, remove the margin, and rest BUY limits on Polymarket slightly below that fair value on spread, total and moneyline markets; fills come from retail sellers; hold to settlement. What the fills show: 78% of dollars are resting bids, but in the last six days those earned nothing before rebates; the profit came from the 22% that were taker buys at about 50c.",
+  "time_gap": "Sportsbook lines absorb line-ups, injuries and sharp money before Polymarket's book does. Scale: seconds in play, minutes pre-game. Not measured: nobody compared its fill prices with sportsbook odds.",
+  "market_categories": [
+   "sports: NBA, college basketball, NFL, NHL spreads and totals"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/igor_mikerin/status/2111821354827686310",
+    "date": "2026-10-18",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral)"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2112573178933293346",
+    "date": "2026-10-20",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral)"
+   }
+  ],
+  "claimed_results": "'one Polymarket wallet made $500K in a week'; example 'buy at 52c while the book fairly values it at 55c'; 'About half of his profit comes before the game, the other half he makes live.'",
+  "evidence": "wallet_check 2026-11-27 (address and the name HomeRunHazard resolve to the same wallet): joined 2026-04-23, 58,505 markets, $283.5M volume, gross 5,475,313, fees 1,734,690 charged (131,354 refunded), rebates 1,209,755, kept 5,081,731 (1.79% of volume, rebates 24%), Diamond taker tier and the 15% maker tier. Kept by month May-Nov 425/530/401/1,189/85/1,521/957K; without rebates 358/440/211/887/-127/1,330/815K. Six-day decomposition (Nov 21-27, $7.1M, 2,151 resolved markets): 78% maker by dollars, all buys; maker buys -0.37c a share (t -0.2, -$40K); taker buys +4.2c a share after fees (t 1.2, +$124K), concentrated at 0.45-0.55; API for the window: kept $280K, fees 41.8K, rebates 42.9K. Statistics for six days are weak (t by market 0.4).",
+  "wallets": [
+   "0x5268527977f700f9bf9b6d5cd843859e4e70135d (HomeRunHazard)"
+  ],
+  "requirements": "Real-time sharp odds feed (paid), market mapping from books to Polymarket slugs, large bankroll for variance (September was negative without rebates), seconds-level updates in play; most sports markets except NBA carry a 1-second taker matching delay.",
+  "fee_sensitivity": "Sports taker rate 0.05 (1.25c at 50c) eats about 40% of a 3c edge; as a maker the fee is zero. The wallet's rebates (40% of taker fees back at Diamond, 15% maker tier) are 24% of what it kept and offset its fees entirely in the last six days; a new account gets neither.",
+  "testability": "Pull its full fill history per market, compare fill prices with closing prices and settlement, and split pre-game from in-play by eventStartTime, maker from taker. ESPN API is reachable for scores; historical sharp odds need an external source.",
+  "red_flags": "Only one wallet, and a very large one. The mechanism the post teaches (resting bids below fair value) showed no edge in the latest six days; the money came from taker fills, which a small account cannot copy at 1.25c of fee without rebates. Month-to-month swings exceed $1M and September was negative without rebates. The $500K-a-week headline is a chosen week. The post is a referral ad, and its how-to was never checked against odds data.",
+  "credibility": 3,
+  "verification": "CONFIRMED. Both posts say what the candidate quotes, including the de-vig recipe and the half pre-game, half live remark, and the wallet tool reproduces every figure. The fill decomposition does not support the claimed source of profit, hence the lower score.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Quoting crypto daily/weekly strike and range markets off spot and volatility (Tokor, 0xDB5)",
+  "family": "options-replication",
+  "mechanism": "Researcher's hypothesis, not stated in either source: markets like 'Bitcoin above $X on Nov N', 'price between A and B', 'will BTC reach / dip to X by date' are digital and barrier options; price them from spot and volatility and trade around fair value. What the fills show: 0xDB5 really does this two-way in strike and range markets (61% maker by dollars, 34% sells, 916 merges in 21 days). Tokor does not look like a quoting bot: 66% maker by dollars, never sells, exits by buying the other side and merging (2,170 merges in 45 days), with the largest block of profit in markets more than 7 days from expiry and 22% of turnover in finance markets.",
+  "time_gap": "Spot and implied volatility move continuously; these thinner books reprice in seconds to minutes. Not measured by anyone.",
+  "market_categories": [
+   "crypto daily and weekly strike markets",
+   "crypto range markets",
+   "crypto monthly reach/dip markets"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/igor_mikerin/status/2114295479626313749",
+    "date": "2026-10-25",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), Tokor"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2110814975765717260",
+    "date": "2026-10-15",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0xDB5"
+   }
+  ],
+  "claimed_results": "Tokor: 'made +$70,000 literally yesterday, and almost $200,000 in October'. 0xDB5: '+$196,060', average trade $72.40, both sides in 71.6% of markets.",
+  "evidence": "wallet_check 2026-11-27. Tokor: joined 2026-07-10, 2,706 markets, $5.7M volume, gross 1,359,117, fees 38,653, rebates 23,046 (2%), kept 1,346,938 of which 71,718 unrealized (23.5% of volume); kept Jul-Nov -28/+127/+76/+713/+454K. 45-day decomposition ($3.30M): buy-and-hold on resolved markets explains $174K of the $913K the API books for the same days; maker fills more than 7 days from expiry earned +6.6c a share on 118 markets. 0xDB5: trading since Jan 2025, 13,883 markets, $34.6M volume, gross 235,352, fees 135,269 charged (78,363 refunded), rebates 29,369 (14%), kept 207,815 (0.60%); without rebates Jun-Nov -10/+21/+7/+6/+4/+27K. 21-day decomposition ($1.72M, 783 resolved markets): all strike and range markets, +$23.4K = 1.36% of turnover, t 2.5 by market; API kept $31.9K.",
+  "wallets": [
+   "Tokor 0xa19cbababc312f9df185e49d7004c249ed1ade6b",
+   "0xDB5 0xdb5ad26b68d77ae966d29e7180147272ab7a3965",
+   "balthazar 0x5a218c7ad04135830a45c41aaed7294df7809318 (partly this category; kept 1,202,669, Sep +418K, Oct -54K, Nov +23K)"
+  ],
+  "requirements": "Spot feed, a volatility estimate (Deribit public data is reachable), digital and barrier pricing, modest speed (seconds), capital sized to the position (Tokor averages about $300 a fill).",
+  "fee_sensitivity": "'All other crypto' taker rate is 0.01 (0.25c at 50c), five times cheaper than BTC 5m; makers pay nothing. Rebates are 2-14% of what the two wallets kept.",
+  "testability": "prices-history (5-minute buckets for 60 days) for strike markets against Binance 1-minute spot and Deribit implied volatility: measure deviation from model price and how long it lasts; then replay 0xDB5's fills for markout (it is the systematic one). For Tokor first rebuild cash flows including merges to see whether the profit is spread capture or a directional position.",
+  "red_flags": "Neither source describes this mechanism: the Tokor post is a discretionary story (YES on 'ETH touches $2,250 by Dec 31' on a 'Hayes sold = local bottom' meme) and the 0xDB5 post describes Up/Down complete sets, which the wallet does not trade. Tokor's 23% return on volume, concentration in Oct-Nov and long-dated positions point to a directional bet during a crash. 0xDB5 kept only $4-7K a month without rebates in Aug-Oct on $2-3M of volume. The post understates Tokor's October by 3.5 times, which shows the author did not look at the data.",
+  "credibility": 2,
+  "verification": "PARTIAL. The quoted dollar figures are in the posts, but the options-pricing mechanism is not in either of them; it is the researcher's reading of market names. The wallet tool confirms the totals; the fill decomposition supports the reading for 0xDB5 and contradicts it for Tokor (0xDB5 alone would rate 3).",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Weather buckets: forecast-update repricing and already-measured buckets (Bilberry, hello.67)",
+  "family": "weather-model",
+  "mechanism": "Poll GFS and ECMWF for airport coordinates hourly across about 50 cities. When tomorrow's forecast high moves by 0.5C or more, buy the bucket one degree closer to the new forecast while it is priced 5-60c, under $25 a trade. Correction from the fills: Bilberry's profit is exactly these taker buys at 0.15-0.85; its dollars at 0.97+ are resting SELL orders at 0.999 that close winning positions, not purchases of buckets already decided by observations. The 'already-measured' half of the name is therefore unsupported by this wallet.",
+  "time_gap": "New model run versus the bucket price. Scale: minutes to hours. (The seconds-long gap after a station report is already taken, per the lab's weather study.)",
+  "market_categories": [
+   "weather: daily highest/lowest temperature by city"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/igor_mikerin/status/2108878693477101880",
+    "date": "2026-10-10",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), Bilberry"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2121681055220383793",
+    "date": "2026-11-14",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), hello.67"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2106706803534750167",
+    "date": "2026-10-04",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), Happening9014"
+   }
+  ],
+  "claimed_results": "Bilberry: '$1,500/day just off weather forecast changes ... September average was $1,500/day'. hello.67: 'made $83K in 5 weeks. Now he's giving it back', '+$75.6K all time, 4,793 markets, $2.4M volume'. Happening9014: '$5,000/week'.",
+  "evidence": "wallet_check 2026-11-27. Bilberry: 12,071 markets, $1.54M volume, gross 73,460, fees 21,305, rebates 3,276 (6%), kept 55,440; kept Aug-Nov +3.7/+35.6/+12.6/+2.8K (September about $1,190 a day, then a 13-fold fall). 45-day decomposition (Oct 13 - Nov 27, $425K, 3,443 resolved markets): taker buys at an average 0.31 earned +2.4c a share (t 2.4, +$16.0K); 3,099 maker sells at 0.999 ($180K) earned nothing; API kept $14.3K after $2.9K of fees. hello.67 (name resolves to the address in the post): joined 2026-10-01, 6,939 markets, $1.29M volume, gross 80,968, fees 18,706, kept 65,240: Oct +63.9K, Nov +1.4K. Happening9014: kept 29,373 since 2024; Aug-Nov +2.8/-1.0/+3.2/+1.7K, so '$5,000/week' is false by an order of magnitude. windy-weather kept 27,264 (Nov +1.9K); BeefSlayer 90,010 (Sep +7.7K, Oct +6.2K, Nov -0.4K).",
+  "wallets": [
+   "Bilberry 0xbf13934a1fec7d3211fc15c138d84ac2a691b91a",
+   "hello.67 0x2e3ecedec4b004c61670f0dcda382ec0da1f0f92",
+   "Happening9014 0x2d0fbf6995692cc56f21171a9993be04436a81aa",
+   "windy-weather 0x164cb85e1718d0a8f95d588b08fbb52b34233e39",
+   "BeefSlayer 0x331bf91c132af9d921e1908ca0979363fc47193f"
+  ],
+  "requirements": "Forecast API polling (Open-Meteo is rate-limited from this sandbox), the settlement station per market, tiny capital, no speed beyond minutes.",
+  "fee_sensitivity": "Weather taker rate is 0.01 since Nov 20 (at most 0.25c a share) but was 0.05 before: Bilberry and hello.67 paid 21K and 19K in fees, a quarter of their gross. The same trades would keep more today. No rebate dependence (5-6%).",
+  "testability": "Archived model runs are needed for the forecast-update rule; api.weather.gov and the Iowa Mesonet ASOS archive give observations. Test bucket prices from prices-history against forecast changes. The lab's weather study already found prices at local midnight well calibrated and a blanket rule negative, so the test must condition on a forecast change.",
+  "red_flags": "Both verified wallets collapsed in November (+2.8K and +1.4K) even though the fee fell five-fold on Nov 20. Thin books: Bilberry earns about 3.6% on $1.5M. The posts are referral ads quoting single lottery hits ('$7 into $3,838') and at least one invented income figure. hello.67's post figures (4,793 markets, $2.4M) do not match the API (6,939 markets, $1.29M).",
+  "credibility": 3,
+  "verification": "CONFIRMED. The Bilberry post contains the full rule (0.5C shift, one degree closer, 5-60c, under $25, 50 cities hourly, $1,500 a day in September) and the other two quotes are verbatim; the wallet tool matches. One correction: the researcher's 'already measured buckets' reading of Bilberry's 0.97+ dollars is wrong, they are sell exits.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Maker/taker hybrid on alt-coin up/down markets (0x0dbd0e1d)",
+  "family": "market-making",
+  "mechanism": "As catalogued: the BTC 5m maker and late-bid playbook run on DOGE, ETH, BNB, SOL and XRP up/down markets. As verified: the wallet trades 5m and 15m windows on six coins, but BTC is the largest part (45% of the turnover seen in the last 24 hours and about 80% of the profit), ETH 26% at about zero, the four alt-coins 29%. By dollars it is 36% maker; taker buys carry the result. The source describes something else again: fixed-size buys of 900 or 600 shares at 2-34c.",
+  "time_gap": "Exchange price versus Polymarket books on short windows; likely seconds. Not measured.",
+  "market_categories": [
+   "crypto up/down 5m and 15m on BTC, ETH, DOGE, SOL, XRP, BNB"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/igor_mikerin/status/2119867380591476753",
+    "date": "2026-11-09",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral)"
+   }
+  ],
+  "claimed_results": "'A 9-day-old Polymarket wallet with 111 profile views is already up $16K ... has already traded 1,962 markets, all short crypto Up/Down windows: BTC, ETH, DOGE, SOL, XRP.' '+$3,760 in the last 24 hours, $1.2M volume.'",
+  "evidence": "wallet_check 2026-11-27: joined 2026-11-02, 25,402 markets, $2.11M volume, gross 77,863, fees 15,028, rebates 4,038 (6%), kept 66,873, 62,835 without rebates (3.0% of volume) in 25 days; already in the Gold taker tier. One-day decomposition (Nov 26-27, 1,319 resolved markets, $87K seen): BTC 15m +$1.6K, BTC 5m +$1.6K, ETH -$0.15K, alt-coins +$0.9K; taker buys +$3.3K, maker buys +$0.5K. The API books +$11.8K for that single day, 18% of the wallet's total. The fill tool returned only 3,600 of the 7,302 fills the API counts, so the shares are approximate.",
+  "wallets": [
+   "0x0dbd0e1d5999a401263dc26cbf1597f2be0cfcd5"
+  ],
+  "requirements": "Feeds for six coins, quoting and taking across many short markets, small tickets (about $10-25).",
+  "fee_sensitivity": "BTC 5m and 15m, where most of its profit sits, carry the 0.05 taker rate; the other coins 0.01. Fees were 19% of gross. Rebates are 6% of what it kept.",
+  "testability": "Pull the wallet's full November fills, split maker from taker and BTC from the rest, compute per-coin markout, and compare with market volume (SOL/XRP/DOGE 5m volume is near zero, so capacity must be checked first).",
+  "red_flags": "Only 25 days of history, in a crash month, with one day worth 18% of the total. The catalogue label is wrong on both counts (it is mostly BTC/ETH and mostly taker by dollars). The mechanism is inferred from a six-hour sample and differs from what the source describes. Single referral post.",
+  "credibility": 2,
+  "verification": "PARTIAL. The post exists and the quoted sentences are in it, but it describes fixed-size cheap buys including BTC, not an alt-coin maker; the mechanism in the candidate is the researcher's inference and the fills contradict its two main points.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Latency taker: lift stale up/down quotes after a Binance move",
+  "family": "latency-crypto-updown",
+  "mechanism": "Compute fair P(Up) from spot, reference, volatility and time left; when the exchange moves and the Polymarket ask is still stale, buy it; if the signal flips, buy the other side as a hedge rather than sell. One post gives a rule: fair price jumps 20c+ in 5 s to above 60c while Polymarket is 10c+ cheaper, buy that second.",
+  "time_gap": "Binance moves first, Polymarket follows in about 0.5-2 s (lab measurement); the posts say 'a beat late' or 'seconds'.",
+  "market_categories": [
+   "crypto up/down 5m",
+   "crypto up/down 15m"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/RetroValix/status/2096691577058148535",
+    "date": "2026-09-06",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), nj23adsknml3"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2095920020953965000",
+    "date": "2026-09-04",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0xAAAAA"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2098196382599315480",
+    "date": "2026-09-10",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), Bonereaper"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2110308831515279578",
+    "date": "2026-10-14",
+    "author": "@igor_mikerin",
+    "kind": "x-post (referral), dgdgt345dfgdf23"
+   },
+   {
+    "url": "https://x.com/Dan1ro0/status/2123872696606036265",
+    "date": "2026-11-20",
+    "author": "@Dan1ro0",
+    "kind": "x-post (ad), blue.birds"
+   }
+  ],
+  "claimed_results": "nj23adsknml3 +$251,218; 0xAAAAA +$304,915; Bonereaper +$1,365,350; dgdgt345dfgdf23 '$700/day'; blue.birds '$12.5M traded, +$101,923.74 in 46 days', 'hedge fund track record'. ('ROI 5,450%' is on a video poster, not in the text.)",
+  "evidence": "wallet_check 2026-11-27. nj23adsknml3: gross 251,169, fees 350,364 charged (95,883 refunded), rebates 50,442, kept 49,548 (rebates 102% of it); without rebates Jun-Sep -14/-5/-10/-6K; volume near zero since October. 0xAAAAA: gross 299,963, fees 384,229, rebates 147,548, kept 64,382 (rebates 229%); without rebates Jun-Aug -17/-36/-24K; zero volume from September, advertised on Sep 4. Bonereaper: gross 1,467,617, fees 2,524,168 charged (906,915 refunded), rebates 679,046, kept 530,841 (rebates 128%); without rebates negative in every month Jun-Nov (-54/-59/-65/-34/-8/-17K). blue.birds: gross 113,721, fees 104,257, rebates 36,204, kept 45,668 (79% rebates) on $6.8M of USDC volume; without rebates Oct +7.3K, Nov +2.2K. trinity42: kept 78,684, 42,942 without rebates, about zero since September. norm1e69: kept 168,550, 48,770 without rebates, stopped in November. dgdgt345dfgdf23 does not resolve (gamma search returns zero results).",
+  "wallets": [
+   "nj23adsknml3 0x674887d1ac838099a48b629dff53f25b7b87ee08",
+   "0xAAAAA 0x251c1a283703beed41590b0875a8dcb8ddd1541f",
+   "Bonereaper 0xeebde7a0e019a63e6b476eb425505b7b3e6eba30",
+   "blue.birds 0xb9587c373c773d023f47c2f85a30b3d5bddcf513",
+   "trinity42 0x4228048ea2f8f571ff2777cc32baee584c5134cb",
+   "norm1e69 0x41e2e1ccf1e4940029af02259a31c6b89b9fa354"
+  ],
+  "requirements": "Co-location near the matching engine, sub-second feeds, and a Diamond or Obsidian volume tier (40-50% taker rebate) to break even.",
+  "fee_sensitivity": "BTC 5m taker rate 0.05 (0.07 before Nov 20) costs 1.25c at 50c. Every advertised latency wallet is negative or about zero after fees without rebates; a new account gets no rebate.",
+  "testability": "Already tested by the lab on the 21-26 Nov tape: a naive fair-value taker loses 1-8% of turnover. This catalogue adds wallet-level confirmation.",
+  "red_flags": "The most advertised family and the worst after fees. Promoted wallets were dead or losing at the time of the posts (0xAAAAA had stopped before its Sep 4 ad). The one concrete rule (a 10c+ gap that persists for a second) comes with a profile that cannot be found. Each post ends in an affiliate link (ratio.you, KCEX, gravia.trade, horizon.trade, Polymarket referral).",
+  "credibility": 2,
+  "verification": "CONFIRMED. All five posts exist and contain the quoted mechanism and figures; the wallet tool reproduces the researcher's numbers (trinity42 without rebates is 43K rather than 36K). The story the posts tell, that speed is the edge, is contradicted by every wallet's result without rebates, as the candidate already says.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Asynchronous pair accumulation ('Up + Down under $1') as a taker",
+  "family": "pair-accumulation",
+  "mechanism": "Buy one side, wait for the underlying to swing, buy the other, so that the average cost of the pair is below $1; keep an unpaired residual in the direction of the model. Posts cite combined costs of 0.91-0.99 on longer windows and 0.946-0.98 on 5m.",
+  "time_gap": "None claimed; it relies on price swinging both ways within the window (volatility harvesting).",
+  "market_categories": [
+   "crypto up/down 5m, 15m, 1h, 4h"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/RetroValix/status/2114066681098355051",
+    "date": "2026-10-24",
+    "author": "@RetroValix",
+    "kind": "x-article (horizon.trade ad)"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2099269744494862618",
+    "date": "2026-09-13",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), Polkadot-Frog"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2115509401809203697",
+    "date": "2026-10-28",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0xb55fa129"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2115557297057603927",
+    "date": "2026-10-28",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0xcE25E214; added by the verification pass from the local dump"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2119917714588238032",
+    "date": "2026-11-09",
+    "author": "@RetroValix",
+    "kind": "x-post (ad), 0xcE25E214 '$3,634 a day'; added by the verification pass from the local dump"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2091951419989573990",
+    "date": "2026-08-24",
+    "author": "@RetroValix",
+    "kind": "x-article"
+   }
+  ],
+  "claimed_results": "x-MoneyForWhiskas '+$624,300 PnL in four months ... approximately +$156,075 a month', gap to $1 of 2.07c per pair 'before costs'; 0xb55fa129 +$1,340,486, '$7,406 per day'; 0xcE25E214 +$701,615 (Oct 28) and '$3,634 a day' (Nov 9); Polkadot-Frog +$142,620 (Sep 13; the +$222,586 in the first pass is not in any post text I found).",
+  "evidence": "wallet_check 2026-11-27. x-MoneyForWhiskas: gross 659,409, fees 479,338, rebates 246,893, kept 426,964 (58% rebates); without rebates Jun-Nov 12/48/52/29/29/10K. Its operator's four wallets (same Diamond tier value 4,471,870): kept 1,102,801 together, 487,294 without rebates. 0xb55fa129: gross 1,370,827, fees 1,412,012, rebates 605,167, kept 563,982 (107% rebates); without rebates Sep-Nov -40/-56/-63K. 0xcE25E214: gross 696,720, fees 713,567, rebates 244,100, kept 227,253; -16,847 without rebates; kept Sep-Nov -0.4/-2.7/-5.4K while being advertised as '$3,634 a day'. Polkadot-Frog: gross 231,212, fees 350,372, rebates 240,882, kept 121,722 (198% rebates); without rebates negative every month May-Oct.",
+  "wallets": [
+   "x-MoneyForWhiskas 0x3048d65321be3497164cdfc2996f94f98a2e7537",
+   "dangerously-skip-permissions 0xc53375ff94e96100f2b30a4b5775db35218d69a9",
+   "GoodFallen 0x0ca4e9d27ff826a109ecbf74754fb66b93f277a6",
+   "FairValueMachine 0xd84403efd50b49a1d8a7181627e00307e6ea5908",
+   "0xb55fa1296e6ec55d0ce53d93b9237389f11764d4",
+   "0xce25e214d5cfe4f459cf67f08df581885aae7fdc",
+   "Polkadot-Frog 0x9d57c42e847173d06841703825d3fe2299e456ea"
+  ],
+  "requirements": "High volume to reach Platinum or Diamond rebate tiers, multiple wallets, fast execution.",
+  "fee_sensitivity": "Taker fee of about 1.25c per side at 50c is larger than the 2-4c pair gap once both legs pay it. These wallets are net negative or marginal without rebates.",
+  "testability": "Lab already showed 'pair cost under $1' is an outcome, not an arbitrage (both sides at once cost at least $1.01), and that the leftover one-sided inventory lost in 3 of 4 samples.",
+  "red_flags": "Depends on volume rebates a new account cannot get. The pair cost quoted in posts ignores fees (the article says 'before costs'). The article that brought the lab here is an advertisement for a strategy-builder subscription and says itself 'The exact indicators remain unknown'; its backtest is of an unrelated ROC/ATR signal. Wallets were advertised with a per-day income while losing money.",
+  "credibility": 2,
+  "verification": "PARTIAL. The article and the 0xb55fa129 post contain the quoted figures and the wallet tool confirms the researcher's numbers. Two claimed figures were tied to the wrong or to uncited posts: Polkadot-Frog's cited post says +$142,620, and 0xcE25E214's figures are in two posts now added to sources.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Copy-trading promoted wallets through a Telegram bot or gravia.trade",
+  "family": "copy-trading",
+  "mechanism": "Follow a wallet named in a post and mirror its trades automatically via a referral-linked tool. There is no edge of its own: the result is the copied wallet's result minus slippage, delay and the tool's fee.",
+  "time_gap": "Negative: the copier acts after the leader.",
+  "market_categories": [
+   "sports",
+   "crypto",
+   "any"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/DextersSolab/status/2123107646735569382",
+    "date": "2026-11-18",
+    "author": "@DextersSolab",
+    "kind": "x-post (ad)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2095491180901630326",
+    "date": "2026-09-03",
+    "author": "@rb_tweets",
+    "kind": "x-post (ad)"
+   },
+   {
+    "url": "https://x.com/RetroValix/status/2096003427956662759",
+    "date": "2026-09-04",
+    "author": "@RetroValix",
+    "kind": "x-post (ad)"
+   }
+  ],
+  "claimed_results": "'THOSE WHO STARTED COPY TRADING THIS GUY AFTER MY POST MADE $40K ALREADY'; rb_tweets 'Trader 3': '$34.25K of profits ... consistently profitable for 4 months ... 22% ROI'.",
+  "evidence": "wallet_check 2026-11-27. rb_tweets' Trader 3 (0xbf5fe8bf…): gross 21,318, kept 11,358 lifetime; kept May-Aug +7.5/+7.1/+5.3/+5.5K, then -3.2/-10.1/-7.6K in Sep-Nov: it lost every month after the Sep 3 post, and its profile never showed the claimed $34K as kept money. DextersSolab's featured wallet 0x76eca410…: kept 628,624, of which +663,731 in November on $256K of volume and -35K over the five months before: one directional bet on a crash. luckycat888888 +198,096 (Oct +102K, Nov +103K). Negative picks: tin54321 -23,465, mrcoolside -16,332 on 16 markets, ch27er -54,603 with 97K of fees.",
+  "wallets": [
+   "0xbf5fe8bfc9ec6e7ff7a311ea85cfc0d2901ac035",
+   "0x76eca4109d0dfe8649d5e3861dfccac67ae7d630",
+   "luckycat888888 0x0b5e2874b65238b1f1d331e7c91aab4ae3af9367",
+   "tin54321 0x91e67d77b45558ce69238bf8a79e2e902b1ee9c5",
+   "mrcoolside 0x4078b5854150adb625c72e846b8588ff1ac93922",
+   "ch27er 0x61a3f1ef9c9618f532eb49f0cb260486c168e508"
+  ],
+  "requirements": "A third-party bot holding your keys or funds, plus its fee.",
+  "fee_sensitivity": "Copier pays taker fees (0.05 on sports and BTC short windows) plus slippage on every leg; leaders with few large bets cannot be copied at their price.",
+  "testability": "For each promoted wallet, compare its PnL before and after the promotion date (done for 11 wallets by the first pass; six re-checked here).",
+  "red_flags": "Selection after the fact, affiliate links in every post, picks reverse after promotion, custody risk of Telegram bots. The 'made $40K for copiers' claim cannot be checked at all.",
+  "credibility": 1,
+  "verification": "CONFIRMED. All three posts exist and say what is quoted (the RetroValix post re-uses rb_tweets' wallet with its own gravia code), and the wallet tool confirms that the promoted wallets lost money or made it in one bet.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "Fade-the-panic at mid-window when BTC is near the reference (RohOnChain rule)",
+  "family": "other",
+  "mechanism": "In minute 3-4 of a BTC 5m window, if BTC is still within about $15 of the start price but one side has been sold down to 25-35c, buy the cheap side as a taker and hold. Stated alongside 'bid both sides at open' and 'no trades in the final 60 seconds'.",
+  "time_gap": "None; a behavioural mispricing claim.",
+  "market_categories": [
+   "crypto up/down 5m"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/RohOnChain/status/2115480282577117588",
+    "date": "2026-10-28",
+    "author": "@RohOnChain",
+    "kind": "x-post"
+   }
+  ],
+  "claimed_results": "'EXACT million-dollar trading strategy'; 'people buying from the book are right 53% of the time & still lose'.",
+  "evidence": "No wallet named and nothing verified. Parts contradict verified wallets: 0x50f7 and BoneOhio trade mostly in the last minute and after the end, and Vega7's profitable fills sit at seconds 225-285. The 53% remark is consistent with the lab's tape finding that takers lose 1.33% before fees.",
+  "wallets": [],
+  "requirements": "Binance feed, taker access, small tickets.",
+  "fee_sensitivity": "BTC 5m taker rate 0.05: about 1.1c per share at 30c, so it needs a true probability of at least about 31% on a 30c entry.",
+  "testability": "Directly testable on the lab's BTC 5m tape: select moments in seconds 180-240 with |spot - reference| under $15 and one side at 25-35c, then check the settlement rate.",
+  "red_flags": "Engagement post ending in 'paste the prompt below into Grok Bot' and pointing to the author's own article; no evidence at all.",
+  "credibility": 1,
+  "verification": "CONFIRMED. The post exists and contains the minute-by-minute rules and both quotes; that is all that can be confirmed, since it names no wallet and shows no data.",
+  "channel": "x1_bot_posts"
+ },
+ {
+  "name": "News-headline sniping on deadline ladders (hit stale resting orders in the first seconds after a headline)",
+  "family": "news-latency",
+  "mechanism": "Entry: within seconds of a binary corporate/political headline, take every resting ask on Yes (and every resting No bid) across all deadline brackets of the event; sister deadlines reprice a few seconds later than the front one, so buy those too. Exit: sell at 97-99c within 1-30 minutes or hold to resolution. Edge: resting 'bond' bids (No at 97c), wide asks and reward-farming quotes whose owners do not react for 5-70 s, so the book stays at pre-news prices while the fact is already public. (Correction: the exchange's cancel latency is not the main cause; cancel p50 is 24 ms and p95 78 ms, only p99 is 0.6-0.7 s.)",
+  "time_gap": "Headline on newswire/X before the Polymarket book. Source figures on two events: first serious buyer +3-5 s, 50c after ~24 s, 95c after 72 s (Nov 23); 35c to 97c in 33 s (Nov 12). The lab's own tape of Nov 23 agrees: first aggressive print 13:55:53 UTC, 0.90 reached after 66-74 s. Sister deadline lag about 3 s. Scale: seconds.",
+  "market_categories": [
+   "tech",
+   "business",
+   "politics",
+   "culture"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/rb_tweets/status/2125192375039595005",
+    "date": "2026-11-24",
+    "author": "@rb_tweets",
+    "kind": "X article (analytics-vendor promoter, referral links)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2121613610879512672",
+    "date": "2026-11-14",
+    "author": "@rb_tweets",
+    "kind": "X article (analytics-vendor promoter, referral links, Telegram alert channel)"
+   },
+   {
+    "url": "https://x.com/dunik_7/status/2120274684952371632",
+    "date": "2026-11-10",
+    "author": "@dunik_7",
+    "kind": "X post (affiliate; Roadster live-stream case, minutes not seconds)"
+   },
+   {
+    "url": "https://x.com/datadashxyz/status/2124961655201419474",
+    "date": "2026-11-23",
+    "author": "@datadashxyz",
+    "kind": "X post (analytics vendor; describes the pre-news holder 0x7795, not the sniping)"
+   },
+   {
+    "url": "https://x.com/devjoshstevens/status/2121241806469796103",
+    "date": "2026-11-13",
+    "author": "@devjoshstevens (Polymarket engineering)",
+    "kind": "official X post (order and cancel latency figures)"
+   }
+  ],
+  "claimed_results": "Nov 23 Huang return: 91 wallets bought in 72 s and made ~$239K, five took $216K (WarriorPooh +$91.6K, nimble-mellow-comet +$77.1K on $22.2K, brohop +$17.7K on $4.5K, Samael-of-Rome +$19.3K, tinman2 +$10.7K); 162 wallets with resting orders lost ~$238K. Nov 12 Huang resignation: 121 wallets made ~$91K, three took $71K (one +$42.4K on $26K in under 2 minutes). 'The same trade, 30 seconds later, made 30 times less.'",
+  "evidence": "wallet_check 2026-11-27 (gross / net kept / rebate share / months Jul-Nov). WarriorPooh: 350,358 / 347,389 / 2% / 11.7K, 3.2K, 3.0K, 7.0K, 170.3K; but it bought about 47K Yes at 0.115-0.123 at 13:30:59-13:31:11, 24 minutes before the release was public, so it is not a clean reactor. nimble-mellow-comet (joined 2026-10-13): 196,211 / 194,892 / 0% / Oct -0.5K, Nov +195.4K. 0x3cc379...fb0b (joined 2026-09-23): 129,012 / 126,063 / 1% / Sep 0.9K, Oct 34.6K, Nov 90.5K. 0xe176...7f65: 57,129 / 55,929 / 0% / 7.8K, 0.0K, 2.0K, -11.7K, 39.2K. brohop: 29,914 / 29,331 / 0% / 2.9K, -0.8K, 4.5K, -0.0K, 21.6K. tinman2: 16,287 / 14,868 (unrealized -14,254) / 3% / -5.6K, -0.5K, -2.1K, -6.2K, 12.6K. Thanks4TheMoney (first to trade, $34): -31,765 / -33,752. dromedaryy: 808,816 / 798,857 / 3% / Sep 27.8K, Oct 416.0K, Nov 359.7K, Gold tier. Victims: Flipadelphia (0x448861...e319, found by the address in the article link) 866,654 / 842,853, Nov -182.5K; Raskell 98,009 / 98,471, positive 5 of the last 6 months. All snipers are Tier 0. Lab tape of Nov 23 (w1_reddit_forums.md): nimble 50,980 at 0.124 at +3 s and brohop 18,517 at 0.20 at +11 s match the article; a reader 20-70 s late could get about 26K shares at 0.50-0.85 in one market, for the whole crowd; a profile named Tree.news is in the tape at +5 s.",
+  "wallets": [
+   "WarriorPooh (0x853c37a959a5791b849e3f3225c7f5963746bd03)",
+   "nimble-mellow-comet (0x3e03eaee9fa9d188e2a15e8bfd9c34b95e44b571)",
+   "0x3cc379741b2ab96d61aab5942a1a711a89f1fb0b",
+   "0xe176897ced0ae142dda0f98dd949338fffb97f65",
+   "brohop (0xfe724b7046696c9c431ae331c3d29816b4799025)",
+   "tinman2 (0x9baebe30d1cefe0ac5be4be85189c9fa33e95d34)",
+   "Thanks4TheMoney (0x1e0f2a7ac232e767b35a2ea5e9447a06c2759556)",
+   "dromedaryy (0x6575759174ad221bba9947bc3f18750ec769b198)",
+   "Flipadelphia (0x448861155279dbf833d041b963e3ac854599e319)",
+   "Raskell (0xb37aa8834f9baefc6fb3312f59df8ddf0348f1b1)"
+  ],
+  "requirements": "Machine-readable headline feed (newswire/X firehose) with sub-second delivery, a prebuilt map from entities/headlines to market token ids, a classifier that is right on the first read, order placement in under ~3 s, $5-25K of idle capital per event to matter. A human reading X lands in the 30 s+ bucket.",
+  "fee_sensitivity": "Tech/finance/elections 0.05, other politics/culture 0.01, geopolitics 0. At 5-40c entries against a 60-95c move the fee (0.24-1.2c per share) is irrelevant. The edge is fill availability, not fees.",
+  "testability": "Whole-market tape via data-api /v2/trades?condition= for every market with a >40c move inside 2 minutes in Sep-Nov; measure for each: time from first abnormal fill to 50c/90c, dollars available at each second, how often the first move reverses (false headlines), and the PnL of a rule 'buy N seconds after first abnormal print'. Block timestamps are 2-3 s late, so only the shape is measurable.",
+  "red_flags": "Both documented events are the same story in one fortnight, written by a tool vendor with referral links. The biggest 'sniper' (WarriorPooh) was already buying 24 minutes before the news, and the same article shows fresh wallets buying days ahead: part of the profit is probably informed. The other winners are 6-10 week old accounts with PnL in 2-3 events. News-feed bots are already in the tape within 5 s. The earlier claim that Nex will shrink the window is unsupported (cancel p50 is already 24 ms; Nex also speeds up takers). Event frequency is low. The dromedaryy Roadster case is a live-stream dip bought over minutes, not a headline snipe.",
+  "credibility": 4,
+  "verification": "CONFIRMED. Both rb_tweets articles, the dunik_7, datadashxyz and devjoshstevens posts were re-read and every quoted number is there; the lab's own tape of Nov 23 reproduces the timing. Not matching: WarriorPooh's pre-news buying makes it a mixed case, and inside the Nov 14 article nimble's start time and average price are given two ways (13:48:42 vs 13:48:24, 94c vs 90c).",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Scheduled economic-release reaction (CPI, jobs report, Fed)",
+  "family": "econ-release",
+  "mechanism": "Entry: at 8:30:00 ET read the released number from the agency/newswire and buy the bracket that is now certain before the book reprices. Exit: hold to resolution (about 2 hours) or sell at 99c. Edge: the number is public and unambiguous the second it is released; the bracket market needs several seconds to reprice.",
+  "time_gap": "Official release (BLS/BEA/Fed) before the Polymarket book: source says first trades ~7 s after release by block time, correct bracket above 90c at 9 s, 99c at 27 s. Lab's economics study on 53 events Sep-Nov: stale fills for 2-20 s (block time), 78% of the profit taken within 15 s, 98.8% within 60 s. Scale: seconds.",
+  "market_categories": [
+   "economics"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/PavelPavlyuh/status/2118315492876132694",
+    "date": "2026-11-05",
+    "author": "@PavelPavlyuh",
+    "kind": "X post (data analysis by a tool builder)"
+   },
+   {
+    "url": "https://x.com/primo_data/status/2118373796147327078",
+    "date": "2026-11-05",
+    "author": "@primo_data (Polymarket data lead)",
+    "kind": "X post endorsing the analysis"
+   }
+  ],
+  "claimed_results": "33 releases in 2026: correct answer priced 48c on average one second before; 217 wallets traded in the first 10 s, 26 of them on 5+ releases; favourite won 13/17 CPI, 3/9 jobs, 7/7 Fed. Example: 'US loses jobs' bracket 0.3c to ~$1.",
+  "evidence": "Reproduced inside the lab (studies/wallets/economics/README.md): 53 scheduled releases Sep-Nov 2026, 263 taker fills on the winning side below 0.95, $69.7K notional, $20.8K profit in total, about $7K a month for all snipers together. wallet_check 2026-11-27 on the two specialists found there: TheElement115 (0x8cb3ed8b...0114, joined 2026-07-21, 151 fills) gross 8,716, net 8,491, rebates 0%, Jul-Nov 0.9K, 0.9K, 0.7K, 4.9K, 1.1K; road2million (0x05946...90a5) gross 5,437, net 5,291, rebates 0%, Jul-Nov 0.4K, 0.2K, 0.2K, 4.4K, 0.9K. Both Tier 0. October was the zero-fee period.",
+  "wallets": [
+   "TheElement115 (0x8cb3ed8b82e59276ceaef9799287f51dbb450114)",
+   "road2million (0x0594680ecb55045909f3f71d93b87d5e836190a5)"
+  ],
+  "requirements": "Direct low-latency access to the release (agency site/API or a paid newswire), parser for the specific number and its rounding rule, order in under ~3-5 s, a server in an unrestricted country close to London. Events are ~3-4 per month in the US, more with ONS/StatCan/central banks. Capital of a few thousand dollars is enough: the best specialist's lifetime volume is $77K.",
+  "fee_sensitivity": "Economics is 0.01 since 2026-11-20 (at 48c: 0.25c per share); measured 0.036-0.048 before and zero Oct 20-31. Survives fees easily if fills exist.",
+  "testability": "Tapes for the 53 events are already cached in data/econ_tapes/. Next: for each event, dollars available per second in seconds 0-30 at pre-release prices and the share one extra taker arriving at +2 s, +5 s, +10 s could have got; live REST polling of the book at T-1 s on the next releases to see whether makers pull quotes beforehand.",
+  "red_flags": "The pool is small: $20.8K over three months for everyone, and the two regulars keep $0.7-5K a month. Numbers in the post are block time. Pre-release books may be nearly empty. 26 repeat wallets compete for it.",
+  "credibility": 4,
+  "verification": "CONFIRMED. The post and the endorsement by Polymarket's data lead read as quoted, and the lab's own tape study finds the same 2-20 s window. What the post does not say, and the lab data adds, is how little money sits in that window.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Liquidity-reward farming plus maker rebates around a discretionary book",
+  "family": "rewards-farming",
+  "mechanism": "Rest large two-sided or one-sided limit orders inside the reward spread on markets with high daily reward pools (hot news markets, esports events), collect the daily liquidity reward and, until Nov 20, 25% of taker fees on fills as maker rebate. Positions that fill are managed as discretionary trades.",
+  "time_gap": "none (the opposite: the farmer is the one hit when news arrives)",
+  "market_categories": [
+   "politics",
+   "tech",
+   "culture",
+   "esports",
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/Tenebrus87/status/2105566697818136995",
+    "date": "2026-10-01",
+    "author": "@Tenebrus87",
+    "kind": "X post (trader's monthly report)"
+   },
+   {
+    "url": "https://x.com/Tenebrus87/status/2100515983324578201",
+    "date": "2026-09-17",
+    "author": "@Tenebrus87",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/Tenebrus87/status/2122990344950157429",
+    "date": "2026-11-18",
+    "author": "@Tenebrus87",
+    "kind": "X post (rebate change)"
+   },
+   {
+    "url": "https://x.com/Tenebrus87/status/2125712141181165795",
+    "date": "2026-11-25",
+    "author": "@Tenebrus87",
+    "kind": "X post ('Lost $130K on the Jensen Huang return markets')"
+   },
+   {
+    "url": "https://x.com/PolymarketTrade/status/2125237678967022053",
+    "date": "2026-11-24",
+    "author": "@PolymarketTrade",
+    "kind": "official X post ($100K LP rewards per day)"
+   },
+   {
+    "url": "https://x.com/XenyPM/status/2114333656789442640",
+    "date": "2026-10-25",
+    "author": "@XenyPM",
+    "kind": "X post"
+   }
+  ],
+  "claimed_results": "September: +$26.3K of which $10K rewards farming + maker rebates; $787 of rewards in one day with 200K shares resting; maker rebates $100-200/day, of which 85-97% disappears after Nov 20. Daily program pool ~$100-110K.",
+  "evidence": "wallet_check 2026-11-27 on Tenebrus7 0xa8c63f77...44e8 (name is a near match; identity now supported by his own Nov 25 post about a $130K Huang loss against the wallet's November gross of -82,149): gross 73,707, fees -7,300, rebates+rewards 95,090 (liquidity rewards 81,572, maker 13,171), net 163,231, 58% of net is rebates/rewards. Rebates+rewards Jul-Nov: 11.6K, 12.2K, 10.4K, 11.7K, 9.0K, matching the $10K claim. Net kept Jul-Nov: 15.4K, 6.0K, 21.6K, 11.1K, -75.5K; without rebates/rewards +3.7K, -6.3K, +11.2K, -0.6K, -84.5K. Car (0x7c3db723...5c6b): liquidity rewards 101,723 of net 1,693,275 (6%), 555 merges for $4.8M of sets in 90 days, mostly on rewarded 2028 presidential markets. 'Eltonma' and 'Dr_PNL' could not be matched: the closest profile names are unrelated small accounts.",
+  "wallets": [
+   "Tenebrus7 (0xa8c63f775ddbbe66b56614191747def3021444e8)",
+   "Car (0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b)"
+  ],
+  "requirements": "Tens to hundreds of thousands of dollars resting, constant monitoring or fast cancel logic, news awareness. Not a few-hundred-euro strategy.",
+  "fee_sensitivity": "Maker pays no fee. Maker rebate for an account under $200K 30-day weighted volume is 0% since 2026-11-20 (was 25%); the liquidity rewards program is separate and continues.",
+  "testability": "Rewards API (per-market pools, rewardsMinSize, rewardsMaxSpread) plus tape: for each rewarded market estimate reward per dollar-day of resting size versus adverse-selection loss when the price jumps through the quote; check what minimum size earns anything. Separate idea from the same trader's Nov 25 post, not yet looked at: in newly launched high-reward markets the farmers' quotes set the price, so the mid can sit far from fair value.",
+  "red_flags": "The reward income is real, but the trading around it is about zero over the wallet's life (gross 73.7K on $43M volume) and November alone lost 84.5K before rewards, mostly a directional No position on the Huang return. Rewards scale with resting size, so a small account earns cents. Two of the four wallets the first pass listed were wrong name matches.",
+  "credibility": 3,
+  "verification": "CONFIRMED. All four Tenebrus87 posts, the PolymarketTrade post and the XenyPM post say what is quoted, and the wallet's monthly rewards match the $10K claim. Lowered from 4 to 3 because the wallet shows the whole business is negative for November and near zero without the rewards.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Small maker bot on crypto markets living on the flat maker rebate",
+  "family": "market-making",
+  "mechanism": "Post-only quotes on crypto up/down markets with small size, apparently across several accounts; income is mostly the maker rebate share of taker fees plus a little spread. Parameters not disclosed.",
+  "time_gap": "none",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/XenyPM/status/2107102254960447503",
+    "date": "2026-10-05",
+    "author": "@XenyPM",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/XenyPM/status/2097304869778653546",
+    "date": "2026-09-08",
+    "author": "@XenyPM",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/holy_moses7/status/2122751310638309463",
+    "date": "2026-11-17",
+    "author": "@holy_moses7",
+    "kind": "X post (rebate change)"
+   },
+   {
+    "url": "https://x.com/GollumGekko1/status/2123027800919527533",
+    "date": "2026-11-18",
+    "author": "@GollumGekko1",
+    "kind": "X post (rebate change)"
+   }
+  ],
+  "claimed_results": "September: ~$700 in maker fees and ~$300 trading PnL; 'over $1,000 in a month' in August; 'Passively earning ~$1.5k a month' including other platforms.",
+  "evidence": "No wallet. The Polymarket profile 'Xeny' (0x7b75e76b...3fd1: gross 116,922, net 117,484, 4% rebates/rewards, Jul-Nov 3.2K, 1.0K, 1.1K, 2.2K, 7.8K) had 3 fills and zero maker rebate in September, so it is not the bot account; his Oct 25 post says 'across accounts'. Structural check: 70% of the claimed income was the flat maker rebate, which is 0% below the $200K tier since 2026-11-20 (two other traders' posts and the docs agree). NOTES.md tape study: a naive maker in BTC 5m with 1-2 s staleness loses 2-8%.",
+  "wallets": [],
+  "requirements": "Small capital, a VPS, cancel/replace speed; since Nov 20 also $200K+ of 30-day maker weighted volume to get any rebate.",
+  "fee_sensitivity": "Maker pays nothing; the rebate that carried it is gone for small accounts. What remains is the claimed ~$300 a month of spread.",
+  "testability": "Maker fills of small wallets on crypto up/down (trades with taker_only=false minus the taker feed), markout at 1/5/30 s, before and after Nov 20.",
+  "red_flags": "No rules, no identifiable wallet, several accounts, and the income source was removed on Nov 20: under the current fee rules the described business cannot pay.",
+  "credibility": 1,
+  "verification": "PARTIAL. The three posts exist and say what is quoted, and the rebate change is confirmed by two other traders. The profit cannot be tied to any wallet, and the only profile with a matching name shows no bot activity in the claimed month.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Bonding: buy near-certain outcomes at 94-99c and wait for resolution",
+  "family": "resolution-bond",
+  "mechanism": "Rest bids / take offers at 94-99c on outcomes judged near-certain (absurd-event No, decided elections, post-news outcomes awaiting resolution) and hold to payout. Two variants: pre-event bonds (carry jump risk) and post-event bonds placed in the minutes-to-days between the fact and resolution.",
+  "time_gap": "Post-event variant: event already happened, resolution (UMA proposal + challenge window) comes hours to days later; the market sits at 97-99.9c. Pre-event variant: none.",
+  "market_categories": [
+   "politics",
+   "culture",
+   "tech",
+   "geopolitics",
+   "elections"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/tsybka/status/2120980677214814615",
+    "date": "2026-11-12",
+    "author": "@tsybka",
+    "kind": "X post (trader, referral code 'bond')"
+   },
+   {
+    "url": "https://x.com/tsybka/status/2116909971073896724",
+    "date": "2026-11-01",
+    "author": "@tsybka",
+    "kind": "X post (referral link)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2121613610879512672",
+    "date": "2026-11-14",
+    "author": "@rb_tweets",
+    "kind": "X article (post-news bonders' returns)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2125192375039595005",
+    "date": "2026-11-24",
+    "author": "@rb_tweets",
+    "kind": "X article (bond bids run over)"
+   },
+   {
+    "url": "https://x.com/bravadotrade/status/2108185755734458488",
+    "date": "2026-10-08",
+    "author": "@bravadotrade",
+    "kind": "vendor post (UMA proposal stream)"
+   }
+  ],
+  "claimed_results": "50K shares of 'Jesus returns' No at 94c; 'over 50,000% APY for 3 days' on Democrats winning the House; post-news bonders put $132K in at 97-99c 'for a few hundred dollars each'; one wallet $133K at 97c sold at 99.9c minutes later for ~$4.5K.",
+  "evidence": "wallet_check 2026-11-27 (gross / net / rebate share / net Jul-Nov). tsybka: 303,688 / 305,579 (unrealized -57,543) / 1% / 13.6K, 11.5K, 3.8K, 9.5K, -29.1K; 0.75% of $40.6M volume. The four post-news bonders of Nov 12: tsekinming01 -139,991 / -140,489 on $58.4M volume, months -35.5K, 0.6K, 12.5K, 29.6K, -59.6K; JJo 318,710 / 335,755 / 5% / -1.6K, 4.7K, 11.4K, 14.1K, 34.3K (0.80% of volume); sbimbg 182,563 / 269,967 / 48% / 113.6K, -120.3K, 17.2K, -54.1K, 45.5K; tinman2 16,287 / 14,868 with -14,254 unrealized. Counter-evidence from the same sources: No bids at 97c on the Huang market lost ~$238K across 162 wallets in 72 s; Tenebrus87 lost $130K holding No there. A working small-scale post-event example found in this pass: Stavenson's 0.49 bids on tennis markets already headed for 50-50 resolution earn +0.97c per share (t = 10 over 131 markets), see the walkover candidate.",
+  "wallets": [
+   "tsybka (0xd5ccdf772f795547e299de57f47966e24de8dea4)",
+   "tsekinming01 (0x69aa9fa621403e3a121b29ad77d32ba9eb5e8847)",
+   "JJo (0xc4086b708cd3a50880b7069add1a1a80000f4675)",
+   "sbimbg (0xf5198df69e13937a40d1c76d6f72d9aa067d906b)",
+   "tinman2 (0x9baebe30d1cefe0ac5be4be85189c9fa33e95d34)"
+  ],
+  "requirements": "Large capital relative to profit (0.5-3% per position), rule-reading skill, patience through dispute windows; /v2/resolutions expected_settlement_time for timing.",
+  "fee_sensitivity": "At p=0.97 a 0.05 rate costs 0.15c per share (5% of a 3c edge), a 0.01 rate 0.03c; resting bids pay nothing. Fees are not the problem, tail losses are.",
+  "testability": "For all markets resolved Sep-Nov: every minute a side traded at 95-99.5c, compute realised payoff of buying there, split by time-to-resolution and by whether the underlying fact was already public (post-event) or not; cluster by event. /v2/resolutions gives proposal and settlement times.",
+  "red_flags": "Of the five named bonders one is down 140K over $58M of volume, one depends on rebates/rewards for half its result, and the promoter himself is -29K in November with -57.5K unrealized. Pre-event bonds are the liquidity that snipers harvest; returns are tiny per dollar and capital is locked; promotion of specific 'free money' markets carries referral codes.",
+  "credibility": 3,
+  "verification": "CONFIRMED. Both tsybka posts and both articles say what is quoted. The wallet data supports 'about 0.75-0.8% of turnover for the good ones' and contradicts the 'easiest money' framing; kept at 3 only because the post-event variant is still untested and has one working small example.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Sports and esports pricing against sportsbook lines (wallets verified, mechanism from a second source)",
+  "family": "model-forecasting",
+  "mechanism": "Not explained in the posts cited here. A post catalogued elsewhere in the lab (x1_bot_posts.md, @igor_mikerin, Oct 18-20) describes HomeRunHazard: take a game 1-3 hours ahead, convert sharp sportsbook odds to probabilities, remove the overround, rest bids on Polymarket slightly below that fair price, half of the profit pre-game and half live; its last 1,000 fills were 81% maker, which fits. THEHIGHLIFE is a different animal: about 165 esports markets a month at ~$10K each, 74% maker, large directional positions.",
+  "time_gap": "Sportsbook line moves and lineup/injury news before the Polymarket book (seconds to minutes) for the HomeRunHazard type; unknown for the others.",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/gusik4ever/status/2125261008478626111",
+    "date": "2026-11-24",
+    "author": "@gusik4ever",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/gusik4ever/status/2124155053691080964",
+    "date": "2026-11-21",
+    "author": "@gusik4ever",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/0xTengen_/status/2125976734776676440",
+    "date": "2026-11-26",
+    "author": "@0xTengen_",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/dunik_7/status/2114781070545584378",
+    "date": "2026-10-26",
+    "author": "@dunik_7",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/arbilest_app/status/2115178367989502044",
+    "date": "2026-10-27",
+    "author": "@arbilest_app",
+    "kind": "vendor post (sportsbook vs Polymarket surebets, no numbers)"
+   },
+   {
+    "url": "https://x.com/igor_mikerin/status/2111821354827686310",
+    "date": "2026-10-18",
+    "author": "@igor_mikerin",
+    "kind": "X post describing the HomeRunHazard method (from the lab's x1 file, not re-read in this pass)"
+   }
+  ],
+  "claimed_results": "homerunhazard +$5.4M over 57,000+ markets; keeptheblueflagflyinghigh $1.59M in a month on $102M volume; thehighlife $2.4M+ on esports with 12 of 13 green months, +$210K in the last 30 days; BreakTheBank +$8.38M in October.",
+  "evidence": "wallet_check 2026-11-27. HomeRunHazard: 58,505 markets, $283.5M volume, gross 5,474,967, fees -1,734,686 (131,354 refunded), rebates+rewards 1,209,755, net 5,081,390 = 1.79% of volume, 24% rebates, Diamond; net Jul-Nov 401K, 1,189K, 85K, 1,521K, 957K (September -127K without rebates). keeptheblueflagflyinghigh (joined 2026-08-25): gross 3,531,929, net 3,427,691, 7% rebates, Diamond; Oct 588K, Nov 2,840K on $52.7M (the post says $102M). THEHIGHLIFE: gross 2,448,036, fees -348,366 (204,766 refunded), net 2,389,087 = 6.8% of volume, 3% rebates, taker Tier 0, maker tier 1; Jul-Nov 128K, 173K, 328K, 521K, 263K; last 30 days 3,103 fills in 165 markets, $1.61M turnover, 74% maker, kept 262.8K, t by market 1.8. BreakTheBank: gross 5,717,083, net 6,047,440, 12% rebates; Jun-Nov +5.17M, +2.67M, -4.92M, +2.27M, +7.07M, -5.34M: a whale, and the source itself says it is not a bot.",
+  "wallets": [
+   "HomeRunHazard (0x5268527977f700f9bf9b6d5cd843859e4e70135d)",
+   "keeptheblueflagflyinghigh (0x0d6a1ada6d7ff785ab4b7263d9ce8e2baa85aa98)",
+   "THEHIGHLIFE (0x8c0b024c17831a0dde038547b7e791ae6a0d7aa5)",
+   "BreakTheBank (0xf0318c32136c2db7fec88b84869aee6a1106c80c)"
+  ],
+  "requirements": "Sportsbook odds feed (sharp books), game-state feeds for in-play, automation across thousands of markets; capital in the tens of thousands at least for these sizes.",
+  "fee_sensitivity": "Sports 0.05, unchanged on Nov 20 (1.25c per share at 50c). HomeRunHazard paid 1.73M in fees and needs its Diamond rebates for a quarter of its profit; a maker-only version pays no fee but gets no rebate below the $200K tier.",
+  "testability": "Pull the full fills of HomeRunHazard and keeptheblueflagflyinghigh (taker and maker split), align with ESPN scoreboard and sportsbook odds timestamps: are entries pre-game or in-play, at what distance from the de-vigged line, and what is the markout at 10 s / 1 min / final. Then test whether resting bids N cents under the de-vigged line are filled and profitable at small size.",
+  "red_flags": "The four posts cited by the first pass are affiliate links pointing at wallets and explain nothing; sizes and tiers are institutional. THEHIGHLIFE's month rests on a handful of large positions (t 1.8), so 'steady bot' overstates it. keeptheblueflagflyinghigh has two months of history. The volume in the gusik post is double what the API shows.",
+  "credibility": 3,
+  "verification": "CONFIRMED for the sources and the wallets: the four affiliate posts say what is quoted and the profile numbers match the API except keeptheblueflagflyinghigh's volume. The first pass's 'mechanism undisclosed' was incomplete: a description for HomeRunHazard already sits in x1_bot_posts.md.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Copy-trading fresh 'sharp' sports and esports wallets",
+  "family": "copy-trading",
+  "mechanism": "Watch new accounts with a short winning record and unusually large bets (NBA totals, CS2 matches), enter the same side after their fill; or mirror a BTC up/down bot through a copy-trading platform.",
+  "time_gap": "Leader's fill (public on-chain within seconds) before the follower's entry; the copier trades after the leader has moved the price. Scale: seconds to minutes.",
+  "market_categories": [
+   "sports",
+   "esports",
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/gusik4ever/status/2120169616437821788",
+    "date": "2026-11-10",
+    "author": "@gusik4ever",
+    "kind": "X post with video (affiliate; video not readable)"
+   },
+   {
+    "url": "https://x.com/gusik4ever/status/2125407411939029120",
+    "date": "2026-11-25",
+    "author": "@gusik4ever",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2104937277361459695",
+    "date": "2026-09-29",
+    "author": "@rb_tweets",
+    "kind": "X post (platform promoter, backtest on the vendor's site)"
+   },
+   {
+    "url": "https://x.com/datadashxyz/status/2124786719010738262",
+    "date": "2026-11-23",
+    "author": "@datadashxyz",
+    "kind": "vendor post"
+   }
+  ],
+  "claimed_results": "'7 for 8 since we started tracking it, +$136K'; copier made $2,500 while the leader made $18K; '$1.1k copytrading a BTC up/down bot'; 'top 1,000 traders had 88% of their money on the Jets' at 39%.",
+  "evidence": "wallet_check 2026-11-27: the leaders' profits are real but their records are days long. 0xe567...4fcb (NBA only, joined 2026-10-31): 180 markets, gross 224,485, net 225,716, 2% rebates, one month. 0x7d267c...fdea (joined 2026-11-24): 13 markets, gross 320,579, net 309,052. 0x95581a...fd3f (joined 2026-11-03): 22 markets, gross 135,763, net 126,854. 0x06081d...3120 (joined 2026-11-05): 57 markets, gross 74,324, net 75,293. The promoter's own tally for the first wallet is 15 hits in 31 tracked positions, and the only quantified copier kept 14% of the leader's profit. In the datadashxyz example 'most of it is one trader' (BreakTheBank, who is -5.34M in November).",
+  "wallets": [
+   "0xe567267582b61b63b7f97be977abdd50c0e54fcb",
+   "0x7d267c84251ade4b63e0438f0ffafe0e924cfdea",
+   "0x95581a6f5045bc6c7cd8acc017df188b05a1fd3f",
+   "0x06081d47a698bff1c673d77c50c11dd4c9da3120"
+  ],
+  "requirements": "Wallet-activity stream, fast entry, capital proportional to the leader's.",
+  "fee_sensitivity": "Sports taker 0.05 plus a worse entry price than the leader; a 50c entry one or two cents late with a 1.25c fee removes most of a 14%-of-volume leader edge.",
+  "testability": "For leader wallets chosen only on information available at the time (age, record so far), simulate entering N seconds after each of their fills at the then-available price with fees; report by selection date to avoid picking winners after the fact.",
+  "red_flags": "Every post carries a referral link (affiliates earn 20%+ of referred fees since Oct 23); 'N-day-old account' samples are survivorship by construction; the four featured wallets have 3 to 27 days of history and 13 to 180 markets; fresh large accounts may be informed or on one hot streak; the 'smart money' aggregate is dominated by one whale.",
+  "credibility": 2,
+  "verification": "CONFIRMED that the posts say what is quoted (the Nov 10 post is only a video caption). The wallets exist and are profitable, which says nothing about a follower's result; the sources' own numbers (15 of 31, 14% kept) argue against it.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "BTC 5/15-minute latency taking from a London-adjacent server",
+  "family": "latency-crypto-updown",
+  "mechanism": "When BTC moves on Binance, buy the now-cheap side of the current up/down market before quotes are pulled; hold to settlement. Profit per trade is around the fee, the account lives on volume-tier taker rebates.",
+  "time_gap": "Binance/Chainlink price before the Polymarket book; stale shares 'gone in about 162 ms' per the source; taker delay 150 ms since 2026-09-04. Scale: ms.",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/saurav_tweets/status/2126030545251647578",
+    "date": "2026-11-26",
+    "author": "@saurav_tweets",
+    "kind": "X post (affiliate, unnamed 'research team')"
+   },
+   {
+    "url": "https://x.com/saurav_tweets/status/2125592594982076760",
+    "date": "2026-11-25",
+    "author": "@saurav_tweets",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/PolymarketDevs/status/2095516409790910925",
+    "date": "2026-09-03",
+    "author": "@PolymarketDevs",
+    "kind": "official X post (taker delay 150 ms)"
+   },
+   {
+    "url": "https://x.com/devjoshstevens/status/2125604044055933225",
+    "date": "2026-11-25",
+    "author": "@devjoshstevens",
+    "kind": "official X post (Nex end-to-end latency)"
+   }
+  ],
+  "claimed_results": "24 h of BTC 5/15m: 501K trades, $7.78M traded, $106K fees; one bot 16,558 trades a day with ~$3.9K fees; same bot fills 14.8% of orders from Dublin vs 11.4% from Mexico.",
+  "evidence": "wallet_check 2026-11-27 on 0xc53375ff...69a9: gross 505,137, fees -369,255, rebates 200,849, net 336,731, 60% of net is rebates, Diamond; net kept Jul-Nov 4.1K, 55.5K, 90.1K, 122.1K, 64.9K; without rebates 3.1K, 35.0K, 38.2K, 46.6K, 13.0K. This wallet is the profile 'dangerously-skip-permissions' and shares its fee-tier volume (wv_30d 4,471,870) with x-MoneyForWhiskas, GoodFallen and FairValueMachine: it is the operator the lab already studied, and its Diamond rebate comes from the group's pooled volume. 0x8dxd (0x63ce3421...ba9a): gross 2,372,850, fees 4,494,762 charged of which 4,172,347 refunded, net 2,171,921, zero volume in Sep, Oct and Nov 2026.",
+  "wallets": [
+   "dangerously-skip-permissions (0xc53375ff94e96100f2b30a4b5775db35218d69a9)",
+   "0x8dxd (0x63ce342161250d705dc0b16df89036c8e5f9ba9a)"
+  ],
+  "requirements": "Server in Dublin/near eu-west-2 in an unrestricted country, Binance and Chainlink feeds (Chainlink API key from Nov 30), $4M+ weighted monthly volume (pooled across several accounts in the verified case) for the 40% rebate tier.",
+  "fee_sensitivity": "BTC 5/15m rate 0.05 (1.25c at 50c); a Tier 0 account keeps none of it back, and the verified bot made 13.0K in November before rebates on $5.2M of volume.",
+  "testability": "Already tested in research/2026-11-27-whiskas; repeat after Nex goes live.",
+  "red_flags": "Referral links; the latency figures (162 ms, 14.8% vs 11.4%) come from an unnamed 'research team' and cannot be checked; the showcase wallet 0x8dxd has been idle for three months; the one live wallet is not independent of what the lab already measured. Structurally closed to a new small account.",
+  "credibility": 3,
+  "verification": "CONFIRMED that both saurav_tweets posts and both official posts say what is quoted, and the wallet figures hold. Lowered from 4 to 3 because the source's own measurements are unverifiable and the wallet evidence duplicates the lab's first study instead of adding to it.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Weather bracket trading from station observations and forecasts",
+  "family": "weather-model",
+  "mechanism": "Trade daily high-temperature brackets using the resolving station's live observations (METAR/SPECI on weather.gov) and forecast guidance; late-day trades when the observed maximum has (almost) settled the bracket; occasional rule/data-error plays.",
+  "time_gap": "Station observation published before the bracket reprices (minutes), and observed running maximum versus end-of-day resolution (hours). Single documented case: Helsinki bracket went 0.1c to 100c on a late 0.1C rise.",
+  "market_categories": [
+   "weather"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/atteonthephone/status/2108284371270832349",
+    "date": "2026-10-08",
+    "author": "@atteonthephone",
+    "kind": "X post (weather trader, no affiliate links)"
+   },
+   {
+    "url": "https://x.com/atteonthephone/status/2099759215891878023",
+    "date": "2026-09-15",
+    "author": "@atteonthephone",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/atteonthephone/status/2111933698647920942",
+    "date": "2026-10-18",
+    "author": "@atteonthephone",
+    "kind": "X post (station data error)"
+   },
+   {
+    "url": "https://x.com/atteonthephone/status/2122708318460297448",
+    "date": "2026-11-17",
+    "author": "@atteonthephone",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/jfm_20wx/status/2094572953950363844",
+    "date": "2026-08-31",
+    "author": "@jfm_20wx",
+    "kind": "X post (one day before the three-month window)"
+   }
+  ],
+  "claimed_results": "jfm_20wx: PnL over $125,000 on weather only, from a $30 bankroll. Counter-claims: 'a weather trader who made +$17k profit and paid $20k in fees'; 'Most weather traders have been struggling all summer as liquidity has evaporated'; 'Polymarket is dying. Weather is dying.' (Nov 17).",
+  "evidence": "wallet_check 2026-11-27 on 0xf8dc8cd0...f31f: 18,111 markets, 255,885 fills, $879K volume, gross +3,030, fees -29,046 (5,384 refunded), rebates 1,346, net -19,286; net Jul-Nov -12.0K, +5.8K, -12.2K, -7.1K, -0.8K. 'jfm-20' (0xcd9d3009...06b0): gross 24,225, net 24,234, zero volume from June to November while the post describes a productive summer, so it is not the author's wallet and the $125K is unverified. From other lab files: the weather names in 'top trader' posts made their money Dec 2025-Apr 2026 and are flat or losing since May; BeefSlayer still kept +7.7K in Sep and +6.2K in Oct. Regime change: weather fee cut to 0.01 on Nov 20 and V2 weather markets live since Nov 23.",
+  "wallets": [
+   "0xf8dc8cd0fd55eccb5409ed99ed90a86bc7f0f31f"
+  ],
+  "requirements": "Station feeds (api.weather.gov, Iowa Mesonet), forecast models, knowledge of each market's resolving source, small capital is enough because books are thin.",
+  "fee_sensitivity": "Weather is 0.01 since Nov 20 (0.25c at 50c, 0.03c at 97c); before that the fee exceeded the documented trader's gross edge, and at the new rate that trader would still be slightly negative.",
+  "testability": "For each city/day Sep-Nov: station observations with timestamps versus bracket prices-history (1-minute for the last 7 days, 5-minute for 60 days) and the tape: how long after the observation that settles the bracket does the price reach 95c, and how much size traded in between; redo with the 0.01 fee.",
+  "red_flags": "The only wallet in this candidate loses money; the one success story cannot be tied to a wallet and predates the window; thin liquidity by practitioners' own account; data errors in the resolving source (Cape Town FACT/FABL) create resolution risk. The rule in the first-pass notes about the resolving source ('Wunderground in the past, now weather gov') is an undated timeline line I did not re-find.",
+  "credibility": 3,
+  "verification": "CONFIRMED. All five posts say what is quoted. The practitioner's own statements and the one checkable wallet point to losses under the old fee; the case for weather rests on the Nov 20 fee cut, which no source has yet traded through.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Fresh-wallet cluster as a pre-news signal",
+  "family": "other",
+  "mechanism": "Monitor new wallets (under two weeks old) whose first trades are cheap Yes on a low-probability dated event; when several appear within 48 hours, buy the same side small and hold.",
+  "time_gap": "Informed buyers act hours to days before the public announcement; the tape shows them immediately. Scale: hours.",
+  "market_categories": [
+   "tech",
+   "business",
+   "crypto",
+   "culture"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/rb_tweets/status/2125192375039595005",
+    "date": "2026-11-24",
+    "author": "@rb_tweets",
+    "kind": "X article (vendor promoter)"
+   },
+   {
+    "url": "https://x.com/KyleDeWriter/status/2122716202329862161",
+    "date": "2026-11-17",
+    "author": "@KyleDeWriter",
+    "kind": "X post (affiliate)"
+   },
+   {
+    "url": "https://x.com/CarOnPolymarket/status/2114869690053124221",
+    "date": "2026-10-27",
+    "author": "@CarOnPolymarket",
+    "kind": "X post"
+   },
+   {
+    "url": "https://x.com/dunik_7/status/2120565601492173134",
+    "date": "2026-11-11",
+    "author": "@dunik_7",
+    "kind": "X post (affiliate)"
+   }
+  ],
+  "claimed_results": "78 wallets under two weeks old put $17.8K into Yes in the 48 h before the Huang news and made ~$270K; three same-day accounts bought ~$14,350 of No at ~4c 15 minutes before a token-launch postponement; two new accounts won $60K+ on the Ballon d'Or.",
+  "evidence": "wallet_check 2026-11-27. 0x127f...f137: 2 markets, 12 fills, $2,593 volume, gross 46,973, net 46,894 (matches the article). 0x41ad...03b0: 3 markets, 5 fills, gross 28,941, net 28,672. 0x7795...9a17 is not a fresh wallet: active since at least June, net -54.1K in July, +306.1K in November, gross 276,484, net 260,359. 0x208cd...a396 (the Taipei wallet, joined 2026-11-05): 5 fills, $97K, net 10,234 of which 10,021 unrealized; the election is on Nov 28, unresolved. All examples were chosen after the outcome.",
+  "wallets": [
+   "0x127f9695ac8043b42237348f84407973cdeef137",
+   "0x41ade7929c97b24780b50f2e419f488d043903b0",
+   "0x77958accec3edfc6ea0194e8fb954647456b9a17",
+   "0x208cd9326212d401f65898d2dbb4a37ac570a396"
+  ],
+  "requirements": "Whole-market tape scanning with wallet-age lookup; small stakes.",
+  "fee_sensitivity": "Entries at 3-15c: fee at 0.05 is 0.15-0.6c per share, small against the payoff if right.",
+  "testability": "Define the trigger ex ante (k wallets younger than d days buying under p cents within h hours), scan all Sep-Nov markets, report hit rate and PnL including all the clusters that led nowhere.",
+  "red_flags": "Hindsight selection; it amounts to trailing probable insiders (one source mentions a new CFTC rule, unverified); fresh wallets are also the typical losing gamblers; the largest winner cited is an older account that had lost 54K in July, not a fresh one.",
+  "credibility": 2,
+  "verification": "CONFIRMED that the four posts say what is quoted and that the named wallets made what is claimed. No source offers a rule or a count of clusters that failed, so nothing here is evidence of an edge.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Both sides merged into cash by a two-sided quoter (described by the source as sub-$1 pair arbitrage)",
+  "family": "pair-accumulation",
+  "mechanism": "Source's version: while one side of a binary runs on news, pick up the leftover other side at stale low asks so that Yes cost + No cost < $1, then merge the pair into USDC. What the wallet shows: a large two-sided quoter on rewarded long-dated markets whose bids fill on both sides and who merges the pairs to free capital; the 'arbitrage' is spread capture by a maker, not a taker trade on stale asks.",
+  "time_gap": "Source: one side of the book reprices before the other during a run, seconds to minutes. Not confirmed by the wallet data.",
+  "market_categories": [
+   "geopolitics",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/PavelPavlyuh/status/2118431176075694140",
+    "date": "2026-11-05",
+    "author": "@PavelPavlyuh",
+    "kind": "X post (wallet analysis by a tool builder, 119 views)"
+   }
+  ],
+  "claimed_results": "May 15: $3,008 for a full Yes+No pair on an Israel ceasefire extension market, merged two minutes later for $3,958 (+$950). '$193M of lifetime volume', 'Last 30 days: $304k in profit'.",
+  "evidence": "wallet_check 2026-11-27 on Car 0x7c3db723...5c6b: 9,357 markets, 268,824 fills, $119.4M volume (post: $193M), gross 1,589,153, fees -39,573 (23,304 refunded), rebates+rewards 107,228 (liquidity rewards 101,723), net 1,693,275, 6% rebates/rewards; net Sep-Nov 32.3K, 35.8K, 45.2K (post: $304K in 30 days). Activity feed: 555 MERGE rows in 90 days for $4.80M of complete sets (Aug 26K, Sep 208K, Oct 2.42M, Nov 2.14M); the eight largest, $166K-278K each, are 2028 presidential markets. NOTES.md: in BTC 5m both sides at once always cost at least $1.01, and 0 of 176 negRisk events offered a complete set below $1 after fees.",
+  "wallets": [
+   "Car (0x7c3db723f1d4d8cb9c550095203b686cb11e5c6b)"
+  ],
+  "requirements": "For the real mechanism: two-sided quoting with hundreds of thousands of dollars on rewarded markets, merge via the CTF contract. For the source's version: book monitoring on both tokens during news runs.",
+  "fee_sensitivity": "Geopolitics is fee-free and makers pay nothing; as a taker, two legs pay rate*p*(1-p) each, which eats a 1-3c gap in 0.05 categories.",
+  "testability": "In Car's fills, pair each MERGE with the preceding buys of both outcomes of that condition: cost of the pair, maker or taker on each leg, minutes between legs. Market-wide: from the tape, minutes where Yes and No both printed as taker buys with a sum under 0.99.",
+  "red_flags": "Single example dated May, outside the window; the analyst's volume and 30-day profit figures do not match the API; the merges are concentrated in long-dated rewarded markets, which points to market-making inventory, a business that needs large capital; books are mirror images, so a true taker pair under $1 needs crossed quotes.",
+  "credibility": 2,
+  "verification": "PARTIAL. The post exists and says what is quoted, and merges are indeed frequent in the wallet. The summary figures in the post disagree with the API and the merge pattern does not look like the taker arbitrage the post describes.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Tennis walkover: markets resolve 50-50 when a player withdraws before the start (alive, not historical)",
+  "family": "other",
+  "mechanism": "Rule in the market text: 'If the match ends in a walkover (player withdraws before the start and the other advances automatically), this market will resolve to 50-50' (a retirement after the start resolves to the player who advances). Entry 1: when a withdrawal becomes known, take the underdog's resting asks at 0.15-0.45 (or sell the favourite above 0.50) in the match-winner market and its set-handicap, totals and set-1 side markets. Entry 2: afterwards rest bids at 0.49 on either side and collect 1c from holders who want out before resolution. Exit: resolution at 0.50, usually within 1-3 hours.",
+  "time_gap": "Withdrawal announcement (tournament order of play, official feeds, X) before the Polymarket book, then book before resolution. Observed: Paris Masters 2026-11-03, favourite still printing 0.74 at 09:33 UTC, underdog taken at 0.28 from 09:38, scheduled start 11:30, market closed at 0.5/0.5 at 12:30; Metz 2026-11-18, underdog taken at 0.32 at 11:15:58, closed 11:56. The lag between the public notice and the first fill is not measured yet. Scale: probably minutes.",
+  "market_categories": [
+   "sports"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/KyleDeWriter/status/2124514489483542559",
+    "date": "2026-11-22",
+    "author": "@KyleDeWriter",
+    "kind": "X post (affiliate; claims the edge was eliminated)"
+   }
+  ],
+  "claimed_results": "Stavenson made ~$324,000 'in just a few months' buying the cheapest outcomes of matches and fights that were then cancelled and resolved 50/50; 'recent changes eliminated the way guys like him were making money out of low-latency competitions and cancelled events'.",
+  "evidence": "wallet_check 2026-11-27 on Stavenson 0xf5fe759c...e23d (exact name; gross matches the claim): joined 2025-10-25, 1,036 markets, 44,236 fills, $3.34M volume, gross 326,102, fees -62,307 (46,908 refunded), rebates+rewards 7,066 (2%), net 317,769 = 9.5% of volume, Tier 0; net Jul-Nov 18.4K, 47.0K, 15.9K, 11.5K, 11.6K; positive in 13 of 14 months. Tape check of the last 30 days: 2,933 fills in 155 sports markets, 154 resolved; 2,922 fills are in markets whose final price is 0.5/0.5 ($145K bought, gross +$12.2K); all tennis (ATP, Challenger, ITF). Split: 46 taker buys below 0.46 for $14.6K earn most of it (0.15-0.30 bucket +20.8c per share after a 1.0c fee, 0.30-0.45 +13.6c); 2,783 maker buys at 0.49 earn +0.97c per share (t = 10 over 131 markets). The rule text was read in four November markets. So the source's 'eliminated' is wrong for tennis walkovers.",
+  "wallets": [
+   "Stavenson (0xf5fe759cece500f58a431ef8dacea321f6e3e23d)"
+  ],
+  "requirements": "A fast source of withdrawals (ATP/WTA/ITF order-of-play updates, live-score providers, tournament accounts), a map from match to Polymarket market and its side markets, small tickets: his median market takes a few hundred to a few thousand dollars. Markets are small ($5K-68K volume), so capacity is about $10-15K of profit a month for everyone.",
+  "fee_sensitivity": "Sports 0.05: about 1.0c per share on a taker buy at 0.28, against an edge of roughly 22c; the 0.49 resting bids pay no fee and earn 1c per 49c in about an hour.",
+  "testability": "List all tennis markets resolved 0.5/0.5 in Sep-Nov (data-api tokens final_price), pull each tape, and measure: time of the first abnormal print versus the time the withdrawal was published (order-of-play pages, live-score APIs), shares available below 0.45 on the underdog and above 0.55 on the favourite at +10 s, +1 min, +5 min, how many wallets compete, and how often a market that looked like a walkover resolved otherwise (retirement after the first point resolves to the advancing player).",
+  "red_flags": "The source is an affiliate post and its central claim (edge gone) is contradicted by the tape; Polymarket could change the rule at any time (the post suggests it already did for other sports); capacity is small; the one wallet may have a private information source for withdrawals; the walkover/retirement distinction is a real way to lose the whole stake on a wrong read.",
+  "credibility": 4,
+  "verification": "PARTIAL. The post exists and names Stavenson with the right profit figure, but says the edge was eliminated; the wallet's last 30 days show it trading almost nothing else, with the 50-50 rule still in the market text. Raised from 3 to 4 on the lab's own tape evidence.",
+  "channel": "x2_practitioners"
+ },
+ {
+  "name": "Weather: sell the bucket a new METAR has just made impossible (station feed faster than the book)",
+  "family": "weather-model",
+  "mechanism": "Daily-temperature markets resolve on the highest routine METAR of the station-local day (aviationweather.gov API named in resolutionSource; T-group tenths, rounded half-up, SPECI excluded). When a report raises the running maximum into a higher bucket, the bucket holding the old maximum is dead: sell it / buy No (and buy the new bucket) before the book reprices. Exit: hold to resolution (15-min dispute window).",
+  "time_gap": "Station observation vs book: the book reprices within ~1-2 min of the observation time stamp, which is 3-5 min BEFORE the official source (aviationweather.gov, NOAA tgftp) shows the report. Exploitable lag is seconds to 2 minutes and only for someone with a faster station channel than the official source. A poller of the official source gets nothing.",
+  "market_categories": [
+   "weather"
+  ],
+  "sources": [
+   {
+    "url": "https://gamma-api.polymarket.com/events?slug=highest-temperature-in-seoul-on-november-28-2026",
+    "date": "2026-11-27",
+    "author": "Polymarket (market rules)",
+    "kind": "official rules via API (re-read by verifier)"
+   },
+   {
+    "url": "https://aviationweather.gov/api/data/metar?ids=RKSI&format=json&hours=3",
+    "date": "2026-11-27",
+    "author": "NOAA AWC",
+    "kind": "resolution source (obsTime/receiptTime; re-measured by verifier)"
+   },
+   {
+    "url": "https://x.com/atteonthephone/status/2108284371270832349",
+    "date": "2026-10-08",
+    "author": "@atteonthephone",
+    "kind": "X post; a different mechanism (late-evening rise flipping a bucket from 0.1c to 100c), not the dead-bucket trade"
+   },
+   {
+    "url": "https://arxiv.org/abs/2609.23969",
+    "date": "2026-09-21",
+    "author": "Crosier",
+    "kind": "paper about KALSHI temperature markets in seven US cities vs forecasts; background only, not Polymarket and not METAR timing"
+   }
+  ],
+  "claimed_results": "No practitioner published the dead-bucket mechanism with numbers. Promotional pages claiming $6K/month or $88K weather bots are uncheckable and were not opened.",
+  "evidence": "Lab study W1 (researcher): 112 Celsius city-days, Nov 21-26, 0 mismatches between computed max and resolved bucket; 70 kill events with the dead bucket at >=5c (median 14.5c); still >=2c in 93% at the stamp, 50% at +1 min, 27% at +2 min, 1% at +5 min; 21% at the official receipt, 0% a minute later; first taker sell a median 25 s after the stamp, 53 of 53 before the official receipt; $1,331 of stale money in six days over 61 wallets (~$19 per event). Independent second lab study (weather wallets): 268 kill reports Nov 22-27, $3,037, all taken before the receipt. Verifier re-measured receipt lag on 14 reports today: RKSI 266-285 s, EGLC 306-327 s, KLGA 186-193 s. Wallet checks (reproduced to the dollar): 0x6011...b31e (HighTempTation) volume $2.58M, gross +106,145, fees -5,317, net +101,206 (3.92% of volume), rebates 0% of net, Tier 0; monthly net May 4.5K, Jun 21.9K, Jul 27.0K, Aug 20.7K, Sep 14.5K, Oct 9.1K, Nov 3.6K (on $96K volume): falling every month since July. 0xf762...e14f volume $256K, gross +4,875, net +4,345, rebates 0%; Mar-Aug negative every month, Oct +3.2K, Nov +2.5K.",
+  "wallets": [
+   "0x6011655c4afb76f36dd1b08a137a1ba73466b31e",
+   "0xf76253274dbd0dfbbdae21a51c4e60f67114e14f"
+  ],
+  "requirements": "A station channel faster than aviationweather.gov per city (national met-service or airport feeds, or continuous sensor data) that also reproduces the routine report exactly; a VPS is enough for execution (no secondsDelay field on weather, fee 0.01); small capital because capacity is small.",
+  "fee_sensitivity": "Weather rate 0.01: at 15c the fee is 0.13c per share, irrelevant against a 15c move. Under the pre-Nov-20 rate of 0.05 it was 0.64c per share, also small; 0x6011...b31e paid fees equal to 5% of its gross. The researcher's remark that the old fee 'sank' weather takers is not supported.",
+  "testability": "Fully testable on public data: aviationweather JSON (obsTime, receiptTime) + Data API prices-history and trades; extend to Fahrenheit cities and earlier months with the 5-minute history or the PendulumFlow weather L2 archive; log candidate faster channels' publication times against the tape.",
+  "red_flags": "Capacity is tiny: ~$220/day in the Celsius half-sample, ~$500/day in the wider lab sample, shared by ~60 wallets. The leading wallet's income has fallen every month since July, and it took only $394 in these 70 events while keeping +3.6K in November, so its PnL is not clean evidence for this one mechanism. The protocol's own variant (tradable after the official receipt) is a null; the $1,331 figure is from a window added afterwards, and protocol.md and run.py share one modification time. A faster feed's running maximum is not the settlement value (KLGA: 5-minute max in a different bucket on 45 of 87 days). Six days, Celsius cities only, 60-second price buckets. Nobody has identified which faster channel the winners use.",
+  "credibility": 4,
+  "verification": "CONFIRMED. Market rules, fee, liveness and the resolution URL read from the live Seoul event; receipt lag re-measured; both wallets reproduce exactly; a second lab study found the same result on a larger sample. Not matching: two of the four cited sources (the Helsinki X post and the Crosier paper, which is about Kalshi) do not document this mechanism, and the fee remark was wrong.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Headline sniping on deadline ladders and their sister contracts",
+  "family": "news-latency",
+  "mechanism": "A machine-read headline (wire/X) maps to a pre-built list of markets; buy Yes on the front deadline and on the later deadlines that reprice seconds later, against resting 'bond' bids and wide asks that are not cancelled in time; sell into the 95-99c bid within minutes or hold to resolution.",
+  "time_gap": "Headline vs book: first serious buy 3-5 s, 50c at ~24 s, 80c at 56 s, 95c at 72 s (Nov 23); 35c to 97c in 33 s (Nov 12), where one order emptied the book and the next trade 3 s later was at 63c. Sister deadlines lag by further seconds. Fan et al.: median 2 min from first web report to the final price level on geopolitical events. The 'live-stream events 7-26 min' item was removed: the cited post does not describe a lag.",
+  "market_categories": [
+   "tech",
+   "politics",
+   "geopolitics",
+   "culture"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/rb_tweets/status/2125192375039595005",
+    "date": "2026-11-24",
+    "author": "@rb_tweets",
+    "kind": "X article by a tool vendor (gravia.trade referral links on every wallet)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2121613610879512672",
+    "date": "2026-11-14",
+    "author": "@rb_tweets",
+    "kind": "X article by the same vendor (referral links, Telegram group)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2610.36639",
+    "date": "2026-10-27",
+    "author": "Fan, Sun, Zhao",
+    "kind": "paper (exists; abstract read)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.21521",
+    "date": "2026-05-18",
+    "author": "Bazyari, Liu, Moran",
+    "kind": "paper (exists; abstract read)"
+   }
+  ],
+  "claimed_results": "Nov 23: 91 wallets made ~$239K in 72 s, five of them $216K; Nov 12: three traders $71K in 33 s; 'the same trade, 30 seconds later, made 30 times less'. Same Nov 23 article: 78 wallets under two weeks old bought $17.8K of Yes in the 48 h BEFORE the news and made ~$270K, more than all post-news buyers; the top winner ($275.5K) had been buying for nine days.",
+  "evidence": "Wallet checks by the verifier. WarriorPooh (0x853c...bd03): volume $3.53M, gross +350,358, fees -8,933, net +347,389 (9.83% of volume), rebates/rewards 2% of net; positive every month since Dec 2025 (3.0K-38.7K a month through October), Nov +170.3K = 49% of all-time; it bought ~$4K of Yes 25 minutes before the Nov 23 news. nimble-mellow-comet (0x3e03...b571): joined 2026-10-13, volume $1.01M, gross +196,211, net +194,892, rebates 0%; Oct -0.5K, Nov +195.4K. Samael-of-Rome (0x3cc379741b2ab96d61aab5942a1a711a89f1fb0b, formerly Michael-The-Taxiarch): joined 2026-09-23, volume $1.51M, gross +129,012, net +126,063, rebates 1%; Sep +0.9K, Oct +34.6K, Nov +90.5K. dromedaryy (0x6575...b198): gross +808,816, net +798,857, rebates/rewards 3%; Sep +27.8K, Oct +416.0K, Nov +359.7K; on Nov 23 it was a victim (-$25K on a stale No bid). tinman2, the only named trader in the slow tail (+35 s at 50c, +$10.7K): all-time net +14,868 including -14,254 unrealized; Jul-Oct -14.4K, Nov +12.6K. The lab's earlier pass reproduced the Huang tape (not redone here).",
+  "wallets": [
+   "WarriorPooh 0x853c37a959a5791b849e3f3225c7f5963746bd03",
+   "nimble-mellow-comet 0x3e03eaee9fa9d188e2a15e8bfd9c34b95e44b571",
+   "Samael-of-Rome 0x3cc379741b2ab96d61aab5942a1a711a89f1fb0b",
+   "dromedaryy 0x6575759174ad221bba9947bc3f18750ec769b198",
+   "tinman2 0x9baebe30d1cefe0ac5be4be85189c9fa33e95d34"
+  ],
+  "requirements": "Machine-readable headline feed, headline-to-market map prepared in advance, order placement in under ~5 s for the main prize or 10-70 s for the tail; $5-50K per event to matter.",
+  "fee_sensitivity": "Tech 0.05, other politics 0.01, geopolitics 0: at 5-40c entry the fee is under 1.2c against moves of 50-90c; irrelevant.",
+  "testability": "Data API tape per event (who bought when, at what price) + first-report timestamps from the Fan et al. event list; measure how much size was available 10 s / 30 s / 2 min after the first report, over many events, not two.",
+  "red_flags": "Credibility lowered from 4 to 3. Both articles are by a tool vendor with referral links and a Telegram funnel, and describe two events of one news story in one fortnight. In the Nov 23 event the pre-news buyers earned more than the reaction traders, which points to informed flow, not speed. Two of three fast wallets are weeks old with their whole PnL in November; the one slow-tail example (tinman2) is flat outside this event. dromedaryy is not a latency trader (see the Roadster correction). Cancels are already fast (p50 24 ms), so the victims were unattended orders; the pool depends on how many such orders rest in the book. Insider and resolution-dispute risk.",
+  "credibility": 3,
+  "verification": "CONFIRMED. Both X articles opened in full: every quoted figure is there (91 wallets / $239K / 72 s, five took $216K; three traders $71K in 33 s; 30 times less after 30 s). What the catalog left out is in the same article: pre-news wallets made more than the snipers, and WarriorPooh had a 25-minute head start.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Scheduled economic release sniping (CPI, jobs, Fed)",
+  "family": "econ-release",
+  "mechanism": "At the release second read the number from the agency site/feed, map it to the bracket markets, take stale asks on the correct bracket; hold to resolution (about 2 h later) or sell at 99c.",
+  "time_gap": "Agency release vs book: first trades ~7 s after (block time), >90c at 9 s, 99c at 27 s per the source. Lab's own study: winner first prints >=0.95 a median 5 s after the release (4 s per release); 120 of 140 uncertain markets within 30 s.",
+  "market_categories": [
+   "economics"
+  ],
+  "sources": [
+   {
+    "url": "https://x.com/PavelPavlyuh/status/2118315492876132694",
+    "date": "2026-11-05",
+    "author": "@PavelPavlyuh",
+    "kind": "X post (1,074 views; opened)"
+   },
+   {
+    "url": "https://x.com/primo_data/status/2118373796147327078",
+    "date": "2026-11-05",
+    "author": "@primo_data (Polymarket data lead)",
+    "kind": "X post quoting and endorsing the above (opened)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2610.36639",
+    "date": "2026-10-27",
+    "author": "Fan, Sun, Zhao",
+    "kind": "paper (central-bank decisions priced a day ahead)"
+   }
+  ],
+  "claimed_results": "33 releases in 2026: correct answer at 48c a second before; 217 wallets traded in the first 10 s, 26 of them on five or more releases; favourite won 13 of 17 inflation prints, 3 of 9 jobs prints, 7 of 7 Fed decisions. No PnL per wallet published.",
+  "evidence": "Reproduced inside the lab since the catalog was written (studies/gaps/econ_release_lag/results.md; 51 releases, 268 markets, 87 days, protocol first): $107K traded at stale prices, worth $30.3K to takers, about $350 a day for ALL takers; 81% taken in the first 7 s, 98% in 30 s; 110 wallets, top three 47%, top ten 77%; three wallets (0x8cb3ed, 0x059468, 0x2f633e) appear in 14-19 releases each. A taker arriving at +5 s would have $2,038 on $9,049 in the reporting part (upper bound, displacing incumbents); at +30 s (the pre-declared variant) $570 on $3,327, t = 1.84, fills in 5 of 30 releases, none in any US release; what is left at +30 s is three thin non-US releases (Germany GDP, Korea GDP, Argentina CPI). Pre-set verdict: INCONCLUSIVE and small. Fee from real charges: 0.036-0.048 before Nov 21, 0.010 after.",
+  "wallets": [],
+  "requirements": "Fetch and parse the release within 1-3 s from a VPS, pre-mapped brackets, resting stale size to hit; about 17 releases a month including non-US ones.",
+  "fee_sensitivity": "Economics 0.01 since Nov 20: at 48c the fee is 0.25c per share, negligible against a 40-50c move. Most of the measured sample traded under the old 0.036-0.048 rate.",
+  "testability": "Already tested once (see evidence). Next: per-wallet PnL of the three repeat wallets; non-US releases with local-language sources; whether the agency site can be read within 1-2 s from a VPS at the release second.",
+  "red_flags": "The whole pool is ~$350 a day shared among everyone and concentrated in CPI, FOMC, PCE and a few surprises; 54% of the +5 s row sits in fills stamped +5/+6 s, inside timestamp jitter; Fed decisions are fully priced beforehand; the source post has 1,074 views and no wallet list.",
+  "credibility": 3,
+  "verification": "CONFIRMED. The post contains every quoted number (48c, +7 s, >90c at +9 s, 99c at +27 s, 217 and 26 wallets) and @primo_data endorses it; the lab's own tape study gives the same speeds. The '4-5 s at the engine' figure is the researcher's inference, not in the post. The catalog entry said 'not reproduced'; it now is, with a small and inconclusive result.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Crypto up/down post-close 'oracle race' (buy the side that already won before the chain is told)",
+  "family": "latency-crypto-updown",
+  "mechanism": "The window ends, the Chainlink result is knowable off-chain, the on-chain settlement lands seconds later and the book stays open: buy the winning side from stale asks (historically the 'written-off' side at 1-3c).",
+  "time_gap": "Off-chain price result vs on-chain settlement: median 26 s, 90% within 85 s per the source; lab tape Nov 26: last fill a median 16 s after the end, p90 46 s. Mep72's real fills: buys at 2c stamped 6-16 s after the close.",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://bitquery.io/investigations/polymarket-oracle-race",
+    "date": "2026-08-24",
+    "author": "Bitquery Research",
+    "kind": "vendor on-chain investigation written with AI tools; dollar figures refuted (see verification)"
+   },
+   {
+    "url": "https://dev.to/lkto1m/why-my-polymarket-bot-watches-chainlink-not-binance-the-oracle-gap-that-changes-every-close-1e96",
+    "date": "2026-06-27",
+    "author": "1kto1m",
+    "kind": "practitioner blog; about using Chainlink instead of Binance BEFORE the close, with a hard stop at T-90 s; it does not document post-close buying; links a bot repo (not opened)"
+   }
+  ],
+  "claimed_results": "Bitquery: $23.1M won in the gap, 97% in about three weeks of April-May 2026; Mep72 $93.7K spent, $6.87M won; penny-bet win rate 84.9% in the week of May 3, 3.4% the week after; showcase market (Solana 5m, May 3, 07:00-07:05 ET) $570 before the close and $517,980 in the 36 s after.",
+  "evidence": "The source's totals do not survive Polymarket's own data. Showcase market: gamma volumeNum $1,415; public tape $724 before the end and $2.36 after it (2 fills); Mep72 has no fill in it. Wallets (article figure -> kept per Data API): Mep72 0xc227...d0c5 $6.87M -> gross +20,409, net +20,285, rebates 0%, volume $55,465, 528,070 shares; Apr +16.7K, May +3.7K, nothing since. In Apr 19 - May 10 it bought 347,678 shares at <=3c for $4,636, so $348K is the most those weeks could have paid. 95slave (article address 0xd81e...8737) $1.21M -> net -921 on $26K; the profile name resolves to a different, empty wallet created 2026-04-28. 0xd02c...b1d7 $0.91M -> net +8,011. 0x619e...f583 $0.74M -> net -514. 0x7fa1...347d $0.73M -> net +1,547. egig 0x69c7...b03c $0.5M -> gross +43,406, net +38,811, rebates 3%; Apr +2.0K, May +10.4K on $12K volume, Jun +28.1K on $13K, Jul +6.8K, Aug -7.7K, Sep -0.8K. PayoRamon and NotWinr resolve to empty wallets created 2026-04-28. Six wallets credited with ~$11.0M kept +$67K. 1kto1m 0xa1d5...1343: volume $934,693, gross +49,550, fees -19,326, rebates 2,484 (8% of net), net +32,711; May 14.0K, Jun 4.8K, Jul 6.0K, Aug 7.6K, Sep 0.3K, Oct ~0, Nov 0. Today (researcher: 144 BTC 5m markets; verifier: 40 more): 0.44-0.58% of dollars trade after end+3 s and there are zero taker buys of the winner.",
+  "wallets": [
+   "Mep72 0xc227bdcfa753509ba71a271121cab504a029d0c5",
+   "95slave 0xd81eae4f81ef1bc460d3fe4c4f5fc8773f1b8737",
+   "0xd02c1a621123ac998736e3e19825c6681e72b1d7",
+   "0x619e07506fab808f62ac1174e17e89756eeff583",
+   "0x7fa1272916ed73259c3a9c30ddc4fd5e8e52347d",
+   "egig 0x69c7b8de588c68d3927f094eb9ec9a2b1bbeb03c",
+   "1kto1m 0xa1d57d329227c75b12b09f927fb3d6d6ef8f1343"
+  ],
+  "requirements": "Real-time Chainlink TWAP (API key required from Nov 30), low latency to London.",
+  "fee_sensitivity": "BTC 5m/15m 0.05, other crypto 0.01; irrelevant at 1-3c entries, but there is nothing left to buy.",
+  "testability": "Whole-market tape per market split at the end time (done for 184 BTC 5m markets of Nov 26); extend to ETH/SOL/XRP/HYPE and 15m/1h, where egig-type accounts were still paid in June-July.",
+  "red_flags": "Credibility lowered from 2 to 1. The only source describing the gap is wrong by two to five orders of magnitude on its own showcase market and on every wallet it names; three of its wallets 'opened' on the CLOB V2 day (2026-04-28), which may point to a decoding error (not checked). The real historical scale was tens of thousands of dollars per account, and the trade is gone on BTC 5m. The second source is about a different trade.",
+  "credibility": 1,
+  "verification": "PARTIAL. The article exists and contains every figure the catalog quotes, and the mechanism is visible in Mep72's fills (2c buys 6-16 s after the close). Its dollar totals are false: showcase market $2.36 after the close on the public tape against $517,980 claimed; six wallets kept +$67K against ~$11.0M claimed. The catalog had caught this for Mep72 only and had left 95slave unresolved.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Passive bid for winning shares dumped between the close and settlement",
+  "family": "resolution-bond",
+  "mechanism": "After a crypto up/down window ends, holders of the winning side sell into the book instead of waiting for redemption. Rest bids for the already-determined winner at 0.99-0.999 as a maker (no fee), redeem at $1 seconds later.",
+  "time_gap": "Outcome fixed at the close vs settlement ~16-46 s later; the bidder must know the TWAP outcome in real time.",
+  "market_categories": [
+   "crypto"
+  ],
+  "sources": [
+   {
+    "url": "https://bitquery.io/investigations/polymarket-oracle-race",
+    "date": "2026-08-24",
+    "author": "Bitquery Research",
+    "kind": "vendor investigation; its own table says wallets buying the near-certain side in the gap netted -$961K after fees on Aug 1-20; figures unreliable"
+   }
+  ],
+  "claimed_results": "None claimed by anyone; this is the researcher's reading of the tape.",
+  "evidence": "Researcher: 241 taker sells of the winner worth $13,456 after end+3 s in 144 BTC 5m markets (12 h of Nov 26), price not computed. Verifier, 40 other markets (Nov 26 12:00-15:20 UTC): 50 such sells, 6,284 shares, $6,263, VWAP 0.9966; 27 fills at 0.99-0.995, 23 at >=0.995, none below 0.99. Total discount to $1: $21.29 in 3.3 hours, about $150 a day for all bidders on BTC 5m together.",
+  "wallets": [],
+  "requirements": "Chainlink TWAP stream (key from Nov 30), fast quoting right at the close, capital turning over every 5 minutes.",
+  "fee_sensitivity": "Maker pays nothing; the edge is the 0.1-1c discount sellers accept (0.34c on average).",
+  "testability": "Done at first order (see evidence). Maker wallets on the other side would need an on-chain fills dataset with both sides.",
+  "red_flags": "Credibility lowered from 2 to 1. The pool is ~$150 a day gross for everyone, less than the ~$270 assumed; close finishes within 1 bp are ambiguous for seconds (a Binance proxy misses 3.5% of outcomes) and one wrong fill at 0.995 wipes out about 300 good ones of the same size; competitors already bid there; no source documents it as profitable.",
+  "credibility": 1,
+  "verification": "PARTIAL. The flow exists and was re-measured on an independent sample, but the margin the catalog left open turns out to be 0.34c a share and about $150 a day in total. The cited source does not support the trade; its own table shows the neighbouring taker version losing money.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Live sports/esports feed-latency taking (official data faster than the book)",
+  "family": "sports-inplay-latency",
+  "mechanism": "Read game events from an official low-latency feed (or the venue), take stale quotes after a score/kill/objective, exit when the market updates seconds later.",
+  "time_gap": "Official feed is said to be 3-4 s ahead of video and video 5-60 s behind the event (law review, not opened); the esports article says prices 'often lag behind by a matter of seconds'. Polymarket takers wait 1 s on most sports (0 on NBA). No Polymarket in-play measurement exists.",
+  "market_categories": [
+   "sports",
+   "esports"
+  ],
+  "sources": [
+   {
+    "url": "https://www.esports.net/news/polymarket-bot-makes-over-200k-in-3-months-with-lol-dota-2-esports/",
+    "date": "2025-12-30",
+    "author": "Jacob Hale",
+    "kind": "news article built on an X post by @ArchiveExplorer (opened); 11 months old"
+   },
+   {
+    "url": "https://georgetownlawtechreview.org/already-scored-information-asymmetry-in-real-time-sports-betting/GLTR-02-2026/",
+    "date": "2026-02",
+    "author": "Georgetown Law Technology Review",
+    "kind": "law review article; NOT opened (HTTP 429), figures via the lab's r1 notes"
+   },
+   {
+    "url": "https://humaninvariant.substack.com/p/the-case-for-alternative-ordering",
+    "date": "2025-11-12",
+    "author": "@HumanInvariant",
+    "kind": "blog (opened); market-structure argument, no Polymarket numbers; over a year old"
+   }
+  ],
+  "claimed_results": "TeemuTeemuTeemu: ~$208,521 'pure profit in a single quarter' from ~$900 on live LoL/Dota 2.",
+  "evidence": "Wallet check (verifier): TeemuTeemuTeemu 0x5388...4d5a volume $2,620,902, gross +230,312, fees 0, rebates 0, net +230,312 (8.79% of volume); Sep 2025 +3.4K, Oct +36.2K, Nov +39.4K, Dec +151.4K (66% of the total in one month), zero volume from January 2026 to today. Researcher's API read of 17,235 markets: secondsDelay 1 on NFL, CFB, CBB, NHL, soccer, F1, Valorant; 0 on all 5,382 NBA markets; field absent on CS2, golf, most tennis (consistent with an earlier independent lab check). NBA end-of-game (29 games): winner >=0.99 before the end in 26; in close finishes repriced within 3-7 s of ESPN's end stamp; $45K traded below 0.99 after the buzzer across 3 games.",
+  "wallets": [
+   "TeemuTeemuTeemu 0x5388bc8cb72eb19a3bec0e8f3db6a77f7cd54d5a"
+  ],
+  "requirements": "Paid official data feed (Genius/Sportradar/GRID/PandaScore) or presence at the venue, low latency to London.",
+  "fee_sensitivity": "Sports 0.05: 1.25c per share at 50c, 2.5% of notional per taker leg, up to 5% for a taker round trip. The one documented bot kept 8.79% of volume with zero fees; today's fee would take half or more of that, and the 1 s delay lets makers with the same feed cancel first.",
+  "testability": "HF Houroux/polymarket-l2-history has Polymarket's own score feed and L2 book on one clock for NFL/EPL/CFB: measure the book move against the score message. NBA: ESPN play-by-play wallclock vs the Data API tape (coarse).",
+  "red_flags": "Credibility lowered from 3 to 2. One wallet, pre-fee, stopped 11 months ago, two thirds of its profit in a single month; the article's '$900' starting stake is uncheckable; Polymarket has since partnered with the official data vendors; the main sources are older than the three-month window. The dev.to 'fatherson' page was removed as a source: it is posted by ABROWNFOX001, the same name as a repo that ships a closed executable asking for wallet credentials.",
+  "credibility": 2,
+  "verification": "PARTIAL. esports.net opened: the $208,521 figure and the 'official match data ... faster than the market' description are there, and the wallet really kept $230K. Not matching today: the account has been dead since January 2026 and earned everything before fees and the matching delay; the law review was not opened; no source measures the in-play lag on Polymarket.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Post-game / post-outcome bond until UMA settlement",
+  "family": "resolution-bond",
+  "mechanism": "After the result is public buy the winner below $1 and wait for settlement (15 min on sports and weather, 10 min on crypto level markets, 2 h default, days if disputed); or buy 97-99c seconds after a headline and sell at 99.9c minutes later.",
+  "time_gap": "Public outcome vs on-chain settlement: 16-19 min for NBA games (measured), ~2 h default, 4-6 days if disputed.",
+  "market_categories": [
+   "sports",
+   "weather",
+   "politics",
+   "tech"
+  ],
+  "sources": [
+   {
+    "url": "https://docs.polymarket.com/concepts/resolution.md",
+    "date": "2026-11-27",
+    "author": "Polymarket",
+    "kind": "official docs (opened: 'Anyone can propose', bond 'typically $750', 2-hour challenge period)"
+   },
+   {
+    "url": "https://x.com/rb_tweets/status/2121613610879512672",
+    "date": "2026-11-14",
+    "author": "@rb_tweets",
+    "kind": "X article by a tool vendor (bonders at 97-99c; opened)"
+   },
+   {
+    "url": "https://arxiv.org/abs/2605.31431",
+    "date": "2026-05-29",
+    "author": "Gebele & Matthes",
+    "kind": "paper (settlement discounting; exists, abstract read)"
+   }
+  ],
+  "claimed_results": "Nov 12: four wallets put $132K into 97-99c 'for a few hundred dollars each'; Nov 23: one unnamed wallet bought $133K at ~97c and sold at 99.9c minutes later for ~$4.5K.",
+  "evidence": "Wallet checks (verifier) on the four named bonders. tsekinming01 0x69aa...8847: volume $58.4M, gross -139,991, net -140,489; Jun +25.6K, Jul -35.5K, Aug +0.6K, Sep +12.5K, Oct +29.6K, Nov -59.6K. JJo 0xc408...4675: volume $41.9M, gross +318,710, net +335,755 (0.80% of volume), rebates/rewards 5% of net; Jun +20.5K, Jul -1.6K, Aug +4.7K, Sep +11.4K, Oct +14.1K, Nov +34.3K. tinman2 0x9bae...5d34: gross +16,287, net +14,868 including -14,254 unrealized; Jul-Oct -14.4K, Nov +12.6K. sbimbg 0xf519...906b: volume $44.7M, gross +181,969, net +269,373, rebates/rewards 48% of net; without them Jun -31.2K, Jul +103.2K, Aug -126.3K, Sep +12.6K, Oct -82.2K, Nov +16.4K. Researcher: NBA, 29 games, on-chain resolution a median 17 min after the last play with the winner already at ~0.999; weather winner >=0.99 at the day's last observation in 96% of 112 city-days; per-market liveness from gamma 900 s sports/weather (bond $250), 600 s crypto levels, default elsewhere. Lab mentions study: buying the first print >=0.95 is negative after fee (4.2% of Yes confirmations resolved the other way).",
+  "wallets": [
+   "tsekinming01 0x69aa9fa621403e3a121b29ad77d32ba9eb5e8847",
+   "JJo 0xc4086b708cd3a50880b7069add1a1a80000f4675",
+   "tinman2 0x9baebe30d1cefe0ac5be4be85189c9fa33e95d34",
+   "sbimbg 0xf5198df69e13937a40d1c76d6f72d9aa067d906b"
+  ],
+  "requirements": "Capital (returns are 0.1-3% per event), reading the rules correctly, tolerance for dispute and reversal risk.",
+  "fee_sensitivity": "At 0.97-0.99 the fee is 0.05-0.15c per share at the 0.05 rate, 0.01-0.03c at 0.01: it takes 5-15% of a 1c edge at 0.05. Holding rewards do not apply on sports, weather or post-count markets.",
+  "testability": "Lab study R1/R2 (r3_structure.md) is the designed test; /v2/resolutions gives resolved_at, prices-history gives the price path.",
+  "red_flags": "Credibility lowered from 3 to 2. Of the four bonders the source names, one is down $140K on $58M of volume, one earns half its result from rebates and rewards and loses in three of the last six months without them, one is flat; only JJo earns from the trading itself, at 0.8% of volume. The cheap part exists only seconds after news and needs size; in routine sports and weather nothing is left; the per-market bond and liveness differ from the docs' '$750 / 2 h'; whether proposing is whitelist-only was not verified.",
+  "credibility": 2,
+  "verification": "CONFIRMED for the sources (docs page and the Nov 14 article say what is quoted; the $133K/$4.5K item is in the Nov 24 article, not the one cited). The wallet data contradicts the idea that bonding at size is a steady earner.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Tweet-count markets: count on X directly, ahead of the official tracker",
+  "family": "tweet-count",
+  "mechanism": "Elon post-count events resolve on the 'Post Counter' at xtracker.polymarket.com. Count qualifying posts on X in real time and trade the bucket boundaries in the last hours before the noon-ET deadline.",
+  "time_gap": "X feed vs tracker: measured in the lab's culture study at a median 161 s (p10 35 s, p90 296 s, p99 5,807 s) over 1,294 posts. Whether the book follows X or the tracker has not been measured.",
+  "market_categories": [
+   "culture"
+  ],
+  "sources": [
+   {
+    "url": "https://gamma-api.polymarket.com/events?slug=elon-musk-of-tweets-november-20-november-27-2026",
+    "date": "2026-11-27",
+    "author": "Polymarket (market rules)",
+    "kind": "official rules via API (re-read by verifier)"
+   },
+   {
+    "url": "https://crypto.news/prediction-markets-are-now-trading-on-elon-musks-dopamine/",
+    "date": "2026-05-11",
+    "author": "crypto.news",
+    "kind": "news article (opened; one sentence on bots scraping the feed, no measurement)"
+   }
+  ],
+  "claimed_results": "A news item says a trader made $106K in a month buying 1-10c ranges; the lab identified that account (sb911): -31.2K all-time, inactive since August.",
+  "evidence": "Rules confirmed on the live event: 30 buckets, fee 0.01, bond $500, default liveness, no secondsDelay, ~$494K 24 h volume; text says deleted posts count if captured (~5 minutes) and X may be a secondary source. The tracker has a public JSON API (/api/users/<handle>/posts with createdAt and importedAt); the catalog said no endpoint was found. Lab culture study: the count inside the window matched the resolved bucket in 21 of 21 events; the eventual winner trades at a median 0.74 six hours out and 0.89 two hours out; pace projection is off by about one bucket at T-12h. One two-month-old account (hixlz) made $40K on $3K by resting 1-15c bids on the bucket next to the pace bucket, 8 winning events of 30. Other accounts named in press are gone (Annica inactive since August, Prexpect flat since September).",
+  "wallets": [],
+  "requirements": "Reliable real-time read of one X account (rate limits, classification of posts), small capital.",
+  "fee_sensitivity": "0.01 rate: negligible.",
+  "testability": "Tape of the final 6 hours of past events against the tracker's post list (createdAt vs importedAt): did boundary buckets move at the post time or at the import time?",
+  "red_flags": "No one has published a lag measurement on the book; a 2.7-minute lead matters only when a post crosses a bucket boundary near the deadline; the one documented winner uses resting cheap bids, not speed; tracker errors and the secondary-source clause create resolution risk.",
+  "credibility": 2,
+  "verification": "PARTIAL. Rules and the crypto.news sentence confirmed. The catalog's 'data endpoint not found' and 'lag not measured' are out of date: the lab's own notes have the API and a 161 s median lag, and the '$106K' trader is a net loser.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Mention markets: hear the word before the stream viewers do",
+  "family": "mention-markets",
+  "mechanism": "Markets resolve Yes if the speaker says a listed term during a named event (source: audio/video of the event). Use the lowest-latency stream plus speech-to-text, buy Yes the moment the term is said; or sell remaining No value as the event ends.",
+  "time_gap": "Room or low-latency stream vs standard streams: 5-40 s (assumed, no source); speech-to-text 1-3 s. On Polymarket the first print after the word is already >=0.90 in 57% of 131 clean live jumps (lab mentions study).",
+  "market_categories": [
+   "mentions",
+   "tech",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://gamma-api.polymarket.com/events?slug=what-will-jensen-huang-say-during-his-gtc-washington-dc-keynote",
+    "date": "2026-11-27",
+    "author": "Polymarket (market rules)",
+    "kind": "official rules via API (re-read by verifier)"
+   },
+   {
+    "url": "https://www.covers.com/industry/federal-investigators-reviewing-mention-markets-trump-aug-14-2026",
+    "date": "2026-08-14",
+    "author": "Grant Mitchell, Covers",
+    "kind": "news (opened); about KALSHI mention markets and an insider (teleprompter operator), not latency"
+   }
+  ],
+  "claimed_results": "None with numbers.",
+  "evidence": "Rules confirmed on the live event: 12 markets, fee 0.01, bond $500, liveness default, no secondsDelay, $20.7K 24 h volume, 'The resolution source will be audio/video of the event'. Lab mentions study (1,382 resolved markets in 95 events, Sep 29 - Nov 23, $2.42M volume, median market $482): all takers together locked in $5,485 below 0.95 in 8 weeks; buying the first print >=0.95 is negative after fee on the later half; resolution a median 2.1-2.4 h after the price confirms.",
+  "wallets": [],
+  "requirements": "Low-latency stream access, automatic transcription with exact-form matching (plural/possessive rules), small capital.",
+  "fee_sensitivity": "0.01 rate: negligible.",
+  "testability": "Already measured at first order by the lab's mentions study; a finer test is fill times against a time-stamped transcript of the official video.",
+  "red_flags": "Credibility lowered from 2 to 1. No source documents this gap; the Tesla Roadster post cited as a related case is a contrarian bet placed before the outcome and was removed; the measured pool is about $100 a day for everyone; exact-wording disputes, staged incidents and an insider case; regulators reviewing the category.",
+  "credibility": 1,
+  "verification": "PARTIAL. The rules source is confirmed; the other two sources do not describe a speed gap (one is about Kalshi and an insider, one is not a lag case). The lab's own measurement, already in NOTES, says speed alone earns almost nothing here.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Election night: trade raw vote counts ahead of network calls",
+  "family": "news-latency",
+  "mechanism": "Model county-level results as they post and buy the race/chamber before the market reaches 99c; the public 'call' is not a signal because the market is hours ahead of it.",
+  "time_gap": "Market vs network calls: market 1-2.5 hours AHEAD (Kalshi House contract 99% at 8:10pm vs NBC 10:08pm; Senate 9pm vs 11:26pm; Polymarket about an hour ahead of CNN on the Texas governor race). Count feed vs book: minutes, unmeasured.",
+  "market_categories": [
+   "elections",
+   "politics"
+  ],
+  "sources": [
+   {
+    "url": "https://hackernoon.com/kalshi-and-polymarket-traded-$2-billion-on-the-2026-midterms",
+    "date": "2026-11-11",
+    "author": "Edwin Munyui (Prediction Frontier)",
+    "kind": "analysis article (opened)"
+   },
+   {
+    "url": "https://x.com/primo_data/status/2117840878232649801",
+    "date": "2026-11-04",
+    "author": "@primo_data",
+    "kind": "X post (opened): 'Polymarket called this an hour ago' against a CNN projection"
+   }
+  ],
+  "claimed_results": "KALSHI's House contract 99% at 8:10pm vs NBC call 10:08pm; Kalshi Senate 99% at 9pm vs 11:26pm; Democratic sweep 75% (6pm) -> 89% (7pm) -> 98% (9pm) on both venues; Polymarket had Annie Andrews at 30.5% an hour before polls closed and she won.",
+  "evidence": "Both sources opened and say this. No tick-level check by anyone in the lab. The '5 hours ahead of AP' figure comes from a low-quality mirror seen only as a search summary and should not be reused.",
+  "wallets": [],
+  "requirements": "A results feed and a calibrated county model; rare events.",
+  "fee_sensitivity": "Elections 0.05.",
+  "testability": "Nov 3 2026 tapes for House/Senate/individual races against time-stamped county result drops (archived feeds).",
+  "red_flags": "There is no gap versus public calls in our favour: the market leads them. The quoted 99% times are Kalshi's contracts, not Polymarket's. Requires a real election model; the next comparable US night is far away.",
+  "credibility": 2,
+  "verification": "CONFIRMED with one correction: the Hackernoon article has all the quoted times, but the 8:10pm and 9pm figures are for Kalshi's contracts; the @primo_data post confirms a roughly one-hour lead for Polymarket on one race.",
+  "channel": "x3_time_gap"
+ },
+ {
+  "name": "Off-chain fill vs on-chain settlement gap ('ghost fills') - a risk, not a strategy",
+  "family": "other",
+  "mechanism": "A fill reported by the API is provisional until the on-chain transaction succeeds; an attacker makes his own order fail on-chain (for example by moving the balance before settlement) after the match has removed maker liquidity or after a bot has hedged against it.",
+  "time_gap": "Match vs chain: 2-3 s.",
+  "market_categories": [
+   "all"
+  ],
+  "sources": [
+   {
+    "url": "https://arxiv.org/abs/2606.16852",
+    "date": "2026-06-15",
+    "author": "Shen, Jin, Wu, Wang",
+    "kind": "paper 'The Ghosts of Polymarket' (abstract read: 2,037,304 reverted matchOrders() transactions analysed)"
+   },
+   {
+    "url": "https://defirate.com/news/polymarket-traders-allege-settlement-exploit-targeting-liquidity-providers/",
+    "date": "2026",
+    "author": "defirate",
+    "kind": "news (opened; describes the revert mechanism, cost per cycle under 1 MATIC)"
+   }
+  ],
+  "claimed_results": "The catalog's '$1.49M attributed to reported attacks' is in neither the arXiv abstract nor the defirate article; removed.",
+  "evidence": "Sources opened by the verifier; no measurement in the lab.",
+  "wallets": [],
+  "requirements": "Adversarial on-chain tooling.",
+  "fee_sensitivity": "n/a",
+  "testability": "Reverted settlement transactions on Polygon.",
+  "red_flags": "It is an attack on other users; relevant to us only as a risk for any hedged bot: treat a fill as final only after the chain confirms.",
+  "credibility": 2,
+  "verification": "PARTIAL. The paper and the article exist and describe the mechanism; the $1.49M figure was not found in either.",
+  "channel": "x3_time_gap"
  }
 ]

@@ -1,0 +1,22 @@
+(1) resolved price markets ending in the 21-day window that at least one studied account touched (equity/ETF tickers):
+    close-day    markets   455  volume $   953,562  per market $  2,096  median $602
+    hit-week     markets  1071  volume $   859,523  per market $    803  median $201
+    updown-day   markets   221  volume $   602,810  per market $  2,728  median $1,075
+    close-week   markets   221  volume $   120,970  per market $    547  median $130
+    earnings     markets    20  volume $   106,755  per market $  5,338  median $2,844
+    total $2,643,620 in 21 days = $125,887 per day
+
+(2) post-decision trades of the WINNING outcome at >= 0.90 (1323 markets with tapes: hit resolved Yes + close/updown), from decision + 60 s to resolution:
+    px 0.90-0.97  trades    42 usd      9,714 discount to $1: $    469  (taker bought: $   464; taker sold to a resting bid: $     5)
+    px 0.97-0.99  trades    18 usd      3,955 discount to $1: $     66  (taker bought: $    66; taker sold to a resting bid: $     0)
+    px 0.99-0.995 trades    59 usd     40,881 discount to $1: $    330  (taker bought: $   321; taker sold to a resting bid: $     9)
+    px >=0.995    trades   278 usd     21,936 discount to $1: $     24  (taker bought: $    11; taker sold to a resting bid: $    13)
+    whole discount pool $889 in 21 days over 1323 markets; median decision -> on-chain resolution 16 min (p10 16, p90 21)
+    top taker wallets by discount (side = what the taker did): [('0xc4b5a673', 'BUY', 414), ('CoinTrick', 'BUY', 227), ('0x31fed1eb', 'BUY', 107), ('0x94d6530c', 'BUY', 50), ('0xa16a1302', 'BUY', 31), ('0xdefebc7e', 'SELL', 10), ('0x06ce4f6a', 'BUY', 6), ('0xb6077a10', 'BUY', 5)]
+
+(3) finance taker fee implied by real charges (API daily fees / sum over taker fills of shares*p*(1-p)):
+    grasstoucher69   Nov 7-19: rate 0.0462 (base 54,943, fees 2,538)   Nov 22-26: rate 0.0493 (base 27,947, fees 1,377)
+    thanksforplayin  Nov 7-19: rate 0.0286 (base 32,058, fees 916)   Nov 22-26: rate 0.0422 (base 9,864, fees 416)
+    superstonksbro   Nov 7-19: rate 0.0294 (base 6,031, fees 178)   Nov 22-26: rate 0.0179 (base 6,829, fees 122)
+    PippiTrader      Nov 7-19: rate 0.0357 (base 35,618, fees 1,273)   Nov 22-26: rate 0.0598 (base 8,387, fees 502)
+    sample of user_pnl point keys: ['cashflow_net', 'deposits', 'economic_pnl', 'fees', 'fees_paid', 'fees_refunded', 'maker_rebate', 'position_pnl', 'realized_combo_pnl', 'realized_lp_pnl', 'realized_market_pnl', 'realized_pnl', 'referral_income', 'reward_income', 'settled_pnl', 'source_block', 'sponsored_income', 'taker_rebate', 'timestamp', 'trade_count', 'trade_pnl', 'unrealized_pnl', 'volume', 'volume_usdc', 'wallet_income', 'withdrawals', 'yield_income']

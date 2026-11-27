@@ -1,0 +1,26 @@
+Lolakis: 890 fills, $225,573, family filter politics, markets 55, events 22
+ role/side/outcome $: {('M', 'SELL', 'Yes'): 57116, ('M', 'BUY', 'Yes'): 49746, ('M', 'SELL', 'No'): 49721, ('M', 'BUY', 'No'): 43418, ('T', 'BUY', 'Yes'): 11646, ('T', 'SELL', 'Yes'): 5072, ('T', 'BUY', 'No'): 4811, ('T', 'SELL', 'No'): 4042}
+ fill usd p10/p50/p90/p99: [1.0, 41.5, 697.2, 2465.0]  neg-risk share of $: 0.28
+ $ by time to market end: {'30-180d': 52505, '7-30d': 41518, '1-7d': 36965, '<1d': 36588, 'after end': 41186, '>180d': 16811}
+ bought $109,621; round-tripped inside window: 186,794 shares, cost $103,241, realised $2,140 (1.15 c/share); sells of older inventory $10,571
+ holding time of round trips ($-weighted) p10/p50/p90: ['4.2 min', '164.9 min', '1934.4 min']  share of round-trip $ closed <60 s: 0.06 <1 h: 0.37
+ round trips by (entry role, exit role): shares, c/share: {('M', 'M'): (144643, 0.68), ('T', 'M'): (24964, 3.47), ('M', 'T'): (15211, 1.92), ('T', 'T'): (1976, -0.33)}
+ buy $ by price: {'<0.70': 42631, '<0.95': 13824, '<0.30': 4569, '<0.90': 28927, '<0.99': 11928, '>=0.99': 7344, '<0.05': 397}
+ 10-second bursts: 708 median fills 1.0 p90 2  bursts touching >=3 markets of one event: 0
+ fills per day: {'11-13': 87, '11-14': 220, '11-15': 72, '11-16': 77, '11-17': 155, '11-18': 57, '11-19': 66, '11-20': 74, '11-21': 9, '11-22': 8, '11-23': 3, '11-24': 19, '11-25': 19, '11-26': 23, '11-27': 1}
+ fills per UTC hour: [40, 76, 25, 35, 26, 35, 39, 4, 17, 10, 15, 18, 28, 79, 74, 46, 30, 43, 22, 45, 33, 38, 45, 67]
+ top events:
+   israel-x-iran-ceasefire-continues-throughptptpt-20260716224448963      mk   6 $   45,235
+   us-x-iran-effective-ceasefire-begins-by-2-week-pause-20261108          mk   5 $   43,489
+   nationwide-ground-stop-lifted-byptptpt                                 mk  10 $   27,596
+   who-will-be-the-next-prime-minister-of-israel-after-the-next-election  mk   3 $   18,544
+   next-french-presidential-election                                      mk   1 $   15,060
+   howard-lutnick-out-as-secretary-of-commerce-by-december-31             mk   4 $   14,665
+   us-announces-end-of-iranian-blockade-byptptpt-20260713152715080        mk   4 $   13,923
+   taipei-mayor-election-winner-20260813125857100                         mk   1 $   11,685
+   presidential-election-winner-2028                                      mk   1 $   10,232
+   marco-rubio-out-as-secretary-of-state-byptptpt                         mk   2 $    5,152
+   democratic-presidential-nominee-2028                                   mk   2 $    4,750
+   jensen-huang-publicly-testifies-before-congress-byptptpt               mk   1 $    2,685
+   alice-huang-federally-charged-by                                       mk   2 $    2,480
+   pete-hegseth-out-as-secretary-of-defense-by-november-30-20261001003401 mk   1 $    2,119

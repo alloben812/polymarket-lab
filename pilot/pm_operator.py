@@ -2631,7 +2631,7 @@ def cmd_selftest(a) -> int:
         expect("finding 1: ... and the report still goes out, with the error text, scrubbed",
                op.st.get("report_error") is None and rep.get("records_error")
                and "exp-broken" in rep["records_error"]["reason"]
-               and "IsADirectoryError" in rep["records_error"]["reason"] and rep["stop_file"] and rep["pnl"] == {}
+               and "IsADirectoryError" in rep["records_error"]["reason"] and rep["stop_file"] and rep.get("pnl") == {}
                and "Записи программ не прочитаны" in md and not op.scrub.leaks(json.dumps(rep) + md)
                and str(tmp) not in json.dumps(rep) + md, f"{rep.get('records_error')} {op.st.get('report_error')}")
         op.stop_file.unlink()                              # the owner removes STOP, but the records are still broken

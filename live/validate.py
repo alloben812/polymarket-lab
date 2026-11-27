@@ -14,6 +14,8 @@ def _scan(rows, markets, report):
     counts, events, gaps, bad, categories = (Counter() for _ in range(5))
     tokens, sessions, heartbeats = {}, {}, {}
     last_reference = None
+    announced_reference_gap = None
+    missing_reference_seconds = 0
     anchored = set()
     subscribed = set()
     market_events = Counter()
@@ -97,12 +99,33 @@ def _scan(rows, markets, report):
                 market_events[payload["market"]] += 1
             if any(t and tokens.get(t) != payload.get("market") for t in ids):
                 bad["wrong_market_event"] += 1
+        elif kind == "reference_gap":
+            start, end = r.get("since_s"), r.get("to_s")
+            if (
+                type(start) is not int
+                or type(end) is not int
+                or start != last_reference
+                or end <= start + 1
+                or announced_reference_gap is not None
+            ):
+                bad["invalid_reference_gap"] += 1
+            else:
+                announced_reference_gap = (start, end)
         elif kind == "reference":
             if r["bars"] and first_reference is None:
                 first_reference = r["bars"][0][0]
             for sec, price in r["bars"]:
                 if last_reference is not None and sec != last_reference + 1:
-                    bad["nonconsecutive_reference"] += 1
+                    if announced_reference_gap == (last_reference, sec):
+                        missing_reference_seconds += sec - last_reference - 1
+                    else:
+                        bad["nonconsecutive_reference"] += 1
+                if announced_reference_gap and announced_reference_gap != (
+                    last_reference,
+                    sec,
+                ):
+                    bad["invalid_reference_gap"] += 1
+                announced_reference_gap = None
                 if float(price) <= 0 or (sec + 1) * BILLION > now:
                     bad["invalid_or_future_candle"] += 1
                 last_reference = sec
@@ -115,6 +138,8 @@ def _scan(rows, markets, report):
                 if delta > 20 * BILLION:
                     bad["unaccounted_pong_gap_over_20s"] += 1
         yield r
+    if announced_reference_gap is not None:
+        bad["reference_gap_without_following_bar"] += 1
     if first_ws and last_ws:
         observed = last_ws - first_ws
         if observed > 20 * BILLION and not counts["heartbeat"]:
@@ -167,6 +192,7 @@ def _scan(rows, markets, report):
             "max_ws_message_age_ms": max_feed_lag_ms,
             "full_book_anchors": dict(reanchors),
             "binance_seconds": candle_count,
+            "binance_declared_missing_seconds": missing_reference_seconds,
             "subscribed_tokens": len(subscribed),
             "anchored_tokens": len(anchored),
             "stop": stop,

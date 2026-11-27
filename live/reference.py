@@ -45,6 +45,10 @@ async def reference_btc(journal):
                     "https://data-api.binance.vision/api/v3/klines?symbol=BTCUSDT&interval=1s&limit="
                     + str(limit)
                 )
+                if newest:
+                    # The latest-N window moves while a request is in flight.
+                    # Page from the last accepted second, including delayed recovery.
+                    url += f"&startTime={(newest + 1) * 1000}"
                 rows = await asyncio.to_thread(get_json, url)
                 # Ignore the candle which was open when the request was sent.
                 bars = [

@@ -227,3 +227,23 @@ def test_preloaded_token_must_still_have_depth_during_its_window():
         {"slug": market["slug"], "known_depth_pct": {"Up": 0.0, "Down": 100.0}}
     ]
     assert report["errors"]["no_in_window_depth_btc5m"] == 1
+
+
+def test_declared_reference_gap_preserves_actual_missing_seconds():
+    from live.validate import inspect
+
+    def rows(with_marker):
+        records = [("reference", {"bars": [[100, "100.20"]]})]
+        if with_marker:
+            records.append(("reference_gap", {"since_s": 100, "to_s": 103}))
+        records.append(("reference", {"bars": [[103, "100.21"]]}))
+        return [
+            dict(kind=k, recv_ns=(200 + i) * 10**9, ordinal=i + 1, session="", **data)
+            for i, (k, data) in enumerate(records)
+        ]
+
+    marked = inspect(rows(True))
+    assert marked["errors"] == {}
+    assert marked["binance_seconds"] == 2
+    assert marked["binance_declared_missing_seconds"] == 2
+    assert inspect(rows(False))["errors"]["nonconsecutive_reference"] == 1

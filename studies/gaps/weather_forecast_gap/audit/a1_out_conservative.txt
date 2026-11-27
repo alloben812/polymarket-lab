@@ -1,0 +1,52 @@
+city-days 737 markets 8107 eventStartTime != my local midnight: 0
+events without exactly one winner: 0 ; winner disagreements data-api vs gamma outcomePrices: 0
+
+== Selected cell AVG g0.15 60h
+tune (city-day)                                n=  90 clusters=  88 stake=    900 net=  +292.0 ret= +32.4% t=+0.88
+tune (date)                                    n=  90 clusters=  35 stake=    900 net=  +292.0 ret= +32.4% t=+0.89
+   c/share 4.41 avg price 0.179 win 0.222
+nov (city-day)                                 n=  54 clusters=  53 stake=    540 net=    +1.1 ret=  +0.2% t=+0.01
+nov (date)                                     n=  54 clusters=  21 stake=    540 net=    +1.1 ret=  +0.2% t=+0.01
+   c/share 0.02 avg price 0.149 win 0.185
+
+== Pooled variants and cells
+tune BEST g0.08 pooled                         n= 868 clusters= 415 stake=   8680 net=  -874.6 ret= -10.1% t=-0.87
+tune BEST g0.15 pooled                         n= 482 clusters= 302 stake=   4820 net=  -561.4 ret= -11.6% t=-0.70
+tune BEST g0.25 pooled                         n= 186 clusters= 153 stake=   1860 net=  +137.7 ret=  +7.4% t=+0.27
+tune AVG g0.08 pooled                          n= 842 clusters= 396 stake=   8420 net=  +159.6 ret=  +1.9% t=+0.17
+tune AVG g0.15 pooled                          n= 443 clusters= 283 stake=   4430 net=   +93.5 ret=  +2.1% t=+0.14
+tune AVG g0.25 pooled                          n= 153 clusters= 125 stake=   1530 net=   +32.6 ret=  +2.1% t=+0.07
+nov BEST g0.08 pooled                          n= 499 clusters= 240 stake=   4990 net=  -287.2 ret=  -5.8% t=-0.36
+nov BEST g0.15 pooled                          n= 313 clusters= 193 stake=   3130 net=  +161.3 ret=  +5.2% t=+0.24
+nov BEST g0.25 pooled                          n= 106 clusters=  89 stake=   1060 net=   +97.4 ret=  +9.2% t=+0.24
+nov AVG g0.08 pooled                           n= 498 clusters= 247 stake=   4980 net=  -278.6 ret=  -5.6% t=-0.33
+nov AVG g0.15 pooled                           n= 281 clusters= 175 stake=   2810 net=  -296.5 ret= -10.6% t=-0.52
+nov AVG g0.25 pooled                           n= 136 clusters= 106 stake=   1360 net=   +13.5 ret=  +1.0% t=+0.03
+selection on tune (max city-day t, >=50 city-days): (0.8793429395195437, ('tune', 'AVG', 0.15, 60))
+Nov cells: min/max ret, |t| max: -100.95 825.0329499307135 1.9978166361540717
+  |t|>1.5 cell ('nov', 'AVG', 0.15, 36)        n=  94 clusters=  88 stake=    940 net=  -352.3 ret= -37.5% t=-1.68
+  |t|>1.5 cell ('nov', 'AVG', 0.25, 36)        n=  42 clusters=  41 stake=    420 net=  -255.1 ret= -60.7% t=-2.00
+  |t|>1.5 cell ('nov', 'BEST', 0.08, 36)       n= 180 clusters= 154 stake=   1800 net=  -567.9 ret= -31.6% t=-1.81
+  |t|>1.5 cell ('tune', 'AVG', 0.08, 18)       n= 341 clusters= 289 stake=   3410 net=  -861.5 ret= -25.3% t=-1.98
+  |t|>1.5 cell ('tune', 'AVG', 0.15, 18)       n= 164 clusters= 151 stake=   1640 net=  -627.2 ret= -38.2% t=-2.85
+  |t|>1.5 cell ('tune', 'BEST', 0.08, 18)      n= 372 clusters= 318 stake=   3720 net= -1094.4 ret= -29.4% t=-2.05
+  |t|>1.5 cell ('tune', 'BEST', 0.25, 60)      n=  19 clusters=  19 stake=    190 net=  -104.6 ret= -55.1% t=-1.73
+
+== Robustness
+tune sel. without best day 2026-10-15          n=  88 clusters=  86 stake=    880 net=   +79.7 ret=  +9.1% t=+0.32
+tune sel. without 10 best markets              n=  80 clusters=  79 stake=    800 net=  -455.8 ret= -57.0% t=-4.32
+tune sel. size-capped to print                 n=  90 clusters=  88 stake=    258 net=   +33.9 ret= +13.2% t=+0.46
+tune sel. fee charged at the time              n=  90 clusters=  88 stake=    900 net=  +271.9 ret= +30.2% t=+0.82
+tune sel. zero fee                             n=  90 clusters=  88 stake=    900 net=  +299.4 ret= +33.3% t=+0.90
+nov sel. without best day 2026-11-15           n=  51 clusters=  50 stake=    510 net=  -121.2 ret= -23.8% t=-0.86
+nov sel. without 10 best markets               n=  44 clusters=  43 stake=    440 net=  -443.8 ret=-100.9% t=-8882.22
+nov sel. size-capped to print                  n=  54 clusters=  53 stake=    192 net=    +5.0 ret=  +2.6% t=+0.08
+nov sel. fee charged at the time               n=  54 clusters=  53 stake=    540 net=   -11.8 ret=  -2.2% t=-0.07
+nov sel. zero fee                              n=  54 clusters=  53 stake=    540 net=    +5.7 ret=  +1.1% t=+0.03
+
+== Blind rule (no model): 60h, first print, 0.03-0.85, up to 3 random buckets per city-day; 200 draws
+tune: blind return median -0.7%, 5-95% [-5.0, +2.3] (tapes exist only for model-likely buckets)
+nov: blind return median +1.6%, 5-95% [-4.2, +5.4] (tapes exist only for model-likely buckets)
+
+tape shares / gamma volumeNum on traded markets: n 1381 p1 1.0 median 1.0 p99 1.002
+entries mine 4807 author 4857 only mine 10 only author 60

@@ -10,6 +10,7 @@ TZ = {"nyc": "America/New_York", "atlanta": "America/New_York", "miami": "Americ
       "los-angeles": "America/Los_Angeles", "san-francisco": "America/Los_Angeles", "seattle": "America/Los_Angeles"}
 MON = {m: i for i, m in enumerate("january february march april may june july august september october november december".split(), 1)}
 LAG = int(sys.argv[1]) if len(sys.argv) > 1 else 3   # block lag: match time = block - LAG, must be >= decision
+TIE = sys.argv[2] if len(sys.argv) > 2 else "max"  # prints sharing one block second: "min" price (author), "max" (conservative), "api" (tape order)
 
 # ---- universe from the raw gamma dump
 E = json.load(gzip.open(D + "/events_raw.json.gz"))
@@ -58,7 +59,7 @@ def tape(c):
         for r in rows:
             if r["o"] == "Yes" and r["s"] == "BUY": b.append((r["t"], r["p"], r["z"]))
             elif r["o"] == "No" and r["s"] == "SELL": b.append((r["t"], round(1 - r["p"], 6), r["z"]))
-        b.sort(key=lambda x: x[0]); TP[c] = ([x[0] for x in b], b, sum(r["z"] for r in rows) / 1.0)
+        b.sort(key=(lambda x: x[0]) if TIE == "api" else (lambda x: (x[0], x[1])) if TIE == "min" else (lambda x: (x[0], -x[1]))); TP[c] = ([x[0] for x in b], b, sum(r["z"] for r in rows) / 1.0)
     return TP[c]
 
 def first(c, t):

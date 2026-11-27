@@ -350,7 +350,8 @@ def test_older_bbo_and_matching_bbo_leave_book_clock_and_depth_intact():
     assert replay.status_for("up") == "book_mismatch"
 
 
-def test_market_resolution_is_terminal_across_sessions_and_rest(tmp_path):
+@pytest.mark.parametrize("resolved_payload", [{"market": "0x123"}, {"assets_ids": ["up"]}])
+def test_market_resolution_is_terminal_across_sessions_and_rest(tmp_path, resolved_payload):
     records = [
         event("market", 1, "", market={
             "condition_id": "0x123", "tokens": {"Up": "up", "Down": "down"},
@@ -358,7 +359,7 @@ def test_market_resolution_is_terminal_across_sessions_and_rest(tmp_path):
         event("connected", 2, tokens=["up", "down"]),
         snapshot(3), snapshot(4, token="down"),
         event("ws", 5, payload={
-            "event_type": "market_resolved", "market": "0x123", "assets_ids": ["up"],
+            "event_type": "market_resolved", **resolved_payload,
         }),
         snapshot(6, token="down", source="rest_checkpoint"),
         snapshot(7),

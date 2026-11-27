@@ -264,7 +264,10 @@ class BookReplay:
         )
         condition = payload.get("market") or payload.get("condition_id")
         if isinstance(condition, str):
-            tokens.update(self._market_tokens.get(condition.lower(), set()))
+            tokens.update(self._market_tokens.get(condition.lower(), ()))
+        for outcomes in self._market_tokens.values():
+            if not tokens.isdisjoint(outcomes):
+                tokens.update(outcomes)
         changed = set()
         for token in tokens:
             state = self._books.get(token)

@@ -527,17 +527,23 @@ for label, lo, hi in periods:
     for mo in (False, True):
         r, rw, F = account_report(mo, lo, hi, label)
         ACC.append(r)
+        _lab = ("first5" if label.startswith("first5") else "last5") + ("O" if mo else "P") + TAG
+        rw.to_csv(f"{OUT}/acct_rw_{_lab}.csv", index=False)
+        F.to_csv(f"{OUT}/acct_fills_{_lab}.csv", index=False)
         print("\nACCOUNT", {k_: (round(v_, 4) if isinstance(v_, float) else v_) for k_, v_ in r.items() if k_ != "daily"})
         print(pd.DataFrame(r["daily"]).to_string(index=False), flush=True)
 json.dump(dict(best_of_six=best6, variant7=name7, first5_net_per_md=f5, account_variant=best7, account_k=ak, account_protection=aprot,
                filter_from=fname, auxiliary_filter_run=aux, class_filter=keep, accounts=ACC,
                october_median_rate_quoted=float(np.median(D.R.values[VAR[best7]["quoted"]])) if VAR[best7]["quoted"].any() else None),
           open(f"{RES}/account{TAG}.json", "w"), indent=1, default=str)
-np.save(f"{RES}/inc_{best7}{TAG}.npy", VAR[best7]["inc"])
+np.save(f"{OUT}/inc_{best7}{TAG}.npy", VAR[best7]["inc"])
 for name, v in VAR.items():
-    v["F"].to_csv(f"{RES}/fills_{name}{TAG}.csv", index=False)
-    MD.get(name, market_days(v["inc"], v["quoted"], v["cap"], v["F"])).to_csv(f"{RES}/marketdays_{name}{TAG}.csv", index=False)
+    v["F"].to_csv(f"{OUT}/fills_{name}{TAG}.csv", index=False)
+    MD.get(name, market_days(v["inc"], v["quoted"], v["cap"], v["F"])).to_csv(f"{OUT}/marketdays_{name}{TAG}.csv", index=False)
 D[["ci", "minute", "date", "event", "city", "R", "msz", "hclass", "lclass", "mclass", "moh", "near_report", "blk_report", "blk_eod", "no_station",
    "valid_q"]].assign(**{f"inc_{n}": v["inc"] for n, v in VAR.items()}, **{f"q_{n}": v["quoted"] for n, v in VAR.items()},
-                      **{f"cap_{n}": v["cap"] for n, v in VAR.items()}).to_parquet(f"{RES}/minutes{TAG}.parquet", index=False)
+                      **{f"cap_{n}": v["cap"] for n, v in VAR.items()}).to_parquet(f"{OUT}/minutes{TAG}.parquet", index=False)
+comp_q = {f"k{k}": float(np.nanmedian(D[f"comp{k}"].values[D.valid_s.values & (D[f"sh_both{k}"].values > 0)])) for k in (0, 1, 2)}
+json.dump(dict(october_median_comp_valid_scored=comp_q, october_median_rate_all=float(D.R.median())), open(f"{RES}/october_comp{TAG}.json", "w"))
+print("october comp", comp_q)
 print("done")

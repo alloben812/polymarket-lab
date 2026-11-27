@@ -25,7 +25,7 @@ def fin(m):
     return (float(f[0]), float(f[1]))
 
 
-def line(label, per_event, n_report=None):
+def line(label, per_event, n_report=None, days=PERIOD_DAYS):
     """per_event: list of dicts {net, cost, shares, fees} for ALL events of the group (zeros included)."""
     n = len(per_event)
     nets = [e["net"] for e in per_event]
@@ -36,10 +36,11 @@ def line(label, per_event, n_report=None):
     r, rse, rt = ratio_cluster(nets, [e["cost"] for e in per_event])
     tot = sum(nets)
     return (f"{label} | {n} | {filled} | {sh:,.0f} | {cost:,.0f} | {cost / sh if sh else float('nan'):.3f} | {tot:,.0f} | {m:.2f} | {t:.2f} | "
-            f"{r * 100 if r == r else float('nan'):.1f}% (t {rt:.1f}) | {tot / MONTHS:,.0f} | {tot / PERIOD_DAYS:.1f}")
+            f"{r * 100 if r == r else float('nan'):.1f}% (t {rt:.1f}) | {tot / (days / 30.44):,.0f} | {tot / days:.1f} | "
+            f"[{(m - 1.96 * se) if se == se else float('nan'):.2f}, {(m + 1.96 * se) if se == se else float('nan'):.2f}]")
 
 
-HDR = "variant | events | with fill | shares | dollars | avg price | net $ | net/event | t (by match) | net/dollar | net $/month | net $/day"
+HDR = "variant | events | with fill | shares | dollars | avg price | net $ | net/event | t (by match) | net/dollar | net $/month | net $/day (86 d) | 95% CI net/event"
 
 
 def month_of(t):
@@ -114,13 +115,14 @@ def main():
     for mo in ("2026-09", "2026-10", "2026-11"):
         for d in DELAYS:
             g = [e for e in RA[d] if month_of(e["closed"]) == mo]
-            print(mo + " | " + line(f"d={d}s", g))
+            print(mo + " | " + line(f"d={d}s", g, days={"2026-09": 30, "2026-10": 31, "2026-11": 25}[mo]))
     print("\n== Class A, time split by moneyline resolution time: earlier 67% vs reporting 33% (all markets)")
     print("part | " + HDR)
     for d in DELAYS:
         early, late = split_by_time(RA[d], key=lambda e: e["closed"], frac=0.67)
-        print("earlier | " + line(f"d={d}s", early))
-        print(f"reporting (from {iso(late[0]['closed'])}) | " + line(f"d={d}s", late))
+        cut = late[0]["closed"]
+        print("earlier | " + line(f"d={d}s", early, days=(cut - P0) / 86400))
+        print(f"reporting (from {iso(cut)}) | " + line(f"d={d}s", late, days=(P1 - cut) / 86400))
 
     # ---------------- class B
     print("\n== Class B (moneyline 1/0, some side market 50-50), rule from the earliest hindsight t_first of its 50-50 markets, all markets")

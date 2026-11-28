@@ -993,10 +993,11 @@ class Session:
 
     def universe_retry_soon(self, now: float) -> bool:
         """1.2.1 (coordinator's rule, journal 20261128-0732Z p. 2): after a failed discovery, retry within
-        UNIVERSE_RETRY_S only while the market list is empty (before the first successful discovery) or the nearest
-        window that is not yet open (of a market that is not closed) opens within UNIVERSE_EVERY_S. A window opens
-        WINDOW_S before endDate and lasts until the market closes (Mkt.in_window); while one is open its markets are
-        already known, and a fast retry would only stall the book polls (discover() is synchronous) during an outage."""
+        UNIVERSE_RETRY_S only while the market list is empty (no successful discovery yet, or none that found a market)
+        or the nearest window that is not yet open (of a market that is not closed) opens within UNIVERSE_EVERY_S,
+        even if another window is open meanwhile. A window opens WINDOW_S before endDate and lasts until the market
+        closes (Mkt.in_window). Open windows do not count as "nearest": their markets are already known, and fast
+        retries for them alone would only stall the book polls (discover() is synchronous) during an outage."""
         if not self.markets:
             return True
         upcoming = [m.end - WINDOW_S for m in self.markets.values() if not m.closed and m.end - WINDOW_S > now]
@@ -2985,6 +2986,13 @@ def cmd_selftest(a) -> int:
         s_c.refresh_universe()
         expect("1.2.1 universe: window opens in 600 s -> fast retry UNIVERSE_RETRY_S after the failure", c_c[0] == 2,
                c_c[0])
+        env_c.sleep(UNIVERSE_RETRY_S - 1)                      # attempt 2 came through due() and failed too (fast)
+        s_c.refresh_universe()
+        expect("1.2.1 universe: a fast failure entered through due() -> no attempt earlier than 60 s after its END",
+               c_c[0] == 2, c_c[0])
+        env_c.sleep(1)
+        s_c.refresh_universe()
+        expect("1.2.1 universe: a fast failure entered through due() -> attempt 60 s after its END", c_c[0] == 3, c_c[0])
 
         env_t1, s_t1, c_t1 = u_session([WINDOW_S + U_FAIL_S + 1190])   # window 1190 s after the failure is seen
         env_t1.sleep(UNIVERSE_RETRY_S)
@@ -3005,6 +3013,13 @@ def cmd_selftest(a) -> int:
         env_d2.sleep(UNIVERSE_RETRY_S)
         s_d2.refresh_universe()
         expect("1.2.1 universe: only an open window known -> regular schedule, no fast retry", c_d2[0] == 1, c_d2[0])
+        env_d3, s_d3, c_d3 = u_session([1800, WINDOW_S + 600])  # a window open now AND the next one opens in 600 s
+        env_d3.sleep(UNIVERSE_RETRY_S)
+        s_d3.refresh_universe()
+        expect("1.2.1 universe: a window open now and the next one opening within 1200 s -> fast retry (the rule)",
+               c_d3[0] == 2, c_d3[0])
+        expect("1.2.1 universe: retry delay 60 s and threshold 1200 s, as the coordinator decided",
+               UNIVERSE_RETRY_S == 60 and UNIVERSE_EVERY_S == 1200, (UNIVERSE_RETRY_S, UNIVERSE_EVERY_S))
 
         env_e, s_e, c_e = u_session([-100])                    # past endDate, not closed: its window is still open
         env_e.sleep(UNIVERSE_RETRY_S)

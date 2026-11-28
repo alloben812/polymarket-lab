@@ -74,7 +74,8 @@ import smoke  # noqa: E402
 from smoke import Refusal  # noqa: E402
 
 VERSION = ("exp_fav 1.2.1 (2026-11-28, 1.1 + narrow-book condition, 2 open tickets, stop 20 USD / 2 losses, "
-           "balance floor; 1.2.1: a failed market discovery is retried after 60 s)")
+           "balance floor; 1.2.1: a failed market discovery is retried after 60 s while no market is known to trade "
+           "or a window opens within 20 min)")
 RULE_SOURCE = ("docs/forward-tests.md v1.0 (2026-11-27), lead 3 (Зацепка 3), plus the narrow-book condition "
                "(best bid >= best ask - 0.03) of the coordinator's decision 2026-11-27 22:15 (HANDOFF.md)")
 
@@ -109,7 +110,7 @@ GEO_EVERY_S = 1800                         # geoblock check every 30 min ...
 GEO_MAX_AGE_S = 3600                       # ... and an order needs one younger than 60 min
 SERVER_TIME_EVERY_S = 600
 UNIVERSE_EVERY_S = 1200
-UNIVERSE_RETRY_S = 60                      # after a failed discovery the next attempt comes this soon (1.2.1)
+UNIVERSE_RETRY_S = 60                      # failed discovery, nothing to trade known or a window near: retry this soon
 STATE_EVERY_S = 60                         # refresh accepting/closed of markets in the window
 RESULT_EVERY_S = 120
 FEE_CHECK_AFTER_S = 45                     # read the charged fee from the activity feed this long after a fill
@@ -990,6 +991,17 @@ class Session:
             self.rec("clock", error=scrub(type(e).__name__))
             out(f"  clock check failed ({scrub(type(e).__name__)}); no orders until it passes")
 
+    def universe_retry_soon(self, now: float) -> bool:
+        """1.2.1: after a failed discovery, retry within UNIVERSE_RETRY_S only when it matters: no known market
+        still to trade (empty list, or only closed/ended ones), or the next window that is not yet open opens within
+        UNIVERSE_EVERY_S. While a window is open its markets are already known, and a fast retry would only stall
+        the book polls (discover() is synchronous) during an outage."""
+        alive = [m for m in self.markets.values() if not m.closed and m.end > now]
+        if not alive:
+            return True
+        upcoming = [m.end - WINDOW_S for m in alive if m.end - WINDOW_S > now]
+        return bool(upcoming) and min(upcoming) - now < UNIVERSE_EVERY_S
+
     def refresh_universe(self, force: bool = False) -> None:
         if not force and not self.due("universe", UNIVERSE_EVERY_S):
             return
@@ -999,12 +1011,17 @@ class Session:
         try:
             found, rejected = self.env.discover(now)
         except Exception as e:  # noqa: BLE001
-            # 1.2.1: a failure must not count as a refresh, or the next attempt would wait UNIVERSE_EVERY_S
-            # (a failed start-up discovery could then miss the start of a window). Rewind the mark so that
-            # due() fires again UNIVERSE_RETRY_S after this failure.
-            self.last["universe"] = self.env.mono() - UNIVERSE_EVERY_S + UNIVERSE_RETRY_S
-            out(f"  universe refresh failed ({scrub(type(e).__name__ + ': ' + str(e))[:200]}); keeping the old list; "
-                f"retry in {UNIVERSE_RETRY_S} s")
+            why = scrub(type(e).__name__ + ': ' + str(e))[:200]
+            if self.universe_retry_soon(self.env.wall()):
+                # 1.2.1: this failure must not count as a refresh, or the next attempt would wait UNIVERSE_EVERY_S
+                # (a failed start-up discovery could then miss the start of a window). Rewind the mark so that
+                # due() fires again UNIVERSE_RETRY_S after the END of this failed call.
+                self.last["universe"] = self.env.mono() - UNIVERSE_EVERY_S + UNIVERSE_RETRY_S
+                out(f"  universe refresh failed ({why}); keeping the old list; retry in {UNIVERSE_RETRY_S} s "
+                    f"(no market known to trade, or a window opens within {UNIVERSE_EVERY_S} s)")
+            else:
+                out(f"  universe refresh failed ({why}); keeping the old list; next try on the regular "
+                    f"{UNIVERSE_EVERY_S} s schedule")
             return
         new = 0
         for m in found:
@@ -2910,6 +2927,63 @@ def cmd_selftest(a) -> int:
         expect("1.2.1 universe: regular refresh UNIVERSE_EVERY_S after the last success", u_calls[0] == 4, u_calls[0])
         expect("1.2.1 universe: the failure log line names the retry delay",
                f"keeping the old list; retry in {UNIVERSE_RETRY_S} s" in out.log_path.read_text())
+
+        # 1.2.1: the fast retry only while no market is known to trade or the next window (not yet open) is near
+        def u_session(offsets, closed=()):
+            env_x, s_x = new_session(n_markets=1)
+            s_x.markets.clear()
+            for i, off in enumerate(offsets):                 # market ends at env_x.t + off; window = last hour
+                m = _fake_market(300 + i, env_x.t + off)
+                m.closed = i in closed
+                s_x.markets[m.key] = m
+            calls = [0]
+
+            def failing(now):
+                calls[0] += 1
+                env_x.sleep(U_FAIL_S)
+                raise RuntimeError("The read operation timed out")
+
+            env_x.discover = failing
+            s_x.refresh_universe(force=True)                  # attempt 1 starts now and fails after U_FAIL_S
+            return env_x, s_x, calls
+
+        env_b, s_b, c_b = u_session([WINDOW_S + 5000])         # next window opens in 5000 s
+        env_b.sleep(UNIVERSE_RETRY_S)
+        s_b.refresh_universe()
+        expect("1.2.1 universe: next window 5000 s away -> no fast retry after a failure", c_b[0] == 1, c_b[0])
+        env_b.sleep(UNIVERSE_EVERY_S - U_FAIL_S - UNIVERSE_RETRY_S - 1)
+        s_b.refresh_universe()
+        expect("1.2.1 universe: next window 5000 s away -> no attempt before the regular interval", c_b[0] == 1, c_b[0])
+        env_b.sleep(1)
+        s_b.refresh_universe()
+        expect("1.2.1 universe: next window 5000 s away -> attempt UNIVERSE_EVERY_S after the failed one started",
+               c_b[0] == 2, c_b[0])
+        expect("1.2.1 universe: the regular-schedule failure is logged as such",
+               f"keeping the old list; next try on the regular {UNIVERSE_EVERY_S} s schedule" in out.log_path.read_text())
+
+        env_c, s_c, c_c = u_session([WINDOW_S + 600])          # next window opens in 600 s
+        env_c.sleep(UNIVERSE_RETRY_S - 1)
+        s_c.refresh_universe()
+        expect("1.2.1 universe: window opens in 600 s -> no attempt earlier than UNIVERSE_RETRY_S", c_c[0] == 1, c_c[0])
+        env_c.sleep(1)
+        s_c.refresh_universe()
+        expect("1.2.1 universe: window opens in 600 s -> fast retry UNIVERSE_RETRY_S after the failure", c_c[0] == 2,
+               c_c[0])
+
+        env_d, s_d, c_d = u_session([1800, WINDOW_S + 5000])   # a window open now, the next one 5000 s away
+        env_d.sleep(UNIVERSE_RETRY_S)
+        s_d.refresh_universe()
+        expect("1.2.1 universe: a window already open does not trigger the fast retry", c_d[0] == 1, c_d[0])
+        env_d2, s_d2, c_d2 = u_session([1800])                 # a window open now, no later window known
+        env_d2.sleep(UNIVERSE_RETRY_S)
+        s_d2.refresh_universe()
+        expect("1.2.1 universe: only an open window known -> regular schedule, no fast retry", c_d2[0] == 1, c_d2[0])
+
+        env_e, s_e, c_e = u_session([WINDOW_S + 5000, -100], closed=(0,))   # one closed, one already ended
+        env_e.sleep(UNIVERSE_RETRY_S)
+        s_e.refresh_universe()
+        expect("1.2.1 universe: only closed or ended markets known -> treated as empty, fast retry", c_e[0] == 2,
+               c_e[0])
 
         # dry-run never posts and records the would-be order
         env, s = new_session(live=False, n_markets=2)
